@@ -5,7 +5,7 @@ page-layout: full
 link-external-newwindow: true
 ---
 
-# BMSC 620: Introduction to Biostatistics
+## BMSC 620: Introduction to Biostatistics
 
 ### Winter 2026
 
@@ -29,10 +29,10 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 :::
 
 ::: g-col-3
-### Office Hours
+### Office hours
 
 [Emile](https://ohsu.webex.com/meet/latour)
-{{< iconify icon-park-solid time size=24px >}} Thursday, 1:00 – 2:00 PM
+{{< iconify icon-park-solid time size=24px >}} Thursday, 1:00–2:00 PM
 
 :::
 
@@ -41,9 +41,9 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 
 {{< iconify fa6-solid calendar-days size=24px >}} Mondays, Wednesdays
 
-{{< iconify fa6-solid calendar size=24px >}} January 5 – March 20
+{{< iconify fa6-solid calendar size=24px >}} January 5–March 20
 
-{{< iconify icon-park-solid time size=24px >}} 9:00 AM – 11:30 AM
+{{< iconify icon-park-solid time size=24px >}} 9:00 AM–11:30 AM
 
 {{< iconify fa6-solid person-chalkboard size=24px >}} In-person, RJH 4320
 
@@ -52,19 +52,19 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 :::
 
 ::: g-col-3
-### Contacting me
+### Contact
 
 E-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.
 :::
 :::
 
-------------------------------------------------------------------------
+---
 
 ::: grid
 ::: g-col-9
 :::
 
 ::: g-col-3
-[{{< iconify icomoon-free github size=24px >}} View the source on GitHub](https://github.com/emilelatour/BMSC_620_W26)
+[{{< iconify icomoon-free github size=24px >}} View the source on GitHub](https://github.com/emilelatour/BMSC_620_W26){.github-link}
 :::
 :::

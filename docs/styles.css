@@ -15,3 +15,8 @@ table {
   margin-top: 1rem;
   margin-bottom: 1.25rem;
 }
+
+/* Keep GitHub footer link on one line */
+a.github-link {
+  white-space: nowrap;
+}

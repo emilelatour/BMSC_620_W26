@@ -1,50 +1,53 @@
 ---
 title: "Instructors"
-format: 
+toc: true
+page-layout: full
+format:
   html:
     link-external-newwindow: true
 ---
 
-## Instructor: Emile Latour, MS
+## Teaching team
 
-::: columns
-::: {.column width="68%"}
+### Emile Latour, MS (Instructor)
+
 -   **Email:** [latour\@ohsu.edu](mailto:latour@ohsu.edu)
+-   **Office:** RJH 4320
+-   **Pronouns:** he/him/his
+-   **Name:** Please feel free to call me **Emile** (pronounced "eh-MEEL" or "ah-MEEL").\
+    Last name: **Latour** (pronounced "luh-TOOR").
+-   **Best way to contact me:** Email is best for course logistics. Office hours are best for homework, R help, and concepts.
 
--   **Office:** VPT 622A
+### Teaching assistants
 
-**Pronouns:** he/him/his
+-   **TA:** *(Name, credentials)*
+    -   **Email:** *(email)*\
+    -   **Role:** *(e.g., homework support, grading support, in-class help)*
+-   **TA:** *(Name, credentials)*
+    -   **Email:** *(email)*\
+    -   **Role:** *(optional)*
 
-*Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).*
+> Note: If you are unsure who to contact, email Emile and I will route your question.
 
-**Best method to contact:** Office hours or email for general course questions.
-:::
+## Office hours
 
-::: {.column width="2%"}
-:::
+All office hours will be held on Webex unless otherwise noted.
 
-::: {.column width="30%"}
+### Emile (Instructor)
 
+-   **Time:** Thursday, 1:00-2:00 PM
+-   **Webex:** <https://ohsu.webex.com/meet/latour>
 
+### Teaching assistants
 
-:::
-:::
+-   **TA office hours:** *(day/time)*
+    -   **Webex:** *(link)*
+-   **TA office hours:** *(day/time)*
+    -   **Webex:** *(link)*
 
-**Brief professor statement:** As a professor, my main goal is to instill a growth mindset into my students. Growth mindset means we are NOT stuck in our abilities or knowledge, and that we all can grow with effort, feedback, and learning from mistakes! This course aims to be as transparent as possible. I want you to understand my motivation for assessments, questions, and lessons. I also want those assessments to be clear, so please ask for clarification whenever needed.
+## What to contact us about
 
-
-## Teaching Assistants
-
-I am very excited to have *Hannah Cunningham* and *Sophia Mann* serve as our TAs for the quarter! Please see the main page for their office hours. 
-
-
-
+-   **Emile (Instructor):** course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.
+-   **TAs:** homework questions, practice problems, and R troubleshooting.
 
 
-Instructors page
-	•	Full teaching team
-	•	All office hours
-	•	Webex links
-	•	Roles (TA, grader, etc.)
-
-This mirrors how students actually use course websites.

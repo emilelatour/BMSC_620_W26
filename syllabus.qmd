@@ -6,13 +6,14 @@ format:
     toc: true
     link-external-newwindow: true
     page-layout: full
+  pdf: default
 ---
 
 # Key course info
 
 - **Course website**: This site is the hub for schedules and materials. Assignments and grades will be managed in **Sakai**.
 - **Communication**: Email is the best way to reach me. I will try to respond within **24 hours Monday–Friday**.
-- **Software**: We will use **R and RStudio** for homework and examples. (Instructions will be posted on the Materials page.)
+- **Software**: We will use **R and RStudio** for homework and in-class examples. (Instructions will be posted on the Materials page.)
 - **One-day room change**: Class will meet in **MAC 3198 on January** 21 only.
 
 # Course description
@@ -29,13 +30,13 @@ Throughout the course, emphasis will be placed on selecting appropriate methods,
 
 By the end of this course, students should be able to:
 
-1. Describe how data relate to a biomedical question of interest.
-2. Select appropriate statistical methods for estimation and testing, and use statistical software to implement those methods.
-3. Interpret and communicate statistical findings to a non-statistical audience in context.
+1. Describe how data relate to a research question of interest.
+2. Select and implement appropriate statistical methods for estimation and inference using statistical software.
+3. Interpret and communicate statistical findings to a non-statistical audience in the context of the original research question.
 
 # Instructors and office hours
 
-See the Instructors￼ page for contact information and office hours.
+See the [Instructors](instructors.qmd) page for contact information and office hours.
 
 # Meeting times and location
 
@@ -44,33 +45,45 @@ See the Instructors￼ page for contact information and office hours.
 - **Time**: 9:00 AM – 11:30 AM
 - **Location**: RJH 4320 (except January 21 in MAC 3198)
 
-Materials and software
+### Known exceptions
 
-See the Materials￼ page for links to software installation instructions, course handouts, datasets, and other resources.
+- Monday, January 19, 2026: Martin Luther King Jr. Day
+- Monday, February 16, 2026: Presidents Day
 
-Assessment and grading
+# Materials and software
+
+See the [Materials](materials.qmd) page for links to software installation instructions, course handouts, datasets, and other resources.
+
+# Assessment and grading
 
 Your grade will be based on the components below. (Details, rubrics, and due dates will be posted on the course website and in Sakai.)
-	•	Homework: Regular problem sets to practice concepts and R skills.
-	•	Quizzes: Periodic checks on core concepts and interpretation.
-	•	Participation / in-class work (if applicable): Any in-class activities or exit tickets will be described on the Assignments or Quizzes pages.
+
+- **Homework**: Regular problem sets to practice concepts and R skills.
+- **Quizzes**: Periodic checks on core concepts and interpretation.
+- **Participation / in-class work (if applicable)**: Any in-class activities or exit tickets will be described on the Assignments or Quizzes pages.
 
 Grading scale: (insert your program’s grading scheme or your planned cutoffs here)
 
-Collaboration and academic integrity
+Specific weights and grading criteria may be adjusted early in the term and will be finalized on the course website and in Sakai.
+
+# Collaboration and academic integrity
 
 You are encouraged to discuss course concepts and work through problems with classmates. However, anything you submit must reflect your own understanding and be written in your own words.
 
-Generative AI tools (e.g., ChatGPT): You may use AI tools to help with learning, coding, and troubleshooting. However, the work you submit must be your own. If you use AI in a way that meaningfully affects your solution (code, wording, approach), cite it briefly (what you used it for and how).
+### Statement on Generative AI
 
-Course policies and university resources
+ChatGPT and other generative AI tools can be great resources for learning how to code and/or troubleshoot code that does not work. However, the work you turn in must be your own. Thus it is inappropriate to rely on AI to directly provide you with solutions to assessment questions (homework and exams) or write text that you are submitting as your own. If you do use AI tools to help you with an assignment, these must be cited along with how they were used.
+
+Please see the Plagiarism & Attribution section (Code Snippets and AI Tools subsection) of [Dr. Steve Bedrick's Course Policies site](https://dmice.ohsu.edu/bedricks/courses/bmi525/policies.html) for BMI 525: Principles and Practice of Data Visualization. 
+
+# Course policies and university resources
 
 Official institutional policies and student resources will be provided in Sakai. Please contact me if you have questions about accommodations, accessibility, or support resources.
 
-Schedule
+# Schedule
 
-See the Schedule￼ page for the current schedule. The schedule may be adjusted as needed.
+See the [Schedule](schedule.qmd) page for the current schedule. The schedule may be adjusted as needed.
 
-⸻
+------------------------------------------------------------------------
 
-Attribution note: This syllabus structure was adapted from departmental course materials, including a syllabus by Meike Niederhausen, with permission, and modified for BMSC 620.
+*Attribution note*: This syllabus structure was adapted from departmental course materials, including a syllabus by Meike Niederhausen, with permission, and modified for BMSC 620.
