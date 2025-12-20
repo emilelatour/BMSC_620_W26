@@ -1,0 +1,50 @@
+---
+title: "Instructors"
+format: 
+  html:
+    link-external-newwindow: true
+---
+
+## Instructor: Emile Latour, MS
+
+::: columns
+::: {.column width="68%"}
+-   **Email:** [latour\@ohsu.edu](mailto:latour@ohsu.edu)
+
+-   **Office:** VPT 622A
+
+**Pronouns:** he/him/his
+
+*Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).*
+
+**Best method to contact:** Office hours or email for general course questions.
+:::
+
+::: {.column width="2%"}
+:::
+
+::: {.column width="30%"}
+
+
+
+:::
+:::
+
+**Brief professor statement:** As a professor, my main goal is to instill a growth mindset into my students. Growth mindset means we are NOT stuck in our abilities or knowledge, and that we all can grow with effort, feedback, and learning from mistakes! This course aims to be as transparent as possible. I want you to understand my motivation for assessments, questions, and lessons. I also want those assessments to be clear, so please ask for clarification whenever needed.
+
+
+## Teaching Assistants
+
+I am very excited to have *Hannah Cunningham* and *Sophia Mann* serve as our TAs for the quarter! Please see the main page for their office hours. 
+
+
+
+
+
+Instructors page
+	•	Full teaching team
+	•	All office hours
+	•	Webex links
+	•	Roles (TA, grader, etc.)
+
+This mirrors how students actually use course websites.

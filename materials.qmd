@@ -1,0 +1,23 @@
+---
+title: "Materials"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    page-layout: full
+editor_options: 
+  chunk_output_type: console
+---
+
+- Textbook (even “TBD”)
+- Software setup
+- Data access
+- Zoom / OneDrive
+
+
+- Create `materials.qmd`
+- Add links there:
+  - Textbook
+  - OneDrive folder
+  - Zoom link (if applicable)
+  - Software setup

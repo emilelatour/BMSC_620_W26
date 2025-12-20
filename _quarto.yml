@@ -1,20 +1,39 @@
 project:
   type: website
+  execute-dir: project
   output-dir: docs
 
 website:
-  title: "BMSC_620_W26"
+  title: "BMSC 620: Introduction to Biostatistics"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    background: primary
+    search: true
+    foreground: "#fff"
+    collapse-below: sm
+    right:
+          - href: schedule.qmd
+            text: Schedule
+          - href: syllabus.qmd
+            text: Syllabus
+          - href: instructors.qmd
+            text: Instructors
+          - href: homework.qmd
+            text: Homework
+          - href: quiz.qmd
+            text: Quizzes
+            
+execute:
+  freeze: auto
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
     css: styles.css
     toc: true
+    smooth-scroll: true
+    code-copy: true
+    code-overflow: wrap
+    fontsize: 1.05em
 
 
 

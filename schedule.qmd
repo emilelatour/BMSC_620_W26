@@ -1,0 +1,84 @@
+---
+title: "Schedule"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    page-layout: full
+editor_options: 
+  chunk_output_type: console
+---
+
+```{css, echo=FALSE}
+.title{
+  font-size: 30px;
+  color: #3070BF;
+  background-color: #fff;
+  padding: 0px;
+}
+```
+
+```{r setup, include=FALSE}
+library(here)
+source(here("class_dates.R"))
+```
+
+| Week | Date | Les-son | Topic | TB sections | Key Info | Slides HTML | Slides PDF | Slides Notes | Exit tix | Record-ing | Muddy Points |
+|------|------|------|------|------|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| 1 | `{r} w1d1 %>% format("%m/%d")` | 0 | Welcome | X.X | Key info to come  | HTMl Slides  | PDF slides |  |  |  |
+|  |  | 1 | Data collection | 1.3 |Key info to come  | HTMl Slides  | PDF slides |  |  |  |
+|  |
+|  |  |  |  |  |  |  |  |
+|  |  |  |  |  |  |  |  |  |  |  |  |
+
+
+: {.striped .hover tbl-colwidths="\[6, 6, 6, 46,6, 6, 6, 6, 6,6, 6\]"}
+
+
+
+
+| Week | Date | Lesson | Topic           | TB sections | Key Info         | Slides HTML | Slides PDF | Slides Notes | Exit tix | Recording | Muddy Points |
+|------|------|--------|-----------------|-------------|------------------|-------------|------------|--------------|----------|-----------|--------------|
+| 1    | `r format(w1d1, "%m/%d")` | 0      | Welcome         | X.X         | Key info to come | HTML Slides | PDF slides  |              |          |           |              |
+|      |      | 1      | Data collection | 1.3         | Key info to come | HTML Slides | PDF slides  |              |          |           |              |
+
+: {.striped .hover tbl-colwidths="[6,6,6,46,6,10,8,8,10,6,8,10]"}
+
+
+| Week | Date | Lesson | Topic           | TB sections | Key Info         | Slides HTML | Slides PDF | Slides Notes | Exit tix | Recording | Muddy Points |
+|------|------|--------|-----------------|-------------|------------------|-------------|------------|--------------|----------|-----------|--------------|
+| 1    | `r format(w1d1, "%m/%d")` | 0      | Welcome         | X.X         | Key info to come | HTML        | PDF        |              |          |           |              |
+|      |      | 1      | Data collection | 1.3         | Key info to come | HTML        | PDF        |              |          |           |              |
+|      |      | 2      | Data ethics     | 1.4         | Key info to come | HTML        | PDF        |              |          |           |              |
+
+
+| Week | Date | Lesson | Topic           | TB sections | Key Info | Slides HTML | Slides PDF | Slides Notes | Exit tix | Recording | Muddy Points |
+|------|------|--------|-----------------|-------------|----------|------------|------------|--------------|----------|-----------|--------------|
+| **Week 1** | `r format(w1d1, "%m/%d")` |        |                 |             |          |            |            |              |          |           |              |
+| 1    |      | 0      | Welcome         | X.X         | ...      | HTML       | PDF        |              |          |           |              |
+|      |      | 1      | Data collection | 1.3         | ...      | HTML       | PDF        |              |          |           |              |
+
+
+
+```{r}
+library(dplyr)
+library(gt)
+
+sched <- tibble::tribble(
+  ~Week, ~Date, ~Lesson, ~Topic, ~TB, ~KeyInfo,
+  1, format(w1d1, "%m/%d"), 0, "Welcome", "X.X", "Key info to come",
+  1, format(w1d1, "%m/%d"), 1, "Data collection", "1.3", "Key info to come"
+)
+
+sched %>%
+  gt(groupname_col = "Week") %>%
+  tab_options(row_group.as_column = FALSE)
+```
+
+| Week | Date | Lesson | Topic           | TB sections | Key Info | Slides HTML | Slides PDF | Slides Notes | Exit tix | Recording | Muddy Points |
+|------|------|--------|-----------------|-------------|----------|------------|------------|--------------|----------|-----------|--------------|
+| **Week 1** |  |  |  |  |  |  |  |  |  |  |  |
+| 1 | `r format(w1d1, "%m/%d")` | 0 | Welcome |  |  |  |  |  |  |  |  |
+|   |  | 1 | Data collection | 1.3 |  |  |  |  |  |  |  |
+|   | `r format(w1d2, "%m/%d")` | 2 | Intro to data & numerical summaries | 1.2, 1.4 |  |  |  |  |  |  |  |
+|   | **`r format(hw0, "%m/%d")`** |  | **HW 0 due @ 11 pm** |  |  |  |  |  |  |  |  |
