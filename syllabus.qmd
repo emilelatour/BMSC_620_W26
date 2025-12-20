@@ -1,0 +1,76 @@
+---
+title: "Syllabus"
+date-modified: "today"
+format: 
+  html:
+    toc: true
+    link-external-newwindow: true
+    page-layout: full
+---
+
+# Key course info
+
+- **Course website**: This site is the hub for schedules and materials. Assignments and grades will be managed in **Sakai**.
+- **Communication**: Email is the best way to reach me. I will try to respond within **24 hours Monday–Friday**.
+- **Software**: We will use **R and RStudio** for homework and examples. (Instructions will be posted on the Materials page.)
+- **One-day room change**: Class will meet in **MAC 3198 on January** 21 only.
+
+# Course description
+
+BMSC 620 introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.
+
+We will begin with descriptive statistics and graphical methods for summarizing data, followed by basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.
+
+The course will then cover confidence intervals and hypothesis testing for one- and two-sample problems using parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.
+
+Throughout the course, emphasis will be placed on selecting appropriate methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using R for basic data management, visualization, and interpretation of statistical output.
+
+# Learning objectives
+
+By the end of this course, students should be able to:
+
+1. Describe how data relate to a biomedical question of interest.
+2. Select appropriate statistical methods for estimation and testing, and use statistical software to implement those methods.
+3. Interpret and communicate statistical findings to a non-statistical audience in context.
+
+# Instructors and office hours
+
+See the Instructors￼ page for contact information and office hours.
+
+# Meeting times and location
+
+- **Days**: Mondays and Wednesdays
+- **Dates**: January 5 – March 20, 2026
+- **Time**: 9:00 AM – 11:30 AM
+- **Location**: RJH 4320 (except January 21 in MAC 3198)
+
+Materials and software
+
+See the Materials￼ page for links to software installation instructions, course handouts, datasets, and other resources.
+
+Assessment and grading
+
+Your grade will be based on the components below. (Details, rubrics, and due dates will be posted on the course website and in Sakai.)
+	•	Homework: Regular problem sets to practice concepts and R skills.
+	•	Quizzes: Periodic checks on core concepts and interpretation.
+	•	Participation / in-class work (if applicable): Any in-class activities or exit tickets will be described on the Assignments or Quizzes pages.
+
+Grading scale: (insert your program’s grading scheme or your planned cutoffs here)
+
+Collaboration and academic integrity
+
+You are encouraged to discuss course concepts and work through problems with classmates. However, anything you submit must reflect your own understanding and be written in your own words.
+
+Generative AI tools (e.g., ChatGPT): You may use AI tools to help with learning, coding, and troubleshooting. However, the work you submit must be your own. If you use AI in a way that meaningfully affects your solution (code, wording, approach), cite it briefly (what you used it for and how).
+
+Course policies and university resources
+
+Official institutional policies and student resources will be provided in Sakai. Please contact me if you have questions about accommodations, accessibility, or support resources.
+
+Schedule
+
+See the Schedule￼ page for the current schedule. The schedule may be adjusted as needed.
+
+⸻
+
+Attribution note: This syllabus structure was adapted from departmental course materials, including a syllabus by Meike Niederhausen, with permission, and modified for BMSC 620.
