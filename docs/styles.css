@@ -23,19 +23,18 @@ a.github-link {
 
 /* Schedule icons: force color away from Flatly link teal */
 .schedule-icon a,
-.schedule-icon .iconify,
-.schedule-icon svg {
+.schedule-icon a:visited,
+.schedule-icon a:hover {
   color: #2C3E50 !important;
+  text-decoration: none;
 }
 
-/* If the SVG uses fill instead of currentColor */
-.schedule-icon svg,
-.schedule-icon svg * {
-  fill: #2C3E50 !important;
+/* Ensure Iconify SVGs inherit link color */
+.schedule-icon svg {
+  fill: currentColor !important;
 }
 
-.schedule-icon a:hover,
-.schedule-icon a:hover .iconify,
+/* Subtle hover feedback */
 .schedule-icon a:hover svg {
   opacity: 0.85;
 }

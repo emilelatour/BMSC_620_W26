@@ -23,4 +23,4 @@ source(here("class_dates.R"))
 |		|	**`{r} format(hw0, '%m/%d')`**	|		|	**HW 0 due @ 11 pm**	|		|		|		|		|		|		|		|		|
 |	**2**	|	`{r} format(w2d1, '%m/%d')`	|	0	|	Welcome	|	X.X	|	<span class="schedule-icon">[{{< iconify akar-icons info-fill size=26px >}}](lessons/00_Welcome/00_Welcome_key_info.qmd)</span>	|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
 																								
-: {.hover tbl-colwidths="[6, 7, 6, 40, 8, 6, 6, 6, 6, 6, 6, 7]"}																																																																																						
+: {.hover tbl-colwidths="[6, 7, 6, 40, 8, 6, 6, 6, 6, 6, 6, 7]"}																																																																																																												
