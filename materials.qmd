@@ -29,8 +29,7 @@ This page contains links to course materials, software setup, and shared resourc
 
 ### Sakai
 
-Assignments, submissions, and grades will be managed through
-Sakai [Sakai](https://sakai.ohsu.edu/), OHSU's learning management system.
+Assignments, submissions, and grades will be managed through [Sakai](https://sakai.ohsu.edu/), OHSU's learning management system.
 
 Links to Sakai assignments will be provided on this website.
 

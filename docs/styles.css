@@ -34,7 +34,7 @@ a.github-link {
   fill: currentColor !important;
 }
 
-/* Subtle hover feedback */
-.schedule-icon a:hover svg {
+/* Subtle hover feedback (works for svg OR span.iconify) */
+.schedule-icon a:hover {
   opacity: 0.85;
 }
