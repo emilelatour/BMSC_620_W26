@@ -20,3 +20,22 @@ table {
 a.github-link {
   white-space: nowrap;
 }
+
+/* Schedule icons: force color away from Flatly link teal */
+.schedule-icon a,
+.schedule-icon .iconify,
+.schedule-icon svg {
+  color: #2C3E50 !important;
+}
+
+/* If the SVG uses fill instead of currentColor */
+.schedule-icon svg,
+.schedule-icon svg * {
+  fill: #2C3E50 !important;
+}
+
+.schedule-icon a:hover,
+.schedule-icon a:hover .iconify,
+.schedule-icon a:hover svg {
+  opacity: 0.85;
+}

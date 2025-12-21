@@ -5,7 +5,7 @@ library(dplyr)
 first_day = as.Date("2025-01-05")
 # Set last day of the class: "Term ends" date in OHSU academic calendar
 library(lubridate)
-last_day = as.Date("2025-01-05") + lubridate::days(75)
+last_day = as.Date("2025-03-20")
 
 # Create the calendar dates sequence
 cal_dates = seq(from = first_day, to = last_day, by = "day")

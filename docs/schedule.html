@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -73,6 +39,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -189,935 +156,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<style type="text/css">
-.title{
-  font-size: 30px;
-  color: #3070BF;
-  background-color: #fff;
-  padding: 0px;
-}
-</style>
-</div>
-<table class="table-striped table-hover caption-top table">
+<table class="table-hover caption-top table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 41%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 36%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Les-son</th>
+<th style="text-align: center;">Week</th>
+<th style="text-align: center;">Date</th>
+<th style="text-align: center;">Lesson</th>
 <th>Topic</th>
-<th>TB sections</th>
+<th style="text-align: center;">Textbook sections</th>
 <th style="text-align: center;">Key Info</th>
 <th style="text-align: center;">Slides HTML</th>
 <th style="text-align: center;">Slides PDF</th>
 <th style="text-align: center;">Slides Notes</th>
 <th style="text-align: center;">Exit tix</th>
-<th style="text-align: center;">Record-ing</th>
+<th style="text-align: center;">Recording</th>
 <th style="text-align: center;">Muddy Points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>01/05</td>
-<td>0</td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">01/05</td>
+<td style="text-align: center;">0</td>
 <td>Welcome</td>
-<td>X.X</td>
+<td style="text-align: center;">X.X</td>
+<td style="text-align: center;"><span class="schedule-icon"><a href="lessons/00_Welcome/00_Welcome_key_info.qmd"><iconify-icon role="img" inline="" icon="akar-icons:info-fill" style="font-size: 26px;" aria-label="Icon info-fill from akar-icons Iconify.design set." title="Icon info-fill from akar-icons Iconify.design set."></iconify-icon></a></span></td>
+<td style="text-align: center;">Slides HTML</td>
+<td style="text-align: center;">Slides PDF</td>
+<td style="text-align: center;">Slides Notes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td>Data collection</td>
+<td style="text-align: center;">1.3</td>
 <td style="text-align: center;">Key info to come</td>
-<td style="text-align: center;">HTMl Slides</td>
-<td style="text-align: center;">PDF slides</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>1</td>
-<td>Data collection</td>
-<td>1.3</td>
-<td style="text-align: center;">Key info to come</td>
-<td style="text-align: center;">HTMl Slides</td>
-<td style="text-align: center;">PDF slides</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">Slides HTML</td>
+<td style="text-align: center;">Slides PDF</td>
+<td style="text-align: center;">Slides Notes</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">01/07</td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-<table class="table-striped table-hover caption-top table">
-<colgroup>
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 35%">
-<col style="width: 5%">
-<col style="width: 8%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 8%">
-<col style="width: 5%">
-<col style="width: 6%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Lesson</th>
-<th>Topic</th>
-<th>TB sections</th>
-<th>Key Info</th>
-<th>Slides HTML</th>
-<th>Slides PDF</th>
-<th>Slides Notes</th>
-<th>Exit tix</th>
-<th>Recording</th>
-<th>Muddy Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>01/05</td>
-<td>0</td>
-<td>Welcome</td>
-<td>X.X</td>
-<td>Key info to come</td>
-<td>HTML Slides</td>
-<td>PDF slides</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>1</td>
-<td>Data collection</td>
-<td>1.3</td>
-<td>Key info to come</td>
-<td>HTML Slides</td>
-<td>PDF slides</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 5%">
-<col style="width: 11%">
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 9%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Lesson</th>
-<th>Topic</th>
-<th>TB sections</th>
-<th>Key Info</th>
-<th>Slides HTML</th>
-<th>Slides PDF</th>
-<th>Slides Notes</th>
-<th>Exit tix</th>
-<th>Recording</th>
-<th>Muddy Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>01/05</td>
-<td>0</td>
-<td>Welcome</td>
-<td>X.X</td>
-<td>Key info to come</td>
-<td>HTML</td>
-<td>PDF</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>1</td>
-<td>Data collection</td>
-<td>1.3</td>
-<td>Key info to come</td>
-<td>HTML</td>
-<td>PDF</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>2</td>
-<td>Data ethics</td>
-<td>1.4</td>
-<td>Key info to come</td>
-<td>HTML</td>
-<td>PDF</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 10%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Lesson</th>
-<th>Topic</th>
-<th>TB sections</th>
-<th>Key Info</th>
-<th>Slides HTML</th>
-<th>Slides PDF</th>
-<th>Slides Notes</th>
-<th>Exit tix</th>
-<th>Recording</th>
-<th>Muddy Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Week 1</strong></td>
-<td>01/05</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td></td>
-<td>0</td>
-<td>Welcome</td>
-<td>X.X</td>
-<td>…</td>
-<td>HTML</td>
-<td>PDF</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>1</td>
-<td>Data collection</td>
-<td>1.3</td>
-<td>…</td>
-<td>HTML</td>
-<td>PDF</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'gt' was built under R version 4.5.2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sched <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Week, <span class="sc">~</span>Date, <span class="sc">~</span>Lesson, <span class="sc">~</span>Topic, <span class="sc">~</span>TB, <span class="sc">~</span>KeyInfo,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="fu">format</span>(w1d1, <span class="st">"%m/%d"</span>), <span class="dv">0</span>, <span class="st">"Welcome"</span>, <span class="st">"X.X"</span>, <span class="st">"Key info to come"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="fu">format</span>(w1d1, <span class="st">"%m/%d"</span>), <span class="dv">1</span>, <span class="st">"Data collection"</span>, <span class="st">"1.3"</span>, <span class="st">"Key info to come"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sched <span class="sc">%&gt;%</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"Week"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(<span class="at">row_group.as_column =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div id="byyotouvzn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#byyotouvzn table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#byyotouvzn thead, #byyotouvzn tbody, #byyotouvzn tfoot, #byyotouvzn tr, #byyotouvzn td, #byyotouvzn th {
-  border-style: none;
-}
-
-#byyotouvzn p {
-  margin: 0;
-  padding: 0;
-}
-
-#byyotouvzn .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#byyotouvzn .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#byyotouvzn .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#byyotouvzn .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#byyotouvzn .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#byyotouvzn .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#byyotouvzn .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#byyotouvzn .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#byyotouvzn .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#byyotouvzn .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#byyotouvzn .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#byyotouvzn .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#byyotouvzn .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#byyotouvzn .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#byyotouvzn .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#byyotouvzn .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#byyotouvzn .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#byyotouvzn .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#byyotouvzn .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#byyotouvzn .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#byyotouvzn .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#byyotouvzn .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#byyotouvzn .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#byyotouvzn .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#byyotouvzn .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#byyotouvzn .gt_left {
-  text-align: left;
-}
-
-#byyotouvzn .gt_center {
-  text-align: center;
-}
-
-#byyotouvzn .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#byyotouvzn .gt_font_normal {
-  font-weight: normal;
-}
-
-#byyotouvzn .gt_font_bold {
-  font-weight: bold;
-}
-
-#byyotouvzn .gt_font_italic {
-  font-style: italic;
-}
-
-#byyotouvzn .gt_super {
-  font-size: 65%;
-}
-
-#byyotouvzn .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#byyotouvzn .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#byyotouvzn .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#byyotouvzn .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#byyotouvzn .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#byyotouvzn .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#byyotouvzn .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#byyotouvzn .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#byyotouvzn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_col_headings">
-<th id="Date" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Date</th>
-<th id="Lesson" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Lesson</th>
-<th id="Topic" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Topic</th>
-<th id="TB" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">TB</th>
-<th id="KeyInfo" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">KeyInfo</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd gt_group_heading_row">
-<td colspan="5" id="1" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">1</td>
-</tr>
-<tr class="even gt_row_group_first">
-<td class="gt_row gt_right" headers="1  Date">01/05</td>
-<td class="gt_row gt_right" headers="1  Lesson">0</td>
-<td class="gt_row gt_left" headers="1  Topic">Welcome</td>
-<td class="gt_row gt_left" headers="1  TB">X.X</td>
-<td class="gt_row gt_left" headers="1  KeyInfo">Key info to come</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_right" headers="1  Date">01/05</td>
-<td class="gt_row gt_right" headers="1  Lesson">1</td>
-<td class="gt_row gt_left" headers="1  Topic">Data collection</td>
-<td class="gt_row gt_left" headers="1  TB">1.3</td>
-<td class="gt_row gt_left" headers="1  KeyInfo">Key info to come</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 10%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 10%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Week</th>
-<th>Date</th>
-<th>Lesson</th>
-<th>Topic</th>
-<th>TB sections</th>
-<th>Key Info</th>
-<th>Slides HTML</th>
-<th>Slides PDF</th>
-<th>Slides Notes</th>
-<th>Exit tix</th>
-<th>Recording</th>
-<th>Muddy Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Week 1</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>01/05</td>
-<td>0</td>
-<td>Welcome</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>1</td>
-<td>Data collection</td>
-<td>1.3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>01/07</td>
-<td>2</td>
 <td>Intro to data &amp; numerical summaries</td>
-<td>1.2, 1.4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td style="text-align: center;">1.2, 1.4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>01/08</strong></td>
+<td style="text-align: center;"></td>
+<td><strong>HW 0 due @ 11 pm</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td><strong>01/08</strong></td>
-<td></td>
-<td><strong>HW 0 due @ 11 pm</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">01/12</td>
+<td style="text-align: center;">0</td>
+<td>Welcome</td>
+<td style="text-align: center;">X.X</td>
+<td style="text-align: center;"><span class="schedule-icon"><a href="lessons/00_Welcome/00_Welcome_key_info.qmd"><iconify-icon role="img" inline="" icon="akar-icons:info-fill" style="font-size: 26px;" aria-label="Icon info-fill from akar-icons Iconify.design set." title="Icon info-fill from akar-icons Iconify.design set."></iconify-icon></a></span></td>
+<td style="text-align: center;">Slides HTML</td>
+<td style="text-align: center;">Slides PDF</td>
+<td style="text-align: center;">Slides Notes</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
