@@ -4,3 +4,9 @@
 .Ruserdata
 
 /.quarto/
+
+# Development helpers and internal tooling
+_dev/
+
+# Unreleased instructional materials
+_staging/

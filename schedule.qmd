@@ -17,10 +17,11 @@ source(here("class_dates.R"))
 
 |	Week	|	Date	|	Lesson	|	Topic	|	Textbook sections	|	Key Info	|	Slides HTML	|	Slides PDF	|	Slides Notes	|	Exit tix	|	Recording	|	Muddy Points	|
 |	:---:	|	:---:	|	:---:	|	---	|	:---:	|	:---:	|	:---:	|	:---:	|	:---:	|	:---:	|	:---:	|	:---:	|
-|	**1**	|	`{r} format(w1d1, '%m/%d')`	|	0	|	Welcome	|	X.X	|	<span class="schedule-icon">[{{< iconify akar-icons info-fill size=26px >}}](lessons/00_Welcome/00_Welcome_key_info.qmd)</span>	|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
-|		|		|	1	|	Data collection	|	1.3	|	Key info to come	|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
+|	**1**	|	`{r} format(w1d1, '%m/%d')`	|	0	|	Welcome	|	X.X	|	<span class='schedule-icon'>[{{< iconify akar-icons info-fill size=26px >}}](lessons/00_Welcome/00_Welcome_key_info.qmd)</span>	|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
+|		|		|	0	|	Data collection	|	1.3	|		|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
 |		|	`{r} format(w1d2, '%m/%d')`	|		|	Intro to data & numerical summaries	|	1.2, 1.4	|		|		|		|		|		|		|		|
 |		|	**`{r} format(hw0, '%m/%d')`**	|		|	**HW 0 due @ 11 pm**	|		|		|		|		|		|		|		|		|
-|	**2**	|	`{r} format(w2d1, '%m/%d')`	|	0	|	Welcome	|	X.X	|	<span class="schedule-icon">[{{< iconify akar-icons info-fill size=26px >}}](lessons/00_Welcome/00_Welcome_key_info.qmd)</span>	|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
+|	**2**	|	`{r} format(w2d1, '%m/%d')`	|	2	|	Welcome	|	X.X	|		|	Slides HTML	|	Slides PDF	|	Slides Notes	|		|		|		|
 																								
-: {.hover tbl-colwidths="[6, 7, 6, 40, 8, 6, 6, 6, 6, 6, 6, 7]"}																																																																																																												
+: {.hover tbl-colwidths="[6, 7, 6, 40, 8, 6, 6, 6, 6, 6, 6, 7]"}																								
+																																																																																																																																													
