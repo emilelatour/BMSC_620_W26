@@ -1,5 +1,5 @@
 ---
-title: "Materials"
+title: "Resources"
 format: 
   html:
     toc: true

@@ -38,3 +38,8 @@ a.github-link {
 .schedule-icon a:hover {
   opacity: 0.85;
 }
+
+.hw-row {
+  color: #18BC9C;
+  font-weight: 600;
+}

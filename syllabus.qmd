@@ -52,7 +52,7 @@ See the [Instructors](instructors.qmd) page for contact information and office h
 
 # Materials and software
 
-See the [Materials](materials.qmd) page for links to software installation instructions, course handouts, datasets, and other resources.
+See the [Resources](resources.qmd) page for links to software installation instructions, course handouts, datasets, and other resources.
 
 # Assessment and grading
 

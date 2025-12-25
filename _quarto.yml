@@ -11,19 +11,48 @@ website:
     foreground: "#fff"
     collapse-below: sm
     right:
-          - href: schedule.qmd
-            text: Schedule
-          - href: materials.qmd
-            text: Materials
+      - href: index.qmd
+        text: Home
+      - href: schedule.qmd
+        text: Schedule
+      - href: homework.qmd
+        text: Homework
+      - href: exams.qmd
+        text: Exams
+      - href: resources.qmd
+        text: Resources
+
+  sidebar:
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: schedule.qmd
+        text: Schedule
+      - href: homework.qmd
+        text: Homework
+      - href: exams.qmd
+        text: Exams
+      - section: "Course info"
+        contents:
           - href: syllabus.qmd
             text: Syllabus
           - href: instructors.qmd
             text: Instructors
-          - href: homework.qmd
-            text: Homework
-          - href: quiz.qmd
-            text: Quizzes
-            
+          - href: resources.qmd
+            text: Resources
+      - section: "Weekly materials"
+        # contents: weeks/week_*.qmd
+        # contents: 
+        #   - weeks/week_01.qmd
+        contents:
+          - href: weeks/week_01.qmd
+            text: Week 1
+          # - href: weeks/week_02.qmd
+          #   text: Week 2
+
 execute:
   freeze: auto
 
@@ -36,6 +65,5 @@ format:
     code-copy: true
     code-overflow: wrap
     fontsize: 1.05em
-
 
 
