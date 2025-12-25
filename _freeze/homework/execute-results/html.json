@@ -1,0 +1,15 @@
+{
+  "hash": "2159575b2287e9a347c5a1a3fd1ba652",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Homework\"\ndate-modified: \"today\"\nformat: \n  html:\n    link-external-newwindow: true\n    page-layout: full\neditor_options: \n  chunk_output_type: console\n---\n\n\n\n\n\n**Under construction**\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

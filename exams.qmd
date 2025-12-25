@@ -1,0 +1,12 @@
+---
+title: "Exams"
+date-modified: "today"
+format: 
+  html:
+    link-external-newwindow: true
+    page-layout: full
+editor_options: 
+  chunk_output_type: console
+---
+
+See Sakai

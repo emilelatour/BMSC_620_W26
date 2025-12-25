@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-09-29">
-<meta name="description" content="Intro to R &amp; RStudio">
+<meta name="description" content="Welcome &amp; Introduction to Data">
 
-<title>Week 1 BSTA 511/611 – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 1 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,7 +40,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,11 +99,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../homework.qmd"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../exams.qmd"> 
+    <a class="nav-link" href="../exams.html"> 
 <span class="menu-text">Exams</span></a>
   </li>  
   <li class="nav-item">
@@ -157,13 +155,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../homework.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../homework.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homework</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exams.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -223,11 +221,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-info" id="toc-general-info" class="nav-link active" data-scroll-target="#general-info">General info</a></li>
-  <li><a href="#overview-of-week-1" id="toc-overview-of-week-1" class="nav-link" data-scroll-target="#overview-of-week-1">Overview of Week 1</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#class-meetings" id="toc-class-meetings" class="nav-link" data-scroll-target="#class-meetings">Class meetings</a></li>
+  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
+  <ul class="collapse">
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides:</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software:</a></li>
+  </ul></li>
   <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
-  <li><a href="#recordings" id="toc-recordings" class="nav-link" data-scroll-target="#recordings">Recordings</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
   </ul>
 </nav>
     </div>
@@ -241,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Intro to R &amp; RStudio
+    Welcome &amp; Introduction to Data
   </div>
 </div>
 
@@ -249,19 +252,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 29, 2025</p>
-    </div>
-  </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 22, 2025</p>
-    </div>
-  </div>
     
   </div>
   
@@ -270,83 +261,71 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="general-info" class="level2">
-<h2 class="anchored" data-anchor-id="general-info">General info</h2>
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.</p>
+<p>By the end of the week, you should be able to:</p>
 <ul>
-<li><a href="https://sakai.ohsu.edu/portal/site/BSTA-511-1-AA-F25/page/d587d48e-3615-48b2-a07c-eeaf1bca897d">Syllabus</a> on Sakai</li>
-<li><a href="https://sakai.ohsu.edu/portal/site/BSTA-511-1-AA-F25/tool/7f531e0a-800c-40eb-bebb-029a60c5df15/ShowPage?returnView=&amp;studentItemId=0&amp;backPath=&amp;bltiAppStores=false&amp;errorMessage=&amp;clearAttr=&amp;messageId=&amp;source=&amp;title=&amp;newTopLevel=false&amp;sendingPage=226698&amp;postedComment=false&amp;addBefore=&amp;itemId=5465465&amp;path=push&amp;reviewAssessment=false&amp;topicId=&amp;addTool=-1&amp;recheck=&amp;id=&amp;forumId=">Week 1 info</a> on Sakai
-<ul>
-<li>Includes links to background survey and BSAT 511/611 Slack group</li>
-</ul></li>
+<li>describe different types of data,</li>
+<li>compute and interpret basic numerical summaries,</li>
+<li>feel comfortable navigating R and RStudio.</li>
 </ul>
 </section>
-<section id="overview-of-week-1" class="level2">
-<h2 class="anchored" data-anchor-id="overview-of-week-1">Overview of Week 1</h2>
-<div class="grid">
-<section id="mon" class="level3 g-col-6">
-<h3 class="anchored" data-anchor-id="mon">Mon</h3>
+<section id="class-meetings" class="level2">
+<h2 class="anchored" data-anchor-id="class-meetings">Class meetings</h2>
+<p><strong>Monday</strong></p>
 <ul>
-<li>No class. OHSU New Student Orientation</li>
-<li><a href="../resources/BSTA 511 text R info F25.pdf">Handout</a> with directions on installing R &amp; RStudio</li>
+<li>Welcome and course overview</li>
+<li>Introduction to data</li>
+<li>Summarizing numerical data</li>
+</ul>
+<p><strong>Wednesday</strong></p>
+<ul>
+<li>Introduction to R and RStudio</li>
+<li>Working with simple datasets in R</li>
 </ul>
 </section>
-<section id="wed---day-1" class="level3 g-col-6">
-<h3 class="anchored" data-anchor-id="wed---day-1">Wed - Day 1</h3>
+<section id="readings-before-class" class="level2">
+<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
 <ul>
-<li>Intro to R &amp; RStudio</li>
-<li>Please have R &amp; RStudio installed for class</li>
+<li>Textbook sections 1.1–1.4</li>
+</ul>
+<p>(Additional resources will be posted if helpful.)</p>
+</section>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides:</h3>
+<ul>
+<li>Day 1 slides (HTML | PDF)</li>
+<li>Day 2 slides (HTML | PDF)</li>
 </ul>
 </section>
-</div>
+<section id="software" class="level3">
+<h3 class="anchored" data-anchor-id="software">Software:</h3>
+<ul>
+<li>Install R and RStudio (see Resources page)</li>
+</ul>
 </section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<table class="table-striped table-hover caption-top table">
-<colgroup>
-<col style="width: 3%">
-<col style="width: 10%">
-<col style="width: 8%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Day</th>
-<th>Topic</th>
-<th>Slides (F23): html</th>
-<th>Slides: pdf</th>
-<th>Slides: web-page</th>
-<th>Code: qmd</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Intro to R &amp; RStudio</td>
-<td><a href="../slides/Day01_bsta511.qmd">Day 1</a></td>
-<td><a href="../slides_pdf/Day01_bsta511.pdf"><iconify-icon role="img" inline="" icon="bi:file-earmark-pdf-fill" style="font-size: 20px;" aria-label="Icon file-earmark-pdf-fill from bi Iconify.design set." title="Icon file-earmark-pdf-fill from bi Iconify.design set."></iconify-icon></a></td>
-<td><a href="../slides_md/Day01_bsta511_md.qmd"><iconify-icon role="img" inline="" icon="streamline:web" style="font-size: 20px;" aria-label="Icon web from streamline Iconify.design set." title="Icon web from streamline Iconify.design set."></iconify-icon></a></td>
-<td><a href="https://github.com/niederhausen/BSTA_511_F25/blob/main/slides_md/Day01_bsta511_md.qmd"><iconify-icon role="img" inline="" icon="simple-icons:quarto" aria-label="Icon quarto from simple-icons Iconify.design set." title="Icon quarto from simple-icons Iconify.design set."></iconify-icon></a></td>
-</tr>
-</tbody>
-</table>
 </section>
 <section id="homework" class="level2">
 <h2 class="anchored" data-anchor-id="homework">Homework</h2>
 <ul>
-<li><a href="../homework/HW_1_F25_bsta511.qmd">HW 1</a> due on Sat, 10/11
-<ul>
-<li>Covers Days 1-3</li>
-</ul></li>
+<li>HW 0 due Sunday at 11:00 pm</li>
+<li>Focuses on course setup and basic concepts from Week 1</li>
 </ul>
 </section>
-<section id="recordings" class="level2">
-<h2 class="anchored" data-anchor-id="recordings">Recordings</h2>
-<ul>
-<li><p>There are no pre-recorded lessons for Week 1. Starting Week 2, you will be accessing pre-recorded lessons on the <a href="https://echo360.org/section/af47457c-bed2-48d7-84ae-eaa2d44f9add/home">EchoVideo site for BSTA 511/611</a>. Make sure you can log into this site and view the recordings.</p></li>
-<li><p><strong>In-class</strong> recording links are on <a href="https://sakai.ohsu.edu/portal/site/BSTA-511-1-AA-F25/tool/7f531e0a-800c-40eb-bebb-029a60c5df15/ShowPage?returnView=&amp;studentItemId=0&amp;backPath=&amp;bltiAppStores=false&amp;errorMessage=&amp;clearAttr=&amp;messageId=&amp;source=&amp;title=&amp;newTopLevel=false&amp;sendingPage=226697&amp;postedComment=false&amp;addBefore=&amp;itemId=5465463&amp;path=push&amp;reviewAssessment=false&amp;topicId=&amp;addTool=-1&amp;recheck=&amp;id=&amp;forumId=">Sakai</a>. Navigate to <em>Course Materials</em> -&gt; <em>Schedule with links to in-class recordings</em>. Note that the password to the recordings is at the top of the page.</p></li>
-</ul>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>Next week we will introduce probability and begin exploratory data analysis and visualization.</p>
 
 
 </section>
@@ -458,11 +437,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
