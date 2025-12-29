@@ -56,9 +56,15 @@ By the end of the week, you should be able to:
 
 - Install R and RStudio (see Resources page)
 
+## Post-class check-in (attendance)
+
+- Please complete the post-class check-in after each class meeting.
+- Used for attendance credit and to identify topics that need clarification.
+- Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
 ## Homework
 
-- HW 0 due Sunday at 11:00 pm
+- HW 0 due Sunday at 11:00 pm  
 - Focuses on course setup and basic concepts from Week 1
 
 ## Looking ahead
