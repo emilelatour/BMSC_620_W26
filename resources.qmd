@@ -112,5 +112,5 @@ Lecture slides, datasets, and handouts will be linked from the [Schedule](schedu
 
 ------------------------------------------------------------------------
 
-*Attribution note:* Portions of this Materials page were adapted from course materials by Nicky Wakim, with permission, and modified for BMSC 620.
+*Attribution note:* Portions of this Resources page were adapted from course materials by Nicky Wakim, with permission, and modified for BMSC 620.
 
