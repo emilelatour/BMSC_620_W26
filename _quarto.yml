@@ -59,7 +59,7 @@ execute:
 format:
   html:
     theme: flatly
-    css: styles.css
+    css: assets/css/styles.css
     toc: true
     smooth-scroll: true
     code-copy: true
