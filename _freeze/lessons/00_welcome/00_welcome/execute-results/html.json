@@ -1,0 +1,19 @@
+{
+  "hash": "23d018d1b2272eebe8233dd5a9145dd9",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Welcome to BMSC 620\"\nauthor: \"Emile Latour\"\ndate: \"2026-01-05\"\ndate-format: long\nformat:\n  revealjs:\n    theme: \"../../assets/css/reveal-bmsc620_v4.scss\"\n    slide-number: true\n    show-slide-number: all\n    width: 1955\n    height: 1100\n    footer: \"BMSC 620\"\nexecute:\n  echo: true\n  freeze: auto\n---\n\n::: {.cell}\n<style type=\"text/css\">\n#wrap {\n  width: 1650px;\n  height: 900px;\n  margin: 0 auto;\n  overflow: hidden;\n  border: 1px solid #999;\n  border-radius: 8px;\n}\n\n#frame {\n  width: 1650px;\n  height: 900px;\n  border: 0;\n\n  /* 🔑 Make website text readable */\n  zoom: 1.25;\n\n  /* Firefox fallback */\n  -moz-transform: scale(1.25);\n  -moz-transform-origin: 0 0;\n}\n</style>\n:::\n\n\n\n## Welcome\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsource(here::here('class_dates.R'))\nformat(as.Date(w1d1), '%b %d, %Y')\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"Jan 05, 2026\"\n```\n\n\n:::\n:::\n\n\n\n## Website\n\n- Course website: [emilelatour.github.io/BMSC_620_W26](https://emilelatour.github.io/BMSC_620_W26/)\n\n## Let's visit the website: Homepage\n\n\n\n```{=html}\n<div id=\"wrap\">\n  <iframe id=\"frame\" src=\"https://emilelatour.github.io/BMSC_620_W26/\"></iframe>\n</div>\n```\n\n\n\n## Let's visit the website: Syllabus\n\n-   Course learning objectives\n-   Textbook in shared folder!\n-   R: we will start to learn this programming language\n-   Assessments and grade breakdowns\n    - Mostly homework + quizzes\n-   Feedback from you to me: in the form of exit tickets, midterm feedback, and final course\n-   How to succeed in this course: resources and assignments explained\n-   Late work policy / Attendance policy\n-   ChatGPT and other AI technology\n-   Course expectations: a few ways that I will show you respect and commitment to you as students\n    -   And a few ways I expect from you!\n-   Communicating with me: give me 24 hours to reply M-F\n    -   Online communication is not my strength!\n\n## Let's visit the website: Syllabus (2/2)\n\n\n\n```{=html}\n<div id=\"wrap\">\n  <iframe id=\"frame\" src=\"https://emilelatour.github.io/BMSC_620_W26/syllabus.html\"></iframe>\n</div>\n```",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

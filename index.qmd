@@ -25,7 +25,8 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 
 {{< iconify fluent person-24-filled size=24px >}} [Emile Latour, MS](instructors.qmd)
 
-{{< iconify bi building-fill size=24px >}} RJH 4320
+<!-- {{< iconify bi building-fill size=24px >}} RJH 4320 -->
+{{< iconify bi building-fill size=24px >}} KCRB
 
 {{< iconify tabler mail-filled size=24px >}} [latour\@ohsu.edu](mailto:latour@ohsu.edu)
 :::

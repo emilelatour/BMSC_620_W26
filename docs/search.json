@@ -15,7 +15,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Key course info\n\nCourse website: This site is the hub for schedules and materials. Assignments and grades will be managed in Sakai.\nCommunication: Email is the best way to reach me. I will try to respond within 24 hours Monday–Friday.\nSoftware: We will use R and RStudio for homework and in-class examples. (Instructions will be posted on the Materials page.)\nOne-day room change: Class will meet in MAC 3198 on January 21 only.\n\n\n\nCourse description\nBMSC 620 introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems using parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using R for basic data management, visualization, and interpretation of statistical output.\n\n\nLearning objectives\nBy the end of this course, students should be able to:\n\nDescribe how data relate to a research question of interest.\nSelect and implement appropriate statistical methods for estimation and inference using statistical software.\nInterpret and communicate statistical findings to a non-statistical audience in the context of the original research question.\n\n\n\nInstructors and office hours\nSee the Instructors page for contact information and office hours.\n\n\nMeeting times and location\n\nDays: Mondays and Wednesdays\nDates: January 5 – March 20, 2026\nTime: 9:00 AM – 11:30 AM\nLocation: RJH 4320 (except January 21 in MAC 3198)\n\n\nKnown exceptions\n\nMonday, January 19, 2026: Martin Luther King Jr. Day\nMonday, February 16, 2026: Presidents Day\n\n\n\n\nMaterials and software\nSee the Resources page for links to software installation instructions, course handouts, datasets, and other resources.\n\n\nAssessment and grading\nYour grade will be based on the components below. (Details, rubrics, and due dates will be posted on the course website and in Sakai.)\n\nHomework: Regular problem sets to practice concepts and R skills.\nQuizzes: Periodic checks on core concepts and interpretation.\nParticipation / in-class work (if applicable): Any in-class activities or exit tickets will be described on the Assignments or Quizzes pages.\n\nGrading scale: (insert your program’s grading scheme or your planned cutoffs here)\nSpecific weights and grading criteria may be adjusted early in the term and will be finalized on the course website and in Sakai.\n\n\nCollaboration and academic integrity\nYou are encouraged to discuss course concepts and work through problems with classmates. However, anything you submit must reflect your own understanding and be written in your own words.\n\nStatement on Generative AI\nChatGPT and other generative AI tools can be great resources for learning how to code and/or troubleshoot code that does not work. However, the work you turn in must be your own. Thus it is inappropriate to rely on AI to directly provide you with solutions to assessment questions (homework and exams) or write text that you are submitting as your own. If you do use AI tools to help you with an assignment, these must be cited along with how they were used.\nPlease see the Plagiarism & Attribution section (Code Snippets and AI Tools subsection) of Dr. Steve Bedrick’s Course Policies site for BMI 525: Principles and Practice of Data Visualization.\n\n\n\nCourse policies and university resources\nOfficial institutional policies and student resources will be provided in Sakai. Please contact me if you have questions about accommodations, accessibility, or support resources.\n\n\nSchedule\nSee the Schedule page for the current schedule. The schedule may be adjusted as needed.\n\nAttribution note: This syllabus structure was adapted from departmental course materials, including a syllabus by Meike Niederhausen, with permission, and modified for BMSC 620.",
+    "text": "Course website: This site is the hub for schedules and materials. Assignments and grades will be managed in Sakai.\nSoftware: We will use R and RStudio for homework and in-class examples. (Instructions will be posted on the Materials page.)\nOne-day room change: Class will meet in MAC 3198 on January 21 only.",
     "crumbs": [
       "Home",
       "Course info",
@@ -23,21 +23,130 @@
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Under construction",
+    "objectID": "syllabus.html#homework-40",
+    "href": "syllabus.html#homework-40",
+    "title": "Syllabus",
+    "section": "Homework (40%)",
+    "text": "Homework (40%)\nHomework assignments are designed to help you practice core concepts, develop familiarity with R, and build confidence interpreting statistical results. Homework is primarily a formative assessment, meaning its purpose is to support learning rather than to assess perfection.\nThere will be regular homework assignments throughout the term. Assignments will typically include a mix of conceptual questions, interpretation, and applied work using R.\n\nGrading\nEach homework assignment will be graded on a 10-point scale using the following criteria:\n\nSubstantial completion (6 points)\nMost required parts of the assignment are attempted (approximately 75–80%). Code and written responses show a genuine effort to engage with the problems, even if some answers are incorrect.\nDemonstrated process (2 points)\nRelevant work is shown, including R code and intermediate steps where appropriate. The focus is on showing how you approached the problem rather than arriving at a perfect solution.\nInterpretation and communication (2 points)\nAnswers include written interpretation where appropriate, with an attempt to explain results in context (e.g., direction, magnitude, units, or meaning of statistical output).\n\nHomework will be graded primarily for effort, reasoning, and clarity, not strict correctness.\n\n\nFeedback\nFor homework submitted on time, the TA will provide feedback on one or more problems. Solutions will be posted after the due date so that you can review your work and identify areas for improvement.\n\n\nLate and dropped homework\n\nLate homework will be accepted for partial credit (up to 80% of the total points). Feedback will only be provided for homework submitted on time.\nThe lowest homework score will be dropped when calculating the final homework grade.\n\nThese policies are intended to provide flexibility for busy schedules while encouraging consistent engagement with the course material.",
     "crumbs": [
       "Home",
-      "Homework"
+      "Course info",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#midterm-exam-20",
+    "href": "syllabus.html#midterm-exam-20",
+    "title": "Syllabus",
+    "section": "Midterm exam (20%)",
+    "text": "Midterm exam (20%)\nThe midterm exam is a take-home assessment designed to evaluate your understanding of the material covered in the first half of the course. The emphasis is on conceptual understanding, interpretation, and clear communication, rather than speed or memorization.\nThe midterm will be available for several days, with the exact release and due dates listed on the course schedule and in Sakai. The exam is designed to take approximately 3–5 hours to complete, though you may choose when and how to distribute that time during the availability window.\n\nFormat and resources\nThe midterm will consist of a small number of multi-part questions and may include conceptual questions, interpretation of statistical output or visualizations, and applied tasks using R.\nYou may use:\n\nCourse notes and slides\nThe course website\nR and RStudio\n\n\n\nCollaboration and academic integrity\nYou may discuss general concepts related to the exam with classmates. However, you must work independently on the midterm and submit your own work. Sharing code, written responses, or specific solutions is not permitted.\n\n\nUse of AI tools\nGenerative AI tools (e.g., ChatGPT) may be used for limited support such as clarifying R error messages or syntax. They may not be used to generate solutions, interpret results, or write responses for the exam. Any use of AI tools must be consistent with the course’s academic integrity policy.\n\n\nSubmission and grading\nYou will submit your midterm exam via Sakai. Instructions regarding file formats and submission details will be provided with the exam.\nThe midterm will be graded based on correctness, reasoning, and clarity of interpretation. Partial credit will be awarded where appropriate.\n\n\nLate policy\n\nExtensions may be granted by request and should be discussed with me as soon as possible.\nUnexcused late submissions will be penalized by 10% per day late.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#final-exam-30",
+    "href": "syllabus.html#final-exam-30",
+    "title": "Syllabus",
+    "section": "Final exam (30%)",
+    "text": "Final exam (30%)\nThe final exam is a take-home assessment designed to evaluate your ability to synthesize course concepts and communicate statistical results clearly and accurately. The exam is cumulative, with an emphasis on material covered after the midterm. As with the midterm, the emphasis is on understanding, interpretation, and reasoning, rather than speed or memorization.\nThe final exam will be available for several days, with the exact release and due dates listed on the course schedule and in Sakai. The exam is designed to take approximately 4–6 hours to complete, though you may choose when and how to distribute that time during the availability window.\n\nFormat and resources\nThe final exam will consist of a small number of multi-part questions that may include:\n\nInterpretation of numerical summaries, confidence intervals, hypothesis tests, or regression output\nInterpretation of data visualizations\nApplied tasks using R\nQuestions that require integrating multiple concepts covered throughout the course\n\nYou may use:\n\nCourse notes and slides\nThe course website\nR and RStudio\n\n\n\nCollaboration and academic integrity\nYou may discuss general concepts related to the exam with classmates. However, you must work independently on the final exam and submit your own work. Sharing code, written responses, or specific solutions is not permitted.\n\n\nUse of AI tools\nGenerative AI tools (e.g., ChatGPT) may be used for limited support such as clarifying R error messages or syntax. They may not be used to generate solutions, interpret results, or write responses for the exam. Any use of AI tools must be consistent with the course’s academic integrity policy.\n\n\nSubmission and grading\nYou will submit your final exam via Sakai. Instructions regarding file formats and submission details will be provided with the exam.\nThe final exam will be graded based on correctness, reasoning, and clarity of interpretation. Partial credit will be awarded where appropriate.\n\n\nLate policy\n\nExtensions may be granted by request and should be discussed with me as soon as possible.\nUnexcused late submissions will be penalized by 10% per day late.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "syllabus.html#attendance-and-post-class-surveys-10",
+    "href": "syllabus.html#attendance-and-post-class-surveys-10",
+    "title": "Syllabus",
+    "section": "Attendance and post-class surveys (10%)",
+    "text": "Attendance and post-class surveys (10%)\nAttendance and engagement will be assessed through brief post-class surveys submitted after class meetings. These surveys are intended to encourage reflection on the day’s material and to provide feedback that helps improve the course.\nSurveys may include short questions about key takeaways, points of confusion, or course logistics. Surveys are designed to be low-effort and should take only a few minutes to complete.\n\nCredit and expectations\n\nYou will receive full credit for completing at least 15 out of 20 post-class surveys during the term.\nSurveys are graded for completion, not correctness.\nNo make-up surveys will be offered, but the 15-of-20 policy is intended to provide flexibility for absences, illness, or scheduling conflicts.\n\n\n\nPurpose\nPost-class surveys serve two purposes:\n\nThey encourage regular engagement with course material.\nThey allow me to identify common questions or areas of confusion and adjust instruction accordingly.\n\nThis component is designed to reward consistent participation without penalizing occasional absences.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Syllabus"
+    ]
+  },
+  {
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
+    "section": "",
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held on Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistants\n\nTA office hours: (day/time)\n\nWebex: (link)\n\nTA office hours: (day/time)\n\nWebex: (link)",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
     ]
   },
   {
@@ -137,83 +246,57 @@
     ]
   },
   {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Under construction",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Homework"
     ]
   },
   {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held on Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistants\n\nTA office hours: (day/time)\n\nWebex: (link)\n\nTA office hours: (day/time)\n\nWebex: (link)",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
+    "objectID": "lessons/00_welcome/00_welcome.html#welcome",
+    "href": "lessons/00_welcome/00_welcome.html#welcome",
+    "title": "Welcome to BMSC 620",
+    "section": "Welcome",
+    "text": "Welcome\n\nsource(here::here('class_dates.R'))\nformat(as.Date(w1d1), '%b %d, %Y')\n\n[1] \"Jan 05, 2026\""
   },
   {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
+    "objectID": "lessons/00_welcome/00_welcome.html#website",
+    "href": "lessons/00_welcome/00_welcome.html#website",
+    "title": "Welcome to BMSC 620",
+    "section": "Website",
+    "text": "Website\n\nCourse website: emilelatour.github.io/BMSC_620_W26"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n RJH 4320\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Homepage",
+    "text": "Let’s visit the website: Homepage"
   },
   {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n RJH 4320\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Syllabus",
+    "text": "Let’s visit the website: Syllabus\n\nCourse learning objectives\nTextbook in shared folder!\nR: we will start to learn this programming language\nAssessments and grade breakdowns\n\nMostly homework + quizzes\n\nFeedback from you to me: in the form of exit tickets, midterm feedback, and final course\nHow to succeed in this course: resources and assignments explained\nLate work policy / Attendance policy\nChatGPT and other AI technology\nCourse expectations: a few ways that I will show you respect and commitment to you as students\n\nAnd a few ways I expect from you!\n\nCommunicating with me: give me 24 hours to reply M-F\n\nOnline communication is not my strength!"
   },
   {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
-    "section": "",
-    "text": "See Sakai",
-    "crumbs": [
-      "Home",
-      "Exams"
-    ]
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus-22",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus-22",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Syllabus (2/2)",
+    "text": "Let’s visit the website: Syllabus (2/2)\n\n  \n\n\n\n\nBMSC 620"
   },
   {
     "objectID": "resources.html",
