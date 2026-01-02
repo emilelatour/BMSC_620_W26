@@ -225,7 +225,7 @@ See the [Schedule](schedule.qmd) page for the current schedule. The schedule may
 
 ------------------------------------------------------------------------
 
-*Attribution note*: This syllabus structure was adapted from departmental course materials, including a syllabus by Meike Niederhausen, with permission, and modified for BMSC 620.
+*Attribution note*: This syllabus structure was adapted from departmental course materials, including syllabi by **Meike Niederhausen** and **Nicky Wakim**, with permission, and modified for BMSC 620.
 
 
 

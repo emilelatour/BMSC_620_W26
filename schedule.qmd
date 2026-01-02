@@ -78,6 +78,7 @@ source(here("class_dates.R"))
 | 6 | `{r} format(w6d1, '%a, %m/%d')` | 10 | Paired data and paired t-tests; Two-sample independent t-tests | 5.2-5.3 |
 |  | `{r} format(w6d2, '%a, %m/%d')` | 11 | Power; Midterm review | 5.4 |
 |  | [**`{r} format(mid_opens, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM opens at 3pm**]{.hw-row} |  |
+|  |  |  | Midterm will cover Lessons 1–9 |  |
 |  | [**`{r} format(mid_closes, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM closes at 11pm**]{.hw-row} |  |
 |  |  |  |  |  |
 | 7 | **`{r} format(w7d1, '%a, %m/%d')`** |  | **No class, Presidents Day** |  |
@@ -96,9 +97,10 @@ source(here("class_dates.R"))
 |  | `{r} format(w10d2, '%a, %m/%d')` | 18 | Simple Linear Regression | 6.1-6.2 |
 |  | [**`{r} format(hw8, '%a, %m/%d')`**]{.hw-row} |  | [**HW 8 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 11 | `{r} format(w11d1, '%a, %m/%d')` | 19 | Simple Linear Regression | 6.3-6.4 |
-|  | `{r} format(w11d2, '%a, %m/%d')` | 20 | Regression; Finals review | 7.1 |
+| 11 | `{r} format(w11d1, '%a, %m/%d')` | 19 | Simple Linear Regression; Finals review | 6.3-6.4 |
 |  | [**`{r} format(final_opens, '%a, %m/%d')`**]{.hw-row} |  | [**FINAL opens at 3pm**]{.hw-row} |  |
-|  | [**`{r} format(final_closes, '%a, %m/%d')`**]{.hw-row} |  | [**FINAL closes at 11pm**]{.hw-row} |  |
+|  |  |  | Final exam is cumulative, with emphasis on Lessons 10–19 |  |
+|  | `{r} format(w11d2, '%a, %m/%d')` | 20 | Optional: Review and questions (no new material) | 7.1 |
+|  | [**`{r} format(final_closes, '%a, %m/%d')`**]{.hw-row} |  | [**FINAL closes at 5pm**]{.hw-row} |  |
 
 : {.hover tbl-colwidths="\[7, 8, 6, 40, 8\]"}

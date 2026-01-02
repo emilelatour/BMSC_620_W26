@@ -64,8 +64,8 @@ hw8 = cal_dates[70]
 ## Week 11 dates
 w11d1 = cal_dates[71]
 w11d2 = cal_dates[73]
-final_opens = cal_dates[73]
-final_closes = cal_dates[77]
+final_opens = cal_dates[71]
+final_closes = cal_dates[75]
 
 
 
