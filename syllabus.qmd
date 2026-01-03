@@ -103,7 +103,7 @@ For homework submitted on time, the TA will provide feedback on one or more prob
 #### Late and dropped homework
 
 - Late homework will be accepted for **partial credit (up to 80% of the total points)**. Feedback will **only** be provided for homework submitted on time.
-- The **lowest homework score will be dropped** when calculating the final homework grade.
+- The **lowest homework score will be dropped** when calculating the final homework grade. **HW 0 is excluded from this policy**, as it is intended to ensure technical readiness for the course.
 
 These policies are intended to provide flexibility for busy schedules while encouraging consistent engagement with the course material.
 
@@ -217,7 +217,39 @@ Please see the Plagiarism & Attribution section (Code Snippets and AI Tools subs
 
 # Course policies and university resources
 
-Official institutional policies and student resources will be provided in Sakai. Please contact me if you have questions about accommodations, accessibility, or support resources.
+### Respect for diversity and inclusion
+
+It is my intent that students from all backgrounds and perspectives be well served by this course, and that the diversity students bring be viewed as a strength and resource for learning. Course materials and activities are designed to be inclusive and respectful of differences in background, identity, experience, and ways of learning.
+
+I expect all students to engage with one another in a professional, respectful, and supportive manner. If you have suggestions for how this course can better support your learning or the learning of others, I welcome your feedback.
+
+If any class meetings or deadlines conflict with religious, cultural, or personal obligations, please let me know so we can discuss appropriate accommodations.
+
+If you have a preferred name or pronouns that differ from those listed on the course roster, please feel free to share them with me.
+
+### Getting help and asking questions
+
+Questions are a normal and expected part of learning statistics.
+
+When asking for help (in office hours or by email), it is helpful to include some context about what you have already tried. For example:
+
+- What part of the problem you understand
+- Where you are getting stuck
+- Any relevant code, output, or notes you are working from
+
+Providing context helps me or the TA give more targeted and efficient feedback. You do not need to have a fully formed question to attend office hours.
+
+### Copyright of course materials
+
+All course materials (including slides, handouts, assignments, and exams) are copyrighted unless otherwise noted. These materials are intended for use only by students enrolled in this course and may not be shared or distributed outside the course without permission.
+
+This includes publicly posting course materials or completed assignments online.
+
+Additional institutional copyright policies are provided elsewhere in Sakai.
+
+### University resources
+
+Official institutional policies and student support resources (including accessibility services and academic support) are provided through Sakai. Please contact me if you have questions or need assistance accessing these resources.
 
 # Schedule
 
