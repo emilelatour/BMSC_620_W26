@@ -35,9 +35,9 @@ Start from the provided `.qmd` template for each assignment.
 
 ## Homework schedule
 
-|	HW	|	Due (\@11pm)	|	View (HTML)	|	Template (.qmd)	|
+|	HW	|	Due (\@11pm)	|	Files to download	|	Preview	|
 |	:---:	|	:---:	|	:---:	|	:---:	|
-|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 (view)](/homework/HW00.qmd)	|	[HW 00 (download)](https://raw.githubusercontent.com/emilelatour/BMSC_620_W26/main/homework/HW00.qmd)	|
+|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 files](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5)	|	[View HW 00](/homework/HW00/HW00.qmd)	|
 |	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
 |	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
 |	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|	(to be posted)	|

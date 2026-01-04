@@ -71,36 +71,36 @@
     ]
   },
   {
-    "objectID": "homework/HW00.html",
-    "href": "homework/HW00.html",
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
     "title": "BMSC 620 — Homework 0",
     "section": "",
     "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
   },
   {
-    "objectID": "homework/HW00.html#homework-0",
-    "href": "homework/HW00.html#homework-0",
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
     "title": "BMSC 620 — Homework 0",
     "section": "Homework 0",
     "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
   },
   {
-    "objectID": "homework/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00.html#part-1-markdown-practice",
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
     "title": "BMSC 620 — Homework 0",
     "section": "Part 1: Markdown practice",
     "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
   },
   {
-    "objectID": "homework/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00.html#part-2-r-code-chunks",
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
     "title": "BMSC 620 — Homework 0",
     "section": "Part 2: R code chunks",
     "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
   },
   {
-    "objectID": "homework/HW00.html#part-3-final-check",
-    "href": "homework/HW00.html#part-3-final-check",
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
     "title": "BMSC 620 — Homework 0",
     "section": "Part 3: Final check",
     "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
@@ -128,7 +128,7 @@
     "href": "homework.html#homework-schedule",
     "title": "Homework",
     "section": "Homework schedule",
-    "text": "Homework schedule\n\n\n\nHW\nDue (@11pm)\nView (HTML)\nTemplate (.qmd)\n\n\n\n\n0\n01/11\nHW 00 (view)\nHW 00 (download)\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "text": "Homework schedule\n\n\n\nHW\nDue (@11pm)\nFiles to download\nPreview\n\n\n\n\n0\n01/11\nHW 00 files\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
     "crumbs": [
       "Home",
       "Homework"
