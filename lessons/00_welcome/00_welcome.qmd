@@ -139,6 +139,14 @@ This course builds on prior versions developed by
 </div>
 ```
 
+## Let's visit the website: Weekly materials
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/weeks/week_01.html"></iframe>
+</div>
+```
+
 ## Let's visit the website: Homework
 
 ```{=html}
@@ -146,3 +154,39 @@ This course builds on prior versions developed by
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/homework.html"></iframe>
 </div>
 ```
+
+## Let's visit the website: Exams
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/exams.html"></iframe>
+</div>
+```
+
+## Structure for this course
+
+- Learning the core tools to **understand and interpret statistics**
+  
+&nbsp;
+
+- Some pieces may feel abstract or disconnected at first — that’s normal
+  
+&nbsp;
+
+- The goal is to build a **toolbox** that lets you analyze data *and* explain what the results mean
+
+## Let me know if you have questions
+
+Or if you notice:
+
+- something unclear
+- something confusing
+- or something that contradicts the course site
+
+## That’s it for logistics
+
+- The course website is your home base
+- Homework 0 is due **Sunday at 11:00 pm**
+- Reach out early if something is confusing
+
+Let’s shift gears and start the course.

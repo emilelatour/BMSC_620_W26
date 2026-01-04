@@ -384,11 +384,46 @@
     "text": "Let’s visit the website: Schedule"
   },
   {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Weekly materials",
+    "text": "Let’s visit the website: Weekly materials"
+  },
+  {
     "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
     "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
     "title": "Welcome to BMSC 620",
     "section": "Let’s visit the website: Homework",
-    "text": "Let’s visit the website: Homework\n\n  \n\n\n\n\nBMSC 620"
+    "text": "Let’s visit the website: Homework"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Exams",
+    "text": "Let’s visit the website: Exams"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
+    "href": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
+    "title": "Welcome to BMSC 620",
+    "section": "Structure for this course",
+    "text": "Structure for this course\n\nLearning the core tools to understand and interpret statistics\n\n \n\nSome pieces may feel abstract or disconnected at first — that’s normal\n\n \n\nThe goal is to build a toolbox that lets you analyze data and explain what the results mean"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
+    "href": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
+    "title": "Welcome to BMSC 620",
+    "section": "Let me know if you have questions",
+    "text": "Let me know if you have questions\nOr if you notice:\n\nsomething unclear\nsomething confusing\nor something that contradicts the course site"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
+    "href": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
+    "title": "Welcome to BMSC 620",
+    "section": "That’s it for logistics",
+    "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
   },
   {
     "objectID": "resources.html",
@@ -449,40 +484,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "homework/HW00/index.html",
-    "href": "homework/HW00/index.html",
-    "title": "BMSC 620 — Homework 0",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW00/index.html#homework-0",
-    "href": "homework/HW00/index.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
-  },
-  {
-    "objectID": "homework/HW00/index.html#part-1-markdown-practice",
-    "href": "homework/HW00/index.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
-  },
-  {
-    "objectID": "homework/HW00/index.html#part-2-r-code-chunks",
-    "href": "homework/HW00/index.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
-  },
-  {
-    "objectID": "homework/HW00/index.html#part-3-final-check",
-    "href": "homework/HW00/index.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
   }
 ]

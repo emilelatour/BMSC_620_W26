@@ -54,7 +54,7 @@ source(here("class_dates.R"))
 
 | Week | Dates | Lesson | Topics | Chapter sections |
 |:-------------:|:-------------:|:-------------:|---------------|:-------------:|
-| 1 | `{r} format(w1d1, '%a, %m/%d')` | 0 | Welcome |  |
+| [**1**](weeks/week_01.qmd) | `{r} format(w1d1, '%a, %m/%d')` | 0 | Welcome |  |
 |  |  | 1 | Intro to Data, Summarizing numerical data | 1.1-1.4 |
 |  | `{r} format(w1d2, '%a, %m/%d')` | 2 | Introduction to R & RStudio |  |
 |  | [**`{r} format(hw0, '%a, %m/%d')`**]{.hw-row} |  | [**HW 0 due \@ 11 pm**]{.hw-row} |  |
