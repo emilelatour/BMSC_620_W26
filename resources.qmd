@@ -41,7 +41,7 @@ A shared OneDrive folder will be used to distribute datasets, handouts, and othe
 - Files will be organized by topic or week.
 - Links to specific files may also appear on the Schedule page.
 
-[Link to class OneDrive folder](ADD-LINK-HERE) **NOT SET UP YET**
+[Link to class OneDrive folder](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCzFL46JxYtQYOScuzb1OrIAfeUyniSwrT6HsHk6zlALVk?e=3JSQGX)
 
 ### Office hours platform
 

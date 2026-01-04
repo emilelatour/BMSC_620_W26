@@ -21,7 +21,7 @@ source(here("class_dates.R"))
 
 **File naming**: `Lastname_FirstInitial_HW##` (example: `Latour_E_HW01`)
 
-**Submit **both** files on Sakai**:
+**Submit **both** files on Sakai:
 
 - Lastname_FirstInitial_HW##.qmd
 - Lastname_FirstInitial_HW##.html
@@ -35,9 +35,11 @@ Start from the provided `.qmd` template for each assignment.
 
 ## Homework schedule
 
-|	HW	|	Due (\@11pm)	|	Files to download	|	Preview	|
+All homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.
+
+|	HW	|	Due (\@11pm)	|	Files	|	Preview	|
 |	:---:	|	:---:	|	:---:	|	:---:	|
-|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 files](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5)	|	[View HW 00](/homework/HW00/HW00.qmd)	|
+|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5)	|	[View HW 00](docs/homework/HW00/HW00.qmd)	|
 |	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
 |	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
 |	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|	(to be posted)	|

@@ -1,0 +1,15 @@
+{
+  "hash": "32906294dc0561352659dd1078fcf455",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"BMSC 620 — Homework 0\"\nauthor: \"Your Name\"\nformat: html\nexecute:\n  echo: true\n---\n\n\n\n\n\n::: {.callout-note}\n**File naming and submission**\n\nPlease use the following file naming convention:\n\n`Lastname_FirstInitial_HW##`\n\nExamples:\n\n- Smith_J_HW01.qmd\n- Smith_J_HW01.html\n\n\nWhen submitting Homework 0, upload **both**:\n\n- the `.qmd` file\n- the rendered `.html` file\n:::\n\n## Homework 0\n\nThis assignment is intended to help you get comfortable working in RStudio\nand using Quarto documents.\n\nThis assignment is graded for completion and effort, not correctness.\n\n---\n\n## Part 1: Markdown practice\n\nEdit this section to demonstrate the following:\n\n- Bold text\n- Italic text\n- A bulleted list\n- A numbered list\n\nYou may replace the text below with your own examples.\n\n- Example bullet\n- Another bullet\n\n1. Example item\n2. Another item\n\n---\n\n## Part 2: R code chunks\n\nBelow is an example R code chunk.\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# This is a comment\n\n2 + 2\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 4\n```\n\n\n:::\n:::\n\n\n\n\n\n### Tasks\n\n1.\tModify the code chunk above so that it:\n  - Includes at least one additional comment\n  - Runs without errors\n2. Add a second R code chunk below that:\n  - Creates a numeric vector with at least 5 numbers \n  - Computes the mean of that vector using mean()\n  - I've included an example below as one possible solution for reference. The submitted code should be your own.\n\n### Example (for reference only)\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Example\n\n# Create a numeric vector\nx <- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 6\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Your code here\n```\n:::\n\n\n\n\n\n## Part 3: Final check\n\nBefore you are finished, confirm that:\n\n- The document renders to HTML without errors\n- All R code chunks run successfully\n- Your name appears at the top of the document\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
