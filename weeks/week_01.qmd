@@ -35,10 +35,10 @@ By the end of the week, you should be able to:
 
 ### Monday — Welcome & Introduction to Data
 
-**Topics**
-- Welcome and course overview
-- Introduction to data
-- Summarizing numerical data
+- **Topics**
+  - Welcome and course overview
+  - Introduction to data
+  - Summarizing numerical data
 
 - **Slides**
   - [HTML](/lessons/00_welcome/00_welcome.qmd)
