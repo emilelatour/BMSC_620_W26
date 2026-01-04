@@ -1,0 +1,104 @@
+---
+title: "BMSC 620 — Homework 0"
+author: "Your Name"
+format: html
+execute:
+  echo: true
+---
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW##`
+
+Examples:
+
+- Smith_J_HW01.qmd
+- Smith_J_HW01.html
+
+
+When submitting Homework 0, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Homework 0
+
+This assignment is intended to help you get comfortable working in RStudio
+and using Quarto documents.
+
+This assignment is graded for completion and effort, not correctness.
+
+---
+
+## Part 1: Markdown practice
+
+Edit this section to demonstrate the following:
+
+- Bold text
+- Italic text
+- A bulleted list
+- A numbered list
+
+You may replace the text below with your own examples.
+
+- Example bullet
+- Another bullet
+
+1. Example item
+2. Another item
+
+---
+
+## Part 2: R code chunks
+
+Below is an example R code chunk.
+
+```{r}
+# This is a comment
+
+2 + 2
+
+```
+
+### Tasks
+
+1.	Modify the code chunk above so that it:
+  - Includes at least one additional comment
+  - Runs without errors
+2. Add a second R code chunk below that:
+  - Creates a numeric vector with at least 5 numbers 
+  - Computes the mean of that vector using mean()
+  - I've included an example below as one possible solution for reference. The submitted code should be your own.
+
+### Example (for reference only)
+
+```{r}
+
+# Example
+
+# Create a numeric vector
+x <- c(3, 7, 10, 4, 6)
+
+# Compute the mean
+mean(x)
+
+```
+
+```{r}
+
+# Your code here
+
+```
+
+## Part 3: Final check
+
+Before you are finished, confirm that:
+
+- The document renders to HTML without errors
+- All R code chunks run successfully
+- Your name appears at the top of the document
+

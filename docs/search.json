@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Week\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nProbability\n2.1-2.4\n\n\n\nWed, 01/14\n4\nData visualization, exploratory data analysis (EDA), and summarizing categorical data\n1.5-1.7\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nData visualization (continued)\n1.5-1.7\n\n\n\nSun, 01/25\n\nHW 2 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA.\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
+    "text": "Week\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nProbability\n2.1-2.4\n\n\n\nWed, 01/14\n4\nData visualization, exploratory data analysis (EDA), and summarizing categorical data\n1.5-1.7\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nData visualization (continued)\n1.5-1.7\n\n\n\nSun, 01/25\n\nHW 2 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
     "crumbs": [
       "Home",
       "Schedule"
@@ -71,82 +71,78 @@
     ]
   },
   {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
+    "objectID": "homework/HW00.html",
+    "href": "homework/HW00.html",
+    "title": "BMSC 620 — Homework 0",
     "section": "",
-    "text": "See Sakai",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00.html#homework-0",
+    "href": "homework/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00.html#part-3-final-check",
+    "href": "homework/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both** files on Sakai**:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
     "crumbs": [
       "Home",
-      "Exams"
+      "Homework"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\n\n\n\nHW\nDue (@11pm)\nTemplate (.qmd)\n\n\n\n\n0\n01/11\nHW 0 template\n\n\n1\n01/18\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n\n\n8\n03/15\n(to be posted)",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Homework"
     ]
   },
   {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: (TBD - will be announced by the end of Week 1)\nWebex: (link TBD)",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
+      "Homework"
     ]
   },
   {
@@ -246,22 +242,83 @@
     ]
   },
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
     "section": "",
-    "text": "Under construction",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
-      "Homework"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: (TBD - will be announced by the end of Week 1)\nWebex: (link TBD)",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
+    "section": "",
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
   },
   {
     "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
@@ -310,7 +367,28 @@
     "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
     "title": "Welcome to BMSC 620",
     "section": "Let’s visit the website: Resources",
-    "text": "Let’s visit the website: Resources\n\n  \n\n\n\n\nBMSC 620"
+    "text": "Let’s visit the website: Resources"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#homepage",
+    "href": "lessons/00_welcome/00_welcome.html#homepage",
+    "title": "Welcome to BMSC 620",
+    "section": "Homepage",
+    "text": "Homepage"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Schedule",
+    "text": "Let’s visit the website: Schedule"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Homework",
+    "text": "Let’s visit the website: Homework\n\n  \n\n\n\n\nBMSC 620"
   },
   {
     "objectID": "resources.html",

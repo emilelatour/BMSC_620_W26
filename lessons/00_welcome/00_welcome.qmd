@@ -122,3 +122,27 @@ This course builds on prior versions developed by
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/resources.html"></iframe>
 </div>
 ```
+
+## Homepage
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/"></iframe>
+</div>
+```
+
+## Let's visit the website: Schedule
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/schedule.html"></iframe>
+</div>
+```
+
+## Let's visit the website: Homework
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/homework.html"></iframe>
+</div>
+```

@@ -89,7 +89,7 @@ source(here("class_dates.R"))
 |  | `{r} format(w8d2, '%a, %m/%d')` | 14 | Chi-squared tests, Fishers exact test | 8.3-8.4 |
 |  | [**`{r} format(hw6, '%a, %m/%d')`**]{.hw-row} |  | [**HW 6 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 9 | `{r} format(w9d1, '%a, %m/%d')` | 15 | Comparing Means with ANOVA. | 5.5, extra |
+| 9 | `{r} format(w9d1, '%a, %m/%d')` | 15 | Comparing Means with ANOVA | 5.5, extra |
 |  | `{r} format(w9d2, '%a, %m/%d')` | 16 | Nonparametric tests | Extra |
 |  | [**`{r} format(hw7, '%a, %m/%d')`**]{.hw-row} |  | [**HW 7 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |

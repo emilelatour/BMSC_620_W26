@@ -436,6 +436,24 @@ Biostatistician, OHSU Knight Cancer Institute</p>
 <div id="wrap">
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/resources.html"></iframe>
 </div>
+</section>
+<section id="homepage" class="slide level2">
+<h2>Homepage</h2>
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/"></iframe>
+</div>
+</section>
+<section id="lets-visit-the-website-schedule" class="slide level2">
+<h2>Let’s visit the website: Schedule</h2>
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/schedule.html"></iframe>
+</div>
+</section>
+<section id="lets-visit-the-website-homework" class="slide level2">
+<h2>Let’s visit the website: Homework</h2>
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/homework.html"></iframe>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -653,44 +671,6 @@ Biostatistician, OHSU Knight Cancer Institute</p>
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

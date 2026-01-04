@@ -5,6 +5,7 @@ format:
   html:
     link-external-newwindow: true
     page-layout: full
+    toc: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -15,6 +16,50 @@ library(here)
 source(here("class_dates.R"))
 ```
 
-**Under construction**
+::: {.callout-note}
+## File naming and submission
+
+**File naming**: `Lastname_FirstInitial_HW##` (example: `Latour_E_HW01`)
+
+**Submit **both** files on Sakai**:
+
+- Lastname_FirstInitial_HW##.qmd
+- Lastname_FirstInitial_HW##.html
+
+:::
 
 
+Homework assignments are due on **Sundays at 11:00 pm** unless otherwise noted.
+
+Start from the provided `.qmd` template for each assignment.
+
+## Homework schedule
+
+|	HW	|	Due (\@11pm)	|	Template (.qmd)	|
+|	:---:	|	:---:	|	:---:	|
+|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 0 template](/homework/HW00.qmd)	|
+|	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|
+|	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|
+|	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|
+|	4	|	`{r} format(hw4, '%m/%d')`	|	(to be posted)	|
+|	5	|	`{r} format(hw5, '%m/%d')`	|	(to be posted)	|
+|	6	|	`{r} format(hw6, '%m/%d')`	|	(to be posted)	|
+|	7	|	`{r} format(hw7, '%m/%d')`	|	(to be posted)	|
+|	8	|	`{r} format(hw8, '%m/%d')`	|	(to be posted)	|
+
+
+## Grading rubric (10 points)
+
+Each homework is graded on a 10-point scale:
+
+- **Substantial completion (6 points)**: ~75-80% of parts attempted with a genuine effort
+- **Demonstrated process (2 points)**: relevant work shown; R code included when used
+- **Interpretation and communication (2 points)**: brief written interpretation in context when appropriate
+
+Homework is graded primarily for **effort, reasoning, and clarity**, not strict correctness.
+
+### Late homework
+
+Late homework is accepted for **partial credit (up to 80% of total points)**.
+
+Feedback is provided **only** for homework submitted on time.
