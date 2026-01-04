@@ -321,24 +321,6 @@
       margin-right: 0; 
     }
   </style>
-  <style>
-  #wrap {
-    width: 1650px;
-    height: 900px;
-    margin: 0 auto;
-    overflow: hidden;
-    border: 1px solid #999;
-    border-radius: 8px;
-  }
-  #frame {
-    width: 1650px;
-    height: 900px;
-    border: 0;
-    zoom: 1.25;
-    -moz-transform: scale(1.25);
-    -moz-transform-origin: 0 0;
-  }
-  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -437,11 +419,30 @@ Biostatistician, OHSU Knight Cancer Institute</p>
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/resources.html"></iframe>
 </div>
 </section>
-<section id="homepage" class="slide level2">
-<h2>Homepage</h2>
-<div id="wrap">
-  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/"></iframe>
-</div>
+<section id="how-this-course-runs-on-the-website" class="slide level2">
+<h2>How this course runs on the website</h2>
+<ul>
+<li><strong>Schedule</strong>
+<ul>
+<li>Big-picture view of topics and due dates</li>
+<li>Updated if anything changes</li>
+</ul></li>
+<li><strong>Weekly materials</strong>
+<ul>
+<li>What to read or review</li>
+<li>Slides, code, and links for each class</li>
+</ul></li>
+<li><strong>Homework</strong>
+<ul>
+<li>Assignment templates</li>
+<li>Due dates and grading expectations</li>
+</ul></li>
+<li><strong>Exams</strong>
+<ul>
+<li>Midterm and final format</li>
+<li>Timing, coverage, and policies</li>
+</ul></li>
+</ul>
 </section>
 <section id="lets-visit-the-website-schedule" class="slide level2">
 <h2>Let’s visit the website: Schedule</h2>
@@ -501,7 +502,7 @@ Biostatistician, OHSU Knight Cancer Institute</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p>BMSC 620</p>
+
 </div>
 </div>
 </section>
@@ -556,7 +557,7 @@ Biostatistician, OHSU Knight Cancer Institute</p>
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'c/t',
+        slideNumber: false,
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -681,9 +682,9 @@ Biostatistician, OHSU Knight Cancer Institute</p>
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1955,
+        width: 1050,
 
-        height: 1100,
+        height: 700,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
@@ -715,6 +716,44 @@ Biostatistician, OHSU Knight Cancer Institute</p>
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

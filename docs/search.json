@@ -423,7 +423,7 @@
     "href": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
     "title": "Welcome to BMSC 620",
     "section": "That’s it for logistics",
-    "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
+    "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course."
   },
   {
     "objectID": "resources.html",
@@ -484,5 +484,12 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
+    "title": "Welcome to BMSC 620",
+    "section": "How this course runs on the website",
+    "text": "How this course runs on the website\n\nSchedule\n\nBig-picture view of topics and due dates\nUpdated if anything changes\n\nWeekly materials\n\nWhat to read or review\nSlides, code, and links for each class\n\nHomework\n\nAssignment templates\nDue dates and grading expectations\n\nExams\n\nMidterm and final format\nTiming, coverage, and policies"
   }
 ]
