@@ -114,3 +114,11 @@ This course builds on prior versions developed by
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/instructors.html"></iframe>
 </div>
 ```
+
+## Let's visit the website: Resources
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/resources.html"></iframe>
+</div>
+```

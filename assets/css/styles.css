@@ -52,3 +52,7 @@ a.hw-row {
   color: #ffffff !important;
   border-color: rgba(255, 255, 255, 0.6);
 }
+
+.github-link {
+  white-space: nowrap;
+}
