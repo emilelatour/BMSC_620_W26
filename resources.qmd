@@ -69,7 +69,7 @@ Please install the following software:
 
 Helpful installation documentation is available here: <https://rstudio-education.github.io/hopr/starting.html>
 
-Also here from Meike Neiderhausen which contains some good additional resources for R: 
+Also, this [handout](/resources/R info.pdf) by Meike Neiderhausen which contains some good additional resources for R.
 
 I encourage you to install these before the first class. We will reserve time early in the term to troubleshoot installation issues.
 
