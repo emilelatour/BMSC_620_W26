@@ -11,48 +11,68 @@ format:
     width: 1955
     height: 1100
     footer: "BMSC 620"
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      </style>
 execute:
   echo: true
   freeze: auto
 ---
 
-```{css}
-/*| echo: false */
+```{r setup, include=FALSE}
+library(here)
+source(here("class_dates.R"))
 
-#wrap {
-  width: 1650px;
-  height: 900px;
-  margin: 0 auto;
-  overflow: hidden;
-  border: 1px solid #999;
-  border-radius: 8px;
-}
-
-#frame {
-  width: 1650px;
-  height: 900px;
-  border: 0;
-
-  /* 🔑 Make website text readable */
-  zoom: 1.25;
-
-  /* Firefox fallback */
-  -moz-transform: scale(1.25);
-  -moz-transform-origin: 0 0;
-}
+library(tidyverse)
 ```
 
-## Welcome
+## Welcome to BMSC 620
 
+<br><br>
 
-```{r}
-source(here::here('class_dates.R'))
-format(as.Date(w1d1), '%b %d, %Y')
-```
+**Emile Latour, MS**  
+Biostatistician, OHSU Knight Cancer Institute
 
-## Website
+&nbsp;
 
-- Course website: [emilelatour.github.io/BMSC_620_W26](https://emilelatour.github.io/BMSC_620_W26/)
+This course builds on prior versions developed by  
+**Meike Niederhausen** and **Nicky Wakim**, with updates and revisions for Winter 2026.
+
+## Some important tasks
+
+<br>
+
+- **Bookmark the course website**  
+  <https://emilelatour.github.io/BMSC_620_W26/>
+  
+&nbsp;
+
+- **Complete Homework 0 by Sunday at 11:00 pm**
+  - Get comfortable with RStudio and Quarto
+  - Make sure you can render a document successfully
+  - This assignment is graded for completion only
+  
+&nbsp;
+
+- **Make sure you have access to the textbook**
+  - Details are posted on the course website
+
 
 ## Let's visit the website: Homepage
 
@@ -62,26 +82,35 @@ format(as.Date(w1d1), '%b %d, %Y')
 </div>
 ```
 
+## Course information on the website
+
+- **Syllabus**
+  - What this course is about
+  - How grading and homework work
+  - Exams, attendance, and course policies
+
+- **Instructors**
+  - Contact information
+  - Office hours
+  - How to get help
+
+- **Resources**
+  - R and RStudio installation instructions
+  - Course materials and datasets
+  - Additional support resources
+
 ## Let's visit the website: Syllabus
-
--   Course learning objectives
--   Textbook in shared folder!
--   R: we will start to learn this programming language
--   Assessments and grade breakdowns
-    - Mostly homework + quizzes
--   Feedback from you to me: in the form of exit tickets, midterm feedback, and final course
--   How to succeed in this course: resources and assignments explained
--   Late work policy / Attendance policy
--   ChatGPT and other AI technology
--   Course expectations: a few ways that I will show you respect and commitment to you as students
-    -   And a few ways I expect from you!
--   Communicating with me: give me 24 hours to reply M-F
-    -   Online communication is not my strength!
-
-## Let's visit the website: Syllabus (2/2)
 
 ```{=html}
 <div id="wrap">
   <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/syllabus.html"></iframe>
+</div>
+```
+
+## Let's visit the website: Instructors
+
+```{=html}
+<div id="wrap">
+  <iframe id="frame" src="https://emilelatour.github.io/BMSC_620_W26/instructors.html"></iframe>
 </div>
 ```

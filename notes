@@ -10,7 +10,13 @@ Then
 
 
 
+Then:
+	•	use &nbsp; inside slides to separate sections
+	•	use <br> after headers to separate title from content
 
+That gives you a clean mental model:
+	•	header spacing = <br>
+	•	content spacing = &nbsp;
 
 
 En Dash –

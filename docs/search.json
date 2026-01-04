@@ -15,7 +15,7 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Course website: This site is the hub for schedules and materials. Assignments and grades will be managed in Sakai.\nSoftware: We will use R and RStudio for homework and in-class examples. (Instructions will be posted on the Materials page.)\nOne-day room change: Class will meet in MAC 3198 on January 21 only.",
+    "text": "Course website: This site is the hub for schedules and materials. Assignments and grades will be managed in Sakai.\nSoftware: We will use R and RStudio for homework and in-class examples. (Instructions will be posted on the Resources page.)\nOne-day room change: Class will meet in MAC 3198 on January 21 only.",
     "crumbs": [
       "Home",
       "Course info",
@@ -106,7 +106,7 @@
     "href": "instructors.html",
     "title": "Instructors",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
       "Course info",
@@ -118,7 +118,7 @@
     "href": "instructors.html#teaching-team",
     "title": "Instructors",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nOffice: RJH 4320\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (e.g., homework support, grading support, in-class help)\n\nTA: (Name, credentials)\n\nEmail: (email)\n\nRole: (optional)\n\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
       "Course info",
@@ -130,7 +130,7 @@
     "href": "instructors.html#office-hours",
     "title": "Instructors",
     "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held on Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistants\n\nTA office hours: (day/time)\n\nWebex: (link)\n\nTA office hours: (day/time)\n\nWebex: (link)",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: (TBD - will be announced by the end of Week 1)\nWebex: (link TBD)",
     "crumbs": [
       "Home",
       "Course info",
@@ -289,7 +289,7 @@
     "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
     "title": "Welcome to BMSC 620",
     "section": "Let’s visit the website: Syllabus",
-    "text": "Let’s visit the website: Syllabus\n\nCourse learning objectives\nTextbook in shared folder!\nR: we will start to learn this programming language\nAssessments and grade breakdowns\n\nMostly homework + quizzes\n\nFeedback from you to me: in the form of exit tickets, midterm feedback, and final course\nHow to succeed in this course: resources and assignments explained\nLate work policy / Attendance policy\nChatGPT and other AI technology\nCourse expectations: a few ways that I will show you respect and commitment to you as students\n\nAnd a few ways I expect from you!\n\nCommunicating with me: give me 24 hours to reply M-F\n\nOnline communication is not my strength!"
+    "text": "Let’s visit the website: Syllabus"
   },
   {
     "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus-22",
@@ -357,5 +357,47 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#intro",
+    "href": "lessons/00_welcome/00_welcome.html#intro",
+    "title": "Welcome to BMSC 620",
+    "section": "Intro",
+    "text": "Intro"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
+    "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
+    "title": "Welcome to BMSC 620",
+    "section": "",
+    "text": "Emile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#some-important-tasks",
+    "href": "lessons/00_welcome/00_welcome.html#some-important-tasks",
+    "title": "Welcome to BMSC 620",
+    "section": "Some important tasks",
+    "text": "Some important tasks\n\n\nBookmark the course website\nhttps://emilelatour.github.io/BMSC_620_W26/\n\n \n\nComplete Homework 0 by Sunday at 11:00 pm\n\nGet comfortable with RStudio and Quarto\nMake sure you can render a document successfully\nThis assignment is graded for completion only\n\n\n \n\nMake sure you have access to the textbook\n\nDetails are posted on the course website"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "title": "Welcome to BMSC 620",
+    "section": "Course information on the website",
+    "text": "Course information on the website\n\nSyllabus\n\nWhat this course is about\nHow grading and homework work\nExams, attendance, and course policies\n\nInstructors\n\nContact information\nOffice hours\nHow to get help\n\nResources\n\nR and RStudio installation instructions\nCourse materials and datasets\nAdditional support resources"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html",
+    "href": "lessons/00_welcome/00_welcome.html",
+    "title": "Welcome to BMSC 620",
+    "section": "",
+    "text": "Emile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Instructors",
+    "text": "Let’s visit the website: Instructors"
   }
 ]

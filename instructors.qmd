@@ -12,38 +12,35 @@ format:
 ### Emile Latour, MS (Instructor)
 
 -   **Email:** [latour\@ohsu.edu](mailto:latour@ohsu.edu)
--   **Office:** RJH 4320
+-   **Campus location:** KCRB
 -   **Pronouns:** he/him/his
 -   **Name:** Please feel free to call me **Emile** (pronounced "eh-MEEL" or "ah-MEEL").\
     Last name: **Latour** (pronounced "luh-TOOR").
 -   **Best way to contact me:** Email is best for course logistics. Office hours are best for homework, R help, and concepts.
 
-### Teaching assistants
+### Teaching assistant(s)
 
--   **TA:** *(Name, credentials)*
-    -   **Email:** *(email)*\
-    -   **Role:** *(e.g., homework support, grading support, in-class help)*
--   **TA:** *(Name, credentials)*
-    -   **Email:** *(email)*\
-    -   **Role:** *(optional)*
+### **Joseph Hwang (TA)**
+
+- **Email:** [hwangjo@ohsu.edu](mailto:hwangjo@ohsu.edu)
 
 > Note: If you are unsure who to contact, email Emile and I will route your question.
 
 ## Office hours
 
-All office hours will be held on Webex unless otherwise noted.
+All office hours will be held via Webex unless otherwise noted.
 
 ### Emile (Instructor)
 
 -   **Time:** Thursday, 1:00-2:00 PM
 -   **Webex:** <https://ohsu.webex.com/meet/latour>
 
-### Teaching assistants
+### Teaching assistant(s)
 
--   **TA office hours:** *(day/time)*
-    -   **Webex:** *(link)*
--   **TA office hours:** *(day/time)*
-    -   **Webex:** *(link)*
+### **Joseph (TA)**
+
+- **Time:** *(TBD - will be announced by the end of Week 1)*
+- **Webex:** *(link TBD)*
 
 ## What to contact us about
 

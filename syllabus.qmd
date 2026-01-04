@@ -12,7 +12,7 @@ format:
 # Key course info
 
 - **Course website**: This site is the hub for schedules and materials. Assignments and grades will be managed in **Sakai**.
-- **Software**: We will use **R and RStudio** for homework and in-class examples. (Instructions will be posted on the Materials page.)
+- **Software**: We will use **R and RStudio** for homework and in-class examples. (Instructions will be posted on the Resources page.)
 - **One-day room change**: Class will meet in **MAC 3198 on January** 21 only.
 
 # Course communication
