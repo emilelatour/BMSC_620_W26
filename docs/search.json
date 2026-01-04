@@ -264,18 +264,18 @@
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
-    "objectID": "lessons/00_welcome/00_welcome.html#welcome",
-    "href": "lessons/00_welcome/00_welcome.html#welcome",
+    "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
+    "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
     "title": "Welcome to BMSC 620",
-    "section": "Welcome",
-    "text": "Welcome\n\nsource(here::here('class_dates.R'))\nformat(as.Date(w1d1), '%b %d, %Y')\n\n[1] \"Jan 05, 2026\""
+    "section": "Welcome to BMSC 620",
+    "text": "Welcome to BMSC 620\n\nEmile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
   },
   {
-    "objectID": "lessons/00_welcome/00_welcome.html#website",
-    "href": "lessons/00_welcome/00_welcome.html#website",
+    "objectID": "lessons/00_welcome/00_welcome.html#some-important-tasks",
+    "href": "lessons/00_welcome/00_welcome.html#some-important-tasks",
     "title": "Welcome to BMSC 620",
-    "section": "Website",
-    "text": "Website\n\nCourse website: emilelatour.github.io/BMSC_620_W26"
+    "section": "Some important tasks",
+    "text": "Some important tasks\n\n\nBookmark the course website\nhttps://emilelatour.github.io/BMSC_620_W26/\n\n \n\nComplete Homework 0 by Sunday at 11:00 pm\n\nGet comfortable with RStudio and Quarto\nMake sure you can render a document successfully\nThis assignment is graded for completion only\n\n\n \n\nMake sure you have access to the textbook\n\nDetails are posted on the course website"
   },
   {
     "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
@@ -285,6 +285,13 @@
     "text": "Let’s visit the website: Homepage"
   },
   {
+    "objectID": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "title": "Welcome to BMSC 620",
+    "section": "Course information on the website",
+    "text": "Course information on the website\n\nSyllabus\n\nWhat this course is about\nHow grading and homework work\nExams, attendance, and course policies\n\nInstructors\n\nContact information\nOffice hours\nHow to get help\n\nResources\n\nR and RStudio installation instructions\nCourse materials and datasets\nAdditional support resources"
+  },
+  {
     "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
     "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
     "title": "Welcome to BMSC 620",
@@ -292,11 +299,18 @@
     "text": "Let’s visit the website: Syllabus"
   },
   {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus-22",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus-22",
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
     "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Syllabus (2/2)",
-    "text": "Let’s visit the website: Syllabus (2/2)\n\n  \n\n\n\n\nBMSC 620"
+    "section": "Let’s visit the website: Instructors",
+    "text": "Let’s visit the website: Instructors"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Resources",
+    "text": "Let’s visit the website: Resources\n\n  \n\n\n\n\nBMSC 620"
   },
   {
     "objectID": "resources.html",
@@ -327,7 +341,7 @@
     "href": "resources.html#course-platforms",
     "title": "Resources",
     "section": "Course platforms",
-    "text": "Course platforms\n\nSakai\nAssignments, submissions, and grades will be managed through Sakai, OHSU’s learning management system.\nLinks to Sakai assignments will be provided on this website.\n\n\nShared course folder (OneDrive)\nA shared OneDrive folder will be used to distribute datasets, handouts, and other course files that do not live directly on this website.\n\nThe folder will include datasets used in class and on homework.\nFiles will be organized by topic or week.\nLinks to specific files may also appear on the Schedule page.\n\nLink to class OneDrive folder\n\n\nOffice hours platform\nWebex will be used for virtual office hours when applicable.\nTo help sessions run smoothly:\n\nPlease stay muted until you want to ask a question.\nUse the chat to indicate when you have a question.\nVideo is encouraged but not required.",
+    "text": "Course platforms\n\nSakai\nAssignments, submissions, and grades will be managed through Sakai, OHSU’s learning management system.\nLinks to Sakai assignments will be provided on this website.\n\n\nShared course folder (OneDrive)\nA shared OneDrive folder will be used to distribute datasets, handouts, and other course files that do not live directly on this website.\n\nThe folder will include datasets used in class and on homework.\nFiles will be organized by topic or week.\nLinks to specific files may also appear on the Schedule page.\n\nLink to class OneDrive folder NOT SET UP YET\n\n\nOffice hours platform\nWebex will be used for virtual office hours when applicable.\nTo help sessions run smoothly:\n\nPlease stay muted until you want to ask a question.\nUse the chat to indicate when you have a question.\nVideo is encouraged but not required.",
     "crumbs": [
       "Home",
       "Course info",
@@ -357,47 +371,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#intro",
-    "href": "lessons/00_welcome/00_welcome.html#intro",
-    "title": "Welcome to BMSC 620",
-    "section": "Intro",
-    "text": "Intro"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
-    "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
-    "title": "Welcome to BMSC 620",
-    "section": "",
-    "text": "Emile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#some-important-tasks",
-    "href": "lessons/00_welcome/00_welcome.html#some-important-tasks",
-    "title": "Welcome to BMSC 620",
-    "section": "Some important tasks",
-    "text": "Some important tasks\n\n\nBookmark the course website\nhttps://emilelatour.github.io/BMSC_620_W26/\n\n \n\nComplete Homework 0 by Sunday at 11:00 pm\n\nGet comfortable with RStudio and Quarto\nMake sure you can render a document successfully\nThis assignment is graded for completion only\n\n\n \n\nMake sure you have access to the textbook\n\nDetails are posted on the course website"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
-    "href": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
-    "title": "Welcome to BMSC 620",
-    "section": "Course information on the website",
-    "text": "Course information on the website\n\nSyllabus\n\nWhat this course is about\nHow grading and homework work\nExams, attendance, and course policies\n\nInstructors\n\nContact information\nOffice hours\nHow to get help\n\nResources\n\nR and RStudio installation instructions\nCourse materials and datasets\nAdditional support resources"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html",
-    "href": "lessons/00_welcome/00_welcome.html",
-    "title": "Welcome to BMSC 620",
-    "section": "",
-    "text": "Emile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Instructors",
-    "text": "Let’s visit the website: Instructors"
   }
 ]
