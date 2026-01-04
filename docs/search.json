@@ -170,18 +170,6 @@
     ]
   },
   {
-    "objectID": "weeks/week_01.html#class-meetings",
-    "href": "weeks/week_01.html#class-meetings",
-    "title": "Week 1",
-    "section": "Class meetings",
-    "text": "Class meetings\nMonday\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nWednesday\n\nIntroduction to R and RStudio\nWorking with simple datasets in R",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
     "objectID": "weeks/week_01.html#readings-before-class",
     "href": "weeks/week_01.html#readings-before-class",
     "title": "Week 1",
@@ -198,7 +186,7 @@
     "href": "weeks/week_01.html#materials",
     "title": "Week 1",
     "section": "Materials",
-    "text": "Materials\n\nSlides:\n\nDay 1 slides (HTML | PDF)\nDay 2 slides (HTML | PDF)\n\n\n\nSoftware:\n\nInstall R and RStudio (see Resources page)",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\nTopics - Welcome and course overview - Introduction to data - Summarizing numerical data\n\nSlides\n\nHTML\nPDF\nOneDrive\n\n\n\n\nWednesday — Introduction to R and RStudio\nTopics - Introduction to R and RStudio - Working with simple datasets in R\nSlides - (to be posted)\nSoftware - Install R and RStudio (see the Resources page)",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -370,11 +358,11 @@
     "text": "Let’s visit the website: Resources"
   },
   {
-    "objectID": "lessons/00_welcome/00_welcome.html#homepage",
-    "href": "lessons/00_welcome/00_welcome.html#homepage",
+    "objectID": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
     "title": "Welcome to BMSC 620",
-    "section": "Homepage",
-    "text": "Homepage"
+    "section": "How this course runs on the website",
+    "text": "How this course runs on the website\n\nSchedule\n\nBig-picture view of topics and due dates\nUpdated if anything changes\n\nWeekly materials\n\nWhat to read or review\nSlides, code, and links for each class\n\nHomework\n\nAssignment templates\nDue dates and grading expectations\n\nExams\n\nMidterm and final format\nTiming, coverage, and policies"
   },
   {
     "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
@@ -484,12 +472,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
-    "href": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
-    "title": "Welcome to BMSC 620",
-    "section": "How this course runs on the website",
-    "text": "How this course runs on the website\n\nSchedule\n\nBig-picture view of topics and due dates\nUpdated if anything changes\n\nWeekly materials\n\nWhat to read or review\nSlides, code, and links for each class\n\nHomework\n\nAssignment templates\nDue dates and grading expectations\n\nExams\n\nMidterm and final format\nTiming, coverage, and policies"
   }
 ]

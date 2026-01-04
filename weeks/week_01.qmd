@@ -25,20 +25,6 @@ By the end of the week, you should be able to:
 - compute and interpret basic numerical summaries,
 - feel comfortable navigating R and RStudio.
 
-## Class meetings
-
-**Monday** 
-
-- Welcome and course overview
-- Introduction to data
-- Summarizing numerical data
-
-**Wednesday** 
-
-- Introduction to R and RStudio
-- Working with simple datasets in R
-
-
 ## Readings (before class)
 
 - Textbook sections 1.1–1.4
@@ -47,14 +33,29 @@ By the end of the week, you should be able to:
 
 ## Materials
 
-### Slides:
+### Monday — Welcome & Introduction to Data
 
-- Day 1 slides (HTML | PDF)
-- Day 2 slides (HTML | PDF)
+**Topics**
+- Welcome and course overview
+- Introduction to data
+- Summarizing numerical data
 
-### Software:
+- **Slides**
+  - [HTML](/lessons/00_welcome/00_welcome.qmd)
+  - [PDF](/docs/lessons/00_welcome/00_welcome.pdf)
+  - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l)
 
-- Install R and RStudio (see Resources page)
+### Wednesday — Introduction to R and RStudio
+
+**Topics**
+- Introduction to R and RStudio
+- Working with simple datasets in R
+
+**Slides**
+- *(to be posted)*
+
+**Software**
+- Install R and RStudio (see the [Resources](/resources.qmd) page)
 
 ## Post-class check-in (attendance)
 
