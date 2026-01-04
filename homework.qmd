@@ -35,17 +35,17 @@ Start from the provided `.qmd` template for each assignment.
 
 ## Homework schedule
 
-|	HW	|	Due (\@11pm)	|	Template (.qmd)	|
-|	:---:	|	:---:	|	:---:	|
-|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 0 template](/homework/HW00.qmd)	|
-|	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|
-|	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|
-|	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|
-|	4	|	`{r} format(hw4, '%m/%d')`	|	(to be posted)	|
-|	5	|	`{r} format(hw5, '%m/%d')`	|	(to be posted)	|
-|	6	|	`{r} format(hw6, '%m/%d')`	|	(to be posted)	|
-|	7	|	`{r} format(hw7, '%m/%d')`	|	(to be posted)	|
-|	8	|	`{r} format(hw8, '%m/%d')`	|	(to be posted)	|
+|	HW	|	Due (\@11pm)	|	View (HTML)	|	Template (.qmd)	|
+|	:---:	|	:---:	|	:---:	|	:---:	|
+|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 (view)](/homework/HW00.qmd)	|	[HW 00 (download)](https://raw.githubusercontent.com/emilelatour/BMSC_620_W26/main/homework/HW00.qmd)	|
+|	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	4	|	`{r} format(hw4, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	5	|	`{r} format(hw5, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	6	|	`{r} format(hw6, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	7	|	`{r} format(hw7, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
+|	8	|	`{r} format(hw8, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
 
 
 ## Grading rubric (10 points)
