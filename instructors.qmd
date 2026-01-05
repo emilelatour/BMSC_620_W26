@@ -20,7 +20,7 @@ format:
 
 ### Teaching assistant(s)
 
-### **Joseph Hwang (TA)**
+### Joseph Hwang (TA)
 
 - **Email:** [hwangjo@ohsu.edu](mailto:hwangjo@ohsu.edu)
 
@@ -37,10 +37,10 @@ All office hours will be held via Webex unless otherwise noted.
 
 ### Teaching assistant(s)
 
-### **Joseph (TA)**
+### Joseph (TA)
 
-- **Time:** *(TBD - will be announced by the end of Week 1)*
-- **Webex:** *(link TBD)*
+- **Time:** Friday, 10:00-11:00 AM
+- **Webex:** <https://ohsu.webex.com/meet/hwangjo>
 
 ## What to contact us about
 
