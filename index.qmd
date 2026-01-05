@@ -46,7 +46,7 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 
 {{< iconify fa6-solid calendar size=24px >}} January 5–March 20
 
-{{< iconify icon-park-solid time size=24px >}} 9:00 AM–11:30 AM
+{{< iconify icon-park-solid time size=24px >}} 9:00 AM–10:30 AM
 
 {{< iconify fa6-solid person-chalkboard size=24px >}} In-person, RJH 4320
 
