@@ -41,9 +41,13 @@ By the end of the week, you should be able to:
   - Summarizing numerical data
 
 - **Slides**
-  - [HTML](/lessons/00_welcome/00_welcome.qmd)
-  - [PDF](/lessons/00_welcome/00_welcome.pdf)
-  - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l)
+  - Welcome & course logistics:
+    - [HTML](/lessons/00_welcome/00_welcome.qmd)
+    - [PDF](/lessons/00_welcome/00_welcome.pdf)
+    - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l)
+  - Introduction to data & numerical summaries:
+    - [HTML](/lessons/01_intro_data/01_intro_data.html)
+    - [PDF](/lessons/01_intro_data/01_intro_data.pdf)
 
 ### Wednesday — Introduction to R and RStudio
 
@@ -56,6 +60,19 @@ By the end of the week, you should be able to:
 
 - **Software**
   - Install R and RStudio (see the [Resources](/resources.qmd) page)
+  
+## Day 1 course background survey
+
+Please complete the **Course Background Survey** after Monday’s class:
+
+- [Course Background Survey](https://forms.gle/DdGXJu3nSPtzDMxC7)
+
+This short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.
+
+Your responses will be used **only** to help tailor examples, pacing, and support for this class.  
+There are no right or wrong answers, and it is not graded for correctness.
+
+Please complete this survey by **Wednesday before class**.
 
 ## Post-class check-in (attendance)
 
@@ -65,8 +82,12 @@ By the end of the week, you should be able to:
 
 ## Homework
 
-- HW 0 due Sunday at 11:00 pm  
-- Focuses on course setup and basic concepts from Week 1
+- **HW 0: Course setup**
+  - Due **Sunday at 11:00 pm**
+  - Focuses on course setup and basic concepts from Week 1
+  - [View HW 0 instructions](/homework/HW00/HW00.qmd)
+
+- See the full list of assignments on the [Homework](/homework.qmd) page.
 
 ## Looking ahead
 

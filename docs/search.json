@@ -71,244 +71,6 @@
     ]
   },
   {
-    "objectID": "homework/HW00/HW00.html",
-    "href": "homework/HW00/HW00.html",
-    "title": "BMSC 620 — Homework 0",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#homework-0",
-    "href": "homework/HW00/HW00.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-3-final-check",
-    "href": "homework/HW00/HW00.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both** files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html",
-    "href": "weeks/week_01.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#overview",
-    "href": "weeks/week_01.html#overview",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#readings-before-class",
-    "href": "weeks/week_01.html#readings-before-class",
-    "title": "Week 1",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#materials",
-    "href": "weeks/week_01.html#materials",
-    "title": "Week 1",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nHTML\nPDF\nOneDrive\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to R and RStudio\nWorking with simple datasets in R\n\nSlides\n\n(to be posted)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
-    "href": "weeks/week_01.html#post-class-check-in-attendance",
-    "title": "Week 1",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#homework",
-    "href": "weeks/week_01.html#homework",
-    "title": "Week 1",
-    "section": "Homework",
-    "text": "Homework\n\nHW 0 due Sunday at 11:00 pm\n\nFocuses on course setup and basic concepts from Week 1",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#looking-ahead",
-    "href": "weeks/week_01.html#looking-ahead",
-    "title": "Week 1",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: (TBD - will be announced by the end of Week 1)\nWebex: (link TBD)",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
-    "section": "",
-    "text": "See Sakai",
-    "crumbs": [
-      "Home",
-      "Exams"
-    ]
-  },
-  {
     "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
     "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
     "title": "Welcome to BMSC 620",
@@ -412,6 +174,571 @@
     "title": "Welcome to BMSC 620",
     "section": "That’s it for logistics",
     "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
+  },
+  {
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
+    "section": "",
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–11:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: (TBD - will be announced by the end of Week 1)\nWebex: (link TBD)",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html",
+    "href": "weeks/week_01.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#overview",
+    "href": "weeks/week_01.html#overview",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#readings-before-class",
+    "href": "weeks/week_01.html#readings-before-class",
+    "title": "Week 1",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#materials",
+    "href": "weeks/week_01.html#materials",
+    "title": "Week 1",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics:\n\nHTML\nPDF\nOneDrive\n\nIntroduction to data & numerical summaries:\n\nHTML\nPDF\n\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to R and RStudio\nWorking with simple datasets in R\n\nSlides\n\n(to be posted)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#day-1-course-background-survey",
+    "href": "weeks/week_01.html#day-1-course-background-survey",
+    "title": "Week 1",
+    "section": "Day 1 course background survey",
+    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
+    "href": "weeks/week_01.html#post-class-check-in-attendance",
+    "title": "Week 1",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#homework",
+    "href": "weeks/week_01.html#homework",
+    "title": "Week 1",
+    "section": "Homework",
+    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#looking-ahead",
+    "href": "weeks/week_01.html#looking-ahead",
+    "title": "Week 1",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both** files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
+    "title": "BMSC 620 — Homework 0",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#learning-objectives-today",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#learning-objectives-today",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Learning objectives (today)",
+    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nDefine and distinguish a target population and a sample\nDescribe common sampling methods and why bias can happen\nCompare experiments vs observational studies (and what each can conclude)"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#why-we-care-about-study-design",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#why-we-care-about-study-design",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Why we care about study design",
+    "text": "Why we care about study design\nStatistics helps answer questions with data.\nBut the design determines what the data can support:\n\nWho is included?\nHow are they selected?\nWhat kind of study is it?\nWhat comparisons are valid?\n\nThese decisions determine what conclusions we can (and cannot) draw."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-collection-principles-1.3",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#data-collection-principles-1.3",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Data collection principles (1.3)",
+    "text": "Data collection principles (1.3)\n\nPopulation vs. sample\nSampling methods\nExperiments vs. Observational studies"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#population-vs.-sample",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#population-vs.-sample",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Population vs. sample",
+    "text": "Population vs. sample\n\n\n(Target) Population\n\nGroup of interest being studied\nGroup from which the sample is selected\n\nstudies often have inclusion and/or exclusion criteria\n\nAlmost always too expensive or logistically impossible to collect data for every case in a population\n\n\n\nSample\n\nGroup on which data are collected\nA subset (of measurements) from the population\n\n\n\nWe use information from a sample to learn about the population from which it was drawn."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-14",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-14",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Sampling methods (1/4)",
+    "text": "Sampling methods (1/4)\nA good sampling method produces a representative sample: one whose characteristics are similar to those of the population.\n\n\nSimple random sample (SRS)\n\nEach individual of a population has the same chance of being sampled\nRandomly sampled\nConsidered best way to sample\n\n\n\n\n\n\n\n\n\nConvenience sample\n\nEasily accessible individuals are more likely to be included in the sample than other individuals\nConsidered a common “pitfall”"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-24-reality-check",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-24-reality-check",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Sampling methods (2/4): Reality check",
+    "text": "Sampling methods (2/4): Reality check\nEven good sampling plans don’t guarantee representative samples\n\n\nNon-response bias\n\nNon-response rates can be high\nAre all groups within a population being reached?\nUnrepresentative sample\n\nCan lead to skewed results\n\n\n\n\n\n\n\n\n“Random” samples can be unrepresentative by random chance\n\nIn a SRS each case in the population has an equal chance of being included in the sample\nBut by random chance alone a random sample might contain a higher proportion of one group over another\nEx: a SRS might by chance include 70% men (unlikely, but theoretically possible)"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-34",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-34",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Sampling methods (3/4)",
+    "text": "Sampling methods (3/4)\n\n\n\nSimple random sample (SRS)\n\nEach individual of a population has the same chance of being sampled\nStatistical methods taught in this class assume a SRS!\n\nStratified sampling\n\nDivide population into groups (strata) before selecting cases within each stratum (often via SRS)\nUsually cases within a strata are similar, but are different from other strata with respect to the outcome of interest, such as gender or age groups"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-44",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#sampling-methods-44",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Sampling methods (4/4)",
+    "text": "Sampling methods (4/4)\n\n\n\nCluster sample\n\nFirst divide population into groups (clusters)\nThen sample a fixed number of clusters, and include all observations from chosen clusters\nClusters are often hospitals, clinicians, schools, etc., where each cluster will have similar services/ policies/ etc.\nCases within clusters usually very diverse\nExample: sample zip codes in Oregon, then include all households in the sampled zip codes.\n\nMultistage sample\n\nSimilar to a cluster sample, but randomly sample individuals within each selected cluster instead of including everyone\nExample: sample zip codes in Oregon, then randomly sample households in the zip codes (i.e. include some households in the sampled zip codes)."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#two-basic-study-designs",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#two-basic-study-designs",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Two basic study designs",
+    "text": "Two basic study designs\n\n\nExperiment\nResearchers directly influence how data arise\n\nSuch as: assigning groups of individuals to different treatments and assessing how the outcome varies across treatment groups\nThree major parts to an experiment\n\nControl\nRandomization\nReplication\n\n\n\nObservational study\nResearchers merely observe and record data, without interfering with how the data arise\n\nFor example, to investigate why certain diseases develop, researchers might collect data by conducting surveys, reviewing medical records, or following a cohort of many similar individuals.\nOften the only available way to study your research question\n\nDue to ethical considerations, funds, or availability of data"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-12",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-12",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Experiments (1/2)",
+    "text": "Experiments (1/2)\n\nResearchers assign individuals to different treatment or intervention groups\n\nControl group: often receive a placebo or usual care\nDifferent treatment groups are often called study arms\n\nRandomization\n\nGroup assignment is usually random to ensure similar (balanced) study arms for all variables (observed and unobserved)\nRandomization allows study arm differences in outcomes to be attributed to treatment rather than variability in patient characteristics\n\nTreatment is the only systematic difference between groups\nEstablish causality\n\nBlocking (stratification): group individuals into blocks (strata) before randomizing if there are certain characteristics that may influence the outcome other than treatment (i.e. gender, age group)\nDifferent than random sampling: sampling decides who enters the study; randomization decides which treatment they receive"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-22",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-22",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Experiments (2/2)",
+    "text": "Experiments (2/2)\n\nReplication\n\nAccomplished by collecting a sufficiently large sample\nResults usually more reliable with a large sample size\n\nOften less variability\nMore likely to be representative of population"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Observational studies",
+    "text": "Observational studies\nSome research questions cannot be studied experimentally due to ethical, practical, or logistical constraints.\n\nData are observed and recorded without interference\nOften done via surveys, electronic health records, or medical chart reviews\nAssociations between variables can be established, but not causality\n\nIndividuals with different characteristics may also differ in other ways that influence response\n\nConfounding variables (lurking variable)\n\nVariables associated with both the explanatory and response variables"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies-prospective-vs.-retrospective-studies",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies-prospective-vs.-retrospective-studies",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Observational studies: prospective vs. retrospective studies",
+    "text": "Observational studies: prospective vs. retrospective studies\nMany observational studies follow cohorts — groups of individuals observed over time.\n\n\n\nProspective\n\nIdentifies participants and collects information at scheduled times or as events unfold.\n\n\nRetrospective\n\nCollect data after events have taken place, such as from medical records\n\n\n \nSome studies can have prospective and retrospective data.\nExample: The Cancer Care Outcomes Research and Surveillance Consortium (CanCORS) enrolled participants with lung or colorectal cancer, collected information about diagnosis, treatment, and previous health behavior (retrospective), but also maintained contact with participants to gather data about long-term outcomes (prospective)."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#comparing-study-designs",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#comparing-study-designs",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Comparing study designs",
+    "text": "Comparing study designs\n\nScience Media Centre"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#systematic-reviews-example",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#systematic-reviews-example",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Systematic Reviews example",
+    "text": "Systematic Reviews example\n\n\n\nSTEM: Systematically Testing the Evidence on Marijuana\n\n\n\n\n\nSTEM is a collaborative project between the US Department of Veterans Affairs and the Center for Evidence-based Policy at Oregon Health & Science University.\nThe project is funded by the US Department of Veterans Affairs: Office of Rural Health."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#from-study-design-to-data",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#from-study-design-to-data",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "From study design to data",
+    "text": "From study design to data\nSo far, we’ve focused on:\n\nhow studies are designed\n\nhow data are collected\n\nNow we shift to:\n\nwhat data look like once we have them\n\nhow data are stored and summarized"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#intro-to-data-1.2",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#intro-to-data-1.2",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Intro to Data (1.2)",
+    "text": "Intro to Data (1.2)\n\nArtwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#a-first-look-at-data-in-r",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#a-first-look-at-data-in-r",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "A first look at data in R",
+    "text": "A first look at data in R\n\nToday is about exposure, not mastery\nWe will revisit all of this slowly\nRight now: focus on concepts, not syntax"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#how-are-data-stored-how-do-we-use-them",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#how-are-data-stored-how-do-we-use-them",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "How are data stored, how do we use them?",
+    "text": "How are data stored, how do we use them?\n\nOften, data are in an Excel sheet, or a plain text file (.csv, .txt)\n.csv files open in Excel automatically, but actually are plain text\nUsually, columns are variables/measures and rows are observations (i.e. a person’s measurements)\n\nData in R\n\nWe can import data from many file types, including .csv, .txt., and .xlsx\n\nWe will cover this on a later date\n\nOnce imported, R typically stores data as data frames, or tibbles if using the tidyverse package (more on this later).\n\nFor our purposes, these are essentially the same, and I will tend to use the terms interchangeably.\nThese are examples of what we call object types in R."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-frame-example",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#data-frame-example",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Data frame example",
+    "text": "Data frame example\n\n\n\ndf &lt;- data.frame(\n  IDs=1:3, \n  gender=c(\"male\", \"female\", \"Male\"), \n  age=c(28, 35.5, 31),\n  trt = c(\"control\", \"1\", \"1\"),\n  Veteran = c(FALSE, TRUE, TRUE)\n  )\ndf\n\n  IDs gender  age     trt Veteran\n1   1   male 28.0 control   FALSE\n2   2 female 35.5       1    TRUE\n3   3   Male 31.0       1    TRUE\n\n\n\nVectors vs. data frames\n\na data frame is a collection (or array or table) of vectors\n\n\n\n\n\n\n\nDifferent columns can be of different data types (i.e. numeric vs. text)\nBoth numeric and text can be stored within a column (stored together as text).\nVectors and data frames are examples of objects in R.\n\nThere are other types of R objects to store data, such as matrices, lists."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#observations-variables",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#observations-variables",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Observations & variables",
+    "text": "Observations & variables\n\n\n\ndf\n\n  IDs gender  age     trt Veteran\n1   1   male 28.0 control   FALSE\n2   2 female 35.5       1    TRUE\n3   3   Male 31.0       1    TRUE\n\n\n\n\n\nISLBS\n\n\n\n\n\nBook refers to a dataset as a data matrix\nRows are usually observations\nColumns are usually variables\nHow many observations are in this dataset?\nWhat are the variable types in this dataset?"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#variable-column-types",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#variable-column-types",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Variable (column) types",
+    "text": "Variable (column) types\n\n\n\n\n\n\n\n\n\nR type\nvariable type\ndescription\n\n\n\n\ninteger\ndiscrete\ninteger-valued numbers\n\n\ndouble or numeric\ncontinuous\nnumbers that are decimals\n\n\nfactor\ncategorical\ncategorical variables stored with levels (groups)\n\n\ncharacter\ncategorical\ntext, “strings”\n\n\nlogical\ncategorical\nboolean (TRUE, FALSE)\n\n\n\n\n\nView the structure of our data frame to see what the variable types are:\n\n\n\nstr(df)\n\n'data.frame':   3 obs. of  5 variables:\n $ IDs    : int  1 2 3\n $ gender : chr  \"male\" \"female\" \"Male\"\n $ age    : num  28 35.5 31\n $ trt    : chr  \"control\" \"1\" \"1\"\n $ Veteran: logi  FALSE TRUE TRUE"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#fishers-or-andersons-iris-data-set",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#fishers-or-andersons-iris-data-set",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Fisher’s (or Anderson’s) Iris data set",
+    "text": "Fisher’s (or Anderson’s) Iris data set\nData description:\n\nn = 150\n3 species of Iris flowers (Setosa, Virginica, and Versicolour)\n\n50 measurements of each type of Iris\n\nvariables:\n\nsepal length, sepal width, petal length, petal width, and species\n\n\nCan the iris species be determined by these variables?\n\n\n\nGareth Duffy"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#view-the-iris-dataset",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#view-the-iris-dataset",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "View the iris dataset",
+    "text": "View the iris dataset\n\n\nThe iris dataset is already pre-loaded in base R and ready to use.\nType the following command in the console window\n\nWarning: this command cannot be rendered. It will give an error.\n\n\n\n\n\n\n\n\nView(iris)\n\n\nA new tab in the scripting window should appear with the iris dataset."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-structure",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#data-structure",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Data structure",
+    "text": "Data structure\n\nWhat are the different variable types in this data set?\n\n\n\n\nstr(iris)   # structure of data\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ..."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-set-summary",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#data-set-summary",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Data set summary",
+    "text": "Data set summary\n\nsummary(iris)\n\n  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   \n Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  \n 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  \n Median :5.800   Median :3.000   Median :4.350   Median :1.300  \n Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  \n 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  \n Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  \n       Species  \n setosa    :50  \n versicolor:50  \n virginica :50"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-set-info",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#data-set-info",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Data set info",
+    "text": "Data set info\n\ndim(iris)\n\n[1] 150   5\n\nnrow(iris)\n\n[1] 150\n\nncol(iris)\n\n[1] 5\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\""
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#view-the-beginning-or-end-of-a-dataset",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#view-the-beginning-or-end-of-a-dataset",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "View the beginning or end of a dataset",
+    "text": "View the beginning or end of a dataset\n\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\ntail(iris)\n\n    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species\n145          6.7         3.3          5.7         2.5 virginica\n146          6.7         3.0          5.2         2.3 virginica\n147          6.3         2.5          5.0         1.9 virginica\n148          6.5         3.0          5.2         2.0 virginica\n149          6.2         3.4          5.4         2.3 virginica\n150          5.9         3.0          5.1         1.8 virginica"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#specify-how-many-rows-to-view-at-beginning-or-end-of-a-dataset",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#specify-how-many-rows-to-view-at-beginning-or-end-of-a-dataset",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Specify how many rows to view at beginning or end of a dataset",
+    "text": "Specify how many rows to view at beginning or end of a dataset\n\nhead(iris, 3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n\ntail(iris, 2)\n\n    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species\n149          6.2         3.4          5.4         2.3 virginica\n150          5.9         3.0          5.1         1.8 virginica"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#the",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#the",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "The $",
+    "text": "The $\n\nSuppose we want to single out the column of petal width values.\nOne way to do this is to use the $\n\nDatSetName$VariableName\n\n\n\niris$Petal.Width\n\n  [1] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 0.2 0.2 0.1 0.1 0.2 0.4 0.4 0.3\n [19] 0.3 0.3 0.2 0.4 0.2 0.5 0.2 0.2 0.4 0.2 0.2 0.2 0.2 0.4 0.1 0.2 0.2 0.2\n [37] 0.2 0.1 0.2 0.2 0.3 0.3 0.2 0.6 0.4 0.3 0.2 0.2 0.2 0.2 1.4 1.5 1.5 1.3\n [55] 1.5 1.3 1.6 1.0 1.3 1.4 1.0 1.5 1.0 1.4 1.3 1.4 1.5 1.0 1.5 1.1 1.8 1.3\n [73] 1.5 1.2 1.3 1.4 1.4 1.7 1.5 1.0 1.1 1.0 1.2 1.6 1.5 1.6 1.5 1.3 1.3 1.3\n [91] 1.2 1.4 1.2 1.0 1.3 1.2 1.3 1.3 1.1 1.3 2.5 1.9 2.1 1.8 2.2 2.1 1.7 1.8\n[109] 1.8 2.5 2.0 1.9 2.1 2.0 2.4 2.3 1.8 2.2 2.3 1.5 2.3 2.0 2.0 1.8 2.1 1.8\n[127] 1.8 1.8 2.1 1.6 1.9 2.0 2.2 1.5 1.4 2.3 2.4 1.8 1.8 2.1 2.4 2.3 1.9 2.3\n[145] 2.5 2.3 1.9 2.0 2.3 1.8"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#example-using-the",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#example-using-the",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Example using the $",
+    "text": "Example using the $\nThe $ is helpful if you want to create a new dataset for just that one variable, or, more commonly, if you want to calculate summary statistics for that one variable.\n\n\n\nmean(iris$Petal.Width)\n\n[1] 1.199333\n\nsd(iris$Petal.Width)\n\n[1] 0.7622377\n\nmedian(iris$Petal.Width)\n\n[1] 1.3"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#inline-code",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#inline-code",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Inline code",
+    "text": "Inline code\n\n\nWith markdown you can also report R code output inline with the text instead of using a chunk.\n\n\n\nText in editor:\n\n\n\n\n\n\nOutput:\nThe mean petal width for all 3 species combined is 1.2 (SD = 0.8) cm.\n\n\nReporting summary statistics this way in a report, makes the numbers computationally reproducible.\nFor example, if this were for an abstract and a year later you are wondering where the numbers came from, your R code will tell you exactly which dataset was used to calculate the values."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#table-1-example",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#table-1-example",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Table 1 example",
+    "text": "Table 1 example\n\n\n\n\n\n\n\n\nAre We on the Same Page?: A Cross-Sectional Study of Patient-Clinician Goal Concordance in Rheumatoid Arthritis\nJ Barton et al.\nArthritis Care & Research.\n2021 Sep 27 https://pubmed.ncbi.nlm.nih.gov/34569172/"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mean",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mean",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of center: mean",
+    "text": "Measures of center: mean\n\nSample mean: the average value of observations\n\\[\\overline{x} = \\frac{x_1+x_2+\\cdots+x_n}{n} = \\sum_{i=1}^{n}\\frac{x_i}{n}\\]\nwhere \\(x_1, x_2, \\ldots, x_n\\) represent the \\(n\\) observed values in a sample\nExample: What is the mean age in the toy dataset df defined earlier?\n\n\ndf\n\n  IDs gender  age     trt Veteran\n1   1   male 28.0 control   FALSE\n2   2 female 35.5       1    TRUE\n3   3   Male 31.0       1    TRUE\n\nmean(df$age)\n\n[1] 31.5"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-median",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-median",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of center: median",
+    "text": "Measures of center: median\n\n\nThe median is the middle value of the observations in a sample.\nThe median is the 50th percentile, meaning\n\n50% of observations lie below and\n50% of observations lie above the median.\n\n\n\n\n\n\n\nIf the number of observations is\n\nodd: the median is the middle observed value\neven: the median is the average of the two middle observed values\n\n\n\n\n\ndf$age\n\n[1] 28.0 35.5 31.0\n\nmedian(df$age)\n\n[1] 31\n\nmedian(c(df$age, 67))\n\n[1] 33.25"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mean-vs.-median",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mean-vs.-median",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of center: mean vs. median",
+    "text": "Measures of center: mean vs. median\n\n\nsummary(iris)\n\n  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   \n Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  \n 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  \n Median :5.800   Median :3.000   Median :4.350   Median :1.300  \n Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  \n 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  \n Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  \n       Species  \n setosa    :50  \n versicolor:50  \n virginica :50"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mode",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mode",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of center: mode",
+    "text": "Measures of center: mode\nmode: the most frequent value in a dataset"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-standard-deviation-sd-13",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-standard-deviation-sd-13",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of spread: standard deviation (SD) (1/3)",
+    "text": "Measures of spread: standard deviation (SD) (1/3)\nstandard deviation is (approximately) the average distance between a typical observation and the mean\n\nAn observation’s deviation is the distance between its value \\(x\\) and the sample mean \\(\\overline{x}\\): deviation = \\(x - \\overline{x}\\)."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-23",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-23",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of spread: SD (2/3)",
+    "text": "Measures of spread: SD (2/3)\n\nThe sample variance \\(s^2\\) is the sum of squared deviations divided by the number of observations minus 1. \\[s^2 = \\frac{(x_1 - \\overline{x})^2+(x_2 - \\overline{x})^2+\\cdots+(x_n - \\overline{x})^2}{n-1} = \\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}\\] where \\(x_1, x_2, \\dots, x_n\\) represent the \\(n\\) observed values.\nThe standard deviation \\(s\\) is the square root of the variance. \\[s = \\sqrt{\\frac{({x_1 - \\overline{x})}^{2}+({x_2 - \\overline{x})}^{2}+\\cdots+({x_n - \\overline{x})}^{2}}{n-1}} = \\sqrt{\\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}}\\]"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-33",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-33",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of spread: SD (3/3)",
+    "text": "Measures of spread: SD (3/3)\n\n\n\nLet’s calculate the sample standard deviation for our toy example\n\n\ndf$age\n\n[1] 28.0 35.5 31.0\n\n\n\n\nmean(df$age)\n\n[1] 31.5\n\nsd(df$age)\n\n[1] 3.774917\n\n\n\n\\(s = \\sqrt{\\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}} =\\)"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#empirical-rule-one-way-to-think-about-the-sd-12",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#empirical-rule-one-way-to-think-about-the-sd-12",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Empirical Rule: one way to think about the SD (1/2)",
+    "text": "Empirical Rule: one way to think about the SD (1/2)\n\n\n\nFor symmetric bell-shaped data, about\n\n68% of the data are within 1 SD of the mean\n95% of the data are within 2 SD’s of the mean\n99.7% of the data are within 3 SD’s of the mean\n\nThese percentages are based off of percentages of a true normal distribution.\n\n\n\n\nhttps://statistics-made-easy.com/empirical-rule/"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#empirical-rule-one-way-to-think-about-the-sd-22",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#empirical-rule-one-way-to-think-about-the-sd-22",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Empirical Rule: one way to think about the SD (2/2)",
+    "text": "Empirical Rule: one way to think about the SD (2/2)\n\n\n\nhist(iris$Sepal.Width)\n\n\n\n\n\n\n\n\n\n\nmean(iris$Sepal.Width)\n\n[1] 3.057333\n\nsd(iris$Sepal.Width)\n\n[1] 0.4358663"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-interquartile-range-iqr-12",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-interquartile-range-iqr-12",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of spread: interquartile range (IQR) (1/2)",
+    "text": "Measures of spread: interquartile range (IQR) (1/2)\nThe \\(p^{th}\\) percentile is the observation such that \\(p\\%\\) of the remaining observations fall below this observation.\n\nThe first quartile \\(Q_1\\) is the \\(25^{th}\\) percentile.\nThe second quartile \\(Q_2\\), i.e., the median, is the \\(50^{th}\\) percentile.\nThe third quartile \\(Q_3\\) is the \\(75^{th}\\) percentile.\n\nThe interquartile range (IQR) is the distance between the third and first quartiles. \\[IQR = Q_3 - Q_1\\]\n\nIQR is the width of the middle half of the data"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-iqr-22",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-iqr-22",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Measures of spread: IQR (2/2)",
+    "text": "Measures of spread: IQR (2/2)\n5 number summary\n\nsummary(iris$Sepal.Width)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  2.000   2.800   3.000   3.057   3.300   4.400 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat is the IQR of the sepal widths?\n\nquantile(iris$Sepal.Width, c(.25, .75))\n\n25% 75% \n2.8 3.3 \n\ndiff(quantile(iris$Sepal.Width, c(.25, .75)))\n\n75% \n0.5 \n\nIQR(iris$Sepal.Width)\n\n[1] 0.5"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#robust-estimates",
+    "href": "lessons/01_intro_to_data/01_intro_to_data.html#robust-estimates",
+    "title": "Introduction to Data & Numerical Summaries",
+    "section": "Robust estimates",
+    "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations have little effect on their values\n\n\n\nestimate\nrobust?\n\n\n\n\nmean\n\n\n\nmedian\n\n\n\nmode\n\n\n\nstandard deviation\n\n\n\nIQR\n\n\n\nrange\n\n\n\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries"
   },
   {
     "objectID": "resources.html",
