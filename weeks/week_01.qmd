@@ -49,6 +49,9 @@ By the end of the week, you should be able to:
     - [HTML](/lessons/01_intro_to_data/01_intro_to_data.qmd)
     - [PDF](/lessons/01_intro_to_data/01_intro_to_data.pdf)
     - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l)
+    
+- **Recording**
+  - [Lecture 01 – Course Introduction + Intro to Data (Slides 1–22)](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBhu6aOXdjNSIxYUE_2MsDhAVvaVgDb2_8U6vo4EK6IA0c?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ldbRGr)
 
 ### Wednesday — Introduction to R and RStudio
 

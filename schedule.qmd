@@ -52,6 +52,9 @@ source(here("class_dates.R"))
 
 <!-- FULL SCHEDULE -->
 
+[🎥 Lecture Recordings (OneDrive folder)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDYsQvyF-5LR7amFaaeogkNAREFnJvtPNQ22rnAKLj6klk?e=A0hKpU)
+
+
 | Week | Dates | Lesson | Topics | Chapter sections |
 |:-------------:|:-------------:|:-------------:|---------------|:-------------:|
 | [**1**](weeks/week_01.qmd) | `{r} format(w1d1, '%a, %m/%d')` | 0 | Welcome |  |
