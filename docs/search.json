@@ -437,7 +437,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#why-we-care-about-study-design",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Why we care about study design",
-    "text": "Why we care about study design\nStatistics helps answer questions with data.\nBut the design determines what the data can support:\n\nWho is included?\nHow are they selected?\nWhat kind of study is it?\nWhat comparisons are valid?\n\nThese decisions determine what conclusions we can (and cannot) draw."
+    "text": "Why we care about study design\n\nStatistics helps answer questions with data.\nBut the design determines what the data can support:\n\nWho is included?\nHow are they selected?\nWhat kind of study is it?\nWhat comparisons are valid?\n\n\nThese decisions determine what conclusions we can (and cannot) draw."
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-collection-principles-1.3",
@@ -493,7 +493,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-12",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Experiments (1/2)",
-    "text": "Experiments (1/2)\n\nResearchers assign individuals to different treatment or intervention groups\n\nControl group: often receive a placebo or usual care\nDifferent treatment groups are often called study arms\n\nRandomization\n\nGroup assignment is usually random to ensure similar (balanced) study arms for all variables (observed and unobserved)\nRandomization allows study arm differences in outcomes to be attributed to treatment rather than variability in patient characteristics\n\nTreatment is the only systematic difference between groups\nEstablish causality\n\nBlocking (stratification): group individuals into blocks (strata) before randomizing if there are certain characteristics that may influence the outcome other than treatment (i.e. gender, age group)\nDifferent than random sampling: sampling decides who enters the study; randomization decides which treatment they receive"
+    "text": "Experiments (1/2)\n\n\n\n\nControl\n\nResearchers limit variability by carefully selecting participants\nInclusion and exclusion criteria reduce the influence of extraneous variables\nHelps ensure the sample is appropriate and relevant to the research question\n\nRandomization\n\nGroup assignment is usually random to ensure similar (balanced) study arms for all variables (observed and unobserved)\nRandomization allows study arm differences in outcomes to be attributed to treatment rather than variability in patient characteristics\n\nTreatment is the only systematic difference between groups\nEstablish causality\n\nBlocking (stratification): group individuals into blocks (strata) before randomizing if there are certain characteristics that may influence the outcome other than treatment (i.e. gender, age group)\nDifferent than random sampling: sampling decides who enters the study; randomization decides which treatment they receive"
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#experiments-22",
@@ -507,7 +507,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Observational studies",
-    "text": "Observational studies\nSome research questions cannot be studied experimentally due to ethical, practical, or logistical constraints.\n\nData are observed and recorded without interference\nOften done via surveys, electronic health records, or medical chart reviews\nAssociations between variables can be established, but not causality\n\nIndividuals with different characteristics may also differ in other ways that influence response\n\nConfounding variables (lurking variable)\n\nVariables associated with both the explanatory and response variables"
+    "text": "Observational studies\nSome research questions cannot be studied experimentally due to ethical, practical, or logistical constraints.\n\nData are observed and recorded without interference\n\nResearchers do not assign treatments or exposures\n\nOften done via surveys, electronic health records, or medical chart reviews\nAssociations between variables can be established, but not causality\n\nIndividuals with different characteristics may also differ in other ways that influence response\n\nConfounding variables (lurking variable)\n\nVariables associated with both the explanatory and response variables"
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#observational-studies-prospective-vs.-retrospective-studies",
@@ -591,7 +591,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#view-the-iris-dataset",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "View the iris dataset",
-    "text": "View the iris dataset\n\n\nThe iris dataset is already pre-loaded in base R and ready to use.\nType the following command in the console window\n\nWarning: this command cannot be rendered. It will give an error.\n\n\n\n\n\n\n\n\nView(iris)\n\n\nA new tab in the scripting window should appear with the iris dataset."
+    "text": "View the iris dataset\n\n\nThe iris dataset is already pre-loaded in base R and ready to use.  \n\n\n\n\n\n\n\nView(iris)\n\n\nA new tab in the scripting window should appear with the iris dataset."
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#data-structure",
@@ -661,7 +661,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-mean",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Measures of center: mean",
-    "text": "Measures of center: mean\n\nSample mean: the average value of observations\n\\[\\overline{x} = \\frac{x_1+x_2+\\cdots+x_n}{n} = \\sum_{i=1}^{n}\\frac{x_i}{n}\\]\nwhere \\(x_1, x_2, \\ldots, x_n\\) represent the \\(n\\) observed values in a sample\nExample: What is the mean age in the toy dataset df defined earlier?\n\n\ndf\n\n  IDs gender  age     trt Veteran\n1   1   male 28.0 control   FALSE\n2   2 female 35.5       1    TRUE\n3   3   Male 31.0       1    TRUE\n\nmean(df$age)\n\n[1] 31.5"
+    "text": "Measures of center: mean\n\nSample mean: the average value of observations\n\\[\\bar{x} = \\frac{x_1+x_2+\\cdots+x_n}{n} = \\sum_{i=1}^{n}\\frac{x_i}{n}\\]\nwhere \\(x_1, x_2, \\ldots, x_n\\) represent the \\(n\\) observed values in a sample\n\n\nExample: What is the mean age in the toy dataset df defined earlier?\n\n\ndf\n\n  IDs gender  age     trt Veteran\n1   1   male 28.0 control   FALSE\n2   2 female 35.5       1    TRUE\n3   3   Male 31.0       1    TRUE\n\nmean(df$age)\n\n[1] 31.5"
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-center-median",
@@ -689,21 +689,21 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-standard-deviation-sd-13",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Measures of spread: standard deviation (SD) (1/3)",
-    "text": "Measures of spread: standard deviation (SD) (1/3)\nstandard deviation is (approximately) the average distance between a typical observation and the mean\n\nAn observation’s deviation is the distance between its value \\(x\\) and the sample mean \\(\\overline{x}\\): deviation = \\(x - \\overline{x}\\)."
+    "text": "Measures of spread: standard deviation (SD) (1/3)\nstandard deviation is (approximately) the average distance between a typical observation and the mean\n\nAn observation’s deviation is the distance between its value \\(x\\) and the sample mean \\(\\bar{x}\\): deviation = \\(x - \\bar{x}\\)."
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-23",
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-23",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Measures of spread: SD (2/3)",
-    "text": "Measures of spread: SD (2/3)\n\nThe sample variance \\(s^2\\) is the sum of squared deviations divided by the number of observations minus 1. \\[s^2 = \\frac{(x_1 - \\overline{x})^2+(x_2 - \\overline{x})^2+\\cdots+(x_n - \\overline{x})^2}{n-1} = \\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}\\] where \\(x_1, x_2, \\dots, x_n\\) represent the \\(n\\) observed values.\nThe standard deviation \\(s\\) is the square root of the variance. \\[s = \\sqrt{\\frac{({x_1 - \\overline{x})}^{2}+({x_2 - \\overline{x})}^{2}+\\cdots+({x_n - \\overline{x})}^{2}}{n-1}} = \\sqrt{\\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}}\\]"
+    "text": "Measures of spread: SD (2/3)\n\nThe sample variance \\(s^2\\) is the sum of squared deviations divided by the number of observations minus 1.\n\n\\[\ns^2 =\n\\frac{(x_1 - \\bar{x})^2 + (x_2 - \\bar{x})^2 + \\cdots + (x_n - \\bar{x})^2}{n - 1}\n=\n\\sum_{i=1}^{n} \\frac{(x_i - \\bar{x})^2}{n - 1}\n\\] where \\(x_1, x_2, \\dots, x_n\\) represent the \\(n\\) observed values.\n \n\nThe standard deviation \\(s\\) (or \\(sd\\)) is the square root of the variance.\n\n\\[\ns\n= \\sqrt{s^2}\n= \\sqrt{\\frac{1}{n - 1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\n\\]"
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-33",
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#measures-of-spread-sd-33",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Measures of spread: SD (3/3)",
-    "text": "Measures of spread: SD (3/3)\n\n\n\nLet’s calculate the sample standard deviation for our toy example\n\n\ndf$age\n\n[1] 28.0 35.5 31.0\n\n\n\n\nmean(df$age)\n\n[1] 31.5\n\nsd(df$age)\n\n[1] 3.774917\n\n\n\n\\(s = \\sqrt{\\sum_{i=1}^{n}\\frac{(x_i - \\overline{x})^2}{n-1}} =\\)"
+    "text": "Measures of spread: SD (3/3)\n\n\n\nLet’s calculate the sample standard deviation for our toy example\n\n\ndf$age\n\n[1] 28.0 35.5 31.0\n\n\n\n\nmean(df$age)\n\n[1] 31.5\n\nsd(df$age)\n\n[1] 3.774917\n\n\n\n\\(s = \\sqrt{\\sum_{i=1}^{n}\\frac{(x_i - \\bar{x})^2}{n-1}} =\\)"
   },
   {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#empirical-rule-one-way-to-think-about-the-sd-12",
@@ -738,7 +738,7 @@
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#robust-estimates",
     "title": "Introduction to Data & Numerical Summaries",
     "section": "Robust estimates",
-    "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations have little effect on their values\n\n\n\nestimate\nrobust?\n\n\n\n\nmean\n\n\n\nmedian\n\n\n\nmode\n\n\n\nstandard deviation\n\n\n\nIQR\n\n\n\nrange\n\n\n\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries"
+    "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations (outliers) have little effect on their values\n\n\n\nEstimate\nRobust?\n\n\n\n\nSample mean\n❌\n\n\nMedian\n✅\n\n\nStandard deviation\n❌\n\n\nIQR\n✅\n\n\nRange\n❌\n\n\n\n\nFor samples with extreme values or skewed distributions, the median and IQR often provide a more stable summary of center and spread than the mean, standard deviation, or range.\nThe range depends only on the smallest and largest observations, so a single outlier can dramatically change its value.\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries"
   },
   {
     "objectID": "resources.html",

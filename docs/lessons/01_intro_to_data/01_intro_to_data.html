@@ -433,13 +433,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="why-we-care-about-study-design" class="slide level2">
 <h2>Why we care about study design</h2>
-<p>Statistics helps answer questions with data.</p>
-<p>But the design determines what the data can support:</p>
+<ul>
+<li><p>Statistics helps answer questions with data.</p></li>
+<li><p>But the design determines what the data can support:</p>
 <ul>
 <li>Who is included?</li>
 <li>How are they selected?</li>
 <li>What kind of study is it?</li>
 <li>What comparisons are valid?</li>
+</ul></li>
 </ul>
 <p>These decisions determine what conclusions we can (and cannot) draw.</p>
 </section>
@@ -614,11 +616,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="experiments-12" class="slide level2">
 <h2>Experiments (1/2)</h2>
+<!-- * Researchers assign individuals to different __treatment__ or __intervention groups__ -->
+<!--   * __Control group__: often receive a __placebo__ or usual care -->
+<!--   * Different treatment groups are often called __study arms__ -->
 <ul>
-<li>Researchers assign individuals to different <strong>treatment</strong> or <strong>intervention groups</strong>
+<li><strong>Control</strong>
 <ul>
-<li><strong>Control group</strong>: often receive a <strong>placebo</strong> or usual care</li>
-<li>Different treatment groups are often called <strong>study arms</strong></li>
+<li>Researchers limit variability by carefully selecting participants</li>
+<li>Inclusion and exclusion criteria reduce the influence of extraneous variables</li>
+<li>Helps ensure the sample is appropriate and relevant to the research question</li>
 </ul></li>
 <li><strong>Randomization</strong>
 <ul>
@@ -651,7 +657,10 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Observational studies</h2>
 <p>Some research questions <strong>cannot be studied experimentally</strong> due to ethical, practical, or logistical constraints.</p>
 <ul>
-<li>Data are observed and recorded without interference</li>
+<li>Data are observed and recorded without interference
+<ul>
+<li>Researchers do not assign treatments or exposures</li>
+</ul></li>
 <li>Often done via surveys, electronic health records, or medical chart reviews</li>
 <li>Associations between variables can be established, <strong>but not causality</strong>
 <ul>
@@ -736,7 +745,7 @@ The project is funded by the US Department of Veterans Affairs: Office of Rural 
 <li>Right now: focus on concepts, not syntax</li>
 </ul>
 </section>
-<section id="how-are-data-stored-how-do-we-use-them" class="slide level2 smaller">
+<section id="how-are-data-stored-how-do-we-use-them" class="slide level2">
 <h2>How are data stored, how do we use them?</h2>
 <ul>
 <li>Often, data are in an Excel sheet, or a plain text file (.csv, .txt)</li>
@@ -914,11 +923,7 @@ The project is funded by the US Department of Veterans Affairs: Office of Rural 
 <h2>View the <code>iris</code> dataset</h2>
 <div style="font-size: 80%;">
 <ul>
-<li>The <code>iris</code> dataset is already pre-loaded in <em>base</em> R and ready to use.</li>
-<li>Type the following command in the console window
-<ul>
-<li><em>Warning: this command cannot be rendered. It will give an error.</em></li>
-</ul></li>
+<li>The <code>iris</code> dataset is already pre-loaded in <em>base</em> R and ready to use. <!-- * Type the following command in the console window --> <!--   - _Warning: this command cannot be rendered. It will give an error._ --></li>
 </ul>
 </div>
 <p><br>
@@ -1147,8 +1152,10 @@ Arthritis Care &amp; Research.<br>
 <h2>Measures of center: mean</h2>
 <div style="font-size: 80%;">
 <p><strong><span style="color:darkorange">Sample mean</span></strong>: the average value of observations</p>
-<p><span class="math display">\[\overline{x} = \frac{x_1+x_2+\cdots+x_n}{n} = \sum_{i=1}^{n}\frac{x_i}{n}\]</span></p>
+<p><span class="math display">\[\bar{x} = \frac{x_1+x_2+\cdots+x_n}{n} = \sum_{i=1}^{n}\frac{x_i}{n}\]</span></p>
 <p>where <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> represent the <span class="math inline">\(n\)</span> observed values in a sample</p>
+<p><br>
+</p>
 <p><strong>Example</strong>: What is the mean age in the toy dataset <code>df</code> defined earlier?</p>
 </div>
 <div class="cell">
@@ -1237,16 +1244,30 @@ Arthritis Care &amp; Research.<br>
 <h2>Measures of spread: standard deviation (SD) (1/3)</h2>
 <p><strong>standard deviation</strong> is (approximately) the average distance between a typical observation and the mean</p>
 <ul>
-<li>An observation’s <strong>deviation</strong> is the distance between its value <span class="math inline">\(x\)</span> and the sample mean <span class="math inline">\(\overline{x}\)</span>: deviation = <span class="math inline">\(x - \overline{x}\)</span>.</li>
+<li>An observation’s <strong>deviation</strong> is the distance between its value <span class="math inline">\(x\)</span> and the sample mean <span class="math inline">\(\bar{x}\)</span>: deviation = <span class="math inline">\(x - \bar{x}\)</span>.</li>
 </ul>
 
 <img data-src="01_intro_to_data_files/figure-revealjs/unnamed-chunk-18-1.png" width="1344" class="r-stretch"></section>
-<section id="measures-of-spread-sd-23" class="slide level2 smaller">
+<section id="measures-of-spread-sd-23" class="slide level2">
 <h2>Measures of spread: SD (2/3)</h2>
 <ul>
-<li><p>The <strong>sample variance</strong> <span class="math inline">\(s^2\)</span> is the sum of squared deviations divided by the number of observations minus 1. <span class="math display">\[s^2 = \frac{(x_1 - \overline{x})^2+(x_2 - \overline{x})^2+\cdots+(x_n - \overline{x})^2}{n-1} = \sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}\]</span> where <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> represent the <span class="math inline">\(n\)</span> observed values.</p></li>
-<li><p>The <strong>standard deviation</strong> <span class="math inline">\(s\)</span> is the square root of the variance. <span class="math display">\[s = \sqrt{\frac{({x_1 - \overline{x})}^{2}+({x_2 - \overline{x})}^{2}+\cdots+({x_n - \overline{x})}^{2}}{n-1}} = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}}\]</span></p></li>
+<li>The <strong>sample variance</strong> <span class="math inline">\(s^2\)</span> is the sum of squared deviations divided by the number of observations minus 1.</li>
 </ul>
+<p><span class="math display">\[
+s^2 =
+\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2}{n - 1}
+=
+\sum_{i=1}^{n} \frac{(x_i - \bar{x})^2}{n - 1}
+\]</span> where <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> represent the <span class="math inline">\(n\)</span> observed values.</p>
+<p>&nbsp;</p>
+<ul>
+<li>The <span style="color:#E75B5C;"><strong>standard deviation</strong></span> <span class="math inline">\(s\)</span> (or <span class="math inline">\(sd\)</span>) is the square root of the variance.</li>
+</ul>
+<p><span class="math display">\[
+s
+= \sqrt{s^2}
+= \sqrt{\frac{1}{n - 1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+\]</span></p>
 </section>
 <section id="measures-of-spread-sd-33" class="slide level2">
 <h2>Measures of spread: SD (3/3)</h2>
@@ -1273,7 +1294,7 @@ Arthritis Care &amp; Research.<br>
 </div>
 </div>
 </div></div>
-<p><span class="math inline">\(s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}} =\)</span></p>
+<p><span class="math inline">\(s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}} =\)</span></p>
 <!-- \sqrt{\frac{({28 - 31.5)}^{2}+({35.5 - 31.5)}^{2}+({31 - 31.5)}^{2}}{3-1}} = 3.775 -->
 </section>
 <section id="empirical-rule-one-way-to-think-about-the-sd-12" class="slide level2">
@@ -1381,41 +1402,41 @@ Arthritis Care &amp; Research.<br>
 </section>
 <section id="robust-estimates" class="slide level2">
 <h2>Robust estimates</h2>
-<p>Summary statistics are called <strong><span style="color:darkorange">robust estimates</span></strong> if extreme observations have little effect on their values</p>
+<p>Summary statistics are called <strong><span style="color:darkorange">robust estimates</span></strong> if extreme observations (outliers) have little effect on their values</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>estimate</th>
-<th>robust?</th>
+<th>Estimate</th>
+<th>Robust?</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>mean</td>
-<td></td>
+<td>Sample mean</td>
+<td>❌</td>
 </tr>
 <tr class="even">
-<td>median</td>
-<td></td>
+<td>Median</td>
+<td>✅</td>
 </tr>
 <tr class="odd">
-<td>mode</td>
-<td></td>
+<td>Standard deviation</td>
+<td>❌</td>
 </tr>
 <tr class="even">
-<td>standard deviation</td>
-<td></td>
-</tr>
-<tr class="odd">
 <td>IQR</td>
-<td></td>
+<td>✅</td>
 </tr>
-<tr class="even">
-<td>range</td>
-<td></td>
+<tr class="odd">
+<td>Range</td>
+<td>❌</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li><p>For samples with extreme values or skewed distributions, the <strong>median and IQR</strong> often provide a more stable summary of center and spread than the mean, standard deviation, or range.</p></li>
+<li><p>The <strong>range</strong> depends only on the smallest and largest observations, so a single outlier can dramatically change its value.</p></li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -1607,7 +1628,7 @@ Arthritis Care &amp; Research.<br>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],

@@ -11,6 +11,7 @@ format:
     width: 1955
     height: 1100
     footer: "BMSC 620 | Intro to Data & Numerical Summaries"
+    html-math-method: mathjax
     header-includes: |
       <style>
       #wrap {
@@ -52,14 +53,13 @@ By the end of class, you should be able to:
 
 ## Why we care about study design
 
-Statistics helps answer questions with data.
+* Statistics helps answer questions with data.
 
-But the design determines what the data can support:
-
-- Who is included?
-- How are they selected?
-- What kind of study is it?
-- What comparisons are valid?
+* But the design determines what the data can support:
+  - Who is included?
+  - How are they selected?
+  - What kind of study is it?
+  - What comparisons are valid?
 
 These decisions determine what conclusions we can (and cannot) draw.
 
@@ -230,9 +230,15 @@ many similar individuals.
 ## Experiments (1/2) 
 
 
-* Researchers assign individuals to different __treatment__ or __intervention groups__
-  * __Control group__: often receive a __placebo__ or usual care
-  * Different treatment groups are often called __study arms__
+<!-- * Researchers assign individuals to different __treatment__ or __intervention groups__ -->
+<!--   * __Control group__: often receive a __placebo__ or usual care -->
+<!--   * Different treatment groups are often called __study arms__ -->
+
+* __Control__
+  * Researchers limit variability by carefully selecting participants
+  * Inclusion and exclusion criteria reduce the influence of extraneous variables
+  * Helps ensure the sample is appropriate and relevant to the research question
+
 * __Randomization__
   * Group assignment is usually random to ensure similar (balanced) study arms for all variables (observed and unobserved)
   * Randomization allows study arm differences in outcomes to be attributed to treatment rather than variability in patient characteristics
@@ -257,6 +263,7 @@ many similar individuals.
 Some research questions **cannot be studied experimentally** due to ethical, practical, or logistical constraints.
 
 * Data are observed and recorded without interference
+  * Researchers do not assign treatments or exposures
 * Often done via surveys, electronic health records, or medical chart reviews
 * Associations between variables can be established, **but not causality**
     * Individuals with different characteristics may also differ in other ways that influence response
@@ -339,7 +346,7 @@ Now we shift to:
 - Right now: focus on concepts, not syntax
 
 
-## How are data stored, how do we use them? {.smaller}
+## How are data stored, how do we use them? 
 
 - Often, data are in an Excel sheet, or a plain text file (.csv, .txt)
 - .csv files open in Excel automatically, but actually are plain text
@@ -465,8 +472,8 @@ _[Can the iris species be determined by these variables?]{style="color:purple"}_
 
 ::: {style="font-size: 80%;"}
 * The `iris` dataset is already pre-loaded in *base* R and ready to use.
-* Type the following command in the console window
-  - _Warning: this command cannot be rendered. It will give an error._
+<!-- * Type the following command in the console window -->
+<!--   - _Warning: this command cannot be rendered. It will give an error._ -->
 :::
 
 \
@@ -636,9 +643,11 @@ Arthritis Care & Research.
 ::: {style="font-size: 80%;"}
 __[Sample mean]{style="color:darkorange"}__: the average value of observations
 
-$$\overline{x} = \frac{x_1+x_2+\cdots+x_n}{n} = \sum_{i=1}^{n}\frac{x_i}{n}$$  
+$$\bar{x} = \frac{x_1+x_2+\cdots+x_n}{n} = \sum_{i=1}^{n}\frac{x_i}{n}$$  
 
 where $x_1, x_2, \ldots, x_n$ represent the $n$ observed values in a sample
+
+\
 
 
 __Example__: What is the mean age in the toy dataset `df` defined earlier?
@@ -708,7 +717,7 @@ iris_long <- iris %>% pivot_longer(Sepal.Length:Petal.Width, names_to = "msr")
 
 ggplot(iris_long, aes(x= value)) +
   facet_grid(cols = vars(msr)) +
-  geom_histogram() +
+  geom_histogram(color = "white") +
   labs(title = "Iris sepal and petal lengths & widths")
 
 ```
@@ -729,7 +738,7 @@ __[mode]{style="color:darkorange"}__: the most frequent value in a dataset
 
 ggplot(iris_long, aes(x= value)) +
   facet_grid(cols = vars(msr)) +
-  geom_histogram() +
+  geom_histogram(color = "white") +
   labs(title = "Iris sepal and petal lengths & widths")
 
 ```
@@ -740,7 +749,7 @@ ggplot(iris_long, aes(x= value)) +
 
 __standard deviation__ is (approximately) the average distance between a typical observation and the mean 
 
-- An observation's **deviation** is the distance between its value $x$ and the sample mean $\overline{x}$: deviation = $x - \overline{x}$.
+- An observation's **deviation** is the distance between its value $x$ and the sample mean $\bar{x}$: deviation = $x - \bar{x}$.
 
 ```{r}
 #| echo: false
@@ -759,24 +768,34 @@ sim_diff_sd_long <- sim_diff_sd %>%
 
 ggplot(sim_diff_sd_long, aes(x= value)) +
   facet_grid(cols = vars(sd)) +
-  geom_histogram() +
+  geom_histogram(color = "white") +
   labs(title = "Simulated data with different standard deviations")
 
 ```
 
 
 
-## Measures of spread: SD  (2/3) {.smaller}
+## Measures of spread: SD  (2/3)
 
-- The **sample variance** $s^2$ is the sum of squared deviations divided by the number of observations minus 1.
-$$s^2 = \frac{(x_1 - \overline{x})^2+(x_2 - \overline{x})^2+\cdots+(x_n - \overline{x})^2}{n-1} = \sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}$$
-    where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
+-   The **sample variance** $s^2$ is the sum of squared deviations divided by the number of observations minus 1. 
 
-- The **standard deviation** $s$ is the square root of the variance.
-$$s = \sqrt{\frac{({x_1 - \overline{x})}^{2}+({x_2 - \overline{x})}^{2}+\cdots+({x_n - \overline{x})}^{2}}{n-1}} = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}}$$
+$$
+s^2 =
+\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2}{n - 1}
+=
+\sum_{i=1}^{n} \frac{(x_i - \bar{x})^2}{n - 1}
+$$
+where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
 
+ 
 
+-   The [**standard deviation**]{style="color:#E75B5C;"} $s$ (or $sd$) is the square root of the variance. 
 
+$$
+s 
+= \sqrt{s^2}
+= \sqrt{\frac{1}{n - 1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
 
 ## Measures of spread: SD  (3/3) 
 
@@ -803,7 +822,7 @@ sd(df$age)
 :::
 :::
 
-$s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \overline{x})^2}{n-1}} =$
+$s = \sqrt{\sum_{i=1}^{n}\frac{(x_i - \bar{x})^2}{n-1}} =$
 
 <!-- \sqrt{\frac{({28 - 31.5)}^{2}+({35.5 - 31.5)}^{2}+({31 - 31.5)}^{2}}{3-1}} = 3.775 -->
 
@@ -904,15 +923,18 @@ IQR(iris$Sepal.Width)
 
 ## Robust estimates
 
-Summary statistics are called __[robust estimates]{style="color:darkorange"}__ if extreme observations have little effect on their values
-
-estimate | robust? 
----| ---
-mean | 
-median |
-mode |
-standard deviation |
-IQR |
-range |
+Summary statistics are called __[robust estimates]{style="color:darkorange"}__ if extreme observations (outliers) have little effect on their values
 
 
+| Estimate           | Robust? |
+|--------------------|---------|
+| Sample mean        | ❌      |
+| Median             | ✅      |
+| Standard deviation | ❌      |
+| IQR                | ✅      |
+| Range              | ❌      |
+
+
+-   For samples with extreme values or skewed distributions, the **median and IQR** often provide a more stable summary of center and spread than the mean, standard deviation, or range.
+
+- The **range** depends only on the smallest and largest observations, so a single outlier can dramatically change its value.
