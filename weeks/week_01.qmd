@@ -46,8 +46,9 @@ By the end of the week, you should be able to:
     - [PDF](/lessons/00_welcome/00_welcome.pdf)
     - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l)
   - Introduction to data & numerical summaries:
-    - [HTML](/lessons/01_intro_data/01_intro_data.html)
+    - [HTML](/lessons/01_intro_data/01_intro_data.qmd)
     - [PDF](/lessons/01_intro_data/01_intro_data.pdf)
+    - [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-
 
 ### Wednesday — Introduction to R and RStudio
 
