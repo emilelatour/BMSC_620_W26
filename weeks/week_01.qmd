@@ -50,11 +50,12 @@ By the end of the week, you should be able to:
 ### Wednesday — Introduction to R and RStudio
 
 - **Topics**
-  - Introduction to R and RStudio
-  - Working with simple datasets in R
-
+  - Introduction to data (continued)
+  - Introduction to R, RStudio, and Quarto
+  
 - **Slides**
-  - *(to be posted)*
+  - Introduction to data & numerical summaries (Continued) ([HTML](/lessons/02_intro_to_data_cont/02_intro_to_data_cont.qmd) | [PDF](/lessons/02_intro_to_data_cont/02_intro_to_data_cont.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Introduction to R, RStudio, and Quarto ([HTML](/lessons/03_intro_to_r/03_intro_to_r.qmd) | [PDF](/lessons/03_intro_to_r/03_intro_to_r.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Software**
   - Install R and RStudio (see the [Resources](/resources.qmd) page)
