@@ -96,9 +96,13 @@ Each homework assignment will be graded on a 10-point scale using the following 
 
 Homework will be graded primarily for **effort, reasoning, and clarity**, not strict correctness.
 
-#### Feedback
+#### Feedback and solutions
 
-For homework submitted on time, the TA will provide feedback on one or more problems. Solutions will be posted after the due date so that you can review your work and identify areas for improvement.
+Homework solutions will be released **immediately after the submission deadline**. This allows you to review the material and apply feedback while working on the next assignment, even if grading is still in progress.
+
+For homework submitted on time, the TA will provide feedback on one or more problems.
+
+**Turnaround time**: Homework will be graded and returned within **one week of the due date**, with a target of **Friday** when possible.
 
 #### Late and dropped homework
 
