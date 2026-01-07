@@ -568,18 +568,18 @@
     "text": "What does a code chunk look like?\nAn empty code chunk looks like this:\nVisual editor\n\nSource editor\n\n\n\n\n\n\n\nImportant\n\n\nNote that a code chunks start with ```{r} and ends with ```. Make sure there is no space before ```."
   },
   {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-12",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-12",
     "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code (1/n)",
-    "text": "Enter and run code (1/n)\n\nType R code inside code chunks\nSelect code you want to run, by\n\nplacing the cursor in the line of code you want to run,\nor highlighting the code you want to run\n\n\n\n\n\nRun selected code by\n\nclicking on the  button in the top right corner of the scripting window and choosing Run Selected Line(s),\nor typing one of the following key combinations:\n\n\n\n\n\nMac\nctrl + return\n\n\nPC\ncommand + return\n\n\n\n\nWhere does the output appear?"
+    "section": "Enter and run code (1/2)",
+    "text": "Enter and run code (1/2)\n\n\n1. Type R code inside a code chunk\n2. Run code (recommended): keyboard shortcut\n\nMac: Ctrl + Return\nWindows: Ctrl + Return\n\n\n\nOutput appears in the Console pane.\n\nOther ways to run code:\n\nPlace the cursor on a line and click the Run button ()\nHighlight multiple lines and choose Run Selected Line(s)"
   },
   {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
     "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code (2/n)",
-    "text": "Enter and run code (2/n)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
+    "section": "Enter and run code (2/2)",
+    "text": "Enter and run code (2/2)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#useful-keyboard-shortcuts",
@@ -1282,26 +1282,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#old",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#old",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Old",
-    "text": "Old\n3 options to create a code chunk\n\nClick on at top right of the editor window, or\nKeyboard shortcut\n\n\n\n\nMac\nCommand + Option + I\n\n\nPC\nCtrl + Alt + I\n\n\n\n\nVisual editor: Select Insert -&gt; Executable Cell -&gt; R"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code",
-    "text": "Enter and run code\n\n\n1. Type R code inside a code chunk\n2. Run code (recommended): keyboard shortcut\n\nMac: Ctrl + Return\nWindows: Ctrl + Return\n\n\n\nOutput appears in the Console pane.\n\nOther ways to run code:\n\nPlace the cursor on a line and click the Run button ()\nHighlight multiple lines and choose Run Selected Line(s)"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code (2/2)",
-    "text": "Enter and run code (2/2)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
   }
 ]
