@@ -969,7 +969,7 @@
     "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-motivating-example-frog-reproduction-data1",
     "title": "Introduction to Data & Numerical Summaries (continued)",
     "section": "A motivating example: frog reproduction data1",
-    "text": "A motivating example: frog reproduction data1\nTo make ideas about data more concrete, we will work with a dataset from an evolutionary biology study on frog reproduction.\nFemale frogs invest energy into reproduction by producing eggs. Because energy is limited, there are natural trade-offs: - producing many small eggs versus - producing fewer larger eggs\nResearchers collected data from frog egg clutches found at breeding ponds across multiple locations that differed in altitude.\nThe goal was to understand how reproductive investment varies across environments.\nDataset adapted from an example in Introductory Statistics for the Life and Biomedical Sciences."
+    "text": "A motivating example: frog reproduction data1\nTo make ideas about data more concrete, we will work with a dataset from an evolutionary biology study on frog reproduction.\nFemale frogs invest energy into reproduction by producing eggs. Because energy is limited, there are natural trade-offs:\n\nproducing many small eggs versus\nproducing fewer larger eggs\n\nResearchers collected data from frog egg clutches found at breeding ponds across multiple locations that differed in altitude.\nThe goal was to understand how reproductive investment varies across environments.\nDataset adapted from an example in Introductory Statistics for the Life and Biomedical Sciences."
   },
   {
     "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-12",
@@ -1032,7 +1032,7 @@
     "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-variable-types-appear-in-r-preview",
     "title": "Introduction to Data & Numerical Summaries (continued)",
     "section": "How variable types appear in R (preview)",
-    "text": "How variable types appear in R (preview)\nWe are not using R in depth yet.\nThis slide is here to help you later connect: - the variable types we talk about conceptually, and - how R stores those variables internally.\nYou do not need to memorize this now.\n\n\n\n\n\n\n\n\nR type\nVariable type\nWhat it represents\n\n\n\n\ninteger\nNumerical (discrete)\nWhole-number counts\n\n\ndouble / numeric\nNumerical (continuous)\nMeasured values with decimals\n\n\nfactor\nCategorical\nCategories stored with defined levels\n\n\ncharacter\nCategorical\nText labels\n\n\nlogical\nCategorical\nTRUE / FALSE values"
+    "text": "How variable types appear in R (preview)\nWe are not using R in depth yet.\nThis slide is here to help you later connect:\n\nthe variable types we talk about conceptually, and\nhow R stores those variables internally.\n\nYou do not need to memorize this now.\n\n\n\n\n\n\n\n\nR type\nVariable type\nWhat it represents\n\n\n\n\ninteger\nNumerical (discrete)\nWhole-number counts\n\n\ndouble / numeric\nNumerical (continuous)\nMeasured values with decimals\n\n\nfactor\nCategorical\nCategories stored with defined levels\n\n\ncharacter\nCategorical\nText labels\n\n\nlogical\nCategorical\nTRUE / FALSE values"
   },
   {
     "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#summarizing-numerical-data-1.4",

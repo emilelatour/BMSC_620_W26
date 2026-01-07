@@ -69,6 +69,7 @@ from an evolutionary biology study on frog reproduction.
 
 Female frogs invest energy into reproduction by producing eggs.
 Because energy is limited, there are natural trade-offs:
+
 - producing **many small eggs** versus
 - producing **fewer larger eggs**
 
@@ -264,6 +265,7 @@ frog_vars |>
 We are **not using R in depth yet**.
 
 This slide is here to help you later connect:
+
 - the variable types we talk about conceptually, and
 - how R stores those variables internally.
 
@@ -363,7 +365,7 @@ The mean clutch volume is `r scales::number(mean(frog$clutch.volume, na.rm = TRU
 
 \
 
-> The mean tells us where the data balance, but it doesn’t tell us how spread out they are.
+- The mean tells us where the data balance, but it doesn’t tell us how spread out they are.
 
 ## Things to note
 
