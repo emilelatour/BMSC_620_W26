@@ -49,8 +49,8 @@ By the end of the week, you should be able to:
   
 - **Muddy points**
 
-I reviewed your post-class feedback and wrote short clarifications here:
-- [Muddy Points - Lesson 1](/lessons/01_intro_to_data/01_intro_to_data_muddy_points.qmd)
+- I reviewed your post-class feedback and wrote short clarifications here:
+  - [Muddy Points - Lesson 1](/lessons/01_intro_to_data/01_intro_to_data_muddy_points.qmd)
 
 ### Wednesday — Introduction to R and RStudio
 
