@@ -1,0 +1,154 @@
+---
+title: "Muddy Points"
+subtitle: "Week 1: Introduction to Data"
+date-modified: "today"
+format:
+  html:
+    toc: true
+---
+
+## Thanks for the feedback
+
+Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture.
+
+
+## 1. Stratified sampling vs. cluster sampling vs. multistage sampling
+
+This was the most common point of confusion, which is very normal. These ideas are closely related, and the differences are mostly about **how groups are formed** and **who gets sampled**.
+
+A helpful way to think about this is to ask two questions:
+
+1.	Why are the groups defined?
+2.	Who do we actually sample?
+
+**Stratified sampling**
+
+- Groups (called *strata*) are formed based on **shared characteristics that matter to the research question**.
+- Individuals within each stratum are relatively similar.
+- We then randomly sample **some individuals from every stratum**.
+
+**Goal**: Ensure representation from all important subgroups.
+
+**Example (animal study)**:
+
+You are studying hormone levels in mice and know sex affects the outcome.
+
+- Create strata by sex (male, female).
+- Randomly sample mice from *each sex* group.
+
+**Cluster sampling**
+
+- Groups (called *clusters*) are formed based on **natural or logistical groupings**.
+- Individuals within a cluster are often diverse.
+- We randomly select **entire clusters**, then include all individuals within them.
+
+**Goal**: Reduce cost or effort when sampling individuals directly is difficult.
+
+**Example (animal study)**:
+
+You are studying lab mice housed in cages.
+
+- Treat each cage as a cluster.
+- Randomly select some cages.
+- Measure all mice in the selected cages.
+
+**Multistage sampling**
+
+- Sampling happens in steps.
+- First, clusters are randomly selected.
+- Then, individuals are randomly sampled within those selected clusters.
+
+**Goal**: Combine logistical convenience with random sampling.
+
+**Example (animal study)**:
+
+- Stage 1: Randomly select cages.
+- Stage 2: Randomly select mice within each selected cage.
+
+You can think of multistage sampling as layering familiar sampling ideas together.
+
+## 2. Why would some clusters be more likely to be selected?
+
+One question that came up was why certain clusters might have a higher chance of selection in **multistage sampling**.
+
+This was a place where I misspoke in class (around the 57 mimute mark of the recording), so I want to clarify.
+
+For the types of sampling designs we focus on in this course (and in the textbook), **clusters are usually selected at random**, with **each cluster having the same probability of being chosen**. You should generally think of cluster sampling as treating each cluster equally at the selection stage.
+
+More complex designs where clusters have different selection probabilities *do exist*, but we will not be focusing on those, and we will not be getting into weighting in this course.
+
+To help reinforce the distinction, here is a contrast between stratified sampling and cluster sampling.
+
+**Stratified sampling**
+
+- The population is divided into **strata** such that units within each stratum are similar with respect to the variable(s) of interest.
+- A random sample is then taken **within each stratum**.
+- Goal: reduce variability *within* strata and ensure representation of important subgroups.
+- Result:
+  - Low variability within strata
+  - Higher variability between strata
+
+**Cluster sampling**
+
+- The population is divided into **clusters** such that:
+  - units *within a cluster are diverse*, and
+	- clusters themselves are similar to one another.
+- A random sample of clusters is selected, and then **all units (or many units)** within the selected clusters are included.
+- Goal: improve practicality or reduce cost when sampling individuals directly is difficult.
+- As described in the textbook:
+  - High case-to-case variability within clusters
+  - Clusters are similar to each other
+
+In short:
+
+- **Stratified sampling**: simple random sample of units *within every group*
+- **Cluster sampling**: simple random sample of *entire groups*
+
+Thank you for raising this! It was a good catch, and this clarification will help going forward.
+
+
+## 3. Nominal vs. ordinal variables
+
+A few people mentioned that variable types felt rushed near the end.
+
+A quick reminder:
+
+- **Nominal variables**: categories with no natural order (e.g., species, blood type).
+- **Ordinal variables**: categories with a meaningful order, but unclear spacing (e.g., mild / moderate / severe).
+
+We will return to variable types repeatedly throughout the course, especially when we start visualizing data and choosing analyses.
+
+## 4. R, Quarto, and .qmd files
+
+Several people noted that the introduction to R and .qmd files felt intimidating, especially for those new to R.
+
+That reaction is expected.
+
+For now, the key idea is:
+
+- A `.qmd` file is a document that mixes **text and code**.
+- Rendering turns it into something readable (like an HTML file).
+
+Homework 0 is designed to be:
+
+- low-stakes,
+- guided,
+- and focused on setup rather than programming.
+
+You are not expected to understand R deeply yet.
+
+## 5. Homework submission and course logistics
+
+A few people asked how homework is submitted and how lecture material connects to the textbook.
+
+- The **course website** is your main hub for slides, recordings, and instructions.
+- **Sakai** is used for submitting assignments and checking grades.
+- Lectures and the textbook are meant to complement each other; sometimes lecture will preview ideas, other times it will reinforce them.
+
+This will feel clearer once you’ve completed your first homework.
+
+## Final note
+
+If something still feels muddy after this clarification, that’s okay. Many concepts in statistics become clearer only after you see them used multiple times.
+
+Please keep using the post-class check-ins. They are genuinely helpful for guiding what we slow down on or revisit.

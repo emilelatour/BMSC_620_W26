@@ -46,6 +46,11 @@ By the end of the week, you should be able to:
     
 - **Recording**
   - [Lecture 01 – Course Introduction + Intro to Data (Slides 1–22)](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBhu6aOXdjNSIxYUE_2MsDhAVvaVgDb2_8U6vo4EK6IA0c?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=ldbRGr)
+  
+- **Muddy points**
+
+I reviewed your post-class feedback and wrote short clarifications here:
+- [Muddy Points - Lesson 1](/lessons/01_intro_to_data/01_intro_to_data_muddy_points.qmd)
 
 ### Wednesday — Introduction to R and RStudio
 

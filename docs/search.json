@@ -1226,5 +1226,61 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
+    "title": "Muddy Points",
+    "section": "1. Stratified sampling vs. cluster sampling vs. multistage sampling",
+    "text": "1. Stratified sampling vs. cluster sampling vs. multistage sampling\nThis was the most common point of confusion, which is very normal. These ideas are closely related, and the differences are mostly about how groups are formed and who gets sampled.\nA helpful way to think about this is to ask two questions:\n\nWhy are the groups defined?\nWho do we actually sample?\n\nStratified sampling\n\nGroups (called strata) are formed based on shared characteristics that matter to the research question.\nIndividuals within each stratum are relatively similar.\nWe then randomly sample some individuals from every stratum.\n\nGoal: Ensure representation from all important subgroups.\nExample (animal study):\nYou are studying hormone levels in mice and know sex affects the outcome.\n\nCreate strata by sex (male, female).\nRandomly sample mice from each sex group.\n\nCluster sampling\n\nGroups (called clusters) are formed based on natural or logistical groupings.\nIndividuals within a cluster are often diverse.\nWe randomly select entire clusters, then include all individuals within them.\n\nGoal: Reduce cost or effort when sampling individuals directly is difficult.\nExample (animal study):\nYou are studying lab mice housed in cages.\n\nTreat each cage as a cluster.\nRandomly select some cages.\nMeasure all mice in the selected cages.\n\nMultistage sampling\n\nSampling happens in steps.\nFirst, clusters are randomly selected.\nThen, individuals are randomly sampled within those selected clusters.\n\nGoal: Combine logistical convenience with random sampling.\nExample (animal study):\n\nStage 1: Randomly select cages.\nStage 2: Randomly select mice within each selected cage.\n\nYou can think of multistage sampling as layering familiar sampling ideas together."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
+    "title": "Muddy Points",
+    "section": "2. Why would some clusters be more likely to be selected?",
+    "text": "2. Why would some clusters be more likely to be selected?\nOne question that came up was why certain clusters might have a higher chance of selection in multistage sampling.\nThis was a place where I misspoke in class (around the 57 mimute mark of the recording), so I want to clarify.\nFor the types of sampling designs we focus on in this course (and in the textbook), clusters are usually selected at random, with each cluster having the same probability of being chosen. You should generally think of cluster sampling as treating each cluster equally at the selection stage.\nMore complex designs where clusters have different selection probabilities do exist, but we will not be focusing on those, and we will not be getting into weighting in this course.\nTo help reinforce the distinction, here is a contrast between stratified sampling and cluster sampling.\nStratified sampling\n\nThe population is divided into strata such that units within each stratum are similar with respect to the variable(s) of interest.\nA random sample is then taken within each stratum.\nGoal: reduce variability within strata and ensure representation of important subgroups.\nResult:\n\nLow variability within strata\nHigher variability between strata\n\n\nCluster sampling\n\nThe population is divided into clusters such that:\n\nunits within a cluster are diverse, and\n\nclusters themselves are similar to one another.\n\n\nA random sample of clusters is selected, and then all units (or many units) within the selected clusters are included.\nGoal: improve practicality or reduce cost when sampling individuals directly is difficult.\nAs described in the textbook:\n\nHigh case-to-case variability within clusters\nClusters are similar to each other\n\n\nIn short:\n\nStratified sampling: simple random sample of units within every group\nCluster sampling: simple random sample of entire groups\n\nThank you for raising this! It was a good catch, and this clarification will help going forward."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
+    "title": "Muddy Points",
+    "section": "3. Nominal vs. ordinal variables",
+    "text": "3. Nominal vs. ordinal variables\nA few people mentioned that variable types felt rushed near the end.\nA quick reminder:\n\nNominal variables: categories with no natural order (e.g., species, blood type).\nOrdinal variables: categories with a meaningful order, but unclear spacing (e.g., mild / moderate / severe).\n\nWe will return to variable types repeatedly throughout the course, especially when we start visualizing data and choosing analyses."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
+    "title": "Muddy Points",
+    "section": "4. R, Quarto, and .qmd files",
+    "text": "4. R, Quarto, and .qmd files\nSeveral people noted that the introduction to R and .qmd files felt intimidating, especially for those new to R.\nThat reaction is expected.\nFor now, the key idea is:\n\nA .qmd file is a document that mixes text and code.\nRendering turns it into something readable (like an HTML file).\n\nHomework 0 is designed to be:\n\nlow-stakes,\nguided,\nand focused on setup rather than programming.\n\nYou are not expected to understand R deeply yet."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
+    "title": "Muddy Points",
+    "section": "5. Homework submission and course logistics",
+    "text": "5. Homework submission and course logistics\nA few people asked how homework is submitted and how lecture material connects to the textbook.\n\nThe course website is your main hub for slides, recordings, and instructions.\nSakai is used for submitting assignments and checking grades.\nLectures and the textbook are meant to complement each other; sometimes lecture will preview ideas, other times it will reinforce them.\n\nThis will feel clearer once you’ve completed your first homework."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
+    "title": "Muddy Points",
+    "section": "Final note",
+    "text": "Final note\nIf something still feels muddy after this clarification, that’s okay. Many concepts in statistics become clearer only after you see them used multiple times.\nPlease keep using the post-class check-ins. They are genuinely helpful for guiding what we slow down on or revisit."
   }
 ]
