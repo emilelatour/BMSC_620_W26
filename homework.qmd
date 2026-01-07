@@ -21,7 +21,7 @@ source(here("class_dates.R"))
 
 **File naming**: `Lastname_FirstInitial_HW##` (example: `Latour_E_HW01`)
 
-**Submit **both** files on Sakai:
+**Submit both** files on Sakai:
 
 - Lastname_FirstInitial_HW##.qmd
 - Lastname_FirstInitial_HW##.html

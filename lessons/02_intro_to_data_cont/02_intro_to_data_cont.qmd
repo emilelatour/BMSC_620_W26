@@ -1,0 +1,671 @@
+---
+title: "Introduction to Data & Numerical Summaries (continued)"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w1d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v4.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Intro to Data & Numerical Summaries (continued)"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r setup, include=FALSE}
+
+library(here)
+source(here("class_dates.R"))
+
+library(tidyverse)
+library(oibiostat)
+```
+
+## Learning objectives (today)
+
+
+By the end of class, you should be able to:
+
+1.	Identify observations and variables in a dataset
+2.	Distinguish numerical and categorical variables (discrete/continuous; nominal/ordinal)
+3.	Describe the center of numerical data using the mean and median
+4.	Describe the spread of numerical data using the SD and IQR
+5.	Explain why skewness and outliers affect some summaries more than others
+
+## Intro to Data (1.2)
+
+![[Artwork by @allison_horst](https://allisonhorst.com/r-packages-functions)](/img_slides/horst_data_cowboy.png){fig-align="center"}
+
+## A motivating example: frog reproduction data[^1]
+
+[^1]: Dataset adapted from an example in *Introductory Statistics for the Life and Biomedical Sciences*.
+
+To make ideas about data more concrete, we will work with a dataset
+from an evolutionary biology study on frog reproduction.
+
+Female frogs invest energy into reproduction by producing eggs.
+Because energy is limited, there are natural trade-offs:
+- producing **many small eggs** versus
+- producing **fewer larger eggs**
+
+Researchers collected data from frog egg clutches found at breeding ponds
+across multiple locations that differed in altitude.
+
+The goal was to understand how reproductive investment varies across
+environments.
+
+## The frog study data (1/2)
+
+```{r}
+#| echo: false
+#| results: asis
+
+data(frog) 
+
+frog |>
+  dplyr::mutate(row = dplyr::row_number()) |>
+  dplyr::select(row, altitude, egg.size, clutch.size, clutch.volume, body.size) |>
+  dplyr::slice(1, 2, 3, 150) |>
+  knitr::kable(digits = 2)
+```
+
+## The frog study data (2/2)
+
+```{r}
+#| echo: false
+#| results: asis
+
+frog |>
+  dplyr::mutate(row = dplyr::row_number()) |>
+  dplyr::select(row, altitude, egg.size, clutch.size, clutch.volume, body.size) |>
+  dplyr::slice(1, 2, 3, 150) |>
+  knitr::kable(digits = 2)
+```
+
+\
+
+- Each **observation** is a **row**.
+- Each **variable** is a **column**.
+- Each **cell** contains a **single value**.
+- All the **observations** and **variables** together make a **data frame**. The textbook will sometimes call it a data matrix.
+
+\ 
+
+- **Missing values**: `NA` here means "missing". The clutch #150 is missing `body.size`.
+
+## The frog study variables and descriptions
+
+```{r}
+#| echo: false
+frog_vars <- tibble::tibble(
+  variable = c(
+    "altitude",
+    "latitude",
+    "egg.size",
+    "clutch.size",
+    "clutch.volume",
+    "body.size"
+  ),
+  description = c(
+    "Altitude of the study site (meters above sea level)",
+    "Latitude of the study site (degrees)",
+    "Average diameter of an individual egg (mm)",
+    "Estimated number of eggs in a clutch",
+    "Total volume of the egg clutch (mm^3)",
+    "Body length of the egg-laying female frog (cm)"
+  )
+)
+
+frog_vars |>
+  knitr::kable()
+```
+
+
+## Types of variables
+
+![[ISLBS](https://www.openintro.org/book/biostat/)](/img_slides/Fig1.8_variable_types.png){fig-align="center"}
+
+## Numerical variables
+
+**Numerical variables** take on values for which mathematical operations
+(addition, subtraction, averaging) are meaningful.
+
+\
+
+There are two common types:
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+### Discrete
+- Take on **separate, countable values**
+- Usually whole numbers
+- Arise from counting
+
+**Examples:**
+
+- Number of eggs in a clutch
+- Number of clinic visits
+- Number of children in a family
+:::
+
+::: {.column width="60%"}
+### Continuous
+- Can take on **any value within a range**
+- Often measured rather than counted
+- Decimals are possible
+
+**Examples:**
+
+- Egg size (mm)
+- Height or weight
+- Blood pressure
+:::
+
+::::
+
+## Categorical variables
+
+**Categorical variables** describe qualities or group membership rather than
+numerical magnitude. The values are called **levels**.
+
+\
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+### Nominal
+- Categories have **no natural ordering**
+- Differences are labels, not amounts
+
+**Examples:**
+
+- Species
+- Blood type
+- Gender identity
+:::
+
+::: {.column width="60%"}
+### Ordinal
+- Categories have a **meaningful order**
+- The spacing between categories is not necessarily equal
+
+**Examples:**
+
+- Disease severity (mild, moderate, severe)
+- Likert-scale responses (strongly disagree -> strongly agree)
+- Education level
+:::
+
+::::
+
+
+## How are data stored, how do we use them? 
+
+- Often, data are in an Excel sheet, or a plain text file (.csv, .txt)
+- .csv files open in Excel automatically, but actually are plain text
+- Usually, columns are variables/measures and rows are observations (i.e. a person's measurements)
+
+### Data in R 
+
+* We can import data from many file types, including .csv, .txt., and .xlsx
+    * We will cover this on a later date
+* Once imported, R typically stores data as __data frames__, or __tibbles__ if using the `tidyverse` package (more on this later).
+    * For our purposes, these are essentially the same, and I will tend to use the terms interchangeably.
+    * These are examples of what we call __object types__ in R.
+
+## Which type is each frog variable?
+
+```{r}
+#| echo: false
+frog_vars <- frog_vars |>
+  dplyr::mutate(
+    type = dplyr::case_when(
+      variable %in% c("altitude", "latitude", "egg.size", "clutch.volume", "body.size") ~ 
+        "Numerical (continuous)",
+      variable == "clutch.size" ~ 
+        "Numerical (discrete)"
+    )
+  )
+
+frog_vars |>
+  knitr::kable()
+```
+
+
+## How variable types appear in R (preview)
+
+We are **not using R in depth yet**.
+
+This slide is here to help you later connect:
+- the variable types we talk about conceptually, and
+- how R stores those variables internally.
+
+You do **not** need to memorize this now.
+
+R type | Variable type | What it represents
+---|---|---
+integer | Numerical (discrete) | Whole-number counts
+double / numeric | Numerical (continuous) | Measured values with decimals
+factor | Categorical | Categories stored with defined levels
+character | Categorical | Text labels
+logical | Categorical | TRUE / FALSE values
+
+## Summarizing numerical data (1.4)
+
+Once data have been collected, a first step is to **describe what we see**.
+
+\
+
+For **numerical variables**, we often want to understand:
+
+- what values are *typical*, and
+- how much the values *vary* across observations.
+
+\
+
+Numerical summaries help us:
+
+- quickly describe large datasets,
+- compare groups,
+- and communicate patterns clearly.
+
+In this section, we focus on summaries for **numerical variables**.
+We will return to categorical variables later.
+
+## Two questions we often ask
+
+For a numerical variable, two questions come up repeatedly:
+
+1. **Where are the values centered?**
+   - What is a “typical” value?
+
+2. **How spread out are the values?**
+   - Are observations tightly clustered or widely dispersed?
+
+The summaries we introduce next are designed to answer these two questions.
+
+::: {.callout-note icon=false}
+Some examples will show R output as a reference.
+You do not need to understand the R code yet — focus on the ideas.
+:::
+
+## Measures of center: the mean
+
+The **mean** (or average) describes the *center* of a numerical variable.
+
+It is calculated by:
+
+- adding all observed values, and
+- dividing by the number of observations.
+
+$$
+\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \sum_{i=1}^{n} \frac{x_i}{n}
+$$
+
+where:
+
+- $x_1, x_2, \ldots, x_n$ are the observed values, and
+- $n$ is the number of observations.
+
+The mean uses **all** observed values and is sensitive to unusually large or small values. All data values contribute equally, even "outliers."
+
+## Example: mean clutch volume
+
+Using the frog data, we can ask:
+
+**What is a typical clutch volume?**
+
+\
+
+For this dataset:
+
+- each observation is one egg clutch
+- clutch volume is measured in mm$^3$
+
+$$
+\bar{x} = \frac{177.8 + 257.0 + \cdots + 933.3}{431} = \frac{380346.3}{431} \approx 882.5
+$$
+
+
+```{r}
+#| echo: true
+mean(frog$clutch.volume, na.rm = TRUE)
+```
+
+The mean clutch volume is `r scales::number(mean(frog$clutch.volume, na.rm = TRUE), accuracy = 0.1)` mm$^3$.
+
+\
+
+> The mean tells us where the data balance, but it doesn’t tell us how spread out they are.
+
+## Things to note
+
+\
+
+- The mean of a binary variable with 0/1 coding gives the proportion (relative frequency) of ones in the sample.
+- The mean can be heavily influenced by "outliers."
+  - ${2, 7, 9} \rightarrow \bar{x} = \frac{2 + 7 + 9}{3} = 6$
+
+  - ${2, 7, 29} \rightarrow \bar{x} = \frac{2 + 7 + 29}{3} \approx 12.7$
+  
+## Distributions of frog variables
+
+```{r}
+#| echo: false
+#| fig.height: 5
+#| fig.width: 14
+
+frog_long <- frog %>% pivot_longer(clutch.size:egg.size, names_to = "msr")
+
+ggplot(frog_long %>% filter(msr != "body.size"), aes(x= value)) +
+  facet_grid(cols = vars(msr), scales="free") +
+  geom_histogram(color = "white") +
+  labs(title = "Histograms of three variables in frog dataset")
+```
+
+## Measures of center: the median
+
+The **median** describes the *center* of a numerical variable
+based on **order**, not magnitude.
+
+- The median is the **middle value** once observations are ordered
+  from smallest to largest.
+- Half of the observations lie **below** the median
+- Half of the observations lie **above** the median
+
+If there are:
+
+- an **odd** number of observations, the median is the middle value
+- an **even** number of observations, the median is the average of the two middle values
+
+Unlike the mean, the median is **not affected** by extreme values.
+
+## Example: mean vs. median
+
+Consider these two datasets:
+
+- $2, 7, 9$ 
+  - Mean = 6  
+  - Median = 7
+
+- $2, 7, 29$
+  - Mean = 12.7  
+  - Median = 7
+
+Only one value changed, but the **mean** changed a lot.
+The **median** did not.
+
+## Distributions of frog variables
+
+```{r}
+#| echo: false
+#| fig.height: 5
+#| fig.width: 14
+
+frog_long %>% 
+  dplyr::filter(msr != "body.size") |> 
+  group_by(msr) |> 
+  mutate(mean = mean(value, na.rm = TRUE), 
+         median = median(value, na.rm = TRUE)) |> 
+  ggplot(aes(x= value)) +
+  geom_histogram(color = "white") + 
+  geom_vline(aes(xintercept = mean), 
+             color = "#1f77b4", 
+             linetype = "solid") + 
+  geom_vline(aes(xintercept = median), 
+             color = "#ff7f0e", 
+             linetype = "dashed") + 
+  facet_grid(cols = vars(msr), scales="free_x") + 
+  labs(title = "Histograms of three variables in frog dataset",
+  subtitle = "Mean (solid blue), Median (dashed orange)")
+```
+
+- When distributions are skewed, the **mean** is pulled toward the tail.
+- The **median** stays closer to where most observations lie.
+
+
+## A note on the mode
+
+The **mode** is the most frequent value in a dataset.
+
+- For **numerical** data, the mode is often unstable or uninformative
+- It depends on how values are measured or grouped
+- As a result, it is rarely reported for continuous variables
+
+The mode is more useful for **categorical** data, which we will revisit later.
+
+
+## Measures of spread: standard deviation (SD) (1/3)
+
+__standard deviation__ is (approximately) the average distance between an observation and the mean 
+
+- An observation's **deviation** is the distance between its value $x$ and the sample mean $\bar{x}$: deviation = $x - \bar{x}$.
+
+```{r}
+#| echo: false
+#| fig.height: 4
+#| fig.width: 14
+
+sim_diff_sd <- data.frame(
+  id = 1:100,
+  sd1 = rnorm(1000, mean = 0, sd = 10),
+  sd2 = rnorm(1000, mean = 0, sd = 30),
+  sd3 = rnorm(1000, mean = 0, sd = 50)
+)
+
+sim_diff_sd_long <- sim_diff_sd %>%
+  pivot_longer(sd1:sd3, names_to = "sd")
+
+ggplot(sim_diff_sd_long, aes(x= value)) +
+  geom_histogram(color = "white") +
+  facet_wrap(~ sd, 
+             labeller = labeller(
+               sd = c(
+                 sd1 = "SD = 10",
+                 sd2 = "SD = 30",
+                 sd3 = "SD = 50"
+               )
+             )) + 
+  labs(title = "Simulated data with different standard deviations", 
+       subtitle = "1000 observations with mean = 0")
+
+```
+
+
+
+## Measures of spread: SD  (2/3)
+
+-   The **sample variance** $s^2$ is the sum of squared deviations divided by the number of observations minus 1. 
+
+$$
+s^2 =
+\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \cdots + (x_n - \bar{x})^2}{n - 1}
+=
+\sum_{i=1}^{n} \frac{(x_i - \bar{x})^2}{n - 1}
+$$
+where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
+
+ 
+
+-   The **standard deviation** $s$ (or $sd$) is the square root of the variance. 
+
+$$
+s 
+= \sqrt{s^2}
+= \sqrt{\frac{1}{n - 1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
+
+## Measures of spread: SD  (3/3) 
+
+
+Let's calculate the sample standard deviation for the `clutch.volume` from the frog dataset. 
+
+- Doing this by hand can be really time consuming!
+- `R` does this easily for us.
+
+```{r}
+sd(frog$clutch.volume, na.rm = TRUE)
+```
+
+So the standard deviation is `r scales::number(sd(frog$clutch.volume), accuracy = 0.1)` mm$^3$.
+
+\
+
+For the sample of `r scales::number(dim(frog)[1], accuracy = 1.0)` frog clutches, the mean clutch volume was `r scales::number(mean(frog$clutch.volume), accuracy = 0.1)`  mm$^3$ (SD = `r scales::number(sd(frog$clutch.volume), accuracy = 0.1)` mm$^3$).
+
+
+
+
+## Empirical Rule: one way to think about the SD
+
+::: {style="font-size: 80%;"}
+
+::: columns
+::: {.column width="40%"}
+For symmetric bell-shaped data, about
+
+* 68% of the data are within 1 SD of the mean
+* 95% of the data are within 2 SD's of the mean
+* 99.7% of the data are within 3 SD's of the mean
+
+These percentages are based off of percentages of a true normal distribution.
+:::
+::: {.column width="60%"}
+
+![[https://statistics-made-easy.com/empirical-rule/](https://statistics-made-easy.com/empirical-rule/)](/img_slides/empirical-rule.png){fig-align="center" width="660"}
+
+:::
+:::
+:::
+
+
+## Measures of spread: interquartile range (IQR) (1/2)
+
+The $p^{th}$ percentile is the observation such that $p\%$ of the remaining observations fall below this observation.
+
+  - The *first quartile* $Q_1$ is the $25^{th}$ percentile.
+  - The *second quartile* $Q_2$, i.e., the median, is the $50^{th}$ percentile.
+  - The *third quartile* $Q_3$ is the $75^{th}$ percentile.
+    
+The __interquartile range (IQR)__ is the distance between the third and first quartiles.
+$$IQR = Q_3 - Q_1$$
+
+* IQR focuses on the **middle 50% of the data**.
+* Robust against outliers.
+
+
+## Measures of spread: interquartile range (IQR) (2/2)
+
+:::: {.columns}
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+#| fig.height: 6
+#| fig.width: 6
+
+ggplot(frog, aes(x= clutch.volume)) +
+  geom_histogram(color = "white") +
+  labs(title = "Histogram of clutch volume")
+```
+:::
+
+::: {.column width="40%"}
+
+\
+
+\
+
+```{r}
+summary(frog$clutch.volume)
+```
+
+$$IQR = Q_3 - Q_1 = 1096.5 - 609.6 = 486.9$$
+
+\
+
+```{r}
+IQR(frog$clutch.volume)
+```
+:::
+
+::::
+
+
+
+
+
+## Measures of spread: range
+
+The **range** describes spread using only the **smallest** and **largest** values.
+
+$$
+\text{Range} = \max(x) - \min(x)
+$$
+
+- Easy to compute and easy to interpret
+- **Not robust**: it depends only on two observations
+- A single unusually large or small value can dramatically change the range
+
+::: {.callout-note icon=false}
+Because it is so sensitive to extreme values, the range is usually less informative than the SD or IQR.
+:::
+
+## Range and outliers (example)
+
+- $2, 7, 9$
+  - $min = 2, max = 9$
+  - $Range = 9 - 2 = 7$
+
+- $2, 7, 29$
+  - $min = 2, max = 29$
+  - $Range = 29 - 2 = 27$
+
+
+Only one value changed, but the **range** changed a lot.
+
+
+## Robust estimates
+
+Summary statistics are called __robust estimates__ if extreme observations (outliers) have little effect on their values
+
+
+| Estimate           | Robust? |
+|--------------------|---------|
+| Sample mean        | ❌      |
+| Median             | ✅      |
+| Standard deviation | ❌      |
+| IQR                | ✅      |
+| Range              | ❌      |
+
+
+-   For samples with extreme values or skewed distributions, the **median and IQR** often provide a more stable summary of center and spread than the mean, standard deviation, or range.
+
+
