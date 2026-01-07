@@ -71,788 +71,6 @@
     ]
   },
   {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#learning-objectives-today",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#learning-objectives-today",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Learning objectives (today)",
-    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nIdentify observations and variables in a dataset\nDistinguish numerical and categorical variables (discrete/continuous; nominal/ordinal)\nDescribe the center of numerical data using the mean and median\nDescribe the spread of numerical data using the SD and IQR\nExplain why skewness and outliers affect some summaries more than others"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#intro-to-data-1.2",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#intro-to-data-1.2",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Intro to Data (1.2)",
-    "text": "Intro to Data (1.2)\n\nArtwork by @allison_horst"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-motivating-example-frog-reproduction-data1",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-motivating-example-frog-reproduction-data1",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "A motivating example: frog reproduction data1",
-    "text": "A motivating example: frog reproduction data1\nTo make ideas about data more concrete, we will work with a dataset from an evolutionary biology study on frog reproduction.\nFemale frogs invest energy into reproduction by producing eggs. Because energy is limited, there are natural trade-offs: - producing many small eggs versus - producing fewer larger eggs\nResearchers collected data from frog egg clutches found at breeding ponds across multiple locations that differed in altitude.\nThe goal was to understand how reproductive investment varies across environments.\nDataset adapted from an example in Introductory Statistics for the Life and Biomedical Sciences."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-12",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-12",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "The frog study data (1/2)",
-    "text": "The frog study data (1/2)\n\n\n\nrow\naltitude\negg.size\nclutch.size\nclutch.volume\nbody.size\n\n\n\n\n1\n3,462.00\n1.95\n181.97\n177.83\n3.63\n\n\n2\n3,462.00\n1.95\n269.15\n257.04\n3.63\n\n\n3\n3,462.00\n1.95\n158.49\n151.36\n3.72\n\n\n150\n2,597.00\n2.24\n537.03\n776.25\nNA"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-22",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-22",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "The frog study data (2/2)",
-    "text": "The frog study data (2/2)\n\n\n\nrow\naltitude\negg.size\nclutch.size\nclutch.volume\nbody.size\n\n\n\n\n1\n3,462.00\n1.95\n181.97\n177.83\n3.63\n\n\n2\n3,462.00\n1.95\n269.15\n257.04\n3.63\n\n\n3\n3,462.00\n1.95\n158.49\n151.36\n3.72\n\n\n150\n2,597.00\n2.24\n537.03\n776.25\nNA\n\n\n\n\n\n\nEach observation is a row.\nEach variable is a column.\nEach cell contains a single value.\nAll the observations and variables together make a data frame. The textbook will sometimes call it a data matrix.\n\n \n\nMissing values: NA here means “missing”. The clutch #150 is missing body.size."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-variables-and-descriptions",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-variables-and-descriptions",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "The frog study variables and descriptions",
-    "text": "The frog study variables and descriptions\n\n\n\n\n\nvariable\ndescription\n\n\n\n\naltitude\nAltitude of the study site (meters above sea level)\n\n\nlatitude\nLatitude of the study site (degrees)\n\n\negg.size\nAverage diameter of an individual egg (mm)\n\n\nclutch.size\nEstimated number of eggs in a clutch\n\n\nclutch.volume\nTotal volume of the egg clutch (mm^3)\n\n\nbody.size\nBody length of the egg-laying female frog (cm)"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#types-of-variables",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#types-of-variables",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Types of variables",
-    "text": "Types of variables\n\nISLBS"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#numerical-variables",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#numerical-variables",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Numerical variables",
-    "text": "Numerical variables\nNumerical variables take on values for which mathematical operations (addition, subtraction, averaging) are meaningful.\n\n\nThere are two common types:\n\n\nDiscrete\n\nTake on separate, countable values\nUsually whole numbers\nArise from counting\n\nExamples:\n\nNumber of eggs in a clutch\nNumber of clinic visits\nNumber of children in a family\n\n\nContinuous\n\nCan take on any value within a range\nOften measured rather than counted\nDecimals are possible\n\nExamples:\n\nEgg size (mm)\nHeight or weight\nBlood pressure"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#categorical-variables",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#categorical-variables",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Categorical variables",
-    "text": "Categorical variables\nCategorical variables describe qualities or group membership rather than numerical magnitude. The values are called levels.\n\n\n\n\nNominal\n\nCategories have no natural ordering\nDifferences are labels, not amounts\n\nExamples:\n\nSpecies\nBlood type\nGender identity\n\n\nOrdinal\n\nCategories have a meaningful order\nThe spacing between categories is not necessarily equal\n\nExamples:\n\nDisease severity (mild, moderate, severe)\nLikert-scale responses (strongly disagree -&gt; strongly agree)\nEducation level"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-are-data-stored-how-do-we-use-them",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-are-data-stored-how-do-we-use-them",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "How are data stored, how do we use them?",
-    "text": "How are data stored, how do we use them?\n\nOften, data are in an Excel sheet, or a plain text file (.csv, .txt)\n.csv files open in Excel automatically, but actually are plain text\nUsually, columns are variables/measures and rows are observations (i.e. a person’s measurements)\n\nData in R\n\nWe can import data from many file types, including .csv, .txt., and .xlsx\n\nWe will cover this on a later date\n\nOnce imported, R typically stores data as data frames, or tibbles if using the tidyverse package (more on this later).\n\nFor our purposes, these are essentially the same, and I will tend to use the terms interchangeably.\nThese are examples of what we call object types in R."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#which-type-is-each-frog-variable",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#which-type-is-each-frog-variable",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Which type is each frog variable?",
-    "text": "Which type is each frog variable?\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\ntype\n\n\n\n\naltitude\nAltitude of the study site (meters above sea level)\nNumerical (continuous)\n\n\nlatitude\nLatitude of the study site (degrees)\nNumerical (continuous)\n\n\negg.size\nAverage diameter of an individual egg (mm)\nNumerical (continuous)\n\n\nclutch.size\nEstimated number of eggs in a clutch\nNumerical (discrete)\n\n\nclutch.volume\nTotal volume of the egg clutch (mm^3)\nNumerical (continuous)\n\n\nbody.size\nBody length of the egg-laying female frog (cm)\nNumerical (continuous)"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-variable-types-appear-in-r-preview",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-variable-types-appear-in-r-preview",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "How variable types appear in R (preview)",
-    "text": "How variable types appear in R (preview)\nWe are not using R in depth yet.\nThis slide is here to help you later connect: - the variable types we talk about conceptually, and - how R stores those variables internally.\nYou do not need to memorize this now.\n\n\n\n\n\n\n\n\nR type\nVariable type\nWhat it represents\n\n\n\n\ninteger\nNumerical (discrete)\nWhole-number counts\n\n\ndouble / numeric\nNumerical (continuous)\nMeasured values with decimals\n\n\nfactor\nCategorical\nCategories stored with defined levels\n\n\ncharacter\nCategorical\nText labels\n\n\nlogical\nCategorical\nTRUE / FALSE values"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#summarizing-numerical-data-1.4",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#summarizing-numerical-data-1.4",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Summarizing numerical data (1.4)",
-    "text": "Summarizing numerical data (1.4)\nOnce data have been collected, a first step is to describe what we see.\n\n\nFor numerical variables, we often want to understand:\n\nwhat values are typical, and\nhow much the values vary across observations.\n\n\n\nNumerical summaries help us:\n\nquickly describe large datasets,\ncompare groups,\nand communicate patterns clearly.\n\nIn this section, we focus on summaries for numerical variables. We will return to categorical variables later."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#two-questions-we-often-ask",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#two-questions-we-often-ask",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Two questions we often ask",
-    "text": "Two questions we often ask\nFor a numerical variable, two questions come up repeatedly:\n\nWhere are the values centered?\n\nWhat is a “typical” value?\n\nHow spread out are the values?\n\nAre observations tightly clustered or widely dispersed?\n\n\nThe summaries we introduce next are designed to answer these two questions.\n\n\n\nNote\n\n\nSome examples will show R output as a reference. You do not need to understand the R code yet — focus on the ideas."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-mean",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-mean",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of center: the mean",
-    "text": "Measures of center: the mean\nThe mean (or average) describes the center of a numerical variable.\nIt is calculated by:\n\nadding all observed values, and\ndividing by the number of observations.\n\n\\[\n\\bar{x} = \\frac{x_1 + x_2 + \\cdots + x_n}{n} = \\sum_{i=1}^{n} \\frac{x_i}{n}\n\\]\nwhere:\n\n\\(x_1, x_2, \\ldots, x_n\\) are the observed values, and\n\\(n\\) is the number of observations.\n\nThe mean uses all observed values and is sensitive to unusually large or small values. All data values contribute equally, even “outliers.”"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-clutch-volume",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-clutch-volume",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Example: mean clutch volume",
-    "text": "Example: mean clutch volume\nUsing the frog data, we can ask:\nWhat is a typical clutch volume?\n\n\nFor this dataset:\n\neach observation is one egg clutch\nclutch volume is measured in mm\\(^3\\)\n\n\\[\n\\bar{x} = \\frac{177.8 + 257.0 + \\cdots + 933.3}{431} = \\frac{380346.3}{431} \\approx 882.5\n\\]\n\nmean(frog$clutch.volume, na.rm = TRUE)\n\n[1] 882.474\n\n\nThe mean clutch volume is 882.5 mm\\(^3\\).\n\n\n\nThe mean tells us where the data balance, but it doesn’t tell us how spread out they are."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#things-to-note",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#things-to-note",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Things to note",
-    "text": "Things to note\n\n\n\nThe mean of a binary variable with 0/1 coding gives the proportion (relative frequency) of ones in the sample.\nThe mean can be heavily influenced by “outliers.”\n\n\\({2, 7, 9} \\rightarrow \\bar{x} = \\frac{2 + 7 + 9}{3} = 6\\)\n\\({2, 7, 29} \\rightarrow \\bar{x} = \\frac{2 + 7 + 29}{3} \\approx 12.7\\)"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Distributions of frog variables",
-    "text": "Distributions of frog variables"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-median",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-median",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of center: the median",
-    "text": "Measures of center: the median\nThe median describes the center of a numerical variable based on order, not magnitude.\n\nThe median is the middle value once observations are ordered from smallest to largest.\nHalf of the observations lie below the median\nHalf of the observations lie above the median\n\nIf there are:\n\nan odd number of observations, the median is the middle value\nan even number of observations, the median is the average of the two middle values\n\nUnlike the mean, the median is not affected by extreme values."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-vs.-median",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-vs.-median",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Example: mean vs. median",
-    "text": "Example: mean vs. median\nConsider these two datasets:\n\n\\(2, 7, 9\\)\n\nMean = 6\n\nMedian = 7\n\n\\(2, 7, 29\\)\n\nMean = 12.7\n\nMedian = 7\n\n\nOnly one value changed, but the mean changed a lot. The median did not."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables-1",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables-1",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Distributions of frog variables",
-    "text": "Distributions of frog variables\n\n\nWhen distributions are skewed, the mean is pulled toward the tail.\nThe median stays closer to where most observations lie."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-note-on-the-mode",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-note-on-the-mode",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "A note on the mode",
-    "text": "A note on the mode\nThe mode is the most frequent value in a dataset.\n\nFor numerical data, the mode is often unstable or uninformative\nIt depends on how values are measured or grouped\nAs a result, it is rarely reported for continuous variables\n\nThe mode is more useful for categorical data, which we will revisit later."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-standard-deviation-sd-13",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-standard-deviation-sd-13",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: standard deviation (SD) (1/3)",
-    "text": "Measures of spread: standard deviation (SD) (1/3)\nstandard deviation is (approximately) the average distance between an observation and the mean\n\nAn observation’s deviation is the distance between its value \\(x\\) and the sample mean \\(\\bar{x}\\): deviation = \\(x - \\bar{x}\\)."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-23",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-23",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: SD (2/3)",
-    "text": "Measures of spread: SD (2/3)\n\nThe sample variance \\(s^2\\) is the sum of squared deviations divided by the number of observations minus 1.\n\n\\[\ns^2 =\n\\frac{(x_1 - \\bar{x})^2 + (x_2 - \\bar{x})^2 + \\cdots + (x_n - \\bar{x})^2}{n - 1}\n=\n\\sum_{i=1}^{n} \\frac{(x_i - \\bar{x})^2}{n - 1}\n\\] where \\(x_1, x_2, \\dots, x_n\\) represent the \\(n\\) observed values.\n \n\nThe standard deviation \\(s\\) (or \\(sd\\)) is the square root of the variance.\n\n\\[\ns\n= \\sqrt{s^2}\n= \\sqrt{\\frac{1}{n - 1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\n\\]"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-33",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-33",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: SD (3/3)",
-    "text": "Measures of spread: SD (3/3)\nLet’s calculate the sample standard deviation for the clutch.volume from the frog dataset.\n\nDoing this by hand can be really time consuming!\nR does this easily for us.\n\n\nsd(frog$clutch.volume, na.rm = TRUE)\n\n[1] 379.0527\n\n\nSo the standard deviation is 379.1 mm\\(^3\\).\n\n\nFor the sample of 431 frog clutches, the mean clutch volume was 882.5 mm\\(^3\\) (SD = 379.1 mm\\(^3\\))."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#empirical-rule-one-way-to-think-about-the-sd",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#empirical-rule-one-way-to-think-about-the-sd",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Empirical Rule: one way to think about the SD",
-    "text": "Empirical Rule: one way to think about the SD\n\n\n\nFor symmetric bell-shaped data, about\n\n68% of the data are within 1 SD of the mean\n95% of the data are within 2 SD’s of the mean\n99.7% of the data are within 3 SD’s of the mean\n\nThese percentages are based off of percentages of a true normal distribution.\n\n\n\n\nhttps://statistics-made-easy.com/empirical-rule/"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-12",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-12",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: interquartile range (IQR) (1/2)",
-    "text": "Measures of spread: interquartile range (IQR) (1/2)\nThe \\(p^{th}\\) percentile is the observation such that \\(p\\%\\) of the remaining observations fall below this observation.\n\nThe first quartile \\(Q_1\\) is the \\(25^{th}\\) percentile.\nThe second quartile \\(Q_2\\), i.e., the median, is the \\(50^{th}\\) percentile.\nThe third quartile \\(Q_3\\) is the \\(75^{th}\\) percentile.\n\nThe interquartile range (IQR) is the distance between the third and first quartiles. \\[IQR = Q_3 - Q_1\\]\n\nIQR focuses on the middle 50% of the data.\nRobust against outliers."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-22",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-22",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: interquartile range (IQR) (2/2)",
-    "text": "Measures of spread: interquartile range (IQR) (2/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsummary(frog$clutch.volume)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  151.4   609.6   831.8   882.5  1096.5  2630.3 \n\n\n\\[IQR = Q_3 - Q_1 = 1096.5 - 609.6 = 486.9\\]\n\n\n\nIQR(frog$clutch.volume)\n\n[1] 486.9009"
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-range",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-range",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Measures of spread: range",
-    "text": "Measures of spread: range\nThe range describes spread using only the smallest and largest values.\n\\[\n\\text{Range} = \\max(x) - \\min(x)\n\\]\n\nEasy to compute and easy to interpret\nNot robust: it depends only on two observations\nA single unusually large or small value can dramatically change the range\n\n\n\n\nNote\n\n\nBecause it is so sensitive to extreme values, the range is usually less informative than the SD or IQR."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#range-and-outliers-example",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#range-and-outliers-example",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Range and outliers (example)",
-    "text": "Range and outliers (example)\n\n\\(2, 7, 9\\)\n\n\\(min = 2, max = 9\\)\n\\(Range = 9 - 2 = 7\\)\n\n\\(2, 7, 29\\)\n\n\\(min = 2, max = 29\\)\n\\(Range = 29 - 2 = 27\\)\n\n\nOnly one value changed, but the range changed a lot."
-  },
-  {
-    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#robust-estimates",
-    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#robust-estimates",
-    "title": "Introduction to Data & Numerical Summaries (continued)",
-    "section": "Robust estimates",
-    "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations (outliers) have little effect on their values\n\n\n\nEstimate\nRobust?\n\n\n\n\nSample mean\n❌\n\n\nMedian\n✅\n\n\nStandard deviation\n❌\n\n\nIQR\n✅\n\n\nRange\n❌\n\n\n\n\nFor samples with extreme values or skewed distributions, the median and IQR often provide a more stable summary of center and spread than the mean, standard deviation, or range.\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries (continued)"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
-    "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
-    "title": "Welcome to BMSC 620",
-    "section": "Welcome to BMSC 620",
-    "text": "Welcome to BMSC 620\n\nEmile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#some-important-tasks",
-    "href": "lessons/00_welcome/00_welcome.html#some-important-tasks",
-    "title": "Welcome to BMSC 620",
-    "section": "Some important tasks",
-    "text": "Some important tasks\n\n\nBookmark the course website\nhttps://emilelatour.github.io/BMSC_620_W26/\n\n \n\nComplete Homework 0 by Sunday at 11:00 pm\n\nGet comfortable with RStudio and Quarto\nMake sure you can render a document successfully\nThis assignment is graded for completion only\n\n\n \n\nMake sure you have access to the textbook\n\nDetails are posted on the course website"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Homepage",
-    "text": "Let’s visit the website: Homepage"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
-    "href": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
-    "title": "Welcome to BMSC 620",
-    "section": "Course information on the website",
-    "text": "Course information on the website\n\nSyllabus\n\nWhat this course is about\nHow grading and homework work\nExams, attendance, and course policies\n\nInstructors\n\nContact information\nOffice hours\nHow to get help\n\nResources\n\nR and RStudio installation instructions\nCourse materials and datasets\nAdditional support resources"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Syllabus",
-    "text": "Let’s visit the website: Syllabus"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Instructors",
-    "text": "Let’s visit the website: Instructors"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Resources",
-    "text": "Let’s visit the website: Resources"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
-    "href": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
-    "title": "Welcome to BMSC 620",
-    "section": "How this course runs on the website",
-    "text": "How this course runs on the website\n\nSchedule\n\nBig-picture view of topics and due dates\nUpdated if anything changes\n\nWeekly materials\n\nWhat to read or review\nSlides, code, and links for each class\n\nHomework\n\nAssignment templates\nDue dates and grading expectations\n\nExams\n\nMidterm and final format\nTiming, coverage, and policies"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Schedule",
-    "text": "Let’s visit the website: Schedule"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Weekly materials",
-    "text": "Let’s visit the website: Weekly materials"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Homework",
-    "text": "Let’s visit the website: Homework"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
-    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
-    "title": "Welcome to BMSC 620",
-    "section": "Let’s visit the website: Exams",
-    "text": "Let’s visit the website: Exams"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
-    "href": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
-    "title": "Welcome to BMSC 620",
-    "section": "Structure for this course",
-    "text": "Structure for this course\n\nLearning the core tools to understand and interpret statistics\n\n \n\nSome pieces may feel abstract or disconnected at first — that’s normal\n\n \n\nThe goal is to build a toolbox that lets you analyze data and explain what the results mean"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
-    "href": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
-    "title": "Welcome to BMSC 620",
-    "section": "Let me know if you have questions",
-    "text": "Let me know if you have questions\nOr if you notice:\n\nsomething unclear\nsomething confusing\nor something that contradicts the course site"
-  },
-  {
-    "objectID": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
-    "href": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
-    "title": "Welcome to BMSC 620",
-    "section": "That’s it for logistics",
-    "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
-  },
-  {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
-    "section": "",
-    "text": "See Sakai",
-    "crumbs": [
-      "Home",
-      "Exams"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html",
-    "href": "weeks/week_01.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#overview",
-    "href": "weeks/week_01.html#overview",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#readings-before-class",
-    "href": "weeks/week_01.html#readings-before-class",
-    "title": "Week 1",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#materials",
-    "href": "weeks/week_01.html#materials",
-    "title": "Week 1",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#day-1-course-background-survey",
-    "href": "weeks/week_01.html#day-1-course-background-survey",
-    "title": "Week 1",
-    "section": "Day 1 course background survey",
-    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
-    "href": "weeks/week_01.html#post-class-check-in-attendance",
-    "title": "Week 1",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#homework",
-    "href": "weeks/week_01.html#homework",
-    "title": "Week 1",
-    "section": "Homework",
-    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#looking-ahead",
-    "href": "weeks/week_01.html#looking-ahead",
-    "title": "Week 1",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html",
-    "href": "homework/HW00/HW00.html",
-    "title": "BMSC 620 — Homework 0",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#homework-0",
-    "href": "homework/HW00/HW00.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-3-final-check",
-    "href": "homework/HW00/HW00.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Learning objectives (today)",
-    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nOpen and navigate RStudio\nCreate, edit, save, and render a Quarto (.qmd) document\nUse basic Markdown to format text in a Quarto document\nCreate and run simple R code chunks and render the output to HTML"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-r",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-r",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "What is R?",
-    "text": "What is R?\n\n\n\nA programming language\nFocus on statistical modeling and data analysis\n\nimport data, manipulate data, run statistics, make plots\n\nUseful for data science\nGreat visualizations\nAlso useful for most anything else you’d want to tell a computer to do\nInterfaces with other languages i.e. python, C++, bash\n\n\n\n\nFor the history and details: Wikipedia\n\nan interpreted language (run it through a command line)\nprocedural programming with functions\nWhy “R”?? Scheme inspired S (invented at Bell Labs in 1976) which inspired R since 1st letters of original authors (free and open source! in 2000)"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-rstudio",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-rstudio",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "What is RStudio?",
-    "text": "What is RStudio?\n\n\nR is a programming language\n\nRStudio is an integrated development environment (IDE)\n= an interface to use R (with perks!)\n\n\nModern Dive"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#open-rstudio-on-your-computer-not-r",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#open-rstudio-on-your-computer-not-r",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Open RStudio on your computer (not R!)",
-    "text": "Open RStudio on your computer (not R!)\n\nModern Dive"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-anatomy",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-anatomy",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "RStudio anatomy",
-    "text": "RStudio anatomy\n\nEmma RandRead more about RStudio’s layout in Section 3.4 of “Getting Used to R, RStudio, and R Markdown” (Ismay and Kennedy 2016)"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#example-creating-an-html-file",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#example-creating-an-html-file",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Example: creating an html file",
-    "text": "Example: creating an html file\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#quarto-.qmd-file-code-text",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#quarto-.qmd-file-code-text",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Quarto = .qmd file = Code + text",
-    "text": "Quarto = .qmd file = Code + text\nA .qmd file is where you write your work.\nRendering turns it into something you can read and submit.\nIf you edit the .qmd, re-render to update the .html.\n\nArtwork from “Hello, Quarto” keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#before-we-get-further-in-.qmd-files",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#before-we-get-further-in-.qmd-files",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Before we get further in .qmd files",
-    "text": "Before we get further in .qmd files\n\nIf you would like to code along, make sure to have RStudio open.\n\n\n\nSteps for making a Quarto file\n\nCreate a Quarto file (.qmd)\nEdit a Quarto file (.qmd)\nSave the Quarto file (.qmd)\nCreate html file"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-quarto-file-.qmd",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-quarto-file-.qmd",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "1. Create a Quarto file (.qmd)",
-    "text": "1. Create a Quarto file (.qmd)\n\n\nTwo options:\n\nclick on File \\(\\rightarrow\\) New File \\(\\rightarrow\\) Quarto Document…\\(\\rightarrow\\) OK,\nor in upper left corner of RStudio click on  \\(\\rightarrow\\) \n\nPop-up window selections:\n\nEnter a title and your name\nSelect HTML output format (default)\nEngine: select Knitr\nEditor: Select Use visual markdown editor\nClick Create"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#the-top-block-yaml---for-later",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#the-top-block-yaml---for-later",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "The top block (YAML) - for later",
-    "text": "The top block (YAML) - for later\nThat block controls document settings.\nWe will come back to it later. For now: do not change it."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#edit-a-quarto-file-.qmd",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#edit-a-quarto-file-.qmd",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "2. Edit a Quarto file (.qmd)",
-    "text": "2. Edit a Quarto file (.qmd)\n\n\n\nAfter clicking on Create, you should then see the following in your editor window:\n\n\n\n\nYou can try editing the text or changing the code!\n\nMake sure you are only editing at the “Quarto” header and below"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#save-the-quarto-file-.qmd",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#save-the-quarto-file-.qmd",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "3. Save the Quarto file (.qmd)",
-    "text": "3. Save the Quarto file (.qmd)\n\nSave the file by\n\nselecting File -&gt; Save,\nor clicking on  (towards the left above the scripting window),\nor keyboard shortcut\n\nPC: Ctrl + s\nMac: Command + s\n\n\nYou will need to specify\n\na filename to save the file as\n\nALWAYS use .qmd as the filename extension for Quarto files\n\nthe folder to save the file in \nFor now, save it to your desktop, or wherever you know you will find it again."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-html-file",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-html-file",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "4. Create html file",
-    "text": "4. Create html file\nWe create the html file by rendering the .qmd file.\nTwo options:\n\nclick on the Render icon  at the top of the editor window,\nor use keyboard shortcuts\n\nMac: Command+Shift+K\nPC: Ctrl+Shift+K\n\n\n\nA new window will open with the html output.\nYou will now see both .qmd and .html files in the folder where you saved the .qmd file.\n\n\n\n\n\n\n\nNote\n\n\n\nThe template .qmd file that RStudio creates will render to an html file by default.\nThe output format can be changed to create a Word doc, pdf, slides, etc."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#tip-changing-the-render-view",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#tip-changing-the-render-view",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Tip: changing the render view",
-    "text": "Tip: changing the render view\n\nYou can change where your .html file pops up\nI have it set to open in the “Viewer Pane” in the bottom right"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#qmd-vs.-its-.html-output",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#qmd-vs.-its-.html-output",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": ".qmd vs. its .html output",
-    "text": ".qmd vs. its .html output\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#file-naming-for-assignments",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#file-naming-for-assignments",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "File naming for assignments",
-    "text": "File naming for assignments\nUse a consistent naming convention so we can grade efficiently:\nLastname_FirstInitial_HW00.qmd\nSubmit both: - .qmd - .html"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Formatting text",
-    "text": "Formatting text\n\nbold, italics, superscripts & subscripts, strikethrough, verbatim, etc.\n\n\nText is formatted through a markup language called Markdown (Wikipedia)\n\nOther markup languages include html (webapges) and LaTeX (math)\nAll text formatting is specified via code\n“Markdown is a plain text format that is designed to be easy to write, and, even more importantly, easy to read” 1\n\nNewer versions of RStudio include a Visual editor as well that makes formatting text similar to using a word processor.\n\n\n\n\n\n\nFrom Quarto’s Markdown Basics webpage, https://quarto.org/docs/authoring/markdown-basics.html"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-visual-editor",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-visual-editor",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Formatting text: Visual editor",
-    "text": "Formatting text: Visual editor\n\nUsing the Visual editor is similar to using a wordprocessor, such as Word\nKeyboard shortcuts usually work as well (shown for Mac below)"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#practice",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#practice",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Practice",
-    "text": "Practice\n\nPart 1\n\nUsing the visual editor, practice formatting text in your qmd file, such as making text bold, italicized, and in code format.\nAdd 1st, 2nd, and 3rd level headers\nAdd a list with a\n\nsub-list (bullet and/or numbered)\n\nAdd a table\nAdd whatever else you are interested in!\n\nPart 2\n\nSwitch back to the Source editor and examine the markdown code that was used for the formatting.\n\n\nQuestions:\n\nWhat went smoothly?\nWhat hurdles did you encounter?"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#how-this-connects-to-homework-0",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#how-this-connects-to-homework-0",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "How this connects to Homework 0",
-    "text": "How this connects to Homework 0\nEverything you practiced today is exactly what you need for HW 0:\n\nEditing text with Markdown\nCreating and running R code chunks\nSaving a .qmd file\nRendering to an .html file\n\nFor Homework 0, you will:\n\nStart from a provided .qmd template\nMake small edits\nRender successfully\nSubmit both the .qmd and .html"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-markdown",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-markdown",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Formatting text: Markdown",
-    "text": "Formatting text: Markdown\n\n\n\n\n\n\n\nMarkdown:\nOutput:\n\n\n\n\n*This text is in italics*, but _so is this text_.\nThis text is in italics, but so is this text.\n\n\n**Bold** also has __2 options__\nBold also has 2 options\n\n\n~~Should this be deleted?~~\nShould this be deleted?\n\n\nNeed^super^ or~sub~ scripts?\nNeedsuper orsub scripts?\n\n\n`Code is often formatted as verbatim`\nCode is often formatted as verbatim\n\n\n&gt;This is a block quote.\n\nThis is a block quote."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#headers",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#headers",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Headers",
-    "text": "Headers\n\nOrganize your documents using headers to create sections and subsections\nUse # at the beginning of the line to create headers\n\n\n\nText in editor:\n\n\n\n\n\n\nOutput:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nMake sure there is no space before the #, and there IS a space after the # in order for the header to work properly."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-tip",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-tip",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "RStudio tip",
-    "text": "RStudio tip\nYou can easily navigate through your .qmd file if you use headers to outline your text"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#code-chunks",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#code-chunks",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Code chunks",
-    "text": "Code chunks\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-code-chunk",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-code-chunk",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Create a code chunk",
-    "text": "Create a code chunk\n3 options to create a code chunk\n\nClick on  at top right of the editor window, or\nKeyboard shortcut\n\n\n\n\nMac\nCommand + Option + I\n\n\nPC\nCtrl + Alt + I\n\n\n\n\nVisual editor: Select Insert -&gt; Executable Cell -&gt; R"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-does-a-code-chunk-look-like",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-does-a-code-chunk-look-like",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "What does a code chunk look like?",
-    "text": "What does a code chunk look like?\nAn empty code chunk looks like this:\nVisual editor\n\nSource editor\n\n\n\n\n\n\n\nImportant\n\n\nNote that a code chunks start with ```{r} and ends with ```. Make sure there is no space before ```."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code (1/n)",
-    "text": "Enter and run code (1/n)\n\nType R code inside code chunks\nSelect code you want to run, by\n\nplacing the cursor in the line of code you want to run,\nor highlighting the code you want to run\n\n\n\n\n\nRun selected code by\n\nclicking on the  button in the top right corner of the scripting window and choosing Run Selected Line(s),\nor typing one of the following key combinations:\n\n\n\n\n\nMac\nctrl + return\n\n\nPC\ncommand + return\n\n\n\n\nWhere does the output appear?"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Enter and run code (2/n)",
-    "text": "Enter and run code (2/n)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#useful-keyboard-shortcuts",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#useful-keyboard-shortcuts",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "Useful keyboard shortcuts",
-    "text": "Useful keyboard shortcuts\nFull list of keyboard shortcuts\n \n\n\n\n\n\n\n\n\naction\nmac\nwindows/linux\n\n\n\n\nRun code in qmd (or script)\ncmd + enter\nctrl + enter\n\n\n&lt;-\noption + -\nalt + -\n\n\ninterrupt currently running command\nesc\nesc\n\n\nin console, retrieve previously run code\nup/down\nup/down\n\n\nkeyboard shortcut help\noption + shift + k\nalt + shift + k\n\n\n\n\n\nPractice\nTry typing code below in your qmd (with shortcut) and evaluating it:\n\ny &lt;- 5\ny"
-  },
-  {
-    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#yaml-metadata",
-    "href": "lessons/03_intro_to_r/03_intro_to_r.html#yaml-metadata",
-    "title": "Introduction to R, RStudio, and Quarto",
-    "section": "YAML metadata",
-    "text": "YAML metadata\n\n\nThe block at the top controls document settings. We’ll come back to it later. For now, don’t touch it.\n\n\n\nBMSC 620 | Intro to R, RStudio, and Quarto"
-  },
-  {
     "objectID": "lessons/01_intro_to_data/01_intro_to_data.html#learning-objectives-today",
     "href": "lessons/01_intro_to_data/01_intro_to_data.html#learning-objectives-today",
     "title": "Introduction to Data & Numerical Summaries",
@@ -1168,6 +386,844 @@
     "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations (outliers) have little effect on their values\n\n\n\nEstimate\nRobust?\n\n\n\n\nSample mean\n❌\n\n\nMedian\n✅\n\n\nStandard deviation\n❌\n\n\nIQR\n✅\n\n\nRange\n❌\n\n\n\n\nFor samples with extreme values or skewed distributions, the median and IQR often provide a more stable summary of center and spread than the mean, standard deviation, or range.\nThe range depends only on the smallest and largest observations, so a single outlier can dramatically change its value.\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries"
   },
   {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Learning objectives (today)",
+    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nOpen and navigate RStudio\nCreate, edit, save, and render a Quarto (.qmd) document\nUse basic Markdown to format text in a Quarto document\nCreate and run simple R code chunks and render the output to HTML"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-r",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-r",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "What is R?",
+    "text": "What is R?\n\n\n\nA programming language\nFocus on statistical modeling and data analysis\n\nimport data, manipulate data, run statistics, make plots\n\nUseful for data science\nGreat visualizations\nAlso useful for most anything else you’d want to tell a computer to do\nInterfaces with other languages i.e. python, C++, bash\n\n\n\n\nFor the history and details: Wikipedia\n\nan interpreted language (run it through a command line)\nprocedural programming with functions\nWhy “R”?? Scheme inspired S (invented at Bell Labs in 1976) which inspired R since 1st letters of original authors (free and open source! in 2000)"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-rstudio",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-is-rstudio",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "What is RStudio?",
+    "text": "What is RStudio?\n\n\nR is a programming language\n\nRStudio is an integrated development environment (IDE)\n= an interface to use R (with perks!)\n\n\nModern Dive"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#open-rstudio-on-your-computer-not-r",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#open-rstudio-on-your-computer-not-r",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Open RStudio on your computer (not R!)",
+    "text": "Open RStudio on your computer (not R!)\n\nModern Dive"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-anatomy",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-anatomy",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "RStudio anatomy",
+    "text": "RStudio anatomy\n\nEmma RandRead more about RStudio’s layout in Section 3.4 of “Getting Used to R, RStudio, and R Markdown” (Ismay and Kennedy 2016)"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#example-creating-an-html-file",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#example-creating-an-html-file",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Example: creating an html file",
+    "text": "Example: creating an html file\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#quarto-.qmd-file-code-text",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#quarto-.qmd-file-code-text",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Quarto = .qmd file = Code + text",
+    "text": "Quarto = .qmd file = Code + text\nA .qmd file is where you write your work.\nRendering turns it into something you can read and submit.\nIf you edit the .qmd, re-render to update the .html.\n\nArtwork from “Hello, Quarto” keynote by Julia Lowndes and Mine Çetinkaya-Rundel, presented at RStudio Conference 2022. Illustrated by Allison Horst."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#before-we-get-further-in-.qmd-files",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#before-we-get-further-in-.qmd-files",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Before we get further in .qmd files",
+    "text": "Before we get further in .qmd files\n\nIf you would like to code along, make sure to have RStudio open.\n\n\n\nSteps for making a Quarto file\n\nCreate a Quarto file (.qmd)\nEdit a Quarto file (.qmd)\nSave the Quarto file (.qmd)\nCreate html file"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-quarto-file-.qmd",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-quarto-file-.qmd",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "1. Create a Quarto file (.qmd)",
+    "text": "1. Create a Quarto file (.qmd)\n\n\nTwo options:\n\nclick on File \\(\\rightarrow\\) New File \\(\\rightarrow\\) Quarto Document…\\(\\rightarrow\\) OK,\nor in upper left corner of RStudio click on  \\(\\rightarrow\\) \n\nPop-up window selections:\n\nEnter a title and your name\nSelect HTML output format (default)\nEngine: select Knitr\nEditor: Select Use visual markdown editor\nClick Create"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#the-top-block-yaml---for-later",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#the-top-block-yaml---for-later",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "The top block (YAML) - for later",
+    "text": "The top block (YAML) - for later\nThat block controls document settings.\nWe will come back to it later. For now: do not change it."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#edit-a-quarto-file-.qmd",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#edit-a-quarto-file-.qmd",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "2. Edit a Quarto file (.qmd)",
+    "text": "2. Edit a Quarto file (.qmd)\n\n\n\nAfter clicking on Create, you should then see the following in your editor window:\n\n\n\n\nYou can try editing the text or changing the code!\n\nMake sure you are only editing at the “Quarto” header and below"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#save-the-quarto-file-.qmd",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#save-the-quarto-file-.qmd",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "3. Save the Quarto file (.qmd)",
+    "text": "3. Save the Quarto file (.qmd)\n\nSave the file by\n\nselecting File -&gt; Save,\nor clicking on  (towards the left above the scripting window),\nor keyboard shortcut\n\nPC: Ctrl + s\nMac: Command + s\n\n\nYou will need to specify\n\na filename to save the file as\n\nALWAYS use .qmd as the filename extension for Quarto files\n\nthe folder to save the file in \nFor now, save it to your desktop, or wherever you know you will find it again."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-html-file",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-html-file",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "4. Create html file",
+    "text": "4. Create html file\nWe create the html file by rendering the .qmd file.\nTwo options:\n\nclick on the Render icon  at the top of the editor window,\nor use keyboard shortcuts\n\nMac: Command+Shift+K\nPC: Ctrl+Shift+K\n\n\n\nA new window will open with the html output.\nYou will now see both .qmd and .html files in the folder where you saved the .qmd file.\n\n\n\n\n\n\n\nNote\n\n\n\nThe template .qmd file that RStudio creates will render to an html file by default.\nThe output format can be changed to create a Word doc, pdf, slides, etc."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#tip-changing-the-render-view",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#tip-changing-the-render-view",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Tip: changing the render view",
+    "text": "Tip: changing the render view\n\nYou can change where your .html file pops up\nI have it set to open in the “Viewer Pane” in the bottom right"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#qmd-vs.-its-.html-output",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#qmd-vs.-its-.html-output",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": ".qmd vs. its .html output",
+    "text": ".qmd vs. its .html output\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#file-naming-for-assignments",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#file-naming-for-assignments",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "File naming for assignments",
+    "text": "File naming for assignments\nUse a consistent naming convention so we can grade efficiently:\nLastname_FirstInitial_HW00.qmd\nSubmit both: - .qmd - .html"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Formatting text",
+    "text": "Formatting text\n\nbold, italics, superscripts & subscripts, strikethrough, verbatim, etc.\n\n\nText is formatted through a markup language called Markdown (Wikipedia)\n\nOther markup languages include html (webapges) and LaTeX (math)\nAll text formatting is specified via code\n“Markdown is a plain text format that is designed to be easy to write, and, even more importantly, easy to read” 1\n\nNewer versions of RStudio include a Visual editor as well that makes formatting text similar to using a word processor.\n\n\n\n\n\n\nFrom Quarto’s Markdown Basics webpage, https://quarto.org/docs/authoring/markdown-basics.html"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-visual-editor",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-visual-editor",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Formatting text: Visual editor",
+    "text": "Formatting text: Visual editor\n\nUsing the Visual editor is similar to using a wordprocessor, such as Word\nKeyboard shortcuts usually work as well (shown for Mac below)"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#practice",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#practice",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Practice",
+    "text": "Practice\n\nPart 1\n\nUsing the visual editor, practice formatting text in your qmd file, such as making text bold, italicized, and in code format.\nAdd 1st, 2nd, and 3rd level headers\nAdd a list with a\n\nsub-list (bullet and/or numbered)\n\nAdd a table\nAdd whatever else you are interested in!\n\nPart 2\n\nSwitch back to the Source editor and examine the markdown code that was used for the formatting.\n\n\nQuestions:\n\nWhat went smoothly?\nWhat hurdles did you encounter?"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#how-this-connects-to-homework-0",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#how-this-connects-to-homework-0",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "How this connects to Homework 0",
+    "text": "How this connects to Homework 0\nEverything you practiced today is exactly what you need for HW 0:\n\nEditing text with Markdown\nCreating and running R code chunks\nSaving a .qmd file\nRendering to an .html file\n\nFor Homework 0, you will:\n\nStart from a provided .qmd template\nMake small edits\nRender successfully\nSubmit both the .qmd and .html"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-markdown",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text-markdown",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Formatting text: Markdown",
+    "text": "Formatting text: Markdown\n\n\n\n\n\n\n\nMarkdown:\nOutput:\n\n\n\n\n*This text is in italics*, but _so is this text_.\nThis text is in italics, but so is this text.\n\n\n**Bold** also has __2 options__\nBold also has 2 options\n\n\n~~Should this be deleted?~~\nShould this be deleted?\n\n\nNeed^super^ or~sub~ scripts?\nNeedsuper orsub scripts?\n\n\n`Code is often formatted as verbatim`\nCode is often formatted as verbatim\n\n\n&gt;This is a block quote.\n\nThis is a block quote."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#headers",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#headers",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Headers",
+    "text": "Headers\n\nOrganize your documents using headers to create sections and subsections\nUse # at the beginning of the line to create headers\n\n\n\nText in editor:\n\n\n\n\n\n\nOutput:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nMake sure there is no space before the #, and there IS a space after the # in order for the header to work properly."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-tip",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#rstudio-tip",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "RStudio tip",
+    "text": "RStudio tip\nYou can easily navigate through your .qmd file if you use headers to outline your text"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#code-chunks",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#code-chunks",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Code chunks",
+    "text": "Code chunks\n\n\n.qmd file\n\n\n\n\n\n\n\n\n.html output"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-code-chunk",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-code-chunk",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Create a code chunk",
+    "text": "Create a code chunk\n3 options to create a code chunk\n\nClick on  at top right of the editor window, or\nKeyboard shortcut\n\n\n\n\nMac\nCommand + Option + I\n\n\nPC\nCtrl + Alt + I\n\n\n\n\nVisual editor: Select Insert -&gt; Executable Cell -&gt; R"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-does-a-code-chunk-look-like",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#what-does-a-code-chunk-look-like",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "What does a code chunk look like?",
+    "text": "What does a code chunk look like?\nAn empty code chunk looks like this:\nVisual editor\n\nSource editor\n\n\n\n\n\n\n\nImportant\n\n\nNote that a code chunks start with ```{r} and ends with ```. Make sure there is no space before ```."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-1n",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Enter and run code (1/n)",
+    "text": "Enter and run code (1/n)\n\nType R code inside code chunks\nSelect code you want to run, by\n\nplacing the cursor in the line of code you want to run,\nor highlighting the code you want to run\n\n\n\n\n\nRun selected code by\n\nclicking on the  button in the top right corner of the scripting window and choosing Run Selected Line(s),\nor typing one of the following key combinations:\n\n\n\n\n\nMac\nctrl + return\n\n\nPC\ncommand + return\n\n\n\n\nWhere does the output appear?"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-2n",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Enter and run code (2/n)",
+    "text": "Enter and run code (2/n)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#useful-keyboard-shortcuts",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#useful-keyboard-shortcuts",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Useful keyboard shortcuts",
+    "text": "Useful keyboard shortcuts\nFull list of keyboard shortcuts\n \n\n\n\n\n\n\n\n\naction\nmac\nwindows/linux\n\n\n\n\nRun code in qmd (or script)\ncmd + enter\nctrl + enter\n\n\n&lt;-\noption + -\nalt + -\n\n\ninterrupt currently running command\nesc\nesc\n\n\nin console, retrieve previously run code\nup/down\nup/down\n\n\nkeyboard shortcut help\noption + shift + k\nalt + shift + k\n\n\n\n\n\nPractice\nTry typing code below in your qmd (with shortcut) and evaluating it:\n\ny &lt;- 5\ny"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#yaml-metadata",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#yaml-metadata",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "YAML metadata",
+    "text": "YAML metadata\n\n\nThe block at the top controls document settings. We’ll come back to it later. For now, don’t touch it.\n\n\n\nBMSC 620 | Intro to R, RStudio, and Quarto"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
+    "title": "BMSC 620 — Homework 0",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html",
+    "href": "weeks/week_01.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#overview",
+    "href": "weeks/week_01.html#overview",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#readings-before-class",
+    "href": "weeks/week_01.html#readings-before-class",
+    "title": "Week 1",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#materials",
+    "href": "weeks/week_01.html#materials",
+    "title": "Week 1",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\n\nI reviewed your post-class feedback and wrote short clarifications here: - Muddy Points - Lesson 1\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#day-1-course-background-survey",
+    "href": "weeks/week_01.html#day-1-course-background-survey",
+    "title": "Week 1",
+    "section": "Day 1 course background survey",
+    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
+    "href": "weeks/week_01.html#post-class-check-in-attendance",
+    "title": "Week 1",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#homework",
+    "href": "weeks/week_01.html#homework",
+    "title": "Week 1",
+    "section": "Homework",
+    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#looking-ahead",
+    "href": "weeks/week_01.html#looking-ahead",
+    "title": "Week 1",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Thursday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
+    "section": "",
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
+    "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
+    "title": "Welcome to BMSC 620",
+    "section": "Welcome to BMSC 620",
+    "text": "Welcome to BMSC 620\n\nEmile Latour, MS\nBiostatistician, OHSU Knight Cancer Institute\n \nThis course builds on prior versions developed by\nMeike Niederhausen and Nicky Wakim, with updates and revisions for Winter 2026."
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#some-important-tasks",
+    "href": "lessons/00_welcome/00_welcome.html#some-important-tasks",
+    "title": "Welcome to BMSC 620",
+    "section": "Some important tasks",
+    "text": "Some important tasks\n\n\nBookmark the course website\nhttps://emilelatour.github.io/BMSC_620_W26/\n\n \n\nComplete Homework 0 by Sunday at 11:00 pm\n\nGet comfortable with RStudio and Quarto\nMake sure you can render a document successfully\nThis assignment is graded for completion only\n\n\n \n\nMake sure you have access to the textbook\n\nDetails are posted on the course website"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homepage",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Homepage",
+    "text": "Let’s visit the website: Homepage"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#course-information-on-the-website",
+    "title": "Welcome to BMSC 620",
+    "section": "Course information on the website",
+    "text": "Course information on the website\n\nSyllabus\n\nWhat this course is about\nHow grading and homework work\nExams, attendance, and course policies\n\nInstructors\n\nContact information\nOffice hours\nHow to get help\n\nResources\n\nR and RStudio installation instructions\nCourse materials and datasets\nAdditional support resources"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-syllabus",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Syllabus",
+    "text": "Let’s visit the website: Syllabus"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-instructors",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Instructors",
+    "text": "Let’s visit the website: Instructors"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-resources",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Resources",
+    "text": "Let’s visit the website: Resources"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
+    "href": "lessons/00_welcome/00_welcome.html#how-this-course-runs-on-the-website",
+    "title": "Welcome to BMSC 620",
+    "section": "How this course runs on the website",
+    "text": "How this course runs on the website\n\nSchedule\n\nBig-picture view of topics and due dates\nUpdated if anything changes\n\nWeekly materials\n\nWhat to read or review\nSlides, code, and links for each class\n\nHomework\n\nAssignment templates\nDue dates and grading expectations\n\nExams\n\nMidterm and final format\nTiming, coverage, and policies"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-schedule",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Schedule",
+    "text": "Let’s visit the website: Schedule"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-weekly-materials",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Weekly materials",
+    "text": "Let’s visit the website: Weekly materials"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-homework",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Homework",
+    "text": "Let’s visit the website: Homework"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
+    "href": "lessons/00_welcome/00_welcome.html#lets-visit-the-website-exams",
+    "title": "Welcome to BMSC 620",
+    "section": "Let’s visit the website: Exams",
+    "text": "Let’s visit the website: Exams"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
+    "href": "lessons/00_welcome/00_welcome.html#structure-for-this-course",
+    "title": "Welcome to BMSC 620",
+    "section": "Structure for this course",
+    "text": "Structure for this course\n\nLearning the core tools to understand and interpret statistics\n\n \n\nSome pieces may feel abstract or disconnected at first — that’s normal\n\n \n\nThe goal is to build a toolbox that lets you analyze data and explain what the results mean"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
+    "href": "lessons/00_welcome/00_welcome.html#let-me-know-if-you-have-questions",
+    "title": "Welcome to BMSC 620",
+    "section": "Let me know if you have questions",
+    "text": "Let me know if you have questions\nOr if you notice:\n\nsomething unclear\nsomething confusing\nor something that contradicts the course site"
+  },
+  {
+    "objectID": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
+    "href": "lessons/00_welcome/00_welcome.html#thats-it-for-logistics",
+    "title": "Welcome to BMSC 620",
+    "section": "That’s it for logistics",
+    "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#learning-objectives-today",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#learning-objectives-today",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Learning objectives (today)",
+    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nIdentify observations and variables in a dataset\nDistinguish numerical and categorical variables (discrete/continuous; nominal/ordinal)\nDescribe the center of numerical data using the mean and median\nDescribe the spread of numerical data using the SD and IQR\nExplain why skewness and outliers affect some summaries more than others"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#intro-to-data-1.2",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#intro-to-data-1.2",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Intro to Data (1.2)",
+    "text": "Intro to Data (1.2)\n\nArtwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-motivating-example-frog-reproduction-data1",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-motivating-example-frog-reproduction-data1",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "A motivating example: frog reproduction data1",
+    "text": "A motivating example: frog reproduction data1\nTo make ideas about data more concrete, we will work with a dataset from an evolutionary biology study on frog reproduction.\nFemale frogs invest energy into reproduction by producing eggs. Because energy is limited, there are natural trade-offs: - producing many small eggs versus - producing fewer larger eggs\nResearchers collected data from frog egg clutches found at breeding ponds across multiple locations that differed in altitude.\nThe goal was to understand how reproductive investment varies across environments.\nDataset adapted from an example in Introductory Statistics for the Life and Biomedical Sciences."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-12",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-12",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "The frog study data (1/2)",
+    "text": "The frog study data (1/2)\n\n\n\nrow\naltitude\negg.size\nclutch.size\nclutch.volume\nbody.size\n\n\n\n\n1\n3,462.00\n1.95\n181.97\n177.83\n3.63\n\n\n2\n3,462.00\n1.95\n269.15\n257.04\n3.63\n\n\n3\n3,462.00\n1.95\n158.49\n151.36\n3.72\n\n\n150\n2,597.00\n2.24\n537.03\n776.25\nNA"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-22",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-data-22",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "The frog study data (2/2)",
+    "text": "The frog study data (2/2)\n\n\n\nrow\naltitude\negg.size\nclutch.size\nclutch.volume\nbody.size\n\n\n\n\n1\n3,462.00\n1.95\n181.97\n177.83\n3.63\n\n\n2\n3,462.00\n1.95\n269.15\n257.04\n3.63\n\n\n3\n3,462.00\n1.95\n158.49\n151.36\n3.72\n\n\n150\n2,597.00\n2.24\n537.03\n776.25\nNA\n\n\n\n\n\n\nEach observation is a row.\nEach variable is a column.\nEach cell contains a single value.\nAll the observations and variables together make a data frame. The textbook will sometimes call it a data matrix.\n\n \n\nMissing values: NA here means “missing”. The clutch #150 is missing body.size."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-variables-and-descriptions",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#the-frog-study-variables-and-descriptions",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "The frog study variables and descriptions",
+    "text": "The frog study variables and descriptions\n\n\n\n\n\nvariable\ndescription\n\n\n\n\naltitude\nAltitude of the study site (meters above sea level)\n\n\nlatitude\nLatitude of the study site (degrees)\n\n\negg.size\nAverage diameter of an individual egg (mm)\n\n\nclutch.size\nEstimated number of eggs in a clutch\n\n\nclutch.volume\nTotal volume of the egg clutch (mm^3)\n\n\nbody.size\nBody length of the egg-laying female frog (cm)"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#types-of-variables",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#types-of-variables",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Types of variables",
+    "text": "Types of variables\n\nISLBS"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#numerical-variables",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#numerical-variables",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Numerical variables",
+    "text": "Numerical variables\nNumerical variables take on values for which mathematical operations (addition, subtraction, averaging) are meaningful.\n\n\nThere are two common types:\n\n\nDiscrete\n\nTake on separate, countable values\nUsually whole numbers\nArise from counting\n\nExamples:\n\nNumber of eggs in a clutch\nNumber of clinic visits\nNumber of children in a family\n\n\nContinuous\n\nCan take on any value within a range\nOften measured rather than counted\nDecimals are possible\n\nExamples:\n\nEgg size (mm)\nHeight or weight\nBlood pressure"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#categorical-variables",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#categorical-variables",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Categorical variables",
+    "text": "Categorical variables\nCategorical variables describe qualities or group membership rather than numerical magnitude. The values are called levels.\n\n\n\n\nNominal\n\nCategories have no natural ordering\nDifferences are labels, not amounts\n\nExamples:\n\nSpecies\nBlood type\nGender identity\n\n\nOrdinal\n\nCategories have a meaningful order\nThe spacing between categories is not necessarily equal\n\nExamples:\n\nDisease severity (mild, moderate, severe)\nLikert-scale responses (strongly disagree -&gt; strongly agree)\nEducation level"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-are-data-stored-how-do-we-use-them",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-are-data-stored-how-do-we-use-them",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "How are data stored, how do we use them?",
+    "text": "How are data stored, how do we use them?\n\nOften, data are in an Excel sheet, or a plain text file (.csv, .txt)\n.csv files open in Excel automatically, but actually are plain text\nUsually, columns are variables/measures and rows are observations (i.e. a person’s measurements)\n\nData in R\n\nWe can import data from many file types, including .csv, .txt., and .xlsx\n\nWe will cover this on a later date\n\nOnce imported, R typically stores data as data frames, or tibbles if using the tidyverse package (more on this later).\n\nFor our purposes, these are essentially the same, and I will tend to use the terms interchangeably.\nThese are examples of what we call object types in R."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#which-type-is-each-frog-variable",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#which-type-is-each-frog-variable",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Which type is each frog variable?",
+    "text": "Which type is each frog variable?\n\n\n\n\n\n\n\n\n\n\nvariable\ndescription\ntype\n\n\n\n\naltitude\nAltitude of the study site (meters above sea level)\nNumerical (continuous)\n\n\nlatitude\nLatitude of the study site (degrees)\nNumerical (continuous)\n\n\negg.size\nAverage diameter of an individual egg (mm)\nNumerical (continuous)\n\n\nclutch.size\nEstimated number of eggs in a clutch\nNumerical (discrete)\n\n\nclutch.volume\nTotal volume of the egg clutch (mm^3)\nNumerical (continuous)\n\n\nbody.size\nBody length of the egg-laying female frog (cm)\nNumerical (continuous)"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-variable-types-appear-in-r-preview",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#how-variable-types-appear-in-r-preview",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "How variable types appear in R (preview)",
+    "text": "How variable types appear in R (preview)\nWe are not using R in depth yet.\nThis slide is here to help you later connect: - the variable types we talk about conceptually, and - how R stores those variables internally.\nYou do not need to memorize this now.\n\n\n\n\n\n\n\n\nR type\nVariable type\nWhat it represents\n\n\n\n\ninteger\nNumerical (discrete)\nWhole-number counts\n\n\ndouble / numeric\nNumerical (continuous)\nMeasured values with decimals\n\n\nfactor\nCategorical\nCategories stored with defined levels\n\n\ncharacter\nCategorical\nText labels\n\n\nlogical\nCategorical\nTRUE / FALSE values"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#summarizing-numerical-data-1.4",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#summarizing-numerical-data-1.4",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Summarizing numerical data (1.4)",
+    "text": "Summarizing numerical data (1.4)\nOnce data have been collected, a first step is to describe what we see.\n\n\nFor numerical variables, we often want to understand:\n\nwhat values are typical, and\nhow much the values vary across observations.\n\n\n\nNumerical summaries help us:\n\nquickly describe large datasets,\ncompare groups,\nand communicate patterns clearly.\n\nIn this section, we focus on summaries for numerical variables. We will return to categorical variables later."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#two-questions-we-often-ask",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#two-questions-we-often-ask",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Two questions we often ask",
+    "text": "Two questions we often ask\nFor a numerical variable, two questions come up repeatedly:\n\nWhere are the values centered?\n\nWhat is a “typical” value?\n\nHow spread out are the values?\n\nAre observations tightly clustered or widely dispersed?\n\n\nThe summaries we introduce next are designed to answer these two questions.\n\n\n\nNote\n\n\nSome examples will show R output as a reference. You do not need to understand the R code yet — focus on the ideas."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-mean",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-mean",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of center: the mean",
+    "text": "Measures of center: the mean\nThe mean (or average) describes the center of a numerical variable.\nIt is calculated by:\n\nadding all observed values, and\ndividing by the number of observations.\n\n\\[\n\\bar{x} = \\frac{x_1 + x_2 + \\cdots + x_n}{n} = \\sum_{i=1}^{n} \\frac{x_i}{n}\n\\]\nwhere:\n\n\\(x_1, x_2, \\ldots, x_n\\) are the observed values, and\n\\(n\\) is the number of observations.\n\nThe mean uses all observed values and is sensitive to unusually large or small values. All data values contribute equally, even “outliers.”"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-clutch-volume",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-clutch-volume",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Example: mean clutch volume",
+    "text": "Example: mean clutch volume\nUsing the frog data, we can ask:\nWhat is a typical clutch volume?\n\n\nFor this dataset:\n\neach observation is one egg clutch\nclutch volume is measured in mm\\(^3\\)\n\n\\[\n\\bar{x} = \\frac{177.8 + 257.0 + \\cdots + 933.3}{431} = \\frac{380346.3}{431} \\approx 882.5\n\\]\n\nmean(frog$clutch.volume, na.rm = TRUE)\n\n[1] 882.474\n\n\nThe mean clutch volume is 882.5 mm\\(^3\\).\n\n\n\nThe mean tells us where the data balance, but it doesn’t tell us how spread out they are."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#things-to-note",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#things-to-note",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Things to note",
+    "text": "Things to note\n\n\n\nThe mean of a binary variable with 0/1 coding gives the proportion (relative frequency) of ones in the sample.\nThe mean can be heavily influenced by “outliers.”\n\n\\({2, 7, 9} \\rightarrow \\bar{x} = \\frac{2 + 7 + 9}{3} = 6\\)\n\\({2, 7, 29} \\rightarrow \\bar{x} = \\frac{2 + 7 + 29}{3} \\approx 12.7\\)"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Distributions of frog variables",
+    "text": "Distributions of frog variables"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-median",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-center-the-median",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of center: the median",
+    "text": "Measures of center: the median\nThe median describes the center of a numerical variable based on order, not magnitude.\n\nThe median is the middle value once observations are ordered from smallest to largest.\nHalf of the observations lie below the median\nHalf of the observations lie above the median\n\nIf there are:\n\nan odd number of observations, the median is the middle value\nan even number of observations, the median is the average of the two middle values\n\nUnlike the mean, the median is not affected by extreme values."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-vs.-median",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#example-mean-vs.-median",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Example: mean vs. median",
+    "text": "Example: mean vs. median\nConsider these two datasets:\n\n\\(2, 7, 9\\)\n\nMean = 6\n\nMedian = 7\n\n\\(2, 7, 29\\)\n\nMean = 12.7\n\nMedian = 7\n\n\nOnly one value changed, but the mean changed a lot. The median did not."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables-1",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#distributions-of-frog-variables-1",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Distributions of frog variables",
+    "text": "Distributions of frog variables\n\n\nWhen distributions are skewed, the mean is pulled toward the tail.\nThe median stays closer to where most observations lie."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-note-on-the-mode",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#a-note-on-the-mode",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "A note on the mode",
+    "text": "A note on the mode\nThe mode is the most frequent value in a dataset.\n\nFor numerical data, the mode is often unstable or uninformative\nIt depends on how values are measured or grouped\nAs a result, it is rarely reported for continuous variables\n\nThe mode is more useful for categorical data, which we will revisit later."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-standard-deviation-sd-13",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-standard-deviation-sd-13",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: standard deviation (SD) (1/3)",
+    "text": "Measures of spread: standard deviation (SD) (1/3)\nstandard deviation is (approximately) the average distance between an observation and the mean\n\nAn observation’s deviation is the distance between its value \\(x\\) and the sample mean \\(\\bar{x}\\): deviation = \\(x - \\bar{x}\\)."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-23",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-23",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: SD (2/3)",
+    "text": "Measures of spread: SD (2/3)\n\nThe sample variance \\(s^2\\) is the sum of squared deviations divided by the number of observations minus 1.\n\n\\[\ns^2 =\n\\frac{(x_1 - \\bar{x})^2 + (x_2 - \\bar{x})^2 + \\cdots + (x_n - \\bar{x})^2}{n - 1}\n=\n\\sum_{i=1}^{n} \\frac{(x_i - \\bar{x})^2}{n - 1}\n\\] where \\(x_1, x_2, \\dots, x_n\\) represent the \\(n\\) observed values.\n \n\nThe standard deviation \\(s\\) (or \\(sd\\)) is the square root of the variance.\n\n\\[\ns\n= \\sqrt{s^2}\n= \\sqrt{\\frac{1}{n - 1}\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\n\\]"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-33",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-sd-33",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: SD (3/3)",
+    "text": "Measures of spread: SD (3/3)\nLet’s calculate the sample standard deviation for the clutch.volume from the frog dataset.\n\nDoing this by hand can be really time consuming!\nR does this easily for us.\n\n\nsd(frog$clutch.volume, na.rm = TRUE)\n\n[1] 379.0527\n\n\nSo the standard deviation is 379.1 mm\\(^3\\).\n\n\nFor the sample of 431 frog clutches, the mean clutch volume was 882.5 mm\\(^3\\) (SD = 379.1 mm\\(^3\\))."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#empirical-rule-one-way-to-think-about-the-sd",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#empirical-rule-one-way-to-think-about-the-sd",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Empirical Rule: one way to think about the SD",
+    "text": "Empirical Rule: one way to think about the SD\n\n\n\nFor symmetric bell-shaped data, about\n\n68% of the data are within 1 SD of the mean\n95% of the data are within 2 SD’s of the mean\n99.7% of the data are within 3 SD’s of the mean\n\nThese percentages are based off of percentages of a true normal distribution.\n\n\n\n\nhttps://statistics-made-easy.com/empirical-rule/"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-12",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-12",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: interquartile range (IQR) (1/2)",
+    "text": "Measures of spread: interquartile range (IQR) (1/2)\nThe \\(p^{th}\\) percentile is the observation such that \\(p\\%\\) of the remaining observations fall below this observation.\n\nThe first quartile \\(Q_1\\) is the \\(25^{th}\\) percentile.\nThe second quartile \\(Q_2\\), i.e., the median, is the \\(50^{th}\\) percentile.\nThe third quartile \\(Q_3\\) is the \\(75^{th}\\) percentile.\n\nThe interquartile range (IQR) is the distance between the third and first quartiles. \\[IQR = Q_3 - Q_1\\]\n\nIQR focuses on the middle 50% of the data.\nRobust against outliers."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-22",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-interquartile-range-iqr-22",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: interquartile range (IQR) (2/2)",
+    "text": "Measures of spread: interquartile range (IQR) (2/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsummary(frog$clutch.volume)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  151.4   609.6   831.8   882.5  1096.5  2630.3 \n\n\n\\[IQR = Q_3 - Q_1 = 1096.5 - 609.6 = 486.9\\]\n\n\n\nIQR(frog$clutch.volume)\n\n[1] 486.9009"
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-range",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#measures-of-spread-range",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Measures of spread: range",
+    "text": "Measures of spread: range\nThe range describes spread using only the smallest and largest values.\n\\[\n\\text{Range} = \\max(x) - \\min(x)\n\\]\n\nEasy to compute and easy to interpret\nNot robust: it depends only on two observations\nA single unusually large or small value can dramatically change the range\n\n\n\n\nNote\n\n\nBecause it is so sensitive to extreme values, the range is usually less informative than the SD or IQR."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#range-and-outliers-example",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#range-and-outliers-example",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Range and outliers (example)",
+    "text": "Range and outliers (example)\n\n\\(2, 7, 9\\)\n\n\\(min = 2, max = 9\\)\n\\(Range = 9 - 2 = 7\\)\n\n\\(2, 7, 29\\)\n\n\\(min = 2, max = 29\\)\n\\(Range = 29 - 2 = 27\\)\n\n\nOnly one value changed, but the range changed a lot."
+  },
+  {
+    "objectID": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#robust-estimates",
+    "href": "lessons/02_intro_to_data_cont/02_intro_to_data_cont.html#robust-estimates",
+    "title": "Introduction to Data & Numerical Summaries (continued)",
+    "section": "Robust estimates",
+    "text": "Robust estimates\nSummary statistics are called robust estimates if extreme observations (outliers) have little effect on their values\n\n\n\nEstimate\nRobust?\n\n\n\n\nSample mean\n❌\n\n\nMedian\n✅\n\n\nStandard deviation\n❌\n\n\nIQR\n✅\n\n\nRange\n❌\n\n\n\n\nFor samples with extreme values or skewed distributions, the median and IQR often provide a more stable summary of center and spread than the mean, standard deviation, or range.\n\n\n\n\nBMSC 620 | Intro to Data & Numerical Summaries (continued)"
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
+    "title": "Muddy Points",
+    "section": "1. Stratified sampling vs. cluster sampling vs. multistage sampling",
+    "text": "1. Stratified sampling vs. cluster sampling vs. multistage sampling\nThis was the most common point of confusion, which is very normal. These ideas are closely related, and the differences are mostly about how groups are formed and who gets sampled.\nA helpful way to think about this is to ask two questions:\n\nWhy are the groups defined?\nWho do we actually sample?\n\nStratified sampling\n\nGroups (called strata) are formed based on shared characteristics that matter to the research question.\nIndividuals within each stratum are relatively similar.\nWe then randomly sample some individuals from every stratum.\n\nGoal: Ensure representation from all important subgroups.\nExample (animal study):\nYou are studying hormone levels in mice and know sex affects the outcome.\n\nCreate strata by sex (male, female).\nRandomly sample mice from each sex group.\n\nCluster sampling\n\nGroups (called clusters) are formed based on natural or logistical groupings.\nIndividuals within a cluster are often diverse.\nWe randomly select entire clusters, then include all individuals within them.\n\nGoal: Reduce cost or effort when sampling individuals directly is difficult.\nExample (animal study):\nYou are studying lab mice housed in cages.\n\nTreat each cage as a cluster.\nRandomly select some cages.\nMeasure all mice in the selected cages.\n\nMultistage sampling\n\nSampling happens in steps.\nFirst, clusters are randomly selected.\nThen, individuals are randomly sampled within those selected clusters.\n\nGoal: Combine logistical convenience with random sampling.\nExample (animal study):\n\nStage 1: Randomly select cages.\nStage 2: Randomly select mice within each selected cage.\n\nYou can think of multistage sampling as layering familiar sampling ideas together."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
+    "title": "Muddy Points",
+    "section": "2. Why would some clusters be more likely to be selected?",
+    "text": "2. Why would some clusters be more likely to be selected?\nOne question that came up was why certain clusters might have a higher chance of selection in multistage sampling.\nThis was a place where I misspoke in class (around the 57 mimute mark of the recording), so I want to clarify.\nFor the types of sampling designs we focus on in this course (and in the textbook), clusters are usually selected at random, with each cluster having the same probability of being chosen. You should generally think of cluster sampling as treating each cluster equally at the selection stage.\nMore complex designs where clusters have different selection probabilities do exist, but we will not be focusing on those, and we will not be getting into weighting in this course.\nTo help reinforce the distinction, here is a contrast between stratified sampling and cluster sampling.\nStratified sampling\n\nThe population is divided into strata such that units within each stratum are similar with respect to the variable(s) of interest.\nA random sample is then taken within each stratum.\nGoal: reduce variability within strata and ensure representation of important subgroups.\nResult:\n\nLow variability within strata\nHigher variability between strata\n\n\nCluster sampling\n\nThe population is divided into clusters such that:\n\nunits within a cluster are diverse, and\n\nclusters themselves are similar to one another.\n\n\nA random sample of clusters is selected, and then all units (or many units) within the selected clusters are included.\nGoal: improve practicality or reduce cost when sampling individuals directly is difficult.\nAs described in the textbook:\n\nHigh case-to-case variability within clusters\nClusters are similar to each other\n\n\nIn short:\n\nStratified sampling: simple random sample of units within every group\nCluster sampling: simple random sample of entire groups\n\nThank you for raising this! It was a good catch, and this clarification will help going forward."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
+    "title": "Muddy Points",
+    "section": "3. Nominal vs. ordinal variables",
+    "text": "3. Nominal vs. ordinal variables\nA few people mentioned that variable types felt rushed near the end.\nA quick reminder:\n\nNominal variables: categories with no natural order (e.g., species, blood type).\nOrdinal variables: categories with a meaningful order, but unclear spacing (e.g., mild / moderate / severe).\n\nWe will return to variable types repeatedly throughout the course, especially when we start visualizing data and choosing analyses."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
+    "title": "Muddy Points",
+    "section": "4. R, Quarto, and .qmd files",
+    "text": "4. R, Quarto, and .qmd files\nSeveral people noted that the introduction to R and .qmd files felt intimidating, especially for those new to R.\nThat reaction is expected.\nFor now, the key idea is:\n\nA .qmd file is a document that mixes text and code.\nRendering turns it into something readable (like an HTML file).\n\nHomework 0 is designed to be:\n\nlow-stakes,\nguided,\nand focused on setup rather than programming.\n\nYou are not expected to understand R deeply yet."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
+    "title": "Muddy Points",
+    "section": "5. Homework submission and course logistics",
+    "text": "5. Homework submission and course logistics\nA few people asked how homework is submitted and how lecture material connects to the textbook.\n\nThe course website is your main hub for slides, recordings, and instructions.\nSakai is used for submitting assignments and checking grades.\nLectures and the textbook are meant to complement each other; sometimes lecture will preview ideas, other times it will reinforce them.\n\nThis will feel clearer once you’ve completed your first homework."
+  },
+  {
+    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
+    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
+    "title": "Muddy Points",
+    "section": "Final note",
+    "text": "Final note\nIf something still feels muddy after this clarification, that’s okay. Many concepts in statistics become clearer only after you see them used multiple times.\nPlease keep using the post-class check-ins. They are genuinely helpful for guiding what we slow down on or revisit."
+  },
+  {
     "objectID": "resources.html",
     "href": "resources.html",
     "title": "Resources",
@@ -1226,61 +1282,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html",
-    "title": "Muddy Points",
-    "section": "",
-    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#thanks-for-the-feedback",
-    "title": "Muddy Points",
-    "section": "",
-    "text": "Thank you to everyone who submitted post-class feedback. Below I address the main points that came up as muddy or unclear after our first lecture."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#stratified-sampling-vs.-cluster-sampling-vs.-multistage-sampling",
-    "title": "Muddy Points",
-    "section": "1. Stratified sampling vs. cluster sampling vs. multistage sampling",
-    "text": "1. Stratified sampling vs. cluster sampling vs. multistage sampling\nThis was the most common point of confusion, which is very normal. These ideas are closely related, and the differences are mostly about how groups are formed and who gets sampled.\nA helpful way to think about this is to ask two questions:\n\nWhy are the groups defined?\nWho do we actually sample?\n\nStratified sampling\n\nGroups (called strata) are formed based on shared characteristics that matter to the research question.\nIndividuals within each stratum are relatively similar.\nWe then randomly sample some individuals from every stratum.\n\nGoal: Ensure representation from all important subgroups.\nExample (animal study):\nYou are studying hormone levels in mice and know sex affects the outcome.\n\nCreate strata by sex (male, female).\nRandomly sample mice from each sex group.\n\nCluster sampling\n\nGroups (called clusters) are formed based on natural or logistical groupings.\nIndividuals within a cluster are often diverse.\nWe randomly select entire clusters, then include all individuals within them.\n\nGoal: Reduce cost or effort when sampling individuals directly is difficult.\nExample (animal study):\nYou are studying lab mice housed in cages.\n\nTreat each cage as a cluster.\nRandomly select some cages.\nMeasure all mice in the selected cages.\n\nMultistage sampling\n\nSampling happens in steps.\nFirst, clusters are randomly selected.\nThen, individuals are randomly sampled within those selected clusters.\n\nGoal: Combine logistical convenience with random sampling.\nExample (animal study):\n\nStage 1: Randomly select cages.\nStage 2: Randomly select mice within each selected cage.\n\nYou can think of multistage sampling as layering familiar sampling ideas together."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#why-would-some-clusters-be-more-likely-to-be-selected",
-    "title": "Muddy Points",
-    "section": "2. Why would some clusters be more likely to be selected?",
-    "text": "2. Why would some clusters be more likely to be selected?\nOne question that came up was why certain clusters might have a higher chance of selection in multistage sampling.\nThis was a place where I misspoke in class (around the 57 mimute mark of the recording), so I want to clarify.\nFor the types of sampling designs we focus on in this course (and in the textbook), clusters are usually selected at random, with each cluster having the same probability of being chosen. You should generally think of cluster sampling as treating each cluster equally at the selection stage.\nMore complex designs where clusters have different selection probabilities do exist, but we will not be focusing on those, and we will not be getting into weighting in this course.\nTo help reinforce the distinction, here is a contrast between stratified sampling and cluster sampling.\nStratified sampling\n\nThe population is divided into strata such that units within each stratum are similar with respect to the variable(s) of interest.\nA random sample is then taken within each stratum.\nGoal: reduce variability within strata and ensure representation of important subgroups.\nResult:\n\nLow variability within strata\nHigher variability between strata\n\n\nCluster sampling\n\nThe population is divided into clusters such that:\n\nunits within a cluster are diverse, and\n\nclusters themselves are similar to one another.\n\n\nA random sample of clusters is selected, and then all units (or many units) within the selected clusters are included.\nGoal: improve practicality or reduce cost when sampling individuals directly is difficult.\nAs described in the textbook:\n\nHigh case-to-case variability within clusters\nClusters are similar to each other\n\n\nIn short:\n\nStratified sampling: simple random sample of units within every group\nCluster sampling: simple random sample of entire groups\n\nThank you for raising this! It was a good catch, and this clarification will help going forward."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#nominal-vs.-ordinal-variables",
-    "title": "Muddy Points",
-    "section": "3. Nominal vs. ordinal variables",
-    "text": "3. Nominal vs. ordinal variables\nA few people mentioned that variable types felt rushed near the end.\nA quick reminder:\n\nNominal variables: categories with no natural order (e.g., species, blood type).\nOrdinal variables: categories with a meaningful order, but unclear spacing (e.g., mild / moderate / severe).\n\nWe will return to variable types repeatedly throughout the course, especially when we start visualizing data and choosing analyses."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#r-quarto-and-.qmd-files",
-    "title": "Muddy Points",
-    "section": "4. R, Quarto, and .qmd files",
-    "text": "4. R, Quarto, and .qmd files\nSeveral people noted that the introduction to R and .qmd files felt intimidating, especially for those new to R.\nThat reaction is expected.\nFor now, the key idea is:\n\nA .qmd file is a document that mixes text and code.\nRendering turns it into something readable (like an HTML file).\n\nHomework 0 is designed to be:\n\nlow-stakes,\nguided,\nand focused on setup rather than programming.\n\nYou are not expected to understand R deeply yet."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#homework-submission-and-course-logistics",
-    "title": "Muddy Points",
-    "section": "5. Homework submission and course logistics",
-    "text": "5. Homework submission and course logistics\nA few people asked how homework is submitted and how lecture material connects to the textbook.\n\nThe course website is your main hub for slides, recordings, and instructions.\nSakai is used for submitting assignments and checking grades.\nLectures and the textbook are meant to complement each other; sometimes lecture will preview ideas, other times it will reinforce them.\n\nThis will feel clearer once you’ve completed your first homework."
-  },
-  {
-    "objectID": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
-    "href": "lessons/01_intro_to_data/01_intro_to_data_muddy_points.html#final-note",
-    "title": "Muddy Points",
-    "section": "Final note",
-    "text": "Final note\nIf something still feels muddy after this clarification, that’s okay. Many concepts in statistics become clearer only after you see them used multiple times.\nPlease keep using the post-class check-ins. They are genuinely helpful for guiding what we slow down on or revisit."
   }
 ]
