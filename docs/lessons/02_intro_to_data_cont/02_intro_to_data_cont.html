@@ -424,9 +424,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="learning-objectives-today" class="slide level2">
 <h2>Learning objectives (today)</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># </span><span class="al">TODO</span><span class="co"> -- update learning objectives</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p>By the end of class, you should be able to:</p>
 <ol type="1">
 <li>Identify observations and variables in a dataset</li>
@@ -867,7 +864,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 \bar{x} = \frac{177.8 + 257.0 + \cdots + 933.3}{431} = \frac{380346.3}{431} \approx 882.5
 \]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">mean</span>(frog<span class="sc">$</span>clutch.volume, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">mean</span>(frog<span class="sc">$</span>clutch.volume, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 882.474</code></pre>
 </div>
@@ -895,7 +892,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="distributions-of-frog-variables" class="slide level2">
 <h2>Distributions of frog variables</h2>
 
-<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-7-1.png" width="1344" class="r-stretch"></section>
+<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-6-1.png" width="1344" class="r-stretch"></section>
 <section id="measures-of-center-the-median" class="slide level2">
 <h2>Measures of center: the median</h2>
 <p>The <strong>median</strong> describes the <em>center</em> of a numerical variable based on <strong>order</strong>, not magnitude.</p>
@@ -933,7 +930,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="distributions-of-frog-variables-1" class="slide level2">
 <h2>Distributions of frog variables</h2>
 
-<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"><ul>
+<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-7-1.png" width="1344" class="r-stretch"><ul>
 <li>When distributions are skewed, the <strong>mean</strong> is pulled toward the tail.</li>
 <li>The <strong>median</strong> stays closer to where most observations lie.</li>
 </ul>
@@ -955,7 +952,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li>An observation’s <strong>deviation</strong> is the distance between its value <span class="math inline">\(x\)</span> and the sample mean <span class="math inline">\(\bar{x}\)</span>: deviation = <span class="math inline">\(x - \bar{x}\)</span>.</li>
 </ul>
 
-<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344" class="r-stretch"></section>
+<img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"></section>
 <section id="measures-of-spread-sd-23" class="slide level2">
 <h2>Measures of spread: SD (2/3)</h2>
 <ul>
@@ -985,7 +982,7 @@ s
 <li><code>R</code> does this easily for us.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">sd</span>(frog<span class="sc">$</span>clutch.volume, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">sd</span>(frog<span class="sc">$</span>clutch.volume, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 379.0527</code></pre>
 </div>
@@ -1039,7 +1036,7 @@ s
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-11-1.png" width="576"></p>
+<p><img data-src="02_intro_to_data_cont_files/figure-revealjs/unnamed-chunk-10-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1050,7 +1047,7 @@ s
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">summary</span>(frog<span class="sc">$</span>clutch.volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">summary</span>(frog<span class="sc">$</span>clutch.volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   151.4   609.6   831.8   882.5  1096.5  2630.3 </code></pre>
@@ -1060,7 +1057,7 @@ s
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">IQR</span>(frog<span class="sc">$</span>clutch.volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">IQR</span>(frog<span class="sc">$</span>clutch.volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 486.9009</code></pre>
 </div>

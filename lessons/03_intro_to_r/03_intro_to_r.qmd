@@ -50,6 +50,9 @@ library(here)
 source(here("class_dates.R"))
 
 library(oibiostat)
+
+# terminal: for icons
+# quarto install extension quarto-ext/fontawesome
 ```
 
 ## Learning objectives (today)
