@@ -495,7 +495,7 @@
     "href": "lessons/03_intro_to_r/03_intro_to_r.html#file-naming-for-assignments",
     "title": "Introduction to R, RStudio, and Quarto",
     "section": "File naming for assignments",
-    "text": "File naming for assignments\nUse a consistent naming convention so we can grade efficiently:\nLastname_FirstInitial_HW00.qmd\nSubmit both: - .qmd - .html"
+    "text": "File naming for assignments\nUse a consistent naming convention so we can grade efficiently:\nLastname_FirstInitial_HW00.qmd\nSubmit both:\n\n.qmd\n.html"
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#formatting-text",
@@ -558,7 +558,7 @@
     "href": "lessons/03_intro_to_r/03_intro_to_r.html#create-a-code-chunk",
     "title": "Introduction to R, RStudio, and Quarto",
     "section": "Create a code chunk",
-    "text": "Create a code chunk\n3 options to create a code chunk\n\nClick on  at top right of the editor window, or\nKeyboard shortcut\n\n\n\n\nMac\nCommand + Option + I\n\n\nPC\nCtrl + Alt + I\n\n\n\n\nVisual editor: Select Insert -&gt; Executable Cell -&gt; R"
+    "text": "Create a code chunk\nRecommended (fastest): keyboard shortcut\n\nMac: Command + Option + I\nWindows: Ctrl + Alt + I\n\n\nOther ways (if you forget the shortcut):\n\nClick the Insert Code Chunk button () at top right of the editor window\nIn the Visual editor: Insert → Executable Cell → R"
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#what-does-a-code-chunk-look-like",
@@ -1282,5 +1282,26 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#old",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#old",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Old",
+    "text": "Old\n3 options to create a code chunk\n\nClick on at top right of the editor window, or\nKeyboard shortcut\n\n\n\n\nMac\nCommand + Option + I\n\n\nPC\nCtrl + Alt + I\n\n\n\n\nVisual editor: Select Insert -&gt; Executable Cell -&gt; R"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Enter and run code",
+    "text": "Enter and run code\n\n\n1. Type R code inside a code chunk\n2. Run code (recommended): keyboard shortcut\n\nMac: Ctrl + Return\nWindows: Ctrl + Return\n\n\n\nOutput appears in the Console pane.\n\nOther ways to run code:\n\nPlace the cursor on a line and click the Run button ()\nHighlight multiple lines and choose Run Selected Line(s)"
+  },
+  {
+    "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
+    "href": "lessons/03_intro_to_r/03_intro_to_r.html#enter-and-run-code-22",
+    "title": "Introduction to R, RStudio, and Quarto",
+    "section": "Enter and run code (2/2)",
+    "text": "Enter and run code (2/2)\n\n\nRun all code in a chunk by\n\nby clicking the play button in the top right corner of the chunk\n\nThe code output appears below the code chunk\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe output should also appear in the Console.\nSettings can be changed so that the output appears only in the Console and not below the code chunk:\n\nSelect  (to right of Render button) and then Chunk Output in Console."
   }
 ]

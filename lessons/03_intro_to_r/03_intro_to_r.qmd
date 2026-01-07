@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R, RStudio, and Quarto"
 author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
-date: "`r library(here); source(here('class_dates.R')); w1d1`"
+date: "`r library(here); source(here('class_dates.R')); w1d2`"
 date-format: long
 format:
   revealjs:
@@ -295,6 +295,7 @@ Use a consistent naming convention so we can grade efficiently:
 `Lastname_FirstInitial_HW00.qmd`
 
 Submit **both**:
+
 - `.qmd`
 - `.html`
 
@@ -478,23 +479,24 @@ You can easily navigate through your `.qmd` file if you use headers to outline y
 
 ## Create a code chunk
 
-3 options to create a code chunk
+**Recommended (fastest): keyboard shortcut**
 
-1. Click on ![](/img_slides/code_chunk_insert_icon.png) at top right of the editor window, or
+- **Mac:** `Command + Option + I`
+- **Windows:** `Ctrl + Alt + I`
 
-2. [__Keyboard shortcut__]{style="color:darkorange"}
+<br>
 
-|     |                        |
-|-----|------------------------|
-| Mac | *Command + Option + I* |
-| PC  | *Ctrl + Alt + I*       |
+**Other ways (if you forget the shortcut):**
 
-3. `Visual editor`: Select `Insert` -> `Executable Cell` -> `R`
+- Click the **Insert Code Chunk** button (![](/img_slides/code_chunk_insert_icon.png)) at top right of the editor window
+- In the **Visual editor**:
+  `Insert` → `Executable Cell` → `R`
 
 ![](/img_slides/code_chunk_insert_visual.png)
 
 
-## What does a code chunk look like? {.smaller}
+
+## What does a code chunk look like? 
 
 An empty code chunk looks like this:
 
@@ -510,36 +512,37 @@ An empty code chunk looks like this:
 Note that a code chunks start with ` ```{r} ` and ends with ` ``` `.  Make sure there is no space before ` ``` `.
 :::
 
-## Enter and run code (1/n) {.smaller}
-
-* __Type R code__ inside code chunks 
-* __Select code__ you want to run, by 
-    - placing the cursor in the line of code you want to run, 
-    - __*or*__ highlighting the code you want to run
+## Enter and run code (1/2)
 
 ::: columns
 ::: {.column width="50%"}
 
-* __Run selected code__ by
-    - clicking on the ![](/img_slides/01_Script_Run.png) button in the top right corner of the scripting window and choosing `Run Selected Line(s)`, 
-    - or typing one of the following key combinations:
+**1. Type R code** inside a code chunk
 
-|     |                        |
-|-----|------------------------|
-| Mac | __ctrl + return__      |
-| PC  | __command + return__   |
+**2. Run code (recommended): keyboard shortcut**
 
-* _Where does the output appear?_
+- **Mac:** `Ctrl + Return`
+- **Windows:** `Ctrl + Return`
+
+\
+
+**Output appears** in the **Console** pane.
+
 :::
-
 ::: {.column width="50%"}
+**Other ways to run code:**
+
+- Place the cursor on a line and click the **Run** button (![](/img_slides/01_Script_Run.png))
+- Highlight multiple lines and choose **Run Selected Line(s)**
 
 ![](/img_slides/01_qmd_coding1a.png){fig-align="center"}
 
+
 :::
 :::
 
-## Enter and run code (2/n)
+
+## Enter and run code (2/2)
 
 ::: {style="font-size: 80%;"}
 * __Run all code__ in a chunk by
@@ -557,7 +560,7 @@ Note that a code chunks start with ` ```{r} ` and ends with ` ``` `.  Make sure 
 :::
 
 
-## Useful keyboard shortcuts {.smaller}
+## Useful keyboard shortcuts 
 
 [Full list of keyboard shortcuts](https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts)\
 \ 

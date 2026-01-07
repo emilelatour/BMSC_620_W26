@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Emile Latour, Nicky Wakim, Meike Niederhausen">
-  <meta name="dcterms.date" content="2026-01-05">
+  <meta name="dcterms.date" content="2026-01-07">
   <title>BMSC 620: Introduction to Biostatistics – Introduction to R, RStudio, and Quarto</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -422,7 +422,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 
-  <p class="date">January 5, 2026</p>
+  <p class="date">January 7, 2026</p>
 </section>
 <section id="learning-objectives-today" class="slide level2">
 <h2>Learning objectives (today)</h2>
@@ -679,7 +679,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>File naming for assignments</h2>
 <p>Use a consistent naming convention so we can grade efficiently:</p>
 <p><code>Lastname_FirstInitial_HW00.qmd</code></p>
-<p>Submit <strong>both</strong>: - <code>.qmd</code> - <code>.html</code></p>
+<p>Submit <strong>both</strong>:</p>
+<ul>
+<li><code>.qmd</code></li>
+<li><code>.html</code></li>
+</ul>
 </section></section>
 <section>
 <section id="types-of-quarto-content" class="title-slide slide level1 center">
@@ -885,29 +889,20 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="create-a-code-chunk" class="slide level2">
 <h2>Create a code chunk</h2>
-<p>3 options to create a code chunk</p>
-<ol type="1">
-<li><p>Click on <img data-src="../../img_slides/code_chunk_insert_icon.png"> at top right of the editor window, or</p></li>
-<li><p><span style="color:darkorange"><strong>Keyboard shortcut</strong></span></p></li>
-</ol>
-<table class="caption-top">
-<tbody>
-<tr class="odd">
-<td>Mac</td>
-<td><em>Command + Option + I</em></td>
-</tr>
-<tr class="even">
-<td>PC</td>
-<td><em>Ctrl + Alt + I</em></td>
-</tr>
-</tbody>
-</table>
-<ol start="3" type="1">
-<li><code>Visual editor</code>: Select <code>Insert</code> -&gt; <code>Executable Cell</code> -&gt; <code>R</code></li>
-</ol>
+<p><strong>Recommended (fastest): keyboard shortcut</strong></p>
+<ul>
+<li><strong>Mac:</strong> <code>Command + Option + I</code></li>
+<li><strong>Windows:</strong> <code>Ctrl + Alt + I</code></li>
+</ul>
+<p><br></p>
+<p><strong>Other ways (if you forget the shortcut):</strong></p>
+<ul>
+<li>Click the <strong>Insert Code Chunk</strong> button (<img data-src="../../img_slides/code_chunk_insert_icon.png">) at top right of the editor window</li>
+<li>In the <strong>Visual editor</strong>: <code>Insert</code> → <code>Executable Cell</code> → <code>R</code></li>
+</ul>
 <p><img data-src="../../img_slides/code_chunk_insert_visual.png"></p>
 </section>
-<section id="what-does-a-code-chunk-look-like" class="slide level2 smaller">
+<section id="what-does-a-code-chunk-look-like" class="slide level2">
 <h2>What does a code chunk look like?</h2>
 <p>An empty code chunk looks like this:</p>
 <p><code>Visual editor</code></p>
@@ -928,41 +923,25 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 </section>
-<section id="enter-and-run-code-1n" class="slide level2 smaller">
-<h2>Enter and run code (1/n)</h2>
-<ul>
-<li><strong>Type R code</strong> inside code chunks</li>
-<li><strong>Select code</strong> you want to run, by
-<ul>
-<li>placing the cursor in the line of code you want to run,</li>
-<li><strong><em>or</em></strong> highlighting the code you want to run</li>
-</ul></li>
-</ul>
+<section id="enter-and-run-code" class="slide level2">
+<h2>Enter and run code</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
+<p><strong>1. Type R code</strong> inside a code chunk</p>
+<p><strong>2. Run code (recommended): keyboard shortcut</strong></p>
 <ul>
-<li><strong>Run selected code</strong> by
-<ul>
-<li>clicking on the <img data-src="../../img_slides/01_Script_Run.png"> button in the top right corner of the scripting window and choosing <code>Run Selected Line(s)</code>,</li>
-<li>or typing one of the following key combinations:</li>
-</ul></li>
+<li><strong>Mac:</strong> <code>Ctrl + Return</code></li>
+<li><strong>Windows:</strong> <code>Ctrl + Return</code></li>
 </ul>
-<table class="caption-top">
-<tbody>
-<tr class="odd">
-<td>Mac</td>
-<td><strong>ctrl + return</strong></td>
-</tr>
-<tr class="even">
-<td>PC</td>
-<td><strong>command + return</strong></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><em>Where does the output appear?</em></li>
-</ul>
+<p><br>
+</p>
+<p><strong>Output appears</strong> in the <strong>Console</strong> pane.</p>
 </div><div class="column" style="width:50%;">
+<p><strong>Other ways to run code:</strong></p>
+<ul>
+<li>Place the cursor on a line and click the <strong>Run</strong> button (<img data-src="../../img_slides/01_Script_Run.png">)</li>
+<li>Highlight multiple lines and choose <strong>Run Selected Line(s)</strong></li>
+</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="../../img_slides/01_qmd_coding1a.png" class="quarto-figure quarto-figure-center"></p>
@@ -970,8 +949,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div></div>
 </section>
-<section id="enter-and-run-code-2n" class="slide level2">
-<h2>Enter and run code (2/n)</h2>
+<section id="enter-and-run-code-22" class="slide level2">
+<h2>Enter and run code (2/2)</h2>
 <div style="font-size: 80%;">
 <ul>
 <li><strong>Run all code</strong> in a chunk by
@@ -1002,7 +981,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 </section>
-<section id="useful-keyboard-shortcuts" class="slide level2 smaller">
+<section id="useful-keyboard-shortcuts" class="slide level2">
 <h2>Useful keyboard shortcuts</h2>
 <p><a href="https://support.posit.co/hc/en-us/articles/200711853-Keyboard-Shortcuts">Full list of keyboard shortcuts</a><br>
 &nbsp;</p>
