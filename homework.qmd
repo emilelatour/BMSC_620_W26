@@ -37,6 +37,8 @@ Start from the provided `.qmd` template for each assignment.
 
 All homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.
 
+Homework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.
+
 |	HW	|	Due (\@11pm)	|	Files	|	Preview	|
 |	:---:	|	:---:	|	:---:	|	:---:	|
 |	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5)	|	[View HW 00](/homework/HW00/HW00.qmd)	|

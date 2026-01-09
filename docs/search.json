@@ -1282,5 +1282,306 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#learning-objectives-today",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#learning-objectives-today",
+    "title": "R basics and data summaries",
+    "section": "Learning objectives (today)",
+    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nRun code\nInspect a dataset\nSummarize numeric + categorical variables\nMake two basic plots"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-in-r",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-in-r",
+    "title": "R basics and data summaries",
+    "section": "Coding in R",
+    "text": "Coding in R\n\nArtwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#we-have-options-where-to-code-in-r",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#we-have-options-where-to-code-in-r",
+    "title": "R basics and data summaries",
+    "section": "We have options where to code in R",
+    "text": "We have options where to code in R\nConsole\n\nFor quick experiments\nTemporary (not saved)\n\nR scripts (.R files)\n\nOften used for data cleaning, functions, or prep\nCommon in real analysis workflows\nCode only\n\nCode chunks in a .qmd file\n\nUsed for analysis and reporting\nCombine code and written explanation\nSaved and reproducible\n\nRunning code\n\nRun the current line or selection with Cmd/Ctrl + Enter"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-as-a-calculator",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-as-a-calculator",
+    "title": "R basics and data summaries",
+    "section": "R as a calculator",
+    "text": "R as a calculator\n\nRules for order of operations are followed\nSpaces between numbers and characters are ignored\n\n\n\n\n\n\n10^2\n\n[1] 100\n\n3 ^ 7\n\n[1] 2187\n\n6/9\n\n[1] 0.6666667\n\n9-43\n\n[1] -34\n\n\n\n\n4^3-2* 7+9 /2\n\n[1] 54.5\n\n\nThe equation above is computed as \\[4^3 − (2 \\cdot 7) + \\frac{9}{2}\\]"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-4-objects-variables-and-assignment-save-results-so-you-can-reuse-them-use---recommended",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-4-objects-variables-and-assignment-save-results-so-you-can-reuse-them-use---recommended",
+    "title": "R basics and data summaries",
+    "section": "Slide 4: Objects (variables) and assignment • Save results so you can reuse them • Use <- (recommended)",
+    "text": "Slide 4: Objects (variables) and assignment • Save results so you can reuse them • Use &lt;- (recommended)\nCode\nx &lt;- 5 x\na &lt;- 3:10 a\nb &lt;- c(5, 12, 2, 100, 8) b\n⸻\nSlide 5: Quick practice (30-60 seconds)\nPrompt on slide: • Make y &lt;- 8 • Make c_vec &lt;- 15:20 • Make d_vec &lt;- c(16:19, 22)\n(No code shown, or include as “solution” on next slide.)\n⸻\nSlide 6: Functions + getting help • Functions look like mean(x) • Help: ?mean\nCode\nmean(1:4) ?mean\n(You can mention: “If something returns NA, we will learn how to handle missing values later.”)\n⸻\nSlide 7: Your 4-step recipe (this is your backbone slide)\nBig text:\nRecipe for HW 1: 1. Load data 2. Inspect data 3. Summarize variables 4. Plot variables\n(No code.)\n⸻\nDataset section (use iris)\nSlide 8: Load and view the dataset\nUse iris because it has both numeric + categorical.\nCode\ndata(iris)\nOptional note: View works interactively, not in knitted slides.\nCode (eval: false in slides)\nView(iris)\n⸻\nSlide 9: Inspect: “What’s in here?”\nTeach the inspection toolkit they’ll reuse constantly.\nCode\ndim(iris) names(iris) str(iris) head(iris)\n(You can mention tail() briefly, but no need to dwell.)\n⸻\nSlide 10: The $ operator (how to grab a column)\nCode\niris$Petal.Length\nOne sentence: • dataset$variable pulls out a single column\n⸻\nSlide 11: Summarize one numeric variable\nUse one variable, then show “repeat this for others.”\nCode\nmean(iris\\(Petal.Length)\nsd(iris\\)Petal.Length) median(iris\\(Petal.Length)\nIQR(iris\\)Petal.Length)\nOptional tiny note: • mean/SD for “center/spread” • median/IQR for “robust center/spread”\n⸻\nSlide 12: Summarize all numeric variables quickly\nThis is their “fast check.”\nCode\nsummary(iris)\nOne sentence: • summary gives a quick snapshot for every column\n⸻\nSlide 13: Summarize a categorical variable: counts\nThis is your categorical bridge.\nCode\ntable(iris$Species)\n⸻\nSlide 14: Categorical proportions\nCode\nprop.table(table(iris$Species))\nOptional: show percent\n100 * prop.table(table(iris$Species))\n⸻\nSlide 15: Plot a numeric variable (histogram)\nCode\nhist(iris$Petal.Length)\nOne sentence: • hist = distribution of one numeric variable\n⸻\nSlide 16: Plot a categorical variable (bar chart)\nCode\nbarplot(table(iris$Species))\nOne sentence: • barplot(table()) = categorical counts\n⸻\nSlide 17: (Optional) Two-way tables (only if you want)\nThis is useful but optional for HW 1 unless you plan to require it.\nCode\ntable(iris\\(Species, iris\\)Sepal.Length &gt; mean(iris$Sepal.Length))\nIf you include it, explain: • It’s just counts for combinations of two categorical variables\nIf you want a cleaner two-way table without logicals, skip this for now.\n⸻\nWrap + practice block\nSlide 18: Common errors (1 slide only)\nKeep it super practical: • object not found -&gt; you didn’t create it / typo / didn’t run the line • quotes matter for text\nCode (intentional error, optional)\nhello\nFix\nhello &lt;- “hello” hello\n(Do not go deeper than this.)\n⸻\nSlide 19: In-class practice (10 minutes)\nPut a checklist on the slide:\nPractice using mtcars: 1. Inspect: dim, names, str, head 2. Summarize numeric: mean(mtcars\\(mpg), sd(mtcars\\)mpg), summary(mtcars) 3. Summarize categorical-ish: table(mtcars\\(cyl), prop.table(table(mtcars\\)cyl)) 4. Plot: hist(mtcars\\(mpg), barplot(table(mtcars\\)cyl))\nCode (on slide)\ndata(mtcars)\ndim(mtcars) names(mtcars) str(mtcars) head(mtcars)\nmean(mtcars\\(mpg)\nsd(mtcars\\)mpg) summary(mtcars)\ntable(mtcars\\(cyl)\nprop.table(table(mtcars\\)cyl))\nhist(mtcars\\(mpg)\nbarplot(table(mtcars\\)cyl))\n⸻\nSlide 20: What you should be able to do for HW 1\nRe-state the competencies: • Open a script and run code • Inspect a dataset (dim, names, str, head) • Summarize numeric (mean, sd, median, IQR, summary) • Summarize categorical (table, prop.table) • Make a histogram + bar chart\n⸻\nSlide 21: Looking ahead\nOne sentence: • Next class: probability as long-run proportion (and we’ll reuse table() and prop.table())\n⸻\nNotes on adapting Nicky’s decks (fast mapping)\nFrom R02/R03, you can reuse almost directly: • calculator slide • objects/vectors slides • functions + help slide • iris inspection slides (View, str, summary, dim, head) • $ slide\nWhat to skip Monday: • AI policy slides • long troubleshooting section • inline code / Quarto reporting • tidyverse / pipe / janitor / gtsummary\n⸻\nIf you want, paste your typical class length (e.g., 75 vs 120 minutes) and I’ll mark which slides to drop for a shorter version without losing HW readiness.\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#variables-objects-in-r",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#variables-objects-in-r",
+    "title": "R basics and data summaries",
+    "section": "Variables (objects) in R",
+    "text": "Variables (objects) in R\nVariables let us store results so we can reuse them later\n(e.g., data, summaries, plots, model output).\n\n\n\n\nAssigning a single value\n\nUse &lt;- to assign a value to a name\nRead as “gets”, “becomes”, or “assigns”\n\n\nx &lt;- 5\nx\n\n[1] 5\n\n\nYou’ll mostly see &lt;- in examples and documentation, so that’s what we’ll use in this course. But sometimes people use =.\n\nx = 5\nx\n\n[1] 5\n\n\n\nAssigning multiple values (vectors)\nSequences\n\na &lt;- 3:10\na\n\n[1]  3  4  5  6  7  8  9 10\n\n\nCombining values with c()\n\nb &lt;- c(5, 12, 2, 100, 8)\nb\n\n[1]   5  12   2 100   8"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-5-quick-practice-30-60-seconds",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-5-quick-practice-30-60-seconds",
+    "title": "R basics and data summaries",
+    "section": "Slide 5: Quick practice (30-60 seconds)",
+    "text": "Slide 5: Quick practice (30-60 seconds)\nPrompt on slide: • Make y &lt;- 8 • Make c_vec &lt;- 15:20 • Make d_vec &lt;- c(16:19, 22)\n(No code shown, or include as “solution” on next slide.)"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-5-quick-practice-30-60-seconds-1",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-5-quick-practice-30-60-seconds-1",
+    "title": "R basics and data summaries",
+    "section": "Slide 5: Quick practice (30-60 seconds)",
+    "text": "Slide 5: Quick practice (30-60 seconds)\nPrompt on slide: • Make y &lt;- 8 • Make c_vec &lt;- 15:20 • Make d_vec &lt;- c(16:19, 22)\n(No code shown, or include as “solution” on next slide.)\n⸻\nSlide 6: Functions + getting help • Functions look like mean(x) • Help: ?mean\nCode\nmean(1:4) ?mean\n(You can mention: “If something returns NA, we will learn how to handle missing values later.”)\n⸻\nSlide 7: Your 4-step recipe (this is your backbone slide)\nBig text:\nRecipe for HW 1: 1. Load data 2. Inspect data 3. Summarize variables 4. Plot variables\n(No code.)\n⸻\nDataset section (use iris)\nSlide 8: Load and view the dataset\nUse iris because it has both numeric + categorical.\nCode\ndata(iris)\nOptional note: View works interactively, not in knitted slides.\nCode (eval: false in slides)\nView(iris)\n⸻\nSlide 9: Inspect: “What’s in here?”\nTeach the inspection toolkit they’ll reuse constantly.\nCode\ndim(iris) names(iris) str(iris) head(iris)\n(You can mention tail() briefly, but no need to dwell.)\n⸻\nSlide 10: The $ operator (how to grab a column)\nCode\niris$Petal.Length\nOne sentence: • dataset$variable pulls out a single column\n⸻\nSlide 11: Summarize one numeric variable\nUse one variable, then show “repeat this for others.”\nCode\nmean(iris\\(Petal.Length)\nsd(iris\\)Petal.Length) median(iris\\(Petal.Length)\nIQR(iris\\)Petal.Length)\nOptional tiny note: • mean/SD for “center/spread” • median/IQR for “robust center/spread”\n⸻\nSlide 12: Summarize all numeric variables quickly\nThis is their “fast check.”\nCode\nsummary(iris)\nOne sentence: • summary gives a quick snapshot for every column\n⸻\nSlide 13: Summarize a categorical variable: counts\nThis is your categorical bridge.\nCode\ntable(iris$Species)\n⸻\nSlide 14: Categorical proportions\nCode\nprop.table(table(iris$Species))\nOptional: show percent\n100 * prop.table(table(iris$Species))\n⸻\nSlide 15: Plot a numeric variable (histogram)\nCode\nhist(iris$Petal.Length)\nOne sentence: • hist = distribution of one numeric variable\n⸻\nSlide 16: Plot a categorical variable (bar chart)\nCode\nbarplot(table(iris$Species))\nOne sentence: • barplot(table()) = categorical counts\n⸻\nSlide 17: (Optional) Two-way tables (only if you want)\nThis is useful but optional for HW 1 unless you plan to require it.\nCode\ntable(iris\\(Species, iris\\)Sepal.Length &gt; mean(iris$Sepal.Length))\nIf you include it, explain: • It’s just counts for combinations of two categorical variables\nIf you want a cleaner two-way table without logicals, skip this for now.\n⸻\nWrap + practice block\nSlide 18: Common errors (1 slide only)\nKeep it super practical: • object not found -&gt; you didn’t create it / typo / didn’t run the line • quotes matter for text\nCode (intentional error, optional)\nhello\nFix\nhello &lt;- “hello” hello\n(Do not go deeper than this.)\n⸻\nSlide 19: In-class practice (10 minutes)\nPut a checklist on the slide:\nPractice using mtcars: 1. Inspect: dim, names, str, head 2. Summarize numeric: mean(mtcars\\(mpg), sd(mtcars\\)mpg), summary(mtcars) 3. Summarize categorical-ish: table(mtcars\\(cyl), prop.table(table(mtcars\\)cyl)) 4. Plot: hist(mtcars\\(mpg), barplot(table(mtcars\\)cyl))\nCode (on slide)\ndata(mtcars)\ndim(mtcars) names(mtcars) str(mtcars) head(mtcars)\nmean(mtcars\\(mpg)\nsd(mtcars\\)mpg) summary(mtcars)\ntable(mtcars\\(cyl)\nprop.table(table(mtcars\\)cyl))\nhist(mtcars\\(mpg)\nbarplot(table(mtcars\\)cyl))\n⸻\nSlide 20: What you should be able to do for HW 1\nRe-state the competencies: • Open a script and run code • Inspect a dataset (dim, names, str, head) • Summarize numeric (mean, sd, median, IQR, summary) • Summarize categorical (table, prop.table) • Make a histogram + bar chart\n⸻\nSlide 21: Looking ahead\nOne sentence: • Next class: probability as long-run proportion (and we’ll reuse table() and prop.table())\n⸻\nNotes on adapting Nicky’s decks (fast mapping)\nFrom R02/R03, you can reuse almost directly: • calculator slide • objects/vectors slides • functions + help slide • iris inspection slides (View, str, summary, dim, head) • $ slide\nWhat to skip Monday: • AI policy slides • long troubleshooting section • inline code / Quarto reporting • tidyverse / pipe / janitor / gtsummary\n⸻\nIf you want, paste your typical class length (e.g., 75 vs 120 minutes) and I’ll mark which slides to drop for a shorter version without losing HW readiness.\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-practice-30-60-seconds",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-practice-30-60-seconds",
+    "title": "R basics and data summaries",
+    "section": "Quick practice (30-60 seconds)",
+    "text": "Quick practice (30-60 seconds)\nIn your .qmd, create:\n\ny &lt;- 8\nc_vec &lt;- 15:20\nd_vec &lt;- c(16:19, 22)\n\n(Do not overthink it - just try it.)"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-practice-solution",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-practice-solution",
+    "title": "R basics and data summaries",
+    "section": "Quick practice: solution",
+    "text": "Quick practice: solution\n\ny &lt;- 8\ny\n\n[1] 8\n\n\n\nc_vec &lt;- 15:20\nc_vec\n\n[1] 15 16 17 18 19 20\n\n\n\nd_vec &lt;- c(16:19, 22)\nd_vec\n\n[1] 16 17 18 19 22"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#using-functions",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#using-functions",
+    "title": "R basics and data summaries",
+    "section": "Using functions",
+    "text": "Using functions\n\nA function performs a task (e.g., calculate a mean)\nFunctions use parentheses: function_name()\nInputs to a function are called arguments\nUse ?function_name to see the help file\n\n\n\n\n\nArguments specified by name\n\nmean(x = 1:4)\n\n[1] 2.5\n\nseq(from = 1, to = 12, by = 3)\n\n[1]  1  4  7 10\n\nseq(by = 3, to = 12, from = 1)\n\n[1]  1  4  7 10\n\n\n\nArguments specified by position\n\nmean(1:4)\n\n[1] 2.5\n\nseq(1, 12, 3)\n\n[1]  1  4  7 10"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#using-functions-for-summary-statistics",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#using-functions-for-summary-statistics",
+    "title": "R basics and data summaries",
+    "section": "Using functions for summary statistics",
+    "text": "Using functions for summary statistics\nNow let’s apply functions to the vectors you just created.\n\nCalculate the mean of c_vec\nCalculate the standard deviation of c_vec\nUse ?sd to see what arguments sd() takes\n\n\n\n\nmean(c_vec)\n\n[1] 17.5\n\nsd(c_vec)\n\n[1] 1.870829\n\n\n \nIf you have time, also try:\n\nmedian(c_vec)\n\n[1] 17.5\n\nIQR(c_vec)\n\n[1] 2.5"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-check",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-check",
+    "title": "R basics and data summaries",
+    "section": "Quick check",
+    "text": "Quick check\n\nDo these functions return one number or many?\nDoes that match what you expect a “summary” to do?"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#working-with-a-real-dataset",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#working-with-a-real-dataset",
+    "title": "R basics and data summaries",
+    "section": "Working with a real dataset",
+    "text": "Working with a real dataset\n \n\nR comes with several built-in datasets that we can use to practice.\nWe’ll start with the iris dataset.\n\nThis dataset is useful because it includes both numeric and categorical variables."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#load-and-view-the-data",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#load-and-view-the-data",
+    "title": "R basics and data summaries",
+    "section": "Load and view the data",
+    "text": "Load and view the data\nThe iris dataset is already available in base R.\n\ndata(iris)\n\n\n\n\n\nViewing in the console\nYou can display the dataset by typing its name:\n\niris\n\n    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species\n1            5.1         3.5          1.4         0.2     setosa\n2            4.9         3.0          1.4         0.2     setosa\n3            4.7         3.2          1.3         0.2     setosa\n4            4.6         3.1          1.5         0.2     setosa\n5            5.0         3.6          1.4         0.2     setosa\n6            5.4         3.9          1.7         0.4     setosa\n7            4.6         3.4          1.4         0.3     setosa\n8            5.0         3.4          1.5         0.2     setosa\n9            4.4         2.9          1.4         0.2     setosa\n10           4.9         3.1          1.5         0.1     setosa\n11           5.4         3.7          1.5         0.2     setosa\n12           4.8         3.4          1.6         0.2     setosa\n13           4.8         3.0          1.4         0.1     setosa\n14           4.3         3.0          1.1         0.1     setosa\n15           5.8         4.0          1.2         0.2     setosa\n16           5.7         4.4          1.5         0.4     setosa\n17           5.4         3.9          1.3         0.4     setosa\n18           5.1         3.5          1.4         0.3     setosa\n19           5.7         3.8          1.7         0.3     setosa\n20           5.1         3.8          1.5         0.3     setosa\n21           5.4         3.4          1.7         0.2     setosa\n22           5.1         3.7          1.5         0.4     setosa\n23           4.6         3.6          1.0         0.2     setosa\n24           5.1         3.3          1.7         0.5     setosa\n25           4.8         3.4          1.9         0.2     setosa\n26           5.0         3.0          1.6         0.2     setosa\n27           5.0         3.4          1.6         0.4     setosa\n28           5.2         3.5          1.5         0.2     setosa\n29           5.2         3.4          1.4         0.2     setosa\n30           4.7         3.2          1.6         0.2     setosa\n31           4.8         3.1          1.6         0.2     setosa\n32           5.4         3.4          1.5         0.4     setosa\n33           5.2         4.1          1.5         0.1     setosa\n34           5.5         4.2          1.4         0.2     setosa\n35           4.9         3.1          1.5         0.2     setosa\n36           5.0         3.2          1.2         0.2     setosa\n37           5.5         3.5          1.3         0.2     setosa\n38           4.9         3.6          1.4         0.1     setosa\n39           4.4         3.0          1.3         0.2     setosa\n40           5.1         3.4          1.5         0.2     setosa\n41           5.0         3.5          1.3         0.3     setosa\n42           4.5         2.3          1.3         0.3     setosa\n43           4.4         3.2          1.3         0.2     setosa\n44           5.0         3.5          1.6         0.6     setosa\n45           5.1         3.8          1.9         0.4     setosa\n46           4.8         3.0          1.4         0.3     setosa\n47           5.1         3.8          1.6         0.2     setosa\n48           4.6         3.2          1.4         0.2     setosa\n49           5.3         3.7          1.5         0.2     setosa\n50           5.0         3.3          1.4         0.2     setosa\n51           7.0         3.2          4.7         1.4 versicolor\n52           6.4         3.2          4.5         1.5 versicolor\n53           6.9         3.1          4.9         1.5 versicolor\n54           5.5         2.3          4.0         1.3 versicolor\n55           6.5         2.8          4.6         1.5 versicolor\n56           5.7         2.8          4.5         1.3 versicolor\n57           6.3         3.3          4.7         1.6 versicolor\n58           4.9         2.4          3.3         1.0 versicolor\n59           6.6         2.9          4.6         1.3 versicolor\n60           5.2         2.7          3.9         1.4 versicolor\n61           5.0         2.0          3.5         1.0 versicolor\n62           5.9         3.0          4.2         1.5 versicolor\n63           6.0         2.2          4.0         1.0 versicolor\n64           6.1         2.9          4.7         1.4 versicolor\n65           5.6         2.9          3.6         1.3 versicolor\n66           6.7         3.1          4.4         1.4 versicolor\n67           5.6         3.0          4.5         1.5 versicolor\n68           5.8         2.7          4.1         1.0 versicolor\n69           6.2         2.2          4.5         1.5 versicolor\n70           5.6         2.5          3.9         1.1 versicolor\n71           5.9         3.2          4.8         1.8 versicolor\n72           6.1         2.8          4.0         1.3 versicolor\n73           6.3         2.5          4.9         1.5 versicolor\n74           6.1         2.8          4.7         1.2 versicolor\n75           6.4         2.9          4.3         1.3 versicolor\n76           6.6         3.0          4.4         1.4 versicolor\n77           6.8         2.8          4.8         1.4 versicolor\n78           6.7         3.0          5.0         1.7 versicolor\n79           6.0         2.9          4.5         1.5 versicolor\n80           5.7         2.6          3.5         1.0 versicolor\n81           5.5         2.4          3.8         1.1 versicolor\n82           5.5         2.4          3.7         1.0 versicolor\n83           5.8         2.7          3.9         1.2 versicolor\n84           6.0         2.7          5.1         1.6 versicolor\n85           5.4         3.0          4.5         1.5 versicolor\n86           6.0         3.4          4.5         1.6 versicolor\n87           6.7         3.1          4.7         1.5 versicolor\n88           6.3         2.3          4.4         1.3 versicolor\n89           5.6         3.0          4.1         1.3 versicolor\n90           5.5         2.5          4.0         1.3 versicolor\n91           5.5         2.6          4.4         1.2 versicolor\n92           6.1         3.0          4.6         1.4 versicolor\n93           5.8         2.6          4.0         1.2 versicolor\n94           5.0         2.3          3.3         1.0 versicolor\n95           5.6         2.7          4.2         1.3 versicolor\n96           5.7         3.0          4.2         1.2 versicolor\n97           5.7         2.9          4.2         1.3 versicolor\n98           6.2         2.9          4.3         1.3 versicolor\n99           5.1         2.5          3.0         1.1 versicolor\n100          5.7         2.8          4.1         1.3 versicolor\n101          6.3         3.3          6.0         2.5  virginica\n102          5.8         2.7          5.1         1.9  virginica\n103          7.1         3.0          5.9         2.1  virginica\n104          6.3         2.9          5.6         1.8  virginica\n105          6.5         3.0          5.8         2.2  virginica\n106          7.6         3.0          6.6         2.1  virginica\n107          4.9         2.5          4.5         1.7  virginica\n108          7.3         2.9          6.3         1.8  virginica\n109          6.7         2.5          5.8         1.8  virginica\n110          7.2         3.6          6.1         2.5  virginica\n111          6.5         3.2          5.1         2.0  virginica\n112          6.4         2.7          5.3         1.9  virginica\n113          6.8         3.0          5.5         2.1  virginica\n114          5.7         2.5          5.0         2.0  virginica\n115          5.8         2.8          5.1         2.4  virginica\n116          6.4         3.2          5.3         2.3  virginica\n117          6.5         3.0          5.5         1.8  virginica\n118          7.7         3.8          6.7         2.2  virginica\n119          7.7         2.6          6.9         2.3  virginica\n120          6.0         2.2          5.0         1.5  virginica\n121          6.9         3.2          5.7         2.3  virginica\n122          5.6         2.8          4.9         2.0  virginica\n123          7.7         2.8          6.7         2.0  virginica\n124          6.3         2.7          4.9         1.8  virginica\n125          6.7         3.3          5.7         2.1  virginica\n126          7.2         3.2          6.0         1.8  virginica\n127          6.2         2.8          4.8         1.8  virginica\n128          6.1         3.0          4.9         1.8  virginica\n129          6.4         2.8          5.6         2.1  virginica\n130          7.2         3.0          5.8         1.6  virginica\n131          7.4         2.8          6.1         1.9  virginica\n132          7.9         3.8          6.4         2.0  virginica\n133          6.4         2.8          5.6         2.2  virginica\n134          6.3         2.8          5.1         1.5  virginica\n135          6.1         2.6          5.6         1.4  virginica\n136          7.7         3.0          6.1         2.3  virginica\n137          6.3         3.4          5.6         2.4  virginica\n138          6.4         3.1          5.5         1.8  virginica\n139          6.0         3.0          4.8         1.8  virginica\n140          6.9         3.1          5.4         2.1  virginica\n141          6.7         3.1          5.6         2.4  virginica\n142          6.9         3.1          5.1         2.3  virginica\n143          5.8         2.7          5.1         1.9  virginica\n144          6.8         3.2          5.9         2.3  virginica\n145          6.7         3.3          5.7         2.5  virginica\n146          6.7         3.0          5.2         2.3  virginica\n147          6.3         2.5          5.0         1.9  virginica\n148          6.5         3.0          5.2         2.0  virginica\n149          6.2         3.4          5.4         2.3  virginica\n150          5.9         3.0          5.1         1.8  virginica\n\n\n\nInteractive view\nYou can open an interactive view of the dataset like this:\n\nView(iris)\n\n(Note: View() works interactively in RStudio, but does not display in slides.)"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#fishers-or-andersons-iris-data-set",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#fishers-or-andersons-iris-data-set",
+    "title": "R basics and data summaries",
+    "section": "Fisher’s (or Anderson’s) Iris data set",
+    "text": "Fisher’s (or Anderson’s) Iris data set\nData description:\n\nn = 150\n3 species of Iris flowers (Setosa, Virginica, and Versicolour)\n\n50 measurements of each type of Iris\n\nVariables:\n\nsepal length, sepal width, petal length, petal width, and species\n\n\n\n\n\nGareth Duffy"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-7-your-4-step-recipe-this-is-your-backbone-slide",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-7-your-4-step-recipe-this-is-your-backbone-slide",
+    "title": "R basics and data summaries",
+    "section": "Slide 7: Your 4-step recipe (this is your backbone slide)",
+    "text": "Slide 7: Your 4-step recipe (this is your backbone slide)\nBig text:\nRecipe for HW 1: 1. Load data 2. Inspect data 3. Summarize variables 4. Plot variables\n(No code.)\n⸻\nDataset section (use iris)\nSlide 8: Load and view the dataset\nUse iris because it has both numeric + categorical.\nCode\ndata(iris)\nOptional note: View works interactively, not in knitted slides.\nCode (eval: false in slides)\nView(iris)\n⸻\nSlide 9: Inspect: “What’s in here?”\nTeach the inspection toolkit they’ll reuse constantly.\nCode\ndim(iris) names(iris) str(iris) head(iris)\n(You can mention tail() briefly, but no need to dwell.)\n⸻\nSlide 10: The $ operator (how to grab a column)\nCode\niris$Petal.Length\nOne sentence: • dataset$variable pulls out a single column\n⸻\nSlide 11: Summarize one numeric variable\nUse one variable, then show “repeat this for others.”\nCode\nmean(iris\\(Petal.Length)\nsd(iris\\)Petal.Length) median(iris\\(Petal.Length)\nIQR(iris\\)Petal.Length)\nOptional tiny note: • mean/SD for “center/spread” • median/IQR for “robust center/spread”\n⸻\nSlide 12: Summarize all numeric variables quickly\nThis is their “fast check.”\nCode\nsummary(iris)\nOne sentence: • summary gives a quick snapshot for every column\n⸻\nSlide 13: Summarize a categorical variable: counts\nThis is your categorical bridge.\nCode\ntable(iris$Species)\n⸻\nSlide 14: Categorical proportions\nCode\nprop.table(table(iris$Species))\nOptional: show percent\n100 * prop.table(table(iris$Species))\n⸻\nSlide 15: Plot a numeric variable (histogram)\nCode\nhist(iris$Petal.Length)\nOne sentence: • hist = distribution of one numeric variable\n⸻\nSlide 16: Plot a categorical variable (bar chart)\nCode\nbarplot(table(iris$Species))\nOne sentence: • barplot(table()) = categorical counts\n⸻\nSlide 17: (Optional) Two-way tables (only if you want)\nThis is useful but optional for HW 1 unless you plan to require it.\nCode\ntable(iris\\(Species, iris\\)Sepal.Length &gt; mean(iris$Sepal.Length))\nIf you include it, explain: • It’s just counts for combinations of two categorical variables\nIf you want a cleaner two-way table without logicals, skip this for now.\n⸻\nWrap + practice block\nSlide 18: Common errors (1 slide only)\nKeep it super practical: • object not found -&gt; you didn’t create it / typo / didn’t run the line • quotes matter for text\nCode (intentional error, optional)\nhello\nFix\nhello &lt;- “hello” hello\n(Do not go deeper than this.)\n⸻\nSlide 19: In-class practice (10 minutes)\nPut a checklist on the slide:\nPractice using mtcars: 1. Inspect: dim, names, str, head 2. Summarize numeric: mean(mtcars\\(mpg), sd(mtcars\\)mpg), summary(mtcars) 3. Summarize categorical-ish: table(mtcars\\(cyl), prop.table(table(mtcars\\)cyl)) 4. Plot: hist(mtcars\\(mpg), barplot(table(mtcars\\)cyl))\nCode (on slide)\ndata(mtcars)\ndim(mtcars) names(mtcars) str(mtcars) head(mtcars)\nmean(mtcars\\(mpg)\nsd(mtcars\\)mpg) summary(mtcars)\ntable(mtcars\\(cyl)\nprop.table(table(mtcars\\)cyl))\nhist(mtcars\\(mpg)\nbarplot(table(mtcars\\)cyl))\n⸻\nSlide 20: What you should be able to do for HW 1\nRe-state the competencies: • Open a script and run code • Inspect a dataset (dim, names, str, head) • Summarize numeric (mean, sd, median, IQR, summary) • Summarize categorical (table, prop.table) • Make a histogram + bar chart\n⸻\nSlide 21: Looking ahead\nOne sentence: • Next class: probability as long-run proportion (and we’ll reuse table() and prop.table())\n⸻\nNotes on adapting Nicky’s decks (fast mapping)\nFrom R02/R03, you can reuse almost directly: • calculator slide • objects/vectors slides • functions + help slide • iris inspection slides (View, str, summary, dim, head) • $ slide\nWhat to skip Monday: • AI policy slides • long troubleshooting section • inline code / Quarto reporting • tidyverse / pipe / janitor / gtsummary\n⸻\nIf you want, paste your typical class length (e.g., 75 vs 120 minutes) and I’ll mark which slides to drop for a shorter version without losing HW readiness.\n\n# TODO\n\n# Dollar sign\n# NA values\n# Loading packages\n\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset",
+    "title": "R basics and data summaries",
+    "section": "Inspecting the dataset",
+    "text": "Inspecting the dataset\nBefore summarizing or plotting, it helps to understand what’s in the dataset.\n\ndim(iris)\nnames(iris)\nstr(iris)\nhead(iris)\ntail(iris)\n\nThese functions help answer questions like:\n\nHow many rows and columns are there?\nWhat are the variable names?\nWhich variables are numeric vs categorical?"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#accessing-a-single-variable-with",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#accessing-a-single-variable-with",
+    "title": "R basics and data summaries",
+    "section": "Accessing a single variable with $",
+    "text": "Accessing a single variable with $\nTo work with one column at a time, use the $ operator.\n\niris$Petal.Length\n\n  [1] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 1.5 1.6 1.4 1.1 1.2 1.5 1.3 1.4\n [19] 1.7 1.5 1.7 1.5 1.0 1.7 1.9 1.6 1.6 1.5 1.4 1.6 1.6 1.5 1.5 1.4 1.5 1.2\n [37] 1.3 1.4 1.3 1.5 1.3 1.3 1.3 1.6 1.9 1.4 1.6 1.4 1.5 1.4 4.7 4.5 4.9 4.0\n [55] 4.6 4.5 4.7 3.3 4.6 3.9 3.5 4.2 4.0 4.7 3.6 4.4 4.5 4.1 4.5 3.9 4.8 4.0\n [73] 4.9 4.7 4.3 4.4 4.8 5.0 4.5 3.5 3.8 3.7 3.9 5.1 4.5 4.5 4.7 4.4 4.1 4.0\n [91] 4.4 4.6 4.0 3.3 4.2 4.2 4.2 4.3 3.0 4.1 6.0 5.1 5.9 5.6 5.8 6.6 4.5 6.3\n[109] 5.8 6.1 5.1 5.3 5.5 5.0 5.1 5.3 5.5 6.7 6.9 5.0 5.7 4.9 6.7 4.9 5.7 6.0\n[127] 4.8 4.9 5.6 5.8 6.1 6.4 5.6 5.1 5.6 6.1 5.6 5.5 4.8 5.4 5.6 5.1 5.1 5.9\n[145] 5.7 5.2 5.0 5.2 5.4 5.1\n\n\ndataset$variable pulls out a single column from a data frame."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-9-inspect-whats-in-here",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#slide-9-inspect-whats-in-here",
+    "title": "R basics and data summaries",
+    "section": "Slide 9: Inspect: “What’s in here?”",
+    "text": "Slide 9: Inspect: “What’s in here?”\nTeach the inspection toolkit they’ll reuse constantly.\nCode\ndim(iris) names(iris) str(iris) head(iris)\n(You can mention tail() briefly, but no need to dwell.)\n⸻\nSlide 10: The $ operator (how to grab a column)\nCode\niris$Petal.Length\nOne sentence: • dataset$variable pulls out a single column\n⸻\nSlide 11: Summarize one numeric variable\nUse one variable, then show “repeat this for others.”\nCode\nmean(iris\\(Petal.Length)\nsd(iris\\)Petal.Length) median(iris\\(Petal.Length)\nIQR(iris\\)Petal.Length)\nOptional tiny note: • mean/SD for “center/spread” • median/IQR for “robust center/spread”\n⸻\nSlide 12: Summarize all numeric variables quickly\nThis is their “fast check.”\nCode\nsummary(iris)\nOne sentence: • summary gives a quick snapshot for every column\n⸻\nSlide 13: Summarize a categorical variable: counts\nThis is your categorical bridge.\nCode\ntable(iris$Species)\n⸻\nSlide 14: Categorical proportions\nCode\nprop.table(table(iris$Species))\nOptional: show percent\n100 * prop.table(table(iris$Species))\n⸻\nSlide 15: Plot a numeric variable (histogram)\nCode\nhist(iris$Petal.Length)\nOne sentence: • hist = distribution of one numeric variable\n⸻\nSlide 16: Plot a categorical variable (bar chart)\nCode\nbarplot(table(iris$Species))\nOne sentence: • barplot(table()) = categorical counts\n⸻\nSlide 17: (Optional) Two-way tables (only if you want)\nThis is useful but optional for HW 1 unless you plan to require it.\nCode\ntable(iris\\(Species, iris\\)Sepal.Length &gt; mean(iris$Sepal.Length))\nIf you include it, explain: • It’s just counts for combinations of two categorical variables\nIf you want a cleaner two-way table without logicals, skip this for now.\n⸻\nWrap + practice block\nSlide 18: Common errors (1 slide only)\nKeep it super practical: • object not found -&gt; you didn’t create it / typo / didn’t run the line • quotes matter for text\nCode (intentional error, optional)\nhello\nFix\nhello &lt;- “hello” hello\n(Do not go deeper than this.)\n⸻\nSlide 19: In-class practice (10 minutes)\nPut a checklist on the slide:\nPractice using mtcars: 1. Inspect: dim, names, str, head 2. Summarize numeric: mean(mtcars\\(mpg), sd(mtcars\\)mpg), summary(mtcars) 3. Summarize categorical-ish: table(mtcars\\(cyl), prop.table(table(mtcars\\)cyl)) 4. Plot: hist(mtcars\\(mpg), barplot(table(mtcars\\)cyl))\nCode (on slide)\ndata(mtcars)\ndim(mtcars) names(mtcars) str(mtcars) head(mtcars)\nmean(mtcars\\(mpg)\nsd(mtcars\\)mpg) summary(mtcars)\ntable(mtcars\\(cyl)\nprop.table(table(mtcars\\)cyl))\nhist(mtcars\\(mpg)\nbarplot(table(mtcars\\)cyl))\n⸻\nSlide 20: What you should be able to do for HW 1\nRe-state the competencies: • Open a script and run code • Inspect a dataset (dim, names, str, head) • Summarize numeric (mean, sd, median, IQR, summary) • Summarize categorical (table, prop.table) • Make a histogram + bar chart\n⸻\nSlide 21: Looking ahead\nOne sentence: • Next class: probability as long-run proportion (and we’ll reuse table() and prop.table())\n⸻\nNotes on adapting Nicky’s decks (fast mapping)\nFrom R02/R03, you can reuse almost directly: • calculator slide • objects/vectors slides • functions + help slide • iris inspection slides (View, str, summary, dim, head) • $ slide\nWhat to skip Monday: • AI policy slides • long troubleshooting section • inline code / Quarto reporting • tidyverse / pipe / janitor / gtsummary\n⸻\nIf you want, paste your typical class length (e.g., 75 vs 120 minutes) and I’ll mark which slides to drop for a shorter version without losing HW readiness.\n\n# TODO\n\n# Dollar sign\n# NA values\n# Loading packages\n\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-1n",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-1n",
+    "title": "R basics and data summaries",
+    "section": "Inspecting the dataset (1/n)",
+    "text": "Inspecting the dataset (1/n)\nHow many rows and columns are there?\n\ndim(iris)\n\n[1] 150   5\n\n\nWhat are the variable names?\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\"     \n\n\nWhich variables are numeric vs categorical?\n\nstr(iris)\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ..."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-2n",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-2n",
+    "title": "R basics and data summaries",
+    "section": "Inspecting the dataset (2/n)",
+    "text": "Inspecting the dataset (2/n)\nWhat are the variable names?\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\""
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-3n",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-3n",
+    "title": "R basics and data summaries",
+    "section": "Inspecting the dataset (3/n)",
+    "text": "Inspecting the dataset (3/n)\nWhich variables are numeric vs categorical?\n\nstr(iris)\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ..."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#viewing-rows-of-a-dataset",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#viewing-rows-of-a-dataset",
+    "title": "R basics and data summaries",
+    "section": "Viewing rows of a dataset",
+    "text": "Viewing rows of a dataset\n\n\nWhen a dataset has many rows, it helps to look at just a few.\n\nhead(iris)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n4          4.6         3.1          1.5         0.2  setosa\n5          5.0         3.6          1.4         0.2  setosa\n6          5.4         3.9          1.7         0.4  setosa\n\ntail(iris)\n\n    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species\n145          6.7         3.3          5.7         2.5 virginica\n146          6.7         3.0          5.2         2.3 virginica\n147          6.3         2.5          5.0         1.9 virginica\n148          6.5         3.0          5.2         2.0 virginica\n149          6.2         3.4          5.4         2.3 virginica\n150          5.9         3.0          5.1         1.8 virginica\n\n\n\nYou can also specify how many rows to view:\n\nhead(iris, 3)\n\n  Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n1          5.1         3.5          1.4         0.2  setosa\n2          4.9         3.0          1.4         0.2  setosa\n3          4.7         3.2          1.3         0.2  setosa\n\ntail(iris, 2)\n\n    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species\n149          6.2         3.4          5.4         2.3 virginica\n150          5.9         3.0          5.1         1.8 virginica"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-dataset-summary",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-dataset-summary",
+    "title": "R basics and data summaries",
+    "section": "Quick dataset summary",
+    "text": "Quick dataset summary\nWe can get a fast overview of all variables at once.\n\nsummary(iris)\n\n  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   \n Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  \n 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  \n Median :5.800   Median :3.000   Median :4.350   Median :1.300  \n Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  \n 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  \n Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  \n       Species  \n setosa    :50  \n versicolor:50  \n virginica :50  \n                \n                \n                \n\n\nThis gives basic summaries for each column, based on its type."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-key-questions",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#inspecting-the-dataset-key-questions",
+    "title": "R basics and data summaries",
+    "section": "Inspecting the dataset: key questions",
+    "text": "Inspecting the dataset: key questions\nHow many rows and columns are there?\n\ndim(iris)\n\n[1] 150   5\n\n\nWhat are the variable names?\n\nnames(iris)\n\n[1] \"Sepal.Length\" \"Sepal.Width\"  \"Petal.Length\" \"Petal.Width\"  \"Species\"     \n\n\nWhich variables are numeric vs categorical?\n\nstr(iris)\n\n'data.frame':   150 obs. of  5 variables:\n $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...\n $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...\n $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...\n $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...\n $ Species     : Factor w/ 3 levels \"setosa\",\"versicolor\",..: 1 1 1 1 1 1 1 1 1 1 ..."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#summarizing-one-numeric-variable",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#summarizing-one-numeric-variable",
+    "title": "R basics and data summaries",
+    "section": "Summarizing one numeric variable",
+    "text": "Summarizing one numeric variable\nOnce you’ve selected a single numeric variable, you can apply summary functions to it.\n\nmean(iris$Petal.Length)\n\n[1] 3.758\n\nsd(iris$Petal.Length)\n\n[1] 1.765298\n\nmedian(iris$Petal.Length)\n\n[1] 4.35\n\nIQR(iris$Petal.Length)\n\n[1] 3.5\n\n\n\nMean / SD describe center and spread\n\nMedian / IQR are more robust to outliers"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-summaries-for-all-variables",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#quick-summaries-for-all-variables",
+    "title": "R basics and data summaries",
+    "section": "Quick summaries for all variables",
+    "text": "Quick summaries for all variables\nWe can also get a fast overview of the entire dataset at once.\n\nsummary(iris)\n\n  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   \n Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  \n 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  \n Median :5.800   Median :3.000   Median :4.350   Median :1.300  \n Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  \n 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  \n Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  \n       Species  \n setosa    :50  \n versicolor:50  \n virginica :50  \n                \n                \n                \n\n\nsummary() provides basic summaries for every column, based on its type."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#missing-values-na-in-r",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#missing-values-na-in-r",
+    "title": "R basics and data summaries",
+    "section": "Missing values (NA) in R",
+    "text": "Missing values (NA) in R\nSometimes datasets contain missing values, represented as NA.\nBy default, summary functions return NA if any values are missing.\n\nx &lt;- c(2, 5, NA, 7)\nmean(x)\n\n[1] NA\n\n\nTo ignore missing values, use na.rm = TRUE.\n\nmean(x, na.rm = TRUE)\n\n[1] 4.666667\n\nsd(x, na.rm = TRUE)\n\n[1] 2.516611\n\nmedian(x, na.rm = TRUE)\n\n[1] 5\n\nIQR(x, na.rm = TRUE)\n\n[1] 2.5\n\n\n\nna.rm = TRUE tells R to remove missing values before calculating"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#summarizing-a-categorical-variable-counts",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#summarizing-a-categorical-variable-counts",
+    "title": "R basics and data summaries",
+    "section": "Summarizing a categorical variable (counts)",
+    "text": "Summarizing a categorical variable (counts)\nFor categorical variables, we often start by counting how many observations fall in each category.\n\ntable(iris$Species)\n\n\n    setosa versicolor  virginica \n        50         50         50"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#categorical-proportions",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#categorical-proportions",
+    "title": "R basics and data summaries",
+    "section": "Categorical proportions",
+    "text": "Categorical proportions\nWe can convert counts into proportions using prop.table().\n\nprop.table(table(iris$Species))\n\n\n    setosa versicolor  virginica \n 0.3333333  0.3333333  0.3333333 \n\n\nTo express proportions as percentages:\n\n100 * prop.table(table(iris$Species))\n\n\n    setosa versicolor  virginica \n  33.33333   33.33333   33.33333"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#plotting-a-numeric-variable",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#plotting-a-numeric-variable",
+    "title": "R basics and data summaries",
+    "section": "Plotting a numeric variable",
+    "text": "Plotting a numeric variable\nA histogram shows the distribution of a single numeric variable.\n\nhist(iris$Petal.Length)"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#plotting-a-categorical-variable",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#plotting-a-categorical-variable",
+    "title": "R basics and data summaries",
+    "section": "Plotting a categorical variable",
+    "text": "Plotting a categorical variable\nA bar chart shows counts for each category.\n\nbarplot(table(iris$Species))\n\n\nbarplot(table()) is a quick way to visualize categorical data."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#lide-17-optional-two-way-tables-only-if-you-want",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#lide-17-optional-two-way-tables-only-if-you-want",
+    "title": "R basics and data summaries",
+    "section": "lide 17: (Optional) Two-way tables (only if you want)",
+    "text": "lide 17: (Optional) Two-way tables (only if you want)\nThis is useful but optional for HW 1 unless you plan to require it.\nCode\ntable(iris\\(Species, iris\\)Sepal.Length &gt; mean(iris$Sepal.Length))\nIf you include it, explain: • It’s just counts for combinations of two categorical variables\nIf you want a cleaner two-way table without logicals, skip this for now.\n⸻\nWrap + practice block\nSlide 18: Common errors (1 slide only)\nKeep it super practical: • object not found -&gt; you didn’t create it / typo / didn’t run the line • quotes matter for text\nCode (intentional error, optional)\nhello\nFix\nhello &lt;- “hello” hello\n(Do not go deeper than this.)\n⸻\nSlide 19: In-class practice (10 minutes)\nPut a checklist on the slide:\nPractice using mtcars: 1. Inspect: dim, names, str, head 2. Summarize numeric: mean(mtcars\\(mpg), sd(mtcars\\)mpg), summary(mtcars) 3. Summarize categorical-ish: table(mtcars\\(cyl), prop.table(table(mtcars\\)cyl)) 4. Plot: hist(mtcars\\(mpg), barplot(table(mtcars\\)cyl))\nCode (on slide)\ndata(mtcars)\ndim(mtcars) names(mtcars) str(mtcars) head(mtcars)\nmean(mtcars\\(mpg)\nsd(mtcars\\)mpg) summary(mtcars)\ntable(mtcars\\(cyl)\nprop.table(table(mtcars\\)cyl))\nhist(mtcars\\(mpg)\nbarplot(table(mtcars\\)cyl))\n⸻\nSlide 20: What you should be able to do for HW 1\nRe-state the competencies: • Open a script and run code • Inspect a dataset (dim, names, str, head) • Summarize numeric (mean, sd, median, IQR, summary) • Summarize categorical (table, prop.table) • Make a histogram + bar chart\n⸻\nSlide 21: Looking ahead\nOne sentence: • Next class: probability as long-run proportion (and we’ll reuse table() and prop.table())\n⸻\nNotes on adapting Nicky’s decks (fast mapping)\nFrom R02/R03, you can reuse almost directly: • calculator slide • objects/vectors slides • functions + help slide • iris inspection slides (View, str, summary, dim, head) • $ slide\nWhat to skip Monday: • AI policy slides • long troubleshooting section • inline code / Quarto reporting • tidyverse / pipe / janitor / gtsummary\n⸻\nIf you want, paste your typical class length (e.g., 75 vs 120 minutes) and I’ll mark which slides to drop for a shorter version without losing HW readiness.\n\n# TODO\n\n# NA values\n# Loading packages\n\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-along-optional",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-along-optional",
+    "title": "R basics and data summaries",
+    "section": "Coding along (optional)",
+    "text": "Coding along (optional)\nIf you want to follow along during class:\n\nOpen a new Quarto document (.qmd)\nThis is how homework and exams will be completed\n\nInsert a code chunk: - Mac: Cmd + Option + I - Windows: Ctrl + Alt + I\nYou can run code with Cmd/Ctrl + Enter."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages-1",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages-1",
+    "title": "R basics and data summaries",
+    "section": "R Packages",
+    "text": "R Packages\nA good analogy for R packages is that they are like apps you can download onto a mobile phone:\n\nModernDive Figure 1.4\nPackages contain additional functions and data"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#installing-packages",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#installing-packages",
+    "title": "R basics and data summaries",
+    "section": "Installing packages",
+    "text": "Installing packages\nTwo options to install packages:\n\ninstall.packages() or\nThe “Packages” tab in Files/Plots/Packages/Help/Viewer window\n\n\ninstall.packages(\"dplyr\")   # only do this ONCE, use quotes\n\n\n\n\nOnly install packages once (unless you want to update them)\nInstalled from Comprehensive R Archive Network (CRAN) = package mothership"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#video-on-installing-packages",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#video-on-installing-packages",
+    "title": "R basics and data summaries",
+    "section": "Video on installing packages",
+    "text": "Video on installing packages\n\nDanielle Navarro’s YouTube video on Installing and loading R packages: https://www.youtube.com/watch?v=kpHZVyDvEhQ\n\nIf you want to get more information on packages"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#installing-vs-loading-packages",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#installing-vs-loading-packages",
+    "title": "R basics and data summaries",
+    "section": "Installing vs loading packages",
+    "text": "Installing vs loading packages\nThere are two separate steps:\nInstall (only once per computer, example):\n\ninstall.packages(\"dplyr\")\n\nLoad (every time you start R):\n\nlibrary(dplyr)\n\nInstalling puts the package on your computer.\nLoading makes it available in your R session."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#textbook-datasets-important",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#textbook-datasets-important",
+    "title": "R basics and data summaries",
+    "section": "Textbook datasets (important)",
+    "text": "Textbook datasets (important)\n\n\nThe textbook datasets live in an R package called oibiostat.\n \nIt is not on CRAN, so we install it from GitHub, per the book authors’ instructions.\n\ninstall.packages(\"devtools\")\ndevtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\n(This may take a few minutes the first time.)\n \nAfter installing, load it (this part is done every time you restart R):\n\nlibrary(oibiostat)"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#check-that-it-worked",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#check-that-it-worked",
+    "title": "R basics and data summaries",
+    "section": "Check that it worked",
+    "text": "Check that it worked\nIf installation worked, you can load the package and access a dataset:\n\nlibrary(oibiostat)\ndata(dds.discr)\nhead(dds.discr)\n\nIf this runs without errors, you’re set.\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#overwriting-objects",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#overwriting-objects",
+    "title": "R basics and data summaries",
+    "section": "Overwriting objects",
+    "text": "Overwriting objects\nIn R, you can overwrite an object by assigning a new value to the same name.\n\nx &lt;- 5\nx\n\n[1] 5\n\n\n\nx &lt;- 10\nx\n\n[1] 10\n\n\n\nR does not warn you when this happens.\nThe old value is replaced.\nThis is normal and common in R."
+  },
+  {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#comments-in-r",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#comments-in-r",
+    "title": "R basics and data summaries",
+    "section": "Comments in R",
+    "text": "Comments in R\nComments are notes to yourself (and others).\nR ignores anything after #.\n\n# This is a comment\nx &lt;- 5   # assign 5 to x\nx\n\n[1] 5\n\n\n\nUse comments to explain what your code is doing. Better is to explain why you decided to do what you are doing with your code.\nFor the class, comments can be helpful in homework and exams to let us know what your thought process is or where you might have been unsure."
   }
 ]

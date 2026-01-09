@@ -1,0 +1,609 @@
+---
+title: "R basics and data summaries"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w2d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v4.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | R basics + summaries"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r}
+#| label: "setup" 
+#| include: false
+#| message: false
+#| warning: false
+
+library(here)
+source(here("class_dates.R"))
+
+# terminal: for icons
+# quarto install extension quarto-ext/fontawesome
+```
+
+## Learning objectives (today)
+
+By the end of class, you should be able to:
+
+1. Run code
+2. Inspect a dataset
+3. Summarize numeric + categorical variables
+4. Make two basic plots
+
+## Coding in R
+
+![[Artwork by \@allison_horst](https://allisonhorst.com/everything-else)](/img_slides/horst_timeline_Rlearning.png){fig-align="center"}
+
+## We have options where to code in R
+
+**Console**
+
+- For quick experiments
+- Temporary (not saved)
+
+**R scripts (.R files)**
+
+- Often used for data cleaning, functions, or prep
+- Common in real analysis workflows
+- Code only
+
+**Code chunks in a .qmd file**
+
+- Used for analysis and reporting
+- Combine **code and written explanation**
+- Saved and reproducible
+
+
+**Running code**
+
+- Run the current line or selection with `Cmd/Ctrl + Enter`
+
+## Coding along (optional)
+
+If you want to follow along during class:
+
+- Open a **new Quarto document** (`.qmd`)
+- This is how homework and exams will be completed
+
+**Insert a code chunk:**
+- Mac: `Cmd + Option + I`
+- Windows: `Ctrl + Alt + I`
+
+You can run code with `Cmd/Ctrl + Enter`.
+
+## R as a calculator
+
+- Rules for order of operations are followed
+- Spaces between numbers and characters are ignored
+
+\
+
+::: columns
+::: {.column width="50%"}
+```{r}
+10^2
+3 ^ 7
+6/9
+9-43
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+4^3-2* 7+9 /2
+```
+
+The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
+:::
+:::
+
+## Variables (objects) in R
+
+Variables let us **store results** so we can reuse them later 
+
+(e.g., data, summaries, plots, model output).
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+#### Assigning a single value
+
+- Use `<-` to assign a value to a name
+- Read as "gets", "becomes", or "assigns"
+
+```{r}
+x <- 5
+x
+```
+
+You'll mostly see `<-` in examples and documentation, so that’s what we’ll use in this course. But sometimes people use `=`.
+
+```{r}
+x = 5
+x
+```
+
+:::
+
+::: {.column width="50%"}
+
+#### Assigning multiple values (vectors)
+
+**Sequences**
+
+```{r}
+a <- 3:10
+a
+```
+
+**Combining values with `c()`**
+
+```{r}
+b <- c(5, 12, 2, 100, 8)
+b
+```
+
+:::
+:::
+
+## Overwriting objects
+
+In R, you can overwrite an object by assigning a new value to the same name.
+
+```{r}
+x <- 5
+x
+```
+
+```{r}
+x <- 10
+x
+```
+
+- R does not warn you when this happens.
+- The old value is replaced.
+- This is normal and common in R.
+
+## Comments in R
+
+Comments are notes to yourself (and others).  
+R ignores anything after `#`.
+
+```{r}
+# This is a comment
+x <- 5   # assign 5 to x
+x
+```
+
+- Use comments to explain *what* your code is doing. Better is to explain *why* you decided to do what you are doing with your code.
+- For the class, comments can be helpful in homework and exams to let us know what your thought process is or where you might have been unsure.
+
+## Quick practice (30-60 seconds)
+
+In your `.qmd`, create:
+
+- `y <- 8`
+- `c_vec <- 15:20`
+- `d_vec <- c(16:19, 22)`
+
+(Do not overthink it - just try it.)
+
+## Quick practice: solution
+
+```{r}
+y <- 8
+y
+```
+
+```{r}
+c_vec <- 15:20
+c_vec
+```
+
+```{r}
+d_vec <- c(16:19, 22)
+d_vec
+```
+
+## Using functions
+
+- A **function** performs a task (e.g., calculate a mean)
+- Functions use parentheses: `function_name()`
+- Inputs to a function are called **arguments**
+- Use `?function_name` to see the help file
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Arguments specified by name
+
+```{r}
+mean(x = 1:4)
+
+seq(from = 1, to = 12, by = 3)
+seq(by = 3, to = 12, from = 1)
+```
+
+:::
+::: {.column width="50%"}
+
+### Arguments specified by position
+
+```{r}
+mean(1:4)
+
+seq(1, 12, 3)
+```
+
+:::
+:::
+
+
+## Using functions for summary statistics
+
+Now let’s apply functions to the vectors you just created.
+
+- Calculate the **mean** of `c_vec`
+- Calculate the **standard deviation** of `c_vec`
+- Use `?sd` to see what arguments `sd()` takes
+
+\
+
+```{r}
+mean(c_vec)
+sd(c_vec)
+```
+
+\ 
+
+If you have time, also try:
+
+```{r}
+median(c_vec)
+IQR(c_vec)
+```
+
+---
+
+## Quick check
+
+- Do these functions return **one number or many**?
+- Does that match what you expect a "summary" to do?
+
+
+## Working with a real dataset
+
+\ 
+
+- R comes with several built-in datasets that we can use to practice.
+
+- We’ll start with the `iris` dataset. 
+  - This dataset is useful because it includes both numeric and categorical variables.
+
+## Fisher's (or Anderson's) Iris data set
+
+Data description: 
+
+-   n = 150
+-   3 species of Iris flowers (Setosa, Virginica, and Versicolour)
+    -   50 measurements of each type of Iris
+-   **Variables**:
+    -   sepal length, sepal width, petal length, petal width, and species
+
+<center><img src="/img_slides/Iris_types.png" width="70%" height="50%"/><img src="/img_slides/Iris_parts.png" width="28%" height="50%"/></center>
+
+[Gareth Duffy](https://github.com/Datagatherer2357/Gareth-Duffy-GMIT-Project)
+
+## Load and view the data
+
+The `iris` dataset is already available in base R.
+
+```{r}
+data(iris)
+```
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Viewing in the console
+
+You can display the dataset by typing its name:
+
+```{r}
+iris
+```
+
+:::
+::: {.column width="50%"}
+
+### Interactive view
+
+You can open an interactive view of the dataset like this:
+
+```{r eval=FALSE}
+View(iris)
+```
+
+(Note: `View()` works interactively in RStudio, but does not display in slides.)
+
+![](/img_slides/screenshot_iris_View.png){fig-align="center" width="95%"}
+:::
+:::
+
+## Inspecting the dataset
+
+Before summarizing or plotting, it helps to understand what’s in the dataset.
+
+```{r}
+#| eval: false
+
+dim(iris)
+names(iris)
+str(iris)
+head(iris)
+tail(iris)
+```
+
+These functions help answer questions like:
+
+- How many rows and columns are there?
+- What are the variable names?
+- Which variables are numeric vs categorical?
+
+
+## Inspecting the dataset: key questions
+
+### How many rows and columns are there?
+
+```{r}
+dim(iris)
+```
+
+### What are the variable names?
+
+```{r}
+names(iris)
+```
+
+### Which variables are numeric vs categorical?
+
+```{r}
+str(iris)
+```
+
+## Viewing rows of a dataset
+
+::: columns
+::: {.column width="50%"}
+
+When a dataset has many rows, it helps to look at just a few.
+
+```{r}
+head(iris)
+tail(iris)
+```
+
+:::
+::: {.column width="50%"}
+
+You can also specify how many rows to view:
+
+```{r}
+head(iris, 3)
+tail(iris, 2)
+```
+
+:::
+:::
+
+## Accessing a single variable with `$`
+
+To work with one column at a time, use the `$` operator.
+
+```{r}
+iris$Petal.Length
+```
+
+`dataset$variable` pulls out a single column from a data frame.
+
+## Summarizing one numeric variable
+
+Once you’ve selected a single numeric variable, you can apply summary functions to it.
+
+```{r}
+mean(iris$Petal.Length)
+sd(iris$Petal.Length)
+median(iris$Petal.Length)
+IQR(iris$Petal.Length)
+```
+
+- Mean / SD describe center and spread  
+- Median / IQR are more robust to outliers  
+
+
+## Quick summaries for all variables
+
+We can also get a fast overview of the entire dataset at once.
+
+```{r}
+summary(iris)
+```
+
+`summary()` provides basic summaries for every column, based on its type.
+
+## Missing values (`NA`) in R
+
+Sometimes datasets contain missing values, represented as `NA`.
+
+By default, summary functions return `NA` if any values are missing.
+
+```{r}
+x <- c(2, 5, NA, 7)
+mean(x)
+```
+
+To ignore missing values, use `na.rm = TRUE`.
+
+```{r}
+mean(x, na.rm = TRUE)
+sd(x, na.rm = TRUE)
+median(x, na.rm = TRUE)
+IQR(x, na.rm = TRUE)
+```
+
+- `na.rm = TRUE` tells R to remove missing values before calculating
+
+
+## Summarizing a categorical variable (counts)
+
+For categorical variables, we often start by counting how many observations fall in each category.
+
+```{r}
+table(iris$Species)
+```
+
+## Categorical proportions
+
+We can convert counts into proportions using `prop.table()`.
+
+```{r}
+prop.table(table(iris$Species))
+```
+
+To express proportions as percentages:
+
+```{r}
+100 * prop.table(table(iris$Species))
+```
+
+## Plotting a numeric variable
+
+A histogram shows the distribution of a single numeric variable.
+
+```{r}
+hist(iris$Petal.Length)
+```
+
+## Plotting a categorical variable
+
+A bar chart shows counts for each category.
+
+```{r}
+barplot(table(iris$Species))
+```
+
+`barplot(table())` is a quick way to visualize categorical data.
+
+# R Packages
+
+<!-- background-image: url(img/tidyverse_celestial.jpg) -->
+
+<!-- background-size: cover -->
+
+![](/img_slides/tidyverse_celestial.jpg){fig-align="center"}
+
+## R Packages
+
+A good analogy for R packages is that they are like apps you can download onto a mobile phone:
+
+![[ModernDive Figure 1.4](https://moderndive.netlify.com/1-getting-started.html#packages)](/img_slides/R_vs_R_packages.png){fig-align="center"}
+
+-   Packages contain additional functions and data
+
+## Installing vs loading packages
+
+There are two separate steps:
+
+**Install** (only once per computer, example):
+
+```{r eval=FALSE}
+install.packages("dplyr")
+```
+
+**Load** (every time you start R):
+
+```{r}
+library(dplyr)
+```
+
+Installing puts the package on your computer. 
+
+Loading makes it available in your R session.
+
+
+## Video on installing packages
+
+-   Danielle Navarro’s YouTube video on ***Installing and loading R packages***: <https://www.youtube.com/watch?v=kpHZVyDvEhQ>
+    -   If you want to get more information on packages
+
+
+## Textbook datasets (important)
+
+\
+
+The textbook datasets live in an R package called `oibiostat`.
+
+\ 
+
+It is **not on CRAN**, so we install it from GitHub, per the book authors' instructions.
+
+```{r eval=FALSE}
+install.packages("devtools")
+devtools::install_github("OI-Biostat/oi_biostat_data", force = TRUE)
+```
+
+(This may take a few minutes the first time.)
+
+\ 
+
+After installing, load it (this part is done **every time** you restart R):
+
+```{r eval=FALSE}
+library(oibiostat)
+```
+
+## Check that it worked
+
+If installation worked, you can load the package and access a dataset:
+
+```{r eval=FALSE}
+library(oibiostat)
+data(dds.discr)
+head(dds.discr)
+```
+
+If this runs without errors, you're set.
