@@ -197,6 +197,7 @@ x
 ## Comments in R
 
 Comments are notes to yourself (and others).  
+
 R ignores anything after `#`.
 
 ```{r}
@@ -205,8 +206,23 @@ x <- 5   # assign 5 to x
 x
 ```
 
-- Use comments to explain *what* your code is doing. Better is to explain *why* you decided to do what you are doing with your code.
-- For the class, comments can be helpful in homework and exams to let us know what your thought process is or where you might have been unsure.
+- Comments can explain *what* your code is doing.
+- Even better, comments can explain *why* you chose to do something.
+
+```{r}
+# Example: WHAT the code is doing
+# Adding two numbers and storing the result
+sum_result <- 2 + 3
+
+# Example: WHY
+# Creating a constant that will be reused later in the analysis
+total_score <- 2 + 3
+```
+
+
+- For this class, comments can be helpful in homework and exams
+- They let us see your thought process or where you might have been unsure
+
 
 ## Quick practice (30-60 seconds)
 
@@ -564,11 +580,53 @@ Installing puts the package on your computer.
 
 Loading makes it available in your R session.
 
+- In practice, `install.packages()` and `library()` calls should go
+  near the **top of a script** or in an **early code chunk** of a `.qmd` file
 
-## Video on installing packages
+## Using `::` to access package functions
 
--   Danielle Navarro’s YouTube video on ***Installing and loading R packages***: <https://www.youtube.com/watch?v=kpHZVyDvEhQ>
-    -   If you want to get more information on packages
+There are two ways to use functions from a package.
+
+::: columns
+::: {.column width="50%"}
+
+**Option 1: Load the package**
+
+```{r}
+library(dplyr)
+arrange(iris, Petal.Length)
+```
+
+::: 
+::: {.column width="50%"}
+
+**Option 2: Use `::` without loading the package**
+
+```{r}
+dplyr::arrange(iris, Petal.Length)
+```
+
+:::
+:::
+
+Both are valid.
+
+- `library()` loads all functions from a package
+- `package::function()` uses just one function
+- Either approach is fine.
+- I recommend including `library()` calls at the top of a file as a cue to yourself (and others) which packages are being used.
+	
+
+## Learn more (optional)
+
+\
+
+If you want a short, clear walkthrough on R packages:
+
+\
+
+> **Installing and loading R packages** Danielle Navarro (YouTube)
+> <https://www.youtube.com/watch?v=kpHZVyDvEhQ>
 
 
 ## Textbook datasets (important)
@@ -607,3 +665,17 @@ head(dds.discr)
 ```
 
 If this runs without errors, you're set.
+
+## Wrap-up
+
+Today you learned how to:
+
+- Run basic R code
+- Inspect a dataset
+- Summarize numeric and categorical variables
+- Make simple plots
+
+We'll build on this foundation to:
+
+- Work more efficiently with data
+- Start using additional functions and packages

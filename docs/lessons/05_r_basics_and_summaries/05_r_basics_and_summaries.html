@@ -581,8 +581,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="comments-in-r" class="slide level2">
 <h2>Comments in R</h2>
-<p>Comments are notes to yourself (and others).<br>
-R ignores anything after <code>#</code>.</p>
+<p>Comments are notes to yourself (and others).</p>
+<p>R ignores anything after <code>#</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># This is a comment</span></span>
 <span id="cb23-2"><a></a>x <span class="ot">&lt;-</span> <span class="dv">5</span>   <span class="co"># assign 5 to x</span></span>
@@ -592,8 +592,21 @@ R ignores anything after <code>#</code>.</p>
 </div>
 </div>
 <ul>
-<li>Use comments to explain <em>what</em> your code is doing. Better is to explain <em>why</em> you decided to do what you are doing with your code.</li>
-<li>For the class, comments can be helpful in homework and exams to let us know what your thought process is or where you might have been unsure.</li>
+<li>Comments can explain <em>what</em> your code is doing.</li>
+<li>Even better, comments can explain <em>why</em> you chose to do something.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Example: WHAT the code is doing</span></span>
+<span id="cb25-2"><a></a><span class="co"># Adding two numbers and storing the result</span></span>
+<span id="cb25-3"><a></a>sum_result <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb25-4"><a></a></span>
+<span id="cb25-5"><a></a><span class="co"># Example: WHY</span></span>
+<span id="cb25-6"><a></a><span class="co"># Creating a constant that will be reused later in the analysis</span></span>
+<span id="cb25-7"><a></a>total_score <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>For this class, comments can be helpful in homework and exams</li>
+<li>They let us see your thought process or where you might have been unsure</li>
 </ul>
 </section>
 <section id="quick-practice-30-60-seconds" class="slide level2">
@@ -609,22 +622,22 @@ R ignores anything after <code>#</code>.</p>
 <section id="quick-practice-solution" class="slide level2">
 <h2>Quick practice: solution</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>y <span class="ot">&lt;-</span> <span class="dv">8</span></span>
-<span id="cb25-2"><a></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>y <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb26-2"><a></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>c_vec <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">:</span><span class="dv">20</span></span>
-<span id="cb27-2"><a></a>c_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>c_vec <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb28-2"><a></a>c_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15 16 17 18 19 20</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>d_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span><span class="sc">:</span><span class="dv">19</span>, <span class="dv">22</span>)</span>
-<span id="cb29-2"><a></a>d_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>d_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span><span class="sc">:</span><span class="dv">19</span>, <span class="dv">22</span>)</span>
+<span id="cb30-2"><a></a>d_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16 17 18 19 22</code></pre>
 </div>
@@ -644,15 +657,15 @@ R ignores anything after <code>#</code>.</p>
 <div class="column" style="width:50%;">
 <h3 id="arguments-specified-by-name">Arguments specified by name</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">mean</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">12</span>, <span class="at">by =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">12</span>, <span class="at">by =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  4  7 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">seq</span>(<span class="at">by =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="dv">12</span>, <span class="at">from =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">seq</span>(<span class="at">by =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="dv">12</span>, <span class="at">from =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  4  7 10</code></pre>
 </div>
@@ -660,11 +673,11 @@ R ignores anything after <code>#</code>.</p>
 </div><div class="column" style="width:50%;">
 <h3 id="arguments-specified-by-position">Arguments specified by position</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  4  7 10</code></pre>
 </div>
@@ -682,11 +695,11 @@ R ignores anything after <code>#</code>.</p>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">mean</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">mean</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 17.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">sd</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">sd</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.870829</code></pre>
 </div>
@@ -694,11 +707,11 @@ R ignores anything after <code>#</code>.</p>
 <p>&nbsp;</p>
 <p>If you have time, also try:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">median</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">median</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 17.5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">IQR</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">IQR</span>(c_vec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
@@ -745,7 +758,7 @@ R ignores anything after <code>#</code>.</p>
 <h2>Load and view the data</h2>
 <p>The <code>iris</code> dataset is already available in base R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">data</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">data</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -754,7 +767,7 @@ R ignores anything after <code>#</code>.</p>
 <h3 id="viewing-in-the-console">Viewing in the console</h3>
 <p>You can display the dataset by typing its name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 1            5.1         3.5          1.4         0.2     setosa
@@ -913,7 +926,7 @@ R ignores anything after <code>#</code>.</p>
 <h3 id="interactive-view">Interactive view</h3>
 <p>You can open an interactive view of the dataset like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">View</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">View</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(Note: <code>View()</code> works interactively in RStudio, but does not display in slides.)</p>
 <div class="quarto-figure quarto-figure-center">
@@ -927,11 +940,11 @@ R ignores anything after <code>#</code>.</p>
 <h2>Inspecting the dataset</h2>
 <p>Before summarizing or plotting, it helps to understand what’s in the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">dim</span>(iris)</span>
-<span id="cb53-2"><a></a><span class="fu">names</span>(iris)</span>
-<span id="cb53-3"><a></a><span class="fu">str</span>(iris)</span>
-<span id="cb53-4"><a></a><span class="fu">head</span>(iris)</span>
-<span id="cb53-5"><a></a><span class="fu">tail</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">dim</span>(iris)</span>
+<span id="cb54-2"><a></a><span class="fu">names</span>(iris)</span>
+<span id="cb54-3"><a></a><span class="fu">str</span>(iris)</span>
+<span id="cb54-4"><a></a><span class="fu">head</span>(iris)</span>
+<span id="cb54-5"><a></a><span class="fu">tail</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>These functions help answer questions like:</p>
 <ul>
@@ -944,21 +957,21 @@ R ignores anything after <code>#</code>.</p>
 <h2>Inspecting the dataset: key questions</h2>
 <h3 id="how-many-rows-and-columns-are-there">How many rows and columns are there?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="fu">dim</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">dim</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 150   5</code></pre>
 </div>
 </div>
 <h3 id="what-are-the-variable-names">What are the variable names?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">names</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">names</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width"  "Species"     </code></pre>
 </div>
 </div>
 <h3 id="which-variables-are-numeric-vs-categorical">Which variables are numeric vs categorical?</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">str</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="fu">str</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   150 obs. of  5 variables:
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
@@ -975,7 +988,7 @@ R ignores anything after <code>#</code>.</p>
 <div class="column" style="width:50%;">
 <p>When a dataset has many rows, it helps to look at just a few.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
@@ -985,7 +998,7 @@ R ignores anything after <code>#</code>.</p>
 5          5.0         3.6          1.4         0.2  setosa
 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="fu">tail</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="fu">tail</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 145          6.7         3.3          5.7         2.5 virginica
@@ -999,14 +1012,14 @@ R ignores anything after <code>#</code>.</p>
 </div><div class="column" style="width:50%;">
 <p>You can also specify how many rows to view:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="fu">head</span>(iris, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="fu">head</span>(iris, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
 2          4.9         3.0          1.4         0.2  setosa
 3          4.7         3.2          1.3         0.2  setosa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="fu">tail</span>(iris, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="fu">tail</span>(iris, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
 149          6.2         3.4          5.4         2.3 virginica
@@ -1019,7 +1032,7 @@ R ignores anything after <code>#</code>.</p>
 <h2>Accessing a single variable with <code>$</code></h2>
 <p>To work with one column at a time, use the <code>$</code> operator.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a>iris<span class="sc">$</span>Petal.Length</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a>iris<span class="sc">$</span>Petal.Length</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 1.5 1.6 1.4 1.1 1.2 1.5 1.3 1.4
  [19] 1.7 1.5 1.7 1.5 1.0 1.7 1.9 1.6 1.6 1.5 1.4 1.6 1.6 1.5 1.5 1.4 1.5 1.2
@@ -1038,19 +1051,19 @@ R ignores anything after <code>#</code>.</p>
 <h2>Summarizing one numeric variable</h2>
 <p>Once you’ve selected a single numeric variable, you can apply summary functions to it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">mean</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.758</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a></a><span class="fu">sd</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a></a><span class="fu">sd</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.765298</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a></a><span class="fu">median</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a></a><span class="fu">median</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.35</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a></a><span class="fu">IQR</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a></a><span class="fu">IQR</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.5</code></pre>
 </div>
@@ -1065,7 +1078,7 @@ R ignores anything after <code>#</code>.</p>
 <h2>Quick summaries for all variables</h2>
 <p>We can also get a fast overview of the entire dataset at once.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a></a><span class="fu">summary</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
@@ -1090,27 +1103,27 @@ R ignores anything after <code>#</code>.</p>
 <p>Sometimes datasets contain missing values, represented as <code>NA</code>.</p>
 <p>By default, summary functions return <code>NA</code> if any values are missing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">7</span>)</span>
-<span id="cb80-2"><a></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">7</span>)</span>
+<span id="cb81-2"><a></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>To ignore missing values, use <code>na.rm = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.666667</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a></a><span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a></a><span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.516611</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a></a><span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a></a><span class="fu">median</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a></a><span class="fu">IQR</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a></a><span class="fu">IQR</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.5</code></pre>
 </div>
@@ -1123,7 +1136,7 @@ R ignores anything after <code>#</code>.</p>
 <h2>Summarizing a categorical variable (counts)</h2>
 <p>For categorical variables, we often start by counting how many observations fall in each category.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a></a><span class="fu">table</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a></a><span class="fu">table</span>(iris<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     setosa versicolor  virginica 
@@ -1135,7 +1148,7 @@ R ignores anything after <code>#</code>.</p>
 <h2>Categorical proportions</h2>
 <p>We can convert counts into proportions using <code>prop.table()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a></a><span class="fu">prop.table</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a></a><span class="fu">prop.table</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     setosa versicolor  virginica 
@@ -1144,7 +1157,7 @@ R ignores anything after <code>#</code>.</p>
 </div>
 <p>To express proportions as percentages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a></a><span class="dv">100</span> <span class="sc">*</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a></a><span class="dv">100</span> <span class="sc">*</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     setosa versicolor  virginica 
@@ -1156,18 +1169,18 @@ R ignores anything after <code>#</code>.</p>
 <h2>Plotting a numeric variable</h2>
 <p>A histogram shows the distribution of a single numeric variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a></a><span class="fu">hist</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a><span class="fu">hist</span>(iris<span class="sc">$</span>Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="05_r_basics_and_summaries_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<img data-src="05_r_basics_and_summaries_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
 <section id="plotting-a-categorical-variable" class="slide level2">
 <h2>Plotting a categorical variable</h2>
 <p>A bar chart shows counts for each category.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a></a><span class="fu">barplot</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a><span class="fu">barplot</span>(<span class="fu">table</span>(iris<span class="sc">$</span>Species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="05_r_basics_and_summaries_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"><p><code>barplot(table())</code> is a quick way to visualize categorical data.</p>
+<img data-src="05_r_basics_and_summaries_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"><p><code>barplot(table())</code> is a quick way to visualize categorical data.</p>
 </section>
 <section>
 <section id="r-packages" class="title-slide slide level1 center">
@@ -1189,23 +1202,358 @@ R ignores anything after <code>#</code>.</p>
 <p>There are two separate steps:</p>
 <p><strong>Install</strong> (only once per computer, example):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Load</strong> (every time you start R):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Installing puts the package on your computer.</p>
 <p>Loading makes it available in your R session.</p>
-</section>
-<section id="video-on-installing-packages" class="slide level2">
-<h2>Video on installing packages</h2>
 <ul>
-<li>Danielle Navarro’s YouTube video on <strong><em>Installing and loading R packages</em></strong>: <a href="https://www.youtube.com/watch?v=kpHZVyDvEhQ" class="uri">https://www.youtube.com/watch?v=kpHZVyDvEhQ</a>
-<ul>
-<li>If you want to get more information on packages</li>
-</ul></li>
+<li>In practice, <code>install.packages()</code> and <code>library()</code> calls should go near the <strong>top of a script</strong> or in an <strong>early code chunk</strong> of a <code>.qmd</code> file</li>
 </ul>
+</section>
+<section id="using-to-access-package-functions" class="slide level2">
+<h2>Using <code>::</code> to access package functions</h2>
+<p>There are two ways to use functions from a package.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Option 1: Load the package</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb101-2"><a></a><span class="fu">arrange</span>(iris, Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            4.6         3.6          1.0         0.2     setosa
+2            4.3         3.0          1.1         0.1     setosa
+3            5.8         4.0          1.2         0.2     setosa
+4            5.0         3.2          1.2         0.2     setosa
+5            4.7         3.2          1.3         0.2     setosa
+6            5.4         3.9          1.3         0.4     setosa
+7            5.5         3.5          1.3         0.2     setosa
+8            4.4         3.0          1.3         0.2     setosa
+9            5.0         3.5          1.3         0.3     setosa
+10           4.5         2.3          1.3         0.3     setosa
+11           4.4         3.2          1.3         0.2     setosa
+12           5.1         3.5          1.4         0.2     setosa
+13           4.9         3.0          1.4         0.2     setosa
+14           5.0         3.6          1.4         0.2     setosa
+15           4.6         3.4          1.4         0.3     setosa
+16           4.4         2.9          1.4         0.2     setosa
+17           4.8         3.0          1.4         0.1     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.2         3.4          1.4         0.2     setosa
+20           5.5         4.2          1.4         0.2     setosa
+21           4.9         3.6          1.4         0.1     setosa
+22           4.8         3.0          1.4         0.3     setosa
+23           4.6         3.2          1.4         0.2     setosa
+24           5.0         3.3          1.4         0.2     setosa
+25           4.6         3.1          1.5         0.2     setosa
+26           5.0         3.4          1.5         0.2     setosa
+27           4.9         3.1          1.5         0.1     setosa
+28           5.4         3.7          1.5         0.2     setosa
+29           5.7         4.4          1.5         0.4     setosa
+30           5.1         3.8          1.5         0.3     setosa
+31           5.1         3.7          1.5         0.4     setosa
+32           5.2         3.5          1.5         0.2     setosa
+33           5.4         3.4          1.5         0.4     setosa
+34           5.2         4.1          1.5         0.1     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.1         3.4          1.5         0.2     setosa
+37           5.3         3.7          1.5         0.2     setosa
+38           4.8         3.4          1.6         0.2     setosa
+39           5.0         3.0          1.6         0.2     setosa
+40           5.0         3.4          1.6         0.4     setosa
+41           4.7         3.2          1.6         0.2     setosa
+42           4.8         3.1          1.6         0.2     setosa
+43           5.0         3.5          1.6         0.6     setosa
+44           5.1         3.8          1.6         0.2     setosa
+45           5.4         3.9          1.7         0.4     setosa
+46           5.7         3.8          1.7         0.3     setosa
+47           5.4         3.4          1.7         0.2     setosa
+48           5.1         3.3          1.7         0.5     setosa
+49           4.8         3.4          1.9         0.2     setosa
+50           5.1         3.8          1.9         0.4     setosa
+51           5.1         2.5          3.0         1.1 versicolor
+52           4.9         2.4          3.3         1.0 versicolor
+53           5.0         2.3          3.3         1.0 versicolor
+54           5.0         2.0          3.5         1.0 versicolor
+55           5.7         2.6          3.5         1.0 versicolor
+56           5.6         2.9          3.6         1.3 versicolor
+57           5.5         2.4          3.7         1.0 versicolor
+58           5.5         2.4          3.8         1.1 versicolor
+59           5.2         2.7          3.9         1.4 versicolor
+60           5.6         2.5          3.9         1.1 versicolor
+61           5.8         2.7          3.9         1.2 versicolor
+62           5.5         2.3          4.0         1.3 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.8          4.0         1.3 versicolor
+65           5.5         2.5          4.0         1.3 versicolor
+66           5.8         2.6          4.0         1.2 versicolor
+67           5.8         2.7          4.1         1.0 versicolor
+68           5.6         3.0          4.1         1.3 versicolor
+69           5.7         2.8          4.1         1.3 versicolor
+70           5.9         3.0          4.2         1.5 versicolor
+71           5.6         2.7          4.2         1.3 versicolor
+72           5.7         3.0          4.2         1.2 versicolor
+73           5.7         2.9          4.2         1.3 versicolor
+74           6.4         2.9          4.3         1.3 versicolor
+75           6.2         2.9          4.3         1.3 versicolor
+76           6.7         3.1          4.4         1.4 versicolor
+77           6.6         3.0          4.4         1.4 versicolor
+78           6.3         2.3          4.4         1.3 versicolor
+79           5.5         2.6          4.4         1.2 versicolor
+80           6.4         3.2          4.5         1.5 versicolor
+81           5.7         2.8          4.5         1.3 versicolor
+82           5.6         3.0          4.5         1.5 versicolor
+83           6.2         2.2          4.5         1.5 versicolor
+84           6.0         2.9          4.5         1.5 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           4.9         2.5          4.5         1.7  virginica
+88           6.5         2.8          4.6         1.5 versicolor
+89           6.6         2.9          4.6         1.3 versicolor
+90           6.1         3.0          4.6         1.4 versicolor
+91           7.0         3.2          4.7         1.4 versicolor
+92           6.3         3.3          4.7         1.6 versicolor
+93           6.1         2.9          4.7         1.4 versicolor
+94           6.1         2.8          4.7         1.2 versicolor
+95           6.7         3.1          4.7         1.5 versicolor
+96           5.9         3.2          4.8         1.8 versicolor
+97           6.8         2.8          4.8         1.4 versicolor
+98           6.2         2.8          4.8         1.8  virginica
+99           6.0         3.0          4.8         1.8  virginica
+100          6.9         3.1          4.9         1.5 versicolor
+101          6.3         2.5          4.9         1.5 versicolor
+102          5.6         2.8          4.9         2.0  virginica
+103          6.3         2.7          4.9         1.8  virginica
+104          6.1         3.0          4.9         1.8  virginica
+105          6.7         3.0          5.0         1.7 versicolor
+106          5.7         2.5          5.0         2.0  virginica
+107          6.0         2.2          5.0         1.5  virginica
+108          6.3         2.5          5.0         1.9  virginica
+109          6.0         2.7          5.1         1.6 versicolor
+110          5.8         2.7          5.1         1.9  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          5.8         2.8          5.1         2.4  virginica
+113          6.3         2.8          5.1         1.5  virginica
+114          6.9         3.1          5.1         2.3  virginica
+115          5.8         2.7          5.1         1.9  virginica
+116          5.9         3.0          5.1         1.8  virginica
+117          6.7         3.0          5.2         2.3  virginica
+118          6.5         3.0          5.2         2.0  virginica
+119          6.4         2.7          5.3         1.9  virginica
+120          6.4         3.2          5.3         2.3  virginica
+121          6.9         3.1          5.4         2.1  virginica
+122          6.2         3.4          5.4         2.3  virginica
+123          6.8         3.0          5.5         2.1  virginica
+124          6.5         3.0          5.5         1.8  virginica
+125          6.4         3.1          5.5         1.8  virginica
+126          6.3         2.9          5.6         1.8  virginica
+127          6.4         2.8          5.6         2.1  virginica
+128          6.4         2.8          5.6         2.2  virginica
+129          6.1         2.6          5.6         1.4  virginica
+130          6.3         3.4          5.6         2.4  virginica
+131          6.7         3.1          5.6         2.4  virginica
+132          6.9         3.2          5.7         2.3  virginica
+133          6.7         3.3          5.7         2.1  virginica
+134          6.7         3.3          5.7         2.5  virginica
+135          6.5         3.0          5.8         2.2  virginica
+136          6.7         2.5          5.8         1.8  virginica
+137          7.2         3.0          5.8         1.6  virginica
+138          7.1         3.0          5.9         2.1  virginica
+139          6.8         3.2          5.9         2.3  virginica
+140          6.3         3.3          6.0         2.5  virginica
+141          7.2         3.2          6.0         1.8  virginica
+142          7.2         3.6          6.1         2.5  virginica
+143          7.4         2.8          6.1         1.9  virginica
+144          7.7         3.0          6.1         2.3  virginica
+145          7.3         2.9          6.3         1.8  virginica
+146          7.9         3.8          6.4         2.0  virginica
+147          7.6         3.0          6.6         2.1  virginica
+148          7.7         3.8          6.7         2.2  virginica
+149          7.7         2.8          6.7         2.0  virginica
+150          7.7         2.6          6.9         2.3  virginica</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Option 2: Use <code>::</code> without loading the package</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(iris, Petal.Length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+1            4.6         3.6          1.0         0.2     setosa
+2            4.3         3.0          1.1         0.1     setosa
+3            5.8         4.0          1.2         0.2     setosa
+4            5.0         3.2          1.2         0.2     setosa
+5            4.7         3.2          1.3         0.2     setosa
+6            5.4         3.9          1.3         0.4     setosa
+7            5.5         3.5          1.3         0.2     setosa
+8            4.4         3.0          1.3         0.2     setosa
+9            5.0         3.5          1.3         0.3     setosa
+10           4.5         2.3          1.3         0.3     setosa
+11           4.4         3.2          1.3         0.2     setosa
+12           5.1         3.5          1.4         0.2     setosa
+13           4.9         3.0          1.4         0.2     setosa
+14           5.0         3.6          1.4         0.2     setosa
+15           4.6         3.4          1.4         0.3     setosa
+16           4.4         2.9          1.4         0.2     setosa
+17           4.8         3.0          1.4         0.1     setosa
+18           5.1         3.5          1.4         0.3     setosa
+19           5.2         3.4          1.4         0.2     setosa
+20           5.5         4.2          1.4         0.2     setosa
+21           4.9         3.6          1.4         0.1     setosa
+22           4.8         3.0          1.4         0.3     setosa
+23           4.6         3.2          1.4         0.2     setosa
+24           5.0         3.3          1.4         0.2     setosa
+25           4.6         3.1          1.5         0.2     setosa
+26           5.0         3.4          1.5         0.2     setosa
+27           4.9         3.1          1.5         0.1     setosa
+28           5.4         3.7          1.5         0.2     setosa
+29           5.7         4.4          1.5         0.4     setosa
+30           5.1         3.8          1.5         0.3     setosa
+31           5.1         3.7          1.5         0.4     setosa
+32           5.2         3.5          1.5         0.2     setosa
+33           5.4         3.4          1.5         0.4     setosa
+34           5.2         4.1          1.5         0.1     setosa
+35           4.9         3.1          1.5         0.2     setosa
+36           5.1         3.4          1.5         0.2     setosa
+37           5.3         3.7          1.5         0.2     setosa
+38           4.8         3.4          1.6         0.2     setosa
+39           5.0         3.0          1.6         0.2     setosa
+40           5.0         3.4          1.6         0.4     setosa
+41           4.7         3.2          1.6         0.2     setosa
+42           4.8         3.1          1.6         0.2     setosa
+43           5.0         3.5          1.6         0.6     setosa
+44           5.1         3.8          1.6         0.2     setosa
+45           5.4         3.9          1.7         0.4     setosa
+46           5.7         3.8          1.7         0.3     setosa
+47           5.4         3.4          1.7         0.2     setosa
+48           5.1         3.3          1.7         0.5     setosa
+49           4.8         3.4          1.9         0.2     setosa
+50           5.1         3.8          1.9         0.4     setosa
+51           5.1         2.5          3.0         1.1 versicolor
+52           4.9         2.4          3.3         1.0 versicolor
+53           5.0         2.3          3.3         1.0 versicolor
+54           5.0         2.0          3.5         1.0 versicolor
+55           5.7         2.6          3.5         1.0 versicolor
+56           5.6         2.9          3.6         1.3 versicolor
+57           5.5         2.4          3.7         1.0 versicolor
+58           5.5         2.4          3.8         1.1 versicolor
+59           5.2         2.7          3.9         1.4 versicolor
+60           5.6         2.5          3.9         1.1 versicolor
+61           5.8         2.7          3.9         1.2 versicolor
+62           5.5         2.3          4.0         1.3 versicolor
+63           6.0         2.2          4.0         1.0 versicolor
+64           6.1         2.8          4.0         1.3 versicolor
+65           5.5         2.5          4.0         1.3 versicolor
+66           5.8         2.6          4.0         1.2 versicolor
+67           5.8         2.7          4.1         1.0 versicolor
+68           5.6         3.0          4.1         1.3 versicolor
+69           5.7         2.8          4.1         1.3 versicolor
+70           5.9         3.0          4.2         1.5 versicolor
+71           5.6         2.7          4.2         1.3 versicolor
+72           5.7         3.0          4.2         1.2 versicolor
+73           5.7         2.9          4.2         1.3 versicolor
+74           6.4         2.9          4.3         1.3 versicolor
+75           6.2         2.9          4.3         1.3 versicolor
+76           6.7         3.1          4.4         1.4 versicolor
+77           6.6         3.0          4.4         1.4 versicolor
+78           6.3         2.3          4.4         1.3 versicolor
+79           5.5         2.6          4.4         1.2 versicolor
+80           6.4         3.2          4.5         1.5 versicolor
+81           5.7         2.8          4.5         1.3 versicolor
+82           5.6         3.0          4.5         1.5 versicolor
+83           6.2         2.2          4.5         1.5 versicolor
+84           6.0         2.9          4.5         1.5 versicolor
+85           5.4         3.0          4.5         1.5 versicolor
+86           6.0         3.4          4.5         1.6 versicolor
+87           4.9         2.5          4.5         1.7  virginica
+88           6.5         2.8          4.6         1.5 versicolor
+89           6.6         2.9          4.6         1.3 versicolor
+90           6.1         3.0          4.6         1.4 versicolor
+91           7.0         3.2          4.7         1.4 versicolor
+92           6.3         3.3          4.7         1.6 versicolor
+93           6.1         2.9          4.7         1.4 versicolor
+94           6.1         2.8          4.7         1.2 versicolor
+95           6.7         3.1          4.7         1.5 versicolor
+96           5.9         3.2          4.8         1.8 versicolor
+97           6.8         2.8          4.8         1.4 versicolor
+98           6.2         2.8          4.8         1.8  virginica
+99           6.0         3.0          4.8         1.8  virginica
+100          6.9         3.1          4.9         1.5 versicolor
+101          6.3         2.5          4.9         1.5 versicolor
+102          5.6         2.8          4.9         2.0  virginica
+103          6.3         2.7          4.9         1.8  virginica
+104          6.1         3.0          4.9         1.8  virginica
+105          6.7         3.0          5.0         1.7 versicolor
+106          5.7         2.5          5.0         2.0  virginica
+107          6.0         2.2          5.0         1.5  virginica
+108          6.3         2.5          5.0         1.9  virginica
+109          6.0         2.7          5.1         1.6 versicolor
+110          5.8         2.7          5.1         1.9  virginica
+111          6.5         3.2          5.1         2.0  virginica
+112          5.8         2.8          5.1         2.4  virginica
+113          6.3         2.8          5.1         1.5  virginica
+114          6.9         3.1          5.1         2.3  virginica
+115          5.8         2.7          5.1         1.9  virginica
+116          5.9         3.0          5.1         1.8  virginica
+117          6.7         3.0          5.2         2.3  virginica
+118          6.5         3.0          5.2         2.0  virginica
+119          6.4         2.7          5.3         1.9  virginica
+120          6.4         3.2          5.3         2.3  virginica
+121          6.9         3.1          5.4         2.1  virginica
+122          6.2         3.4          5.4         2.3  virginica
+123          6.8         3.0          5.5         2.1  virginica
+124          6.5         3.0          5.5         1.8  virginica
+125          6.4         3.1          5.5         1.8  virginica
+126          6.3         2.9          5.6         1.8  virginica
+127          6.4         2.8          5.6         2.1  virginica
+128          6.4         2.8          5.6         2.2  virginica
+129          6.1         2.6          5.6         1.4  virginica
+130          6.3         3.4          5.6         2.4  virginica
+131          6.7         3.1          5.6         2.4  virginica
+132          6.9         3.2          5.7         2.3  virginica
+133          6.7         3.3          5.7         2.1  virginica
+134          6.7         3.3          5.7         2.5  virginica
+135          6.5         3.0          5.8         2.2  virginica
+136          6.7         2.5          5.8         1.8  virginica
+137          7.2         3.0          5.8         1.6  virginica
+138          7.1         3.0          5.9         2.1  virginica
+139          6.8         3.2          5.9         2.3  virginica
+140          6.3         3.3          6.0         2.5  virginica
+141          7.2         3.2          6.0         1.8  virginica
+142          7.2         3.6          6.1         2.5  virginica
+143          7.4         2.8          6.1         1.9  virginica
+144          7.7         3.0          6.1         2.3  virginica
+145          7.3         2.9          6.3         1.8  virginica
+146          7.9         3.8          6.4         2.0  virginica
+147          7.6         3.0          6.6         2.1  virginica
+148          7.7         3.8          6.7         2.2  virginica
+149          7.7         2.8          6.7         2.0  virginica
+150          7.7         2.6          6.9         2.3  virginica</code></pre>
+</div>
+</div>
+</div></div>
+<p>Both are valid.</p>
+<ul>
+<li><code>library()</code> loads all functions from a package</li>
+<li><code>package::function()</code> uses just one function</li>
+<li>Either approach is fine.</li>
+<li>I recommend including <code>library()</code> calls at the top of a file as a cue to yourself (and others) which packages are being used.</li>
+</ul>
+</section>
+<section id="learn-more-optional" class="slide level2">
+<h2>Learn more (optional)</h2>
+<p><br>
+</p>
+<p>If you want a short, clear walkthrough on R packages:</p>
+<p><br>
+</p>
+<blockquote>
+<p><strong>Installing and loading R packages</strong> Danielle Navarro (YouTube) <a href="https://www.youtube.com/watch?v=kpHZVyDvEhQ" class="uri">https://www.youtube.com/watch?v=kpHZVyDvEhQ</a></p>
+</blockquote>
 </section>
 <section id="textbook-datasets-important" class="slide level2">
 <h2>Textbook datasets (important)</h2>
@@ -1215,25 +1563,40 @@ R ignores anything after <code>#</code>.</p>
 <p>&nbsp;</p>
 <p>It is <strong>not on CRAN</strong>, so we install it from GitHub, per the book authors’ instructions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb100-2"><a></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"OI-Biostat/oi_biostat_data"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb105-2"><a></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"OI-Biostat/oi_biostat_data"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(This may take a few minutes the first time.)</p>
 <p>&nbsp;</p>
 <p>After installing, load it (this part is done <strong>every time</strong> you restart R):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a></a><span class="fu">library</span>(oibiostat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a></a><span class="fu">library</span>(oibiostat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-that-it-worked" class="slide level2">
 <h2>Check that it worked</h2>
 <p>If installation worked, you can load the package and access a dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a></a><span class="fu">library</span>(oibiostat)</span>
-<span id="cb102-2"><a></a><span class="fu">data</span>(dds.discr)</span>
-<span id="cb102-3"><a></a><span class="fu">head</span>(dds.discr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a></a><span class="fu">library</span>(oibiostat)</span>
+<span id="cb107-2"><a></a><span class="fu">data</span>(dds.discr)</span>
+<span id="cb107-3"><a></a><span class="fu">head</span>(dds.discr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If this runs without errors, you’re set.</p>
+</section>
+<section id="wrap-up" class="slide level2">
+<h2>Wrap-up</h2>
+<p>Today you learned how to:</p>
+<ul>
+<li>Run basic R code</li>
+<li>Inspect a dataset</li>
+<li>Summarize numeric and categorical variables</li>
+<li>Make simple plots</li>
+</ul>
+<p>We’ll build on this foundation to:</p>
+<ul>
+<li>Work more efficiently with data</li>
+<li>Start using additional functions and packages</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
