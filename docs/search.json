@@ -1863,5 +1863,12 @@
     "title": "Summarizing Categorical Data: Tables and Plots",
     "section": "Box plot legend",
     "text": "Box plot legend"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#wrap-up",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#wrap-up",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "Wrap-up",
+    "text": "Wrap-up\nToday you learned how to:\n\nSummarize categorical variables (counts + proportions)\nCompare two categorical variables (contingency tables)\nInterpret row vs column percentages\nUse bar plots, histograms, and box plots as quick visual summaries\n\n\n\n\nBMSC 620 | Summarizing Categorical Data"
   }
 ]

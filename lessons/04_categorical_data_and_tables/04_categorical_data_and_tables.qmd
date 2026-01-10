@@ -741,7 +741,7 @@ ggplot(frog,
 \
 
 ::: columns
-::: {.column width=50%"}
+::: {.column width="50%"}
 
 #### Box plot
 
@@ -753,13 +753,18 @@ ggplot(frog,
 #   laviz::theme_minimal_white(grid = "Y", base_size = 18)
 
 ggplot(frog, 
-       aes(x = "", 
+       aes(x = "1", 
        y = clutch.volume)) +
   geom_boxplot(width = 0.25) +
   labs(x = NULL, y = "Clutch volume") +
   laviz::theme_minimal_white(grid = "None", 
                              base_size = 18) + 
-  scale_y_continuous(limit = c(0, 3000))
+  scale_y_continuous(limits = c(0, 3000)) +
+  theme(
+    axis.text.x  = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.line.x  = element_blank()
+  )
 
 ```
 
@@ -778,7 +783,7 @@ ggplot(frog,
 
 frog |> 
   mutate(altitude = as.character(altitude), 
-         altitude = stringr::str_remove(altitude, ","), 
+         altitude = as.numeric(gsub(",", "", altitude)), 
          altitude = as.numeric(altitude)) |> 
   mutate(altitude = cut(altitude, 
                         breaks = c(2000, 2500, 3000, 3500), 
@@ -806,16 +811,11 @@ laviz::ggplot_box_legend()
 ```
 
 
-## What you should be able to do now
+## Wrap-up
 
-- Summarize categorical variables with:
-  - Counts
-  - Proportions
-  - Tables
+Today you learned how to:
 
-- Compare two categorical variables using:
-  - Contingency tables
-  - Bar plots
-
-- Clearly state *what is being conditioned on* when interpreting results
-
+- Summarize categorical variables (counts + proportions)
+- Compare two categorical variables (contingency tables)
+- Interpret row vs column percentages
+- Use bar plots, histograms, and box plots as quick visual summaries
