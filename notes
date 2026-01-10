@@ -20,3 +20,26 @@ That gives you a clean mental model:
 
 
 En Dash –
+
+
+
+
+
+::: columns
+::: {.column width="50%"}
+```{r}
+10^2
+3 ^ 7
+6/9
+9-43
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+4^3-2* 7+9 /2
+```
+
+The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
+:::
+:::

@@ -1,0 +1,356 @@
+---
+title: "R basics and data summaries"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w2d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v4.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | R basics + summaries"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r}
+#| label: "setup" 
+#| include: false
+#| message: false
+#| warning: false
+
+library(here)
+source(here("class_dates.R"))
+
+library(dplyr)
+library(ggplot2)
+library(gt)
+library(janitor)
+library(lamisc)       # devtools::install_github("emilelatour/lamisc") 
+library(oibiostat)
+
+
+library(laviz)        # devtools::install_github("emilelatour/laviz") 
+
+data("famuss")
+
+# terminal: for icons
+# quarto install extension quarto-ext/fontawesome
+```
+
+## Learning objectives (today)
+
+By the end of class, you should be able to:
+
+1. Run code
+2. Inspect a dataset
+3. Summarize numeric + categorical variables
+4. Make two basic plots
+
+
+
+## Summarizing categorical data
+
+- Last week we looked at: 
+  - Variable types
+  - Summarizing numerical variables
+  
+- Today, we focus on summarizing and *describing* categorical variables.
+
+## What do we mean by categorical?
+
+- Values are labels or categories
+- Counts and proportions matter more than averages
+- Examples from biomedicine:
+  - Treatment group
+  - Diagnosis
+  - Sex
+  - Response category (e.g., improved / unchanged / worsened)
+
+\
+
+- **Nominal** – labels, no order
+- **Ordinal** – labels, with order
+
+## Example dataset: FAMuSS
+
+**Functional SNPs Associated with Muscle Size and Strength (FAMuSS)**
+
+- Study goal: examine how **demographic, physiological, and genetic factors**
+  are associated with muscle strength
+
+- Strength measured in:
+  - Dominant arm
+  - Non-dominant arm
+  - Before and after resistance training
+
+- Key gene of interest:
+  - **ACTN3** ("the sports gene")
+
+- Data frame with **595 participants**
+
+**Variables we will focus on today:**
+
+- `sex` (Female, Male)
+- `race` (African Am, Asian, Caucasian, Hispanic, Other)
+- `actn3.r577x` (CC, CT, TT genotype)
+
+(We will use other variables later in the course.)
+
+# One categorical variable (Section 1.5)
+
+![[Artwork by @allison_horst](https://allisonhorst.com/r-packages-functions)](/img_slides/horst_categorical_data_types.png){fig-align="center"}
+
+## Frequency tables
+
+- A frequency table shows the **count** in each category
+- Often the first summary we compute for categorical data
+
+\
+
+- **Questions** it helps answer:
+  - How many observations are in each category?
+  - Are some categories rare?
+  
+## Relative frequency tables
+
+- A relative frequency table shows **proportions** instead of counts
+- Proportions often make comparisons easier
+
+- Especially useful when:
+  - Group sizes differ
+  - We want to compare across studies or samples
+  
+## FAMuSS example
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Counts 
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+famuss |> 
+  dplyr::count(actn3.r577x) |> 
+  janitor::adorn_totals() |> 
+  gt::gt()
+```
+:::
+
+:::
+::: {.column width="50%"}
+
+### Proportions
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+famuss |> 
+  lamisc::calc_tabyl(actn3.r577x) |> 
+  gt::gt()
+```
+::: 
+
+:::
+:::
+
+## Bar plots for categorical data
+
+- Bar plots visualize counts or proportions
+- Each bar represents a category
+- Bar height reflects frequency or proportion
+
+**Bar plots** are used for **categorical** data
+
+**Histograms** are used for **numerical** data
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+
+```{r}
+#| echo: false
+
+ggplot(data = famuss, 
+       aes(x = race)) + 
+  geom_bar(stat = "count", 
+           width = 0.8) +
+  labs(y = "Count", x = "Race") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5))
+
+```
+
+::: 
+::: {.column width="50%"}
+
+
+```{r}
+#| echo: false
+
+ggplot(data = famuss, aes(x = age)) +
+  geom_histogram(color = "white") +
+  labs(y = "Count", x = "Age") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5))
+```
+
+:::
+:::
+
+## Visualizing a categorical variable: bar plots
+
+\
+
+**Height** = **count** or **proportion**
+
+::: columns
+::: {.column width="50%"}
+
+### Counts 
+
+```{r}
+#| echo: false
+
+ggplot(data = famuss, 
+       aes(x = actn3.r577x)) + 
+  geom_bar(stat = "count", 
+           width = 0.8) +
+  labs(y = "Count", 
+       x = "Genotype") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5))
+
+```
+
+:::
+::: {.column width="50%"}
+
+### Proportions
+
+```{r}
+#| echo: false
+famuss |> 
+  janitor::tabyl(actn3.r577x) |> 
+  ggplot(aes(x = actn3.r577x, 
+             y = percent)) + 
+  geom_bar(stat = "identity", 
+           width = 0.8) +
+  labs(y = "Proportion (0–1)", 
+       x = "Genotype") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5))
+
+```
+
+:::
+:::
+
+
+## Two categorical variables (Section 1.6.2)
+
+- So far, we have summarized **one categorical variable at a time**
+  - Counts
+  - Proportions
+  - Bar plots
+
+- Often, we want to understand the relationship between **two categorical variables**
+
+\
+
+- **Examples**:
+  - Genotype and sex
+  - Treatment group and response
+  - Exposure and disease status
+
+\
+
+- **Example question**:
+  - Does the distribution of genotypes differ by sex?
+
+## Contingency tables
+
+- When we have **two categorical variables**, we summarize them with a **contingency table**
+  (also called a **two-way table**)
+
+- A contingency table shows **counts** for each combination of categories
+
+- Example question:
+  - Does the distribution of **genotype** differ by **sex**?
+
+- Next: how to read the table (rows vs columns) and compute proportions
+
+## Marginal totals vs conditional distributions
+
+## Row proportions vs column proportions
+
+## Interpreting contingency tables
+
+## Common interpretation pitfalls
+
+## Visualizing two categorical variables
+
+## Segmented bar plots
+
+## Standardized (proportional) bar plots
+
+## Special case: two-by-two tables
+
+## What you should be able to do now
+
+## Looking ahead
+

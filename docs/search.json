@@ -1611,5 +1611,180 @@
     "title": "R basics and data summaries",
     "section": "Wrap-up",
     "text": "Wrap-up\nToday you learned how to:\n\nRun basic R code\nInspect a dataset\nSummarize numeric and categorical variables\nMake simple plots\n\nWe’ll build on this foundation to:\n\nWork more efficiently with data\nStart using additional functions and packages\n\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#learning-objectives-today",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#learning-objectives-today",
+    "title": "R basics and data summaries",
+    "section": "Learning objectives (today)",
+    "text": "Learning objectives (today)\nBy the end of class, you should be able to:\n\nRun code\nInspect a dataset\nSummarize numeric + categorical variables\nMake two basic plots"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#summarizing-categorical-data",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#summarizing-categorical-data",
+    "title": "R basics and data summaries",
+    "section": "Summarizing categorical data",
+    "text": "Summarizing categorical data\n\nLast week we looked at:\n\nVariable types\nSummarizing numerical variables\n\nToday, we focus on summarizing and describing categorical variables."
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#what-do-we-mean-by-categorical",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#what-do-we-mean-by-categorical",
+    "title": "R basics and data summaries",
+    "section": "What do we mean by categorical?",
+    "text": "What do we mean by categorical?\n\nValues are labels or categories\nCounts and proportions matter more than averages\nExamples from biomedicine:\n\nTreatment group\nDiagnosis\nSex\nResponse category (e.g., improved / unchanged / worsened)\n\n\n\n\n\nNominal – labels, no order\nOrdinal – labels, with order"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#example-dataset-famuss",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#example-dataset-famuss",
+    "title": "R basics and data summaries",
+    "section": "Example dataset: FAMuSS",
+    "text": "Example dataset: FAMuSS\nFunctional SNPs Associated with Muscle Size and Strength (FAMuSS)\n\nStudy goal: examine how demographic, physiological, and genetic factors are associated with muscle strength\nStrength measured in:\n\nDominant arm\nNon-dominant arm\nBefore and after resistance training\n\nKey gene of interest:\n\nACTN3 (“the sports gene”)\n\nData frame with 595 participants\n\nVariables we will focus on today:\n\nsex (Female, Male)\nrace (African Am, Asian, Caucasian, Hispanic, Other)\nactn3.r577x (CC, CT, TT genotype)\n\n(We will use other variables later in the course.)"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#frequency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#frequency-tables",
+    "title": "R basics and data summaries",
+    "section": "Frequency tables",
+    "text": "Frequency tables\n\nA frequency table shows the count in each category\nOften the first summary we compute for categorical data\n\n\n\n\nQuestions it helps answer:\n\nHow many observations are in each category?\nAre some categories rare?"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#relative-frequency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#relative-frequency-tables",
+    "title": "R basics and data summaries",
+    "section": "Relative frequency tables",
+    "text": "Relative frequency tables\n\nA relative frequency table shows proportions instead of counts\nProportions often make comparisons easier\nEspecially useful when:\n\nGroup sizes differ\nWe want to compare across studies or samples"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#famuss-example",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#famuss-example",
+    "title": "R basics and data summaries",
+    "section": "FAMuSS example",
+    "text": "FAMuSS example\n\n\n\n\nCounts\n\n\n\n\n\n\n\n\n\nactn3.r577x\nn\n\n\n\n\nCC\n173\n\n\nCT\n261\n\n\nTT\n161\n\n\nTotal\n595\n\n\n\n\n\n\n\n\n\nProportions\n\n\n\n\n\n\n\n\n\nactn3.r577x\nn\npercent\n\n\n\n\nCC\n173\n29.1%\n\n\nCT\n261\n43.9%\n\n\nTT\n161\n27.1%\n\n\nTotal\n595\n100.0%"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#bar-plots-for-categorical-data",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#bar-plots-for-categorical-data",
+    "title": "R basics and data summaries",
+    "section": "Bar plots for categorical data",
+    "text": "Bar plots for categorical data\n\nBar plots visualize counts or proportions\nEach bar represents a category\nBar height reflects frequency or proportion\n\nBar plots are used for categorical data\nHistograms are used for numerical data"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-frequency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-frequency-tables",
+    "title": "R basics and data summaries",
+    "section": "One categorical variable: frequency tables",
+    "text": "One categorical variable: frequency tables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-relative-frequency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-relative-frequency-tables",
+    "title": "R basics and data summaries",
+    "section": "One categorical variable: relative frequency tables",
+    "text": "One categorical variable: relative frequency tables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-categorical-variable-bar-plots",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-categorical-variable-bar-plots",
+    "title": "R basics and data summaries",
+    "section": "Visualizing a categorical variable: bar plots",
+    "text": "Visualizing a categorical variable: bar plots\n\n\nHeight = count or proportion\n\n\nCounts\n\n\n\n\n\n\n\n\n\n\nProportions"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#two-categorical-variables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#two-categorical-variables",
+    "title": "R basics and data summaries",
+    "section": "Two categorical variables",
+    "text": "Two categorical variables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#contingency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#contingency-tables",
+    "title": "R basics and data summaries",
+    "section": "Contingency tables",
+    "text": "Contingency tables\n\nWhen we have two categorical variables, we summarize them with a contingency table (also called a two-way table)\nA contingency table shows counts for each combination of categories\nExample question:\n\nDoes the distribution of genotype differ by sex?\n\nNext: how to read the table (rows vs columns) and compute proportions"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#marginal-totals-vs-conditional-distributions",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#marginal-totals-vs-conditional-distributions",
+    "title": "R basics and data summaries",
+    "section": "Marginal totals vs conditional distributions",
+    "text": "Marginal totals vs conditional distributions"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#row-proportions-vs-column-proportions",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#row-proportions-vs-column-proportions",
+    "title": "R basics and data summaries",
+    "section": "Row proportions vs column proportions",
+    "text": "Row proportions vs column proportions"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#interpreting-contingency-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#interpreting-contingency-tables",
+    "title": "R basics and data summaries",
+    "section": "Interpreting contingency tables",
+    "text": "Interpreting contingency tables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#common-interpretation-pitfalls",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#common-interpretation-pitfalls",
+    "title": "R basics and data summaries",
+    "section": "Common interpretation pitfalls",
+    "text": "Common interpretation pitfalls"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-two-categorical-variables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-two-categorical-variables",
+    "title": "R basics and data summaries",
+    "section": "Visualizing two categorical variables",
+    "text": "Visualizing two categorical variables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#segmented-bar-plots",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#segmented-bar-plots",
+    "title": "R basics and data summaries",
+    "section": "Segmented bar plots",
+    "text": "Segmented bar plots"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#standardized-proportional-bar-plots",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#standardized-proportional-bar-plots",
+    "title": "R basics and data summaries",
+    "section": "Standardized (proportional) bar plots",
+    "text": "Standardized (proportional) bar plots"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#special-case-two-by-two-tables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#special-case-two-by-two-tables",
+    "title": "R basics and data summaries",
+    "section": "Special case: two-by-two tables",
+    "text": "Special case: two-by-two tables"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#what-you-should-be-able-to-do-now",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#what-you-should-be-able-to-do-now",
+    "title": "R basics and data summaries",
+    "section": "What you should be able to do now",
+    "text": "What you should be able to do now"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#looking-ahead",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#looking-ahead",
+    "title": "R basics and data summaries",
+    "section": "Looking ahead",
+    "text": "Looking ahead\n\n\n\nBMSC 620 | R basics + summaries"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#two-categorical-variables-section-1.6.2",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#two-categorical-variables-section-1.6.2",
+    "title": "R basics and data summaries",
+    "section": "Two categorical variables (Section 1.6.2)",
+    "text": "Two categorical variables (Section 1.6.2)\n\nSo far, we have summarized one categorical variable at a time\n\nCounts\nProportions\nBar plots\n\nOften, we want to understand the relationship between two categorical variables\n\n\n\n\nExamples:\n\nGenotype and sex\nTreatment group and response\nExposure and disease status\n\n\n\n\n\nExample question:\n\nDoes the distribution of genotypes differ by sex?"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-categorical-variable-bar-plots-1",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-categorical-variable-bar-plots-1",
+    "title": "R basics and data summaries",
+    "section": "Visualizing a categorical variable: bar plots",
+    "text": "Visualizing a categorical variable: bar plots\n\n\n\nHeight\n\ncount\nproportion\n\n\n\nCounts\n\n\n\n\n\n\n\n\n\n\nProportions"
   }
 ]
