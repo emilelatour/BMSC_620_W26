@@ -1,5 +1,5 @@
 ---
-title: "R basics and data summaries"
+title: "Summarizing Categorical Data: Tables and Plots"
 author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
 date: "`r library(here); source(here('class_dates.R')); w2d1`"
 date-format: long
@@ -10,7 +10,7 @@ format:
     show-slide-number: all
     width: 1955
     height: 1100
-    footer: "BMSC 620 | R basics + summaries"
+    footer: "BMSC 620 | Summarizing Categorical Data"
     html-math-method: mathjax
     header-includes: |
       <style>
@@ -85,10 +85,10 @@ data("famuss")
 
 By the end of class, you should be able to:
 
-1. Run code
-2. Inspect a dataset
-3. Summarize numeric + categorical variables
-4. Make two basic plots
+1. Summarize categorical variables using counts and proportions
+2. Construct and interpret frequency and contingency tables
+3. Distinguish between marginal totals and conditional distributions
+4. Visualize categorical data using bar plots
 
 
 
@@ -319,38 +319,389 @@ famuss |>
 
 \
 
-- **Example question**:
-  - Does the distribution of genotypes differ by sex?
 
 ## Contingency tables
 
 - When we have **two categorical variables**, we summarize them with a **contingency table**
   (also called a **two-way table**)
 
-- A contingency table shows **counts** for each combination of categories
+\
 
-- Example question:
-  - Does the distribution of **genotype** differ by **sex**?
+- Each cell shows the **count** for a combination of categories
 
-- Next: how to read the table (rows vs columns) and compute proportions
+\
+
+- Rows represent one variable  
+- Columns represent the other variable
+
+## Contingency table example (counts)
+
+- **Example question**:
+  - Does the distribution of genotypes differ by sex?
+  
+\
+
+- These are **counts**, not proportions
+- Totals appear along the margins
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_totals(where = "both") |> 
+  gt::gt()
+```
+:::
+
+
 
 ## Marginal totals vs conditional distributions
 
-## Row proportions vs column proportions
+::: columns
+::: {.column width="50%"}
+- **Marginal totals**
+  - Summarize **one variable at a time**
+  - Ignore the other variable
+  - Found in the **row totals** or **column totals**
+
+\
+
+- **Conditional distributions**
+  - Describe one variable **within levels of the other**
+  - Require computing **proportions**
+
+::: 
+::: {.column width="50%"}
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_totals(where = "both") |> 
+  janitor::adorn_title(placement = "combined") |> 
+  gt::gt()
+```
+:::
+
+:::
+:::
+
+## Row proportions vs column proportions (1/2)
+
+- Which one you use depends on the **question**
+
+- **Row proportions**
+  - Condition on the **row variable**
+  - Each row sums to 1 (or 100%)
+  
+- **Example question**: Among females, what proportion have genotype CC?
+
+
+::: columns
+::: {.column width="50%"}
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_totals(where = "col") |> 
+  janitor::adorn_title(placement = "combined") |> 
+  gt::gt()
+```
+:::
+
+::: 
+::: {.column width="50%"}
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_percentages(denominator = "row") |> 
+  janitor::adorn_totals(where = "col") |> 
+  janitor::adorn_title(placement = "combined") |> 
+  gt::gt() |> 
+  gt::fmt_number()
+```
+:::
+
+:::
+:::
+
+
+
+## Row proportions vs column proportions (2/2)
+
+- **Column proportions**
+  - Condition on the **column variable**
+  - Each column sums to 1 (or 100%)
+  
+- **Example question**: Among those with genotype CC, what proportion are female?
+
+
+::: columns
+::: {.column width="50%"}
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_totals(where = "row") |> 
+  janitor::adorn_title(placement = "combined") |> 
+  gt::gt()
+```
+:::
+
+::: 
+::: {.column width="50%"}
+
+::: {.tbl-big}
+```{r}
+#| echo: false
+
+
+famuss |> 
+  janitor::tabyl(sex, 
+                 actn3.r577x) |> 
+  janitor::adorn_percentages(denominator = "col") |> 
+  janitor::adorn_totals(where = "row") |> 
+  janitor::adorn_title(placement = "combined") |> 
+  gt::gt() |> 
+  gt::fmt_number()
+```
+:::
+
+:::
+:::
+
+
 
 ## Interpreting contingency tables
 
+- Always ask:
+  - What are the **rows**?
+  - What are the **columns**?
+  - What is being **held fixed**?
+
+\
+
+- Interpretation depends on:
+  - The research question
+  - Which variable you condition on
+
 ## Common interpretation pitfalls
+
+- Confusing marginal totals with conditional distributions
+  - Marginal totals describe the sample overall
+  - Conditional distributions describe relationships (what happens within groups)
+- Comparing counts when group sizes differ
+- Forgetting which variable is being conditioned on
 
 ## Visualizing two categorical variables
 
-## Segmented bar plots
+- Contingency tables show the numbers
+- Plots help reveal patterns
 
-## Standardized (proportional) bar plots
+\
+
+
+## Bar plots example: Sex by genotype
+
+\
+
+::: columns
+::: {.column width="33.3%"}
+
+#### Grouped bar plot
+
+```{r}
+#| echo: false
+
+
+ggplot(data = famuss, 
+       aes(x = actn3.r577x, 
+           fill = sex)) + 
+  geom_bar(stat = "count", 
+           position = "dodge", 
+           width = 0.8) +
+  labs(y = "Count", 
+       x = "Genotype") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+::: 
+::: {.column width="33.3%"}
+
+#### Stacked bar plot 
+
+```{r}
+#| echo: false
+
+ggplot(data = famuss, 
+       aes(x = actn3.r577x, 
+           fill = sex)) + 
+  geom_bar(stat = "count", 
+           width = 0.8) +
+  labs(y = "Count", 
+       x = "Genotype") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+:::
+::: {.column width="33.4%"}
+
+#### Percent stacked bar plot
+
+```{r}
+#| echo: false
+famuss |> 
+  ggplot(aes(x = actn3.r577x, 
+             fill = sex)) + 
+  geom_bar(position = "fill", 
+           width = 0.8) +
+  labs(y = "Proportion (0–1)", 
+       x = "Genotype") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+:::
+:::
+
+
+## Bar plots example: Genotype by sex
+
+\
+
+::: columns
+::: {.column width="33.3%"}
+
+#### Grouped bar plot
+
+```{r}
+#| echo: false
+
+
+ggplot(data = famuss, 
+       aes(x = sex, 
+           fill = actn3.r577x)) + 
+  geom_bar(stat = "count", 
+           position = "dodge", 
+           width = 0.8) +
+  labs(y = "Count", 
+       x = "Sex") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+::: 
+::: {.column width="33.3%"}
+
+#### Stacked bar plot 
+
+```{r}
+#| echo: false
+
+ggplot(data = famuss, 
+       aes(x = sex, 
+           fill = actn3.r577x)) + 
+  geom_bar(stat = "count", 
+           width = 0.8) +
+  labs(y = "Count", 
+       x = "Sex") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+:::
+::: {.column width="33.4%"}
+
+#### Percent stacked bar plot
+
+```{r}
+#| echo: false
+famuss |> 
+  ggplot(aes(x = sex, 
+           fill = actn3.r577x)) + 
+  geom_bar(position = "fill", 
+           width = 0.8) +
+  labs(y = "Proportion (0–1)", 
+       x = "Sex") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18) + 
+  theme(plot.margin = margin(5, 5, 5, 5)) + 
+  see::scale_fill_okabeito()
+
+```
+
+:::
+:::
 
 ## Special case: two-by-two tables
 
+- A **two-by-two table** is a contingency table with:
+  - Two levels of one variable
+  - Two levels of another variable
+
+\
+
+- Very common in biomedical research:
+  - Exposure (Yes / No) × Outcome (Yes / No)
+  - Treatment (Drug / Control) × Response (Improved / Not improved)
+  - Test result (Positive / Negative) × Disease status (Present / Absent)
+
+\
+
+- Today:
+  - Focus on **structure and interpretation**
+- Later:
+  - Risk, odds, probability, and inference
+
 ## What you should be able to do now
 
-## Looking ahead
+- Summarize categorical variables with:
+  - Counts
+  - Proportions
+  - Tables
+
+- Compare two categorical variables using:
+  - Contingency tables
+  - Bar plots
+
+- Clearly state *what is being conditioned on* when interpreting results
 
