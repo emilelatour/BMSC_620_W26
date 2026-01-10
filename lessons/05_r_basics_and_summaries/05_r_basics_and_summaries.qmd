@@ -49,14 +49,14 @@ source(here("class_dates.R"))
 # quarto install extension quarto-ext/fontawesome
 ```
 
-## Learning objectives (today)
+<!-- ## Learning objectives (today) -->
 
-By the end of class, you should be able to:
+<!-- By the end of class, you should be able to: -->
 
-1. Run code
-2. Inspect a dataset
-3. Summarize numeric + categorical variables
-4. Make two basic plots
+<!-- 1. Run code -->
+<!-- 2. Inspect a dataset -->
+<!-- 3. Summarize numeric + categorical variables -->
+<!-- 4. Make two basic plots -->
 
 ## Coding in R
 

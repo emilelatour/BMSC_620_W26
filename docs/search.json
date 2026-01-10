@@ -1828,5 +1828,40 @@
     "title": "Summarizing Categorical Data: Tables and Plots",
     "section": "Bar plots example: Genotype by sex",
     "text": "Bar plots example: Genotype by sex\n\n\n\n\nGrouped bar plot\n\n\n\n\n\n\n\n\n\n\nStacked bar plot\n\n\n\n\n\n\n\n\n\n\nPercent stacked bar plot"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#todays-plan",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#todays-plan",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "Today’s plan",
+    "text": "Today’s plan\n\nSummarizing categorical data (tables + bar plots)\nR basics: writing and running code in Quarto"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#a-quick-note-on-numeric-variables",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#a-quick-note-on-numeric-variables",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "A quick note on numeric variables",
+    "text": "A quick note on numeric variables\nLast week, we summarized numeric variables using:\n\nmean and standard deviation\nmedian and IQR\n\n\n\nWe can also summarize numeric variables visually, just like we did for categorical data."
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-numeric-variable-histogram",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-numeric-variable-histogram",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "Visualizing a numeric variable: histogram",
+    "text": "Visualizing a numeric variable: histogram\n\nHistograms show the distribution of a numeric variable\nUseful for seeing:\n\nshape (symmetric vs skewed)\noutliers\nclusters"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-numeric-variable-box-plot",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#visualizing-a-numeric-variable-box-plot",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "Visualizing a numeric variable: box plot",
+    "text": "Visualizing a numeric variable: box plot\n\nBox plots summarize a numeric variable using:\n\nmedian\nIQR\npotential outliers\n\n\n\n\n\n\nBox plot\n\n\n\n\n\n\n\n\n\n\nBox plot by groups"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#box-plot-legend",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#box-plot-legend",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "Box plot legend",
+    "text": "Box plot legend"
   }
 ]

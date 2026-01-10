@@ -70,27 +70,31 @@ library(ggplot2)
 library(gt)
 library(janitor)
 library(lamisc)       # devtools::install_github("emilelatour/lamisc") 
-library(oibiostat)
-
-
 library(laviz)        # devtools::install_github("emilelatour/laviz") 
+library(oibiostat)
+library(see)
+
 
 data("famuss")
+data("frog")
 
 # terminal: for icons
 # quarto install extension quarto-ext/fontawesome
 ```
 
-## Learning objectives (today)
+<!-- ## Learning objectives (today) -->
 
-By the end of class, you should be able to:
+<!-- By the end of class, you should be able to: -->
 
-1. Summarize categorical variables using counts and proportions
-2. Construct and interpret frequency and contingency tables
-3. Distinguish between marginal totals and conditional distributions
-4. Visualize categorical data using bar plots
+<!-- 1. Summarize categorical variables using counts and proportions -->
+<!-- 2. Construct and interpret frequency and contingency tables -->
+<!-- 3. Distinguish between marginal totals and conditional distributions -->
+<!-- 4. Visualize categorical data using bar plots -->
 
+## Today’s plan
 
+1. Summarizing categorical data (tables + bar plots)
+2. R basics: writing and running code in Quarto
 
 ## Summarizing categorical data
 
@@ -691,6 +695,116 @@ famuss |>
   - Focus on **structure and interpretation**
 - Later:
   - Risk, odds, probability, and inference
+  
+## A quick note on numeric variables
+
+Last week, we summarized numeric variables using:
+
+- mean and standard deviation
+- median and IQR
+
+\
+
+We can also **summarize numeric variables visually**, just like we did for categorical data.
+
+## Visualizing a numeric variable: histogram
+
+- Histograms show the **distribution** of a numeric variable
+- Useful for seeing:
+  - shape (symmetric vs skewed)
+  - outliers
+  - clusters
+
+```{r}
+#| echo: false
+# ggplot(famuss, aes(x = age)) +
+#   geom_histogram(color = "white") +
+#   labs(x = "Age", y = "Count") +
+#   laviz::theme_minimal_white(grid = "Y", base_size = 18)
+
+ggplot(frog, 
+       aes(x = clutch.volume)) +
+  geom_histogram(color = "white") +
+  labs(x = "Clutch volume", 
+       y = "Count") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 18)
+```
+
+## Visualizing a numeric variable: box plot
+
+- Box plots summarize a numeric variable using:
+  - median
+  - IQR
+  - potential outliers
+
+\
+
+::: columns
+::: {.column width=50%"}
+
+#### Box plot
+
+```{r}
+#| echo: false
+# ggplot(famuss, aes(y = age)) +
+#   geom_boxplot() +
+#   labs(x = NULL, y = "Age") +
+#   laviz::theme_minimal_white(grid = "Y", base_size = 18)
+
+ggplot(frog, 
+       aes(x = "", 
+       y = clutch.volume)) +
+  geom_boxplot(width = 0.25) +
+  labs(x = NULL, y = "Clutch volume") +
+  laviz::theme_minimal_white(grid = "None", 
+                             base_size = 18) + 
+  scale_y_continuous(limit = c(0, 3000))
+
+```
+
+:::
+::: {.column width="50%"}
+
+#### Box plot by groups
+
+```{r}
+#| echo: false
+# ggplot(famuss, aes(y = age)) +
+#   geom_boxplot() +
+#   labs(x = NULL, y = "Age") +
+#   laviz::theme_minimal_white(grid = "Y", base_size = 18)
+
+
+frog |> 
+  mutate(altitude = as.character(altitude), 
+         altitude = stringr::str_remove(altitude, ","), 
+         altitude = as.numeric(altitude)) |> 
+  mutate(altitude = cut(altitude, 
+                        breaks = c(2000, 2500, 3000, 3500), 
+                        labels = c("2000–2500", "2500–3000", "3000–3500"))) |> 
+  ggplot(aes(x = altitude, 
+       y = clutch.volume)) +
+  geom_boxplot(width = 0.25) +
+  labs(x = "Altitude", 
+       y = "Clutch volume") +
+  laviz::theme_minimal_white(grid = "None", 
+                             base_size = 18) + 
+  scale_y_continuous(limit = c(0, 3000))
+
+```
+
+:::
+:::
+
+## Box plot legend
+
+```{r}
+#| echo: false
+
+laviz::ggplot_box_legend()
+```
+
 
 ## What you should be able to do now
 

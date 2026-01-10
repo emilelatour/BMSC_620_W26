@@ -377,14 +377,20 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 
   <p class="date">January 12, 2026</p>
 </section>
-<section id="learning-objectives-today" class="slide level2">
-<h2>Learning objectives (today)</h2>
-<p>By the end of class, you should be able to:</p>
+<section class="slide level2">
+
+<!-- ## Learning objectives (today) -->
+<!-- By the end of class, you should be able to: -->
+<!-- 1. Summarize categorical variables using counts and proportions -->
+<!-- 2. Construct and interpret frequency and contingency tables -->
+<!-- 3. Distinguish between marginal totals and conditional distributions -->
+<!-- 4. Visualize categorical data using bar plots -->
+</section>
+<section id="todays-plan" class="slide level2">
+<h2>Today’s plan</h2>
 <ol type="1">
-<li>Summarize categorical variables using counts and proportions</li>
-<li>Construct and interpret frequency and contingency tables</li>
-<li>Distinguish between marginal totals and conditional distributions</li>
-<li>Visualize categorical data using bar plots</li>
+<li>Summarizing categorical data (tables + bar plots)</li>
+<li>R basics: writing and running code in Quarto</li>
 </ol>
 </section>
 <section id="summarizing-categorical-data" class="slide level2">
@@ -486,23 +492,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="zpxakxmdqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zpxakxmdqh table {
+<div id="tdgdmrwblt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tdgdmrwblt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zpxakxmdqh thead, #zpxakxmdqh tbody, #zpxakxmdqh tfoot, #zpxakxmdqh tr, #zpxakxmdqh td, #zpxakxmdqh th {
+#tdgdmrwblt thead, #tdgdmrwblt tbody, #tdgdmrwblt tfoot, #tdgdmrwblt tr, #tdgdmrwblt td, #tdgdmrwblt th {
   border-style: none;
 }
 
-#zpxakxmdqh p {
+#tdgdmrwblt p {
   margin: 0;
   padding: 0;
 }
 
-#zpxakxmdqh .gt_table {
+#tdgdmrwblt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -528,12 +534,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_caption {
+#tdgdmrwblt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zpxakxmdqh .gt_title {
+#tdgdmrwblt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -545,7 +551,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#zpxakxmdqh .gt_subtitle {
+#tdgdmrwblt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -557,7 +563,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#zpxakxmdqh .gt_heading {
+#tdgdmrwblt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -569,13 +575,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_bottom_border {
+#tdgdmrwblt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_col_headings {
+#tdgdmrwblt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -590,7 +596,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_col_heading {
+#tdgdmrwblt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -610,7 +616,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#zpxakxmdqh .gt_column_spanner_outer {
+#tdgdmrwblt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -622,15 +628,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#zpxakxmdqh .gt_column_spanner_outer:first-child {
+#tdgdmrwblt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zpxakxmdqh .gt_column_spanner_outer:last-child {
+#tdgdmrwblt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zpxakxmdqh .gt_column_spanner {
+#tdgdmrwblt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -642,11 +648,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#zpxakxmdqh .gt_spanner_row {
+#tdgdmrwblt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zpxakxmdqh .gt_group_heading {
+#tdgdmrwblt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +678,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#zpxakxmdqh .gt_empty_group_heading {
+#tdgdmrwblt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -687,15 +693,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#zpxakxmdqh .gt_from_md > :first-child {
+#tdgdmrwblt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zpxakxmdqh .gt_from_md > :last-child {
+#tdgdmrwblt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zpxakxmdqh .gt_row {
+#tdgdmrwblt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -714,7 +720,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#zpxakxmdqh .gt_stub {
+#tdgdmrwblt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -727,7 +733,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#zpxakxmdqh .gt_stub_row_group {
+#tdgdmrwblt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -741,15 +747,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#zpxakxmdqh .gt_row_group_first td {
+#tdgdmrwblt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zpxakxmdqh .gt_row_group_first th {
+#tdgdmrwblt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zpxakxmdqh .gt_summary_row {
+#tdgdmrwblt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -759,16 +765,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#zpxakxmdqh .gt_first_summary_row {
+#tdgdmrwblt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_first_summary_row.thick {
+#tdgdmrwblt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zpxakxmdqh .gt_last_summary_row {
+#tdgdmrwblt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,7 +784,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_grand_summary_row {
+#tdgdmrwblt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -788,7 +794,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#zpxakxmdqh .gt_first_grand_summary_row {
+#tdgdmrwblt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -798,7 +804,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_last_grand_summary_row_top {
+#tdgdmrwblt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -808,11 +814,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_striped {
+#tdgdmrwblt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zpxakxmdqh .gt_table_body {
+#tdgdmrwblt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -821,7 +827,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_footnotes {
+#tdgdmrwblt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -835,7 +841,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_footnote {
+#tdgdmrwblt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -844,7 +850,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#zpxakxmdqh .gt_sourcenotes {
+#tdgdmrwblt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -858,7 +864,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#zpxakxmdqh .gt_sourcenote {
+#tdgdmrwblt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -866,72 +872,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#zpxakxmdqh .gt_left {
+#tdgdmrwblt .gt_left {
   text-align: left;
 }
 
-#zpxakxmdqh .gt_center {
+#tdgdmrwblt .gt_center {
   text-align: center;
 }
 
-#zpxakxmdqh .gt_right {
+#tdgdmrwblt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zpxakxmdqh .gt_font_normal {
+#tdgdmrwblt .gt_font_normal {
   font-weight: normal;
 }
 
-#zpxakxmdqh .gt_font_bold {
+#tdgdmrwblt .gt_font_bold {
   font-weight: bold;
 }
 
-#zpxakxmdqh .gt_font_italic {
+#tdgdmrwblt .gt_font_italic {
   font-style: italic;
 }
 
-#zpxakxmdqh .gt_super {
+#tdgdmrwblt .gt_super {
   font-size: 65%;
 }
 
-#zpxakxmdqh .gt_footnote_marks {
+#tdgdmrwblt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zpxakxmdqh .gt_asterisk {
+#tdgdmrwblt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zpxakxmdqh .gt_indent_1 {
+#tdgdmrwblt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zpxakxmdqh .gt_indent_2 {
+#tdgdmrwblt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zpxakxmdqh .gt_indent_3 {
+#tdgdmrwblt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zpxakxmdqh .gt_indent_4 {
+#tdgdmrwblt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zpxakxmdqh .gt_indent_5 {
+#tdgdmrwblt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zpxakxmdqh .katex-display {
+#tdgdmrwblt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zpxakxmdqh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tdgdmrwblt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -972,23 +978,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="syjridkyfz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#syjridkyfz table {
+<div id="xjznwvoxpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xjznwvoxpg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#syjridkyfz thead, #syjridkyfz tbody, #syjridkyfz tfoot, #syjridkyfz tr, #syjridkyfz td, #syjridkyfz th {
+#xjznwvoxpg thead, #xjznwvoxpg tbody, #xjznwvoxpg tfoot, #xjznwvoxpg tr, #xjznwvoxpg td, #xjznwvoxpg th {
   border-style: none;
 }
 
-#syjridkyfz p {
+#xjznwvoxpg p {
   margin: 0;
   padding: 0;
 }
 
-#syjridkyfz .gt_table {
+#xjznwvoxpg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1014,12 +1020,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_caption {
+#xjznwvoxpg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#syjridkyfz .gt_title {
+#xjznwvoxpg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1031,7 +1037,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#syjridkyfz .gt_subtitle {
+#xjznwvoxpg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1043,7 +1049,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#syjridkyfz .gt_heading {
+#xjznwvoxpg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1055,13 +1061,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_bottom_border {
+#xjznwvoxpg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_col_headings {
+#xjznwvoxpg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1076,7 +1082,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_col_heading {
+#xjznwvoxpg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1096,7 +1102,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#syjridkyfz .gt_column_spanner_outer {
+#xjznwvoxpg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1108,15 +1114,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#syjridkyfz .gt_column_spanner_outer:first-child {
+#xjznwvoxpg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#syjridkyfz .gt_column_spanner_outer:last-child {
+#xjznwvoxpg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#syjridkyfz .gt_column_spanner {
+#xjznwvoxpg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1128,11 +1134,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#syjridkyfz .gt_spanner_row {
+#xjznwvoxpg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#syjridkyfz .gt_group_heading {
+#xjznwvoxpg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1158,7 +1164,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#syjridkyfz .gt_empty_group_heading {
+#xjznwvoxpg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1173,15 +1179,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#syjridkyfz .gt_from_md > :first-child {
+#xjznwvoxpg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#syjridkyfz .gt_from_md > :last-child {
+#xjznwvoxpg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#syjridkyfz .gt_row {
+#xjznwvoxpg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1200,7 +1206,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#syjridkyfz .gt_stub {
+#xjznwvoxpg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1213,7 +1219,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#syjridkyfz .gt_stub_row_group {
+#xjznwvoxpg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1227,15 +1233,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#syjridkyfz .gt_row_group_first td {
+#xjznwvoxpg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#syjridkyfz .gt_row_group_first th {
+#xjznwvoxpg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#syjridkyfz .gt_summary_row {
+#xjznwvoxpg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1245,16 +1251,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#syjridkyfz .gt_first_summary_row {
+#xjznwvoxpg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_first_summary_row.thick {
+#xjznwvoxpg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#syjridkyfz .gt_last_summary_row {
+#xjznwvoxpg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1264,7 +1270,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_grand_summary_row {
+#xjznwvoxpg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1274,7 +1280,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#syjridkyfz .gt_first_grand_summary_row {
+#xjznwvoxpg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1284,7 +1290,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_last_grand_summary_row_top {
+#xjznwvoxpg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1294,11 +1300,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_striped {
+#xjznwvoxpg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#syjridkyfz .gt_table_body {
+#xjznwvoxpg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1307,7 +1313,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_footnotes {
+#xjznwvoxpg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1321,7 +1327,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_footnote {
+#xjznwvoxpg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1330,7 +1336,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#syjridkyfz .gt_sourcenotes {
+#xjznwvoxpg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1344,7 +1350,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#syjridkyfz .gt_sourcenote {
+#xjznwvoxpg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1352,72 +1358,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#syjridkyfz .gt_left {
+#xjznwvoxpg .gt_left {
   text-align: left;
 }
 
-#syjridkyfz .gt_center {
+#xjznwvoxpg .gt_center {
   text-align: center;
 }
 
-#syjridkyfz .gt_right {
+#xjznwvoxpg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#syjridkyfz .gt_font_normal {
+#xjznwvoxpg .gt_font_normal {
   font-weight: normal;
 }
 
-#syjridkyfz .gt_font_bold {
+#xjznwvoxpg .gt_font_bold {
   font-weight: bold;
 }
 
-#syjridkyfz .gt_font_italic {
+#xjznwvoxpg .gt_font_italic {
   font-style: italic;
 }
 
-#syjridkyfz .gt_super {
+#xjznwvoxpg .gt_super {
   font-size: 65%;
 }
 
-#syjridkyfz .gt_footnote_marks {
+#xjznwvoxpg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#syjridkyfz .gt_asterisk {
+#xjznwvoxpg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#syjridkyfz .gt_indent_1 {
+#xjznwvoxpg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#syjridkyfz .gt_indent_2 {
+#xjznwvoxpg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#syjridkyfz .gt_indent_3 {
+#xjznwvoxpg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#syjridkyfz .gt_indent_4 {
+#xjznwvoxpg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#syjridkyfz .gt_indent_5 {
+#xjznwvoxpg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#syjridkyfz .katex-display {
+#xjznwvoxpg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#syjridkyfz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xjznwvoxpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1583,23 +1589,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="hnllsbudnh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hnllsbudnh table {
+<div id="ewihbfzooe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ewihbfzooe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hnllsbudnh thead, #hnllsbudnh tbody, #hnllsbudnh tfoot, #hnllsbudnh tr, #hnllsbudnh td, #hnllsbudnh th {
+#ewihbfzooe thead, #ewihbfzooe tbody, #ewihbfzooe tfoot, #ewihbfzooe tr, #ewihbfzooe td, #ewihbfzooe th {
   border-style: none;
 }
 
-#hnllsbudnh p {
+#ewihbfzooe p {
   margin: 0;
   padding: 0;
 }
 
-#hnllsbudnh .gt_table {
+#ewihbfzooe .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1625,12 +1631,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_caption {
+#ewihbfzooe .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hnllsbudnh .gt_title {
+#ewihbfzooe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1642,7 +1648,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#hnllsbudnh .gt_subtitle {
+#ewihbfzooe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1654,7 +1660,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#hnllsbudnh .gt_heading {
+#ewihbfzooe .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1666,13 +1672,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_bottom_border {
+#ewihbfzooe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_col_headings {
+#ewihbfzooe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1687,7 +1693,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_col_heading {
+#ewihbfzooe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1707,7 +1713,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#hnllsbudnh .gt_column_spanner_outer {
+#ewihbfzooe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1719,15 +1725,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#hnllsbudnh .gt_column_spanner_outer:first-child {
+#ewihbfzooe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hnllsbudnh .gt_column_spanner_outer:last-child {
+#ewihbfzooe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hnllsbudnh .gt_column_spanner {
+#ewihbfzooe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1739,11 +1745,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#hnllsbudnh .gt_spanner_row {
+#ewihbfzooe .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hnllsbudnh .gt_group_heading {
+#ewihbfzooe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1769,7 +1775,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#hnllsbudnh .gt_empty_group_heading {
+#ewihbfzooe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1784,15 +1790,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#hnllsbudnh .gt_from_md > :first-child {
+#ewihbfzooe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hnllsbudnh .gt_from_md > :last-child {
+#ewihbfzooe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hnllsbudnh .gt_row {
+#ewihbfzooe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1811,7 +1817,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#hnllsbudnh .gt_stub {
+#ewihbfzooe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1824,7 +1830,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#hnllsbudnh .gt_stub_row_group {
+#ewihbfzooe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1838,15 +1844,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#hnllsbudnh .gt_row_group_first td {
+#ewihbfzooe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hnllsbudnh .gt_row_group_first th {
+#ewihbfzooe .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hnllsbudnh .gt_summary_row {
+#ewihbfzooe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1856,16 +1862,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#hnllsbudnh .gt_first_summary_row {
+#ewihbfzooe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_first_summary_row.thick {
+#ewihbfzooe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hnllsbudnh .gt_last_summary_row {
+#ewihbfzooe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1875,7 +1881,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_grand_summary_row {
+#ewihbfzooe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1885,7 +1891,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#hnllsbudnh .gt_first_grand_summary_row {
+#ewihbfzooe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1895,7 +1901,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_last_grand_summary_row_top {
+#ewihbfzooe .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1905,11 +1911,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_striped {
+#ewihbfzooe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hnllsbudnh .gt_table_body {
+#ewihbfzooe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1918,7 +1924,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_footnotes {
+#ewihbfzooe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1932,7 +1938,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_footnote {
+#ewihbfzooe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1941,7 +1947,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#hnllsbudnh .gt_sourcenotes {
+#ewihbfzooe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1955,7 +1961,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#hnllsbudnh .gt_sourcenote {
+#ewihbfzooe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1963,72 +1969,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#hnllsbudnh .gt_left {
+#ewihbfzooe .gt_left {
   text-align: left;
 }
 
-#hnllsbudnh .gt_center {
+#ewihbfzooe .gt_center {
   text-align: center;
 }
 
-#hnllsbudnh .gt_right {
+#ewihbfzooe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hnllsbudnh .gt_font_normal {
+#ewihbfzooe .gt_font_normal {
   font-weight: normal;
 }
 
-#hnllsbudnh .gt_font_bold {
+#ewihbfzooe .gt_font_bold {
   font-weight: bold;
 }
 
-#hnllsbudnh .gt_font_italic {
+#ewihbfzooe .gt_font_italic {
   font-style: italic;
 }
 
-#hnllsbudnh .gt_super {
+#ewihbfzooe .gt_super {
   font-size: 65%;
 }
 
-#hnllsbudnh .gt_footnote_marks {
+#ewihbfzooe .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hnllsbudnh .gt_asterisk {
+#ewihbfzooe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hnllsbudnh .gt_indent_1 {
+#ewihbfzooe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hnllsbudnh .gt_indent_2 {
+#ewihbfzooe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hnllsbudnh .gt_indent_3 {
+#ewihbfzooe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hnllsbudnh .gt_indent_4 {
+#ewihbfzooe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hnllsbudnh .gt_indent_5 {
+#ewihbfzooe .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hnllsbudnh .katex-display {
+#ewihbfzooe .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hnllsbudnh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ewihbfzooe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2098,23 +2104,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="kogjkrcimn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kogjkrcimn table {
+<div id="fehdghpiev" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fehdghpiev table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kogjkrcimn thead, #kogjkrcimn tbody, #kogjkrcimn tfoot, #kogjkrcimn tr, #kogjkrcimn td, #kogjkrcimn th {
+#fehdghpiev thead, #fehdghpiev tbody, #fehdghpiev tfoot, #fehdghpiev tr, #fehdghpiev td, #fehdghpiev th {
   border-style: none;
 }
 
-#kogjkrcimn p {
+#fehdghpiev p {
   margin: 0;
   padding: 0;
 }
 
-#kogjkrcimn .gt_table {
+#fehdghpiev .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2140,12 +2146,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_caption {
+#fehdghpiev .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kogjkrcimn .gt_title {
+#fehdghpiev .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2157,7 +2163,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#kogjkrcimn .gt_subtitle {
+#fehdghpiev .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2169,7 +2175,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#kogjkrcimn .gt_heading {
+#fehdghpiev .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2181,13 +2187,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_bottom_border {
+#fehdghpiev .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_col_headings {
+#fehdghpiev .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2202,7 +2208,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_col_heading {
+#fehdghpiev .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2222,7 +2228,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#kogjkrcimn .gt_column_spanner_outer {
+#fehdghpiev .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2234,15 +2240,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#kogjkrcimn .gt_column_spanner_outer:first-child {
+#fehdghpiev .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kogjkrcimn .gt_column_spanner_outer:last-child {
+#fehdghpiev .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kogjkrcimn .gt_column_spanner {
+#fehdghpiev .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2254,11 +2260,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#kogjkrcimn .gt_spanner_row {
+#fehdghpiev .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kogjkrcimn .gt_group_heading {
+#fehdghpiev .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2284,7 +2290,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#kogjkrcimn .gt_empty_group_heading {
+#fehdghpiev .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2299,15 +2305,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#kogjkrcimn .gt_from_md > :first-child {
+#fehdghpiev .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kogjkrcimn .gt_from_md > :last-child {
+#fehdghpiev .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kogjkrcimn .gt_row {
+#fehdghpiev .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2326,7 +2332,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#kogjkrcimn .gt_stub {
+#fehdghpiev .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2339,7 +2345,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#kogjkrcimn .gt_stub_row_group {
+#fehdghpiev .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2353,15 +2359,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#kogjkrcimn .gt_row_group_first td {
+#fehdghpiev .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kogjkrcimn .gt_row_group_first th {
+#fehdghpiev .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kogjkrcimn .gt_summary_row {
+#fehdghpiev .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2371,16 +2377,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#kogjkrcimn .gt_first_summary_row {
+#fehdghpiev .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_first_summary_row.thick {
+#fehdghpiev .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kogjkrcimn .gt_last_summary_row {
+#fehdghpiev .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2390,7 +2396,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_grand_summary_row {
+#fehdghpiev .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2400,7 +2406,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#kogjkrcimn .gt_first_grand_summary_row {
+#fehdghpiev .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2410,7 +2416,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_last_grand_summary_row_top {
+#fehdghpiev .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2420,11 +2426,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_striped {
+#fehdghpiev .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kogjkrcimn .gt_table_body {
+#fehdghpiev .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2433,7 +2439,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_footnotes {
+#fehdghpiev .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2447,7 +2453,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_footnote {
+#fehdghpiev .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2456,7 +2462,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#kogjkrcimn .gt_sourcenotes {
+#fehdghpiev .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2470,7 +2476,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#kogjkrcimn .gt_sourcenote {
+#fehdghpiev .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2478,72 +2484,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#kogjkrcimn .gt_left {
+#fehdghpiev .gt_left {
   text-align: left;
 }
 
-#kogjkrcimn .gt_center {
+#fehdghpiev .gt_center {
   text-align: center;
 }
 
-#kogjkrcimn .gt_right {
+#fehdghpiev .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kogjkrcimn .gt_font_normal {
+#fehdghpiev .gt_font_normal {
   font-weight: normal;
 }
 
-#kogjkrcimn .gt_font_bold {
+#fehdghpiev .gt_font_bold {
   font-weight: bold;
 }
 
-#kogjkrcimn .gt_font_italic {
+#fehdghpiev .gt_font_italic {
   font-style: italic;
 }
 
-#kogjkrcimn .gt_super {
+#fehdghpiev .gt_super {
   font-size: 65%;
 }
 
-#kogjkrcimn .gt_footnote_marks {
+#fehdghpiev .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kogjkrcimn .gt_asterisk {
+#fehdghpiev .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kogjkrcimn .gt_indent_1 {
+#fehdghpiev .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kogjkrcimn .gt_indent_2 {
+#fehdghpiev .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kogjkrcimn .gt_indent_3 {
+#fehdghpiev .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kogjkrcimn .gt_indent_4 {
+#fehdghpiev .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kogjkrcimn .gt_indent_5 {
+#fehdghpiev .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kogjkrcimn .katex-display {
+#fehdghpiev .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kogjkrcimn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fehdghpiev div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2605,23 +2611,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="spawyoggwq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#spawyoggwq table {
+<div id="sjsnsaheof" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sjsnsaheof table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#spawyoggwq thead, #spawyoggwq tbody, #spawyoggwq tfoot, #spawyoggwq tr, #spawyoggwq td, #spawyoggwq th {
+#sjsnsaheof thead, #sjsnsaheof tbody, #sjsnsaheof tfoot, #sjsnsaheof tr, #sjsnsaheof td, #sjsnsaheof th {
   border-style: none;
 }
 
-#spawyoggwq p {
+#sjsnsaheof p {
   margin: 0;
   padding: 0;
 }
 
-#spawyoggwq .gt_table {
+#sjsnsaheof .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2647,12 +2653,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_caption {
+#sjsnsaheof .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#spawyoggwq .gt_title {
+#sjsnsaheof .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2664,7 +2670,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#spawyoggwq .gt_subtitle {
+#sjsnsaheof .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2676,7 +2682,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#spawyoggwq .gt_heading {
+#sjsnsaheof .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2688,13 +2694,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_bottom_border {
+#sjsnsaheof .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_col_headings {
+#sjsnsaheof .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2709,7 +2715,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_col_heading {
+#sjsnsaheof .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2729,7 +2735,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#spawyoggwq .gt_column_spanner_outer {
+#sjsnsaheof .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2741,15 +2747,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#spawyoggwq .gt_column_spanner_outer:first-child {
+#sjsnsaheof .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#spawyoggwq .gt_column_spanner_outer:last-child {
+#sjsnsaheof .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#spawyoggwq .gt_column_spanner {
+#sjsnsaheof .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2761,11 +2767,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#spawyoggwq .gt_spanner_row {
+#sjsnsaheof .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#spawyoggwq .gt_group_heading {
+#sjsnsaheof .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2791,7 +2797,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#spawyoggwq .gt_empty_group_heading {
+#sjsnsaheof .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2806,15 +2812,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#spawyoggwq .gt_from_md > :first-child {
+#sjsnsaheof .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#spawyoggwq .gt_from_md > :last-child {
+#sjsnsaheof .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#spawyoggwq .gt_row {
+#sjsnsaheof .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2833,7 +2839,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#spawyoggwq .gt_stub {
+#sjsnsaheof .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2846,7 +2852,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#spawyoggwq .gt_stub_row_group {
+#sjsnsaheof .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2860,15 +2866,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#spawyoggwq .gt_row_group_first td {
+#sjsnsaheof .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#spawyoggwq .gt_row_group_first th {
+#sjsnsaheof .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#spawyoggwq .gt_summary_row {
+#sjsnsaheof .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2878,16 +2884,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#spawyoggwq .gt_first_summary_row {
+#sjsnsaheof .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_first_summary_row.thick {
+#sjsnsaheof .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#spawyoggwq .gt_last_summary_row {
+#sjsnsaheof .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2897,7 +2903,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_grand_summary_row {
+#sjsnsaheof .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2907,7 +2913,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#spawyoggwq .gt_first_grand_summary_row {
+#sjsnsaheof .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2917,7 +2923,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_last_grand_summary_row_top {
+#sjsnsaheof .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2927,11 +2933,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_striped {
+#sjsnsaheof .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#spawyoggwq .gt_table_body {
+#sjsnsaheof .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2940,7 +2946,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_footnotes {
+#sjsnsaheof .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2954,7 +2960,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_footnote {
+#sjsnsaheof .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2963,7 +2969,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#spawyoggwq .gt_sourcenotes {
+#sjsnsaheof .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2977,7 +2983,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#spawyoggwq .gt_sourcenote {
+#sjsnsaheof .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2985,72 +2991,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#spawyoggwq .gt_left {
+#sjsnsaheof .gt_left {
   text-align: left;
 }
 
-#spawyoggwq .gt_center {
+#sjsnsaheof .gt_center {
   text-align: center;
 }
 
-#spawyoggwq .gt_right {
+#sjsnsaheof .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#spawyoggwq .gt_font_normal {
+#sjsnsaheof .gt_font_normal {
   font-weight: normal;
 }
 
-#spawyoggwq .gt_font_bold {
+#sjsnsaheof .gt_font_bold {
   font-weight: bold;
 }
 
-#spawyoggwq .gt_font_italic {
+#sjsnsaheof .gt_font_italic {
   font-style: italic;
 }
 
-#spawyoggwq .gt_super {
+#sjsnsaheof .gt_super {
   font-size: 65%;
 }
 
-#spawyoggwq .gt_footnote_marks {
+#sjsnsaheof .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#spawyoggwq .gt_asterisk {
+#sjsnsaheof .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#spawyoggwq .gt_indent_1 {
+#sjsnsaheof .gt_indent_1 {
   text-indent: 5px;
 }
 
-#spawyoggwq .gt_indent_2 {
+#sjsnsaheof .gt_indent_2 {
   text-indent: 10px;
 }
 
-#spawyoggwq .gt_indent_3 {
+#sjsnsaheof .gt_indent_3 {
   text-indent: 15px;
 }
 
-#spawyoggwq .gt_indent_4 {
+#sjsnsaheof .gt_indent_4 {
   text-indent: 20px;
 }
 
-#spawyoggwq .gt_indent_5 {
+#sjsnsaheof .gt_indent_5 {
   text-indent: 25px;
 }
 
-#spawyoggwq .katex-display {
+#sjsnsaheof .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#spawyoggwq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sjsnsaheof div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3091,23 +3097,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="yekcjzpixy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yekcjzpixy table {
+<div id="mnaxhedarq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mnaxhedarq table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yekcjzpixy thead, #yekcjzpixy tbody, #yekcjzpixy tfoot, #yekcjzpixy tr, #yekcjzpixy td, #yekcjzpixy th {
+#mnaxhedarq thead, #mnaxhedarq tbody, #mnaxhedarq tfoot, #mnaxhedarq tr, #mnaxhedarq td, #mnaxhedarq th {
   border-style: none;
 }
 
-#yekcjzpixy p {
+#mnaxhedarq p {
   margin: 0;
   padding: 0;
 }
 
-#yekcjzpixy .gt_table {
+#mnaxhedarq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3133,12 +3139,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_caption {
+#mnaxhedarq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yekcjzpixy .gt_title {
+#mnaxhedarq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3150,7 +3156,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#yekcjzpixy .gt_subtitle {
+#mnaxhedarq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3162,7 +3168,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#yekcjzpixy .gt_heading {
+#mnaxhedarq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3174,13 +3180,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_bottom_border {
+#mnaxhedarq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_col_headings {
+#mnaxhedarq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3195,7 +3201,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_col_heading {
+#mnaxhedarq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3215,7 +3221,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#yekcjzpixy .gt_column_spanner_outer {
+#mnaxhedarq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3227,15 +3233,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#yekcjzpixy .gt_column_spanner_outer:first-child {
+#mnaxhedarq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yekcjzpixy .gt_column_spanner_outer:last-child {
+#mnaxhedarq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yekcjzpixy .gt_column_spanner {
+#mnaxhedarq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3247,11 +3253,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#yekcjzpixy .gt_spanner_row {
+#mnaxhedarq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yekcjzpixy .gt_group_heading {
+#mnaxhedarq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3277,7 +3283,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#yekcjzpixy .gt_empty_group_heading {
+#mnaxhedarq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3292,15 +3298,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#yekcjzpixy .gt_from_md > :first-child {
+#mnaxhedarq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yekcjzpixy .gt_from_md > :last-child {
+#mnaxhedarq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yekcjzpixy .gt_row {
+#mnaxhedarq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3319,7 +3325,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#yekcjzpixy .gt_stub {
+#mnaxhedarq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3332,7 +3338,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#yekcjzpixy .gt_stub_row_group {
+#mnaxhedarq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3346,15 +3352,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#yekcjzpixy .gt_row_group_first td {
+#mnaxhedarq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yekcjzpixy .gt_row_group_first th {
+#mnaxhedarq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yekcjzpixy .gt_summary_row {
+#mnaxhedarq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3364,16 +3370,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#yekcjzpixy .gt_first_summary_row {
+#mnaxhedarq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_first_summary_row.thick {
+#mnaxhedarq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yekcjzpixy .gt_last_summary_row {
+#mnaxhedarq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3383,7 +3389,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_grand_summary_row {
+#mnaxhedarq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3393,7 +3399,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#yekcjzpixy .gt_first_grand_summary_row {
+#mnaxhedarq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3403,7 +3409,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_last_grand_summary_row_top {
+#mnaxhedarq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3413,11 +3419,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_striped {
+#mnaxhedarq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yekcjzpixy .gt_table_body {
+#mnaxhedarq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3426,7 +3432,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_footnotes {
+#mnaxhedarq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3440,7 +3446,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_footnote {
+#mnaxhedarq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3449,7 +3455,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#yekcjzpixy .gt_sourcenotes {
+#mnaxhedarq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3463,7 +3469,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#yekcjzpixy .gt_sourcenote {
+#mnaxhedarq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3471,72 +3477,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#yekcjzpixy .gt_left {
+#mnaxhedarq .gt_left {
   text-align: left;
 }
 
-#yekcjzpixy .gt_center {
+#mnaxhedarq .gt_center {
   text-align: center;
 }
 
-#yekcjzpixy .gt_right {
+#mnaxhedarq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yekcjzpixy .gt_font_normal {
+#mnaxhedarq .gt_font_normal {
   font-weight: normal;
 }
 
-#yekcjzpixy .gt_font_bold {
+#mnaxhedarq .gt_font_bold {
   font-weight: bold;
 }
 
-#yekcjzpixy .gt_font_italic {
+#mnaxhedarq .gt_font_italic {
   font-style: italic;
 }
 
-#yekcjzpixy .gt_super {
+#mnaxhedarq .gt_super {
   font-size: 65%;
 }
 
-#yekcjzpixy .gt_footnote_marks {
+#mnaxhedarq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yekcjzpixy .gt_asterisk {
+#mnaxhedarq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yekcjzpixy .gt_indent_1 {
+#mnaxhedarq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yekcjzpixy .gt_indent_2 {
+#mnaxhedarq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yekcjzpixy .gt_indent_3 {
+#mnaxhedarq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yekcjzpixy .gt_indent_4 {
+#mnaxhedarq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yekcjzpixy .gt_indent_5 {
+#mnaxhedarq .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yekcjzpixy .katex-display {
+#mnaxhedarq .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yekcjzpixy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mnaxhedarq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3590,23 +3596,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="wfivxxiunp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wfivxxiunp table {
+<div id="udpwwqekdf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#udpwwqekdf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wfivxxiunp thead, #wfivxxiunp tbody, #wfivxxiunp tfoot, #wfivxxiunp tr, #wfivxxiunp td, #wfivxxiunp th {
+#udpwwqekdf thead, #udpwwqekdf tbody, #udpwwqekdf tfoot, #udpwwqekdf tr, #udpwwqekdf td, #udpwwqekdf th {
   border-style: none;
 }
 
-#wfivxxiunp p {
+#udpwwqekdf p {
   margin: 0;
   padding: 0;
 }
 
-#wfivxxiunp .gt_table {
+#udpwwqekdf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3632,12 +3638,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_caption {
+#udpwwqekdf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wfivxxiunp .gt_title {
+#udpwwqekdf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3649,7 +3655,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#wfivxxiunp .gt_subtitle {
+#udpwwqekdf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3661,7 +3667,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#wfivxxiunp .gt_heading {
+#udpwwqekdf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3673,13 +3679,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_bottom_border {
+#udpwwqekdf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_col_headings {
+#udpwwqekdf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3694,7 +3700,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_col_heading {
+#udpwwqekdf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3714,7 +3720,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#wfivxxiunp .gt_column_spanner_outer {
+#udpwwqekdf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3726,15 +3732,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#wfivxxiunp .gt_column_spanner_outer:first-child {
+#udpwwqekdf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wfivxxiunp .gt_column_spanner_outer:last-child {
+#udpwwqekdf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wfivxxiunp .gt_column_spanner {
+#udpwwqekdf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3746,11 +3752,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#wfivxxiunp .gt_spanner_row {
+#udpwwqekdf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wfivxxiunp .gt_group_heading {
+#udpwwqekdf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3776,7 +3782,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#wfivxxiunp .gt_empty_group_heading {
+#udpwwqekdf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3791,15 +3797,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#wfivxxiunp .gt_from_md > :first-child {
+#udpwwqekdf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wfivxxiunp .gt_from_md > :last-child {
+#udpwwqekdf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wfivxxiunp .gt_row {
+#udpwwqekdf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3818,7 +3824,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#wfivxxiunp .gt_stub {
+#udpwwqekdf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3831,7 +3837,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#wfivxxiunp .gt_stub_row_group {
+#udpwwqekdf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3845,15 +3851,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#wfivxxiunp .gt_row_group_first td {
+#udpwwqekdf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wfivxxiunp .gt_row_group_first th {
+#udpwwqekdf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wfivxxiunp .gt_summary_row {
+#udpwwqekdf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3863,16 +3869,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#wfivxxiunp .gt_first_summary_row {
+#udpwwqekdf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_first_summary_row.thick {
+#udpwwqekdf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wfivxxiunp .gt_last_summary_row {
+#udpwwqekdf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3882,7 +3888,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_grand_summary_row {
+#udpwwqekdf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3892,7 +3898,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#wfivxxiunp .gt_first_grand_summary_row {
+#udpwwqekdf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3902,7 +3908,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_last_grand_summary_row_top {
+#udpwwqekdf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3912,11 +3918,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_striped {
+#udpwwqekdf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wfivxxiunp .gt_table_body {
+#udpwwqekdf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3925,7 +3931,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_footnotes {
+#udpwwqekdf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3939,7 +3945,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_footnote {
+#udpwwqekdf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3948,7 +3954,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#wfivxxiunp .gt_sourcenotes {
+#udpwwqekdf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3962,7 +3968,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#wfivxxiunp .gt_sourcenote {
+#udpwwqekdf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3970,72 +3976,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#wfivxxiunp .gt_left {
+#udpwwqekdf .gt_left {
   text-align: left;
 }
 
-#wfivxxiunp .gt_center {
+#udpwwqekdf .gt_center {
   text-align: center;
 }
 
-#wfivxxiunp .gt_right {
+#udpwwqekdf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wfivxxiunp .gt_font_normal {
+#udpwwqekdf .gt_font_normal {
   font-weight: normal;
 }
 
-#wfivxxiunp .gt_font_bold {
+#udpwwqekdf .gt_font_bold {
   font-weight: bold;
 }
 
-#wfivxxiunp .gt_font_italic {
+#udpwwqekdf .gt_font_italic {
   font-style: italic;
 }
 
-#wfivxxiunp .gt_super {
+#udpwwqekdf .gt_super {
   font-size: 65%;
 }
 
-#wfivxxiunp .gt_footnote_marks {
+#udpwwqekdf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wfivxxiunp .gt_asterisk {
+#udpwwqekdf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wfivxxiunp .gt_indent_1 {
+#udpwwqekdf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wfivxxiunp .gt_indent_2 {
+#udpwwqekdf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wfivxxiunp .gt_indent_3 {
+#udpwwqekdf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wfivxxiunp .gt_indent_4 {
+#udpwwqekdf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wfivxxiunp .gt_indent_5 {
+#udpwwqekdf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wfivxxiunp .katex-display {
+#udpwwqekdf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wfivxxiunp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#udpwwqekdf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4079,23 +4085,23 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="tbl-big">
 <div class="cell">
 <div class="cell-output-display">
-<div id="jgpdsovmhn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jgpdsovmhn table {
+<div id="umktxnpgci" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#umktxnpgci table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jgpdsovmhn thead, #jgpdsovmhn tbody, #jgpdsovmhn tfoot, #jgpdsovmhn tr, #jgpdsovmhn td, #jgpdsovmhn th {
+#umktxnpgci thead, #umktxnpgci tbody, #umktxnpgci tfoot, #umktxnpgci tr, #umktxnpgci td, #umktxnpgci th {
   border-style: none;
 }
 
-#jgpdsovmhn p {
+#umktxnpgci p {
   margin: 0;
   padding: 0;
 }
 
-#jgpdsovmhn .gt_table {
+#umktxnpgci .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -4121,12 +4127,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-left-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_caption {
+#umktxnpgci .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jgpdsovmhn .gt_title {
+#umktxnpgci .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4138,7 +4144,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-width: 0;
 }
 
-#jgpdsovmhn .gt_subtitle {
+#umktxnpgci .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4150,7 +4156,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-width: 0;
 }
 
-#jgpdsovmhn .gt_heading {
+#umktxnpgci .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4162,13 +4168,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_bottom_border {
+#umktxnpgci .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_col_headings {
+#umktxnpgci .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4183,7 +4189,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_col_heading {
+#umktxnpgci .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4203,7 +4209,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#jgpdsovmhn .gt_column_spanner_outer {
+#umktxnpgci .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4215,15 +4221,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 4px;
 }
 
-#jgpdsovmhn .gt_column_spanner_outer:first-child {
+#umktxnpgci .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jgpdsovmhn .gt_column_spanner_outer:last-child {
+#umktxnpgci .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jgpdsovmhn .gt_column_spanner {
+#umktxnpgci .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4235,11 +4241,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   width: 100%;
 }
 
-#jgpdsovmhn .gt_spanner_row {
+#umktxnpgci .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jgpdsovmhn .gt_group_heading {
+#umktxnpgci .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4265,7 +4271,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   text-align: left;
 }
 
-#jgpdsovmhn .gt_empty_group_heading {
+#umktxnpgci .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4280,15 +4286,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: middle;
 }
 
-#jgpdsovmhn .gt_from_md > :first-child {
+#umktxnpgci .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jgpdsovmhn .gt_from_md > :last-child {
+#umktxnpgci .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jgpdsovmhn .gt_row {
+#umktxnpgci .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4307,7 +4313,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   overflow-x: hidden;
 }
 
-#jgpdsovmhn .gt_stub {
+#umktxnpgci .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4320,7 +4326,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#jgpdsovmhn .gt_stub_row_group {
+#umktxnpgci .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4334,15 +4340,15 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   vertical-align: top;
 }
 
-#jgpdsovmhn .gt_row_group_first td {
+#umktxnpgci .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jgpdsovmhn .gt_row_group_first th {
+#umktxnpgci .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jgpdsovmhn .gt_summary_row {
+#umktxnpgci .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4352,16 +4358,16 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#jgpdsovmhn .gt_first_summary_row {
+#umktxnpgci .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_first_summary_row.thick {
+#umktxnpgci .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jgpdsovmhn .gt_last_summary_row {
+#umktxnpgci .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4371,7 +4377,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_grand_summary_row {
+#umktxnpgci .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4381,7 +4387,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#jgpdsovmhn .gt_first_grand_summary_row {
+#umktxnpgci .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4391,7 +4397,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-top-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_last_grand_summary_row_top {
+#umktxnpgci .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4401,11 +4407,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_striped {
+#umktxnpgci .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jgpdsovmhn .gt_table_body {
+#umktxnpgci .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4414,7 +4420,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-bottom-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_footnotes {
+#umktxnpgci .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4428,7 +4434,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_footnote {
+#umktxnpgci .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4437,7 +4443,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#jgpdsovmhn .gt_sourcenotes {
+#umktxnpgci .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4451,7 +4457,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   border-right-color: #D3D3D3;
 }
 
-#jgpdsovmhn .gt_sourcenote {
+#umktxnpgci .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4459,72 +4465,72 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
   padding-right: 5px;
 }
 
-#jgpdsovmhn .gt_left {
+#umktxnpgci .gt_left {
   text-align: left;
 }
 
-#jgpdsovmhn .gt_center {
+#umktxnpgci .gt_center {
   text-align: center;
 }
 
-#jgpdsovmhn .gt_right {
+#umktxnpgci .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jgpdsovmhn .gt_font_normal {
+#umktxnpgci .gt_font_normal {
   font-weight: normal;
 }
 
-#jgpdsovmhn .gt_font_bold {
+#umktxnpgci .gt_font_bold {
   font-weight: bold;
 }
 
-#jgpdsovmhn .gt_font_italic {
+#umktxnpgci .gt_font_italic {
   font-style: italic;
 }
 
-#jgpdsovmhn .gt_super {
+#umktxnpgci .gt_super {
   font-size: 65%;
 }
 
-#jgpdsovmhn .gt_footnote_marks {
+#umktxnpgci .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jgpdsovmhn .gt_asterisk {
+#umktxnpgci .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jgpdsovmhn .gt_indent_1 {
+#umktxnpgci .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jgpdsovmhn .gt_indent_2 {
+#umktxnpgci .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jgpdsovmhn .gt_indent_3 {
+#umktxnpgci .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jgpdsovmhn .gt_indent_4 {
+#umktxnpgci .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jgpdsovmhn .gt_indent_5 {
+#umktxnpgci .gt_indent_5 {
   text-indent: 25px;
 }
 
-#jgpdsovmhn .katex-display {
+#umktxnpgci .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#jgpdsovmhn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#umktxnpgci div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4719,6 +4725,71 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </ul></li>
 </ul>
 </section>
+<section id="a-quick-note-on-numeric-variables" class="slide level2">
+<h2>A quick note on numeric variables</h2>
+<p>Last week, we summarized numeric variables using:</p>
+<ul>
+<li>mean and standard deviation</li>
+<li>median and IQR</li>
+</ul>
+<p><br>
+</p>
+<p>We can also <strong>summarize numeric variables visually</strong>, just like we did for categorical data.</p>
+</section>
+<section id="visualizing-a-numeric-variable-histogram" class="slide level2">
+<h2>Visualizing a numeric variable: histogram</h2>
+<ul>
+<li>Histograms show the <strong>distribution</strong> of a numeric variable</li>
+<li>Useful for seeing:
+<ul>
+<li>shape (symmetric vs skewed)</li>
+<li>outliers</li>
+<li>clusters</li>
+</ul></li>
+</ul>
+
+<img data-src="04_categorical_data_and_tables_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<section id="visualizing-a-numeric-variable-box-plot" class="slide level2">
+<h2>Visualizing a numeric variable: box plot</h2>
+<ul>
+<li>Box plots summarize a numeric variable using:
+<ul>
+<li>median</li>
+<li>IQR</li>
+<li>potential outliers</li>
+</ul></li>
+</ul>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%&quot;;">
+<h4 id="box-plot">Box plot</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04_categorical_data_and_tables_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h4 id="box-plot-by-groups">Box plot by groups</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04_categorical_data_and_tables_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="box-plot-legend" class="slide level2">
+<h2>Box plot legend</h2>
+
+<img data-src="04_categorical_data_and_tables_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
 <section id="what-you-should-be-able-to-do-now" class="slide level2">
 <h2>What you should be able to do now</h2>
 <ul>
