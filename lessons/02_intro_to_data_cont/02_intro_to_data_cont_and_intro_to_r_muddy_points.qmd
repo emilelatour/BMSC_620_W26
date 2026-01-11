@@ -1,0 +1,87 @@
+---
+title: "Muddy Points"
+subtitle: "Getting Started with Data, R, and Quarto"
+date-modified: "today"
+format:
+  html:
+    toc: true
+---
+
+## Thanks for the feedback
+
+Thank you to everyone who submitted post-class feedback. Overall, the material from our first week was reported as quite clear, which is great to hear. Below I address the main points that came up as muddy or unclear.
+
+---
+
+## 1. Mean vs. standard deviation notation ($\bar{x}$, $s$ vs. $\mu$, $\sigma$)
+
+One question that came up was why we sometimes use symbols like **μ** and **σ** instead of **x̄** (x-bar) and **s**, particularly when drawing or describing a normal curve.
+
+A helpful rule of thumb:
+
+- **x̄ (x-bar)** and **s** are *sample statistics* — they summarize data you actually observed.
+- **μ (mu)** and **σ (sigma)** are *population parameters* — they describe an underlying population or theoretical distribution.
+
+When we draw a normal curve, we often label it with **μ** and **σ** even if, in practice, we estimate those values using **x̄** and **s** from data. This is just a convention and something we will revisit once we start formal inference.
+
+Relatedly, one person mentioned confusion about the “squared SD”:
+
+- The **variance** is the standard deviation squared.
+- Variance has squared units, which is why we usually *report* the standard deviation instead.
+
+---
+
+## 2. Markdown vs. comments in `.qmd` files
+
+A few questions came up about when to use different symbols in Quarto files:
+
+- `#` inside an R code chunk is a **code comment** (for humans, not output).
+- `<!-- -->` is an **HTML comment** in the markdown text (also not shown in output).
+- `>` creates a **block quote**, which *does* appear in the rendered document.
+
+In short:
+- Use comments (`#` or `<!-- -->`) for notes to yourself or graders.
+- Use block quotes (`>`) when you want text to appear as part of the document.
+
+---
+
+## 3. Source vs. Visual editor
+
+Some people weren’t sure why we would use the **Source** editor at this point.
+
+For now, think of this as:
+
+- **Visual editor**: helpful for getting started, especially if you’re new.
+- **Source editor**: shows the underlying text and structure of the document.
+
+They are just two ways of editing the *same* file. Over time, you may find that the Source editor gives you more control, but you are free to use whichever view feels more comfortable right now.
+
+---
+
+## 4. Is `.qmd` something people actually use?
+
+Yes — documents that combine code, text, and output are very common in statistics and data analysis.
+
+Some people use:
+- Quarto (`.qmd`)
+- R Markdown (`.Rmd`)
+- Jupyter notebooks
+- Similar tools in Python or other languages
+
+We are using Quarto in this course because it supports reproducible analysis and clear communication in one place. The skills you learn here will transfer easily to other tools.
+
+---
+
+## 5. Pace and in-class practice
+
+A small number of people mentioned that the R portion felt a little fast, especially for those completely new to R.
+
+That is expected early on. The goal of in-class practice is **exposure**, not mastery in the moment. It’s okay if you don’t finish everything during class — we’ll continue to reinforce these ideas through homework and repeated use.
+
+---
+
+## Final note
+
+If something still feels muddy after this clarification, that’s okay. Many ideas in statistics (and in R) only become clear after you see them used multiple times.
+
+Please keep using the post-class check-ins. They are genuinely helpful for guiding what we revisit or slow down on.

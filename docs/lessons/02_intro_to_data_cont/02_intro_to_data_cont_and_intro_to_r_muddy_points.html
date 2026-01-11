@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Welcome &amp; Introduction to Data">
 
-<title>Week 1 – BMSC 620: Introduction to Biostatistics</title>
+<title>Muddy Points – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,8 +68,37 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../assets/css/styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -80,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
     </a>
   </div>
@@ -91,23 +119,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../schedule.html"> 
+    <a class="nav-link" href="../../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../homework.html"> 
+    <a class="nav-link" href="../../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../exams.html"> 
+    <a class="nav-link" href="../../exams.html"> 
 <span class="menu-text">Exams</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../resources.html"> 
+    <a class="nav-link" href="../../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -121,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_01.html">Week 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Muddy Points</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -143,25 +171,25 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../homework.html" class="sidebar-item-text sidebar-link">
+  <a href="../../homework.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homework</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../../exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -176,19 +204,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../instructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -196,16 +224,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly materials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week_01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
@@ -221,39 +249,37 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
-  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
-  <ul class="collapse">
-  <li><a href="#monday-welcome-introduction-to-data" id="toc-monday-welcome-introduction-to-data" class="nav-link" data-scroll-target="#monday-welcome-introduction-to-data">Monday — Welcome &amp; Introduction to Data</a></li>
-  <li><a href="#wednesday-introduction-to-r-and-rstudio" id="toc-wednesday-introduction-to-r-and-rstudio" class="nav-link" data-scroll-target="#wednesday-introduction-to-r-and-rstudio">Wednesday — Introduction to R and RStudio</a></li>
-  </ul></li>
-  <li><a href="#day-1-course-background-survey" id="toc-day-1-course-background-survey" class="nav-link" data-scroll-target="#day-1-course-background-survey">Day 1 course background survey</a></li>
-  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  <li><a href="#thanks-for-the-feedback" id="toc-thanks-for-the-feedback" class="nav-link active" data-scroll-target="#thanks-for-the-feedback">Thanks for the feedback</a></li>
+  <li><a href="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" id="toc-mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="nav-link" data-scroll-target="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</a></li>
+  <li><a href="#markdown-vs.-comments-in-.qmd-files" id="toc-markdown-vs.-comments-in-.qmd-files" class="nav-link" data-scroll-target="#markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</a></li>
+  <li><a href="#source-vs.-visual-editor" id="toc-source-vs.-visual-editor" class="nav-link" data-scroll-target="#source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</a></li>
+  <li><a href="#is-.qmd-something-people-actually-use" id="toc-is-.qmd-something-people-actually-use" class="nav-link" data-scroll-target="#is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</a></li>
+  <li><a href="#pace-and-in-class-practice" id="toc-pace-and-in-class-practice" class="nav-link" data-scroll-target="#pace-and-in-class-practice">5. Pace and in-class practice</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final note</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_01.html">Week 1</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 1</h1>
+<h1 class="title">Muddy Points</h1>
+<p class="subtitle lead">Getting Started with Data, R, and Quarto</p>
 </div>
 
-<div>
-  <div class="description">
-    Welcome &amp; Introduction to Data
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">January 10, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -262,121 +288,66 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!--
-Think of the weekly page as answering just five student questions:
-    1.  What are we doing this week?
-    2.  What do I need to read/watch before class?
-    3.  What materials should I have open during class?
-    4.  What is due (and when)?
-    5.  Where do I go if I want to review later?
-    -->
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.</p>
-<p>By the end of the week, you should be able to:</p>
+<section id="thanks-for-the-feedback" class="level2">
+<h2 class="anchored" data-anchor-id="thanks-for-the-feedback">Thanks for the feedback</h2>
+<p>Thank you to everyone who submitted post-class feedback. Overall, the material from our first week was reported as quite clear, which is great to hear. Below I address the main points that came up as muddy or unclear.</p>
+<hr>
+</section>
+<section id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="level2">
+<h2 class="anchored" data-anchor-id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</h2>
+<p>One question that came up was why we sometimes use symbols like <strong>μ</strong> and <strong>σ</strong> instead of <strong>x̄</strong> (x-bar) and <strong>s</strong>, particularly when drawing or describing a normal curve.</p>
+<p>A helpful rule of thumb:</p>
 <ul>
-<li>describe different types of data,</li>
-<li>compute and interpret basic numerical summaries,</li>
-<li>feel comfortable navigating R and RStudio.</li>
+<li><strong>x̄ (x-bar)</strong> and <strong>s</strong> are <em>sample statistics</em> — they summarize data you actually observed.</li>
+<li><strong>μ (mu)</strong> and <strong>σ (sigma)</strong> are <em>population parameters</em> — they describe an underlying population or theoretical distribution.</li>
 </ul>
-</section>
-<section id="readings-before-class" class="level2">
-<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
+<p>When we draw a normal curve, we often label it with <strong>μ</strong> and <strong>σ</strong> even if, in practice, we estimate those values using <strong>x̄</strong> and <strong>s</strong> from data. This is just a convention and something we will revisit once we start formal inference.</p>
+<p>Relatedly, one person mentioned confusion about the “squared SD”:</p>
 <ul>
-<li>Textbook sections 1.1–1.4</li>
+<li>The <strong>variance</strong> is the standard deviation squared.</li>
+<li>Variance has squared units, which is why we usually <em>report</em> the standard deviation instead.</li>
 </ul>
-<p>(Additional resources will be posted if helpful.)</p>
+<hr>
 </section>
-<section id="materials" class="level2">
-<h2 class="anchored" data-anchor-id="materials">Materials</h2>
-<section id="monday-welcome-introduction-to-data" class="level3">
-<h3 class="anchored" data-anchor-id="monday-welcome-introduction-to-data">Monday — Welcome &amp; Introduction to Data</h3>
+<section id="markdown-vs.-comments-in-.qmd-files" class="level2">
+<h2 class="anchored" data-anchor-id="markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</h2>
+<p>A few questions came up about when to use different symbols in Quarto files:</p>
 <ul>
-<li><p><strong>Topics</strong></p>
-<ul>
-<li>Welcome and course overview</li>
-<li>Introduction to data</li>
-<li>Summarizing numerical data</li>
-</ul></li>
-<li><p><strong>Slides</strong></p>
-<ul>
-<li>Welcome &amp; course logistics (<a href="../lessons/00_welcome/00_welcome.html">HTML</a> | <a href="../lessons/00_welcome/00_welcome.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-<li>Introduction to data &amp; numerical summaries (<a href="../lessons/01_intro_to_data/01_intro_to_data.html">HTML</a> | <a href="../lessons/01_intro_to_data/01_intro_to_data.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-</ul></li>
-<li><p><strong>Recording</strong></p>
-<ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBhu6aOXdjNSIxYUE_2MsDhAVvaVgDb2_8U6vo4EK6IA0c?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=ldbRGr">Lecture 01 – Course Introduction + Intro to Data (Slides 1–22)</a></li>
-</ul></li>
-<li><p><strong>Muddy points</strong></p>
-<p>I reviewed your post-class feedback and wrote short clarifications here:</p>
-<ul>
-<li><a href="../lessons/01_intro_to_data/01_intro_to_data_muddy_points.html">Muddy Points - Lesson 1</a></li>
-</ul></li>
+<li><code>#</code> inside an R code chunk is a <strong>code comment</strong> (for humans, not output).</li>
+<li><code>&lt;!-- --&gt;</code> is an <strong>HTML comment</strong> in the markdown text (also not shown in output).</li>
+<li><code>&gt;</code> creates a <strong>block quote</strong>, which <em>does</em> appear in the rendered document.</li>
 </ul>
+<p>In short: - Use comments (<code>#</code> or <code>&lt;!-- --&gt;</code>) for notes to yourself or graders. - Use block quotes (<code>&gt;</code>) when you want text to appear as part of the document.</p>
+<hr>
 </section>
-<section id="wednesday-introduction-to-r-and-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="wednesday-introduction-to-r-and-rstudio">Wednesday — Introduction to R and RStudio</h3>
+<section id="source-vs.-visual-editor" class="level2">
+<h2 class="anchored" data-anchor-id="source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</h2>
+<p>Some people weren’t sure why we would use the <strong>Source</strong> editor at this point.</p>
+<p>For now, think of this as:</p>
 <ul>
-<li><p><strong>Topics</strong></p>
-<ul>
-<li>Introduction to data (continued)</li>
-<li>Introduction to R, RStudio, and Quarto</li>
-</ul></li>
-<li><p><strong>Slides</strong></p>
-<ul>
-<li>Introduction to data &amp; numerical summaries (Continued) (<a href="../lessons/02_intro_to_data_cont/02_intro_to_data_cont.html">HTML</a> | <a href="../lessons/02_intro_to_data_cont/02_intro_to_data_cont.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-<li>Introduction to R, RStudio, and Quarto (<a href="../lessons/03_intro_to_r/03_intro_to_r.html">HTML</a> | <a href="../lessons/03_intro_to_r/03_intro_to_r.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-</ul></li>
-<li><p><strong>Software</strong></p>
-<ul>
-<li>Install R and RStudio (see the <a href="../resources.html">Resources</a> page)</li>
-</ul></li>
-<li><p><strong>Recording</strong></p>
-<ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBhu6aOXdjNSIxYUE_2MsDhAVvaVgDb2_8U6vo4EK6IA0c?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=leQOx9">Lecture 02 – Intro to Data (Cont.) + Intro to R &amp; RStudio, Quarto</a></li>
-</ul></li>
-<li><p><strong>Muddy points</strong></p>
-<p>I reviewed your post-class feedback and wrote short clarifications here:</p>
-<ul>
-<li><a href="lessons/02_intro_to_data_cont/02_intro_to_data_cont_and_intro_to_r_muddy_points.qmd">Muddy Points - Lesson 2</a></li>
-</ul></li>
+<li><strong>Visual editor</strong>: helpful for getting started, especially if you’re new.</li>
+<li><strong>Source editor</strong>: shows the underlying text and structure of the document.</li>
 </ul>
+<p>They are just two ways of editing the <em>same</em> file. Over time, you may find that the Source editor gives you more control, but you are free to use whichever view feels more comfortable right now.</p>
+<hr>
 </section>
+<section id="is-.qmd-something-people-actually-use" class="level2">
+<h2 class="anchored" data-anchor-id="is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</h2>
+<p>Yes — documents that combine code, text, and output are very common in statistics and data analysis.</p>
+<p>Some people use: - Quarto (<code>.qmd</code>) - R Markdown (<code>.Rmd</code>) - Jupyter notebooks - Similar tools in Python or other languages</p>
+<p>We are using Quarto in this course because it supports reproducible analysis and clear communication in one place. The skills you learn here will transfer easily to other tools.</p>
+<hr>
 </section>
-<section id="day-1-course-background-survey" class="level2">
-<h2 class="anchored" data-anchor-id="day-1-course-background-survey">Day 1 course background survey</h2>
-<p>Please complete the <strong>Course Background Survey</strong> after Monday’s class:</p>
-<ul>
-<li><a href="https://forms.gle/DdGXJu3nSPtzDMxC7">Course Background Survey</a></li>
-</ul>
-<p>This short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.</p>
-<p>Your responses will be used <strong>only</strong> to help tailor examples, pacing, and support for this class.<br>
-There are no right or wrong answers, and it is not graded for correctness.</p>
-<p>Please complete this survey by <strong>Wednesday before class</strong>.</p>
+<section id="pace-and-in-class-practice" class="level2">
+<h2 class="anchored" data-anchor-id="pace-and-in-class-practice">5. Pace and in-class practice</h2>
+<p>A small number of people mentioned that the R portion felt a little fast, especially for those completely new to R.</p>
+<p>That is expected early on. The goal of in-class practice is <strong>exposure</strong>, not mastery in the moment. It’s okay if you don’t finish everything during class — we’ll continue to reinforce these ideas through homework and repeated use.</p>
+<hr>
 </section>
-<section id="post-class-check-in-attendance" class="level2">
-<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
-<ul>
-<li>Please complete the post-class check-in after each class meeting.</li>
-<li>Used for attendance credit and to identify topics that need clarification.</li>
-<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
-</ul>
-</section>
-<section id="homework" class="level2">
-<h2 class="anchored" data-anchor-id="homework">Homework</h2>
-<ul>
-<li><strong>HW 0: Course setup</strong>
-<ul>
-<li>Due <strong>Sunday at 11:00 pm</strong></li>
-<li>Focuses on course setup and basic concepts from Week 1</li>
-<li><a href="../homework/HW00/HW00.html">View HW 0 instructions</a></li>
-</ul></li>
-<li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
-</ul>
-</section>
-<section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>Next week we will introduce probability and begin exploratory data analysis and visualization.</p>
+<section id="final-note" class="level2">
+<h2 class="anchored" data-anchor-id="final-note">Final note</h2>
+<p>If something still feels muddy after this clarification, that’s okay. Many ideas in statistics (and in R) only become clear after you see them used multiple times.</p>
+<p>Please keep using the post-class check-ins. They are genuinely helpful for guiding what we revisit or slow down on.</p>
 
 
 </section>
@@ -807,5 +778,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
