@@ -1,0 +1,120 @@
+---
+title: "Week 2"
+description: "Categorical Data, Probability, and Conditional Probability"
+format:
+  html:
+    toc: true
+---
+
+<!--
+Think of the weekly page as answering just five student questions:
+	1.	What are we doing this week?
+	2.	What do I need to read/watch before class?
+	3.	What materials should I have open during class?
+	4.	What is due (and when)?
+	5.	Where do I go if I want to review later?
+	-->
+
+## Announcements
+
+- New TA: Nick Chaiyachakorn
+- HW 0 Solutions released, and homework grading policy
+- Reminder: No class next Monday, January 19
+
+
+## Overview
+
+This week focuses on **categorical data and probability**.
+
+We will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.
+
+By the end of the week, you should be able to:
+
+- summarize categorical variables using counts and proportions,
+- interpret contingency tables using row and column percentages,
+- understand probability as a long-run proportion,
+- compute conditional probabilities from tables,
+- use Bayes’ theorem to reverse conditioning in applied examples.
+
+## Readings (before class)
+
+- Textbook sections 1.5–1.7 (categorical data and relationships)
+- Textbook sections 2.1–2.2 (probability and conditional probability)
+
+(Additional resources will be posted if helpful.)
+
+## Materials
+
+### Monday — Categorical data and relationships
+
+- **Topics**
+  - Categorical variables
+  - Frequency tables and proportions
+  - Bar plots
+  - Contingency tables
+  - Row vs column percentages
+  - Interpreting conditional distributions
+
+- **Slides**
+  - Categorical data and tables ([HTML](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.qmd) | [PDF](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.qmd) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - R basics and data summaries ([HTML](/lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.qmd) | [PDF](/lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+
+- **Recording**
+  - Lecture 03 – Categorical Data and Contingency Tables, R basics and data summaries (link coming)
+
+- **Muddy points**
+  
+  I will review post-class feedback and post clarifications if needed.
+
+---
+
+### Wednesday — Probability and conditional probability
+
+- **Topics**
+  - What probability means (long-run interpretation)
+  - Sample space and events
+  - Complements and probability rules
+  - Conditional probability
+  - Bayes’ theorem
+  - Diagnostic testing example (PPV)
+
+- **Slides**
+  - Probability and conditional probability (HTML | PDF | Recording – links coming)
+
+- **Recording**
+  - Lecture 04 – Probability and Bayes’ Theorem (link coming)
+
+---
+
+## Homework
+
+- **HW 1**
+  - Due **Sunday at 11:00 pm**
+  - Covers:
+    - vectors and missing values
+    - numeric and categorical summaries
+    - contingency tables
+    - histograms and box plots
+  - [HW 1 instructions](link coming)
+
+- See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+- Please complete the post-class check-in after each class meeting.
+- Used for attendance credit and to identify topics that need clarification.
+- Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+There is **no class next Monday**.
+
+Next Wednesday we will begin **data visualization and exploratory data analysis (EDA)**, including:
+
+- histograms, box plots, and scatterplots,
+- data frames vs tibbles,
+- subsetting and filtering data,
+- an introduction to `ggplot2`.
+
+These tools will help us move from summaries to storytelling with data.
+	
