@@ -24,6 +24,10 @@ format:
 
 - **Email:** [hwangjo@ohsu.edu](mailto:hwangjo@ohsu.edu)
 
+### Nick Chaiyachakorn (TA)
+
+- **Email:** [chaiyach@ohsu.edu](mailto:chaiyach@ohsu.edu)
+
 > Note: If you are unsure who to contact, email Emile and I will route your question.
 
 ## Office hours
@@ -41,6 +45,11 @@ All office hours will be held via Webex unless otherwise noted.
 
 - **Time:** Friday, 10:00-11:00 AM
 - **Webex:** <https://ohsu.webex.com/meet/hwangjo>
+
+### Nick (TA)
+
+- **Time:** (coming)
+- **Webex:** (coming)
 
 ## What to contact us about
 
