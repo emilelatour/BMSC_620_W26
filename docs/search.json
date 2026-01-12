@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "🎥 Lecture Recordings (OneDrive folder)\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nSummarizing categorical data and contingency tables\n1.5-1.7\n\n\n\nWed, 01/14\n4\nProbability and conditional probability\n2.1-2.4\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nData visualization and exploratory data analysis (EDA)\n1.5-1.7\n\n\n\nSun, 01/25\n\nHW 2 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
+    "text": "🎥 Lecture Recordings (OneDrive folder) – Lectures 1, 2, and Part 1 of Lecture 3\n🎥 Lecture Recordings (loom.com) – Part 2 of Lecture 3\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nSummarizing categorical data and contingency tables\n1.5-1.7\n\n\n\nWed, 01/14\n4\nProbability and conditional probability\n2.1-2.4\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nData visualization and exploratory data analysis (EDA)\n1.5-1.7\n\n\n\nSun, 01/25\n\nHW 2 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
     "crumbs": [
       "Home",
       "Schedule"
@@ -757,82 +757,174 @@
     "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
   },
   {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
+    "title": "BMSC 620 — Homework 0",
     "section": "",
-    "text": "See Sakai",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
     "crumbs": [
       "Home",
-      "Exams"
+      "Homework"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  (Link and time coming)\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  (Link and time coming)\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes. Link to Homework Solutions under Resources on Sakai course site\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Homework"
     ]
   },
   {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html",
+    "href": "weeks/week_02.html",
+    "title": "Week 2",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: (coming)\nWebex: (coming)",
+    "objectID": "weeks/week_02.html#announcements",
+    "href": "weeks/week_02.html#announcements",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "objectID": "weeks/week_02.html#overview",
+    "href": "weeks/week_02.html#overview",
+    "title": "Week 2",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#readings-before-class",
+    "href": "weeks/week_02.html#readings-before-class",
+    "title": "Week 2",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#materials",
+    "href": "weeks/week_02.html#materials",
+    "title": "Week 2",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\nI was trying out new recording software today. There was a glitch about 1 hour and 20 minutes into class. Part 1 is available on OneDrive in mp4 format The last ten minutes of class are available through loom.com.\nMuddy points\nI will review post-class feedback and post clarifications if needed.\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#homework",
+    "href": "weeks/week_02.html#homework",
+    "title": "Week 2",
+    "section": "Homework",
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nHW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
+    "href": "weeks/week_02.html#post-class-check-in-attendance",
+    "title": "Week 2",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#looking-ahead",
+    "href": "weeks/week_02.html#looking-ahead",
+    "title": "Week 2",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
@@ -932,175 +1024,146 @@
     ]
   },
   {
-    "objectID": "weeks/week_02.html",
-    "href": "weeks/week_02.html",
-    "title": "Week 2",
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
-      "Weekly materials",
-      "Week 2"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#announcements",
-    "href": "weeks/week_02.html#announcements",
-    "title": "Week 2",
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
-      "Weekly materials",
-      "Week 2"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#overview",
-    "href": "weeks/week_02.html#overview",
-    "title": "Week 2",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
     "crumbs": [
       "Home",
-      "Weekly materials",
-      "Week 2"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#readings-before-class",
-    "href": "weeks/week_02.html#readings-before-class",
-    "title": "Week 2",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
     "crumbs": [
       "Home",
-      "Weekly materials",
-      "Week 2"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#materials",
-    "href": "weeks/week_02.html#materials",
-    "title": "Week 2",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03 – Categorical Data and Contingency Tables, R basics and data summaries (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#homework",
-    "href": "weeks/week_02.html#homework",
-    "title": "Week 2",
-    "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nHW 1 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
-    "href": "weeks/week_02.html#post-class-check-in-attendance",
-    "title": "Week 2",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#looking-ahead",
-    "href": "weeks/week_02.html#looking-ahead",
-    "title": "Week 2",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
     "crumbs": [
-      "Home",
-      "Homework"
+      "Home"
     ]
   },
   {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\n(to be posted)\n(to be posted)\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
-    "objectID": "homework/HW00/HW00.html",
-    "href": "homework/HW00/HW00.html",
-    "title": "BMSC 620 — Homework 0",
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
     "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
   },
   {
-    "objectID": "homework/HW00/HW00.html#homework-0",
-    "href": "homework/HW00/HW00.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+    "objectID": "homework/HW01/HW01.html",
+    "href": "homework/HW01/HW01.html",
+    "title": "BMSC 620 — Homework 1",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 1, upload both:\n\nthe .qmd file\nthe rendered .html file"
   },
   {
-    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+    "objectID": "homework/HW01/HW01.html#homework-1",
+    "href": "homework/HW01/HW01.html#homework-1",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Homework 1",
+    "text": "Homework 1\nThis assignment reviews:\n\nwriting and running code in Quarto\nsummarizing numeric and categorical variables\nfrequency tables and contingency tables\nbar plots, histograms, and box plots\n\nUnless stated otherwise, show your work using R code chunks."
   },
   {
-    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+    "objectID": "homework/HW01/HW01.html#part-0-setup",
+    "href": "homework/HW01/HW01.html#part-0-setup",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 0: Setup",
+    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)"
   },
   {
-    "objectID": "homework/HW00/HW00.html#part-3-final-check",
-    "href": "homework/HW00/HW00.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+    "objectID": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "href": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 1: R objects and vectors",
+    "text": "Part 1: R objects and vectors\n\n1A. Calculator practice\nCreate code that computes each of the following (one line each):\n\n12 / 5\n3^4\nsqrt(81)\n4^3 - 2 * 7 + 9 / 2\n\n\n# Your code here\n\n\n\n1B. Create vectors and summarize\n\nCreate a vector named x containing the numbers: 4, 9, 2, 10, 7, 7\nCompute the mean and standard deviation of x\nCompute the median and IQR of x\n\n\n\n1C. Missing values\n\nCreate a vector named y containing: 2, 5, NA, 7, 9\nCompute mean(y). What happens?\nCompute the mean again ignoring missing values\n\nWrite 1 to 2 sentences explaining what na.rm = TRUE does.\nYour explanation:"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "href": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 2: Inspecting a dataset (nhanes.samp)",
+    "text": "Part 2: Inspecting a dataset (nhanes.samp)\nIn this homework, you will work with the dataset nhanes.samp, which is included in the oibiostat package.\nThe National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a sample of 200 individuals from NHANES, provided for instructional purposes.\nTo load the dataset, run:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n\n2A. Basic inspection\nRun the following functions:\n\ndim(nhanes.samp)\nnames(nhanes.samp)\nstr(nhanes.samp)\nhead(nhanes.samp)\n\nAnswer the questions below in plain text.\n\nHow many rows and columns does nhanes.samp have?\nName two categorical variables? (i.e. Factor variable type)\nGive one example of a numeric variable. (int or num)\n\nAnswers: 1. 2. 3.\n\n\n2B. Accessing a single variable with $\n\nUse $ to pull out Age\nCompute the mean, sd, median, and IQR of Age\n\n\n\n2C. Working with NA values.\nWe can see that some variables in the dataset have missing values (NA) like the variable Height.\n\nsummary(nhanes.samp$Height)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   90.6   156.6   166.2   162.6   175.7   191.3      10 \n\n\n\nUse $ to pull out Height\nCompute the mean, sd, median, and IQR of Height. Hint: you will need to remove the NA values by adding the argument na.rm = TRUE to the function calls."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "href": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 3: Summarizing one categorical variable",
+    "text": "Part 3: Summarizing one categorical variable\nWe will summarize Gender\n\n3A. Counts and proportions\n\nUse table() to get counts of Gender\nUse prop.table() to get proportions of Gender\nConvert proportions to percentages\n\nHint: table(nhanes.samp$Gender) and prop.table(...)\n\n\n3B. Bar plot\nMake a bar plot of Gender using the barplot function."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "href": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 4: Two categorical variables (contingency tables)",
+    "text": "Part 4: Two categorical variables (contingency tables)\nWe can use the table() function to examine the relationships between two categorical variables. Here is an example using Gender and Race1:\n\ntable(nhanes.samp$Gender, nhanes.samp$Race1)   # counts\n\n        \n         Black Hispanic Mexican White Other\n  female     7        8       9    65    13\n  male      16        6      13    57     6\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions\n\n        \n              Black   Hispanic    Mexican      White      Other\n  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098\n  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions\n\n        \n             Black  Hispanic   Mexican     White     Other\n  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105\n  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895\n\n\nUsing row percentages (margin = 1), where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.\nUsing column percentages (margin = 2), where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.\n\n4A. Contingency table (counts)\nChoose either the Diabetes or SmokeNow variable in the data set. Create a contingency table similar to above with Gender and the variable that you choose.\n\n\n4B. Row proportions vs column proportions\n\nCreate a row proportion table (each row sums to 1)\nCreate a column proportion table (each column sums to 1)\n\nHint:\n\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)\n\n\n\n4C. Interpretation\nAnswer each question in 1 to 2 sentences.\n\nProvide 1 or 2 short sentences describing the row percentages.\nProvide 1 or 2 short sentences describing the column percentages.\n\nAnswers: 1. 2."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "href": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 5: Visual summaries for numeric variables",
+    "text": "Part 5: Visual summaries for numeric variables\n\n5A. Histogram\nMake a histogram of BMI.\nUsing the hist() function, you can add:\n\na title by adding an argument main = \"Histogram of BMI\"\nand a label for the x-axis using xlab = \"BMI\"\nWhen in doubt about arguments to functions, use the ? then the function name to get help. i.e. type in the console ?hist to get help for the hist() function.\n\nIf you get an error due to missing values, use na.omit() or remove NA values before calling hist().\n\n\n5B. Box plot (overall)\nMake a single box plot of Height using boxplot(). Include a title “Box plot of Height” and a label for the y-axis (ylab = \"Height\"). Get help using ?boxplot if you need it.\nNOTE: We saw earlier that Height contained NA values. boxplot() will ignore NA values automatically.\n\n\n5C. Box plot by group\nMake a box plot of Height by Gender.\nIf you look at the first example in the help for the boxplot function ?boxplot, they give an example of a box plot of count by spray using the InsectSprays dataset.\n\nboxplot(count ~ spray, data = InsectSprays, col = \"lightgray\")\n\nFollow their example to make your Height by Gender box plot with the nhanes.samp data.\nWhich group has a higher median height? How can you tell from the figure? Are there any outliers?\nAnswer:"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#final-check",
+    "href": "homework/HW01/HW01.html#final-check",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Final check",
+    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou uploaded both the .qmd and .html files"
   },
   {
     "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-in-r",

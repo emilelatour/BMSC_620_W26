@@ -34,7 +34,7 @@ Start from the provided `.qmd` template for each assignment.
 
 All homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.
 
-Homework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.
+Homework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes. [Link to Homework Solutions](https://sakai.ohsu.edu/x/C8KIPB) under Resources on Sakai course site
 
 | HW | Due (\@11pm) | Files | Preview |
 |:----------------:|:----------------:|:----------------:|:----------------:|
