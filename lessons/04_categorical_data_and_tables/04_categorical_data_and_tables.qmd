@@ -135,7 +135,7 @@ data("frog")
 
 (We will use other variables later in the course.)
 
-# One categorical variable (Section 1.5)
+## One categorical variable (Section 1.5)
 
 ![[Artwork by @allison_horst](https://allisonhorst.com/r-packages-functions)](/img_slides/horst_categorical_data_types.png){fig-align="center"}
 

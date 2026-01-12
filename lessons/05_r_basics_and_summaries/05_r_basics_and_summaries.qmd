@@ -538,7 +538,7 @@ barplot(table(iris$Species))
 
 `barplot(table())` is a quick way to visualize categorical data.
 
-# R Packages
+## R Packages
 
 <!-- background-image: url(img/tidyverse_celestial.jpg) -->
 

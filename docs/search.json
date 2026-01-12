@@ -1285,6 +1285,13 @@
     "text": "Plotting a categorical variable\nA bar chart shows counts for each category.\n\nbarplot(table(iris$Species))\n\n\nbarplot(table()) is a quick way to visualize categorical data."
   },
   {
+    "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages",
+    "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages",
+    "title": "R basics and data summaries",
+    "section": "R Packages",
+    "text": "R Packages"
+  },
+  {
     "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages-1",
     "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-packages-1",
     "title": "R basics and data summaries",
@@ -1577,6 +1584,13 @@
     "title": "Summarizing Categorical Data: Tables and Plots",
     "section": "Example dataset: FAMuSS",
     "text": "Example dataset: FAMuSS\nFunctional SNPs Associated with Muscle Size and Strength (FAMuSS)\n\nStudy goal: examine how demographic, physiological, and genetic factors are associated with muscle strength\nStrength measured in:\n\nDominant arm\nNon-dominant arm\nBefore and after resistance training\n\nKey gene of interest:\n\nACTN3 (“the sports gene”)\n\nData frame with 595 participants\n\nVariables we will focus on today:\n\nsex (Female, Male)\nrace (African Am, Asian, Caucasian, Hispanic, Other)\nactn3.r577x (CC, CT, TT genotype)\n\n(We will use other variables later in the course.)"
+  },
+  {
+    "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-section-1.5",
+    "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#one-categorical-variable-section-1.5",
+    "title": "Summarizing Categorical Data: Tables and Plots",
+    "section": "One categorical variable (Section 1.5)",
+    "text": "One categorical variable (Section 1.5)\n\nArtwork by @allison_horst"
   },
   {
     "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#frequency-tables",
