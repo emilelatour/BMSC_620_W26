@@ -40,8 +40,8 @@ Throughout the course, emphasis will be placed on selecting appropriate statisti
 [Joseph](https://ohsu.webex.com/meet/hwangjo)
 {{< iconify icon-park-solid time size=24px >}} Friday, 10:00-11:00 AM
 
-Nick
-{{< iconify icon-park-solid time size=24px >}} (Link and time coming)
+[Nick](https://ohsu.webex.com/meet/chaiyach)
+{{< iconify icon-park-solid time size=24px >}} Wednesday, 1:00–2:00 PM
 
 
 :::
