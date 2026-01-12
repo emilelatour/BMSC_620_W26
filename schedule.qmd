@@ -62,7 +62,7 @@ source(here("class_dates.R"))
 |		|	`{r} format(w1d2, '%a, %m/%d')`	|	2	|	Introduction to R & RStudio	|		|
 |		|	[**`{r} format(hw0, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 0 due @ 11 pm**]{.hw-row}	|		|
 |		|		|		|		|		|
-|	2	|	`{r} format(w2d1, '%a, %m/%d')`	|	3	|	Summarizing categorical data and contingency tables	|	1.5-1.7	|
+|	[2](/weeks/week_02.qmd)	|	`{r} format(w2d1, '%a, %m/%d')`	|	3	|	Summarizing categorical data and contingency tables	|	1.5-1.7	|
 |		|	`{r} format(w2d2, '%a, %m/%d')`	|	4	|	Probability and conditional probability	|	2.1-2.4	|
 |		|	[**`{r} format(hw1, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 1 due @ 11 pm**]{.hw-row}	|		|
 |		|		|		|		|		|

@@ -936,56 +936,96 @@
     "href": "weeks/week_02.html",
     "title": "Week 2",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19"
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#announcements",
     "href": "weeks/week_02.html#announcements",
     "title": "Week 2",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19"
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#overview",
     "href": "weeks/week_02.html#overview",
     "title": "Week 2",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples."
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#readings-before-class",
     "href": "weeks/week_02.html#readings-before-class",
     "title": "Week 2",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)"
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#materials",
     "href": "weeks/week_02.html#materials",
     "title": "Week 2",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03 – Categorical Data and Contingency Tables, R basics and data summaries (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)"
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03 – Categorical Data and Contingency Tables, R basics and data summaries (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#homework",
     "href": "weeks/week_02.html#homework",
     "title": "Week 2",
     "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nHW 1 instructions\n\nSee the full list of assignments on the Homework page."
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nHW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#post-class-check-in-attendance",
     "href": "weeks/week_02.html#post-class-check-in-attendance",
     "title": "Week 2",
     "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in"
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "weeks/week_02.html#looking-ahead",
     "href": "weeks/week_02.html#looking-ahead",
     "title": "Week 2",
     "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data."
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
   },
   {
     "objectID": "homework.html",
