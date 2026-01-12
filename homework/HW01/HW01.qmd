@@ -1,0 +1,297 @@
+---
+title: "BMSC 620 — Homework 1"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+execute:
+  echo: true
+---
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW##`
+
+Examples:
+
+- Smith_J_HW01.qmd
+- Smith_J_HW01.html
+
+
+When submitting Homework 1, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Homework 1
+
+This assignment reviews:
+
+- writing and running code in Quarto
+- summarizing numeric and categorical variables
+- frequency tables and contingency tables
+- bar plots, histograms, and box plots
+
+Unless stated otherwise, show your work using R code chunks.
+
+---
+
+
+## Part 0: Setup
+
+1. In the chunk below, load the packages you need for this homework.
+2. Run the chunk to confirm there are no errors.
+
+```{r}
+
+# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.
+# install.packages("devtools")
+# devtools::install_github("OI-Biostat/oi_biostat_data", force = TRUE)
+
+library(oibiostat)
+
+```
+
+## Part 1: R objects and vectors
+
+### 1A. Calculator practice
+
+Create code that computes each of the following (one line each):
+
+- 12 / 5
+- 3^4
+- sqrt(81)
+- 4^3 - 2 * 7 + 9 / 2
+
+```{r}
+# Your code here
+
+
+```
+
+### 1B. Create vectors and summarize
+
+1. Create a vector named x containing the numbers: 4, 9, 2, 10, 7, 7
+2. Compute the mean and standard deviation of x
+3. Compute the median and IQR of x
+
+```{r}
+
+```
+
+
+### 1C. Missing values
+
+1. Create a vector named y containing: 2, 5, NA, 7, 9
+2. Compute mean(y). What happens?
+3. Compute the mean again ignoring missing values
+
+Write 1 to 2 sentences explaining what na.rm = TRUE does.
+
+```{r}
+
+```
+
+**Your explanation:**
+
+## Part 2: Inspecting a dataset (nhanes.samp)
+
+In this homework, you will work with the dataset **nhanes.samp**, which is included in the `oibiostat` package.
+
+The National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a **sample of 200 individuals** from NHANES, provided for instructional purposes.
+
+To load the dataset, run:
+
+```{r}
+library(oibiostat)
+data("nhanes.samp")
+
+```
+
+### 2A. Basic inspection
+
+Run the following functions:
+
+- dim(nhanes.samp)
+- names(nhanes.samp)
+- str(nhanes.samp)
+- head(nhanes.samp)
+
+```{r}
+
+```
+
+
+Answer the questions below in plain text.
+
+1. How many rows and columns does nhanes.samp have?
+2. Name two categorical variables? (i.e. `Factor` variable type)
+3. Give one example of a numeric variable. (`int` or `num`)
+
+Answers:
+1.
+2.
+3.
+
+### 2B. Accessing a single variable with $
+
+1. Use $ to pull out `Age`
+2. Compute the mean, sd, median, and IQR of `Age`
+
+```{r}
+
+```
+
+### 2C. Working with `NA` values. 
+
+We can see that some variables in the dataset have missing values (`NA`) like the variable `Height`.
+
+```{r}
+summary(nhanes.samp$Height)
+```
+
+1. Use $ to pull out `Height`
+2. Compute the mean, sd, median, and IQR of `Height`. Hint: you will need to remove the `NA` values by adding the argument `na.rm = TRUE` to the function calls.
+
+```{r}
+
+```
+
+
+
+## Part 3: Summarizing one categorical variable
+
+We will summarize `Gender`
+
+### 3A. Counts and proportions
+
+1. Use table() to get counts of `Gender`
+2. Use prop.table() to get proportions of `Gender`
+3. Convert proportions to percentages
+
+Hint: `table(nhanes.samp$Gender)` and `prop.table(...)`
+
+```{r}
+
+```
+
+
+### 3B. Bar plot
+
+Make a bar plot of `Gender` using the `barplot` function.
+
+```{r}
+
+```
+
+## Part 4: Two categorical variables (contingency tables)
+
+We can use the `table()` function to examine the relationships between two categorical variables. Here is an example using `Gender` and `Race1`:
+
+```{r}
+table(nhanes.samp$Gender, nhanes.samp$Race1)   # counts
+prop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions
+prop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions
+```
+
+Using **row percentages (margin = 1)**, where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.
+
+Using **column percentages (margin = 2)**, where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.
+
+### 4A. Contingency table (counts)
+
+Choose either the `Diabetes` or `SmokeNow` variable in the data set. Create a contingency table similar to above with `Gender` and the variable that you choose.
+
+```{r}
+
+```
+
+### 4B. Row proportions vs column proportions
+
+1. Create a row proportion table (each row sums to 1)
+2. Create a column proportion table (each column sums to 1)
+
+Hint: 
+
+- `prop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)`
+- `prop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)`
+
+```{r}
+
+```
+
+
+### 4C. Interpretation
+
+Answer each question in 1 to 2 sentences.
+
+1. Provide 1 or 2 short sentences describing the *row* percentages.
+2. Provide 1 or 2 short sentences describing the *column* percentages.
+
+Answers:
+1.
+2.
+
+
+## Part 5: Visual summaries for numeric variables
+
+### 5A. Histogram
+
+Make a histogram of `BMI`.
+
+Using the `hist()` function, you can add:
+
+- a title by adding an argument `main = "Histogram of BMI"`
+- and a label for the x-axis using `xlab = "BMI"`
+- When in doubt about arguments to functions, use the `?` then the function name to get help. i.e. type in the console `?hist` to get help for the `hist()` function.
+
+If you get an error due to missing values, use `na.omit()` or remove `NA` values before calling `hist()`.
+
+```{r}
+
+```
+
+### 5B. Box plot (overall)
+
+Make a single box plot of `Height` using `boxplot()`. Include a title "Box plot of Height" and a label for the y-axis (`ylab = "Height"`). Get help using `?boxplot` if you need it.
+
+NOTE: We saw earlier that `Height` contained `NA` values. `boxplot()` will ignore `NA` values automatically.
+
+```{r}
+
+```
+
+### 5C. Box plot by group
+
+Make a box plot of `Height` by `Gender`.
+
+If you look at the first example in the help for the boxplot function `?boxplot`, they give an example of a box plot of `count` by `spray` using the `InsectSprays` dataset.
+
+```{r}
+#| eval: false
+boxplot(count ~ spray, data = InsectSprays, col = "lightgray")
+```
+
+Follow their example to make your `Height` by `Gender` box plot with the `nhanes.samp` data.
+
+```{r}
+
+```
+
+Which group has a higher median height? How can you tell from the figure? Are there any outliers?
+
+Answer:
+
+## Final check
+
+Before submitting, confirm that:
+
+- The document renders to HTML without errors
+- All code chunks run successfully
+- Your name appears at the top
+- You uploaded both the .qmd and .html files
+

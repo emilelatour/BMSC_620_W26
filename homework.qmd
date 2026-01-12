@@ -10,24 +10,21 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 ```{r setup, include=FALSE}
 library(here)
 source(here("class_dates.R"))
 ```
 
-::: {.callout-note}
+::: callout-note
 ## File naming and submission
 
 **File naming**: `Lastname_FirstInitial_HW##` (example: `Latour_E_HW01`)
 
 **Submit both** files on Sakai:
 
-- Lastname_FirstInitial_HW##.qmd
-- Lastname_FirstInitial_HW##.html
-
+-   Lastname_FirstInitial_HW##.qmd
+-   Lastname_FirstInitial_HW##.html
 :::
-
 
 Homework assignments are due on **Sundays at 11:00 pm** unless otherwise noted.
 
@@ -39,26 +36,25 @@ All homework files are distributed through OneDrive. Each homework link contains
 
 Homework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.
 
-|	HW	|	Due (\@11pm)	|	Files	|	Preview	|
-|	:---:	|	:---:	|	:---:	|	:---:	|
-|	0	|	`{r} format(hw0, '%m/%d')`	|	[HW 00 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5)	|	[View HW 00](/homework/HW00/HW00.qmd)	|
-|	1	|	`{r} format(hw1, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	2	|	`{r} format(hw2, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	3	|	`{r} format(hw3, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	4	|	`{r} format(hw4, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	5	|	`{r} format(hw5, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	6	|	`{r} format(hw6, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	7	|	`{r} format(hw7, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-|	8	|	`{r} format(hw8, '%m/%d')`	|	(to be posted)	|	(to be posted)	|
-
+| HW | Due (\@11pm) | Files | Preview |
+|:----------------:|:----------------:|:----------------:|:----------------:|
+| 0 | `{r} format(hw0, '%m/%d')` | [HW 00 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5) | [View HW 00](/homework/HW00/HW00.qmd) |
+| 1 | `{r} format(hw1, '%m/%d')` | [HW 01 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDNPvsaCmCLTJ4_EDwtr1_WAXRAjlX6jdEOt08nffiJOV4?e=WMUc7T) | [View HW 01](/homework/HW01/HW01.qmd) |
+| 2 | `{r} format(hw2, '%m/%d')` | (to be posted) | (to be posted) |
+| 3 | `{r} format(hw3, '%m/%d')` | (to be posted) | (to be posted) |
+| 4 | `{r} format(hw4, '%m/%d')` | (to be posted) | (to be posted) |
+| 5 | `{r} format(hw5, '%m/%d')` | (to be posted) | (to be posted) |
+| 6 | `{r} format(hw6, '%m/%d')` | (to be posted) | (to be posted) |
+| 7 | `{r} format(hw7, '%m/%d')` | (to be posted) | (to be posted) |
+| 8 | `{r} format(hw8, '%m/%d')` | (to be posted) | (to be posted) |
 
 ## Grading rubric (10 points)
 
 Each homework is graded on a 10-point scale:
 
-- **Substantial completion (6 points)**: ~75-80% of parts attempted with a genuine effort
-- **Demonstrated process (2 points)**: relevant work shown; R code included when used
-- **Interpretation and communication (2 points)**: brief written interpretation in context when appropriate
+-   **Substantial completion (6 points)**: \~75-80% of parts attempted with a genuine effort
+-   **Demonstrated process (2 points)**: relevant work shown; R code included when used
+-   **Interpretation and communication (2 points)**: brief written interpretation in context when appropriate
 
 Homework is graded primarily for **effort, reasoning, and clarity**, not strict correctness.
 
