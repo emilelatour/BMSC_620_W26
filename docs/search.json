@@ -1121,7 +1121,7 @@
     "href": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#coding-along-optional",
     "title": "R basics and data summaries",
     "section": "Coding along (optional)",
-    "text": "Coding along (optional)\nIf you want to follow along during class:\n\nOpen a new Quarto document (.qmd)\nThis is how homework and exams will be completed\n\nInsert a code chunk: - Mac: Cmd + Option + I - Windows: Ctrl + Alt + I\nYou can run code with Cmd/Ctrl + Enter."
+    "text": "Coding along (optional)\nIf you want to follow along during class:\n\nOpen a new Quarto document (.qmd)\nThis is how homework and exams will be completed\n\nInsert a code chunk:\n\nMac: Cmd + Option + I\nWindows: Ctrl + Alt + I\n\nYou can run code with Cmd/Ctrl + Enter."
   },
   {
     "objectID": "lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.html#r-as-a-calculator",
@@ -1646,7 +1646,7 @@
     "href": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#contingency-table-example-counts",
     "title": "Summarizing Categorical Data: Tables and Plots",
     "section": "Contingency table example (counts)",
-    "text": "Contingency table example (counts)\n\nExample question:\n\nDoes the distribution of genotypes differ by sex?\n\n\n\n\n\nThese are counts, not proportions\nTotals appear along the margins\n\n\n\n\n\n\n\n\n\n\nsex\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\nTotal\n173\n261\n161\n595"
+    "text": "Contingency table example (counts)\n\nExample question:\n\nDoes the distribution of genotypes differ by sex?\n\n\n\n\n\nThese are counts, not proportions\nTotals appear along the margins\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\nTotal\n173\n261\n161\n595"
   },
   {
     "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#marginal-totals-vs-conditional-distributions",

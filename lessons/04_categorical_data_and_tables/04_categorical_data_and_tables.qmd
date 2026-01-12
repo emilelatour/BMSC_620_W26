@@ -348,6 +348,7 @@ famuss |>
   janitor::tabyl(sex, 
                  actn3.r577x) |> 
   janitor::adorn_totals(where = "both") |> 
+  janitor::adorn_title(placement = "combined") |> 
   gt::gt()
 ```
 :::

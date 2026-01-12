@@ -88,6 +88,7 @@ If you want to follow along during class:
 - This is how homework and exams will be completed
 
 **Insert a code chunk:**
+
 - Mac: `Cmd + Option + I`
 - Windows: `Ctrl + Alt + I`
 
