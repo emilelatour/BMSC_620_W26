@@ -99,7 +99,7 @@ By the end of the week, you should be able to:
     - numeric and categorical summaries
     - contingency tables
     - histograms and box plots
-  - [HW 1 instructions](link coming)
+  - [View HW 1 instructions](/homework/HW01/HW01.qmd)
 
 - See the full list of assignments on the [Homework](/homework.qmd) page.
 
