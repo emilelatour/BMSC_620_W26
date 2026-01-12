@@ -73,7 +73,7 @@ By the end of the week, you should be able to:
 
   I reviewed your post-class feedback and wrote short clarifications here:
   
-    - [Muddy Points - Lesson 2](lessons/02_intro_to_data_cont/02_intro_to_data_cont_and_intro_to_r_muddy_points.qmd)
+    - [Muddy Points - Lesson 2](/lessons/02_intro_to_data_cont/02_intro_to_data_cont_and_intro_to_r_muddy_points.qmd)
   
   
 ## Day 1 course background survey
