@@ -56,7 +56,7 @@ By the end of the week, you should be able to:
   - Interpreting conditional distributions
 
 - **Slides**
-  - Categorical data and tables ([HTML](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.qmd) | [PDF](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.qmd) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Categorical data and tables ([HTML](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.qmd) | [PDF](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
   - R basics and data summaries ([HTML](/lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.qmd) | [PDF](/lessons/05_r_basics_and_summaries/05_r_basics_and_summaries.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
