@@ -1,0 +1,536 @@
+---
+title: "Muddy Points"
+subtitle: "Categorical Data and R Basics"
+date-modified: "today"
+format:
+  html:
+    toc: true
+---
+
+## Thanks for the feedback
+
+Thank you to everyone who submitted post-class feedback. The comments were thoughtful and specific, which is incredibly helpful for improving pacing and clarity.
+
+Below I’ve grouped the most common muddy points into a few themes and addressed each one.
+
+## A note on pacing
+
+Several comments mentioned that the end of class felt rushed, particularly around functions, R packages, and libraries.
+
+I tried to cover too much in the final 15 minutes, and that made it hard to follow along, especially if you encountered any errors or needed to catch up.
+
+### What the pacing feedback shows
+
+Looking at the post-class survey:
+
+- 53% felt the pace was about right
+- 33% felt it was slightly too fast
+- 13% felt it was slightly too slow
+
+This tells me that while the overall pace worked for many of you, a significant portion found it too fast, especially toward the end.
+
+### Going forward
+
+I'll adjust by:
+
+- Leaving more buffer time at the end of class rather than rushing to cover everything
+- Slowing down when introducing new R functions
+- Giving you more time to type along and troubleshoot errors as they come up
+- Being more intentional about what's "essential for now" vs. "we'll revisit this later"
+
+The reality is that R has a learning curve, especially if you're new to programming. Some of the functions we covered (like `seq()` or inspecting datasets) were meant as examples or reference material, not things you need to master immediately.
+
+### What you can do
+
+If the pace feels too fast:
+
+- Focus on running the code and getting it to work, even if you don't fully understand every detail yet
+- Use the help system (`?function_name`) to review functions after class
+- Come to office hours or reach out if something didn't click
+- Remember that we'll be using these same tools repeatedly, so you'll get more comfortable with practice
+
+Thanks for the honest feedback. It helps me calibrate for future classes.
+
+## Why does Quarto sometimes say "object not found" even though I assigned it?
+
+Several people described seeing an error like:
+
+`Error: object 'x' not found`
+
+even though the code that creates the object appears earlier in the Quarto document.
+
+This usually happens because **code chunks have not been run in order**.
+
+Key points:
+
+- An object only exists if the chunk that creates it has actually been executed
+- Writing code in a Quarto document does not automatically run it
+- If a later chunk runs before an earlier one, R will report "object not found"
+- Restarting R or opening a new session clears all previously created objects
+
+When the error suddenly disappears, it is usually because:
+
+- you ran an earlier chunk
+- you rendered the document from the top
+- or you ran all chunks in order
+
+<!-- We will spend time in class discussing how to run chunks, restart sessions, and diagnose this type of error. -->
+
+## `View()` vs `view()` in R
+
+Several people ran into an error like:
+
+`Error in view(iris) : could not find function "view"`
+
+This happens because **R is case-sensitive**.
+
+In R:
+
+- `View()` (capital V) is a built-in RStudio function that opens a data viewer
+- `view()` (lowercase v) does not exist, so R throws an error
+
+For example:
+
+```{r}
+#| eval: false
+View(iris)   # works
+view(iris)   # error
+```
+
+This is a common early mistake and nothing to worry about. Many R functions rely on exact capitalization, so even small differences in case can cause errors.
+
+If you see an error saying a function "could not be found," one of the first things to check is whether the function name is spelled and capitalized correctly.
+
+## Understanding function arguments: the `seq()` example 
+
+One muddy point was about understanding what `from = 1, to = 12, by = 3` means in the `seq()` function.
+
+This is actually a great question because it gets at how **all** R functions work, not just `seq()`.
+
+### What `seq()` does
+
+The `seq()` function generates a sequence of numbers. For example:
+
+```{r}
+seq(from = 1, to = 12, by = 3)
+```
+
+This creates a sequence that:
+
+- Starts at 1 (`from = 1`)
+- Ends at 12 (`to = 12`)
+- Increases by 3 each step (`by = 3`)
+
+So you get: 1, 4, 7, 10
+
+### Argument order doesn't matter when you name them
+
+One key point about R functions: when you **name** the arguments, the order doesn't matter:
+
+```{r}
+seq(from = 1, to = 12, by = 3)
+seq(by = 3, to = 12, from = 1)
+```
+
+Both produce exactly the same result because R knows which value goes with which argument.
+
+### When you don't name them, argument order does matter
+
+```{r}
+seq(1, 12, 3)
+seq(3, 12, 1)
+```
+
+### How to learn about any function
+
+The most important takeaway: whenever you see a function you don't recognize (or want to remember how it works), use the help system:
+
+```{r}
+#| eval: false
+?seq
+```
+
+This will show you:
+
+- What arguments the function takes
+- What each argument means
+- Examples of how to use it
+
+**This works for any function in R.** Get in the habit of typing `?function_name` whenever you're unsure.
+
+### Why I used `seq()` as an example
+
+I used `seq()` not because you need to memorize it for this class, but to illustrate how functions work in general: they take named inputs (arguments) and produce outputs. The specific function doesn't matter as much as understanding that pattern.
+
+
+## Why assign objects (`b <- c(3:10)`) instead of just running code?
+
+This was a great question and came up because I ran `c(3:10)` live in class.
+
+I used that line **only to demonstrate what the c()** function does, and to show that in this case it produces the same result as `3:10`. It was not meant to be an example of analysis code you would normally write.
+
+In general: 
+
+- `c(3:10)` creates a vector and prints it to the console
+- `b <- c(3:10)` creates the same vector **and stores it** so it can be reused later
+
+Assigning objects allows you to:
+- reuse results
+- build analyses step-by-step
+- debug your work
+- write reproducible code
+
+In practice, almost everything we do in R involves creating objects and then working with them. When you see code run without assignment, it is usually just for demonstration or quick inspection.
+
+## Inspecting a new dataset: how to apply this to your own data
+
+One comment noted that the dataset inspection portion felt unclear, especially in terms of how to apply it to a dataset of your own.
+
+That's completely understandable. The goal of those functions is not to memorize them, but to develop a **consistent first step** whenever you load or receive a new dataset.
+
+When you read in *any* dataset, a good default workflow is:
+
+```{r}
+#| eval: false
+dim(data)
+names(data)
+str(data)
+head(data)
+tail(data)
+```
+
+Each of these answers a different, important question:
+
+- `dim()` – How many rows and columns are there?
+- `names()` – What are the variable (column) names?
+- `str()` – What type of data is each variable (numeric, character, factor, etc.)?
+- `head()` / `tail()` – What do the first or last few rows actually look like?
+
+Together, these help you understand:
+
+- what information you have
+- how variables are stored
+- whether the data look like you expect them to
+
+You can think of this as the R equivalent of "opening a spreadsheet and scrolling around," but in a more systematic and reproducible way.
+
+Going forward, when you work with your own datasets (for homework or projects), these should be the **first things you run** after importing data.
+
+
+
+## Proportion tables: why `prop.table(iris$Species)` gives an error
+
+One question came up at the end of class about the following error:
+
+```
+Error in Summary.factor(…):
+'sum' not meaningful for factors
+```
+
+This happened when running:
+
+```{r}
+#| eval: false
+prop.table(iris$Species)
+```
+
+The key issue is that `prop.table()` expects a table as its input, not a raw column or vector.
+
+You can see this in the help file:
+
+```{r}
+#| eval: false
+?prop.table
+```
+
+The first argument to `prop.table()` should be a table of counts, which is usually created with `table()`.
+
+For example:
+
+```{r}
+table(iris$Species)
+```
+
+creates a table of counts for each species. Then:
+
+```{r}
+prop.table(table(iris$Species))
+```
+
+computes the proportions.
+
+When you run:
+
+```{r}
+#| eval: false
+prop.table(iris$Species)
+```
+
+R tries to treat the factor as if it were numeric and attempts to compute sums internally, which leads to the error:
+
+```
+'sum' not meaningful for factors
+```
+
+So the fix is not about changing the data, but about giving the function the type of object it expects.
+
+A good general pattern to remember is:
+
+* First, create a table of counts with `table()`
+* Then, compute proportions with `prop.table()`
+
+## Why nest functions like `prop.table(table(x))`?
+
+One question was: "Why are the nested table functions necessary? Is there a cleaner way to code this?"
+
+This is a great question about R's design philosophy.
+
+### Why the nesting is necessary
+
+Each function does **one specific job**:
+
+- `table()` creates a frequency table (counts)
+- `prop.table()` converts counts to proportions
+
+R's approach is to have many small, focused functions that do one thing well, rather than fewer functions that try to do everything.
+
+So to get proportions, you need:
+
+1. First, count the frequencies: `table(x)`
+2. Then, convert to proportions: `prop.table(table(x))`
+
+### Is there a cleaner way?
+
+You could save the intermediate step to make it more readable:
+```{r}
+#| eval: false
+# Option 1: nested (what we've been doing)
+prop.table(table(iris$Species))
+
+# Option 2: save intermediate step
+species_counts <- table(iris$Species)
+species_props <- prop.table(species_counts)
+species_props
+```
+
+Option 2 is more verbose but can be easier to read and debug, especially when you're learning.
+
+### The tidyverse approach
+
+Later in the course, we'll learn the `dplyr` package, which has functions that work differently and can feel more intuitive:
+```{r}
+#| eval: false
+library(dplyr)
+
+iris %>%
+  count(Species) %>%
+  mutate(proportion = n / sum(n))
+```
+
+This reads more like English: "take iris, count by Species, then calculate proportions."
+
+### For now
+
+The `table()` and `prop.table()` approach is the base R way and is worth learning because:
+
+- It works without any packages
+- It's widely used
+- Understanding it helps you understand R's function design
+
+But I hear you that the nesting can feel awkward. We'll see other approaches as the course progresses.
+
+## Marginal vs. Conditional Distributions
+
+One muddy point was about the difference between marginal and conditional distributions.
+
+This is a really important distinction, so let's break it down with a concrete example.
+
+### A Simple Example: Gender and Smoking Status
+
+Imagine we have data on 100 people, classified by gender and smoking status:
+
+```{r}
+# Create example data
+smoking_data <- matrix(c(15, 35, 25, 25), 
+                       nrow = 2,
+                       dimnames = list(
+                         Gender = c("Male", "Female"),
+                         Smoker = c("Yes", "No")
+                       ))
+smoking_data
+```
+
+### Marginal Distribution: Looking at ONE variable
+
+**Marginal distributions** answer questions like: "What proportion of our sample is male?" or "What proportion smokes?"
+
+You get these by summing across rows or columns:
+```{r}
+# Marginal distribution for Gender (sum across columns)
+rowSums(smoking_data)
+
+# As proportions
+prop.table(rowSums(smoking_data))
+```
+
+This tells us: 40% of our sample is male, 60% is female. **We're ignoring smoking status entirely.**
+```{r}
+# Marginal distribution for Smoker (sum across rows)
+colSums(smoking_data)
+
+# As proportions
+prop.table(colSums(smoking_data))
+```
+
+This tells us: 50% of our sample smokes, 50% doesn't. **We're ignoring gender entirely.**
+
+### Conditional Distribution: Looking at relationships
+
+**Conditional distributions** answer questions like: "Among males, what proportion smokes?" or "Among smokers, what proportion is male?"
+
+You calculate these within a specific row or column:
+```{r}
+# Conditional distribution of smoking GIVEN gender
+# (proportions within each row)
+prop.table(smoking_data, margin = 1)
+```
+
+This tells us:
+
+- Among males: 38% smoke, 63% don't
+- Among females: 58% smoke, 42% don't
+
+This is **P(Smoker | Gender)** — the probability of smoking *given* someone's gender.
+
+### The Key Difference
+
+- **Marginal**: What's the overall distribution of one variable? (Ignores other variables)
+- **Conditional**: What's the distribution of one variable *within a specific group* of another variable? (Shows relationships)
+
+### Why This Matters
+
+Conditional distributions let you see if variables are related:
+
+- If smoking rates are the same for males and females, gender and smoking might be independent
+- If smoking rates differ by gender, there's a relationship between these variables
+
+We'll use this concept throughout the course when we talk about associations and relationships between variables.
+
+## Installing packages: what does "comment it out" mean?
+
+One muddy point was about what I meant when I said to "code it out" after installing a package. 
+
+I thought I said "**comment** it out" (at least I meant to), which is R terminology for turning code into a comment so it doesn't run anymore.
+
+### The workflow for installing packages
+
+Here's the typical workflow:
+
+**Step 1: Install the package (only once)**
+
+When you first need a package, you install it:
+```{r}
+#| eval: false
+install.packages("ggplot2")
+```
+
+**Step 2: Comment it out after installation**
+
+After the package is installed on your computer, you add a `#` at the beginning of that line to turn it into a comment:
+```{r}
+#| eval: false
+# install.packages("ggplot2")
+```
+
+This way:
+
+- The code is still visible in your script (you remember what package you needed)
+- But it won't run every time you run your script (since it's already installed)
+- If someone else uses your script, they can see what packages are needed and uncomment it if needed
+
+**Step 3: Load the package (every time)**
+
+At the top of your script, you load the package every time you use it:
+```{r}
+#| eval: false
+library(ggplot2)
+```
+
+### Why comment instead of delete?
+
+You could delete the `install.packages()` line entirely, but commenting it out is often better because:
+
+- It documents what packages your script needs
+- If you share your script with someone else, they can see what to install
+- If you need to reinstall R or use a different computer, you have a record
+
+### Summary
+
+- `install.packages()` → run once, then **comment out** with `#`
+- `library()` → include at the top of every script, runs every time
+
+Sorry for any confusion with my wording in class!
+
+## Package conflicts: how often is this a problem?
+
+One question was: "How often will it be a problem installing R packages that break other R packages?"
+
+Good news: **this is rare in practice**, especially with the packages we'll use in this course.
+
+### When conflicts happen
+
+The most common "conflict" you'll see isn't packages breaking each other, but rather two packages having functions with the same name. For example:
+```{r}
+#| eval: false
+library(dplyr)
+library(MASS)
+```
+
+Both packages have a function called `select()`. When you load both, R will warn you:
+```
+The following object is masked from 'package:dplyr':
+    select
+```
+
+This means the `select()` from the package loaded second (MASS) will be used by default.
+
+### How to handle this
+
+If you need a specific version of a function, you can specify the package explicitly:
+```{r}
+#| eval: false
+dplyr::select()  # uses dplyr's version
+MASS::select()   # uses MASS's version
+```
+
+### Bottom line
+
+- True package incompatibility (where one package actually breaks another) is uncommon
+- Function name conflicts are more common but easy to manage
+- R will warn you when conflicts occur
+- For this course, the packages we use are all compatible with each other
+
+Don't worry about this as you're getting started. If a conflict comes up, we'll address it together.
+
+## Working directories and file locations
+
+Questions came up about:
+
+- what your working directory is
+- how it differs from where files are saved
+- why errors appear when setting directories
+
+We'll cover this more carefully soon, especially once we start importing data and working with multiple files.
+
+When working with a Quarto document (`.qmd`) like in the homework, your working directory will be wherever you have the `.qmd` saved and RStudio should produce the `.html` file there. For what we've been learning in R you shouldn't have to worry about working directories yet. 
+
+We'll cover this more once we start importing data and working with multiple files.
+
+
+
+
+
+
+
+
+
