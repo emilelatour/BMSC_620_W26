@@ -43,3 +43,11 @@ En Dash –
 The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 :::
 :::
+
+
+
+
+
+# set ggplot theme for slides 
+theme_set(theme_bw(base_size = 22))
+# theme_update(text = element_text(size=16))  # set global text size for ggplots

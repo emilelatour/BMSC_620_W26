@@ -52,9 +52,9 @@ source(here("class_dates.R"))
 
 <!-- FULL SCHEDULE -->
 
-[🎥 Lecture Recordings (OneDrive folder)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDYsQvyF-5LR7amFaaeogkNAREFnJvtPNQ22rnAKLj6klk?e=A0hKpU) – Lectures 1, 2, and Part 1 of Lecture 3
+[🎥 Lecture Recordings (OneDrive folder)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDYsQvyF-5LR7amFaaeogkNAREFnJvtPNQ22rnAKLj6klk?e=A0hKpU) – Lectures 1, 2, and Part 1 of Lecture 3, Lecture 4
 
-[🎥 Lecture Recordings (loom.com)](https://loom.com/share/folder/1ccd8ec81f1b4d53a92361ea5f8e2db4) – Part 2 of Lecture 3
+[🎥 Lecture Recordings (loom.com)](https://loom.com/share/folder/1ccd8ec81f1b4d53a92361ea5f8e2db4) – Part 2 of Lecture 3, Lecture 4
 
 
 
