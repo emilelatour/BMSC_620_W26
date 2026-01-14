@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Emile Latour">
+<meta name="dcterms.date" content="2026-01-14">
+
+<title>R: Working with data using the tidyverse – BMSC 620: Introduction to Biostatistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exams.html"> 
+<span class="menu-text">Exams</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">R: Working with data using the tidyverse</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homework</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course info</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#where-we-are" id="toc-where-we-are" class="nav-link active" data-scroll-target="#where-we-are">Where we are</a>
+  <ul class="collapse">
+  <li><a href="#goal-for-today-r-portion" id="toc-goal-for-today-r-portion" class="nav-link" data-scroll-target="#goal-for-today-r-portion">Goal for today (R portion)</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters">Why this matters</a></li>
+  </ul></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse">The tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#what-is-the-tidyverse" id="toc-what-is-the-tidyverse" class="nav-link" data-scroll-target="#what-is-the-tidyverse">What is the tidyverse?</a></li>
+  <li><a href="#installing-vs-loading-quick-reminder" id="toc-installing-vs-loading-quick-reminder" class="nav-link" data-scroll-target="#installing-vs-loading-quick-reminder">Installing vs loading (quick reminder)</a></li>
+  <li><a href="#what-data-are-we-using-today" id="toc-what-data-are-we-using-today" class="nav-link" data-scroll-target="#what-data-are-we-using-today">What data are we using today?</a></li>
+  </ul></li>
+  <li><a href="#data-frames-and-tibbles" id="toc-data-frames-and-tibbles" class="nav-link" data-scroll-target="#data-frames-and-tibbles">Data frames and tibbles</a>
+  <ul class="collapse">
+  <li><a href="#data-frames-vs-tibbles" id="toc-data-frames-vs-tibbles" class="nav-link" data-scroll-target="#data-frames-vs-tibbles">Data frames vs tibbles</a></li>
+  <li><a href="#quick-ways-to-inspect-data" id="toc-quick-ways-to-inspect-data" class="nav-link" data-scroll-target="#quick-ways-to-inspect-data">Quick ways to inspect data</a></li>
+  </ul></li>
+  <li><a href="#subsetting-base-r-vs-dplyr" id="toc-subsetting-base-r-vs-dplyr" class="nav-link" data-scroll-target="#subsetting-base-r-vs-dplyr">Subsetting: base R vs dplyr</a>
+  <ul class="collapse">
+  <li><a href="#subsetting-in-base-r-rows-cols" id="toc-subsetting-in-base-r-rows-cols" class="nav-link" data-scroll-target="#subsetting-in-base-r-rows-cols">Subsetting in base R: <code>[rows, cols]</code></a></li>
+  <li><a href="#logical-subsetting-in-base-r" id="toc-logical-subsetting-in-base-r" class="nav-link" data-scroll-target="#logical-subsetting-in-base-r">Logical subsetting in base R</a></li>
+  <li><a href="#the-same-idea-in-dplyr-filter" id="toc-the-same-idea-in-dplyr-filter" class="nav-link" data-scroll-target="#the-same-idea-in-dplyr-filter">The same idea in dplyr: <code>filter()</code></a></li>
+  </ul></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">Pipes</a>
+  <ul class="collapse">
+  <li><a href="#the-pipe-means-and-then" id="toc-the-pipe-means-and-then" class="nav-link" data-scroll-target="#the-pipe-means-and-then">The pipe <code>%&gt;%</code> means “and then”</a></li>
+  </ul></li>
+  <li><a href="#core-dplyr-verbs" id="toc-core-dplyr-verbs" class="nav-link" data-scroll-target="#core-dplyr-verbs">Core dplyr verbs</a>
+  <ul class="collapse">
+  <li><a href="#the-5-verbs-we-will-use-a-lot" id="toc-the-5-verbs-we-will-use-a-lot" class="nav-link" data-scroll-target="#the-5-verbs-we-will-use-a-lot">The 5 verbs we will use a lot</a></li>
+  <li><a href="#filter-keep-rows-that-match-a-condition" id="toc-filter-keep-rows-that-match-a-condition" class="nav-link" data-scroll-target="#filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</a></li>
+  <li><a href="#select-keep-columns-by-name" id="toc-select-keep-columns-by-name" class="nav-link" data-scroll-target="#select-keep-columns-by-name"><code>select()</code>: keep columns by name</a></li>
+  <li><a href="#mutate-create-a-new-column" id="toc-mutate-create-a-new-column" class="nav-link" data-scroll-target="#mutate-create-a-new-column"><code>mutate()</code>: create a new column</a></li>
+  <li><a href="#summarize-reduce-to-a-summary-row" id="toc-summarize-reduce-to-a-summary-row" class="nav-link" data-scroll-target="#summarize-reduce-to-a-summary-row"><code>summarize()</code>: reduce to a summary row</a></li>
+  <li><a href="#group_by-summarize-summaries-by-group" id="toc-group_by-summarize-summaries-by-group" class="nav-link" data-scroll-target="#group_by-summarize-summaries-by-group"><code>group_by()</code> + <code>summarize()</code>: summaries by group</a></li>
+  </ul></li>
+  <li><a href="#your-turn-2-3-minutes" id="toc-your-turn-2-3-minutes" class="nav-link" data-scroll-target="#your-turn-2-3-minutes">Your turn (2-3 minutes)</a>
+  <ul class="collapse">
+  <li><a href="#task-1-humans-only" id="toc-task-1-humans-only" class="nav-link" data-scroll-target="#task-1-humans-only">Task 1: Humans only</a></li>
+  <li><a href="#task-2-conditional-summaries" id="toc-task-2-conditional-summaries" class="nav-link" data-scroll-target="#task-2-conditional-summaries">Task 2: Conditional summaries</a></li>
+  </ul></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a>
+  <ul class="collapse">
+  <li><a href="#next-week-ggplot2-eda" id="toc-next-week-ggplot2-eda" class="nav-link" data-scroll-target="#next-week-ggplot2-eda">Next week: ggplot2 + EDA</a></li>
+  <li><a href="#importing-data-preview-only" id="toc-importing-data-preview-only" class="nav-link" data-scroll-target="#importing-data-preview-only">Importing data (preview only)</a></li>
+  </ul></li>
+  <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a>
+  <ul class="collapse">
+  <li><a href="#what-you-should-remember" id="toc-what-you-should-remember" class="nav-link" data-scroll-target="#what-you-should-remember">What you should remember</a></li>
+  <li><a href="#quick-reference" id="toc-quick-reference" class="nav-link" data-scroll-target="#quick-reference">Quick reference</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="r_tidyverse_dplyr_basics.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R: Working with data using the tidyverse</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Emile Latour </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 14, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="where-we-are" class="level1">
+<h1>Where we are</h1>
+<section id="goal-for-today-r-portion" class="level2">
+<h2 class="anchored" data-anchor-id="goal-for-today-r-portion">Goal for today (R portion)</h2>
+<p>We are learning a small, reusable “grammar” for working with data:</p>
+<ul>
+<li>tidyverse (what it is)</li>
+<li>tibbles (modern data frames)</li>
+<li>subsetting (keep rows/columns)</li>
+<li>pipes (<code>%&gt;%</code>) as “and then”</li>
+<li>core <code>dplyr</code> verbs: <code>filter()</code>, <code>select()</code>, <code>mutate()</code>, <code>summarize()</code>, <code>group_by()</code></li>
+</ul>
+<hr>
+</section>
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why this matters</h2>
+<p>Next class we start <strong>ggplot2 + EDA</strong>.</p>
+<p>Most plots start with:</p>
+<ol type="1">
+<li>keep the rows you care about (<code>filter()</code>)</li>
+<li>keep the variables you need (<code>select()</code>)</li>
+<li>create a helper variable (<code>mutate()</code>)</li>
+<li>plot (<code>ggplot()</code>)</li>
+</ol>
+</section>
+</section>
+<section id="the-tidyverse" class="level1">
+<h1>The tidyverse</h1>
+<section id="what-is-the-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-tidyverse">What is the tidyverse?</h2>
+<p>The tidyverse is a collection of R packages designed to work together:</p>
+<ul>
+<li><strong>dplyr</strong>: data manipulation</li>
+<li><strong>ggplot2</strong>: visualization</li>
+<li><strong>readxl</strong>: import Excel files (we’ll use later)</li>
+</ul>
+<p>We are <em>not</em> trying to learn everything in the tidyverse.</p>
+<hr>
+</section>
+<section id="installing-vs-loading-quick-reminder" class="level2">
+<h2 class="anchored" data-anchor-id="installing-vs-loading-quick-reminder">Installing vs loading (quick reminder)</h2>
+<p>Install (once per computer):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load (every session):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="what-data-are-we-using-today" class="level2">
+<h2 class="anchored" data-anchor-id="what-data-are-we-using-today">What data are we using today?</h2>
+<p>We’ll use <code>starwars</code> (built into <code>dplyr</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 14
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+ 2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…
+ 3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…
+ 4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+ 5 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+ 6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+ 7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+ 8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…
+ 9 Biggs D…    183    84 black      light      brown           24   male  mascu…
+10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+# ℹ 77 more rows
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="data-frames-and-tibbles" class="level1">
+<h1>Data frames and tibbles</h1>
+<section id="data-frames-vs-tibbles" class="level2">
+<h2 class="anchored" data-anchor-id="data-frames-vs-tibbles">Data frames vs tibbles</h2>
+<p>A <strong>data frame</strong> is a rectangular table:</p>
+<ul>
+<li>rows = observations</li>
+<li>columns = variables</li>
+</ul>
+<p>A <strong>tibble</strong> is a modern data frame with nicer printing.</p>
+<p>Most tidyverse functions return tibbles.</p>
+<hr>
+</section>
+<section id="quick-ways-to-inspect-data" class="level2">
+<h2 class="anchored" data-anchor-id="quick-ways-to-inspect-data">Quick ways to inspect data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 87
+Columns: 14
+$ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or…
+$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…
+$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…
+$ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", N…
+$ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "…
+$ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue",…
+$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …
+$ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female",…
+$ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "femini…
+$ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "T…
+$ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human", "Huma…
+$ films      &lt;list&gt; &lt;"A New Hope", "The Empire Strikes Back", "Return of the J…
+$ vehicles   &lt;list&gt; &lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "Imp…
+$ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanced x1",…</code></pre>
+</div>
+</div>
+<p>Other useful ones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="subsetting-base-r-vs-dplyr" class="level1">
+<h1>Subsetting: base R vs dplyr</h1>
+<section id="subsetting-in-base-r-rows-cols" class="level2">
+<h2 class="anchored" data-anchor-id="subsetting-in-base-r-rows-cols">Subsetting in base R: <code>[rows, cols]</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[rows, cols]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Examples:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]                 <span class="co"># first 5 rows</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"height"</span>)] <span class="co"># two columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="logical-subsetting-in-base-r" class="level2">
+<h2 class="anchored" data-anchor-id="logical-subsetting-in-base-r">Logical subsetting in base R</h2>
+<p>Keep rows where a condition is TRUE:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Human"</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Read it out loud:</p>
+<p>“Give me the rows where species equals Human.”</p>
+<hr>
+</section>
+<section id="the-same-idea-in-dplyr-filter" class="level2">
+<h2 class="anchored" data-anchor-id="the-same-idea-in-dplyr-filter">The same idea in dplyr: <code>filter()</code></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 14
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+ 2 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+ 3 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+ 4 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+ 5 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+ 6 Biggs D…    183    84 black      light      brown           24   male  mascu…
+ 7 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+ 8 Anakin …    188    84 blond      fair       blue            41.9 male  mascu…
+ 9 Wilhuff…    180    NA auburn, g… fair       blue            64   male  mascu…
+10 Han Solo    180    80 brown      fair       brown           29   male  mascu…
+# ℹ 25 more rows
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+</div>
+<p>Same idea, easier to read once you get used to it.</p>
+</section>
+</section>
+<section id="pipes" class="level1">
+<h1>Pipes</h1>
+<section id="the-pipe-means-and-then" class="level2">
+<h2 class="anchored" data-anchor-id="the-pipe-means-and-then">The pipe <code>%&gt;%</code> means “and then”</h2>
+<p>Pipes help you read code top-to-bottom.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can always write code without pipes. We use them for readability.</p>
+</section>
+</section>
+<section id="core-dplyr-verbs" class="level1">
+<h1>Core dplyr verbs</h1>
+<section id="the-5-verbs-we-will-use-a-lot" class="level2">
+<h2 class="anchored" data-anchor-id="the-5-verbs-we-will-use-a-lot">The 5 verbs we will use a lot</h2>
+<ul>
+<li><code>filter()</code> keep rows</li>
+<li><code>select()</code> keep (or drop) columns</li>
+<li><code>mutate()</code> create new columns</li>
+<li><code>summarize()</code> collapse to summaries</li>
+<li><code>group_by()</code> do summaries by groups</li>
+</ul>
+<p>If you learn these five, you can do most things we need in this course.</p>
+<hr>
+</section>
+<section id="filter-keep-rows-that-match-a-condition" class="level2">
+<h2 class="anchored" data-anchor-id="filter-keep-rows-that-match-a-condition"><code>filter()</code>: keep rows that match a condition</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 14
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+ 2 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+ 3 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+ 4 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+ 5 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+ 6 Biggs D…    183    84 black      light      brown           24   male  mascu…
+ 7 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+ 8 Anakin …    188    84 blond      fair       blue            41.9 male  mascu…
+ 9 Wilhuff…    180    NA auburn, g… fair       blue            64   male  mascu…
+10 Han Solo    180    80 brown      fair       brown           29   male  mascu…
+# ℹ 25 more rows
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+</div>
+<p>Multiple conditions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>, height <span class="sc">&gt;=</span> <span class="dv">180</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 14
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Darth V…    202 136   none       white      yellow          41.9 male  mascu…
+ 2 Biggs D…    183  84   black      light      brown           24   male  mascu…
+ 3 Obi-Wan…    182  77   auburn, w… fair       blue-gray       57   male  mascu…
+ 4 Anakin …    188  84   blond      fair       blue            41.9 male  mascu…
+ 5 Wilhuff…    180  NA   auburn, g… fair       blue            64   male  mascu…
+ 6 Han Solo    180  80   brown      fair       brown           29   male  mascu…
+ 7 Boba Fe…    183  78.2 black      fair       brown           31.5 male  mascu…
+ 8 Qui-Gon…    193  89   brown      fair       blue            92   male  mascu…
+ 9 Padmé A…    185  45   brown      light      brown           46   fema… femin…
+10 Ric Olié    183  NA   brown      fair       blue            NA   male  mascu…
+11 Quarsh …    183  NA   black      dark       brown           62   male  mascu…
+12 Mace Wi…    188  84   none       dark       brown           72   male  mascu…
+13 Cliegg …    183  NA   brown      fair       blue            82   male  mascu…
+14 Dooku       193  80   white      fair       brown          102   male  mascu…
+15 Bail Pr…    191  NA   black      tan        brown           67   male  mascu…
+16 Jango F…    183  79   black      tan        brown           66   male  mascu…
+17 Raymus …    188  79   brown      light      brown           NA   male  mascu…
+# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
+#   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+</div>
+<p>(<code>,</code> is like “and” inside <code>filter()</code>.)</p>
+<hr>
+</section>
+<section id="select-keep-columns-by-name" class="level2">
+<h2 class="anchored" data-anchor-id="select-keep-columns-by-name"><code>select()</code>: keep columns by name</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, height, mass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 4
+   name               species height  mass
+   &lt;chr&gt;              &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+ 1 Luke Skywalker     Human      172    77
+ 2 C-3PO              Droid      167    75
+ 3 R2-D2              Droid       96    32
+ 4 Darth Vader        Human      202   136
+ 5 Leia Organa        Human      150    49
+ 6 Owen Lars          Human      178   120
+ 7 Beru Whitesun Lars Human      165    75
+ 8 R5-D4              Droid       97    32
+ 9 Biggs Darklighter  Human      183    84
+10 Obi-Wan Kenobi     Human      182    77
+# ℹ 77 more rows</code></pre>
+</div>
+</div>
+<p>Drop columns with <code>-</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>films, <span class="sc">-</span>vehicles, <span class="sc">-</span>starships)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 11
+   name     height  mass hair_color skin_color eye_color birth_year sex   gender
+   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+ 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+ 2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…
+ 3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…
+ 4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+ 5 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+ 6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+ 7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+ 8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…
+ 9 Biggs D…    183    84 black      light      brown           24   male  mascu…
+10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+# ℹ 77 more rows
+# ℹ 2 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="mutate-create-a-new-column" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-create-a-new-column"><code>mutate()</code>: create a new column</h2>
+<p>Example: convert height from cm to meters</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height_m =</span> height <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, height, height_m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 87 × 3
+   name               height height_m
+   &lt;chr&gt;               &lt;int&gt;    &lt;dbl&gt;
+ 1 Luke Skywalker        172     1.72
+ 2 C-3PO                 167     1.67
+ 3 R2-D2                  96     0.96
+ 4 Darth Vader           202     2.02
+ 5 Leia Organa           150     1.5 
+ 6 Owen Lars             178     1.78
+ 7 Beru Whitesun Lars    165     1.65
+ 8 R5-D4                  97     0.97
+ 9 Biggs Darklighter     183     1.83
+10 Obi-Wan Kenobi        182     1.82
+# ℹ 77 more rows</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="summarize-reduce-to-a-summary-row" class="level2">
+<h2 class="anchored" data-anchor-id="summarize-reduce-to-a-summary-row"><code>summarize()</code>: reduce to a summary row</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+      n mean_height mean_mass
+  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1    87        175.      97.3</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="group_by-summarize-summaries-by-group" class="level2">
+<h2 class="anchored" data-anchor-id="group_by-summarize-summaries-by-group"><code>group_by()</code> + <code>summarize()</code>: summaries by group</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 3
+   species      n mean_height
+   &lt;chr&gt;    &lt;int&gt;       &lt;dbl&gt;
+ 1 Human       35        178 
+ 2 Droid        6        131.
+ 3 &lt;NA&gt;         4        175 
+ 4 Gungan       3        209.
+ 5 Kaminoan     2        221 
+ 6 Mirialan     2        168 
+ 7 Twi'lek      2        179 
+ 8 Wookiee      2        231 
+ 9 Zabrak       2        173 
+10 Aleena       1         79 
+# ℹ 28 more rows</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="your-turn-2-3-minutes" class="level1">
+<h1>Your turn (2-3 minutes)</h1>
+<section id="task-1-humans-only" class="level2">
+<h2 class="anchored" data-anchor-id="task-1-humans-only">Task 1: Humans only</h2>
+<ol type="1">
+<li>Filter to humans<br>
+</li>
+<li>Keep only <code>name</code>, <code>height</code>, <code>mass</code><br>
+</li>
+<li>Show the first 10 rows</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="task-2-conditional-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="task-2-conditional-summaries">Task 2: Conditional summaries</h2>
+<p>Compute the mean height by sex:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="looking-ahead" class="level1">
+<h1>Looking ahead</h1>
+<section id="next-week-ggplot2-eda" class="level2">
+<h2 class="anchored" data-anchor-id="next-week-ggplot2-eda">Next week: ggplot2 + EDA</h2>
+<p>We will use the same pattern:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Today was about learning the “data wrangling” steps that come before plotting.</p>
+<hr>
+</section>
+<section id="importing-data-preview-only" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-preview-only">Importing data (preview only)</h2>
+<p>Soon we will import Excel data:</p>
+<ul>
+<li><code>readxl::read_excel("file.xlsx")</code></li>
+<li>Use good file paths (often with <code>here()</code>)</li>
+</ul>
+<p>We will do this when we start working with real datasets for homework and in-class examples.</p>
+</section>
+</section>
+<section id="recap" class="level1">
+<h1>Recap</h1>
+<section id="what-you-should-remember" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-should-remember">What you should remember</h2>
+<ul>
+<li>tidyverse = a toolkit (we’ll mainly use dplyr + ggplot2 + readxl)</li>
+<li>tibbles are modern data frames</li>
+<li><code>filter()</code> rows, <code>select()</code> columns</li>
+<li><code>%&gt;%</code> means “and then”</li>
+<li><code>mutate()</code> create columns</li>
+<li><code>summarize()</code> + <code>group_by()</code> for conditional summaries</li>
+</ul>
+<hr>
+</section>
+<section id="quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference">Quick reference</h2>
+<ul>
+<li>dplyr reference: https://dplyr.tidyverse.org/reference/index.html</li>
+<li>R for Data Science: https://r4ds.hadley.nz/</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
