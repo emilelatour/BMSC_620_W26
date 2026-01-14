@@ -88,9 +88,7 @@ I was trying out new recording software today, and there was a glitch about 1 ho
   - Diagnostic testing example (PPV)
 
 - **Slides**
-  - Probability and conditional probability (HTML | PDF | Recording – links coming)
-
- ([HTML](/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.qmd) | [PDF](/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Probability and conditional probability ([HTML](/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.qmd) | [PDF](/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
   - Lecture 04 – Probability and conditional probability (link coming)
