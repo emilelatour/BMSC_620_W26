@@ -90,8 +90,11 @@ I was trying out new recording software today, and there was a glitch about 1 ho
 - **Slides**
   - Probability and conditional probability (HTML | PDF | Recording – links coming)
 
+ ([HTML](/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.qmd) | [PDF](/lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+
+/Users/latour/Library/CloudStorage/Dropbox/teaching/BMSC_620_W26/lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.qmd
 - **Recording**
-  - Lecture 04 – Probability and Bayes’ Theorem (link coming)
+  - Lecture 04 – Probability and conditional probability (link coming)
 
 ---
 

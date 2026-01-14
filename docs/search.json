@@ -1030,415 +1030,6 @@
     "text": "Wrap-up\nToday you learned how to:\n\nRun basic R code\nInspect a dataset\nSummarize numeric and categorical variables\nMake simple plots\n\nWe’ll build on this foundation to:\n\nWork more efficiently with data\nStart using additional functions and packages\n\n\n\n\nBMSC 620 | R basics + summaries"
   },
   {
-    "objectID": "homework/HW01/HW01.html",
-    "href": "homework/HW01/HW01.html",
-    "title": "BMSC 620 — Homework 1",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 1, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#homework-1",
-    "href": "homework/HW01/HW01.html#homework-1",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Homework 1",
-    "text": "Homework 1\nThis assignment reviews:\n\nwriting and running code in Quarto\nsummarizing numeric and categorical variables\nfrequency tables and contingency tables\nbar plots, histograms, and box plots\n\nUnless stated otherwise, show your work using R code chunks."
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-0-setup",
-    "href": "homework/HW01/HW01.html#part-0-setup",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 0: Setup",
-    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)"
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
-    "href": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 1: R objects and vectors",
-    "text": "Part 1: R objects and vectors\n\n1A. Calculator practice\nCreate code that computes each of the following (one line each):\n\n12 / 5\n3^4\nsqrt(81)\n4^3 - 2 * 7 + 9 / 2\n\n\n# Your code here\n\n\n\n1B. Create vectors and summarize\n\nCreate a vector named x containing the numbers: 4, 9, 2, 10, 7, 7\nCompute the mean and standard deviation of x\nCompute the median and IQR of x\n\n\n\n1C. Missing values\n\nCreate a vector named y containing: 2, 5, NA, 7, 9\nCompute mean(y). What happens?\nCompute the mean again ignoring missing values\n\nWrite 1 to 2 sentences explaining what na.rm = TRUE does.\nYour explanation:"
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
-    "href": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 2: Inspecting a dataset (nhanes.samp)",
-    "text": "Part 2: Inspecting a dataset (nhanes.samp)\nIn this homework, you will work with the dataset nhanes.samp, which is included in the oibiostat package.\nThe National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a sample of 200 individuals from NHANES, provided for instructional purposes.\nTo load the dataset, run:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n\n2A. Basic inspection\nRun the following functions:\n\ndim(nhanes.samp)\nnames(nhanes.samp)\nstr(nhanes.samp)\nhead(nhanes.samp)\n\nAnswer the questions below in plain text.\n\nHow many rows and columns does nhanes.samp have?\nName two categorical variables? (i.e. Factor variable type)\nGive one example of a numeric variable. (int or num)\n\nAnswers: 1. 2. 3.\n\n\n2B. Accessing a single variable with $\n\nUse $ to pull out Age\nCompute the mean, sd, median, and IQR of Age\n\n\n\n2C. Working with NA values.\nWe can see that some variables in the dataset have missing values (NA) like the variable Height.\n\nsummary(nhanes.samp$Height)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   90.6   156.6   166.2   162.6   175.7   191.3      10 \n\n\n\nUse $ to pull out Height\nCompute the mean, sd, median, and IQR of Height. Hint: you will need to remove the NA values by adding the argument na.rm = TRUE to the function calls."
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
-    "href": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 3: Summarizing one categorical variable",
-    "text": "Part 3: Summarizing one categorical variable\nWe will summarize Gender\n\n3A. Counts and proportions\n\nUse table() to get counts of Gender\nUse prop.table() to get proportions of Gender\nConvert proportions to percentages\n\nHint: table(nhanes.samp$Gender) and prop.table(...)\n\n\n3B. Bar plot\nMake a bar plot of Gender using the barplot function."
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
-    "href": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 4: Two categorical variables (contingency tables)",
-    "text": "Part 4: Two categorical variables (contingency tables)\nWe can use the table() function to examine the relationships between two categorical variables. Here is an example using Gender and Race1:\n\ntable(nhanes.samp$Gender, nhanes.samp$Race1)   # counts\n\n        \n         Black Hispanic Mexican White Other\n  female     7        8       9    65    13\n  male      16        6      13    57     6\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions\n\n        \n              Black   Hispanic    Mexican      White      Other\n  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098\n  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions\n\n        \n             Black  Hispanic   Mexican     White     Other\n  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105\n  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895\n\n\nUsing row percentages (margin = 1), where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.\nUsing column percentages (margin = 2), where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.\n\n4A. Contingency table (counts)\nChoose either the Diabetes or SmokeNow variable in the data set. Create a contingency table similar to above with Gender and the variable that you choose.\n\n\n4B. Row proportions vs column proportions\n\nCreate a row proportion table (each row sums to 1)\nCreate a column proportion table (each column sums to 1)\n\nHint:\n\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)\n\n\n\n4C. Interpretation\nAnswer each question in 1 to 2 sentences.\n\nProvide 1 or 2 short sentences describing the row percentages.\nProvide 1 or 2 short sentences describing the column percentages.\n\nAnswers: 1. 2."
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
-    "href": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 5: Visual summaries for numeric variables",
-    "text": "Part 5: Visual summaries for numeric variables\n\n5A. Histogram\nMake a histogram of BMI.\nUsing the hist() function, you can add:\n\na title by adding an argument main = \"Histogram of BMI\"\nand a label for the x-axis using xlab = \"BMI\"\nWhen in doubt about arguments to functions, use the ? then the function name to get help. i.e. type in the console ?hist to get help for the hist() function.\n\nIf you get an error due to missing values, use na.omit() or remove NA values before calling hist().\n\n\n5B. Box plot (overall)\nMake a single box plot of Height using boxplot(). Include a title “Box plot of Height” and a label for the y-axis (ylab = \"Height\"). Get help using ?boxplot if you need it.\nNOTE: We saw earlier that Height contained NA values. boxplot() will ignore NA values automatically.\n\n\n5C. Box plot by group\nMake a box plot of Height by Gender.\nIf you look at the first example in the help for the boxplot function ?boxplot, they give an example of a box plot of count by spray using the InsectSprays dataset.\n\nboxplot(count ~ spray, data = InsectSprays, col = \"lightgray\")\n\nFollow their example to make your Height by Gender box plot with the nhanes.samp data.\nWhich group has a higher median height? How can you tell from the figure? Are there any outliers?\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW01/HW01.html#final-check",
-    "href": "homework/HW01/HW01.html#final-check",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Final check",
-    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou uploaded both the .qmd and .html files"
-  },
-  {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
-    "section": "",
-    "text": "See Sakai",
-    "crumbs": [
-      "Home",
-      "Exams"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html",
-    "href": "weeks/week_01.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#overview",
-    "href": "weeks/week_01.html#overview",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#readings-before-class",
-    "href": "weeks/week_01.html#readings-before-class",
-    "title": "Week 1",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#materials",
-    "href": "weeks/week_01.html#materials",
-    "title": "Week 1",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#day-1-course-background-survey",
-    "href": "weeks/week_01.html#day-1-course-background-survey",
-    "title": "Week 1",
-    "section": "Day 1 course background survey",
-    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
-    "href": "weeks/week_01.html#post-class-check-in-attendance",
-    "title": "Week 1",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#homework",
-    "href": "weeks/week_01.html#homework",
-    "title": "Week 1",
-    "section": "Homework",
-    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#looking-ahead",
-    "href": "weeks/week_01.html#looking-ahead",
-    "title": "Week 1",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html",
-    "href": "weeks/week_02.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#announcements",
-    "href": "weeks/week_02.html#announcements",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#overview",
-    "href": "weeks/week_02.html#overview",
-    "title": "Week 2",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#readings-before-class",
-    "href": "weeks/week_02.html#readings-before-class",
-    "title": "Week 2",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#materials",
-    "href": "weeks/week_02.html#materials",
-    "title": "Week 2",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format. Part 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#homework",
-    "href": "weeks/week_02.html#homework",
-    "title": "Week 2",
-    "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
-    "href": "weeks/week_02.html#post-class-check-in-attendance",
-    "title": "Week 2",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#looking-ahead",
-    "href": "weeks/week_02.html#looking-ahead",
-    "title": "Week 2",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
-    "crumbs": [
-      "Home",
-      "Homework"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html",
-    "href": "homework/HW00/HW00.html",
-    "title": "BMSC 620 — Homework 0",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#homework-0",
-    "href": "homework/HW00/HW00.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-3-final-check",
-    "href": "homework/HW00/HW00.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
-  },
-  {
     "objectID": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
     "href": "lessons/00_welcome/00_welcome.html#welcome-to-bmsc-620",
     "title": "Welcome to BMSC 620",
@@ -1542,6 +1133,730 @@
     "title": "Welcome to BMSC 620",
     "section": "That’s it for logistics",
     "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
+    "title": "BMSC 620 — Homework 0",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html",
+    "href": "weeks/week_02.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#announcements",
+    "href": "weeks/week_02.html#announcements",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#overview",
+    "href": "weeks/week_02.html#overview",
+    "title": "Week 2",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#readings-before-class",
+    "href": "weeks/week_02.html#readings-before-class",
+    "title": "Week 2",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#materials",
+    "href": "weeks/week_02.html#materials",
+    "title": "Week 2",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format. Part 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | Recording – links coming)\n\nRecording\n\nLecture 04 – Probability and Bayes’ Theorem (link coming)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#homework",
+    "href": "weeks/week_02.html#homework",
+    "title": "Week 2",
+    "section": "Homework",
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
+    "href": "weeks/week_02.html#post-class-check-in-attendance",
+    "title": "Week 2",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#looking-ahead",
+    "href": "weeks/week_02.html#looking-ahead",
+    "title": "Week 2",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html",
+    "href": "weeks/week_01.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#overview",
+    "href": "weeks/week_01.html#overview",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#readings-before-class",
+    "href": "weeks/week_01.html#readings-before-class",
+    "title": "Week 1",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#materials",
+    "href": "weeks/week_01.html#materials",
+    "title": "Week 1",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#day-1-course-background-survey",
+    "href": "weeks/week_01.html#day-1-course-background-survey",
+    "title": "Week 1",
+    "section": "Day 1 course background survey",
+    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
+    "href": "weeks/week_01.html#post-class-check-in-attendance",
+    "title": "Week 1",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#homework",
+    "href": "weeks/week_01.html#homework",
+    "title": "Week 1",
+    "section": "Homework",
+    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#looking-ahead",
+    "href": "weeks/week_01.html#looking-ahead",
+    "title": "Week 1",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
+    "section": "",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
+    "section": "",
+    "text": "See Sakai",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "homework/HW01/HW01.html",
+    "href": "homework/HW01/HW01.html",
+    "title": "BMSC 620 — Homework 1",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 1, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#homework-1",
+    "href": "homework/HW01/HW01.html#homework-1",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Homework 1",
+    "text": "Homework 1\nThis assignment reviews:\n\nwriting and running code in Quarto\nsummarizing numeric and categorical variables\nfrequency tables and contingency tables\nbar plots, histograms, and box plots\n\nUnless stated otherwise, show your work using R code chunks."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-0-setup",
+    "href": "homework/HW01/HW01.html#part-0-setup",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 0: Setup",
+    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "href": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 1: R objects and vectors",
+    "text": "Part 1: R objects and vectors\n\n1A. Calculator practice\nCreate code that computes each of the following (one line each):\n\n12 / 5\n3^4\nsqrt(81)\n4^3 - 2 * 7 + 9 / 2\n\n\n# Your code here\n\n\n\n1B. Create vectors and summarize\n\nCreate a vector named x containing the numbers: 4, 9, 2, 10, 7, 7\nCompute the mean and standard deviation of x\nCompute the median and IQR of x\n\n\n\n1C. Missing values\n\nCreate a vector named y containing: 2, 5, NA, 7, 9\nCompute mean(y). What happens?\nCompute the mean again ignoring missing values\n\nWrite 1 to 2 sentences explaining what na.rm = TRUE does.\nYour explanation:"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "href": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 2: Inspecting a dataset (nhanes.samp)",
+    "text": "Part 2: Inspecting a dataset (nhanes.samp)\nIn this homework, you will work with the dataset nhanes.samp, which is included in the oibiostat package.\nThe National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a sample of 200 individuals from NHANES, provided for instructional purposes.\nTo load the dataset, run:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n\n2A. Basic inspection\nRun the following functions:\n\ndim(nhanes.samp)\nnames(nhanes.samp)\nstr(nhanes.samp)\nhead(nhanes.samp)\n\nAnswer the questions below in plain text.\n\nHow many rows and columns does nhanes.samp have?\nName two categorical variables? (i.e. Factor variable type)\nGive one example of a numeric variable. (int or num)\n\nAnswers: 1. 2. 3.\n\n\n2B. Accessing a single variable with $\n\nUse $ to pull out Age\nCompute the mean, sd, median, and IQR of Age\n\n\n\n2C. Working with NA values.\nWe can see that some variables in the dataset have missing values (NA) like the variable Height.\n\nsummary(nhanes.samp$Height)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   90.6   156.6   166.2   162.6   175.7   191.3      10 \n\n\n\nUse $ to pull out Height\nCompute the mean, sd, median, and IQR of Height. Hint: you will need to remove the NA values by adding the argument na.rm = TRUE to the function calls."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "href": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 3: Summarizing one categorical variable",
+    "text": "Part 3: Summarizing one categorical variable\nWe will summarize Gender\n\n3A. Counts and proportions\n\nUse table() to get counts of Gender\nUse prop.table() to get proportions of Gender\nConvert proportions to percentages\n\nHint: table(nhanes.samp$Gender) and prop.table(...)\n\n\n3B. Bar plot\nMake a bar plot of Gender using the barplot function."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "href": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 4: Two categorical variables (contingency tables)",
+    "text": "Part 4: Two categorical variables (contingency tables)\nWe can use the table() function to examine the relationships between two categorical variables. Here is an example using Gender and Race1:\n\ntable(nhanes.samp$Gender, nhanes.samp$Race1)   # counts\n\n        \n         Black Hispanic Mexican White Other\n  female     7        8       9    65    13\n  male      16        6      13    57     6\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions\n\n        \n              Black   Hispanic    Mexican      White      Other\n  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098\n  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions\n\n        \n             Black  Hispanic   Mexican     White     Other\n  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105\n  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895\n\n\nUsing row percentages (margin = 1), where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.\nUsing column percentages (margin = 2), where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.\n\n4A. Contingency table (counts)\nChoose either the Diabetes or SmokeNow variable in the data set. Create a contingency table similar to above with Gender and the variable that you choose.\n\n\n4B. Row proportions vs column proportions\n\nCreate a row proportion table (each row sums to 1)\nCreate a column proportion table (each column sums to 1)\n\nHint:\n\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)\n\n\n\n4C. Interpretation\nAnswer each question in 1 to 2 sentences.\n\nProvide 1 or 2 short sentences describing the row percentages.\nProvide 1 or 2 short sentences describing the column percentages.\n\nAnswers: 1. 2."
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "href": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 5: Visual summaries for numeric variables",
+    "text": "Part 5: Visual summaries for numeric variables\n\n5A. Histogram\nMake a histogram of BMI.\nUsing the hist() function, you can add:\n\na title by adding an argument main = \"Histogram of BMI\"\nand a label for the x-axis using xlab = \"BMI\"\nWhen in doubt about arguments to functions, use the ? then the function name to get help. i.e. type in the console ?hist to get help for the hist() function.\n\nIf you get an error due to missing values, use na.omit() or remove NA values before calling hist().\n\n\n5B. Box plot (overall)\nMake a single box plot of Height using boxplot(). Include a title “Box plot of Height” and a label for the y-axis (ylab = \"Height\"). Get help using ?boxplot if you need it.\nNOTE: We saw earlier that Height contained NA values. boxplot() will ignore NA values automatically.\n\n\n5C. Box plot by group\nMake a box plot of Height by Gender.\nIf you look at the first example in the help for the boxplot function ?boxplot, they give an example of a box plot of count by spray using the InsectSprays dataset.\n\nboxplot(count ~ spray, data = InsectSprays, col = \"lightgray\")\n\nFollow their example to make your Height by Gender box plot with the nhanes.samp data.\nWhich group has a higher median height? How can you tell from the figure? Are there any outliers?\nAnswer:"
+  },
+  {
+    "objectID": "homework/HW01/HW01.html#final-check",
+    "href": "homework/HW01/HW01.html#final-check",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Final check",
+    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou uploaded both the .qmd and .html files"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#where-we-are",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#where-we-are",
+    "title": "Probability and Conditional Probability",
+    "section": "Where we are",
+    "text": "Where we are\nOn Monday we worked with:\n\nfrequency tables\nrow and column percentages\ncontingency tables\n\nToday we formalize those ideas using probability notation."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#learning-goals",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#learning-goals",
+    "title": "Probability and Conditional Probability",
+    "section": "Learning goals",
+    "text": "Learning goals\nBy the end of class, you should be able to:\n\nInterpret probabilities using notation\nDistinguish joint, marginal, and conditional probabilities\nCompute conditional probabilities from tables\nUnderstand when events are independent"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-probability",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-probability",
+    "title": "Probability and Conditional Probability",
+    "section": "What is probability?",
+    "text": "What is probability?\nA probability is a number between 0 and 1 that describes how likely an event is.\n\n0 = impossible\n1 = certain\n\nA more technical definition:\n\nprobability of an outcome is the proportion of times the outcome would occur if the random phenomenon could be observed an infinite number of times."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation",
+    "title": "Probability and Conditional Probability",
+    "section": "Probability notation",
+    "text": "Probability notation\n\n\nWe write probabilities using:\n\\[\nP(A)\n\\]\nwhich means: the probability that event \\(A\\) occurs\n\n\nExamples:\n\n\\(P(\\text{Heads})\\)\n\\(P(\\text{Rolling a 6})\\)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation-continued",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation-continued",
+    "title": "Probability and Conditional Probability",
+    "section": "Probability notation (continued)",
+    "text": "Probability notation (continued)\n \nIf an event A occurs m times out of a total of n identical trials, then\n\\[\nP(A) = \\frac{m}{n}\n     = \\frac{\\text{number of times } A \\text{ occurs}}{\\text{number of trials}}\n\\]\nExamples:\n\nFlip a fair coin 10 times and record the proportion of heads.\nRolling a six-sided die lots of times, and recording proportion of times a 6 appears."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#is-the-coin-fair",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#is-the-coin-fair",
+    "title": "Probability and Conditional Probability",
+    "section": "Is the coin fair?",
+    "text": "Is the coin fair?\n\n\n\nWe can think of flipping a coin.\n\nThere are two possible outcomes (heads or tails).\nThe probability of getting heads is 0.5.\n\n\n\n\n\nIf we flip the coin 10 times, it is not certain that we will get 5 heads.\nHowever, if we flip it enough times, we will get heads 50% of the flips.\n\n\n\n\nFun “Seeing Theory” demonstration!"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#law-of-large-numbers-intuition",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#law-of-large-numbers-intuition",
+    "title": "Probability and Conditional Probability",
+    "section": "Law of Large Numbers (intuition)",
+    "text": "Law of Large Numbers (intuition)\n\nImpractical to conduct “infinitely” many trials to determined probabilities\nInstead estimate probabilities using the proportion (of times an event occurs) from “large” samples\n\nLaw of large numbers If we repeat a random experiment many times:\n\nthe long-run proportion of times an event occurs\napproaches the true probability\n\nThis is why we interpret probability as a long-run relative frequency."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#complement-rule",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#complement-rule",
+    "title": "Probability and Conditional Probability",
+    "section": "Complement rule",
+    "text": "Complement rule\nIf \\(A\\) is an event, then:\n\\[\nP(A^c) = 1 - P(A)\n\\]\nExample:\n\nIf \\(P(\\text{Rain}) = 0.3\\)\nthen \\(P(\\text{No rain}) = 0.7\\)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#disjoint-events",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#disjoint-events",
+    "title": "Probability and Conditional Probability",
+    "section": "Disjoint events",
+    "text": "Disjoint events\nTwo events are disjoint if they cannot occur at the same time.\nIf \\(A\\) and \\(B\\) are disjoint:\n\\[\nP(A \\text{ or } B) = P(A) + P(B)\n\\]\n\nAlso use the term mutually exclusive to mean disjoint.\nCan see “or” represented by the \\(\\cup\\) symbol. So \\(P(A \\cup B)\\)."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-rolling-a-die",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-rolling-a-die",
+    "title": "Probability and Conditional Probability",
+    "section": "Example: rolling a die",
+    "text": "Example: rolling a die\nLet:\n\n\\(A\\) = rolling a 1\n\\(B\\) = rolling a 6\n\nThese are disjoint.\n\\[\nP(A \\text{ or } B) = \\frac{1}{6} + \\frac{1}{6} = \\frac{2}{6}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#k-disjoint-outcomes",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#k-disjoint-outcomes",
+    "title": "Probability and Conditional Probability",
+    "section": "\\(k\\) disjoint outcomes",
+    "text": "\\(k\\) disjoint outcomes\nIf there are \\(k\\) disjoint outcomes \\(A_1\\), …, \\(A_k\\), then the probability that either one of these outcomes will occur is \\[P(A_1) + P(A_2) + \\cdots + P(A_k)\\] Example: probability of rolling a 1, 2, 3, 4, 5, or 6.\n\\[\n\\begin{aligned}\nP(1 \\text{ or } 2\\text{ or } 3\\text{ or } 4\\text{ or } 5\\text{ or } 6) &= P(1) + P(2) + P(3) + P(4) + P(5) + P(6) \\\\\n&= \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} \\\\\n&= 1\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#textbooks-die-rolling-example",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#textbooks-die-rolling-example",
+    "title": "Probability and Conditional Probability",
+    "section": "Textbook’s die rolling example",
+    "text": "Textbook’s die rolling example\n\n\nLet:\n\n\\(A\\) = rolling a 1 or 2\n\\(B\\) = rolling a 4 or 6\n\n\n\n\\[\nP(A \\text{ or } B) = P(A) + P(B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{2}{6} = \\frac{2}{3}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#non-disjoint-events",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#non-disjoint-events",
+    "title": "Probability and Conditional Probability",
+    "section": "Non-disjoint events",
+    "text": "Non-disjoint events\n\n\nWhat if events CAN occur at the same time?\n\n\nExample:\n\nDrawing a card that is a diamond\nDrawing a card that is a face card (Jack, Queen, King)\n\n\n\nThese events overlap - a card can be both!"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-addition-rule",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-addition-rule",
+    "title": "Probability and Conditional Probability",
+    "section": "General Addition Rule",
+    "text": "General Addition Rule\n\n\nIf \\(A\\) and \\(B\\) are any two events (disjoint or not):\n\\[\nP(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\n\\]\nWe subtract \\(P(A \\text{ and } B)\\) because those outcomes were counted twice.\n \nThis formula is sometimes written:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-cards",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-cards",
+    "title": "Probability and Conditional Probability",
+    "section": "Example: Cards",
+    "text": "Example: Cards\n\n\\(P(\\text{diamond}) = \\frac{13}{52}\\)\n\\(P(\\text{face card}) = \\frac{12}{52}\\)\n\\(P(\\text{diamond and face card}) = \\frac{3}{52}\\) (J♦, Q♦, K♦)\n\n\\[\n\\begin{aligned}\nP(\\text{diamond or face card}) &= \\frac{13}{52} + \\frac{12}{52} - \\frac{3}{52} \\\\\n&= \\frac{22}{52}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#dice-again",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#dice-again",
+    "title": "Probability and Conditional Probability",
+    "section": "Dice again",
+    "text": "Dice again\n\n\nLet:\n\n\\(A\\) = rolling a 1 or 2\n\\(D\\) = rolling a 2 or 3\n\n\\[\n\\begin{aligned}\nP(\\text{A or D}) &= \\frac{2}{6} + \\frac{2}{6} - \\frac{1}{6} \\\\\n&= \\frac{3}{6} \\\\\n&= \\frac{1}{2}\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-addition-rule-when-events-are-disjoint",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-addition-rule-when-events-are-disjoint",
+    "title": "Probability and Conditional Probability",
+    "section": "General Addition Rule when events are disjoint",
+    "text": "General Addition Rule when events are disjoint\n\n\nGeneral Addition Rule again\n\\[\nP(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\n\\]\nIf events are disjoint, then \\(P(A \\text{ and } B) = 0\\), and we get the same result we saw before for disjoint events.\n\\[\nP(A \\text{ or } B) = P(A) + P(B)\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#connecting-back-to-monday",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#connecting-back-to-monday",
+    "title": "Probability and Conditional Probability",
+    "section": "Connecting back to Monday",
+    "text": "Connecting back to Monday\nRemember the contingency tables from Monday?\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\nTotal\n173\n261\n161\n595\n\n\n\n\n\n\n\n\n\nWe calculated row proportions and column proportions\nToday we’re going to give these formal names using probability notation"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-simpler-example-for-today",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-simpler-example-for-today",
+    "title": "Probability and Conditional Probability",
+    "section": "A simpler example for today",
+    "text": "A simpler example for today\nFor teaching purposes, let’s work with a simpler 2×2 table:\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000\n\n\n\nThis represents 1,000 patients who were tested for a disease."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#joint-probabilities",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#joint-probabilities",
+    "title": "Probability and Conditional Probability",
+    "section": "Joint probabilities",
+    "text": "Joint probabilities\n\n\nJoint probabilities involve two events happening together.\n\n\n\n\nExamples:\n\n\\(P(\\text{Disease and Test +}) = \\textcolor{red}{90} / 1000\\)\n\\(P(\\text{No Disease and Test -}) = \\textcolor{blue}{720} / 1000\\)\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-probabilities",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-probabilities",
+    "title": "Probability and Conditional Probability",
+    "section": "Marginal probabilities",
+    "text": "Marginal probabilities\n\n\nMarginal probabilities ignore the other variable.\n\n\nExamples:\n\n\\(P(\\text{Disease}) = \\textcolor{red}{100} / 1000\\)\n\\(P(\\text{Test +}) = \\textcolor{blue}{270} / 1000\\)\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-vs-joint",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-vs-joint",
+    "title": "Probability and Conditional Probability",
+    "section": "Marginal vs Joint",
+    "text": "Marginal vs Joint\nIt can help to remember when looking at a table that:\n\nJoint probability: intersection of row and column\nMarginal probability: row or column total"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-vs-joint-vs-conditional",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-vs-joint-vs-conditional",
+    "title": "Probability and Conditional Probability",
+    "section": "Marginal vs Joint vs Conditional",
+    "text": "Marginal vs Joint vs Conditional\nFrom the table:\n\nMarginal: \\(P(\\text{Disease}) = 100 / 1000\\) (ignore test results)\nJoint: \\(P(\\text{Disease and Test +}) = 90 / 1000\\) (both happening)\nConditional: \\(P(\\text{Disease} \\mid \\text{Test +}) = ?\\) (we’ll calculate next)\n\nKey difference: Marginal ignores other variables, conditional focuses within a subgroup."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#conditional-probabilities",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#conditional-probabilities",
+    "title": "Probability and Conditional Probability",
+    "section": "Conditional probabilities",
+    "text": "Conditional probabilities\n\n\nConditional probability answers:\nGiven that \\(B\\) occurred, how likely is \\(A\\)?\n\n\nNotation:\n\\[\nP(A \\mid B)\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#definition-of-conditional-probability",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#definition-of-conditional-probability",
+    "title": "Probability and Conditional Probability",
+    "section": "Definition of conditional probability",
+    "text": "Definition of conditional probability\n\\[\nP(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\n\\]\n\n\nThis is just a restricted proportion.\n\nWe’re only looking at cases where \\(B\\) occurred (the denominator)\nThen asking: of those cases, how many also have \\(A\\)?\nWe’ve “restricted” our view to just the \\(B\\) group\n\n\n\n\nExample: \\(P(\\text{Disease} \\mid \\text{Test +})\\)\n\nDenominator: only people who tested positive\nNumerator: of those, how many have disease?\nWe’ve restricted to the “Test+” subgroup"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-from-the-table",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-from-the-table",
+    "title": "Probability and Conditional Probability",
+    "section": "Example from the table",
+    "text": "Example from the table\n\n\nWhat is \\(P(\\text{Disease} \\mid \\text{Test +})\\)?\n\n\n\n\n\\[\n\\begin{aligned}\nP(\\text{Disease} \\mid \\text{Test +}) &= \\frac{P(Disease \\text{ and } Test +)}{P(Test +)} \\\\\n&= \\frac{\\textcolor{red}{90} / 1000}{\\textcolor{blue}{270} / 1000} \\\\\n&= \\frac{\\textcolor{red}{90}}{\\textcolor{blue}{270}} \\\\\n&\\approx 0.333\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000\n\n\n\n\n\n\nInterpretation: Among those who tested positive, about 33% have the disease."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#this-is-what-you-did-monday",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#this-is-what-you-did-monday",
+    "title": "Probability and Conditional Probability",
+    "section": "This is what you did Monday!",
+    "text": "This is what you did Monday!\n\n\nWhen you calculated row proportions:\n\nYou were computing \\(P(\\text{genotype} \\mid \\text{sex})\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n0.30\n0.42\n0.28\n1.00\n\n\nMale\n0.28\n0.46\n0.26\n1.00"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#this-is-what-you-did-monday-1",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#this-is-what-you-did-monday-1",
+    "title": "Probability and Conditional Probability",
+    "section": "This is what you did Monday!",
+    "text": "This is what you did Monday!\n\n\nWhen you calculated column proportions:\n\nYou were computing \\(P(\\text{sex} \\mid \\text{genotype})\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n106\n149\n98\n\n\nMale\n67\n112\n63\n\n\nTotal\n173\n261\n161\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n0.61\n0.57\n0.61\n\n\nMale\n0.39\n0.43\n0.39\n\n\nTotal\n1.00\n1.00\n1.00\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe formula just formalizes what you already know how to do."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-independence",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-independence",
+    "title": "Probability and Conditional Probability",
+    "section": "What is independence?",
+    "text": "What is independence?\n\n\nTwo events are independent if knowing one provides no information about the other.\n\n\nExamples:\n\nFlipping a coin and rolling a die (independent)\nYour height and the weather tomorrow (independent)\nHaving a disease and testing positive (NOT independent!)\nSmoking and lung cancer (NOT independent!)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#checking-for-independence",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#checking-for-independence",
+    "title": "Probability and Conditional Probability",
+    "section": "Checking for independence",
+    "text": "Checking for independence\n\n\nEvents \\(A\\) and \\(B\\) are independent if:\n\\[P(A \\text{ and } B) = P(A) \\times P(B)\\]\nOR equivalently:\n\\[P(A \\mid B) = P(A)\\]\n\n\nWhy are these equivalent? Starting with the conditional probability formula:\n\\[P(A \\mid B) = \\frac{P(A \\cap B)}{P(B)} = \\frac{P(A) \\times P(B)}{P(B)} = P(A)\\]\n\n\nKey idea: “Knowing \\(B\\) doesn’t change the probability of \\(A\\)”"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-independence",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-independence",
+    "title": "Probability and Conditional Probability",
+    "section": "Example: Independence",
+    "text": "Example: Independence\n\n\nRoll two dice. Are the outcomes independent?\n\n\n\n\\(P(\\text{first die} = 1) = \\frac{1}{6}\\)\n\\(P(\\text{second die} = 1) = \\frac{1}{6}\\)\n\\(P(\\text{both} = 1) = \\frac{1}{36}\\)\n\n\n\nCheck: \\(\\frac{1}{6} \\times \\frac{1}{6} = \\frac{1}{36}\\) ✓\n\n\nThe events are independent."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-not-independent",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-not-independent",
+    "title": "Probability and Conditional Probability",
+    "section": "Example: NOT independent",
+    "text": "Example: NOT independent\n\n\nFrom our medical test example:\n\n\\(P(\\text{Disease}) = \\frac{100}{1000} = 0.10\\)\n\\(P(\\text{Disease} \\mid \\text{Test +}) = \\frac{90}{270} \\approx 0.33\\)\n\n\n\nSince \\(0.33 \\neq 0.10\\), the events are NOT independent.\n\n\nTesting positive changes the probability of disease! This is why tests are useful."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-multiplication-rule",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-multiplication-rule",
+    "title": "Probability and Conditional Probability",
+    "section": "General multiplication rule",
+    "text": "General multiplication rule\nThe General multiplication rule\n\n\n\\[\nP(A \\text{ and } B) = P(A \\mid B) \\times P(B)\n\\]\nwhich follows from rearranging the definition of conditional probability:\n\\[\nP(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)} \\rightarrow P(A|B)P(B) = P(A \\text{ and } B)\n\\]\n\n\nThis connects joint and conditional probabilities."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-multiplication-rule",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-multiplication-rule",
+    "title": "Probability and Conditional Probability",
+    "section": "Example: Multiplication rule",
+    "text": "Example: Multiplication rule\n\n\nWhat is the probability of randomly selecting a person who is male AND has hypertension?\n\n\nGiven:\n\n\\(P(\\text{male}) = 0.50\\)\n\\(P(\\text{hypertension} \\mid \\text{male}) = 0.18\\)\n\n\n\n\\[\n\\begin{aligned}\nP(\\text{male and hypertension}) &= P(\\text{hypertension} \\mid \\text{male}) \\times P(\\text{male}) \\\\\n&= 0.18 \\times 0.50 \\\\\n&= 0.09\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#multiplication-rule-for-independent-events",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#multiplication-rule-for-independent-events",
+    "title": "Probability and Conditional Probability",
+    "section": "Multiplication rule for independent events",
+    "text": "Multiplication rule for independent events\n\n\nWhen events are independent, the multiplication rule simplifies:\n\\[\nP(A \\text{ and } B) = P(A) \\times P(B)\n\\]\n\n\nWhy? Because when events are independent, \\(P(A \\mid B) = P(A)\\).\n\n\nExample: Rolling two dice\n\\[\nP(\\text{both are 6}) = \\frac{1}{6} \\times \\frac{1}{6} = \\frac{1}{36}\n\\]"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-medical-testing-scenario",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-medical-testing-scenario",
+    "title": "Probability and Conditional Probability",
+    "section": "A medical testing scenario",
+    "text": "A medical testing scenario\n\n\nGiven information:\n\nPrevalence (disease rate in population) = 1%\nSensitivity (correct positive test result when disease present) = 90%\nSpecificity (correct negative test result when disease absent) = 90%\n\n\n\nQuestion: If someone tests positive, what’s the probability they actually have the disease?\n\n\nThis is asking for: \\(P(\\text{Disease} \\mid \\text{Test +})\\)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#build-a-contingency-table",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#build-a-contingency-table",
+    "title": "Probability and Conditional Probability",
+    "section": "Build a contingency table",
+    "text": "Build a contingency table\n\n\nLet’s think about 10,000 people:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n?\n?\n?\n\n\nTest -\n?\n?\n?\n\n\nTotal\n?\n?\n10,000\n\n\n\n\n\nLet’s fill this in step by step…"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#building-the-table-using-what-we-learned",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#building-the-table-using-what-we-learned",
+    "title": "Probability and Conditional Probability",
+    "section": "Building the table using what we learned",
+    "text": "Building the table using what we learned\n\n\nWe’ll use:\n\nMarginal probabilities (prevalence)\nConditional probabilities (sensitivity, specificity)\n\nMultiplication rule: \\(P(A \\text{ and } B) = P(A \\mid B) \\times P(B)\\)\n\n\n\nThis shows how all the concepts work together!"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-1-how-many-have-the-disease",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-1-how-many-have-the-disease",
+    "title": "Probability and Conditional Probability",
+    "section": "Step 1: How many have the disease?",
+    "text": "Step 1: How many have the disease?\n\n\nPrevalence = 1%, so out of 10,000 people:\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n?\n?\n?\n\n\nTest -\n?\n?\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n1% of 10,000 = 100 people have disease\n99% of 10,000 = 9,900 people don’t have disease"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-2-among-those-with-disease-how-many-test-positive",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-2-among-those-with-disease-how-many-test-positive",
+    "title": "Probability and Conditional Probability",
+    "section": "Step 2: Among those WITH disease, how many test positive?",
+    "text": "Step 2: Among those WITH disease, how many test positive?\n\n\nSensitivity = 90%, so of the 100 with disease:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n?\n?\n\n\nTest -\n10\n?\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n90% of 100 = 90 test positive (true positives)\n\nUsing multiplication rule: \\(P(\\text{Test +} \\mid \\text{Disease}) \\times 100\\)\n\n10% of 100 = 10 test negative (false negatives)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-3-among-those-without-disease-how-many-test-positive",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-3-among-those-without-disease-how-many-test-positive",
+    "title": "Probability and Conditional Probability",
+    "section": "Step 3: Among those WITHOUT disease, how many test positive?",
+    "text": "Step 3: Among those WITHOUT disease, how many test positive?\n\n\nSpecificity = 90% (so 10% test positive when they don’t have disease):\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n?\n\n\nTest -\n10\n8,910\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n10% of 9,900 = 990 test positive (false positives)\n\nUsing multiplication rule: \\(P(\\text{Test +} \\mid \\text{No Disease}) \\times 9,900\\)\n\n90% of 9,900 = 8,910 test negative (true negatives)"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-4-fill-in-the-row-totals",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#step-4-fill-in-the-row-totals",
+    "title": "Probability and Conditional Probability",
+    "section": "Step 4: Fill in the row totals",
+    "text": "Step 4: Fill in the row totals\n\n\nNow we can complete the table:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\nTotal positive tests: 90 + 990 = 1,080\nTotal negative tests: 10 + 8,910 = 8,920"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#calculate-the-ppv",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#calculate-the-ppv",
+    "title": "Probability and Conditional Probability",
+    "section": "Calculate the PPV",
+    "text": "Calculate the PPV\n\n\n\\[\n\\begin{aligned}\nP(\\text{Disease} \\mid \\text{Test +}) &= \\frac{\\textcolor{red}{90}}{\\textcolor{purple}{1,080}} \\\\\n&\\approx 0.083 \\\\\n&= 8.3\\%\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\nOnly about 8% of positive tests indicate disease!"
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#key-takeaway",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#key-takeaway",
+    "title": "Probability and Conditional Probability",
+    "section": "Key takeaway",
+    "text": "Key takeaway\n\n\nEven a good test (90% sensitivity, 90% specificity) can have a low PPV when the condition is rare.\n\n\nWhy?\n\nOnly 100 people have the disease\nBut 990 people test positive incorrectly\nThe false positives outnumber the true positives!\n\n\n\nBase rates matter.\n\n\nNext class: We’ll see how Bayes’ theorem formalizes this calculation."
+  },
+  {
+    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-to-remember",
+    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-to-remember",
+    "title": "Probability and Conditional Probability",
+    "section": "What to remember",
+    "text": "What to remember\n\n\n\nProbability is a long-run relative frequency (between 0 and 1)\nAddition rules: disjoint vs non-disjoint events\nContingency tables show joint and marginal probabilities\nConditional probability: \\(P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\)\n\nThis formalizes the row/column proportions you did Monday!\n\nIndependence: \\(P(A \\mid B) = P(A)\\) (knowing \\(B\\) doesn’t change \\(A\\))\nMultiplication rule: \\(P(A \\text{ and } B) = P(A \\mid B) \\times P(B)\\)\nBase rates matter for interpreting test results\n\n\n\nNext class (after MLK Day): Bayes’ theorem and doing this in R with tidyverse!\n\n\n\nBMSC 620 | Probability"
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
@@ -2022,754 +2337,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#big-picture",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#big-picture",
-    "title": "Probability and Conditional Probability",
-    "section": "Big picture",
-    "text": "Big picture\nOn Monday we worked with:\n\nfrequency tables\nrow and column percentages\ncontingency tables\n\nToday we formalize those ideas using probability notation."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#learning-goals",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#learning-goals",
-    "title": "Probability and Conditional Probability",
-    "section": "Learning goals",
-    "text": "Learning goals\nBy the end of class, you should be able to:\n\ninterpret probabilities using notation\ndistinguish joint, marginal, and conditional probabilities\ncompute conditional probabilities from tables\nunderstand Bayes’ theorem as reversing conditioning"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-probability",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-is-probability",
-    "title": "Probability and Conditional Probability",
-    "section": "What is probability?",
-    "text": "What is probability?\nA probability is a number between 0 and 1 that describes how likely an event is.\n\n0 = impossible\n1 = certain"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#probability-notation",
-    "title": "Probability and Conditional Probability",
-    "section": "Probability notation",
-    "text": "Probability notation\nWe write probabilities using:\n\\[\nP(A)\n\\]\nwhich means:\n\nthe probability that event \\(A\\) occurs\n\nExamples: - \\(P(\\text{Heads})\\) - \\(P(\\text{Rolling a 6})\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#law-of-large-numbers-intuition",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#law-of-large-numbers-intuition",
-    "title": "Probability and Conditional Probability",
-    "section": "Law of Large Numbers (intuition)",
-    "text": "Law of Large Numbers (intuition)\nIf we repeat a random experiment many times:\n\nthe long-run proportion of times an event occurs\napproaches the true probability\n\nThis is why we interpret probability as a long-run relative frequency."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#complement-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#complement-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "Complement rule",
-    "text": "Complement rule\nIf \\(A\\) is an event, then:\n\\[\nP(A^c) = 1 - P(A)\n\\]\nExample: - If \\(P(\\text{Rain}) = 0.3\\) - then \\(P(\\text{No rain}) = 0.7\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#disjoint-events",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#disjoint-events",
-    "title": "Probability and Conditional Probability",
-    "section": "Disjoint events",
-    "text": "Disjoint events\nTwo events are disjoint if they cannot occur at the same time.\nIf \\(A\\) and \\(B\\) are disjoint:\n\\[\nP(A \\text{ or } B) = P(A) + P(B)\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-rolling-a-die",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-rolling-a-die",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: rolling a die",
-    "text": "Example: rolling a die\nLet: - \\(A\\) = rolling a 1 - \\(B\\) = rolling a 6\nThese are disjoint.\n\\[\nP(A \\text{ or } B) = \\frac{1}{6} + \\frac{1}{6} = \\frac{2}{6}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#non-disjoint-events",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#non-disjoint-events",
-    "title": "Probability and Conditional Probability",
-    "section": "Non-disjoint events",
-    "text": "Non-disjoint events\nIf events can overlap:\n\\[\nP(A \\text{ or } B) = P(A) + P(B) - P(A \\cap B)\n\\]\nWe subtract the overlap so we don’t double-count it."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-contingency-table",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#a-contingency-table",
-    "title": "Probability and Conditional Probability",
-    "section": "A contingency table",
-    "text": "A contingency table\nSuppose we have the following table:\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#joint-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#joint-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Joint probabilities",
-    "text": "Joint probabilities\nJoint probabilities involve two events happening together.\nExamples: - \\(P(\\text{Disease and Test +}) = 90 / 1000\\) - \\(P(\\text{No Disease and Test -}) = 720 / 1000\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#marginal-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Marginal probabilities",
-    "text": "Marginal probabilities\nMarginal probabilities ignore the other variable.\nExamples: - \\(P(\\text{Disease}) = 100 / 1000\\) - \\(P(\\text{Test +}) = 270 / 1000\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#conditional-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#conditional-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Conditional probabilities",
-    "text": "Conditional probabilities\nConditional probability answers:\n\nGiven that \\(B\\) occurred, how likely is \\(A\\)?\n\nNotation:\n\\[\nP(A \\mid B)\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#definition-of-conditional-probability",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#definition-of-conditional-probability",
-    "title": "Probability and Conditional Probability",
-    "section": "Definition of conditional probability",
-    "text": "Definition of conditional probability\n\\[\nP(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\n\\]\nThis is just a restricted proportion."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-from-the-table",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#example-from-the-table",
-    "title": "Probability and Conditional Probability",
-    "section": "Example from the table",
-    "text": "Example from the table\nWhat is:\n\\[\nP(\\text{Disease} \\mid \\text{Test +})?\n\\]\n\\[\n= \\frac{90 / 1000}{270 / 1000}\n= \\frac{90}{270}\n= 0.333\n\\]\nInterpretation: &gt; Among those who tested positive, about 33% have the disease."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-multiplication-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#general-multiplication-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "General multiplication rule",
-    "text": "General multiplication rule\nRearranging the definition:\n\\[\nP(A \\cap B) = P(A \\mid B) P(B)\n\\]\nThis connects joint and conditional probabilities."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#why-bayes-matters",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#why-bayes-matters",
-    "title": "Probability and Conditional Probability",
-    "section": "Why Bayes matters",
-    "text": "Why Bayes matters\nOften we know:\n\n\\(P(\\text{Test +} \\mid \\text{Disease})\\)\nbut want:\n\\(P(\\text{Disease} \\mid \\text{Test +})\\)\n\nThese are not the same."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#bayes-theorem-simple-form",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#bayes-theorem-simple-form",
-    "title": "Probability and Conditional Probability",
-    "section": "Bayes’ theorem (simple form)",
-    "text": "Bayes’ theorem (simple form)\n\\[\nP(A \\mid B) =\n\\frac{P(B \\mid A) P(A)}{P(B)}\n\\]\nThink of Bayes as reversing the conditioning."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#interpreting-bayes",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#interpreting-bayes",
-    "title": "Probability and Conditional Probability",
-    "section": "Interpreting Bayes",
-    "text": "Interpreting Bayes\nBayes combines:\n\nhow common the condition is (prevalence)\nhow accurate the test is\nhow often the test is positive overall"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#given-information",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#given-information",
-    "title": "Probability and Conditional Probability",
-    "section": "Given information",
-    "text": "Given information\nSuppose:\n\nPrevalence = 1%\nSensitivity = 90%\nSpecificity = 90%\n\nOut of 10,000 people:"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#build-a-table-with-counts",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#build-a-table-with-counts",
-    "title": "Probability and Conditional Probability",
-    "section": "Build a table with counts",
-    "text": "Build a table with counts\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1080\n\n\nTest -\n10\n8910\n8920\n\n\nTotal\n100\n9900\n10000"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#positive-predictive-value-ppv",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#positive-predictive-value-ppv",
-    "title": "Probability and Conditional Probability",
-    "section": "Positive Predictive Value (PPV)",
-    "text": "Positive Predictive Value (PPV)\n\\[\nP(\\text{Disease} \\mid \\text{Test +})\n= \\frac{90}{1080}\n\\approx 0.083\n\\]\nOnly about 8% of positive tests indicate disease."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#key-takeaway",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#key-takeaway",
-    "title": "Probability and Conditional Probability",
-    "section": "Key takeaway",
-    "text": "Key takeaway\nEven a good test can have a low PPV when the condition is rare.\nBase rates matter."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#tables-as-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#tables-as-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Tables as probabilities",
-    "text": "Tables as probabilities\nIn R:\ntab &lt;- matrix(c(90, 990, 10, 8910), nrow = 2, byrow = TRUE)\nprop.table(tab)\nprop.table(tab, margin = 1)\nprop.table(tab, margin = 2)\nThese correspond to joint, row-conditional, and column-conditional probabilities."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-to-remember",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#what-to-remember",
-    "title": "Probability and Conditional Probability",
-    "section": "What to remember",
-    "text": "What to remember\n\nProbability is long-run relative frequency\nConditional probability = restricted proportion\nTables make probabilities concrete\nBayes reverses conditioning\nBase rates matter\n\n\n\n\nBMSC 620 | Probability"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html",
-    "title": "Where we are",
-    "section": "",
-    "text": "title: “Probability and Conditional Probability” author: “Emile Latour” date: “r library(here); source(here('class_dates.R')); w2d2” date-format: long format: revealjs: theme: “../../assets/css/reveal-bmsc620_v4.scss” slide-number: true show-slide-number: all width: 1955 height: 1100 footer: “BMSC 620 | Probability” html-math-method: mathjax execute: echo: true freeze: auto editor_options: chunk_output_type: console"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#big-picture",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#big-picture",
-    "title": "Probability and Conditional Probability",
-    "section": "Big picture",
-    "text": "Big picture\nOn Monday we worked with:\n\nfrequency tables\nrow and column percentages\ncontingency tables\n\nToday we formalize those ideas using probability notation."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#learning-goals",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#learning-goals",
-    "title": "Probability and Conditional Probability",
-    "section": "Learning goals",
-    "text": "Learning goals\nBy the end of class, you should be able to:\n\nInterpret probabilities using notation\nDistinguish joint, marginal, and conditional probabilities\nCompute conditional probabilities from tables\nUnderstand when events are independent"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-is-probability",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-is-probability",
-    "title": "Probability and Conditional Probability",
-    "section": "What is probability?",
-    "text": "What is probability?\nA probability is a number between 0 and 1 that describes how likely an event is.\n\n0 = impossible\n1 = certain\n\nA more technical definition:\n\nprobability of an outcome is the proportion of times the outcome would occur if the random phenomenon could be observed an infinite number of times."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#probability-notation",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#probability-notation",
-    "title": "Probability and Conditional Probability",
-    "section": "Probability notation",
-    "text": "Probability notation\n\n\nWe write probabilities using:\n\\[\nP(A)\n\\]\nwhich means: the probability that event \\(A\\) occurs\n\n\nExamples:\n\n\\(P(\\text{Heads})\\)\n\\(P(\\text{Rolling a 6})\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#law-of-large-numbers-intuition",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#law-of-large-numbers-intuition",
-    "title": "Probability and Conditional Probability",
-    "section": "Law of Large Numbers (intuition)",
-    "text": "Law of Large Numbers (intuition)\n\nImpractical to conduct “infinitely” many trials to determined probabilities\nInstead estimate probabilities using the proportion (of times an event occurs) from “large” samples\n\nLaw of large numbers If we repeat a random experiment many times:\n\nthe long-run proportion of times an event occurs\napproaches the true probability\n\nThis is why we interpret probability as a long-run relative frequency."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#complement-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#complement-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "Complement rule",
-    "text": "Complement rule\nIf \\(A\\) is an event, then:\n\\[\nP(A^c) = 1 - P(A)\n\\]\nExample:\n\nIf \\(P(\\text{Rain}) = 0.3\\)\nthen \\(P(\\text{No rain}) = 0.7\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#disjoint-events",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#disjoint-events",
-    "title": "Probability and Conditional Probability",
-    "section": "Disjoint events",
-    "text": "Disjoint events\nTwo events are disjoint if they cannot occur at the same time.\nIf \\(A\\) and \\(B\\) are disjoint:\n\\[\nP(A \\text{ or } B) = P(A) + P(B)\n\\]\n\nAlso use the term mutually exclusive to mean disjoint.\nCan see “or” represented by the \\(\\cup\\) symbol. So \\(P(A \\cup B)\\)."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-rolling-a-die",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-rolling-a-die",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: rolling a die",
-    "text": "Example: rolling a die\nLet:\n\n\\(A\\) = rolling a 1\n\\(B\\) = rolling a 6\n\nThese are disjoint.\n\\[\nP(A \\text{ or } B) = \\frac{1}{6} + \\frac{1}{6} = \\frac{2}{6}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#non-disjoint-events",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#non-disjoint-events",
-    "title": "Probability and Conditional Probability",
-    "section": "Non-disjoint events",
-    "text": "Non-disjoint events\n\n\nWhat if events CAN occur at the same time?\n\n\nExample:\n\nDrawing a card that is a diamond\nDrawing a card that is a face card (Jack, Queen, King)\n\n\n\nThese events overlap - a card can be both!"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-contingency-table",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-contingency-table",
-    "title": "Probability and Conditional Probability",
-    "section": "A contingency table",
-    "text": "A contingency table\nSuppose we have the following table:\n          | Disease | No Disease | Total |\n|–|||-| | Test + | 90 | 180 | 270 | | Test - | 10 | 720 | 730 | | Total | 100 | 900 | 1000 |"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#joint-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#joint-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Joint probabilities",
-    "text": "Joint probabilities\n\n\nJoint probabilities involve two events happening together.\n\n\n\n\nExamples:\n\n\\(P(\\text{Disease and Test +}) = \\textcolor{red}{90} / 1000\\)\n\\(P(\\text{No Disease and Test -}) = \\textcolor{blue}{720} / 1000\\)\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#marginal-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#marginal-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Marginal probabilities",
-    "text": "Marginal probabilities\n\n\nMarginal probabilities ignore the other variable.\n\n\nExamples:\n\n\\(P(\\text{Disease}) = \\textcolor{red}{100} / 1000\\)\n\\(P(\\text{Test +}) = \\textcolor{blue}{270} / 1000\\)\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#conditional-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#conditional-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Conditional probabilities",
-    "text": "Conditional probabilities\n\n\nConditional probability answers:\nGiven that \\(B\\) occurred, how likely is \\(A\\)?\n\n\nNotation:\n\\[\nP(A \\mid B)\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#definition-of-conditional-probability",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#definition-of-conditional-probability",
-    "title": "Probability and Conditional Probability",
-    "section": "Definition of conditional probability",
-    "text": "Definition of conditional probability\n\\[\nP(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\n\\]\n\n\nThis is just a restricted proportion.\n\nWe’re only looking at cases where \\(B\\) occurred (the denominator)\nThen asking: of those cases, how many also have \\(A\\)?\nWe’ve “restricted” our view to just the \\(B\\) group\n\n\n\n\nExample: \\(P(\\text{Disease} \\mid \\text{Test +})\\)\n\nDenominator: only people who tested positive\nNumerator: of those, how many have disease?\nWe’ve restricted to the “Test+” subgroup"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-from-the-table",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-from-the-table",
-    "title": "Probability and Conditional Probability",
-    "section": "Example from the table",
-    "text": "Example from the table\n\n\nWhat is \\(P(\\text{Disease} \\mid \\text{Test +})\\)?\n\n\n\n\n\\[\n\\begin{aligned}\nP(\\text{Disease} \\mid \\text{Test +}) &= \\frac{P(Disease \\text{ and } Test +)}{P(Test +)} \\\\\n&= \\frac{\\textcolor{red}{90} / 1000}{\\textcolor{blue}{270} / 1000} \\\\\n&= \\frac{\\textcolor{red}{90}}{\\textcolor{blue}{270}} \\\\\n&\\approx 0.333\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000\n\n\n\n\n\n\nInterpretation: Among those who tested positive, about 33% have the disease."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-multiplication-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-multiplication-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "General multiplication rule",
-    "text": "General multiplication rule\n\n\nRearranging the definition of conditional probability:\n\\[\nP(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\n\\]\n\n\nWe can solve for the joint probability:\n\\[\nP(A \\text{ and } B) = P(A \\mid B) \\times P(B)\n\\]\n\n\nThis connects joint and conditional probabilities."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#why-bayes-matters",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#why-bayes-matters",
-    "title": "Probability and Conditional Probability",
-    "section": "Why Bayes matters",
-    "text": "Why Bayes matters\nOften we know:\n\n\\(P(\\text{Test +} \\mid \\text{Disease})\\)\nbut want:\n\\(P(\\text{Disease} \\mid \\text{Test +})\\)\n\nThese are not the same."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#bayes-theorem-simple-form",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#bayes-theorem-simple-form",
-    "title": "Probability and Conditional Probability",
-    "section": "Bayes’ theorem (simple form)",
-    "text": "Bayes’ theorem (simple form)\n\\[\nP(A \\mid B) =\n\\frac{P(B \\mid A) P(A)}{P(B)}\n\\]\nThink of Bayes as reversing the conditioning."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#interpreting-bayes",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#interpreting-bayes",
-    "title": "Probability and Conditional Probability",
-    "section": "Interpreting Bayes",
-    "text": "Interpreting Bayes\nBayes combines:\n\nhow common the condition is (prevalence)\nhow accurate the test is\nhow often the test is positive overall"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#given-information",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#given-information",
-    "title": "Probability and Conditional Probability",
-    "section": "Given information",
-    "text": "Given information\nSuppose:\n\nPrevalence = 1%\nSensitivity = 90%\nSpecificity = 90%\n\nOut of 10,000 people:"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#build-a-table-with-counts",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#build-a-table-with-counts",
-    "title": "Probability and Conditional Probability",
-    "section": "Build a table with counts",
-    "text": "Build a table with counts\n          | Disease | No Disease | Total |\n|–|||-| | Test + | 90 | 990 | 1080 | | Test - | 10 | 8910 | 8920 | | Total | 100 | 9900 | 10000 |"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#positive-predictive-value-ppv",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#positive-predictive-value-ppv",
-    "title": "Probability and Conditional Probability",
-    "section": "Positive Predictive Value (PPV)",
-    "text": "Positive Predictive Value (PPV)\n\\[\nP(\\text{Disease} \\mid \\text{Test +})\n= \\frac{90}{1080}\n\\approx 0.083\n\\]\nOnly about 8% of positive tests indicate disease."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#key-takeaway",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#key-takeaway",
-    "title": "Probability and Conditional Probability",
-    "section": "Key takeaway",
-    "text": "Key takeaway\n\n\nEven a good test (90% sensitivity, 90% specificity) can have a low PPV when the condition is rare.\n\n\nWhy?\n\nOnly 100 people have the disease\nBut 990 people test positive incorrectly\nThe false positives outnumber the true positives!\n\n\n\nBase rates matter.\n\n\nNext class: We’ll see how Bayes’ theorem formalizes this calculation."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#tables-as-probabilities",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#tables-as-probabilities",
-    "title": "Probability and Conditional Probability",
-    "section": "Tables as probabilities",
-    "text": "Tables as probabilities\nIn R:\ntab &lt;- matrix(c(90, 990, 10, 8910), nrow = 2, byrow = TRUE)\nprop.table(tab)\nprop.table(tab, margin = 1)\nprop.table(tab, margin = 2)\nThese correspond to joint, row-conditional, and column-conditional probabilities."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-to-remember",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-to-remember",
-    "title": "Probability and Conditional Probability",
-    "section": "What to remember",
-    "text": "What to remember\n\n\n\nProbability is a long-run relative frequency (between 0 and 1)\nAddition rules: disjoint vs non-disjoint events\nContingency tables show joint and marginal probabilities\nConditional probability: \\(P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\)\n\nThis formalizes the row/column proportions you did Monday!\n\nIndependence: \\(P(A \\mid B) = P(A)\\) (knowing \\(B\\) doesn’t change \\(A\\))\nMultiplication rule: \\(P(A \\text{ and } B) = P(A \\mid B) \\times P(B)\\)\nBase rates matter for interpreting test results\n\n\n\nNext class (after MLK Day): Bayes’ theorem and doing this in R with tidyverse!\n\n\n\nBMSC 620 | Probability"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html",
-    "title": "R: Working with data using the tidyverse",
-    "section": "",
-    "text": "We are learning a small, reusable “grammar” for working with data:\n\ntidyverse (what it is)\ntibbles (modern data frames)\nsubsetting (keep rows/columns)\npipes (%&gt;%) as “and then”\ncore dplyr verbs: filter(), select(), mutate(), summarize(), group_by()\n\n\n\n\n\nNext class we start ggplot2 + EDA.\nMost plots start with:\n\nkeep the rows you care about (filter())\nkeep the variables you need (select())\ncreate a helper variable (mutate())\nplot (ggplot())"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#goal-for-today-r-portion",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#goal-for-today-r-portion",
-    "title": "R: Working with data using the tidyverse",
-    "section": "",
-    "text": "We are learning a small, reusable “grammar” for working with data:\n\ntidyverse (what it is)\ntibbles (modern data frames)\nsubsetting (keep rows/columns)\npipes (%&gt;%) as “and then”\ncore dplyr verbs: filter(), select(), mutate(), summarize(), group_by()"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#why-this-matters",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#why-this-matters",
-    "title": "R: Working with data using the tidyverse",
-    "section": "",
-    "text": "Next class we start ggplot2 + EDA.\nMost plots start with:\n\nkeep the rows you care about (filter())\nkeep the variables you need (select())\ncreate a helper variable (mutate())\nplot (ggplot())"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-is-the-tidyverse",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-is-the-tidyverse",
-    "title": "R: Working with data using the tidyverse",
-    "section": "What is the tidyverse?",
-    "text": "What is the tidyverse?\nThe tidyverse is a collection of R packages designed to work together:\n\ndplyr: data manipulation\nggplot2: visualization\nreadxl: import Excel files (we’ll use later)\n\nWe are not trying to learn everything in the tidyverse."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#installing-vs-loading-quick-reminder",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#installing-vs-loading-quick-reminder",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Installing vs loading (quick reminder)",
-    "text": "Installing vs loading (quick reminder)\nInstall (once per computer):\n\ninstall.packages(\"tidyverse\")\n\nLoad (every session):\n\nlibrary(tidyverse)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-data-are-we-using-today",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-data-are-we-using-today",
-    "title": "R: Working with data using the tidyverse",
-    "section": "What data are we using today?",
-    "text": "What data are we using today?\nWe’ll use starwars (built into dplyr):\n\ndf\n\n# A tibble: 87 × 14\n   name     height  mass hair_color skin_color eye_color birth_year sex   gender\n   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…\n 2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…\n 3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…\n 4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…\n 5 Leia Or…    150    49 brown      light      brown           19   fema… femin…\n 6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…\n 7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…\n 8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…\n 9 Biggs D…    183    84 black      light      brown           24   male  mascu…\n10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…\n# ℹ 77 more rows\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#data-frames-vs-tibbles",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#data-frames-vs-tibbles",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Data frames vs tibbles",
-    "text": "Data frames vs tibbles\nA data frame is a rectangular table:\n\nrows = observations\ncolumns = variables\n\nA tibble is a modern data frame with nicer printing.\nMost tidyverse functions return tibbles."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#quick-ways-to-inspect-data",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#quick-ways-to-inspect-data",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Quick ways to inspect data",
-    "text": "Quick ways to inspect data\n\nglimpse(df)\n\nRows: 87\nColumns: 14\n$ name       &lt;chr&gt; \"Luke Skywalker\", \"C-3PO\", \"R2-D2\", \"Darth Vader\", \"Leia Or…\n$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…\n$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…\n$ hair_color &lt;chr&gt; \"blond\", NA, NA, \"none\", \"brown\", \"brown, grey\", \"brown\", N…\n$ skin_color &lt;chr&gt; \"fair\", \"gold\", \"white, blue\", \"white\", \"light\", \"light\", \"…\n$ eye_color  &lt;chr&gt; \"blue\", \"yellow\", \"red\", \"yellow\", \"brown\", \"blue\", \"blue\",…\n$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …\n$ sex        &lt;chr&gt; \"male\", \"none\", \"none\", \"male\", \"female\", \"male\", \"female\",…\n$ gender     &lt;chr&gt; \"masculine\", \"masculine\", \"masculine\", \"masculine\", \"femini…\n$ homeworld  &lt;chr&gt; \"Tatooine\", \"Tatooine\", \"Naboo\", \"Tatooine\", \"Alderaan\", \"T…\n$ species    &lt;chr&gt; \"Human\", \"Droid\", \"Droid\", \"Human\", \"Human\", \"Human\", \"Huma…\n$ films      &lt;list&gt; &lt;\"A New Hope\", \"The Empire Strikes Back\", \"Return of the J…\n$ vehicles   &lt;list&gt; &lt;\"Snowspeeder\", \"Imperial Speeder Bike\"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, \"Imp…\n$ starships  &lt;list&gt; &lt;\"X-wing\", \"Imperial shuttle\"&gt;, &lt;&gt;, &lt;&gt;, \"TIE Advanced x1\",…\n\n\nOther useful ones:\n\nnames(df)\nnrow(df)\nncol(df)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#subsetting-in-base-r-rows-cols",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#subsetting-in-base-r-rows-cols",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Subsetting in base R: [rows, cols]",
-    "text": "Subsetting in base R: [rows, cols]\n\ndf[rows, cols]\n\nExamples:\n\ndf[1:5, ]                 # first 5 rows\ndf[, c(\"name\", \"height\")] # two columns"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#logical-subsetting-in-base-r",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#logical-subsetting-in-base-r",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Logical subsetting in base R",
-    "text": "Logical subsetting in base R\nKeep rows where a condition is TRUE:\n\ndf[df$species == \"Human\", ]\n\nRead it out loud:\n“Give me the rows where species equals Human.”"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-same-idea-in-dplyr-filter",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-same-idea-in-dplyr-filter",
-    "title": "R: Working with data using the tidyverse",
-    "section": "The same idea in dplyr: filter()",
-    "text": "The same idea in dplyr: filter()\n\ndf %&gt;%\n  filter(species == \"Human\")\n\n# A tibble: 35 × 14\n   name     height  mass hair_color skin_color eye_color birth_year sex   gender\n   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…\n 2 Darth V…    202   136 none       white      yellow          41.9 male  mascu…\n 3 Leia Or…    150    49 brown      light      brown           19   fema… femin…\n 4 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…\n 5 Beru Wh…    165    75 brown      light      blue            47   fema… femin…\n 6 Biggs D…    183    84 black      light      brown           24   male  mascu…\n 7 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…\n 8 Anakin …    188    84 blond      fair       blue            41.9 male  mascu…\n 9 Wilhuff…    180    NA auburn, g… fair       blue            64   male  mascu…\n10 Han Solo    180    80 brown      fair       brown           29   male  mascu…\n# ℹ 25 more rows\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;\n\n\nSame idea, easier to read once you get used to it."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-pipe-means-and-then",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-pipe-means-and-then",
-    "title": "R: Working with data using the tidyverse",
-    "section": "The pipe %>% means “and then”",
-    "text": "The pipe %&gt;% means “and then”\nPipes help you read code top-to-bottom.\n\ndf %&gt;%\n  filter(species == \"Human\") %&gt;%\n  select(name, height, mass)\n\nYou can always write code without pipes. We use them for readability."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-5-verbs-we-will-use-a-lot",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#the-5-verbs-we-will-use-a-lot",
-    "title": "R: Working with data using the tidyverse",
-    "section": "The 5 verbs we will use a lot",
-    "text": "The 5 verbs we will use a lot\n\nfilter() keep rows\nselect() keep (or drop) columns\nmutate() create new columns\nsummarize() collapse to summaries\ngroup_by() do summaries by groups\n\nIf you learn these five, you can do most things we need in this course."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#filter-keep-rows-that-match-a-condition",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#filter-keep-rows-that-match-a-condition",
-    "title": "R: Working with data using the tidyverse",
-    "section": "filter(): keep rows that match a condition",
-    "text": "filter(): keep rows that match a condition\n\ndf %&gt;%\n  filter(species == \"Human\")\n\n# A tibble: 35 × 14\n   name     height  mass hair_color skin_color eye_color birth_year sex   gender\n   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…\n 2 Darth V…    202   136 none       white      yellow          41.9 male  mascu…\n 3 Leia Or…    150    49 brown      light      brown           19   fema… femin…\n 4 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…\n 5 Beru Wh…    165    75 brown      light      blue            47   fema… femin…\n 6 Biggs D…    183    84 black      light      brown           24   male  mascu…\n 7 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…\n 8 Anakin …    188    84 blond      fair       blue            41.9 male  mascu…\n 9 Wilhuff…    180    NA auburn, g… fair       blue            64   male  mascu…\n10 Han Solo    180    80 brown      fair       brown           29   male  mascu…\n# ℹ 25 more rows\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;\n\n\nMultiple conditions:\n\ndf %&gt;%\n  filter(species == \"Human\", height &gt;= 180)\n\n# A tibble: 17 × 14\n   name     height  mass hair_color skin_color eye_color birth_year sex   gender\n   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n 1 Darth V…    202 136   none       white      yellow          41.9 male  mascu…\n 2 Biggs D…    183  84   black      light      brown           24   male  mascu…\n 3 Obi-Wan…    182  77   auburn, w… fair       blue-gray       57   male  mascu…\n 4 Anakin …    188  84   blond      fair       blue            41.9 male  mascu…\n 5 Wilhuff…    180  NA   auburn, g… fair       blue            64   male  mascu…\n 6 Han Solo    180  80   brown      fair       brown           29   male  mascu…\n 7 Boba Fe…    183  78.2 black      fair       brown           31.5 male  mascu…\n 8 Qui-Gon…    193  89   brown      fair       blue            92   male  mascu…\n 9 Padmé A…    185  45   brown      light      brown           46   fema… femin…\n10 Ric Olié    183  NA   brown      fair       blue            NA   male  mascu…\n11 Quarsh …    183  NA   black      dark       brown           62   male  mascu…\n12 Mace Wi…    188  84   none       dark       brown           72   male  mascu…\n13 Cliegg …    183  NA   brown      fair       blue            82   male  mascu…\n14 Dooku       193  80   white      fair       brown          102   male  mascu…\n15 Bail Pr…    191  NA   black      tan        brown           67   male  mascu…\n16 Jango F…    183  79   black      tan        brown           66   male  mascu…\n17 Raymus …    188  79   brown      light      brown           NA   male  mascu…\n# ℹ 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,\n#   vehicles &lt;list&gt;, starships &lt;list&gt;\n\n\n(, is like “and” inside filter().)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#select-keep-columns-by-name",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#select-keep-columns-by-name",
-    "title": "R: Working with data using the tidyverse",
-    "section": "select(): keep columns by name",
-    "text": "select(): keep columns by name\n\ndf %&gt;%\n  select(name, species, height, mass)\n\n# A tibble: 87 × 4\n   name               species height  mass\n   &lt;chr&gt;              &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;\n 1 Luke Skywalker     Human      172    77\n 2 C-3PO              Droid      167    75\n 3 R2-D2              Droid       96    32\n 4 Darth Vader        Human      202   136\n 5 Leia Organa        Human      150    49\n 6 Owen Lars          Human      178   120\n 7 Beru Whitesun Lars Human      165    75\n 8 R5-D4              Droid       97    32\n 9 Biggs Darklighter  Human      183    84\n10 Obi-Wan Kenobi     Human      182    77\n# ℹ 77 more rows\n\n\nDrop columns with -:\n\ndf %&gt;%\n  select(-films, -vehicles, -starships)\n\n# A tibble: 87 × 11\n   name     height  mass hair_color skin_color eye_color birth_year sex   gender\n   &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; \n 1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…\n 2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…\n 3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…\n 4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…\n 5 Leia Or…    150    49 brown      light      brown           19   fema… femin…\n 6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…\n 7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…\n 8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…\n 9 Biggs D…    183    84 black      light      brown           24   male  mascu…\n10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…\n# ℹ 77 more rows\n# ℹ 2 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#mutate-create-a-new-column",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#mutate-create-a-new-column",
-    "title": "R: Working with data using the tidyverse",
-    "section": "mutate(): create a new column",
-    "text": "mutate(): create a new column\nExample: convert height from cm to meters\n\ndf %&gt;%\n  mutate(height_m = height / 100) %&gt;%\n  select(name, height, height_m)\n\n# A tibble: 87 × 3\n   name               height height_m\n   &lt;chr&gt;               &lt;int&gt;    &lt;dbl&gt;\n 1 Luke Skywalker        172     1.72\n 2 C-3PO                 167     1.67\n 3 R2-D2                  96     0.96\n 4 Darth Vader           202     2.02\n 5 Leia Organa           150     1.5 \n 6 Owen Lars             178     1.78\n 7 Beru Whitesun Lars    165     1.65\n 8 R5-D4                  97     0.97\n 9 Biggs Darklighter     183     1.83\n10 Obi-Wan Kenobi        182     1.82\n# ℹ 77 more rows"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#summarize-reduce-to-a-summary-row",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#summarize-reduce-to-a-summary-row",
-    "title": "R: Working with data using the tidyverse",
-    "section": "summarize(): reduce to a summary row",
-    "text": "summarize(): reduce to a summary row\n\ndf %&gt;%\n  summarize(\n    n = n(),\n    mean_height = mean(height, na.rm = TRUE),\n    mean_mass = mean(mass, na.rm = TRUE)\n  )\n\n# A tibble: 1 × 3\n      n mean_height mean_mass\n  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt;\n1    87        175.      97.3"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#group_by-summarize-summaries-by-group",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#group_by-summarize-summaries-by-group",
-    "title": "R: Working with data using the tidyverse",
-    "section": "group_by() + summarize(): summaries by group",
-    "text": "group_by() + summarize(): summaries by group\n\ndf %&gt;%\n  group_by(species) %&gt;%\n  summarize(\n    n = n(),\n    mean_height = mean(height, na.rm = TRUE),\n    .groups = \"drop\"\n  ) %&gt;%\n  arrange(desc(n))\n\n# A tibble: 38 × 3\n   species      n mean_height\n   &lt;chr&gt;    &lt;int&gt;       &lt;dbl&gt;\n 1 Human       35        178 \n 2 Droid        6        131.\n 3 &lt;NA&gt;         4        175 \n 4 Gungan       3        209.\n 5 Kaminoan     2        221 \n 6 Mirialan     2        168 \n 7 Twi'lek      2        179 \n 8 Wookiee      2        231 \n 9 Zabrak       2        173 \n10 Aleena       1         79 \n# ℹ 28 more rows"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#task-1-humans-only",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#task-1-humans-only",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Task 1: Humans only",
-    "text": "Task 1: Humans only\n\nFilter to humans\n\nKeep only name, height, mass\n\nShow the first 10 rows\n\n\ndf %&gt;%\n  filter(species == \"Human\") %&gt;%\n  select(name, height, mass) %&gt;%\n  slice_head(n = 10)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#task-2-conditional-summaries",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#task-2-conditional-summaries",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Task 2: Conditional summaries",
-    "text": "Task 2: Conditional summaries\nCompute the mean height by sex:\n\ndf %&gt;%\n  group_by(sex) %&gt;%\n  summarize(\n    n = n(),\n    mean_height = mean(height, na.rm = TRUE),\n    .groups = \"drop\"\n  )"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#next-week-ggplot2-eda",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#next-week-ggplot2-eda",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Next week: ggplot2 + EDA",
-    "text": "Next week: ggplot2 + EDA\nWe will use the same pattern:\n\ndf %&gt;%\n  filter(species == \"Human\") %&gt;%\n  ggplot(aes(x = height)) +\n  geom_histogram()\n\nToday was about learning the “data wrangling” steps that come before plotting."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#importing-data-preview-only",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#importing-data-preview-only",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Importing data (preview only)",
-    "text": "Importing data (preview only)\nSoon we will import Excel data:\n\nreadxl::read_excel(\"file.xlsx\")\nUse good file paths (often with here())\n\nWe will do this when we start working with real datasets for homework and in-class examples."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-you-should-remember",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#what-you-should-remember",
-    "title": "R: Working with data using the tidyverse",
-    "section": "What you should remember",
-    "text": "What you should remember\n\ntidyverse = a toolkit (we’ll mainly use dplyr + ggplot2 + readxl)\ntibbles are modern data frames\nfilter() rows, select() columns\n%&gt;% means “and then”\nmutate() create columns\nsummarize() + group_by() for conditional summaries"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#quick-reference",
-    "href": "lessons/06_probability_and_conditional_probability/r_tidyverse_dplyr_basics.html#quick-reference",
-    "title": "R: Working with data using the tidyverse",
-    "section": "Quick reference",
-    "text": "Quick reference\n\ndplyr reference: https://dplyr.tidyverse.org/reference/index.html\nR for Data Science: https://r4ds.hadley.nz/"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#where-we-are",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#where-we-are",
-    "title": "Probability and Conditional Probability",
-    "section": "Where we are",
-    "text": "Where we are\nOn Monday we worked with:\n\nfrequency tables\nrow and column percentages\ncontingency tables\n\nToday we formalize those ideas using probability notation."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#probability-notation-continued",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#probability-notation-continued",
-    "title": "Probability and Conditional Probability",
-    "section": "Probability notation (continued)",
-    "text": "Probability notation (continued)\n \nIf an event A occurs m times out of a total of n identical trials, then\n\\[\nP(A) = \\frac{m}{n}\n     = \\frac{\\text{number of times } A \\text{ occurs}}{\\text{number of trials}}\n\\]\nExamples:\n\nFlip a fair coin 10 times and record the proportion of heads.\nRolling a six-sided die lots of times, and recording proportion of times a 6 appears."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#is-the-coin-fair",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#is-the-coin-fair",
-    "title": "Probability and Conditional Probability",
-    "section": "Is the coin fair?",
-    "text": "Is the coin fair?\n\n\n\nWe can think of flipping a coin.\n\nThere are two possible outcomes (heads or tails).\nThe probability of getting heads is 0.5.\n\n\n\n\n\nIf we flip the coin 10 times, it is not certain that we will get 5 heads.\nHowever, if we flip it enough times, we will get heads 50% of the flips.\n\n\n\n\nFun “Seeing Theory” demonstration!"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#k-disjoint-outcomes",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#k-disjoint-outcomes",
-    "title": "Probability and Conditional Probability",
-    "section": "\\(k\\) disjoint outcomes",
-    "text": "\\(k\\) disjoint outcomes\nIf there are \\(k\\) disjoint outcomes \\(A_1\\), …, \\(A_k\\), then the probability that either one of these outcomes will occur is \\[P(A_1) + P(A_2) + \\cdots + P(A_k)\\] Example: probability of rolling a 1, 2, 3, 4, 5, or 6.\n\\[\n\\begin{aligned}\nP(1 \\text{ or } 2\\text{ or } 3\\text{ or } 4\\text{ or } 5\\text{ or } 6) &= P(1) + P(2) + P(3) + P(4) + P(5) + P(6) \\\\\n&= \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} \\\\\n&= 1\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-addition-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-addition-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "General Addition Rule",
-    "text": "General Addition Rule\n\n\nIf \\(A\\) and \\(B\\) are any two events (disjoint or not):\n\\[\nP(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\n\\]\nWe subtract \\(P(A \\text{ and } B)\\) because those outcomes were counted twice.\n \nThis formula is sometimes written:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-cards",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-cards",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: Cards",
-    "text": "Example: Cards\n\n\\(P(\\text{diamond}) = \\frac{13}{52}\\)\n\\(P(\\text{face card}) = \\frac{12}{52}\\)\n\\(P(\\text{diamond and face card}) = \\frac{3}{52}\\) (J♦, Q♦, K♦)\n\n\\[\n\\begin{aligned}\nP(\\text{diamond or face card}) &= \\frac{13}{52} + \\frac{12}{52} - \\frac{3}{52} \\\\\n&= \\frac{22}{52}\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#dice-again",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#dice-again",
-    "title": "Probability and Conditional Probability",
-    "section": "Dice again",
-    "text": "Dice again\n\n\nLet:\n\n\\(A\\) = rolling a 1 or 2\n\\(D\\) = rolling a 2 or 3\n\n\\[\n\\begin{aligned}\nP(\\text{A or D}) &= \\frac{2}{6} + \\frac{2}{6} - \\frac{1}{6} \\\\\n&= \\frac{3}{6} \\\\\n&= \\frac{1}{2}\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-addition-rule-when-events-are-disjoint",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-addition-rule-when-events-are-disjoint",
-    "title": "Probability and Conditional Probability",
-    "section": "General Addition Rule when events are disjoint",
-    "text": "General Addition Rule when events are disjoint\n\n\nGeneral Addition Rule again\n\\[\nP(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\n\\]\nIf events are disjoint, then \\(P(A \\text{ and } B) = 0\\), and we get the same result we saw before for disjoint events.\n\\[\nP(A \\text{ or } B) = P(A) + P(B)\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#textbooks-die-rolling-example",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#textbooks-die-rolling-example",
-    "title": "Probability and Conditional Probability",
-    "section": "Textbook’s die rolling example",
-    "text": "Textbook’s die rolling example\n\n\nLet:\n\n\\(A\\) = rolling a 1 or 2\n\\(B\\) = rolling a 4 or 6\n\n\n\n\\[\nP(A \\text{ or } B) = P(A) + P(B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{2}{6} = \\frac{2}{3}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#textbooks-die-rolling-example-1",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#textbooks-die-rolling-example-1",
-    "title": "Probability and Conditional Probability",
-    "section": "Textbook’s die rolling example",
-    "text": "Textbook’s die rolling example\nLet:\n\n\\(A\\) = rolling a 1 or 2\n\\(B\\) = rolling a 4 or 6\n\n\\[\nP(A \\text{ or } B) = P(A) + P(B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{2}{6} = \\frac{2}{3}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#connecting-back-to-monday",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#connecting-back-to-monday",
-    "title": "Probability and Conditional Probability",
-    "section": "Connecting back to Monday",
-    "text": "Connecting back to Monday\nRemember the contingency tables from Monday?\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\nTotal\n173\n261\n161\n595\n\n\n\n\n\n\n\n\n\nWe calculated row proportions and column proportions\nToday we’re going to give these formal names using probability notation"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-simpler-example-for-today",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-simpler-example-for-today",
-    "title": "Probability and Conditional Probability",
-    "section": "A simpler example for today",
-    "text": "A simpler example for today\nFor teaching purposes, let’s work with a simpler 2×2 table:\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1000\n\n\n\nThis represents 1,000 patients who were tested for a disease."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday",
-    "title": "Probability and Conditional Probability",
-    "section": "This is what you did Monday!",
-    "text": "This is what you did Monday!\n\n\nWhen you calculated row proportions:\n\nYou were computing \\(P(\\text{genotype} \\mid \\text{sex})\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n0.30\n0.42\n0.28\n1.00\n\n\nMale\n0.28\n0.46\n0.26\n1.00"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-1",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-1",
-    "title": "Probability and Conditional Probability",
-    "section": "This is what you did Monday!",
-    "text": "This is what you did Monday!\n\n\nWhen you calculated column proportions:\n\nYou were computing \\(P(\\text{sex} \\mid \\text{genotype})\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n106\n149\n98\n\n\nMale\n67\n112\n63\n\n\nTotal\n173\n261\n161\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n0.61\n0.57\n0.61\n\n\nMale\n0.39\n0.43\n0.39\n\n\nTotal\n1.00\n1.00\n1.00\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe formula just formalizes what you already know how to do."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-2",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-2",
-    "title": "Probability and Conditional Probability",
-    "section": "This is what you did Monday!",
-    "text": "This is what you did Monday!\nWhen you calculated row proportions:\n\nYou were computing \\(P(\\text{genotype} \\mid \\text{sex})\\)\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n106\n149\n98\n353\n\n\nMale\n67\n112\n63\n242\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\nTotal\n\n\n\n\nFemale\n0.30\n0.42\n0.28\n1.00\n\n\nMale\n0.28\n0.46\n0.26\n1.00"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-3",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#this-is-what-you-did-monday-3",
-    "title": "Probability and Conditional Probability",
-    "section": "This is what you did Monday!",
-    "text": "This is what you did Monday!\nWhen you calculated column proportions:\n\nYou were computing \\(P(\\text{sex} \\mid \\text{genotype})\\)\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n106\n149\n98\n\n\nMale\n67\n112\n63\n\n\nTotal\n173\n261\n161\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nsex/actn3.r577x\nCC\nCT\nTT\n\n\n\n\nFemale\n0.61\n0.57\n0.61\n\n\nMale\n0.39\n0.43\n0.39\n\n\nTotal\n1.00\n1.00\n1.00\n\n\n\n\n\n\n\n\n\n\n\nThe formula just formalizes what you already know how to do!"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-is-independence",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#what-is-independence",
-    "title": "Probability and Conditional Probability",
-    "section": "What is independence?",
-    "text": "What is independence?\n\n\nTwo events are independent if knowing one provides no information about the other.\n\n\nExamples:\n\nFlipping a coin and rolling a die (independent)\nYour height and the weather tomorrow (independent)\nHaving a disease and testing positive (NOT independent!)\nSmoking and lung cancer (NOT independent!)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#checking-for-independence",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#checking-for-independence",
-    "title": "Probability and Conditional Probability",
-    "section": "Checking for independence",
-    "text": "Checking for independence\n\n\nEvents \\(A\\) and \\(B\\) are independent if:\n\\[P(A \\text{ and } B) = P(A) \\times P(B)\\]\nOR equivalently:\n\\[P(A \\mid B) = P(A)\\]\n\n\nKey idea: “Knowing \\(B\\) doesn’t change the probability of \\(A\\)”"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-independence",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-independence",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: Independence",
-    "text": "Example: Independence\n\n\nRoll two dice. Are the outcomes independent?\n\n\n\n\\(P(\\text{first die} = 1) = \\frac{1}{6}\\)\n\\(P(\\text{second die} = 1) = \\frac{1}{6}\\)\n\\(P(\\text{both} = 1) = \\frac{1}{36}\\)\n\n\n\nCheck: \\(\\frac{1}{6} \\times \\frac{1}{6} = \\frac{1}{36}\\) ✓\n\n\nThe events are independent."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-not-independent",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-not-independent",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: NOT independent",
-    "text": "Example: NOT independent\n\n\nFrom our medical test example:\n\n\\(P(\\text{Disease}) = \\frac{100}{1000} = 0.10\\)\n\\(P(\\text{Disease} \\mid \\text{Test +}) = \\frac{90}{270} \\approx 0.33\\)\n\n\n\nSince \\(0.33 \\neq 0.10\\), the events are NOT independent.\n\n\nTesting positive changes the probability of disease! This is why tests are useful."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-multiplication-rule",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#example-multiplication-rule",
-    "title": "Probability and Conditional Probability",
-    "section": "Example: Multiplication rule",
-    "text": "Example: Multiplication rule\n\n\nWhat is the probability of randomly selecting a person who is male AND has hypertension?\n\n\nGiven:\n\n\\(P(\\text{male}) = 0.50\\)\n\\(P(\\text{hypertension} \\mid \\text{male}) = 0.18\\)\n\n\n\n\\[\n\\begin{aligned}\nP(\\text{male and hypertension}) &= P(\\text{hypertension} \\mid \\text{male}) \\times P(\\text{male}) \\\\\n&= 0.18 \\times 0.50 \\\\\n&= 0.09\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#multiplication-rule-for-independent-events",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#multiplication-rule-for-independent-events",
-    "title": "Probability and Conditional Probability",
-    "section": "Multiplication rule for independent events",
-    "text": "Multiplication rule for independent events\n\n\nWhen events are independent, the multiplication rule simplifies:\n\\[\nP(A \\text{ and } B) = P(A) \\times P(B)\n\\]\n\n\nWhy? Because when events are independent, \\(P(A \\mid B) = P(A)\\).\n\n\nExample: Rolling two dice\n\\[\nP(\\text{both are 6}) = \\frac{1}{6} \\times \\frac{1}{6} = \\frac{1}{36}\n\\]"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-multiplication-rule-1",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#general-multiplication-rule-1",
-    "title": "Probability and Conditional Probability",
-    "section": "General multiplication rule",
-    "text": "General multiplication rule\nRearranging the definition:\n\\[\nP(A \\cap B) = P(A \\mid B) P(B)\n\\]\nThis connects joint and conditional probabilities."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-medical-testing-scenario",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#a-medical-testing-scenario",
-    "title": "Probability and Conditional Probability",
-    "section": "A medical testing scenario",
-    "text": "A medical testing scenario\n\n\nGiven information:\n\nPrevalence (disease rate in population) = 1%\nSensitivity (correct positive test when disease present) = 90%\nSpecificity (correct negative test when disease absent) = 90%\n\n\n\nQuestion: If someone tests positive, what’s the probability they actually have the disease?\n\n\nThis is asking for: \\(P(\\text{Disease} \\mid \\text{Test +})\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#build-a-contingency-table",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#build-a-contingency-table",
-    "title": "Probability and Conditional Probability",
-    "section": "Build a contingency table",
-    "text": "Build a contingency table\n\n\nLet’s think about 10,000 people:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n?\n?\n?\n\n\nTest -\n?\n?\n?\n\n\nTotal\n?\n?\n10,000\n\n\n\n\n\nLet’s fill this in step by step…"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-1-how-many-have-the-disease",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-1-how-many-have-the-disease",
-    "title": "Probability and Conditional Probability",
-    "section": "Step 1: How many have the disease?",
-    "text": "Step 1: How many have the disease?\n\n\nPrevalence = 1%, so out of 10,000 people:\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n?\n?\n?\n\n\nTest -\n?\n?\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n1% of 10,000 = 100 people have disease\n\n\\(P(Disease) \\times 10,000\\)\n\n99% of 10,000 = 9,900 people don’t have disease\n\n\\([1 - P(Disease)] \\times 10,000\\)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-2-among-those-with-disease-how-many-test-positive",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-2-among-those-with-disease-how-many-test-positive",
-    "title": "Probability and Conditional Probability",
-    "section": "Step 2: Among those WITH disease, how many test positive?",
-    "text": "Step 2: Among those WITH disease, how many test positive?\n\n\nSensitivity = 90%, so of the 100 with disease:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n?\n?\n\n\nTest -\n10\n?\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n90% of 100 = 90 test positive (true positives)\n\nUsing multiplication rule: \\(P(\\text{Test +} \\mid \\text{Disease}) \\times 100\\)\n\n10% of 100 = 10 test negative (false negatives)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-3-among-those-without-disease-how-many-test-positive",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-3-among-those-without-disease-how-many-test-positive",
-    "title": "Probability and Conditional Probability",
-    "section": "Step 3: Among those WITHOUT disease, how many test positive?",
-    "text": "Step 3: Among those WITHOUT disease, how many test positive?\n\n\nSpecificity = 90% (so 10% test positive when they don’t have disease):\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n?\n\n\nTest -\n10\n8,910\n?\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\n10% of 9,900 = 990 test positive (false positives)\n\nUsing multiplication rule: \\(P(\\text{Test +} \\mid \\text{No Disease}) \\times 9,900\\)\n\n90% of 9,900 = 8,910 test negative (true negatives)"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-4-fill-in-the-row-totals",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#step-4-fill-in-the-row-totals",
-    "title": "Probability and Conditional Probability",
-    "section": "Step 4: Fill in the row totals",
-    "text": "Step 4: Fill in the row totals\n\n\nNow we can complete the table:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\nTotal positive tests: 90 + 990 = 1,080\nTotal negative tests: 10 + 8,910 = 8,920"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#calculate-the-ppv",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#calculate-the-ppv",
-    "title": "Probability and Conditional Probability",
-    "section": "Calculate the PPV",
-    "text": "Calculate the PPV\n\n\n\\[\n\\begin{aligned}\nP(\\text{Disease} \\mid \\text{Test +}) &= \\frac{\\textcolor{red}{90}}{\\textcolor{purple}{1,080}} \\\\\n&\\approx 0.083 \\\\\n&= 8.3\\%\n\\end{aligned}\n\\]\n\n\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\nOnly about 8% of positive tests indicate disease!"
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#key-takeaway-1",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#key-takeaway-1",
-    "title": "Probability and Conditional Probability",
-    "section": "Key takeaway",
-    "text": "Key takeaway\nEven a good test can have a low PPV when the condition is rare.\nBase rates matter."
-  },
-  {
-    "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#building-the-table-using-what-we-learned",
-    "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability_EJL.html#building-the-table-using-what-we-learned",
-    "title": "Probability and Conditional Probability",
-    "section": "Building the table using what we learned",
-    "text": "Building the table using what we learned\n\n\nWe’ll use:\n\nMarginal probabilities (prevalence)\nConditional probabilities (sensitivity, specificity)\n\nMultiplication rule: \\(P(A \\text{ and } B) = P(A \\mid B) \\times P(B)\\)\n\n\n\nThis shows how all the concepts work together!"
   }
 ]

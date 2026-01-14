@@ -10,7 +10,8 @@
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <meta name="author" content="Emile Latour">
+  <meta name="author" content="Emile Latour, Nicky Wakim, Meike Niederhausen">
+  <meta name="dcterms.date" content="2026-01-12">
   <title>BMSC 620: Introduction to Biostatistics – Probability and Conditional Probability</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,71 +30,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -385,6 +321,44 @@
       margin-right: 0; 
     }
   </style>
+  <style>
+  #wrap {
+    width: 1650px;
+    height: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #999;
+    border-radius: 8px;
+  }
+  #frame {
+    width: 1650px;
+    height: 900px;
+    border: 0;
+    zoom: 1.25;
+    -moz-transform: scale(1.25);
+    -moz-transform-origin: 0 0;
+  }
+  /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+  .reveal .tbl-big {
+    font-size: 28px !important;
+    /* center the output block inside the column */
+    display: flex;
+    justify-content: center;
+
+    /* scale from center */
+    transform: scale(1.6);
+    transform-origin: top center;
+  }
+  .reveal .tbl-big table,
+  .reveal .tbl-big .flextable,
+  .reveal .tbl-big .flextable table {
+    font-size: 28px !important;
+  }
+  .reveal .tbl-big td,
+  .reveal .tbl-big th {
+    padding: 6px 10px !important;
+  }
+  </style>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -396,20 +370,15 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Emile Latour 
+Emile Latour, Nicky Wakim, Meike Niederhausen 
 </div>
 </div>
 </div>
 
-  <p class="date">Invalid Date</p>
+  <p class="date">January 12, 2026</p>
 </section>
-<section>
-<section id="where-we-are" class="title-slide slide level1 center">
-<h1>Where we are</h1>
-
-</section>
-<section id="big-picture" class="slide level2">
-<h2>Big picture</h2>
+<section id="where-we-are" class="slide level2">
+<h2>Where we are</h2>
 <p>On Monday we worked with:</p>
 <ul>
 <li>frequency tables</li>
@@ -422,12 +391,12 @@ Emile Latour
 <h2>Learning goals</h2>
 <p>By the end of class, you should be able to:</p>
 <ul>
-<li>interpret probabilities using notation</li>
-<li>distinguish joint, marginal, and conditional probabilities</li>
-<li>compute conditional probabilities from tables</li>
-<li>understand Bayes’ theorem as <em>reversing conditioning</em></li>
+<li>Interpret probabilities using notation</li>
+<li>Distinguish joint, marginal, and conditional probabilities</li>
+<li>Compute conditional probabilities from tables</li>
+<li>Understand when events are independent</li>
 </ul>
-</section></section>
+</section>
 <section>
 <section id="probability-basics" class="title-slide slide level1 center">
 <h1>Probability basics</h1>
@@ -435,27 +404,77 @@ Emile Latour
 </section>
 <section id="what-is-probability" class="slide level2">
 <h2>What is probability?</h2>
-<p>A <strong>probability</strong> is a number between 0 and 1 that describes how likely an event is.</p>
+<p>A <strong>probability</strong> is a number between 0 and 1 that describes <strong>how likely an event is</strong>.</p>
 <ul>
 <li>0 = impossible</li>
 <li>1 = certain</li>
 </ul>
+<p>A more technical definition:</p>
+<blockquote>
+<p>probability of an outcome is the proportion of times the outcome would occur if the random phenomenon could be observed an infinite number of times.</p>
+</blockquote>
 </section>
 <section id="probability-notation" class="slide level2">
 <h2>Probability notation</h2>
+<p><br>
+</p>
 <p>We write probabilities using:</p>
 <p><span class="math display">\[
 P(A)
 \]</span></p>
-<p>which means:</p>
-<blockquote>
-<p>the probability that event <span class="math inline">\(A\)</span> occurs</p>
-</blockquote>
-<p>Examples: - <span class="math inline">\(P(\text{Heads})\)</span> - <span class="math inline">\(P(\text{Rolling a 6})\)</span></p>
+<p>which means: <strong>the probability that event <span class="math inline">\(A\)</span> occurs</strong></p>
+<p><br>
+</p>
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(P(\text{Heads})\)</span></li>
+<li><span class="math inline">\(P(\text{Rolling a 6})\)</span></li>
+</ul>
+</section>
+<section id="probability-notation-continued" class="slide level2">
+<h2>Probability notation (continued)</h2>
+<p>&nbsp;</p>
+<p>If an event <em>A</em> occurs <em>m</em> times out of a total of <em>n</em> identical trials, then</p>
+<p><span class="math display">\[
+P(A) = \frac{m}{n}
+     = \frac{\text{number of times } A \text{ occurs}}{\text{number of trials}}
+\]</span></p>
+<p>Examples:</p>
+<ul>
+<li>Flip a fair coin 10 times and record the proportion of heads.</li>
+<li>Rolling a six-sided die lots of times, and recording proportion of times a 6 appears.</li>
+</ul>
+</section>
+<section id="is-the-coin-fair" class="slide level2">
+<h2>Is the coin fair?</h2>
+<p><br>
+</p>
+<ul>
+<li>We can think of flipping a coin.
+<ul>
+<li>There are two possible outcomes (heads or tails).</li>
+<li>The probability of getting heads is 0.5.</li>
+</ul></li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>If we flip the coin 10 times, it is not certain that we will get 5 heads.</li>
+<li>However, if we flip it <strong>enough</strong> times, we will get heads 50% of the flips.</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><a href="https://seeing-theory.brown.edu/basic-probability/index.html">Fun “Seeing Theory” demonstration!</a></li>
+</ul>
 </section>
 <section id="law-of-large-numbers-intuition" class="slide level2">
 <h2>Law of Large Numbers (intuition)</h2>
-<p>If we repeat a random experiment many times:</p>
+<ul>
+<li>Impractical to conduct “infinitely” many trials to determined probabilities</li>
+<li>Instead estimate probabilities using the proportion (of times an event occurs) from “large” samples</li>
+</ul>
+<p><strong>Law of large numbers</strong> If we repeat a random experiment many times:</p>
 <ul>
 <li>the long-run proportion of times an event occurs</li>
 <li>approaches the true probability</li>
@@ -468,11 +487,15 @@ P(A)
 <p><span class="math display">\[
 P(A^c) = 1 - P(A)
 \]</span></p>
-<p>Example: - If <span class="math inline">\(P(\text{Rain}) = 0.3\)</span> - then <span class="math inline">\(P(\text{No rain}) = 0.7\)</span></p>
+<p>Example:</p>
+<ul>
+<li>If <span class="math inline">\(P(\text{Rain}) = 0.3\)</span></li>
+<li>then <span class="math inline">\(P(\text{No rain}) = 0.7\)</span></li>
+</ul>
 </section></section>
 <section>
-<section id="addition-rules" class="title-slide slide level1 center">
-<h1>Addition rules</h1>
+<section id="addition-rules-working-with-probability" class="title-slide slide level1 center">
+<h1>Addition rules (working with probability)</h1>
 
 </section>
 <section id="disjoint-events" class="slide level2">
@@ -482,78 +505,788 @@ P(A^c) = 1 - P(A)
 <p><span class="math display">\[
 P(A \text{ or } B) = P(A) + P(B)
 \]</span></p>
+<ul>
+<li>Also use the term <strong>mutually exclusive</strong> to mean disjoint.</li>
+<li>Can see “or” represented by the <span class="math inline">\(\cup\)</span> symbol. So <span class="math inline">\(P(A \cup B)\)</span>.</li>
+</ul>
 </section>
 <section id="example-rolling-a-die" class="slide level2">
 <h2>Example: rolling a die</h2>
-<p>Let: - <span class="math inline">\(A\)</span> = rolling a 1 - <span class="math inline">\(B\)</span> = rolling a 6</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = rolling a 1</li>
+<li><span class="math inline">\(B\)</span> = rolling a 6</li>
+</ul>
 <p>These are disjoint.</p>
 <p><span class="math display">\[
 P(A \text{ or } B) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6}
 \]</span></p>
 </section>
+<section id="k-disjoint-outcomes" class="slide level2">
+<h2><span class="math inline">\(k\)</span> disjoint outcomes</h2>
+<p>If there are <span class="math inline">\(k\)</span> disjoint outcomes <span class="math inline">\(A_1\)</span>, …, <span class="math inline">\(A_k\)</span>, then the probability that either one of these outcomes will occur is <span class="math display">\[P(A_1) + P(A_2) + \cdots + P(A_k)\]</span> Example: probability of rolling a 1, 2, 3, 4, 5, or 6.</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(1 \text{ or } 2\text{ or } 3\text{ or } 4\text{ or } 5\text{ or } 6) &amp;= P(1) + P(2) + P(3) + P(4) + P(5) + P(6) \\
+&amp;= \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} \\
+&amp;= 1
+\end{aligned}
+\]</span></p>
+</section>
+<section id="textbooks-die-rolling-example" class="slide level2">
+<h2>Textbook’s die rolling example</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = rolling a 1 or 2</li>
+<li><span class="math inline">\(B\)</span> = rolling a 4 or 6</li>
+</ul>
+<p><br>
+</p>
+<p><span class="math display">\[
+P(A \text{ or } B) = P(A) + P(B) = \frac{2}{6} + \frac{2}{6} = \frac{2}{6} = \frac{2}{3}
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../../img_slides/disjointEvents.png"></p>
+</div></div>
+</section>
 <section id="non-disjoint-events" class="slide level2">
 <h2>Non-disjoint events</h2>
-<p>If events can overlap:</p>
+<p><br>
+</p>
+<p>What if events CAN occur at the same time?</p>
+<p><br>
+</p>
+<p>Example:</p>
+<ul>
+<li>Drawing a card that is a <strong>diamond</strong></li>
+<li>Drawing a card that is a <strong>face card</strong> (Jack, Queen, King)</li>
+</ul>
+<p><br>
+</p>
+<p>These events <strong>overlap</strong> - a card can be both!</p>
+</section>
+<section id="general-addition-rule" class="slide level2">
+<h2>General Addition Rule</h2>
+<p><br>
+</p>
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are any two events (disjoint or not):</p>
 <p><span class="math display">\[
-P(A \text{ or } B) = P(A) + P(B) - P(A \cap B)
+P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)
 \]</span></p>
-<p>We subtract the overlap so we don’t double-count it.</p>
+<p>We subtract <span class="math inline">\(P(A \text{ and } B)\)</span> because those outcomes were counted twice.</p>
+<p>&nbsp;</p>
+<p>This formula is sometimes written:</p>
+<p><span class="math display">\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]</span></p>
+</section>
+<section id="example-cards" class="slide level2">
+<h2>Example: Cards</h2>
+<ul>
+<li><span class="math inline">\(P(\text{diamond}) = \frac{13}{52}\)</span></li>
+<li><span class="math inline">\(P(\text{face card}) = \frac{12}{52}\)</span></li>
+<li><span class="math inline">\(P(\text{diamond and face card}) = \frac{3}{52}\)</span> (J♦, Q♦, K♦)</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{diamond or face card}) &amp;= \frac{13}{52} + \frac{12}{52} - \frac{3}{52} \\
+&amp;= \frac{22}{52}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="dice-again" class="slide level2">
+<h2>Dice again</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> = rolling a 1 or 2</li>
+<li><span class="math inline">\(D\)</span> = rolling a 2 or 3</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{A or D}) &amp;= \frac{2}{6} + \frac{2}{6} - \frac{1}{6} \\
+&amp;= \frac{3}{6} \\
+&amp;= \frac{1}{2}
+\end{aligned}
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="../../img_slides/disjointEvents.png"></p>
+</div></div>
+</section>
+<section id="general-addition-rule-when-events-are-disjoint" class="slide level2">
+<h2>General Addition Rule when events are disjoint</h2>
+<p><br>
+</p>
+<p>General Addition Rule again</p>
+<p><span class="math display">\[
+P(A \text{ or } B) = P(A) + P(B) - P(A \text{ and } B)
+\]</span></p>
+<p>If <strong>events are disjoint</strong>, then <span class="math inline">\(P(A \text{ and } B) = 0\)</span>, and we get the same result we saw before for disjoint events.</p>
+<p><span class="math display">\[
+P(A \text{ or } B) = P(A) + P(B)
+\]</span></p>
+</section>
+<section id="connecting-back-to-monday" class="slide level2">
+<h2>Connecting back to Monday</h2>
+<p>Remember the contingency tables from Monday?</p>
+<div class="tbl-big">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tppkcyvbpg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tppkcyvbpg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tppkcyvbpg thead, #tppkcyvbpg tbody, #tppkcyvbpg tfoot, #tppkcyvbpg tr, #tppkcyvbpg td, #tppkcyvbpg th {
+  border-style: none;
+}
+
+#tppkcyvbpg p {
+  margin: 0;
+  padding: 0;
+}
+
+#tppkcyvbpg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tppkcyvbpg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tppkcyvbpg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tppkcyvbpg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tppkcyvbpg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tppkcyvbpg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tppkcyvbpg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tppkcyvbpg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tppkcyvbpg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tppkcyvbpg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tppkcyvbpg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tppkcyvbpg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tppkcyvbpg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tppkcyvbpg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tppkcyvbpg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tppkcyvbpg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tppkcyvbpg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tppkcyvbpg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tppkcyvbpg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tppkcyvbpg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tppkcyvbpg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tppkcyvbpg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tppkcyvbpg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tppkcyvbpg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tppkcyvbpg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tppkcyvbpg .gt_left {
+  text-align: left;
+}
+
+#tppkcyvbpg .gt_center {
+  text-align: center;
+}
+
+#tppkcyvbpg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tppkcyvbpg .gt_font_normal {
+  font-weight: normal;
+}
+
+#tppkcyvbpg .gt_font_bold {
+  font-weight: bold;
+}
+
+#tppkcyvbpg .gt_font_italic {
+  font-style: italic;
+}
+
+#tppkcyvbpg .gt_super {
+  font-size: 65%;
+}
+
+#tppkcyvbpg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tppkcyvbpg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tppkcyvbpg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tppkcyvbpg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tppkcyvbpg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tppkcyvbpg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tppkcyvbpg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tppkcyvbpg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tppkcyvbpg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="sex/actn3.r577x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">sex/actn3.r577x</th>
+<th id="CC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CC</th>
+<th id="CT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CT</th>
+<th id="TT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TT</th>
+<th id="Total" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Female</td>
+<td class="gt_row gt_right" headers="CC">106</td>
+<td class="gt_row gt_right" headers="CT">149</td>
+<td class="gt_row gt_right" headers="TT">98</td>
+<td class="gt_row gt_right" headers="Total">353</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Male</td>
+<td class="gt_row gt_right" headers="CC">67</td>
+<td class="gt_row gt_right" headers="CT">112</td>
+<td class="gt_row gt_right" headers="TT">63</td>
+<td class="gt_row gt_right" headers="Total">242</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Total</td>
+<td class="gt_row gt_right" headers="CC">173</td>
+<td class="gt_row gt_right" headers="CT">261</td>
+<td class="gt_row gt_right" headers="TT">161</td>
+<td class="gt_row gt_right" headers="Total">595</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>We calculated <strong>row proportions</strong> and <strong>column proportions</strong></li>
+<li>Today we’re going to give these formal names using probability notation</li>
+</ul>
 </section></section>
 <section>
-<section id="contingency-tables" class="title-slide slide level1 center">
-<h1>Contingency tables</h1>
+<section id="contingency-tables-tables-as-probabilities" class="title-slide slide level1 center">
+<h1>Contingency tables – tables as probabilities</h1>
 
 </section>
-<section id="a-contingency-table" class="slide level2">
-<h2>A contingency table</h2>
-<p>Suppose we have the following table:</p>
+<section id="a-simpler-example-for-today" class="slide level2">
+<h2>A simpler example for today</h2>
+<p>For teaching purposes, let’s work with a simpler 2×2 table:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th></th>
-<th>Disease</th>
-<th>No Disease</th>
-<th>Total</th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Test +</td>
-<td>90</td>
-<td>180</td>
-<td>270</td>
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">270</td>
 </tr>
 <tr class="even">
-<td>Test -</td>
-<td>10</td>
-<td>720</td>
-<td>730</td>
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">720</td>
+<td style="text-align: center;">730</td>
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td>100</td>
-<td>900</td>
-<td>1000</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">900</td>
+<td style="text-align: center;">1000</td>
 </tr>
 </tbody>
 </table>
+<p>This represents 1,000 patients who were tested for a disease.</p>
 </section>
 <section id="joint-probabilities" class="slide level2">
 <h2>Joint probabilities</h2>
+<p><br>
+</p>
 <p>Joint probabilities involve <strong>two events happening together</strong>.</p>
-<p>Examples: - <span class="math inline">\(P(\text{Disease and Test +}) = 90 / 1000\)</span> - <span class="math inline">\(P(\text{No Disease and Test -}) = 720 / 1000\)</span></p>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(P(\text{Disease and Test +}) = \textcolor{red}{90} / 1000\)</span></li>
+<li><span class="math inline">\(P(\text{No Disease and Test -}) = \textcolor{blue}{720} / 1000\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;"><span style="color:red;">90</span></td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">270</td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;"><span style="color:blue;">720</span></td>
+<td style="text-align: center;">730</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">900</td>
+<td style="text-align: center;">1000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
 </section>
 <section id="marginal-probabilities" class="slide level2">
 <h2>Marginal probabilities</h2>
+<p><br>
+</p>
 <p>Marginal probabilities ignore the other variable.</p>
-<p>Examples: - <span class="math inline">\(P(\text{Disease}) = 100 / 1000\)</span> - <span class="math inline">\(P(\text{Test +}) = 270 / 1000\)</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(P(\text{Disease}) = \textcolor{red}{100} / 1000\)</span></li>
+<li><span class="math inline">\(P(\text{Test +}) = \textcolor{blue}{270} / 1000\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;"><span style="color:blue;">270</span></td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">720</td>
+<td style="text-align: center;">730</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;"><span style="color:red;">100</span></td>
+<td style="text-align: center;">900</td>
+<td style="text-align: center;">1000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section id="marginal-vs-joint" class="slide level2">
+<h2>Marginal vs Joint</h2>
+<p>It can help to remember when looking at a table that:</p>
+<ul>
+<li><strong>Joint probability</strong>: intersection of row and column</li>
+<li><strong>Marginal probability</strong>: row or column total</li>
+</ul>
+</section>
+<section id="marginal-vs-joint-vs-conditional" class="slide level2">
+<h2>Marginal vs Joint vs Conditional</h2>
+<p>From the table:</p>
+<ul>
+<li><strong>Marginal</strong>: <span class="math inline">\(P(\text{Disease}) = 100 / 1000\)</span> (ignore test results)</li>
+<li><strong>Joint</strong>: <span class="math inline">\(P(\text{Disease and Test +}) = 90 / 1000\)</span> (both happening)</li>
+<li><strong>Conditional</strong>: <span class="math inline">\(P(\text{Disease} \mid \text{Test +}) = ?\)</span> (we’ll calculate next)</li>
+</ul>
+<p><strong>Key difference</strong>: Marginal ignores other variables, conditional focuses within a subgroup.</p>
 </section>
 <section id="conditional-probabilities" class="slide level2">
 <h2>Conditional probabilities</h2>
+<p><br>
+</p>
 <p>Conditional probability answers:</p>
-<blockquote>
-<p>Given that <span class="math inline">\(B\)</span> occurred, how likely is <span class="math inline">\(A\)</span>?</p>
-</blockquote>
+<p><strong>Given that <span class="math inline">\(B\)</span> occurred, how likely is <span class="math inline">\(A\)</span>?</strong></p>
+<p><br>
+</p>
 <p>Notation:</p>
 <p><span class="math display">\[
 P(A \mid B)
@@ -562,22 +1295,2162 @@ P(A \mid B)
 <section id="definition-of-conditional-probability" class="slide level2">
 <h2>Definition of conditional probability</h2>
 <p><span class="math display">\[
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+P(A \mid B) = \frac{P(A \text{ and } B)}{P(B)}
 \]</span></p>
+<p><br>
+</p>
 <p>This is just a <strong>restricted proportion</strong>.</p>
+<ul>
+<li>We’re only looking at cases where <span class="math inline">\(B\)</span> occurred (the denominator)</li>
+<li>Then asking: of those cases, how many also have <span class="math inline">\(A\)</span>?</li>
+<li>We’ve “restricted” our view to just the <span class="math inline">\(B\)</span> group</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li><strong>Example:</strong> <span class="math inline">\(P(\text{Disease} \mid \text{Test +})\)</span>
+<ul>
+<li>Denominator: only people who tested positive</li>
+<li>Numerator: of those, how many have disease?</li>
+<li>We’ve restricted to the “Test+” subgroup</li>
+</ul></li>
+</ul>
 </section>
 <section id="example-from-the-table" class="slide level2">
 <h2>Example from the table</h2>
-<p>What is:</p>
+<p><br>
+</p>
+<p>What is <span class="math inline">\(P(\text{Disease} \mid \text{Test +})\)</span>?</p>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><span class="math display">\[
-P(\text{Disease} \mid \text{Test +})?
+\begin{aligned}
+P(\text{Disease} \mid \text{Test +}) &amp;= \frac{P(Disease \text{ and } Test +)}{P(Test +)} \\
+&amp;= \frac{\textcolor{red}{90} / 1000}{\textcolor{blue}{270} / 1000} \\
+&amp;= \frac{\textcolor{red}{90}}{\textcolor{blue}{270}} \\
+&amp;\approx 0.333
+\end{aligned}
 \]</span></p>
-<p><span class="math display">\[
-= \frac{90 / 1000}{270 / 1000}
-= \frac{90}{270}
-= 0.333
-\]</span></p>
-<p>Interpretation: &gt; Among those who tested positive, about 33% have the disease.</p>
+</div><div class="column" style="width:50%;">
+<p><br>
+</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 22%">
+<col style="width: 30%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;"><span style="color:red;">90</span></td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;"><span style="color:blue;">270</span></td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">720</td>
+<td style="text-align: center;">730</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">900</td>
+<td style="text-align: center;">1000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<p><br>
+</p>
+<p><strong>Interpretation</strong>: Among those who tested positive, about 33% have the disease.</p>
+</section>
+<section id="this-is-what-you-did-monday" class="slide level2">
+<h2>This is what you did Monday!</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>When you calculated <strong>row proportions</strong>:</p>
+<ul>
+<li>You were computing <span class="math inline">\(P(\text{genotype} \mid \text{sex})\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tbl-big">
+<div class="cell">
+<div class="cell-output-display">
+<div id="kwbapnseih" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kwbapnseih table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kwbapnseih thead, #kwbapnseih tbody, #kwbapnseih tfoot, #kwbapnseih tr, #kwbapnseih td, #kwbapnseih th {
+  border-style: none;
+}
+
+#kwbapnseih p {
+  margin: 0;
+  padding: 0;
+}
+
+#kwbapnseih .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kwbapnseih .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kwbapnseih .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kwbapnseih .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kwbapnseih .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kwbapnseih .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kwbapnseih .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kwbapnseih .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kwbapnseih .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kwbapnseih .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kwbapnseih .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kwbapnseih .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kwbapnseih .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kwbapnseih .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kwbapnseih .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kwbapnseih .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kwbapnseih .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kwbapnseih .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kwbapnseih .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kwbapnseih .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kwbapnseih .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kwbapnseih .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kwbapnseih .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kwbapnseih .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kwbapnseih .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kwbapnseih .gt_left {
+  text-align: left;
+}
+
+#kwbapnseih .gt_center {
+  text-align: center;
+}
+
+#kwbapnseih .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kwbapnseih .gt_font_normal {
+  font-weight: normal;
+}
+
+#kwbapnseih .gt_font_bold {
+  font-weight: bold;
+}
+
+#kwbapnseih .gt_font_italic {
+  font-style: italic;
+}
+
+#kwbapnseih .gt_super {
+  font-size: 65%;
+}
+
+#kwbapnseih .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kwbapnseih .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kwbapnseih .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kwbapnseih .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kwbapnseih .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kwbapnseih .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kwbapnseih .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kwbapnseih .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kwbapnseih div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="sex/actn3.r577x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">sex/actn3.r577x</th>
+<th id="CC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CC</th>
+<th id="CT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CT</th>
+<th id="TT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TT</th>
+<th id="Total" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Female</td>
+<td class="gt_row gt_right" headers="CC">106</td>
+<td class="gt_row gt_right" headers="CT">149</td>
+<td class="gt_row gt_right" headers="TT">98</td>
+<td class="gt_row gt_right" headers="Total">353</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Male</td>
+<td class="gt_row gt_right" headers="CC">67</td>
+<td class="gt_row gt_right" headers="CT">112</td>
+<td class="gt_row gt_right" headers="TT">63</td>
+<td class="gt_row gt_right" headers="Total">242</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tbl-big">
+<div class="cell">
+<div class="cell-output-display">
+<div id="rwwercdkng" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rwwercdkng table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rwwercdkng thead, #rwwercdkng tbody, #rwwercdkng tfoot, #rwwercdkng tr, #rwwercdkng td, #rwwercdkng th {
+  border-style: none;
+}
+
+#rwwercdkng p {
+  margin: 0;
+  padding: 0;
+}
+
+#rwwercdkng .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rwwercdkng .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rwwercdkng .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rwwercdkng .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rwwercdkng .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rwwercdkng .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rwwercdkng .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rwwercdkng .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rwwercdkng .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rwwercdkng .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rwwercdkng .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rwwercdkng .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rwwercdkng .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rwwercdkng .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rwwercdkng .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwwercdkng .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rwwercdkng .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rwwercdkng .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rwwercdkng .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwwercdkng .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rwwercdkng .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwwercdkng .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rwwercdkng .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwwercdkng .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rwwercdkng .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rwwercdkng .gt_left {
+  text-align: left;
+}
+
+#rwwercdkng .gt_center {
+  text-align: center;
+}
+
+#rwwercdkng .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rwwercdkng .gt_font_normal {
+  font-weight: normal;
+}
+
+#rwwercdkng .gt_font_bold {
+  font-weight: bold;
+}
+
+#rwwercdkng .gt_font_italic {
+  font-style: italic;
+}
+
+#rwwercdkng .gt_super {
+  font-size: 65%;
+}
+
+#rwwercdkng .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rwwercdkng .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rwwercdkng .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rwwercdkng .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rwwercdkng .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rwwercdkng .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rwwercdkng .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rwwercdkng .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rwwercdkng div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="sex/actn3.r577x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">sex/actn3.r577x</th>
+<th id="CC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CC</th>
+<th id="CT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CT</th>
+<th id="TT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TT</th>
+<th id="Total" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Total</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Female</td>
+<td class="gt_row gt_right" headers="CC">0.30</td>
+<td class="gt_row gt_right" headers="CT">0.42</td>
+<td class="gt_row gt_right" headers="TT">0.28</td>
+<td class="gt_row gt_right" headers="Total">1.00</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Male</td>
+<td class="gt_row gt_right" headers="CC">0.28</td>
+<td class="gt_row gt_right" headers="CT">0.46</td>
+<td class="gt_row gt_right" headers="TT">0.26</td>
+<td class="gt_row gt_right" headers="Total">1.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="this-is-what-you-did-monday-1" class="slide level2">
+<h2>This is what you did Monday!</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>When you calculated <strong>column proportions</strong>:</p>
+<ul>
+<li>You were computing <span class="math inline">\(P(\text{sex} \mid \text{genotype})\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+
+</div><div class="column" style="width:50%;">
+
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="tbl-big">
+<div class="cell">
+<div class="cell-output-display">
+<div id="rvyeagnjzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rvyeagnjzz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rvyeagnjzz thead, #rvyeagnjzz tbody, #rvyeagnjzz tfoot, #rvyeagnjzz tr, #rvyeagnjzz td, #rvyeagnjzz th {
+  border-style: none;
+}
+
+#rvyeagnjzz p {
+  margin: 0;
+  padding: 0;
+}
+
+#rvyeagnjzz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rvyeagnjzz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rvyeagnjzz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rvyeagnjzz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rvyeagnjzz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rvyeagnjzz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rvyeagnjzz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rvyeagnjzz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rvyeagnjzz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rvyeagnjzz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rvyeagnjzz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rvyeagnjzz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rvyeagnjzz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rvyeagnjzz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rvyeagnjzz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvyeagnjzz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rvyeagnjzz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rvyeagnjzz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rvyeagnjzz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvyeagnjzz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rvyeagnjzz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvyeagnjzz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rvyeagnjzz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvyeagnjzz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rvyeagnjzz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rvyeagnjzz .gt_left {
+  text-align: left;
+}
+
+#rvyeagnjzz .gt_center {
+  text-align: center;
+}
+
+#rvyeagnjzz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rvyeagnjzz .gt_font_normal {
+  font-weight: normal;
+}
+
+#rvyeagnjzz .gt_font_bold {
+  font-weight: bold;
+}
+
+#rvyeagnjzz .gt_font_italic {
+  font-style: italic;
+}
+
+#rvyeagnjzz .gt_super {
+  font-size: 65%;
+}
+
+#rvyeagnjzz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rvyeagnjzz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rvyeagnjzz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rvyeagnjzz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rvyeagnjzz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rvyeagnjzz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rvyeagnjzz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rvyeagnjzz .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rvyeagnjzz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="sex/actn3.r577x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">sex/actn3.r577x</th>
+<th id="CC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CC</th>
+<th id="CT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CT</th>
+<th id="TT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TT</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Female</td>
+<td class="gt_row gt_right" headers="CC">106</td>
+<td class="gt_row gt_right" headers="CT">149</td>
+<td class="gt_row gt_right" headers="TT">98</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Male</td>
+<td class="gt_row gt_right" headers="CC">67</td>
+<td class="gt_row gt_right" headers="CT">112</td>
+<td class="gt_row gt_right" headers="TT">63</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Total</td>
+<td class="gt_row gt_right" headers="CC">173</td>
+<td class="gt_row gt_right" headers="CT">261</td>
+<td class="gt_row gt_right" headers="TT">161</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="tbl-big">
+<div class="cell">
+<div class="cell-output-display">
+<div id="gxgqlafjft" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gxgqlafjft table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gxgqlafjft thead, #gxgqlafjft tbody, #gxgqlafjft tfoot, #gxgqlafjft tr, #gxgqlafjft td, #gxgqlafjft th {
+  border-style: none;
+}
+
+#gxgqlafjft p {
+  margin: 0;
+  padding: 0;
+}
+
+#gxgqlafjft .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gxgqlafjft .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gxgqlafjft .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gxgqlafjft .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gxgqlafjft .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gxgqlafjft .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gxgqlafjft .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gxgqlafjft .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gxgqlafjft .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gxgqlafjft .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gxgqlafjft .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gxgqlafjft .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gxgqlafjft .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gxgqlafjft .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gxgqlafjft .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxgqlafjft .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gxgqlafjft .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gxgqlafjft .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gxgqlafjft .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxgqlafjft .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gxgqlafjft .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxgqlafjft .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gxgqlafjft .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxgqlafjft .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gxgqlafjft .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gxgqlafjft .gt_left {
+  text-align: left;
+}
+
+#gxgqlafjft .gt_center {
+  text-align: center;
+}
+
+#gxgqlafjft .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gxgqlafjft .gt_font_normal {
+  font-weight: normal;
+}
+
+#gxgqlafjft .gt_font_bold {
+  font-weight: bold;
+}
+
+#gxgqlafjft .gt_font_italic {
+  font-style: italic;
+}
+
+#gxgqlafjft .gt_super {
+  font-size: 65%;
+}
+
+#gxgqlafjft .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gxgqlafjft .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gxgqlafjft .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gxgqlafjft .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gxgqlafjft .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gxgqlafjft .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gxgqlafjft .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gxgqlafjft .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gxgqlafjft div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="sex/actn3.r577x" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">sex/actn3.r577x</th>
+<th id="CC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CC</th>
+<th id="CT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">CT</th>
+<th id="TT" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">TT</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Female</td>
+<td class="gt_row gt_right" headers="CC">0.61</td>
+<td class="gt_row gt_right" headers="CT">0.57</td>
+<td class="gt_row gt_right" headers="TT">0.61</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Male</td>
+<td class="gt_row gt_right" headers="CC">0.39</td>
+<td class="gt_row gt_right" headers="CT">0.43</td>
+<td class="gt_row gt_right" headers="TT">0.39</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="sex/actn3.r577x">Total</td>
+<td class="gt_row gt_right" headers="CC">1.00</td>
+<td class="gt_row gt_right" headers="CT">1.00</td>
+<td class="gt_row gt_right" headers="TT">1.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<p><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The formula just formalizes what you already know how to do.</p>
+</div><div class="column" style="width:50%;">
+
+</div></div>
+</section></section>
+<section>
+<section id="independence" class="title-slide slide level1 center">
+<h1>Independence</h1>
+
+</section>
+<section id="what-is-independence" class="slide level2">
+<h2>What is independence?</h2>
+<p><br>
+</p>
+<p>Two events are <strong>independent</strong> if knowing one provides no information about the other.</p>
+<p><br>
+</p>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>Flipping a coin and rolling a die (independent)</li>
+<li>Your height and the weather tomorrow (independent)</li>
+<li>Having a disease and testing positive (NOT independent!)</li>
+<li>Smoking and lung cancer (NOT independent!)</li>
+</ul>
+</section>
+<section id="checking-for-independence" class="slide level2">
+<h2>Checking for independence</h2>
+<p><br>
+</p>
+<p>Events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent if:</p>
+<p><span class="math display">\[P(A \text{ and } B) = P(A) \times P(B)\]</span></p>
+<p><strong>OR</strong> equivalently:</p>
+<p><span class="math display">\[P(A \mid B) = P(A)\]</span></p>
+<p><br>
+</p>
+<p><strong>Why are these equivalent?</strong> Starting with the conditional probability formula:</p>
+<p><span class="math display">\[P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) \times P(B)}{P(B)} = P(A)\]</span></p>
+<p><br>
+</p>
+<p><strong>Key idea:</strong> “Knowing <span class="math inline">\(B\)</span> doesn’t change the probability of <span class="math inline">\(A\)</span>”</p>
+</section>
+<section id="example-independence" class="slide level2">
+<h2>Example: Independence</h2>
+<p><br>
+</p>
+<p>Roll two dice. Are the outcomes independent?</p>
+<p><br>
+</p>
+<ul>
+<li><span class="math inline">\(P(\text{first die} = 1) = \frac{1}{6}\)</span></li>
+<li><span class="math inline">\(P(\text{second die} = 1) = \frac{1}{6}\)</span></li>
+<li><span class="math inline">\(P(\text{both} = 1) = \frac{1}{36}\)</span></li>
+</ul>
+<p><br>
+</p>
+<p><strong>Check:</strong> <span class="math inline">\(\frac{1}{6} \times \frac{1}{6} = \frac{1}{36}\)</span> ✓</p>
+<p><br>
+</p>
+<p>The events are independent.</p>
+</section>
+<section id="example-not-independent" class="slide level2">
+<h2>Example: NOT independent</h2>
+<p><br>
+</p>
+<p>From our medical test example:</p>
+<ul>
+<li><span class="math inline">\(P(\text{Disease}) = \frac{100}{1000} = 0.10\)</span></li>
+<li><span class="math inline">\(P(\text{Disease} \mid \text{Test +}) = \frac{90}{270} \approx 0.33\)</span></li>
+</ul>
+<p><br>
+</p>
+<p>Since <span class="math inline">\(0.33 \neq 0.10\)</span>, the events are <strong>NOT independent</strong>.</p>
+<p><br>
+</p>
+<p>Testing positive changes the probability of disease! This is why tests are useful.</p>
 </section></section>
 <section>
 <section id="multiplication-rule" class="title-slide slide level1 center">
@@ -586,119 +3459,398 @@ P(\text{Disease} \mid \text{Test +})?
 </section>
 <section id="general-multiplication-rule" class="slide level2">
 <h2>General multiplication rule</h2>
-<p>Rearranging the definition:</p>
+<p>The General multiplication rule</p>
+<p><br>
+</p>
 <p><span class="math display">\[
-P(A \cap B) = P(A \mid B) P(B)
+P(A \text{ and } B) = P(A \mid B) \times P(B)
 \]</span></p>
-<p>This connects joint and conditional probabilities.</p>
+<p>which follows from rearranging the definition of conditional probability:</p>
+<p><span class="math display">\[
+P(A \mid B) = \frac{P(A \text{ and } B)}{P(B)} \rightarrow P(A|B)P(B) = P(A \text{ and } B)
+\]</span></p>
+<p><br>
+</p>
+<p>This connects <strong>joint</strong> and <strong>conditional</strong> probabilities.</p>
+</section>
+<section id="example-multiplication-rule" class="slide level2">
+<h2>Example: Multiplication rule</h2>
+<p><br>
+</p>
+<p>What is the probability of randomly selecting a person who is male AND has hypertension?</p>
+<p><br>
+</p>
+<p>Given:</p>
+<ul>
+<li><span class="math inline">\(P(\text{male}) = 0.50\)</span></li>
+<li><span class="math inline">\(P(\text{hypertension} \mid \text{male}) = 0.18\)</span></li>
+</ul>
+<p><br>
+</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{male and hypertension}) &amp;= P(\text{hypertension} \mid \text{male}) \times P(\text{male}) \\
+&amp;= 0.18 \times 0.50 \\
+&amp;= 0.09
+\end{aligned}
+\]</span></p>
+</section>
+<section id="multiplication-rule-for-independent-events" class="slide level2">
+<h2>Multiplication rule for independent events</h2>
+<p><br>
+</p>
+<p>When events are <strong>independent</strong>, the multiplication rule simplifies:</p>
+<p><span class="math display">\[
+P(A \text{ and } B) = P(A) \times P(B)
+\]</span></p>
+<p><br>
+</p>
+<p><strong>Why?</strong> Because when events are independent, <span class="math inline">\(P(A \mid B) = P(A)\)</span>.</p>
+<p><br>
+</p>
+<p><strong>Example:</strong> Rolling two dice</p>
+<p><span class="math display">\[
+P(\text{both are 6}) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}
+\]</span></p>
 </section></section>
 <section>
-<section id="bayes-theorem" class="title-slide slide level1 center">
-<h1>Bayes’ theorem</h1>
+<section id="positive-predictive-value-ppv" class="title-slide slide level1 center">
+<h1>Positive Predictive Value (PPV)</h1>
 
 </section>
-<section id="why-bayes-matters" class="slide level2">
-<h2>Why Bayes matters</h2>
-<p>Often we know:</p>
+<section id="a-medical-testing-scenario" class="slide level2">
+<h2>A medical testing scenario</h2>
+<p><br>
+</p>
+<p><strong>Given information:</strong></p>
 <ul>
-<li><span class="math inline">\(P(\text{Test +} \mid \text{Disease})\)</span></li>
-<li>but want:</li>
-<li><span class="math inline">\(P(\text{Disease} \mid \text{Test +})\)</span></li>
+<li>Prevalence (disease rate in population) = 1%</li>
+<li>Sensitivity (correct positive test result when disease present) = 90%</li>
+<li>Specificity (correct negative test result when disease absent) = 90%</li>
 </ul>
-<p>These are <strong>not the same</strong>.</p>
+<p><br>
+</p>
+<p><strong>Question:</strong> If someone tests positive, what’s the probability they actually have the disease?</p>
+<p><br>
+</p>
+<p>This is asking for: <span class="math inline">\(P(\text{Disease} \mid \text{Test +})\)</span></p>
 </section>
-<section id="bayes-theorem-simple-form" class="slide level2">
-<h2>Bayes’ theorem (simple form)</h2>
-<p><span class="math display">\[
-P(A \mid B) =
-\frac{P(B \mid A) P(A)}{P(B)}
-\]</span></p>
-<p>Think of Bayes as <em>reversing the conditioning</em>.</p>
-</section>
-<section id="interpreting-bayes" class="slide level2">
-<h2>Interpreting Bayes</h2>
-<p>Bayes combines:</p>
-<ul>
-<li>how common the condition is (prevalence)</li>
-<li>how accurate the test is</li>
-<li>how often the test is positive overall</li>
-</ul>
-</section></section>
-<section>
-<section id="one-ppv-example" class="title-slide slide level1 center">
-<h1>One PPV example</h1>
-
-</section>
-<section id="given-information" class="slide level2">
-<h2>Given information</h2>
-<p>Suppose:</p>
-<ul>
-<li>Prevalence = 1%</li>
-<li>Sensitivity = 90%</li>
-<li>Specificity = 90%</li>
-</ul>
-<p>Out of 10,000 people:</p>
-</section>
-<section id="build-a-table-with-counts" class="slide level2">
-<h2>Build a table with counts</h2>
+<section id="build-a-contingency-table" class="slide level2">
+<h2>Build a contingency table</h2>
+<p><br>
+</p>
+<p>Let’s think about 10,000 people:</p>
+<p><br>
+</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th></th>
-<th>Disease</th>
-<th>No Disease</th>
-<th>Total</th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Test +</td>
-<td>90</td>
-<td>990</td>
-<td>1080</td>
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
-<td>Test -</td>
-<td>10</td>
-<td>8910</td>
-<td>8920</td>
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td>100</td>
-<td>9900</td>
-<td>10000</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">10,000</td>
 </tr>
 </tbody>
 </table>
+<p><br>
+</p>
+<p>Let’s fill this in step by step…</p>
 </section>
-<section id="positive-predictive-value-ppv" class="slide level2">
-<h2>Positive Predictive Value (PPV)</h2>
+<section id="building-the-table-using-what-we-learned" class="slide level2">
+<h2>Building the table using what we learned</h2>
+<p><br>
+</p>
+<p>We’ll use:</p>
+<ul>
+<li><strong>Marginal probabilities</strong> (prevalence)</li>
+<li><strong>Conditional probabilities</strong> (sensitivity, specificity)<br>
+</li>
+<li><strong>Multiplication rule</strong>: <span class="math inline">\(P(A \text{ and } B) = P(A \mid B) \times P(B)\)</span></li>
+</ul>
+<p><br>
+</p>
+<p>This shows how all the concepts work together!</p>
+</section>
+<section id="step-1-how-many-have-the-disease" class="slide level2">
+<h2>Step 1: How many have the disease?</h2>
+<p><br>
+</p>
+<p>Prevalence = 1%, so out of 10,000 people:</p>
+<p><br>
+</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 22%">
+<col style="width: 30%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;"><span style="color:red;">100</span></td>
+<td style="text-align: center;"><span style="color:blue;">9,900</span></td>
+<td style="text-align: center;">10,000</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<ul>
+<li>1% of 10,000 = <span style="color:red;">100 people have disease</span></li>
+<li>99% of 10,000 = <span style="color:blue;">9,900 people don’t have disease</span></li>
+</ul>
+</section>
+<section id="step-2-among-those-with-disease-how-many-test-positive" class="slide level2">
+<h2>Step 2: Among those WITH disease, how many test positive?</h2>
+<p><br>
+</p>
+<p>Sensitivity = 90%, so of the 100 with disease:</p>
+<p><br>
+</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;"><span style="color:red;">90</span></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;"><span style="color:red;">10</span></td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">9,900</td>
+<td style="text-align: center;">10,000</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<ul>
+<li>90% of 100 = <span style="color:red;">90 test positive</span> (true positives)
+<ul>
+<li>Using multiplication rule: <span class="math inline">\(P(\text{Test +} \mid \text{Disease}) \times 100\)</span></li>
+</ul></li>
+<li>10% of 100 = <span style="color:red;">10 test negative</span> (false negatives)</li>
+</ul>
+</section>
+<section id="step-3-among-those-without-disease-how-many-test-positive" class="slide level2">
+<h2>Step 3: Among those WITHOUT disease, how many test positive?</h2>
+<p><br>
+</p>
+<p>Specificity = 90% (so 10% test positive when they don’t have disease):</p>
+<p><br>
+</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;"><span style="color:blue;">990</span></td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;"><span style="color:blue;">8,910</span></td>
+<td style="text-align: center;">?</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">9,900</td>
+<td style="text-align: center;">10,000</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<ul>
+<li>10% of 9,900 = <span style="color:blue;">990 test positive</span> (false positives)
+<ul>
+<li>Using multiplication rule: <span class="math inline">\(P(\text{Test +} \mid \text{No Disease}) \times 9,900\)</span></li>
+</ul></li>
+<li>90% of 9,900 = <span style="color:blue;">8,910 test negative</span> (true negatives)</li>
+</ul>
+</section>
+<section id="step-4-fill-in-the-row-totals" class="slide level2">
+<h2>Step 4: Fill in the row totals</h2>
+<p><br>
+</p>
+<p>Now we can complete the table:</p>
+<p><br>
+</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">990</td>
+<td style="text-align: center;"><span style="color:purple;">1,080</span></td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">8,910</td>
+<td style="text-align: center;"><span style="color:purple;">8,920</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">9,900</td>
+<td style="text-align: center;">10,000</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<ul>
+<li>Total positive tests: 90 + 990 = <span style="color:purple;">1,080</span></li>
+<li>Total negative tests: 10 + 8,910 = <span style="color:purple;">8,920</span></li>
+</ul>
+</section>
+<section id="calculate-the-ppv" class="slide level2">
+<h2>Calculate the PPV</h2>
+<p><br>
+</p>
 <p><span class="math display">\[
-P(\text{Disease} \mid \text{Test +})
-= \frac{90}{1080}
-\approx 0.083
+\begin{aligned}
+P(\text{Disease} \mid \text{Test +}) &amp;= \frac{\textcolor{red}{90}}{\textcolor{purple}{1,080}} \\
+&amp;\approx 0.083 \\
+&amp;= 8.3\%
+\end{aligned}
 \]</span></p>
-<p>Only about <strong>8%</strong> of positive tests indicate disease.</p>
+<p><br>
+</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 22%">
+<col style="width: 30%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Disease</th>
+<th style="text-align: center;">No Disease</th>
+<th style="text-align: center;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Test +</strong></td>
+<td style="text-align: center;"><span style="color:red;">90</span></td>
+<td style="text-align: center;">990</td>
+<td style="text-align: center;"><span style="color:purple;">1,080</span></td>
+</tr>
+<tr class="even">
+<td><strong>Test -</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">8,910</td>
+<td style="text-align: center;">8,920</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">9,900</td>
+<td style="text-align: center;">10,000</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
+<p>Only about <strong>8%</strong> of positive tests indicate disease!</p>
 </section>
 <section id="key-takeaway" class="slide level2">
 <h2>Key takeaway</h2>
-<p>Even a good test can have a low PPV when the condition is rare.</p>
+<p><br>
+</p>
+<p>Even a good test (90% sensitivity, 90% specificity) can have a low PPV when the condition is rare.</p>
+<p><br>
+</p>
+<p><strong>Why?</strong></p>
+<ul>
+<li>Only 100 people have the disease</li>
+<li>But 990 people test positive incorrectly</li>
+<li>The false positives outnumber the true positives!</li>
+</ul>
+<p><br>
+</p>
 <p><strong>Base rates matter.</strong></p>
-</section></section>
-<section>
-<section id="optional-r-connection" class="title-slide slide level1 center">
-<h1>Optional R connection</h1>
-
-</section>
-<section id="tables-as-probabilities" class="slide level2">
-<h2>Tables as probabilities</h2>
-<p>In R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">990</span>, <span class="dv">10</span>, <span class="dv">8910</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a></a><span class="fu">prop.table</span>(tab)</span>
-<span id="cb1-3"><a></a><span class="fu">prop.table</span>(tab, <span class="at">margin =</span> <span class="dv">1</span>)</span>
-<span id="cb1-4"><a></a><span class="fu">prop.table</span>(tab, <span class="at">margin =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>These correspond to joint, row-conditional, and column-conditional probabilities.</p>
+<p><br>
+</p>
+<p><em>Next class: We’ll see how Bayes’ theorem formalizes this calculation.</em></p>
 </section></section>
 <section>
 <section id="recap" class="title-slide slide level1 center">
@@ -707,13 +3859,23 @@ P(\text{Disease} \mid \text{Test +})
 </section>
 <section id="what-to-remember" class="slide level2">
 <h2>What to remember</h2>
+<p><br>
+</p>
 <ul>
-<li>Probability is long-run relative frequency</li>
-<li>Conditional probability = restricted proportion</li>
-<li>Tables make probabilities concrete</li>
-<li>Bayes reverses conditioning</li>
-<li>Base rates matter</li>
+<li>Probability is a <strong>long-run relative frequency</strong> (between 0 and 1)</li>
+<li><strong>Addition rules</strong>: disjoint vs non-disjoint events</li>
+<li><strong>Contingency tables</strong> show joint and marginal probabilities</li>
+<li><strong>Conditional probability</strong>: <span class="math inline">\(P(A \mid B) = \frac{P(A \text{ and } B)}{P(B)}\)</span>
+<ul>
+<li>This formalizes the row/column proportions you did Monday!</li>
+</ul></li>
+<li><strong>Independence</strong>: <span class="math inline">\(P(A \mid B) = P(A)\)</span> (knowing <span class="math inline">\(B\)</span> doesn’t change <span class="math inline">\(A\)</span>)</li>
+<li><strong>Multiplication rule</strong>: <span class="math inline">\(P(A \text{ and } B) = P(A \mid B) \times P(B)\)</span></li>
+<li><strong>Base rates matter</strong> for interpreting test results</li>
 </ul>
+<p><br>
+</p>
+<p><strong>Next class (after MLK Day):</strong> Bayes’ theorem and doing this in R with tidyverse!</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -931,6 +4093,44 @@ P(\text{Disease} \mid \text{Test +})
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
