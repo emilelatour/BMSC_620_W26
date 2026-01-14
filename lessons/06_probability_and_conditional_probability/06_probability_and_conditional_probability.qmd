@@ -359,6 +359,9 @@ $$
 
 Remember the contingency tables from Monday?
 
+- We calculated **row proportions** and **column proportions**
+- Today we're going to give these formal names using probability notation
+
 ::: {.tbl-big}
 ```{r}
 #| echo: false
@@ -374,8 +377,7 @@ famuss |>
 ```
 :::
 
-- We calculated **row proportions** and **column proportions**
-- Today we're going to give these formal names using probability notation
+
 
 # Contingency tables – tables as probabilities
 

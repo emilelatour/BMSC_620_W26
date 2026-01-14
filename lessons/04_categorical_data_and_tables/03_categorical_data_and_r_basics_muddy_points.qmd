@@ -175,6 +175,7 @@ In general:
 - `b <- c(3:10)` creates the same vector **and stores it** so it can be reused later
 
 Assigning objects allows you to:
+
 - reuse results
 - build analyses step-by-step
 - debug your work
