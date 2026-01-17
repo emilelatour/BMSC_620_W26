@@ -94,6 +94,13 @@ I was trying out new recording software today, and there was a glitch about 1 ho
 - **Recording**
   - [Lecture 04 – Probability and conditional probability (loom.com)](https://www.loom.com/share/2ac44664599a4fbf964f50eeacd84246)
   - [Lecture 04 – Probability and conditional probability (OneDrive folder)](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBA_IiqMb2RSZHcTk0aJD5oAag49W_Lz5oUUTRVFBDjGs8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=GAuX68)
+  
+  - **Muddy points**
+  
+  I reviewed your post-class feedback and wrote clarifications here:
+  
+    - [Muddy Points - Lesson 4](//lessons/06_probability_and_conditional_probability/06_probability_muddy_points.qmd)
+
 
 ---
 

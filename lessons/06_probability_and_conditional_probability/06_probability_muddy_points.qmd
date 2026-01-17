@@ -1,0 +1,431 @@
+---
+title: "Muddy Points"
+subtitle: "Probability and Conditional Probability"
+date-modified: "today"
+format:
+  html:
+    toc: true
+---
+
+## Thanks for the feedback
+
+Thank you to everyone who submitted post-class feedback. I'm glad the probability material resonated with so many of you, and I appreciate the specific questions about R and the suggestions about course structure.
+
+## A note on pacing
+
+Looking at the post-class survey for this lecture:
+
+- 78% felt the pace was about right
+- 19% felt it was slightly too fast
+- 3% felt it was slightly too slow
+
+This is strong feedback overall. For those who found the live R coding portion slightly too fast, remember that the lectures are recorded and you can rewatch those sections. We'll also be working extensively with R next week, which will give you more practice time.
+
+## A note on muddy points timing
+
+A few of you suggested moving muddy points to the end of class or posting them as videos rather than covering them during class time.
+
+I appreciate this feedback. Here's my current thinking:
+
+- Many students specifically noted in the "clear points" that they found the muddy points review helpful
+- Reviewing them at the start helps ensure everyone's on the same page before new material
+- That said, I hear that 20 minutes is a significant chunk of class time
+
+Going forward, I'll:
+
+- Post muddy points to the website before class (as I do now)
+- Give you time to read through them on your own first
+- Quickly highlight the most common or important points in class rather than going through everything line by line
+- Encourage you to come to office hours with specific questions
+
+This should give us more time for new material while still addressing the most important confusions.
+
+## Multiplication rule vs. conditional probability
+
+One excellent question was: "I think I'm getting confused between the multiplication rule and conditional probability. Conditional probability is more 'if this, then what about that' and the multiplication rule is 'if this and that'. But what is the difference, for instance between 'positive results and has disease' vs 'of those who have positive results, how many have disease'? Is the difference just in the denominator?"
+
+This is a great question because these concepts are closely related.
+
+### Conditional probability
+
+**Conditional probability** answers: "Given that A happened, what's the probability of B?"
+
+$$P(B|A) = \frac{P(A \text{ and } B)}{P(A)}$$
+
+For example: "Of those who test positive, what proportion actually have the disease?"
+
+The denominator is $P(\text{positive test})$ — we're restricting our focus to only those who tested positive.
+
+### Multiplication rule
+
+The **multiplication rule** calculates the probability that **both** A and B happen together:
+
+$$P(A \text{ and } B) = P(A) \times P(B|A)$$
+
+For example: "What's the probability someone has the disease AND tests positive?"
+
+This gives you the joint probability of both events occurring.
+
+### The relationship
+
+You're absolutely right that the denominator is the key difference:
+
+- **Conditional probability** divides by $P(A)$ to find the proportion within a subset
+- **Multiplication rule** multiplies to find the probability of both events together
+
+They're mathematically related — in fact, the multiplication rule comes from rearranging the conditional probability formula:
+
+$$P(A \text{ and } B) = P(B|A) \times P(A)$$
+
+### Example with numbers
+
+Suppose:
+- 1% of people have a disease: $P(\text{disease}) = 0.01$
+- The test is 95% accurate for those with disease: $P(\text{positive}|\text{disease}) = 0.95$
+
+**Conditional probability:** Of those with disease, 95% test positive.
+
+**Multiplication rule:** The probability of having disease AND testing positive is:
+$$P(\text{disease and positive}) = 0.01 \times 0.95 = 0.0095$$
+
+So about 0.95% of the entire population has disease and tests positive.
+
+The conditional probability focuses on a rate within a subgroup. The multiplication rule gives you the overall joint probability.
+
+## Understanding pipes in R: `%>%`
+
+Several questions came up about pipes, including:
+
+- "I don't fully understand pipes in R and how to utilize them outside of linking data"
+- "I was confused when you used the example: `dplyr::count(Species) %>% mutate(proportion = n / sum(n))`"
+
+This is completely understandable since we only briefly introduced pipes at the end of class.
+
+### What pipes do
+
+The pipe operator `%>%` takes the output from one function and passes it as the first argument to the next function.
+
+Without pipes:
+```{r}
+#| eval: false
+mutate(count(iris, Species), proportion = n / sum(n))
+```
+
+With pipes:
+```{r}
+#| eval: false
+iris %>%
+  count(Species) %>%
+  mutate(proportion = n / sum(n))
+```
+
+### Why pipes are helpful
+
+Pipes let you read code from left to right (or top to bottom), which is more natural than reading nested functions from inside-out.
+
+Think of it like a recipe:
+
+**Nested approach** (inside-out):
+```{r}
+#| eval: false
+bake(mix(add(get_flour(), get_eggs()), get_sugar()))
+```
+
+**Pipe approach** (step-by-step):
+```{r}
+#| eval: false
+get_flour() %>%
+  add(get_eggs()) %>%
+  mix(get_sugar()) %>%
+  bake()
+```
+
+### We'll spend more time on this
+
+Don't worry if pipes feel unclear right now. We briefly introduced them at the end of class, but we'll use them extensively next week when we work with data visualization and data manipulation in the tidyverse.
+
+For now, just know that `%>%` means "take the thing on the left and pass it to the function on the right."
+
+## How does R know that "n" is the count column?
+
+One question was: "I was also a little confused when you used the example in class: `dplyr::count(Species) %>% mutate(proportion = n / sum(n))`, how R knew that 'n' was the title for the column of counts."
+
+Great observation! This is specific to how the `count()` function works in `dplyr`.
+
+### What `count()` does
+
+When you use `count()`, it automatically:
+
+1. Groups the data by the variable(s) you specify
+2. Counts the number of rows in each group
+3. **Always names the count column "n"**, unless you name it something else using the `name =` argument (see `?dplyr::count`)
+
+For example:
+```{r}
+library(dplyr)
+iris %>%
+  count(Species)
+```
+
+This creates a table with two columns:
+- `Species` (the grouping variable)
+- `n` (the counts — automatically named by `count()`)
+
+### Why we can use "n" in `mutate()`
+
+Because `count()` always creates a column called `n`, we can refer to it by that name in the next step:
+
+```{r}
+iris %>%
+  count(Species) %>%
+  mutate(proportion = n / sum(n))
+```
+
+This works because:
+- `count()` created a column named `n`
+- `mutate()` sees that column and can use it in calculations
+
+### What if you want a different name?
+
+You can rename the count column if you want:
+```{r}
+iris %>%
+  count(Species, name = "total")
+```
+
+Now the count column is called `total` instead of `n`.
+
+### Bottom line
+
+The name `n` isn't magic — it's just the default name that `count()` gives to the count column. Once you know that pattern, you can use `n` in subsequent operations.
+
+## Does `mutate()` edit your actual data?
+
+One question was: "I'm wondering when you use the mutate function, are you editing your actual data table, or just seeing what a new column would look like."
+
+Excellent question! This is important to understand for working safely with data in R.
+
+### Short answer: No, it doesn't modify your original data
+
+When you use `mutate()` (or most data manipulation functions in R), it creates a **new data frame** with the changes. It does **not** modify the original data frame unless you explicitly overwrite it.
+
+### Example
+
+```{r}
+library(dplyr)
+
+# Original data
+head(iris)
+
+# Use mutate to add a column
+iris %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width)
+
+# Check the original data again
+head(iris)
+```
+
+Notice that `iris` still looks the same — it doesn't have the `Sepal.Area` column. The `mutate()` operation created a new data frame that we didn't save.
+
+### To keep the changes, you need to save them
+
+If you want to keep the modified data, you need to assign it:
+
+```{r}
+# Save the modified data to a new object
+iris_modified <- iris %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width)
+
+# Now iris_modified has the new column
+head(iris_modified)
+
+# But iris is still unchanged
+head(iris)
+```
+
+Or, you can overwrite the original (use with caution):
+
+```{r}
+#| eval: false
+# This replaces iris with the modified version
+iris <- iris %>%
+  mutate(Sepal.Area = Sepal.Length * Sepal.Width)
+```
+
+### This is a safety feature
+
+R's approach means you can experiment freely without accidentally destroying your data. You can try different transformations and see what they look like, and your original data remains safe unless you explicitly choose to overwrite it.
+
+## Define terms before using them (tibbles, pipes, etc.)
+
+One comment noted: "I think it would be helpful in the future if you tried to define things before we started using them. For instance it would be nice to know a tibble is just a type of table or that a pipe was used to chain codes before we were using and manipulating them."
+
+This is very fair feedback. I introduced several tidyverse concepts quickly at the end of class without proper definitions.
+
+### What I'll do differently
+
+Going forward, especially in next week's data visualization class:
+
+- I'll define new terms and functions before using them in examples
+- I'll explain the "why" along with the "how"
+- I'll be more explicit about which concepts are "nice to know" vs. "essential right now"
+
+### Quick definitions for this week
+
+For reference:
+
+- **Tibble**: A modern version of a data frame (R's name for a data table). It's essentially the same thing, just with slightly nicer printing and behavior. When you see `tibble`, think "data table."
+
+- **Pipe (`%>%`)**: An operator that passes the output of one function as input to the next function. Helps you chain operations together in a readable way.
+
+- **`mutate()`**: Creates new columns or modifies existing ones in a data frame
+
+- **`count()`**: Counts the number of rows for each group and automatically creates a column called `n` with the counts
+
+We'll use all of these extensively next week, and I'll make sure to introduce them more carefully.
+
+## R coding pace and screen visibility
+
+Several comments mentioned:
+
+- "The R stuff is still a little fast for me, especially with how small the screen is"
+- "It's difficult to see when we transition to working in R Studio. I found that we were moving a bit too quickly here as well"
+- "It would be helpful if we were given why we do things instead of just this does that"
+
+These are all related to the live coding portion at the end of class.
+
+### What I'll adjust
+
+For next week's class (which will involve substantial R work):
+
+1. **Slower pace**: I'll be more deliberate about typing slowly and pausing between steps
+2. **Larger font**: I'll increase the font size in RStudio for better visibility
+3. **More "why"**: I'll explain the purpose of each step, not just what it does
+4. **Clear transitions**: I'll announce when we're switching from slides to RStudio
+5. **Buffer time**: I'll plan for time to let people catch up, especially during package installation
+
+### For those following along
+
+If you're typing along and fall behind:
+
+- Focus on watching and understanding rather than typing everything in real-time
+- You can always catch up using the recorded lecture and posted code
+- The goal is understanding, not speed-typing
+
+### Package installation delays
+
+One comment noted: "Installing data packages always takes a few minutes or longer if there's an error. It seems instantaneous on your screen, and I'd hate to fall behind while waiting for something to load."
+
+You're absolutely right. Package installation can take time, especially on slower connections or older computers. 
+
+In class, I often have packages already installed, which is why it looks instant.
+
+Going forward:
+
+- I'll warn you when we're about to install packages
+- I'll suggest installing key packages before class when possible
+- If installation takes time during class, I'll pause and give everyone time to catch up
+
+## Request for keyboard shortcuts cheat sheet
+
+One request was: "Can we have a cheat sheet of keyboard functions we will commonly use?"
+
+Great idea! Here are some essential RStudio keyboard shortcuts:
+
+### Most useful shortcuts
+
+**Running code:**
+
+- `Ctrl/Cmd + Enter`: Run current line or selection
+- `Ctrl/Cmd + Shift + Enter`: Run entire chunk (in Quarto)
+
+**Navigation:**
+
+- `Ctrl/Cmd + 1`: Move cursor to script editor
+- `Ctrl/Cmd + 2`: Move cursor to console
+- `Ctrl/Cmd + Shift + M`: Insert pipe operator `%>%`
+
+**Code help:**
+
+- `Tab`: Auto-complete function names or variable names
+- `F1` (when cursor on function name): Open help documentation
+
+**Other useful:**
+
+- `Ctrl/Cmd + Shift + C`: Comment/uncomment selected lines
+- `Alt + -`: Insert assignment operator `<-`
+
+### RStudio's built-in cheat sheet
+
+RStudio has this built in! Go to:
+**Help → Cheatsheets → RStudio IDE Cheat Sheet**
+
+I'll also post a short list of the most essential shortcuts to the course website.
+
+## Some stats seemed too basic — when will I use this?
+
+One comment noted: "Some of the stats seemed so basic I had a hard time understanding when I would use it in my own work/day to day. But I'm sure when we get further it'll all fall into place."
+
+This is a fair concern, and you're right that things will click more as we progress.
+
+### Why we start with fundamentals
+
+Probability concepts like conditional probability, independence, and joint distributions are foundational to:
+
+- Understanding statistical tests (coming soon)
+- Interpreting confidence intervals and p-values
+- Building regression models
+- Making sense of diagnostic test results (like we did with sensitivity/specificity)
+
+### Moving toward applications
+
+Over the next few weeks, we'll build on these fundamentals to:
+
+- Analyze real datasets
+- Fit models to data
+- Test hypotheses
+- Make predictions
+
+The probability material we covered this week will come up repeatedly. For example:
+
+- Regression coefficients are conditional means
+- P-values are conditional probabilities
+- Confidence intervals rely on probability distributions
+
+So while it might feel abstract now, these concepts are the building blocks for the applied work we'll do later in the course.
+
+## Working through code outside of class
+
+One comment: "The lecture material is helpful but I have trouble following the in class coding examples. I have to work through the homework in order to fully grasp concepts."
+
+This is completely normal and actually a healthy learning process!
+
+### Live coding is for exposure, not mastery
+
+The purpose of live coding in class is to:
+
+- Show you what's possible
+- Demonstrate the workflow
+- Give you examples to refer back to
+
+It's **not** expected that you'll fully understand everything the first time you see it.
+
+### Learning happens through practice
+
+Real understanding comes from:
+
+- Working through homework problems
+- Experimenting with the code on your own
+- Making mistakes and debugging them
+- Applying the concepts to different datasets
+
+If you find that you need to work through examples outside of class to really understand them, that's exactly how it should work. The in-class demos are the starting point, not the finish line.
+
+### How to make the most of this
+
+- Watch the recordings when working on homework
+- Try modifying the in-class examples with different data
+- Come to office hours to work through specific confusions
+
+You're learning in exactly the right way.
+

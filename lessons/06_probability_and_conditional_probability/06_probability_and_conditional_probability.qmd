@@ -1,7 +1,7 @@
 ---
 title: "Probability and Conditional Probability"
 author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
-date: "`r library(here); source(here('class_dates.R')); w2d1`"
+date: "`r library(here); source(here('class_dates.R')); w2d2`"
 date-format: long
 format:
   revealjs:
