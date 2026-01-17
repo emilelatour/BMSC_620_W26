@@ -79,6 +79,40 @@ If you run into problems, please email me and include:
 - The full error message (copy/paste or screenshot)
 - What you have already tried
 
+### RStudio cheatsheets and shortcuts
+
+RStudio provides helpful reference materials for common tasks and packages.
+
+#### Official RStudio cheatsheets
+
+These one-page reference guides are extremely helpful when learning R:
+
+- Access them in RStudio: **Help → Cheatsheets**
+- Or download directly: <https://posit.co/resources/cheatsheets/>
+
+**Most relevant for this course:**
+
+- **RStudio IDE Cheat Sheet** - Overview of RStudio interface and keyboard shortcuts
+- **Data Transformation with dplyr** - The verbs we use for data manipulation
+- **Data Visualization with ggplot2** - Creating effective visualizations
+- **R Markdown Cheat Sheet** - Also applies to Quarto documents
+
+I recommend printing or bookmarking the dplyr and ggplot2 cheatsheets - you'll reference them frequently!
+
+#### Keyboard shortcuts
+
+Learning a few keyboard shortcuts will make your workflow much faster. 
+
+[**View essential keyboard shortcuts**](/resources/keyboard_shortcuts.qmd) - A quick reference for Mac and PC with the shortcuts you'll use most.
+
+The most important ones:
+
+- `Cmd/Ctrl + Shift + M` - Insert pipe `%>%`
+- `Cmd/Ctrl + Enter` - Run current line/selection
+- `Cmd/Ctrl + Shift + C` - Comment/uncomment lines
+
+You can view all available shortcuts in RStudio: **Tools → Keyboard Shortcuts Help** (or press `Option/Alt + Shift + K`)
+
 ### Additional R resources (optional)
 
 These resources are not required, but may be helpful if you want extra practice or alternative explanations.

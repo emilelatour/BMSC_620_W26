@@ -1,0 +1,75 @@
+---
+title: "Essential RStudio Keyboard Shortcuts"
+subtitle: "Quick reference for the shortcuts you'll use most"
+date-modified: "today"
+format: 
+  html:
+    toc: false
+---
+
+These are the keyboard shortcuts you'll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!
+
+## Most Essential Shortcuts
+
+| Action | Mac | Windows/Linux |
+|--------|-----|---------------|
+| **Insert pipe `%>%`** | `Cmd + Shift + M` | `Ctrl + Shift + M` |
+| **Insert code chunk** | `Cmd + Option + I` | `Ctrl + Alt + I` |
+| **Run current line/selection** | `Cmd + Enter` | `Ctrl + Enter` |
+| **Run current chunk** | `Cmd + Shift + Enter` | `Ctrl + Shift + Enter` |
+| **Run all chunks above** | `Cmd + Option + P` | `Ctrl + Alt + P` |
+| **Comment/uncomment line(s)** | `Cmd + Shift + C` | `Ctrl + Shift + C` |
+| **Insert assignment `<-`** | `Option + -` (minus) | `Alt + -` (minus) |
+
+: {.hover tbl-colwidths="\[10, 8, 8\]"}
+
+## Additional Helpful Shortcuts
+
+| Action | Mac | Windows/Linux |
+|--------|-----|---------------|
+| **Move cursor to source editor** | `Ctrl + 1` | `Ctrl + 1` |
+| **Move cursor to console** | `Ctrl + 2` | `Ctrl + 2` |
+| **Clear console** | `Ctrl + L` | `Ctrl + L` |
+| **Restart R session** | `Cmd + Shift + 0` | `Ctrl + Shift + F10` |
+| **Show keyboard shortcut reference** | `Option + Shift + K` | `Alt + Shift + K` |
+| **Find in files** | `Cmd + Shift + F` | `Ctrl + Shift + F` |
+| **Auto-complete** | `Tab` | `Tab` |
+| **Get help for function** | `F1` (cursor on function) | `F1` (cursor on function) |
+
+: {.hover tbl-colwidths="\[10, 8, 8\]"}
+
+## Tips for Learning Shortcuts
+
+- **Start with 2-3**: Don't try to memorize all of these at once. Start with the pipe operator and running code.
+- **Use them consistently**: The more you use a shortcut, the more automatic it becomes.
+- **View all shortcuts**: In RStudio, go to **Tools → Keyboard Shortcuts Help** or press `Option/Alt + Shift + K` to see the complete list.
+- **Customize shortcuts**: You can customize shortcuts in **Tools → Modify Keyboard Shortcuts**.
+
+## The Shortcuts You'll Use Every Class
+
+If you only remember three shortcuts, make them these:
+
+1. **`Cmd/Ctrl + Shift + M`** - Insert pipe `%>%`
+2. **`Cmd/Ctrl + Enter`** - Run current line
+3. **`Cmd/Ctrl + Shift + C`** - Comment/uncomment
+
+These three will save you countless hours of typing!
+
+## RStudio Cheatsheets
+
+RStudio provides official cheatsheets for many packages and topics. Access them in RStudio:
+
+**Help → Cheatsheets**
+
+Or download them directly from: <https://posit.co/resources/cheatsheets/>
+
+### Most relevant cheatsheets for this course:
+
+- **RStudio IDE Cheat Sheet** - Overview of RStudio interface and shortcuts
+- **Data Transformation with dplyr** - The dplyr verbs we use constantly
+- **Data Visualization with ggplot2** - Creating plots
+- **R Markdown** - Works for Quarto documents too
+
+---
+
+*Tip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!*
