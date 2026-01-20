@@ -2470,5 +2470,572 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#todays-plan",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#todays-plan",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Today’s plan",
+    "text": "Today’s plan\n\nTools for exploratory data analysis (EDA)\nData wrangling with dplyr\nSummary tables with janitor and rstatix\nData visualization with ggplot2"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#what-is-exploratory-data-analysis",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#what-is-exploratory-data-analysis",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "What is exploratory data analysis?",
+    "text": "What is exploratory data analysis?\nExploratory Data Analysis (EDA) is the process of:\n\nInspecting and summarizing data\nIdentifying patterns, outliers, and relationships\nUnderstanding the structure before formal analysis\n\n\n\nEDA helps answer questions like:\n\nWhat variables do I have?\nWhat does the distribution look like?\nAre there missing values?\nHow do variables relate to each other?"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-tidyverse-ecosystem",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-tidyverse-ecosystem",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The tidyverse ecosystem",
+    "text": "The tidyverse ecosystem\n\nArtwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-tidyverse-philosophy",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-tidyverse-philosophy",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The tidyverse philosophy",
+    "text": "The tidyverse philosophy\nThe tidyverse is a collection of R packages designed for data science.\n\n\n\n\nKey principles:\n\nConsistent syntax across packages\nFunctions designed to work together\nHuman-readable code\nWorks well with the pipe operator %&gt;%\n\n\n\n\nggplot2 - data visualisation\ndplyr - data manipulation\ntidyr - tidy data\nreadr - read rectangular data\npurrr - functional programming\ntibble - modern data frames\nstringr - string manipulation\nforcats - factors\nand many more …"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#todays-dataset-nhanes",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#todays-dataset-nhanes",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Today’s dataset: NHANES",
+    "text": "Today’s dataset: NHANES\nNational Health and Nutrition Examination Survey (NHANES)\n\nCDC survey assessing health and nutritional status of adults and children in the US\nCombines interviews, physical examinations, and laboratory tests\nToday we’ll use a sample of adult participants\n\n\n\nLoading the data:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp.adult\")"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#first-look-at-the-data",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#first-look-at-the-data",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "First look at the data",
+    "text": "First look at the data\nAlways start by getting a sense of what’s in your dataset.\n\n\n\n\nHow many rows and columns?\n\ndim(nhanes.samp.adult)\n\n[1] 135  76\n\n\nWhat are the variable names?\n\nnames(nhanes.samp.adult)\n\n [1] \"ID\"               \"SurveyYr\"         \"Gender\"           \"Age\"             \n [5] \"AgeDecade\"        \"AgeMonths\"        \"Race1\"            \"Race3\"           \n [9] \"Education\"        \"MaritalStatus\"    \"HHIncome\"         \"HHIncomeMid\"     \n[13] \"Poverty\"          \"HomeRooms\"        \"HomeOwn\"          \"Work\"            \n[17] \"Weight\"           \"Length\"           \"HeadCirc\"         \"Height\"          \n[21] \"BMI\"              \"BMICatUnder20yrs\" \"BMI_WHO\"          \"Pulse\"           \n[25] \"BPSysAve\"         \"BPDiaAve\"         \"BPSys1\"           \"BPDia1\"          \n[29] \"BPSys2\"           \"BPDia2\"           \"BPSys3\"           \"BPDia3\"          \n[33] \"Testosterone\"     \"DirectChol\"       \"TotChol\"          \"UrineVol1\"       \n[37] \"UrineFlow1\"       \"UrineVol2\"        \"UrineFlow2\"       \"Diabetes\"        \n[41] \"DiabetesAge\"      \"HealthGen\"        \"DaysPhysHlthBad\"  \"DaysMentHlthBad\" \n[45] \"LittleInterest\"   \"Depressed\"        \"nPregnancies\"     \"nBabies\"         \n[49] \"Age1stBaby\"       \"SleepHrsNight\"    \"SleepTrouble\"     \"PhysActive\"      \n[53] \"PhysActiveDays\"   \"TVHrsDay\"         \"CompHrsDay\"       \"TVHrsDayChild\"   \n[57] \"CompHrsDayChild\"  \"Alcohol12PlusYr\"  \"AlcoholDay\"       \"AlcoholYear\"     \n[61] \"SmokeNow\"         \"Smoke100\"         \"Smoke100n\"        \"SmokeAge\"        \n[65] \"Marijuana\"        \"AgeFirstMarij\"    \"RegularMarij\"     \"AgeRegMarij\"     \n[69] \"HardDrugs\"        \"SexEver\"          \"SexAge\"           \"SexNumPartnLife\" \n[73] \"SexNumPartYear\"   \"SameSex\"          \"SexOrientation\"   \"PregnantNow\"     \n\n\n\nWhat does the first few rows look like?\n\nhead(nhanes.samp.adult, 3)\n\n# A tibble: 3 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 63147 2011_12  male      41 \" 40-49\"         NA White White Some College\n2 57165 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High School \n3 69465 2011_12  female    50 \" 50-59\"         NA White White College Grad\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#tibbles-tidyverse-data-frames",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#tibbles-tidyverse-data-frames",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Tibbles: tidyverse data frames",
+    "text": "Tibbles: tidyverse data frames\nA tibble is the tidyverse version of a data frame.\n\nnhanes.samp.adult\n\n# A tibble: 135 × 76\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n * &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\n\n\nBenefits of tibbles:\n\nPrints only first 10 rows (doesn’t flood console)\nShows column types\nNever converts strings to factors automatically"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#glimpse---quick-data-structure",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#glimpse---quick-data-structure",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "glimpse() - quick data structure",
+    "text": "glimpse() - quick data structure\n \nglimpse() from the dplyr package shows you the structure of your data in a compact format.\n\nglimpse(nhanes.samp.adult)\n\nRows: 135\nColumns: 76\n$ ID               &lt;int&gt; 63147, 57165, 69465, 57313, 56047, 57056, 54643, 5309…\n$ SurveyYr         &lt;fct&gt; 2011_12, 2009_10, 2011_12, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, female, female, female, male, female, fem…\n$ Age              &lt;int&gt; 41, 48, 50, 74, 27, 26, 41, 52, 56, 39, 32, 72, 35, 2…\n$ AgeDecade        &lt;fct&gt;  40-49,  40-49,  50-59,  70+,  20-29,  20-29,  40-49,…\n$ AgeMonths        &lt;int&gt; NA, 586, NA, 889, 329, 316, 503, 632, NA, 472, 391, 8…\n$ Race1            &lt;fct&gt; White, Black, White, White, White, Mexican, White, Wh…\n$ Race3            &lt;fct&gt; White, NA, White, NA, NA, NA, NA, NA, White, NA, NA, …\n$ Education        &lt;fct&gt; Some College, High School, College Grad, College Grad…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Divorced, Widowed, NeverMarried, Ne…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 35000-44999, 45000-54999, 7…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 40000, 50000, 87500, 12500, 60000, 2500…\n$ Poverty          &lt;dbl&gt; 1.41, 1.36, 2.16, 4.16, 3.51, 0.39, 2.33, 0.05, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 10, 7, 7, 5, 9, 6, 7, 6, 4, 12, 6, 6, 8, 1, 5, …\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Own, Own, Own, Other, Own, Own, R…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NotWorking, Worki…\n$ Weight           &lt;dbl&gt; 106.8, 77.4, 70.5, 61.7, 70.3, 92.6, 55.6, 82.0, 88.2…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 188.8, 168.2, 161.8, 158.1, 168.1, 165.8, 155.6, 156.…\n$ BMI              &lt;dbl&gt; 30.00, 27.36, 26.90, 24.68, 24.88, 33.69, 22.96, 33.5…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; NA, 25.0_to_29.9, 25.0_to_29.9, 18.5_to_24.9, 18.5_to…\n$ Pulse            &lt;int&gt; 88, 70, 76, 64, 74, 78, 82, 96, 44, 60, 72, 88, 66, 6…\n$ BPSysAve         &lt;int&gt; 112, 123, 152, 132, 107, 126, 111, 114, 137, 122, 124…\n$ BPDiaAve         &lt;int&gt; 76, 69, 103, 81, 58, 75, 76, 71, 77, 78, 89, 66, 66, …\n$ BPSys1           &lt;int&gt; 114, 128, 144, 146, 106, 126, 116, 116, 134, 124, 128…\n$ BPDia1           &lt;int&gt; 78, 78, 104, 84, 62, 86, 72, 66, 78, 70, 94, 72, 62, …\n$ BPSys2           &lt;int&gt; 114, 126, 150, 130, 108, 130, 112, 116, 140, 120, 124…\n$ BPDia2           &lt;int&gt; 76, 76, 106, 80, 52, 74, 76, 72, 76, 80, 90, 64, 66, …\n$ BPSys3           &lt;int&gt; 110, 120, 154, 134, 106, 122, 110, 112, 134, 124, 124…\n$ BPDia3           &lt;int&gt; 76, 62, 100, 82, 64, 76, 76, 70, 78, 76, 88, 68, 66, …\n$ Testosterone     &lt;dbl&gt; 390.16, NA, 8.17, NA, NA, NA, NA, NA, 327.89, NA, NA,…\n$ DirectChol       &lt;dbl&gt; 1.19, 1.22, 2.43, NA, 1.84, 1.40, 1.24, 1.60, 1.11, 0…\n$ TotChol          &lt;dbl&gt; 4.84, 3.75, 5.92, NA, 4.78, 6.96, 5.77, 6.03, 5.25, 5…\n$ UrineVol1        &lt;int&gt; 57, 49, 30, 33, 150, 100, 17, 56, 104, 272, 120, 29, …\n$ UrineFlow1       &lt;dbl&gt; 0.074, 0.551, 1.304, 0.673, 0.342, 0.917, 0.283, 0.34…\n$ UrineVol2        &lt;int&gt; NA, NA, 114, 122, NA, NA, 61, NA, NA, NA, NA, 49, NA,…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, 1.118, 1.220, NA, NA, 0.407, NA, NA, NA, NA, …\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, Yes, No, No, …\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Fair, Fair, Vgood, Vgood, Fair, Fair, Good, Fair, NA,…\n$ DaysPhysHlthBad  &lt;int&gt; 12, 20, 0, 0, 2, 0, 4, 0, NA, 0, 20, 2, 0, 2, NA, 7, …\n$ DaysMentHlthBad  &lt;int&gt; 30, 30, 0, 0, 0, 0, 5, 5, NA, 0, 10, 0, 8, 3, NA, 14,…\n$ LittleInterest   &lt;fct&gt; Several, None, None, None, None, Several, Several, No…\n$ Depressed        &lt;fct&gt; Several, None, None, None, None, None, Several, Most,…\n$ nPregnancies     &lt;int&gt; NA, NA, 3, 3, 2, NA, 3, 2, NA, NA, 7, 3, NA, NA, NA, …\n$ nBabies          &lt;int&gt; NA, NA, 3, 3, 2, NA, 3, 2, NA, NA, 2, 3, NA, NA, NA, …\n$ Age1stBaby       &lt;int&gt; NA, NA, 27, 23, 17, NA, 31, 22, NA, NA, 23, 20, NA, N…\n$ SleepHrsNight    &lt;int&gt; 9, 3, 6, 6, 6, 6, 6, 4, 7, 4, 8, 8, 7, 6, 4, 4, 5, 8,…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, No, No, No, No, Yes, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, Yes, Yes, Yes, No, No, No, No, Yes, No, Yes, No, …\n$ PhysActiveDays   &lt;int&gt; NA, 3, 4, 7, NA, NA, NA, NA, 4, NA, 3, NA, NA, NA, NA…\n$ TVHrsDay         &lt;fct&gt; 1_hr, NA, 1_hr, NA, NA, NA, NA, NA, 2_hr, NA, NA, NA,…\n$ CompHrsDay       &lt;fct&gt; 1_hr, NA, 1_hr, NA, NA, NA, NA, NA, More_4_hr, NA, NA…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, No, Yes, NA, Yes, Yes, …\n$ AlcoholDay       &lt;int&gt; 2, NA, 1, 1, 5, 12, 1, 12, NA, NA, NA, 1, 1, 11, NA, …\n$ AlcoholYear      &lt;int&gt; 2, 0, 364, 52, 24, 168, 4, 364, NA, 0, 0, 4, 2, 52, N…\n$ SmokeNow         &lt;fct&gt; NA, No, NA, No, Yes, Yes, No, Yes, NA, NA, NA, NA, NA…\n$ Smoke100         &lt;fct&gt; No, Yes, No, Yes, Yes, Yes, Yes, Yes, No, No, No, No,…\n$ Smoke100n        &lt;fct&gt; Non-Smoker, Smoker, Non-Smoker, Smoker, Smoker, Smoke…\n$ SmokeAge         &lt;int&gt; NA, 11, NA, 18, 14, 14, 10, 30, NA, NA, NA, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, No, NA, Yes, Yes, Yes, No, NA, No, Yes, NA,…\n$ AgeFirstMarij    &lt;int&gt; 16, 17, NA, NA, 11, 14, 11, NA, NA, NA, 17, NA, NA, 2…\n$ RegularMarij     &lt;fct&gt; No, Yes, No, NA, Yes, Yes, Yes, No, NA, No, Yes, NA, …\n$ AgeRegMarij      &lt;int&gt; NA, 17, NA, NA, 16, 14, 11, NA, NA, NA, 20, NA, NA, N…\n$ HardDrugs        &lt;fct&gt; Yes, No, No, NA, No, Yes, No, No, NA, No, Yes, NA, No…\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, Yes, Yes, Yes, NA, Yes, Yes, …\n$ SexAge           &lt;int&gt; 15, 17, 17, NA, 13, 15, 15, 17, NA, 21, 16, NA, 17, 1…\n$ SexNumPartnLife  &lt;int&gt; 50, 81, 4, NA, 10, 8, 3, 5, NA, 5, 45, NA, 4, 1, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 10, 1, NA, 3, 1, 1, 0, NA, 5, 2, NA, 1, 1, NA, 2, …\n$ SameSex          &lt;fct&gt; No, No, No, NA, No, No, No, No, NA, No, Yes, NA, No, …\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, NA, N…\n\n\n\n\n\nEach row shows: variable name, type, and first few values\nEasier to read than str() for large datasets"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#skim---comprehensive-summary",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#skim---comprehensive-summary",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "skim() - comprehensive summary",
+    "text": "skim() - comprehensive summary\nskim() from the skimr package gives you detailed summaries and mini visualizations.\n\nskim(nhanes.samp.adult)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The pipe operator: %>%",
+    "text": "The pipe operator: %&gt;%\nThe pipe operator %&gt;% takes the output from one function and passes it as the first argument to the next function.\nThink of it as: “and then…”\n\n\nI want to find my keys, then start my car, then drive to work, then park my car.\n\n\n\n\nNested\n\npark(drive(start_car(find(\"keys\")), \n           to = \"work\"))\n\n\nPiped\n\nfind(\"keys\") %&gt;%\n  start_car() %&gt;%\n  drive(to = \"work\") %&gt;%\n  park()"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The pipe operator: %>%",
+    "text": "The pipe operator: %&gt;%\n\n\nWithout pipes (nested)\n\n\nRead from inside-out\n\nhead(nhanes.samp.adult, 3)\n\n# A tibble: 3 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 63147 2011_12  male      41 \" 40-49\"         NA White White Some College\n2 57165 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High School \n3 69465 2011_12  female    50 \" 50-59\"         NA White White College Grad\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\n\nWith pipes\n\n\nRead left to right\n\nnhanes.samp.adult %&gt;% \n  head(3)\n\n# A tibble: 3 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 63147 2011_12  male      41 \" 40-49\"         NA White White Some College\n2 57165 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High School \n3 69465 2011_12  female    50 \" 50-59\"         NA White White College Grad\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#dplyr-the-grammar-of-data-manipulation",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#dplyr-the-grammar-of-data-manipulation",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "dplyr: The grammar of data manipulation",
+    "text": "dplyr: The grammar of data manipulation\ndplyr provides a consistent set of verbs for data manipulation:\n\n\n\n\n\nFunction\nWhat it does\n\n\n\n\nfilter()\nKeep rows that meet conditions\n\n\nselect()\nKeep or drop columns\n\n\nmutate()\nCreate or modify columns\n\n\narrange()\nSort rows\n\n\ngroup_by()\nGroup data for summaries\n\n\nsummarize()\nCalculate summary statistics\n\n\n\n\n\nThese verbs can be chained together with %&gt;% for powerful data transformations."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#filter---subsetting-rows",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#filter---subsetting-rows",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "filter() - subsetting rows",
+    "text": "filter() - subsetting rows\nfilter() keeps rows that meet specified conditions.\n\n\n\n\nSingle condition\n\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\")\n\n\n\nMultiple conditions (AND)\n\nnhanes.samp.adult %&gt;%\n  filter(Gender == \"female\", \n         Age &gt; 50)\n\n# OR \n\nnhanes.samp.adult %&gt;%\n  filter(Gender == \"female\" & \n         Age &gt; 50)\n\n\nUsing OR (|)\n\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\" | \n         Age &gt; 70)\n\n\n\nNumeric comparisons\n\nnhanes.samp.adult %&gt;%\n  filter(BMI &gt;= 30)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#comparison-operators-in-r",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#comparison-operators-in-r",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Comparison operators in R",
+    "text": "Comparison operators in R\nWhen using filter(), you’ll use these comparison operators:\n\n\n\n\n\nOperator\nMeaning\n\n\n\n\n==\nEqual to\n\n\n!=\nNot equal to\n\n\n&gt;\nGreater than\n\n\n&gt;=\nGreater than or equal to\n\n\n&lt;\nLess than\n\n\n&lt;=\nLess than or equal to\n\n\n& or ,\nAND (both conditions must be true)\n\n\n|\nOR (at least one condition must be true)\n\n\nis.na()\nCheck if value is missing"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#select---choosing-columns",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#select---choosing-columns",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "select() - choosing columns",
+    "text": "select() - choosing columns\nselect() lets you keep or remove specific columns.\n\n\n\n\nSelect specific columns\n\nnhanes.samp.adult %&gt;%\n  select(Age, Gender, BMI)\n\n\n\nSelect a range of columns\n\nnhanes.samp.adult %&gt;%\n  select(Age:Education)\n\n\nDrop columns (i.e. de-select)\n\nnhanes.samp.adult %&gt;%\n  select(-ID)\n\n \nSelect by pattern\n\nnhanes.samp.adult %&gt;%\n  select(starts_with(\"B\"))"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate---creating-new-variables",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate---creating-new-variables",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "mutate() - creating new variables",
+    "text": "mutate() - creating new variables\nmutate() creates new columns or modifies existing ones.\n\n\nImportant: mutate() doesn’t change your original data unless you save it!\n\n\nCreate a single new column\n\nnhanes.samp.adult %&gt;%\n  mutate(height_m = Height / 100) %&gt;%\n  select(ID, Height, height_m)\n\n# A tibble: 135 × 3\n      ID Height height_m\n   &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt;\n 1 63147   189.     1.89\n 2 57165   168.     1.68\n 3 69465   162.     1.62\n 4 57313   158.     1.58\n 5 56047   168.     1.68\n 6 57056   166.     1.66\n 7 54643   156.     1.56\n 8 53095   156.     1.56\n 9 67434   181.     1.81\n10 60273   178.     1.78\n# ℹ 125 more rows"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate-with-case_when",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate-with-case_when",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "mutate() with case_when()",
+    "text": "mutate() with case_when()\ncase_when() is useful for creating categorical variables based on conditions.\n\nnhanes.samp.adult %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 18.5 ~ \"Underweight\",\n    BMI &lt; 25 ~ \"Normal\",\n    BMI &lt; 30 ~ \"Overweight\",\n    BMI &gt;= 30 ~ \"Obese\"\n  )) %&gt;%\n  select(ID, BMI, bmi_category) %&gt;%\n  head(5)  # Just show first 5 rows\n\n# A tibble: 5 × 3\n     ID   BMI bmi_category\n  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       \n1 63147  30   Obese       \n2 57165  27.4 Overweight  \n3 69465  26.9 Overweight  \n4 57313  24.7 Normal      \n5 56047  24.9 Normal      \n\n\n\n\n\ncase_when() evaluates conditions in order\nUse ~ to separate condition from result\n\nFirst matching condition wins"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate---multiple-columns-at-once",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate---multiple-columns-at-once",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "mutate() - multiple columns at once",
+    "text": "mutate() - multiple columns at once\nYou can create several new variables in one mutate() call.\n\nnhanes.samp.adult %&gt;%\n  mutate(\n    height_m = Height / 100,\n    weight_kg = Weight * 0.453592,\n    bmi_calculated = weight_kg / (height_m^2)\n  ) %&gt;%\n  select(ID, Height, Weight, BMI, height_m, weight_kg, bmi_calculated)\n\n# A tibble: 135 × 7\n      ID Height Weight   BMI height_m weight_kg bmi_calculated\n   &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;\n 1 63147   189.  107.   30       1.89      48.4           13.6\n 2 57165   168.   77.4  27.4     1.68      35.1           12.4\n 3 69465   162.   70.5  26.9     1.62      32.0           12.2\n 4 57313   158.   61.7  24.7     1.58      28.0           11.2\n 5 56047   168.   70.3  24.9     1.68      31.9           11.3\n 6 57056   166.   92.6  33.7     1.66      42.0           15.3\n 7 54643   156.   55.6  23.0     1.56      25.2           10.4\n 8 53095   156.   82    33.5     1.56      37.2           15.2\n 9 67434   181.   88.2  26.8     1.81      40.0           12.2\n10 60273   178.  119    37.5     1.78      54.0           17.0\n# ℹ 125 more rows"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-2-3-minutes",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-2-3-minutes",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick practice (2-3 minutes)",
+    "text": "Quick practice (2-3 minutes)\nUsing the nhanes.samp.adult data and pipes:\n\nFilter to people with diabetes\nSelect the columns: Age, Gender, BMI, Diabetes\nCreate a new column called age_group that is:\n\n“Under 50” if Age &lt; 50\n“50 or older” if Age &gt;= 50\n\n\n(Hint: Use filter(), select(), and mutate() with case_when())"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-solution",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-solution",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick practice: solution",
+    "text": "Quick practice: solution\n\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\") %&gt;%\n  select(Age, Gender, BMI, Diabetes) %&gt;%\n  mutate(age_group = case_when(\n    Age &lt; 50 ~ \"Under 50\",\n    Age &gt;= 50 ~ \"50 or older\"\n  ))\n\n# A tibble: 13 × 5\n     Age Gender   BMI Diabetes age_group  \n   &lt;int&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;chr&gt;      \n 1    32 female  45.5 Yes      Under 50   \n 2    63 male    37.7 Yes      50 or older\n 3    49 male    34.6 Yes      Under 50   \n 4    36 male    38.7 Yes      Under 50   \n 5    38 female  31.7 Yes      Under 50   \n 6    55 male    22.6 Yes      50 or older\n 7    57 female  29.2 Yes      50 or older\n 8    59 female  21.6 Yes      50 or older\n 9    70 female  31.8 Yes      50 or older\n10    61 female  38.7 Yes      50 or older\n11    33 female  42.8 Yes      Under 50   \n12    58 female  34.3 Yes      50 or older\n13    57 male    40.4 Yes      50 or older"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#arrange---sorting-rows",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#arrange---sorting-rows",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "arrange() - sorting rows",
+    "text": "arrange() - sorting rows\narrange() sorts rows by one or more variables.\n\n\n\n\nSort ascending (default)\n\nnhanes.samp.adult %&gt;%\n  select(ID, Age, BMI) %&gt;%\n  arrange(Age) %&gt;% \n  head(8)\n\n\nSort descending\n\nnhanes.samp.adult %&gt;%\n  select(ID, Age, BMI) %&gt;%\n  arrange(desc(Age)) %&gt;% \n  head(8)\n\nUse desc() to sort in descending order."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#group_by---preparing-for-summaries",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#group_by---preparing-for-summaries",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "group_by() - preparing for summaries",
+    "text": "group_by() - preparing for summaries\ngroup_by() groups your data by one or more variables.\n\nWhat if I want to quickly look at group differences?\nIt will not change how the data look, but changes the actions of following functions\n\n\n\nBy itself, it doesn’t change how the data looks:\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender)\n\n# A tibble: 135 × 76\n# Groups:   Gender [2]\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\nNotice the “Groups: Gender [2]” at the top - the data is now grouped, but not summarized."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#group_by-with-summarize",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#group_by-with-summarize",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "group_by() with summarize()",
+    "text": "group_by() with summarize()\nThe real power of group_by() comes when combined with summarize().\n\n\n\n\nWithout grouping\n\nnhanes.samp.adult %&gt;%\n  summarize(\n    mean_bmi = mean(BMI, na.rm = TRUE),\n    sd_bmi = sd(BMI, na.rm = TRUE), \n    n = n()\n  )\n\n# A tibble: 1 × 3\n  mean_bmi sd_bmi     n\n     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1     29.1   7.55   135\n\n\n\nWith grouping by Gender\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender) %&gt;%\n  summarize(\n    mean_bmi = mean(BMI, na.rm = TRUE),\n    sd_bmi = sd(BMI, na.rm = TRUE),\n    n = n()\n  )\n\n# A tibble: 2 × 4\n  Gender mean_bmi sd_bmi     n\n  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;\n1 female     29.0   8.81    70\n2 male       29.2   5.97    65\n\n\n\nn() counts the number of observations in each group."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#chaining-multiple-dplyr-verbs",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#chaining-multiple-dplyr-verbs",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Chaining multiple dplyr verbs",
+    "text": "Chaining multiple dplyr verbs\nYou can chain operations together to answer complex questions.\n\n\nQuestion: What is the mean BMI for people over age 50, by diabetes status?\n\nnhanes.samp.adult %&gt;%\n  filter(Age &gt; 50) %&gt;%\n  select(Age, BMI, Diabetes) %&gt;%\n  group_by(Diabetes) %&gt;%\n  summarize(\n    n = n(),\n    mean_bmi = mean(BMI, na.rm = TRUE),\n    sd_bmi = sd(BMI, na.rm = TRUE)\n  )\n\n# A tibble: 2 × 4\n  Diabetes     n mean_bmi sd_bmi\n  &lt;fct&gt;    &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;\n1 No          39     28.1   6.30\n2 Yes          8     32.0   7.16"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#summary-tables-with-janitor",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#summary-tables-with-janitor",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Summary tables with janitor",
+    "text": "Summary tables with janitor\ntabyl() in the janitor package makes frequency tables much easier than base R.\n\n\n\n\nOne-way frequency table\n\nnhanes.samp.adult %&gt;%\n  tabyl(Gender)\n\n Gender  n   percent\n female 70 0.5185185\n   male 65 0.4814815\n\n\nGives you counts (n), percentages (percent), and includes missing values automatically.\n\nTwo-way table (cross-tabulation)\n\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes)\n\n Gender No Yes\n female 62   8\n   male 60   5"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#enhancing-tables-with-janitor-adorn-functions",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#enhancing-tables-with-janitor-adorn-functions",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Enhancing tables with janitor adorn functions",
+    "text": "Enhancing tables with janitor adorn functions\njanitor has “adorn” functions to format tables nicely.\n\n\n\n\nAdd percentages\n\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes) %&gt;%\n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1)\n\n Gender    No   Yes\n female 88.6% 11.4%\n   male 92.3%  7.7%\n\n\n\nAdd totals\n\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes) %&gt;%\n  adorn_totals(c(\"row\", \"col\"))\n\n Gender  No Yes Total\n female  62   8    70\n   male  60   5    65\n  Total 122  13   135"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#combining-adorn-functions",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#combining-adorn-functions",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Combining adorn functions",
+    "text": "Combining adorn functions\nYou can chain multiple adorn functions together.\n\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes) %&gt;%\n  adorn_totals(c(\"row\", \"col\")) %&gt;%\n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1) %&gt;%\n  adorn_ns()\n\n Gender          No        Yes        Total\n female 88.6%  (62) 11.4%  (8) 100.0%  (70)\n   male 92.3%  (60)  7.7%  (5) 100.0%  (65)\n  Total 90.4% (122)  9.6% (13) 100.0% (135)\n\n\n\n\n\nadorn_ns() adds the counts alongside percentages\nOrder matters: calculate totals first, then percentages"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#summary-statistics-with-rstatix",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#summary-statistics-with-rstatix",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Summary statistics with rstatix",
+    "text": "Summary statistics with rstatix\nget_summary_stats() in rstatix package provides pipe-friendly functions for summary statistics.\n\n\n\n\nSummary for one variable\n\nnhanes.samp.adult %&gt;%\n  get_summary_stats(BMI, \n                    type = \"mean_sd\")\n\n# A tibble: 1 × 4\n  variable     n  mean    sd\n  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 BMI        135  29.1  7.55\n\n\n\nSummary by groups\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender) %&gt;%\n  get_summary_stats(BMI, \n                    type = \"mean_sd\")\n\n# A tibble: 2 × 5\n  Gender variable     n  mean    sd\n  &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 female BMI         70  29.0  8.82\n2 male   BMI         65  29.2  5.97\n\n\n\n\n\nOther types: \"median_iqr\", \"five_number\", \"full\", \"common\""
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#multiple-variables-and-groups",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#multiple-variables-and-groups",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Multiple variables and groups",
+    "text": "Multiple variables and groups\nget_summary_stats() can handle multiple variables at once.\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender, Diabetes) %&gt;%\n  get_summary_stats(BMI, Height, Weight, type = \"mean_sd\")\n\n# A tibble: 12 × 6\n   Gender Diabetes variable     n  mean    sd\n   &lt;fct&gt;  &lt;fct&gt;    &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 female No       BMI         62  28.3  8.75\n 2 female No       Height      62 163.   7.57\n 3 female No       Weight      62  75.7 25.9 \n 4 female Yes      BMI          8  34.4  7.73\n 5 female Yes      Height       8 161.   7.11\n 6 female Yes      Weight       8  90.0 22.6 \n 7 male   No       BMI         60  28.8  5.69\n 8 male   No       Height      60 176.   6.97\n 9 male   No       Weight      60  89.6 18.1 \n10 male   Yes      BMI          5  34.8  7.15\n11 male   Yes      Height       5 178.   9.28\n12 male   Yes      Weight       5 109.  22.0"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-check-putting-it-together",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-check-putting-it-together",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick check: putting it together",
+    "text": "Quick check: putting it together\nUsing what you’ve learned, try to answer:\nWhat is the mean age and BMI for each combination of Gender and Diabetes status?\n\n\nHints:\n\nUse group_by() with two variables\nUse get_summary_stats() or summarize()\nInclude n() to count observations"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-check-solution",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-check-solution",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick check: solution",
+    "text": "Quick check: solution\n\n\nUsing rstatix\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender, Diabetes) %&gt;%\n  get_summary_stats(Age, BMI, \n                    type = \"mean_sd\")\n\n# A tibble: 8 × 6\n  Gender Diabetes variable     n  mean    sd\n  &lt;fct&gt;  &lt;fct&gt;    &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 female No       Age         62  42.2 16.2 \n2 female No       BMI         62  28.3  8.75\n3 female Yes      Age          8  51   14.5 \n4 female Yes      BMI          8  34.4  7.73\n5 male   No       Age         60  45.4 16.4 \n6 male   No       BMI         60  28.8  5.69\n7 male   Yes      Age          5  52   10.2 \n8 male   Yes      BMI          5  34.8  7.15\n\n\n\nUsing dplyr summarize\n\nnhanes.samp.adult %&gt;%\n  group_by(Gender, Diabetes) %&gt;%\n  summarize(\n    n = n(),\n    mean_age = mean(Age, na.rm = TRUE),\n    mean_bmi = mean(BMI, na.rm = TRUE)\n  )\n\n# A tibble: 4 × 5\n# Groups:   Gender [2]\n  Gender Diabetes     n mean_age mean_bmi\n  &lt;fct&gt;  &lt;fct&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 female No          62     42.2     28.3\n2 female Yes          8     51       34.4\n3 male   No          60     45.4     28.8\n4 male   Yes          5     52       34.8"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-visualization-with-ggplot2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-visualization-with-ggplot2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Data visualization with ggplot2",
+    "text": "Data visualization with ggplot2\n\nArtwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#why-visualize-data",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#why-visualize-data",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Why visualize data?",
+    "text": "Why visualize data?\nVisualizations help us:\n\nUnderstand distributions\nIdentify outliers and patterns\nCompare groups\nCommunicate findings"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-grammar-of-graphics",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-grammar-of-graphics",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The grammar of graphics",
+    "text": "The grammar of graphics\nggplot2 implements the grammar of graphics - a framework for describing plots.\n\n\nEvery ggplot has three essential components:\n\nData - the dataset you’re plotting\nAesthetics (aes()) - mappings from data to visual properties (x, y, color, size, etc.)\nGeoms - geometric objects that represent the data (points, lines, bars, etc.)\n\n\n\nBasic template:\n\nggplot(data = DATA, \n       mapping = aes(x = X_VAR, y = Y_VAR)) +\n  geom_SOMETHING()\n\n\n\nNotice we use + (not %&gt;%) to add layers to a ggplot."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#your-first-ggplot-histogram",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#your-first-ggplot-histogram",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Your first ggplot: histogram",
+    "text": "Your first ggplot: histogram\nHistogram - shows the distribution of a single numeric variable.\n\n\nggplot(data = nhanes.samp.adult, \n       mapping = aes(x = BMI)) +\n  geom_histogram()\n\n\n\n\n\n\n\n\n\n\n\nWhat does this tell us?\n\nMost people have BMI between 20-35\nDistribution is slightly right-skewed\nSome people with very high BMI (outliers)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#customizing-histograms",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#customizing-histograms",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Customizing histograms",
+    "text": "Customizing histograms\nYou can control the appearance of histograms.\n\n\n\n\nAdjust bin width\n\nggplot(nhanes.samp.adult, \n       aes(x = BMI)) +\n  geom_histogram(binwidth = 2)\n\n\n\n\n\n\n\n\n\nAdjust number of bins\n\nggplot(nhanes.samp.adult, \n       aes(x = BMI)) +\n  geom_histogram(bins = 50)\n\n\n\n\n\n\n\n\n\nTry different values to find what best reveals patterns in your data."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#boxplots---comparing-distributions",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#boxplots---comparing-distributions",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Boxplots - comparing distributions",
+    "text": "Boxplots - comparing distributions\nBoxplot - shows the distribution across groups.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Gender, y = BMI)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nBoxplot components:\n\nBox: middle 50% of data (IQR)\nLine in box: median\nWhiskers: extend to most extreme non-outlier values\nPoints: potential outliers"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#boxplot-by-multiple-groups",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#boxplot-by-multiple-groups",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Boxplot by multiple groups",
+    "text": "Boxplot by multiple groups\nWe can compare distributions across multiple categorical variables.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Diabetes, y = BMI)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nPeople with diabetes tend to have higher BMI."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adding-color-to-boxplots",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adding-color-to-boxplots",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Adding color to boxplots",
+    "text": "Adding color to boxplots\nColor can be mapped to a variable using aes().\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Gender, \n           y = BMI, \n           fill = Diabetes)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\n\nfill controls the fill color of shapes.\ncolor would control the outline color."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#scatterplots---relationship-between-two-numeric-variables",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#scatterplots---relationship-between-two-numeric-variables",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Scatterplots - relationship between two numeric variables",
+    "text": "Scatterplots - relationship between two numeric variables\nScatterplot - shows the relationship between two numeric variables.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Height, y = Weight)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nWhat we see:\n\nPositive relationship\nTaller people tend to weigh more\nSome variability"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#enhancing-scatterplots-with-color",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#enhancing-scatterplots-with-color",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Enhancing scatterplots with color",
+    "text": "Enhancing scatterplots with color\nMap a third variable to color to see patterns.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Height, \n           y = Weight, \n           color = Gender)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\n\n\nNow we can see if the relationship differs by gender."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adjusting-point-transparency",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adjusting-point-transparency",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Adjusting point transparency",
+    "text": "Adjusting point transparency\nWhen points overlap, transparency (alpha) helps.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Height, \n           y = Weight, \n           color = Gender)) +\n  geom_point(alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\n\nalpha ranges from 0 (transparent) to 1 (opaque)."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#bar-charts---categorical-data",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#bar-charts---categorical-data",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Bar charts - categorical data",
+    "text": "Bar charts - categorical data\nBar chart - shows counts or frequencies of categories.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Diabetes)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\ngeom_bar() automatically counts observations in each category."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#grouped-bar-charts",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#grouped-bar-charts",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Grouped bar charts",
+    "text": "Grouped bar charts\nCompare categories across groups by mapping a variable to fill.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Gender, \n           fill = Diabetes)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\nBy default, bars are stacked."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#position-adjustments-for-bar-charts",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#position-adjustments-for-bar-charts",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Position adjustments for bar charts",
+    "text": "Position adjustments for bar charts\n\n\nStacked (default)\n\nggplot(nhanes.samp.adult, \n       aes(x = Gender, \n           fill = Diabetes)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\nSide-by-side\n\nggplot(nhanes.samp.adult, \n       aes(x = Gender, \n           fill = Diabetes)) +\n  geom_bar(position = \"dodge\")"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adding-labels-and-titles",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#adding-labels-and-titles",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Adding labels and titles",
+    "text": "Adding labels and titles\nMake your plots more informative with labels.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = Height, y = Weight)) +\n  geom_point(alpha = 0.5) +\n  labs(\n    title = \"Height vs Weight in NHANES\",\n    subtitle = \"Adult participants\",\n    x = \"Height (cm)\",\n    y = \"Weight (kg)\",\n    caption = \"Data: NHANES\"\n  )"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#faceting---small-multiples",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#faceting---small-multiples",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Faceting - small multiples",
+    "text": "Faceting - small multiples\nFacets create separate panels for subgroups.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = BMI)) +\n  geom_histogram(bins = 30) +\n  facet_wrap(~Gender)\n\n\n\n\n\n\n\n\n\n\n\nfacet_wrap() creates a panel for each level of a variable."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#faceting-by-two-variables",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#faceting-by-two-variables",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Faceting by two variables",
+    "text": "Faceting by two variables\nCreate a grid of panels with two variables.\n\n\nggplot(nhanes.samp.adult, \n       aes(x = BMI)) +\n  geom_histogram(bins = 30) +\n  facet_grid(Gender ~ Diabetes)\n\n\n\n\n\n\n\n\n\n\n\nfacet_grid() creates rows × columns layout."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#combining-dplyr-and-ggplot2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#combining-dplyr-and-ggplot2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Combining dplyr and ggplot2",
+    "text": "Combining dplyr and ggplot2\nYou can pipe data directly into ggplot()!\n\n\nnhanes.samp.adult %&gt;%\n  filter(Age &gt;= 50) %&gt;%\n  ggplot(aes(x = Height, y = Weight)) +\n  geom_point(alpha = 0.5) +\n  labs(title = \"Height vs Weight (Age ≥ 50)\")\n\n\n\n\n\n\n\n\n\n\n\nPipe %&gt;% passes data to ggplot().\nThen use + to add layers."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#saving-your-work",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#saving-your-work",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Saving your work",
+    "text": "Saving your work\nRemember: dplyr operations don’t modify the original data unless you save them.\n\n\n\n\nSave filtered data\n\nadults_diabetes &lt;- nhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\")\n\n# Check it worked\nnrow(adults_diabetes)\n\n[1] 13\n\n\n\nSave data with new variables\n\nnhanes_with_categories &lt;- \n  nhanes.samp.adult %&gt;%\n  mutate(\n    bmi_category = case_when(\n      BMI &lt; 18.5 ~ \"Underweight\",\n      BMI &lt; 25 ~ \"Normal\",\n      BMI &lt; 30 ~ \"Overweight\",\n      BMI &gt;= 30 ~ \"Obese\"\n    )\n  )"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#saving-plots",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#saving-plots",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Saving plots",
+    "text": "Saving plots\nSave plots to files with ggsave().\n\n# Create a plot\np &lt;- ggplot(nhanes.samp.adult, aes(x = BMI)) +\n  geom_histogram(bins = 30) +\n  labs(title = \"Distribution of BMI\")\n\n# Save it\nggsave(\"bmi_histogram.png\", plot = p, \n       width = 8, height = 6, dpi = 300)\n\n\n\nTips:\n\nggsave() saves the last plot if you don’t specify plot =\nCommon formats: .png, .pdf, .jpg\nAdjust width and height in inches\nUse dpi = 300 for publication quality"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#common-ggplot2-geoms",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#common-ggplot2-geoms",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Common ggplot2 geoms",
+    "text": "Common ggplot2 geoms\n\n\n\n\n\n\n\n\nGeom\nUse case\nVariables needed\n\n\n\n\ngeom_histogram()\nDistribution of one numeric variable\nx\n\n\ngeom_density()\nSmooth distribution curve\nx\n\n\ngeom_boxplot()\nCompare distributions across groups\nx (categorical), y (numeric)\n\n\ngeom_point()\nRelationship between two numeric variables\nx, y\n\n\ngeom_line()\nTrends over time or ordered data\nx, y\n\n\ngeom_bar()\nCounts of categorical data\nx\n\n\ngeom_col()\nPre-computed values\nx, y"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-5-minutes",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-5-minutes",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick practice (5 minutes)",
+    "text": "Quick practice (5 minutes)\nUsing what you’ve learned, create:\n\nA scatterplot of Age vs BMI\nColor the points by Diabetes status\nAdd appropriate labels\nAdd transparency to see overlapping points\n\n\n\nBonus: Facet by Gender"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-solution-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#quick-practice-solution-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Quick practice: solution",
+    "text": "Quick practice: solution\n\nggplot(nhanes.samp.adult, \n       aes(x = Age, y = BMI, color = Diabetes)) +\n  geom_point(alpha = 0.5) +\n  labs(\n    title = \"Relationship between Age and BMI\",\n    subtitle = \"NHANES adult sample\",\n    x = \"Age (years)\",\n    y = \"Body Mass Index (kg/m²)\"\n  ) +\n  facet_wrap(~Gender)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#eda-workflow-summary",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#eda-workflow-summary",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "EDA workflow summary",
+    "text": "EDA workflow summary\n1. Import and inspect\n\nLoad data\nCheck dimensions, variable names, and types\nLook for missing values\n\n2. Summarize\n\nCalculate summary statistics\nCreate frequency tables\nGroup by relevant variables\n\n3. Visualize\n\nPlot distributions (histograms, boxplots)\nExplore relationships (scatterplots)\nCompare groups (facets, colors)\n\n4. Iterate\n\nAsk new questions based on what you find\nFilter, transform, and visualize again"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#key-takeaways",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#key-takeaways",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nPipes (%&gt;%) chain operations together for readable code\ndplyr verbs manipulate data:\n\nfilter() - subset rows\nselect() - choose columns\nmutate() - create/modify variables\ngroup_by() + summarize() - calculate summaries by group\n\njanitor::tabyl() creates clean frequency tables\nrstatix::get_summary_stats() provides pipe-friendly summary statistics\nggplot2 builds visualizations using data + aesthetics + geoms\nNothing changes your original data unless you save it with &lt;-"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#resources-for-learning-more",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#resources-for-learning-more",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Resources for learning more",
+    "text": "Resources for learning more\nTidyverse documentation:\n\nhttps://dplyr.tidyverse.org/\nhttps://ggplot2.tidyverse.org/\n\n\n\nBooks (free online):\n\nR for Data Science (2e) by Hadley Wickham & Garrett Grolemund\nModern Dive by Chester Ismay & Albert Kim\n\n\n\nCheat sheets:\n\nData transformation with dplyr\nData visualization with ggplot2"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#practice-exercises",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#practice-exercises",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Practice exercises",
+    "text": "Practice exercises\nTry these on your own to reinforce what you learned:\n\nFilter the data to people with BMI &gt; 30\nCreate a scatterplot of Age vs BMI\nCalculate mean height by gender\nMake a histogram of Age\nCreate a two-way table of Gender and Diabetes status\n\n\n\n\nBMSC 620 | EDA + Data Viz"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#packages-well-use-today",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#packages-well-use-today",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Packages well use today",
+    "text": "Packages well use today\nPackages we’ll use today:\n\ndplyr - data manipulation\nggplot2 - visualization\njanitor - clean tables\nrstatix - summary statistics\nskimr - quick data summaries"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#packages-for-eda",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#packages-for-eda",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Packages for EDA",
+    "text": "Packages for EDA\n\n\nPackages we’ll use today:\n\ndplyr - data manipulation\nggplot2 - visualization\njanitor - clean tables\nrstatix - summary statistics\nskimr - quick data summaries\n\n\n\nNot all from the tidyverse, but came after and follow the philosophy."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#tidy-data1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#tidy-data1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Tidy data1",
+    "text": "Tidy data1\n\n\nEach variable must have its own column.\nEach observation must have its own row.\nEach value must have its own cell.\n\nSource: R for Data Science. Grolemund and Wickham."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#pipes",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#pipes",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "PIpes",
+    "text": "PIpes\n\n\nWithout pipes (nested)\n\n# Read from inside-out\nhead(nhanes.samp.adult, 3)\n\n# A tibble: 3 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 63147 2011_12  male      41 \" 40-49\"         NA White White Some College\n2 57165 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High School \n3 69465 2011_12  female    50 \" 50-59\"         NA White White College Grad\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\nHarder to read when operations stack up:\n\nmean(filter(nhanes.samp.adult, \n            Diabetes == \"Yes\")$BMI, \n     na.rm = TRUE)\n\n\nWith pipes\n\n# Read left to right\nnhanes.samp.adult %&gt;% \n  head(3)\n\n# A tibble: 3 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education   \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;       \n1 63147 2011_12  male      41 \" 40-49\"         NA White White Some College\n2 57165 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High School \n3 69465 2011_12  female    50 \" 50-59\"         NA White White College Grad\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\nMore readable for complex operations:\n\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\") %&gt;%\n  pull(BMI) %&gt;%\n  mean(na.rm = TRUE)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator-2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-pipe-operator-2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The pipe operator: %>%",
+    "text": "The pipe operator: %&gt;%\n\n\nWithout pipes (nested)\n\n\nHarder to read when operations stack up:\n\nmean(filter(nhanes.samp.adult, \n            Diabetes == \"Yes\")$BMI, \n     na.rm = TRUE)\n\n\nWith pipes\n\n\nMore readable for complex operations:\n\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\") %&gt;%\n  pull(BMI) %&gt;%\n  mean(na.rm = TRUE)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate-with-case_when-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mutate-with-case_when-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "mutate() with case_when()",
+    "text": "mutate() with case_when()\ncase_when() is useful for creating categorical variables based on conditions.\n\nnhanes.samp.adult %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 18.5 ~ \"Underweight\",\n    BMI &lt; 25 ~ \"Normal\",\n    BMI &lt; 30 ~ \"Overweight\",\n    BMI &gt;= 30 ~ \"Obese\"\n  )) %&gt;%\n  select(ID, BMI, bmi_category) %&gt;%\n  head(5)  # Just show first 5 rows\n\n# A tibble: 5 × 3\n     ID   BMI bmi_category\n  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       \n1 63147  30   Obese       \n2 57165  27.4 Overweight  \n3 69465  26.9 Overweight  \n4 57313  24.7 Normal      \n5 56047  24.9 Normal      \n\n\n\ncase_when() evaluates conditions in order\nUse ~ to separate condition from result\n\nFirst matching condition wins"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#arrange---multiple-columns",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#arrange---multiple-columns",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "arrange() - multiple columns",
+    "text": "arrange() - multiple columns\nYou can sort by multiple variables at once.\n\nnhanes.samp.adult %&gt;%\n  select(ID, Gender, Age, BMI) %&gt;%\n  arrange(Gender, desc(Age)) %&gt;%\n  head(8)\n\n# A tibble: 8 × 4\n     ID Gender   Age   BMI\n  &lt;int&gt; &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;\n1 61964 female    80  19.2\n2 57313 female    74  24.7\n3 59171 female    74  32.0\n4 58284 female    72  25.2\n5 67897 female    71  17.1\n6 67285 female    70  36.6\n7 67668 female    70  31.8\n8 69421 female    68  25.9\n\n\nSorts by Gender first, then by Age (descending) within each gender group."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#anscombes-quartet",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#anscombes-quartet",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Anscombe’s Quartet",
+    "text": "Anscombe’s Quartet\nFour datasets with identical summary statistics but very different patterns:\n\nAll four have the same mean, SD, and correlation - but look how different they are!"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#anscombe-2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#anscombe-2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Anscombe 2",
+    "text": "Anscombe 2"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#datasaurs",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#datasaurs",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Datasaurs",
+    "text": "Datasaurs\n\nlibrary(datasauRus)\n\nggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +\n  geom_point() +\n  facet_wrap(~dataset) + \n  laviz::theme_minimal_white(axis = TRUE, \n                             border = TRUE, \n                             grid = FALSE) + \n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-datasaurus-dozen",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-datasaurus-dozen",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The Datasaurus Dozen",
+    "text": "The Datasaurus Dozen\nSimilar to Anscombe’s quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice here\n\nMean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#basics-of-a-ggplot",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#basics-of-a-ggplot",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Basics of a ggplot",
+    "text": "Basics of a ggplot"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#grammar-of-ggplot2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#grammar-of-ggplot2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Grammar of ggplot2",
+    "text": "Grammar of ggplot2\n\n\n\n\n\n\n\n\n\nggplot2 needs at least the following three to produce a chart:\n\ndata, a mapping, and a layer\n\n\n \n\nFor the most part, there are default settings for the other parts:\n\nscales, facets, coordinates, and themes"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Data",
+    "text": "Data\n\nggplot2 uses data to construct a plot\nWorks best with tiday data (when every observation is a row and each variable is a column)\nFirst step in plotting:\n\nPass the data to the ggplot function, which stores the data to be used later by other parts of the plotting system"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Data",
+    "text": "Data\n\nFor example, if we intend to make a graphic about the mpg dataset, we would start as follows:\n\n\nggplot(data = mpg)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mapping",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#mapping",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Mapping",
+    "text": "Mapping\n\nMappings use the aes() function to map variables to the different axes on a plot\n\naes() stands for “aesthetics”"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-mapping",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-mapping",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Data + Mapping",
+    "text": "Data + Mapping\n\nIf we want the cty and hwy columns to map to the x- and y-coordinates in the plot, we can do that as follows:\n\n\nggplot(mpg, mapping = aes(x = cty, y = hwy))"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#layers",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#layers",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Layers",
+    "text": "Layers\n\nEvery layer consists of three important parts:\n\nThe geometry that determines how data are displayed, such as points, lines, or rectangles\nThe statistical transformation that may compute new variables from the data and affect what of the data is displayed.\nThe position adjustment that primarily determines where a piece of data is being displayed\n\nA layer can be constructed using the geom_*() and stat_*() functions\n\nThese functions often determine one of the three parts of a layer, while the other two can still be specified."
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-mapping-layers",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data-mapping-layers",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Data + Mapping + Layers",
+    "text": "Data + Mapping + Layers\nHere is how we can use two layers to display the cty and hwy columns of the mpg dataset as points and stack a trend line on top:\n\nggplot(mpg, aes(cty, hwy)) +\n  # to create a scatterplot\n  geom_point() +\n  # to fit and overlay a line\n  geom_smooth(formula = y ~ x, method = \"lm\")"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-grammar-of-graphics-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-grammar-of-graphics-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "The grammar of graphics",
+    "text": "The grammar of graphics\n[Your current explanation]"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Building a ggplot step by step",
+    "text": "Building a ggplot step by step\nStep 1: Just data\n\nggplot(data = nhanes.samp.adult)"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step-1",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step-1",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Building a ggplot step by step",
+    "text": "Building a ggplot step by step\nStep 2: Add mapping\n\nggplot(nhanes.samp.adult, aes(x = BMI))"
+  },
+  {
+    "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step-2",
+    "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#building-a-ggplot-step-by-step-2",
+    "title": "Exploratory Data Analysis and Data Visualization",
+    "section": "Building a ggplot step by step",
+    "text": "Building a ggplot step by step\nStep 3: Add geom\n\nggplot(nhanes.samp.adult, aes(x = BMI)) +\n  geom_histogram()"
   }
 ]

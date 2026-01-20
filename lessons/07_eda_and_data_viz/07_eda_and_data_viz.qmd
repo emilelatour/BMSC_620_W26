@@ -1,0 +1,1693 @@
+---
+title: "Exploratory Data Analysis and Data Visualization"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w3d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v4.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | EDA + Data Viz"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r}
+#| label: "setup" 
+#| include: false
+#| message: false
+#| warning: false
+
+library(here)
+source(here("class_dates.R"))
+
+
+library(datasauRus)  # install.packages("datasauRus")
+library(dplyr)
+library(ggplot2)
+library(janitor)
+library(rstatix)
+library(skimr)
+library(oibiostat)
+
+data("nhanes.samp.adult")
+
+# terminal: for icons
+# quarto install extension quarto-ext/fontawesome
+```
+
+## Today's plan
+
+1. Tools for exploratory data analysis (EDA)
+2. Data wrangling with `dplyr`
+3. Summary tables with `janitor` and `rstatix`
+4. Data visualization with `ggplot2`
+
+## What is exploratory data analysis?
+
+**Exploratory Data Analysis (EDA)** is the process of:
+
+- Inspecting and summarizing data
+- Identifying patterns, outliers, and relationships
+- Understanding the structure before formal analysis
+
+\
+
+**EDA helps answer questions like:**
+
+- What variables do I have?
+- What does the distribution look like?
+- Are there missing values?
+- How do variables relate to each other?
+
+## The tidyverse ecosystem
+
+![[Artwork by @allison_horst](https://allisonhorst.com/r-packages-functions)](/img_slides/tidyverse_celestial.jpg){fig-align="center"}
+
+## The tidyverse philosophy
+
+The **tidyverse** is a collection of R packages designed for data science.
+
+\
+
+::: columns
+::: {.column width="45%"}
+
+**Key principles:**
+
+- Consistent syntax across packages
+- Functions designed to work together
+- Human-readable code
+- Works well with the pipe operator `%>%`
+
+\
+
+-   **ggplot2** - data visualisation
+-   **dplyr** - data manipulation
+-   **tidyr** - tidy data
+-   **readr** - read rectangular data
+-   **purrr** - functional programming
+-   **tibble** - modern data frames
+-   **stringr** - string manipulation
+-   **forcats** - factors
+-   and many more ...
+:::
+
+::: {.column width="55%"}
+![](/img_slides/tidyverse.png){fig-align="center" width="669"}
+:::
+:::
+
+
+\
+
+## Packages for EDA
+
+\
+
+**Packages we'll use today:**
+
+- `dplyr` - data manipulation
+- `ggplot2` - visualization
+- `janitor` - clean tables
+- `rstatix` - summary statistics
+- `skimr` - quick data summaries
+
+\
+
+Not all from the tidyverse, but came after and follow the philosophy.
+
+## Tidy data[^1]
+
+[^1]: Source: R for Data Science. Grolemund and Wickham.
+
+![](/img_slides/tidy-data-frame.png)
+
+1.  Each variable must have its own column.
+
+2.  Each observation must have its own row.
+
+3.  Each value must have its own cell.
+
+## Today's dataset: NHANES
+
+**National Health and Nutrition Examination Survey (NHANES)**
+
+- CDC survey assessing health and nutritional status of adults and children in the US
+- Combines interviews, physical examinations, and laboratory tests
+- Today we'll use a sample of adult participants
+
+\
+
+**Loading the data:**
+
+```{r}
+#| eval: false
+
+library(oibiostat)
+data("nhanes.samp.adult")
+```
+
+## First look at the data
+
+Always start by getting a sense of what's in your dataset.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+**How many rows and columns?**
+
+```{r}
+dim(nhanes.samp.adult)
+```
+
+**What are the variable names?**
+
+```{r}
+names(nhanes.samp.adult)
+```
+
+:::
+::: {.column width="50%"}
+
+**What does the first few rows look like?**
+
+```{r}
+head(nhanes.samp.adult, 3)
+```
+
+:::
+:::
+
+## Tibbles: tidyverse data frames
+
+A **tibble** is the tidyverse version of a data frame.
+
+```{r}
+nhanes.samp.adult
+```
+
+\
+
+**Benefits of tibbles:**
+
+- Prints only first 10 rows (doesn't flood console)
+- Shows column types
+- Never converts strings to factors automatically
+
+## glimpse() - quick data structure
+
+\ 
+
+`glimpse()` from the `dplyr` package shows you the structure of your data in a compact format.
+
+```{r}
+glimpse(nhanes.samp.adult)
+```
+
+\
+
+- Each row shows: variable name, type, and first few values
+- Easier to read than `str()` for large datasets
+
+## skim() - comprehensive summary
+
+`skim()` from the `skimr` package gives you detailed summaries and mini visualizations.
+
+```{r}
+#| eval: false
+#| echo: true
+
+skim(nhanes.samp.adult)
+```
+
+```{r}
+#| echo: false
+#| eval: true
+#| out-width: "90%"
+#| fig-align: center
+
+# knitr::include_graphics("/img_slides/nhanes_skim_output.png")
+```
+
+![](/img_slides/nhanes_skim_output.png){fig-align="center" width="70%"}
+
+## The pipe operator: `%>%`
+
+The pipe operator `%>%` takes the output from one function and passes it as the first argument to the next function.
+
+**Think of it as:** "and then..."
+
+\
+
+I want to find my keys, then start my car, then drive to work, then park my car.
+
+\
+
+::: columns
+::: {.column width="50%"}
+**Nested**
+
+```{r eval = FALSE}
+park(drive(start_car(find("keys")), 
+           to = "work"))
+```
+:::
+
+::: {.column width="50%"}
+**Piped**
+
+```{r eval = FALSE}
+find("keys") %>%
+  start_car() %>%
+  drive(to = "work") %>%
+  park()
+```
+:::
+:::
+
+## The pipe operator: `%>%`
+
+::: columns
+::: {.column width="50%"}
+
+### Without pipes (nested)
+
+\
+
+Read from inside-out
+
+```{r}
+
+head(nhanes.samp.adult, 3)
+```
+
+:::
+::: {.column width="50%"}
+
+### With pipes
+
+\
+
+Read left to right
+
+```{r}
+
+nhanes.samp.adult %>% 
+  head(3)
+```
+
+:::
+:::
+
+## The pipe operator: `%>%`
+
+::: columns
+::: {.column width="50%"}
+
+### Without pipes (nested)
+
+\
+
+Harder to read when operations stack up:
+
+```{r}
+#| eval: false
+
+mean(filter(nhanes.samp.adult, 
+            Diabetes == "Yes")$BMI, 
+     na.rm = TRUE)
+```
+
+:::
+::: {.column width="50%"}
+
+### With pipes
+
+\
+
+More readable for complex operations:
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  filter(Diabetes == "Yes") %>%
+  pull(BMI) %>%
+  mean(na.rm = TRUE)
+```
+
+:::
+:::
+
+## dplyr: The grammar of data manipulation
+
+`dplyr` provides a consistent set of **verbs** for data manipulation:
+
+\
+
+| Function | What it does |
+|----------|-------------|
+| `filter()` | Keep rows that meet conditions |
+| `select()` | Keep or drop columns |
+| `mutate()` | Create or modify columns |
+| `arrange()` | Sort rows |
+| `group_by()` | Group data for summaries |
+| `summarize()` | Calculate summary statistics |
+
+\
+
+These verbs can be chained together with `%>%` for powerful data transformations.
+
+## filter() - subsetting rows
+
+`filter()` keeps rows that meet specified conditions.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Single condition
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  filter(Diabetes == "Yes")
+```
+
+\
+
+### Multiple conditions (AND)
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  filter(Gender == "female", 
+         Age > 50)
+
+# OR 
+
+nhanes.samp.adult %>%
+  filter(Gender == "female" & 
+         Age > 50)
+```
+
+:::
+::: {.column width="50%"}
+
+### Using OR (`|`)
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  filter(Diabetes == "Yes" | 
+         Age > 70)
+```
+
+\
+
+### Numeric comparisons
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  filter(BMI >= 30)
+```
+
+:::
+:::
+
+## Comparison operators in R
+
+When using `filter()`, you'll use these comparison operators:
+
+\
+
+| Operator | Meaning |
+|----------|---------|
+| `==` | Equal to |
+| `!=` | Not equal to |
+| `>` | Greater than |
+| `>=` | Greater than or equal to |
+| `<` | Less than |
+| `<=` | Less than or equal to |
+| `&` or `,` | AND (both conditions must be true) |
+| `|` | OR (at least one condition must be true) |
+| `is.na()` | Check if value is missing |
+
+## select() - choosing columns
+
+`select()` lets you keep or remove specific columns.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Select specific columns
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(Age, Gender, BMI)
+```
+
+\
+
+### Select a range of columns
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(Age:Education)
+```
+
+:::
+::: {.column width="50%"}
+
+### Drop columns (i.e. de-select)
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(-ID)
+```
+
+\ 
+
+### Select by pattern
+
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(starts_with("B"))
+```
+
+:::
+:::
+
+## mutate() - creating new variables
+
+`mutate()` creates new columns or modifies existing ones.
+
+\
+
+**Important:** `mutate()` doesn't change your original data unless you save it!
+
+\
+
+### Create a single new column
+
+```{r}
+nhanes.samp.adult %>%
+  mutate(height_m = Height / 100) %>%
+  select(ID, Height, height_m)
+```
+
+
+
+## mutate() with case_when()
+
+`case_when()` is useful for creating categorical variables based on conditions.
+```{r}
+nhanes.samp.adult %>%
+  mutate(bmi_category = case_when(
+    BMI < 18.5 ~ "Underweight",
+    BMI < 25 ~ "Normal",
+    BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"
+  )) %>%
+  select(ID, BMI, bmi_category) %>%
+  head(5)  # Just show first 5 rows
+```
+
+\
+
+- `case_when()` evaluates conditions in order
+- Use `~` to separate condition from result  
+- First matching condition wins
+
+## mutate() - multiple columns at once
+
+You can create several new variables in one `mutate()` call.
+
+```{r}
+nhanes.samp.adult %>%
+  mutate(
+    height_m = Height / 100,
+    weight_kg = Weight * 0.453592,
+    bmi_calculated = weight_kg / (height_m^2)
+  ) %>%
+  select(ID, Height, Weight, BMI, height_m, weight_kg, bmi_calculated)
+```
+
+## Quick practice (2-3 minutes)
+
+Using the `nhanes.samp.adult` data and pipes:
+
+1. Filter to people with diabetes
+2. Select the columns: Age, Gender, BMI, Diabetes
+3. Create a new column called `age_group` that is:
+   - "Under 50" if Age < 50
+   - "50 or older" if Age >= 50
+
+(Hint: Use `filter()`, `select()`, and `mutate()` with `case_when()`)
+
+## Quick practice: solution
+
+```{r}
+nhanes.samp.adult %>%
+  filter(Diabetes == "Yes") %>%
+  select(Age, Gender, BMI, Diabetes) %>%
+  mutate(age_group = case_when(
+    Age < 50 ~ "Under 50",
+    Age >= 50 ~ "50 or older"
+  ))
+```
+
+## arrange() - sorting rows
+
+`arrange()` sorts rows by one or more variables.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Sort ascending (default)
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(ID, Age, BMI) %>%
+  arrange(Age) %>% 
+  head(8)
+```
+
+:::
+::: {.column width="50%"}
+
+### Sort descending
+```{r}
+#| eval: false
+
+nhanes.samp.adult %>%
+  select(ID, Age, BMI) %>%
+  arrange(desc(Age)) %>% 
+  head(8)
+```
+
+Use `desc()` to sort in descending order.
+:::
+:::
+
+
+## arrange() - multiple columns
+
+You can sort by multiple variables at once.
+```{r}
+nhanes.samp.adult %>%
+  select(ID, Gender, Age, BMI) %>%
+  arrange(Gender, desc(Age)) %>%
+  head(8)
+```
+
+Sorts by Gender first, then by Age (descending) within each gender group.
+
+## group_by() - preparing for summaries
+
+`group_by()` groups your data by one or more variables.
+
+-   What if I want to quickly look at group differences?
+-   It will not change how the data look, but changes the actions of following functions
+
+\
+
+**By itself, it doesn't change how the data looks:**
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender)
+```
+
+Notice the "Groups: Gender [2]" at the top - the data is now grouped, but not summarized.
+
+## group_by() with summarize()
+
+The real power of `group_by()` comes when combined with `summarize()`.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Without grouping
+
+```{r}
+nhanes.samp.adult %>%
+  summarize(
+    mean_bmi = mean(BMI, na.rm = TRUE),
+    sd_bmi = sd(BMI, na.rm = TRUE), 
+    n = n()
+  )
+```
+
+:::
+::: {.column width="50%"}
+
+### With grouping by Gender
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender) %>%
+  summarize(
+    mean_bmi = mean(BMI, na.rm = TRUE),
+    sd_bmi = sd(BMI, na.rm = TRUE),
+    n = n()
+  )
+```
+
+:::
+:::
+
+`n()` counts the number of observations in each group.
+
+## Chaining multiple dplyr verbs
+
+You can chain operations together to answer complex questions.
+
+\
+
+**Question:** What is the mean BMI for people over age 50, by diabetes status?
+
+```{r}
+nhanes.samp.adult %>%
+  filter(Age > 50) %>%
+  select(Age, BMI, Diabetes) %>%
+  group_by(Diabetes) %>%
+  summarize(
+    n = n(),
+    mean_bmi = mean(BMI, na.rm = TRUE),
+    sd_bmi = sd(BMI, na.rm = TRUE)
+  )
+```
+
+## Summary statistics with rstatix
+
+`get_summary_stats()` in `rstatix` package provides pipe-friendly functions for summary statistics.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Summary for one variable
+
+```{r}
+nhanes.samp.adult %>%
+  get_summary_stats(BMI, 
+                    type = "mean_sd")
+```
+
+
+
+:::
+::: {.column width="50%"}
+
+### Summary by groups
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender) %>%
+  get_summary_stats(BMI, 
+                    type = "mean_sd")
+```
+
+:::
+:::
+
+\
+
+Other types: `"median_iqr"`, `"five_number"`, `"full"`, `"common"`
+
+## Multiple variables and groups
+
+`get_summary_stats()` can handle multiple variables at once.
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender, Diabetes) %>%
+  get_summary_stats(BMI, Height, Weight, type = "mean_sd")
+```
+
+## Quick check: putting it together
+
+Using what you've learned, try to answer:
+
+**What is the mean age and BMI for each combination of Gender and Diabetes status?**
+
+\
+
+Hints:
+
+- Use `group_by()` with two variables
+- Use `get_summary_stats()` or `summarize()`
+- Include `n()` to count observations
+
+## Quick check: solution
+
+::: columns
+::: {.column width="50%"}
+
+### Using rstatix
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender, Diabetes) %>%
+  get_summary_stats(Age, BMI, 
+                    type = "mean_sd")
+```
+
+:::
+::: {.column width="50%"}
+
+### Using dplyr summarize
+
+```{r}
+nhanes.samp.adult %>%
+  group_by(Gender, Diabetes) %>%
+  summarize(
+    n = n(),
+    mean_age = mean(Age, na.rm = TRUE),
+    mean_bmi = mean(BMI, na.rm = TRUE)
+  )
+```
+
+:::
+:::
+
+## Summary tables with janitor
+
+`tabyl()` in the `janitor` package makes frequency tables much easier than base R.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### One-way frequency table
+
+```{r}
+nhanes.samp.adult %>%
+  tabyl(Gender)
+```
+
+Gives you counts (`n`), percentages (`percent`), and includes missing values automatically.
+
+:::
+::: {.column width="50%"}
+
+### Two-way table (cross-tabulation)
+
+```{r}
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes)
+```
+
+:::
+:::
+
+## Enhancing tables with janitor adorn functions
+
+`janitor` has "adorn" functions to format tables nicely.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Add percentages
+
+```{r}
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 1)
+```
+
+:::
+::: {.column width="50%"}
+
+### Add totals
+
+```{r}
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes) %>%
+  adorn_totals(c("row", "col"))
+```
+
+:::
+:::
+
+## Combining adorn functions
+
+You can chain multiple adorn functions together.
+
+```{r}
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes) %>%
+  adorn_totals(c("row", "col")) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns()
+```
+
+
+\
+
+- `adorn_ns()` adds the counts alongside percentages
+- Order matters: calculate totals first, then percentages
+
+
+
+
+## Data visualization with ggplot2
+
+![[Artwork by @allison_horst](https://allisonhorst.com/r-packages-functions)](/img_slides/horst_ggplot2_exploratory.png){fig-align="center"}
+
+## Why visualize data?
+
+Visualizations help us:
+
+- Understand distributions
+- Identify outliers and patterns
+- Compare groups
+- Communicate findings
+
+\
+
+
+## Anscombe's Quartet
+
+Four datasets with identical summary statistics but very different patterns:
+
+```{r}
+#| echo: false
+
+# anscombe %>% 
+#   mutate(id = dplyr::row_number()) %>% 
+#   tidyr::pivot_longer(cols = x1:y4) %>% 
+#   mutate(group = readr::parse_number(name), 
+#          name = dplyr::case_when(stringr::str_detect(name, "x") ~ "x", 
+#                                  stringr::str_detect(name, "y") ~ "y")) %>% 
+#   tidyr::pivot_wider(names_from = name, 
+#                      values_from = value) %>% 
+#   ggplot(aes(x = x, 
+#              y = y)) + 
+#   geom_point(color = "darkorange", 
+#              size = 2.5, 
+#              shape = 19, 
+#              alpha = 0.85) + 
+#   stat_smooth(method = "lm", 
+#               se = FALSE) + 
+#   facet_wrap(~ group) + 
+#   laviz::theme_minimal_white(axis = TRUE, 
+#                              border = TRUE, 
+#                              grid = FALSE)
+
+#| echo: false
+
+# Calculate summary stats for each group
+anscombe_stats <- anscombe %>% 
+  mutate(id = dplyr::row_number()) %>% 
+  tidyr::pivot_longer(cols = x1:y4) %>% 
+  mutate(group = readr::parse_number(name), 
+         name = dplyr::case_when(stringr::str_detect(name, "x") ~ "x", 
+                                 stringr::str_detect(name, "y") ~ "y")) %>% 
+  tidyr::pivot_wider(names_from = name, 
+                     values_from = value) %>% 
+  group_by(group) %>% 
+  summarize(
+    mean_x = mean(x),
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    cor = cor(x, y)
+  ) %>% 
+  mutate(label = sprintf("Mean X = %.1f, Y = %.1f\nSD X = %.2f, Y = %.2f\nCor = %.2f", 
+                        mean_x, mean_y, sd_x, sd_y, cor))
+
+# Create plot with annotations
+anscombe %>% 
+  mutate(id = dplyr::row_number()) %>% 
+  tidyr::pivot_longer(cols = x1:y4) %>% 
+  mutate(group = readr::parse_number(name), 
+         name = dplyr::case_when(stringr::str_detect(name, "x") ~ "x", 
+                                 stringr::str_detect(name, "y") ~ "y")) %>% 
+  tidyr::pivot_wider(names_from = name, 
+                     values_from = value) %>% 
+  ggplot(aes(x = x, y = y)) + 
+  geom_point(color = "darkorange", 
+             size = 2.5, 
+             shape = 19, 
+             alpha = 0.85) + 
+  stat_smooth(method = "lm", 
+              se = FALSE) + 
+  geom_text(data = anscombe_stats,
+            aes(x = 6, y = 12, label = label),
+            hjust = 0,
+            vjust = 1,
+            size = 3,
+            color = "gray30") +
+  facet_wrap(~ group) + 
+  laviz::theme_minimal_white(axis = TRUE, 
+                             border = TRUE, 
+                             grid = FALSE)
+```
+
+
+All four have the same mean, SD, and correlation - but look how different they are!
+
+
+## The Datasaurus Dozen
+
+Similar to Anscombe's quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice [here](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+
+```{r}
+#| echo: false
+
+library(datasauRus)
+
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +
+  geom_point() +
+  facet_wrap(~dataset) + 
+  laviz::theme_minimal_white(axis = TRUE, 
+                             border = TRUE, 
+                             grid = FALSE) + 
+  theme(legend.position = "none")
+
+
+datasaurus_sum_stats <- datasaurus_dozen %>% 
+  group_by(dataset) %>% 
+  summarize(
+    mean_x = mean(x),
+    mean_y = mean(y),
+    sd_x = sd(x),
+    sd_y = sd(y),
+    cor = cor(x, y)
+  ) %>% 
+  mutate(label = sprintf("Mean X = %.1f, Y = %.1f\nSD X = %.2f, Y = %.2f\nCor = %.2f", 
+                        mean_x, mean_y, sd_x, sd_y, cor)) %>% 
+  dplyr::slice(1) %>% 
+  dplyr::pull(label)
+
+
+```
+
+`r datasaurus_sum_stats`
+
+## The grammar of graphics
+
+`ggplot2` implements the **grammar of graphics** - a framework for describing plots.
+
+\
+
+**Every ggplot has three essential components:**
+
+1. **Data** - the dataset you're plotting
+2. **Aesthetics** (`aes()`) - mappings from data to visual properties (x, y, color, size, etc.)
+3. **Geoms** - geometric objects that represent the data (points, lines, bars, etc.)
+
+\
+
+**Basic template:**
+
+```{r}
+#| eval: false
+
+ggplot(data = DATA, 
+       mapping = aes(x = X_VAR, y = Y_VAR)) +
+  geom_SOMETHING()
+```
+
+\
+
+Notice we use `+` (not `%>%`) to add layers to a ggplot.
+
+## Basics of a ggplot
+
+![](/img_slides/ggplot_basics_from_ppt.png){fig-align="center"}
+
+## Grammar of ggplot2
+
+::::: columns
+::: {.column width="60%"}
+![](/img_slides/ggplot_layers.png){fig-align="center" width="1600"}
+:::
+
+::: {.column width="40%"}
+-   `ggplot2` needs at least the following three to produce a chart:
+    -   data, a mapping, and a layer
+
+ 
+
+-   For the most part, there are default settings for the other parts:
+    -   scales, facets, coordinates, and themes
+:::
+:::::
+
+<!-- ## **Data** -->
+
+<!-- -   ggplot2 uses data to construct a plot -->
+
+<!-- -   Works best with tidy data (when every observation is a row and each variable is a column) -->
+
+<!-- -   First step in plotting: -->
+
+<!--     -   Pass the data to the `ggplot` function, which stores the data to be used later by other parts of the plotting system -->
+
+<!-- ## Data -->
+
+<!-- -   For example, if we intend to make a graphic about the `mpg` dataset, we would start as follows: -->
+
+<!-- ```{r} -->
+<!-- #| fig-width: 6 -->
+<!-- #| fig-height: 4 -->
+<!-- #| fig-align: center -->
+
+<!-- ggplot(data = mpg) -->
+<!-- ``` -->
+
+<!-- ## **Mapping** -->
+
+<!-- -   Mappings use the `aes()` function to **map** variables to the different axes on a plot -->
+
+<!--     -   `aes()` stands for "aesthetics" -->
+
+<!-- ## Data + Mapping -->
+
+<!-- -   If we want the `cty` and `hwy` columns to map to the x- and y-coordinates in the plot, we can do that as follows: -->
+
+<!-- ```{r} -->
+<!-- #| fig-width: 6 -->
+<!-- #| fig-height: 4 -->
+<!-- #| fig-align: center -->
+
+<!-- ggplot(mpg,  -->
+<!--        mapping = aes(x = cty, y = hwy)) -->
+<!-- ``` -->
+
+<!-- ## **Layers** -->
+
+<!-- -   Every layer consists of three important parts: -->
+
+<!--     -   The **geometry** that determines *how* data are displayed, such as points, lines, or rectangles -->
+
+<!--     -   The **statistical transformation** that may compute new variables from the data and affect *what* of the data is displayed. -->
+
+<!--     -   The **position adjustment** that primarily determines *where* a piece of data is being displayed -->
+
+<!-- -   A layer can be constructed using the `geom_*()` and `stat_*()` functions -->
+
+<!--     -   These functions often determine one of the three parts of a layer, while the other two can still be specified. -->
+
+<!-- ## Data + Mapping + Layers -->
+
+<!-- Here is how we can use two layers to display the `cty` and `hwy` columns of the `mpg` dataset as points and stack a trend line on top: -->
+
+<!-- ```{r} -->
+<!-- #| fig-width: 6 -->
+<!-- #| fig-height: 4 -->
+<!-- #| fig-align: center -->
+
+<!-- ggplot(mpg, aes(cty, hwy)) + -->
+<!--   # to create a scatterplot -->
+<!--   geom_point() + -->
+<!--   # to fit and overlay a line -->
+<!--   geom_smooth(formula = y ~ x, method = "lm") -->
+<!-- ``` -->
+
+
+## Building a ggplot step by step
+
+#### Step 1: Just data
+
+```{r}
+
+ggplot(data = nhanes.samp.adult)
+```
+
+
+## Building a ggplot step by step
+
+#### Step 2: Add mapping
+
+```{r}
+
+ggplot(nhanes.samp.adult, aes(x = BMI))
+```
+
+## Building a ggplot step by step
+
+#### Step 3: Add geom
+
+```{r}
+
+ggplot(nhanes.samp.adult, aes(x = BMI)) +
+  geom_histogram()
+```
+
+
+## Your first ggplot: histogram
+
+**Histogram** - shows the distribution of a single numeric variable.
+
+```{r}
+#| output-location: column
+
+ggplot(data = nhanes.samp.adult, 
+       mapping = aes(x = BMI)) +
+  geom_histogram()
+```
+
+\
+
+**What does this tell us?**
+
+- Most people have BMI between 20-35
+- Distribution is slightly right-skewed
+- Some people with very high BMI (outliers)
+
+## Customizing histograms
+
+You can control the appearance of histograms.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Adjust bin width
+
+```{r}
+ggplot(nhanes.samp.adult, 
+       aes(x = BMI)) +
+  geom_histogram(binwidth = 2)
+```
+
+:::
+::: {.column width="50%"}
+
+### Adjust number of bins
+
+```{r}
+ggplot(nhanes.samp.adult, 
+       aes(x = BMI)) +
+  geom_histogram(bins = 50)
+```
+
+:::
+:::
+
+Try different values to find what best reveals patterns in your data.
+
+## Boxplots - comparing distributions
+
+**Boxplot** - shows the distribution across groups.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Gender, y = BMI)) +
+  geom_boxplot()
+```
+
+\
+
+**Boxplot components:**
+
+- Box: middle 50% of data (IQR)
+- Line in box: median
+- Whiskers: extend to most extreme non-outlier values
+- Points: potential outliers
+
+## Boxplot by multiple groups
+
+We can compare distributions across multiple categorical variables.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Diabetes, y = BMI)) +
+  geom_boxplot()
+```
+
+\
+
+People with diabetes tend to have higher BMI.
+
+## Adding color to boxplots
+
+Color can be mapped to a variable using `aes()`.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Gender, 
+           y = BMI, 
+           fill = Diabetes)) +
+  geom_boxplot()
+```
+
+\
+
+`fill` controls the fill color of shapes.
+
+`color` would control the outline color.
+
+## Scatterplots - relationship between two numeric variables
+
+**Scatterplot** - shows the relationship between two numeric variables.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Height, y = Weight)) +
+  geom_point()
+```
+
+\
+
+**What we see:**
+
+- Positive relationship
+- Taller people tend to weigh more
+- Some variability
+
+## Enhancing scatterplots with color
+
+Map a third variable to color to see patterns.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Height, 
+           y = Weight, 
+           color = Gender)) +
+  geom_point()
+```
+
+\
+
+Now we can see if the relationship differs by gender.
+
+## Adjusting point transparency
+
+When points overlap, transparency (`alpha`) helps.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Height, 
+           y = Weight, 
+           color = Gender)) +
+  geom_point(alpha = 0.5)
+```
+
+\
+
+`alpha` ranges from 0 (transparent) to 1 (opaque).
+
+## Bar charts - categorical data
+
+**Bar chart** - shows counts or frequencies of categories.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Diabetes)) +
+  geom_bar()
+```
+
+\
+
+`geom_bar()` automatically counts observations in each category.
+
+## Grouped bar charts
+
+Compare categories across groups by mapping a variable to `fill`.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Gender, 
+           fill = Diabetes)) +
+  geom_bar()
+```
+
+\
+
+By default, bars are stacked.
+
+## Position adjustments for bar charts
+
+::: columns
+::: {.column width="50%"}
+
+### Stacked (default)
+
+```{r}
+ggplot(nhanes.samp.adult, 
+       aes(x = Gender, 
+           fill = Diabetes)) +
+  geom_bar()
+```
+
+:::
+::: {.column width="50%"}
+
+### Side-by-side
+
+```{r}
+ggplot(nhanes.samp.adult, 
+       aes(x = Gender, 
+           fill = Diabetes)) +
+  geom_bar(position = "dodge")
+```
+
+:::
+:::
+
+## Adding labels and titles
+
+Make your plots more informative with labels.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = Height, y = Weight)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Height vs Weight in NHANES",
+    subtitle = "Adult participants",
+    x = "Height (cm)",
+    y = "Weight (kg)",
+    caption = "Data: NHANES"
+  )
+```
+
+## Faceting - small multiples
+
+**Facets** create separate panels for subgroups.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = BMI)) +
+  geom_histogram(bins = 30) +
+  facet_wrap(~Gender)
+```
+
+\
+
+`facet_wrap()` creates a panel for each level of a variable.
+
+## Faceting by two variables
+
+Create a grid of panels with two variables.
+
+```{r}
+#| output-location: column
+
+ggplot(nhanes.samp.adult, 
+       aes(x = BMI)) +
+  geom_histogram(bins = 30) +
+  facet_grid(Gender ~ Diabetes)
+```
+
+\
+
+`facet_grid()` creates rows × columns layout.
+
+## Combining dplyr and ggplot2
+
+You can pipe data directly into `ggplot()`!
+
+```{r}
+#| output-location: column
+
+nhanes.samp.adult %>%
+  filter(Age >= 50) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point(alpha = 0.5) +
+  labs(title = "Height vs Weight (Age ≥ 50)")
+```
+
+\
+
+Pipe `%>%` passes data to `ggplot()`.
+
+Then use `+` to add layers.
+
+## Saving your work
+
+Remember: **dplyr operations don't modify the original data** unless you save them.
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+### Save filtered data
+
+```{r}
+adults_diabetes <- nhanes.samp.adult %>%
+  filter(Diabetes == "Yes")
+
+# Check it worked
+nrow(adults_diabetes)
+```
+
+:::
+::: {.column width="50%"}
+
+### Save data with new variables
+
+```{r}
+nhanes_with_categories <- 
+  nhanes.samp.adult %>%
+  mutate(
+    bmi_category = case_when(
+      BMI < 18.5 ~ "Underweight",
+      BMI < 25 ~ "Normal",
+      BMI < 30 ~ "Overweight",
+      BMI >= 30 ~ "Obese"
+    )
+  )
+```
+
+:::
+:::
+
+## Saving plots
+
+Save plots to files with `ggsave()`.
+
+```{r}
+#| eval: false
+
+# Create a plot
+p <- ggplot(nhanes.samp.adult, aes(x = BMI)) +
+  geom_histogram(bins = 30) +
+  labs(title = "Distribution of BMI")
+
+# Save it
+ggsave("bmi_histogram.png", plot = p, 
+       width = 8, height = 6, dpi = 300)
+```
+
+\
+
+**Tips:**
+
+- `ggsave()` saves the last plot if you don't specify `plot =`
+- Common formats: `.png`, `.pdf`, `.jpg`
+- Adjust `width` and `height` in inches
+- Use `dpi = 300` for publication quality
+
+## Common ggplot2 geoms
+
+| Geom | Use case | Variables needed |
+|------|----------|-----------------|
+| `geom_histogram()` | Distribution of one numeric variable | x |
+| `geom_density()` | Smooth distribution curve | x |
+| `geom_boxplot()` | Compare distributions across groups | x (categorical), y (numeric) |
+| `geom_point()` | Relationship between two numeric variables | x, y |
+| `geom_line()` | Trends over time or ordered data | x, y |
+| `geom_bar()` | Counts of categorical data | x |
+| `geom_col()` | Pre-computed values | x, y |
+
+## Quick practice (5 minutes)
+
+Using what you've learned, create:
+
+1. A scatterplot of Age vs BMI
+2. Color the points by Diabetes status
+3. Add appropriate labels
+4. Add transparency to see overlapping points
+
+\
+
+**Bonus:** Facet by Gender
+
+## Quick practice: solution
+
+```{r}
+ggplot(nhanes.samp.adult, 
+       aes(x = Age, y = BMI, color = Diabetes)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Relationship between Age and BMI",
+    subtitle = "NHANES adult sample",
+    x = "Age (years)",
+    y = "Body Mass Index (kg/m²)"
+  ) +
+  facet_wrap(~Gender)
+```
+
+## EDA workflow summary
+
+**1. Import and inspect**
+
+- Load data
+- Check dimensions, variable names, and types
+- Look for missing values
+
+**2. Summarize**
+
+- Calculate summary statistics
+- Create frequency tables
+- Group by relevant variables
+
+**3. Visualize**
+
+- Plot distributions (histograms, boxplots)
+- Explore relationships (scatterplots)
+- Compare groups (facets, colors)
+
+**4. Iterate**
+
+- Ask new questions based on what you find
+- Filter, transform, and visualize again
+
+## Key takeaways
+
+- **Pipes (`%>%`)** chain operations together for readable code
+- **`dplyr` verbs** manipulate data:
+  - `filter()` - subset rows
+  - `select()` - choose columns
+  - `mutate()` - create/modify variables
+  - `group_by()` + `summarize()` - calculate summaries by group
+- **`janitor::tabyl()`** creates clean frequency tables
+- **`rstatix::get_summary_stats()`** provides pipe-friendly summary statistics
+- **`ggplot2`** builds visualizations using data + aesthetics + geoms
+- **Nothing changes your original data** unless you save it with `<-`
+
+## Resources for learning more
+
+**Tidyverse documentation:**
+
+- <https://dplyr.tidyverse.org/>
+- <https://ggplot2.tidyverse.org/>
+
+\
+
+**Books (free online):**
+
+- [R for Data Science (2e)](https://r4ds.hadley.nz/) by Hadley Wickham & Garrett Grolemund
+- [Modern Dive](https://moderndive.com/) by Chester Ismay & Albert Kim
+-   Online textbook for `ggplot2`: <https://ggplot2-book.org/>
+-   Another online resource for data visualization with `ggplot2`: <https://socviz.co/index.html#preface>
+
+\
+
+**Cheat sheets:**
+
+- [Data transformation with dplyr](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf)
+- [Data visualization with ggplot2](https://github.com/rstudio/cheatsheets/blob/main/data-visualization.pdf)
+
+## Practice exercises
+
+Try these on your own to reinforce what you learned:
+
+1. Filter the data to people with BMI > 30
+2. Create a scatterplot of Age vs BMI
+3. Calculate mean height by gender
+4. Make a histogram of Age
+5. Create a two-way table of Gender and Diabetes status
+
