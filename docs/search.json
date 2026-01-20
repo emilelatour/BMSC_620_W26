@@ -2868,7 +2868,7 @@
     "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#resources-for-learning-more",
     "title": "Exploratory Data Analysis and Data Visualization",
     "section": "Resources for learning more",
-    "text": "Resources for learning more\nTidyverse documentation:\n\nhttps://dplyr.tidyverse.org/\nhttps://ggplot2.tidyverse.org/\n\n\n\nBooks (free online):\n\nR for Data Science (2e) by Hadley Wickham & Garrett Grolemund\nModern Dive by Chester Ismay & Albert Kim\n\n\n\nCheat sheets:\n\nData transformation with dplyr\nData visualization with ggplot2"
+    "text": "Resources for learning more\nTidyverse documentation:\n\nhttps://dplyr.tidyverse.org/\nhttps://ggplot2.tidyverse.org/\n\n\n\nBooks (free online):\n\nR for Data Science (2e) by Hadley Wickham & Garrett Grolemund\nggplot2: Elegant Graphics for Data Analysis\nData Visualization: A Practical Introduction by Kieran Healy\nModern Dive by Chester Ismay & Albert Kim\n\n\n\nCheat sheets:\n\nData transformation with dplyr\nData visualization with ggplot2"
   },
   {
     "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#practice-exercises",
@@ -2952,7 +2952,7 @@
     "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#the-datasaurus-dozen",
     "title": "Exploratory Data Analysis and Data Visualization",
     "section": "The Datasaurus Dozen",
-    "text": "The Datasaurus Dozen\nSimilar to Anscombe’s quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice here\n\nMean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06"
+    "text": "The Datasaurus Dozen\nSimilar to Anscombe’s quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice here\n\nAll 13 datasets have nearly identical summary statistics: Mean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06"
   },
   {
     "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#basics-of-a-ggplot",
@@ -2966,7 +2966,7 @@
     "href": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#grammar-of-ggplot2",
     "title": "Exploratory Data Analysis and Data Visualization",
     "section": "Grammar of ggplot2",
-    "text": "Grammar of ggplot2\n\n\n\n\n\n\n\n\n\nggplot2 needs at least the following three to produce a chart:\n\ndata, a mapping, and a layer\n\n\n \n\nFor the most part, there are default settings for the other parts:\n\nscales, facets, coordinates, and themes"
+    "text": "Grammar of ggplot2\n\n\n\n\n\n\n\n\nBeyond the basics:\n\nScales control how data values map to visual properties\nFacets create subplots\nCoordinates adjust the coordinate system\nThemes control visual appearance\n\nMost of these have good defaults - we’ll focus on the essential three components today."
   },
   {
     "objectID": "lessons/07_eda_and_data_viz/07_eda_and_data_viz.html#data",

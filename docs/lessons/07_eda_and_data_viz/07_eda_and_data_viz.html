@@ -1558,7 +1558,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <h2>The Datasaurus Dozen</h2>
 <p>Similar to Anscombe’s quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice <a href="https://www.research.autodesk.com/publications/same-stats-different-graphs/">here</a></p>
 
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"><p>Mean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06</p>
+<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"><p>All 13 datasets have nearly identical summary statistics: Mean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06</p>
 </section>
 <section id="the-grammar-of-graphics" class="slide level2">
 <h2>The grammar of graphics</h2>
@@ -1597,64 +1597,15 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 </figure>
 </div>
 </div><div class="column" style="width:40%;">
+<p><strong>Beyond the basics:</strong></p>
 <ul>
-<li><code>ggplot2</code> needs at least the following three to produce a chart:
-<ul>
-<li>data, a mapping, and a layer</li>
-</ul></li>
+<li><strong>Scales</strong> control how data values map to visual properties</li>
+<li><strong>Facets</strong> create subplots</li>
+<li><strong>Coordinates</strong> adjust the coordinate system</li>
+<li><strong>Themes</strong> control visual appearance</li>
 </ul>
-<p>&nbsp;</p>
-<ul>
-<li>For the most part, there are default settings for the other parts:
-<ul>
-<li>scales, facets, coordinates, and themes</li>
-</ul></li>
-</ul>
+<p>Most of these have good defaults - we’ll focus on the essential three components today.</p>
 </div></div>
-<!-- ## **Data** -->
-<!-- -   ggplot2 uses data to construct a plot -->
-<!-- -   Works best with tidy data (when every observation is a row and each variable is a column) -->
-<!-- -   First step in plotting: -->
-<!--     -   Pass the data to the `ggplot` function, which stores the data to be used later by other parts of the plotting system -->
-<!-- ## Data -->
-<!-- -   For example, if we intend to make a graphic about the `mpg` dataset, we would start as follows: -->
-<!-- ```{r} -->
-<!-- #| fig-width: 6 -->
-<!-- #| fig-height: 4 -->
-<!-- #| fig-align: center -->
-<!-- ggplot(data = mpg) -->
-<!-- ``` -->
-<!-- ## **Mapping** -->
-<!-- -   Mappings use the `aes()` function to **map** variables to the different axes on a plot -->
-<!--     -   `aes()` stands for "aesthetics" -->
-<!-- ## Data + Mapping -->
-<!-- -   If we want the `cty` and `hwy` columns to map to the x- and y-coordinates in the plot, we can do that as follows: -->
-<!-- ```{r} -->
-<!-- #| fig-width: 6 -->
-<!-- #| fig-height: 4 -->
-<!-- #| fig-align: center -->
-<!-- ggplot(mpg,  -->
-<!--        mapping = aes(x = cty, y = hwy)) -->
-<!-- ``` -->
-<!-- ## **Layers** -->
-<!-- -   Every layer consists of three important parts: -->
-<!--     -   The **geometry** that determines *how* data are displayed, such as points, lines, or rectangles -->
-<!--     -   The **statistical transformation** that may compute new variables from the data and affect *what* of the data is displayed. -->
-<!--     -   The **position adjustment** that primarily determines *where* a piece of data is being displayed -->
-<!-- -   A layer can be constructed using the `geom_*()` and `stat_*()` functions -->
-<!--     -   These functions often determine one of the three parts of a layer, while the other two can still be specified. -->
-<!-- ## Data + Mapping + Layers -->
-<!-- Here is how we can use two layers to display the `cty` and `hwy` columns of the `mpg` dataset as points and stack a trend line on top: -->
-<!-- ```{r} -->
-<!-- #| fig-width: 6 -->
-<!-- #| fig-height: 4 -->
-<!-- #| fig-align: center -->
-<!-- ggplot(mpg, aes(cty, hwy)) + -->
-<!--   # to create a scatterplot -->
-<!--   geom_point() + -->
-<!--   # to fit and overlay a line -->
-<!--   geom_smooth(formula = y ~ x, method = "lm") -->
-<!-- ``` -->
 </section>
 <section id="building-a-ggplot-step-by-step" class="slide level2">
 <h2>Building a ggplot step by step</h2>
@@ -2254,6 +2205,8 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <p><strong>Books (free online):</strong></p>
 <ul>
 <li><a href="https://r4ds.hadley.nz/">R for Data Science (2e)</a> by Hadley Wickham &amp; Garrett Grolemund</li>
+<li><a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></li>
+<li><a href="https://socviz.co/">Data Visualization: A Practical Introduction</a> by Kieran Healy</li>
 <li><a href="https://moderndive.com/">Modern Dive</a> by Chester Ismay &amp; Albert Kim</li>
 </ul>
 <p><br>

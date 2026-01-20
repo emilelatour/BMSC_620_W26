@@ -1,0 +1,392 @@
+---
+title: "Bayes' Theorem"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w3d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v4.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Bayes' Theorem"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r}
+#| label: "setup" 
+#| include: false
+#| message: false
+#| warning: false
+
+library(here)
+source(here("class_dates.R"))
+
+library(dplyr)
+library(ggplot2)
+library(gt)
+library(janitor)
+
+# terminal: for icons
+# quarto install extension quarto-ext/fontawesome
+```
+
+## Recap: What we did last time
+
+\
+
+Last class, we calculated the **Positive Predictive Value (PPV)** using a contingency table:
+
+\
+
+|            | Disease | No Disease | Total |
+|------------|:-------:|:----------:|:-----:|
+| **Test +** | 90      | 990        | 1,080 |
+| **Test -** | 10      | 8,910      | 8,920 |
+| **Total**  | 100     | 9,900      | 10,000 |
+
+\
+
+$$P(\text{Disease} \mid \text{Test +}) = \frac{90}{1,080} \approx 0.083$$
+
+\
+
+Today we'll see the **formula** that lets us calculate this directly.
+
+# Bayes' Theorem
+
+## The question we're asking
+
+\
+
+We want to **flip the conditional probability**:
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+**What we know:**
+
+- $P(\text{Test +} \mid \text{Disease})$ (sensitivity)
+- $P(\text{Test +} \mid \text{No Disease})$ (1 - specificity)
+- $P(\text{Disease})$ (prevalence)
+
+:::
+
+::: {.column width="50%"}
+
+**What we want:**
+
+- $P(\text{Disease} \mid \text{Test +})$ (PPV)
+
+:::
+:::
+
+\
+
+Bayes' Theorem gives us a formula to "flip" the conditional.
+
+## Bayes' Theorem: General form
+
+\
+
+$$
+P(A \mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}
+$$
+
+\
+
+**In words:**
+
+- $P(A \mid B)$ = **posterior** (what we want to know)
+- $P(B \mid A)$ = **likelihood** (what we can measure)
+- $P(A)$ = **prior** (base rate)
+- $P(B)$ = **marginal probability** of $B$
+
+## Bayes' Theorem: Medical testing version
+
+\
+
+For our diagnostic test:
+
+$$
+P(\text{Disease} \mid \text{Test +}) = \frac{P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease})}{P(\text{Test +})}
+$$
+
+\
+
+**In words:**
+
+- $P(\text{Disease} \mid \text{Test +})$ = PPV (what we want)
+- $P(\text{Test +} \mid \text{Disease})$ = sensitivity (what test manufacturer tells us)
+- $P(\text{Disease})$ = prevalence (base rate in population)
+- $P(\text{Test +})$ = overall rate of positive tests
+
+## The tricky part: $P(\text{Test +})$
+
+\
+
+How do we find $P(\text{Test +})$?
+
+\
+
+There are **two ways** to test positive:
+
+1. Have disease AND test positive: $P(\text{Disease and Test +})$
+2. No disease AND test positive: $P(\text{No Disease and Test +})$
+
+\
+
+Using the **law of total probability**:
+
+$$
+P(\text{Test +}) = P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease}) + P(\text{Test +} \mid \text{No Disease}) \times P(\text{No Disease})
+$$
+
+## Bayes' Theorem: Complete formula
+
+\
+
+$$
+P(\text{Disease} \mid \text{Test +}) = \frac{P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease})}{P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease}) + P(\text{Test +} \mid \text{No Disease}) \times P(\text{No Disease})}
+$$
+
+\
+
+This looks complicated, but we have all the pieces!
+
+## Applying Bayes' Theorem to our example
+
+\
+
+**Given:**
+
+- Sensitivity = 90% = $P(\text{Test +} \mid \text{Disease}) = 0.90$
+- Specificity = 90%, so $P(\text{Test +} \mid \text{No Disease}) = 0.10$
+- Prevalence = 1% = $P(\text{Disease}) = 0.01$
+- Therefore: $P(\text{No Disease}) = 0.99$
+
+## Step 1: Calculate the numerator
+
+\
+
+$$
+\begin{aligned}
+\text{Numerator} &= P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease}) \\
+&= 0.90 \times 0.01 \\
+&= 0.009
+\end{aligned}
+$$
+
+\
+
+This represents the **true positives** (people who have disease AND test positive).
+
+## Step 2: Calculate the denominator
+
+\
+
+$$
+\begin{aligned}
+\text{Denominator} &= P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease}) \\
+&\quad + P(\text{Test +} \mid \text{No Disease}) \times P(\text{No Disease}) \\
+&= (0.90 \times 0.01) + (0.10 \times 0.99) \\
+&= 0.009 + 0.099 \\
+&= 0.108
+\end{aligned}
+$$
+
+\
+
+This represents **all positive tests** (true positives + false positives).
+
+## Step 3: Calculate PPV
+
+\
+
+$$
+\begin{aligned}
+P(\text{Disease} \mid \text{Test +}) &= \frac{0.009}{0.108} \\
+&\approx 0.083 \\
+&= 8.3\%
+\end{aligned}
+$$
+
+\
+
+**Same answer as before!** But now we calculated it directly from the formula.
+
+## Connecting to the contingency table
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+**Bayes' Theorem:**
+
+$$
+\frac{0.90 \times 0.01}{(0.90 \times 0.01) + (0.10 \times 0.99)} = 0.083
+$$
+
+\
+
+**Numerator:** true positives
+
+**Denominator:** all positives
+
+:::
+
+::: {.column width="50%"}
+
+**Contingency table:**
+
+|            | Disease | No Disease | Total |
+|------------|:-------:|:----------:|:-----:|
+| **Test +** | [90]{style="color:red;"}      | [990]{style="color:blue;"}        | [1,080]{style="color:purple;"} |
+| **Test -** | 10      | 8,910      | 8,920 |
+| **Total**  | 100     | 9,900      | 10,000 |
+
+\
+
+$$\frac{\textcolor{red}{90}}{\textcolor{purple}{1,080}} = 0.083$$
+
+:::
+:::
+
+\
+
+The formula gives us the **proportions** directly!
+
+## Why is this useful?
+
+\
+
+**Without Bayes' Theorem:**
+
+- Build entire contingency table
+- Need to choose a population size
+- More steps, more chances for errors
+
+\
+
+**With Bayes' Theorem:**
+
+- Plug numbers directly into formula
+- Get answer immediately
+- Works with any probabilities (don't need counts)
+
+\
+
+Both approaches work - use whichever makes more sense to you!
+
+
+## What to remember about Bayes' Theorem
+
+\
+
+**The formula:**
+
+$$
+P(A \mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}
+$$
+
+\
+
+**Key concepts:**
+
+- Bayes' Theorem "flips" conditional probabilities
+- Always consider **base rates** (priors)
+- Low prevalence → low PPV, even with accurate tests
+- Can use formula OR contingency table (both work!)
+- **Posterior = (Likelihood × Prior) / Evidence**
+
+## Bayes vs. Contingency tables
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+**Contingency table approach:**
+
+**Pros:**
+
+- Visual and intuitive
+- See all relationships
+- Good for teaching
+
+**Cons:**
+
+- Requires choosing population size
+- More steps
+- Can't easily see effect of changing parameters
+
+:::
+
+::: {.column width="50%"}
+
+**Bayes' Theorem approach:**
+
+**Pros:**
+
+- Direct calculation
+- Works with proportions
+- Easy to see how prevalence affects PPV
+
+**Cons:**
+
+- Formula can seem abstract
+- Need to remember to calculate denominator
+
+:::
+:::
+
+\
+
+**Use whichever approach makes more sense to you!**
+
