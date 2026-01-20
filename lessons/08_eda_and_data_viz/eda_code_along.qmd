@@ -1,0 +1,569 @@
+---
+title: "Data Wrangling and Visualization"
+subtitle: "Working with the tidyverse"
+date: "today"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    code-fold: false
+    theme: default
+---
+
+## Overview
+
+Today we'll learn tools for:
+
+- **Data wrangling** with `dplyr` (manipulating data)
+- **Summary tables** with `janitor` and `rstatix` (easier summaries)
+- **Data visualization** with `ggplot2` (making plots)
+
+---
+
+## Setup
+
+First, load the packages we'll use today:
+
+```{r}
+#| message: false
+#| warning: false
+
+# install.packages("tidyverse")
+# install.packages("janitor")
+# install.packages("rstatix")
+# install.packages("skimr")
+
+# Packages for class
+library(dplyr)    # Part of tidyverse
+library(ggplot2)  # Part of tidyverse
+library(janitor)  # for working with dirty data 
+library(rstatix)  # Pipe-Friendly Framework for Basic Statistical Tests
+library(skimr)    # Compact and Flexible Summaries of Data
+
+# Text book package with datasets
+library(oibiostat)
+```
+
+Load the NHANES data:
+
+```{r}
+data("nhanes.samp.adult")
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Exploring the data
+
+### glimpse()
+
+`glimpse()` is the tidyverse version of `str()`. It shows you the structure of your data.
+
+```{r}
+glimpse(nhanes.samp.adult)
+```
+
+**Your notes:**
+
+
+### skim()
+
+`skim()` from the skimr package gives you a comprehensive summary of your data, including summary statistics and mini histograms.
+
+```{r}
+skim(nhanes.samp.adult)
+```
+
+**Your notes:**
+
+---
+
+## Tibbles
+
+A **tibble** is the tidyverse version of a data frame. It's essentially the same thing, just with nicer printing.
+
+```{r}
+# Print the data
+nhanes.samp.adult
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## The Pipe Operator: `%>%`
+
+The pipe operator `%>%` takes the output from one function and passes it as input to the next function.
+
+Think of it as: "and then..."
+
+### Without pipes (nested functions)
+
+```{r}
+# Read from inside-out
+head(nhanes.samp.adult)
+```
+
+### With pipes
+
+```{r}
+# Read from left to right (or top to bottom)
+nhanes.samp.adult %>% 
+  head()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## dplyr: The main verbs
+
+The `dplyr` package gives us functions (verbs) for manipulating data:
+
+- `filter()` - keep rows that meet a condition
+- `select()` - keep or drop columns
+- `mutate()` - create new columns or modify existing ones
+- `group_by()` - group data for analysis
+- `arrange()` - sort rows
+
+---
+
+## filter()
+
+`filter()` keeps rows that meet certain conditions.
+
+### Filter to one condition
+
+```{r}
+# Keep only people with diabetes
+nhanes.samp.adult %>%
+  filter(Diabetes == "Yes")
+```
+
+### Filter with multiple conditions
+
+```{r}
+# Keep only females over age 50
+nhanes.samp.adult %>%
+  filter(Gender == "female", Age > 50)
+```
+
+### Other comparison operators
+
+```{r}
+# Greater than or equal to
+nhanes.samp.adult %>%
+  filter(BMI >= 30)
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## select()
+
+`select()` keeps (or drops) specific columns.
+
+### Select certain columns
+
+```{r}
+# Keep only demographic variables
+nhanes.samp.adult %>%
+  select(Age, Gender, Race1, Education)
+```
+
+### Select a range of columns
+
+```{r}
+# Keep columns from Age through Education
+nhanes.samp.adult %>%
+  select(Age:Education)
+```
+
+### Drop columns
+
+```{r}
+# Drop the ID column
+nhanes.samp.adult %>%
+  select(-ID)
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## mutate()
+
+`mutate()` creates new columns or modifies existing ones.
+
+**Important:** `mutate()` does NOT change your original data unless you save it!
+
+### Create a new column
+
+```{r}
+# Create BMI categories
+nhanes.samp.adult %>%
+  mutate(bmi_category = case_when(
+    BMI < 18.5 ~ "Underweight",
+    BMI < 25 ~ "Normal",
+    BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"
+  ))
+```
+
+### Create multiple columns at once
+
+```{r}
+# Create height in meters and weight in kg
+nhanes.samp.adult %>%
+  mutate(
+    height_m = Height / 100,
+    weight_kg = Weight * 0.453592
+  )
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Combining dplyr verbs
+
+You can chain multiple operations together with the pipe!
+
+```{r}
+# Filter, select, and mutate in one pipeline
+nhanes.samp.adult %>%
+  filter(Age >= 40) %>%
+  select(Age, Gender, BMI, Diabetes) %>%
+  mutate(bmi_category = case_when(
+    BMI < 25 ~ "Normal or underweight",
+    BMI >= 25 ~ "Overweight or obese"
+  ))
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## group_by()
+
+`group_by()` groups your data by one or more variables. It's most useful when combined with other functions.
+
+```{r}
+# Group by gender
+nhanes.samp.adult %>%
+  group_by(Gender)
+```
+
+Note: By itself, `group_by()` doesn't change how the data looks. It sets up groups for the next operation.
+
+**Your notes:**
+
+
+
+
+---
+
+## Summary tables with janitor
+
+The `janitor` package makes creating frequency tables much easier than base R!
+
+### tabyl() - frequency tables
+
+```{r}
+# One-way frequency table
+nhanes.samp.adult %>%
+  tabyl(Gender)
+```
+
+```{r}
+# Two-way table (cross-tabulation)
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes)
+```
+
+### Adding percentages
+
+```{r}
+# Add row percentages
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes) %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 1)
+```
+
+```{r}
+# Add totals
+nhanes.samp.adult %>%
+  tabyl(Gender, Diabetes) %>%
+  adorn_totals(c("row", "col"))
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Summary statistics with rstatix
+
+The `rstatix` package provides easy-to-use functions for summary statistics.
+
+### get_summary_stats()
+
+```{r}
+# Summary stats for BMI
+nhanes.samp.adult %>%
+  get_summary_stats(BMI, type = "mean_sd")
+```
+
+### Summary stats by group
+
+```{r}
+# BMI summary by gender
+nhanes.samp.adult %>%
+  group_by(Gender) %>%
+  get_summary_stats(BMI, type = "mean_sd")
+```
+
+```{r}
+# Multiple variables
+nhanes.samp.adult %>%
+  group_by(Gender) %>%
+  get_summary_stats(BMI, Height, Weight, type = "mean_sd")
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Data Visualization with ggplot2
+
+`ggplot2` is a powerful package for creating visualizations.
+
+### The grammar of graphics
+
+Every ggplot has three essential components:
+
+1. **Data** - the dataset you're plotting
+2. **Aesthetics** (`aes()`) - what variables map to x, y, color, etc.
+3. **Geoms** - the type of plot (points, bars, lines, etc.)
+
+---
+
+## Basic ggplot template
+
+```{r}
+#| eval: false
+
+ggplot(data = DATA, mapping = aes(x = X_VAR, y = Y_VAR)) +
+  geom_TYPE()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## geom_histogram() - Distribution of one numerical variable
+
+Histograms show the distribution of a single numerical variable.
+
+```{r}
+# Distribution of BMI
+ggplot(data = nhanes.samp.adult, mapping = aes(x = BMI)) +
+  geom_histogram()
+```
+
+```{r}
+# Control the number of bins
+ggplot(data = nhanes.samp.adult, mapping = aes(x = BMI)) +
+  geom_histogram(bins = 30)
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## geom_boxplot() - Compare distributions across groups
+
+Boxplots show the distribution of a numerical variable across different groups.
+
+```{r}
+# BMI by gender
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Gender, y = BMI)) +
+  geom_boxplot()
+```
+
+```{r}
+# BMI by diabetes status
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Diabetes, y = BMI)) +
+  geom_boxplot()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## geom_point() - Scatterplot for two numerical variables
+
+Scatterplots show the relationship between two numerical variables.
+
+```{r}
+# Height vs Weight
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Height, y = Weight)) +
+  geom_point()
+```
+
+```{r}
+# Add color by group
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Height, y = Weight, color = Gender)) +
+  geom_point()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## geom_bar() - Bar chart for categorical variables
+
+Bar charts show counts or frequencies of categorical variables.
+
+```{r}
+# Count of diabetes status
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Diabetes)) +
+  geom_bar()
+```
+
+```{r}
+# Count of education levels
+ggplot(data = nhanes.samp.adult, mapping = aes(x = Education)) +
+  geom_bar()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Combining ggplot with dplyr
+
+You can pipe data into ggplot!
+
+```{r}
+# Filter then plot
+nhanes.samp.adult %>%
+  filter(Age >= 50) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point()
+```
+
+```{r}
+# Create new variable then plot
+nhanes.samp.adult %>%
+  mutate(bmi_category = case_when(
+    BMI < 25 ~ "Normal or underweight",
+    BMI >= 25 ~ "Overweight or obese"
+  )) %>%
+  ggplot(aes(x = bmi_category)) +
+  geom_bar()
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Saving your work
+
+Remember: all these operations create NEW data frames - they don't modify the original!
+
+To save your work, use the assignment operator `<-`:
+
+```{r}
+# Save filtered data
+adults_with_diabetes <- nhanes.samp.adult %>%
+  filter(Diabetes == "Yes")
+```
+
+```{r}
+# Save data with new variables
+nhanes_with_bmi_cat <- nhanes.samp.adult %>%
+  mutate(bmi_category = case_when(
+    BMI < 18.5 ~ "Underweight",
+    BMI < 25 ~ "Normal",
+    BMI < 30 ~ "Overweight",
+    BMI >= 30 ~ "Obese"
+  ))
+```
+
+**Your notes:**
+
+
+
+
+---
+
+## Key takeaways
+
+- **Pipes (`%>%`)** let you chain operations together
+- **`dplyr` verbs** manipulate data: `filter()`, `select()`, `mutate()`, `group_by()`
+- **`janitor::tabyl()`** makes clean frequency tables
+- **`rstatix::get_summary_stats()`** calculates summary statistics easily
+- **`ggplot2`** creates visualizations using data + aesthetics + geoms
+- **Nothing changes your original data** unless you explicitly save it with `<-`
+
+---
+
+## Practice on your own
+
+Try these exercises:
+
+1. Filter the data to people with BMI > 30
+2. Create a scatterplot of Age vs BMI
+3. Calculate mean height by gender
+4. Make a histogram of Age
+5. Create a two-way table of Gender and Diabetes status
+
+**Your notes:**
