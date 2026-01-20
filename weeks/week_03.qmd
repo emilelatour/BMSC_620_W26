@@ -48,7 +48,7 @@ By the end of the week, you should be able to:
 
 **Optional review materials:**
 
-- Bayes' Theorem supplemental recording (HTML | PDF | OneDrive – links coming)
+- Bayes' Theorem supplemental recording ([HTML](/lessons/07_bayes-theorem/07_bayes_theorem.qmd) | [PDF](/lessons/07_bayes-theorem/07_bayes_theorem.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
   - [Link to recording - TBD]
 
 ---
@@ -64,7 +64,7 @@ By the end of the week, you should be able to:
   - Introduction to `ggplot2`
 
 - **Slides**
-  - Exploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)
+  - Exploratory Data Analysis and Data Visualization ([HTML](/lessons/08_eda_and_data_viz/08_eda_and_data_viz.qmd) | [PDF](/lessons/08_eda_and_data_viz/08_eda_and_data_viz.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Code along**
   - [Download EDA and Data Viz code along (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQCrK8NNN6T5Ta1pfd6elDidAc3o8LB2RXSvu4CsIRkiRV0?e=lRkBtq"}
