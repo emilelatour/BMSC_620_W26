@@ -1552,13 +1552,13 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <h2>Anscombe’s Quartet</h2>
 <p>Four datasets with identical summary statistics but very different patterns:</p>
 
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"><p>All four have the same mean, SD, and correlation - but look how different they are!</p>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-44-1.png" width="960" class="r-stretch"><p>All four have the same mean, SD, and correlation - but look how different they are!</p>
 </section>
 <section id="the-datasaurus-dozen" class="slide level2">
 <h2>The Datasaurus Dozen</h2>
 <p>Similar to Anscombe’s quartet, The Datasaurus Dozen is a compilation of 13 data sets with similar numerical summaries and radically different visual summaries. See a great discussion of this dataset by the creators, Justin Matejka and George Fitzmaurice <a href="https://www.research.autodesk.com/publications/same-stats-different-graphs/">here</a></p>
 
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"><p>All 13 datasets have nearly identical summary statistics: Mean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06</p>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"><p>All 13 datasets have nearly identical summary statistics: Mean X = 54.3, Y = 47.8 SD X = 16.77, Y = 26.94 Cor = -0.06</p>
 </section>
 <section id="the-grammar-of-graphics" class="slide level2">
 <h2>The grammar of graphics</h2>
@@ -1614,7 +1614,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="fu">ggplot</span>(<span class="at">data =</span> nhanes.samp.adult)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-47-1.png" width="960" class="r-stretch"></section>
 <section id="building-a-ggplot-step-by-step-1" class="slide level2">
 <h2>Building a ggplot step by step</h2>
 <h4 id="step-2-add-mapping">Step 2: Add mapping</h4>
@@ -1622,7 +1622,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a></a><span class="fu">ggplot</span>(nhanes.samp.adult, <span class="fu">aes</span>(<span class="at">x =</span> BMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
 <section id="building-a-ggplot-step-by-step-2" class="slide level2">
 <h2>Building a ggplot step by step</h2>
 <h4 id="step-3-add-geom">Step 3: Add geom</h4>
@@ -1631,7 +1631,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <span id="cb72-2"><a></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-49-1.png" width="960" class="r-stretch"></section>
 <section id="your-first-ggplot-histogram" class="slide level2">
 <h2>Your first ggplot: histogram</h2>
 <p><strong>Histogram</strong> - shows the distribution of a single numeric variable.</p>
@@ -1644,7 +1644,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1673,7 +1673,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1687,7 +1687,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1707,7 +1707,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1734,7 +1734,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1757,7 +1757,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1779,7 +1779,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-56-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1807,7 +1807,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-57-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-57-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1830,7 +1830,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-58-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1851,7 +1851,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-59-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-59-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1873,7 +1873,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-60-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-60-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1895,7 +1895,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-61-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-61-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1910,7 +1910,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-62-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-62-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1936,7 +1936,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-63-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-63-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1955,7 +1955,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-64-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-64-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1977,7 +1977,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-65-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-65-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2000,7 +2000,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-66-1.png" width="960"></p>
+<p><img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-66-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2149,7 +2149,7 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, N
 <span id="cb94-10"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="07_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-70-1.png" width="960" class="r-stretch"></section>
+<img data-src="08_eda_and_data_viz_files/figure-revealjs/unnamed-chunk-70-1.png" width="960" class="r-stretch"></section>
 <section id="eda-workflow-summary" class="slide level2">
 <h2>EDA workflow summary</h2>
 <p><strong>1. Import and inspect</strong></p>
