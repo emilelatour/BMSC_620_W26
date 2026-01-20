@@ -1678,357 +1678,152 @@
     ]
   },
   {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html",
-    "href": "code_for_students/08_eda_and_data_viz_code.html",
-    "title": "Data Wrangling and Visualization",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "Today we’ll learn tools for:\n\nData wrangling with dplyr (manipulating data)\nSummary tables with janitor and rstatix (easier summaries)\nData visualization with ggplot2 (making plots)"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#overview",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#overview",
-    "title": "Data Wrangling and Visualization",
-    "section": "",
-    "text": "Today we’ll learn tools for:\n\nData wrangling with dplyr (manipulating data)\nSummary tables with janitor and rstatix (easier summaries)\nData visualization with ggplot2 (making plots)"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#setup",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#setup",
-    "title": "Data Wrangling and Visualization",
-    "section": "Setup",
-    "text": "Setup\nFirst, load the packages we’ll use today:\n\n# install.packages(\"tidyverse\")\n# install.packages(\"janitor\")\n# install.packages(\"rstatix\")\n# install.packages(\"skimr\")\n\n# Packages for class\nlibrary(dplyr)    # Part of tidyverse\nlibrary(ggplot2)  # Part of tidyverse\nlibrary(janitor)  # for working with dirty data \nlibrary(rstatix)  # Pipe-Friendly Framework for Basic Statistical Tests\nlibrary(skimr)    # Compact and Flexible Summaries of Data\n\n# Text book package with datasets\nlibrary(oibiostat)\n\nLoad the NHANES data:\n\ndata(\"nhanes.samp.adult\")\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#exploring-the-data",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#exploring-the-data",
-    "title": "Data Wrangling and Visualization",
-    "section": "Exploring the data",
-    "text": "Exploring the data\n\nglimpse()\nglimpse() is the tidyverse version of str(). It shows you the structure of your data.\n\nglimpse(nhanes.samp.adult)\n\nRows: 135\nColumns: 76\n$ ID               &lt;int&gt; 63147, 57165, 69465, 57313, 56047, 57056, 54643, 5309…\n$ SurveyYr         &lt;fct&gt; 2011_12, 2009_10, 2011_12, 2009_10, 2009_10, 2009_10,…\n$ Gender           &lt;fct&gt; male, male, female, female, female, male, female, fem…\n$ Age              &lt;int&gt; 41, 48, 50, 74, 27, 26, 41, 52, 56, 39, 32, 72, 35, 2…\n$ AgeDecade        &lt;fct&gt;  40-49,  40-49,  50-59,  70+,  20-29,  20-29,  40-49,…\n$ AgeMonths        &lt;int&gt; NA, 586, NA, 889, 329, 316, 503, 632, NA, 472, 391, 8…\n$ Race1            &lt;fct&gt; White, Black, White, White, White, Mexican, White, Wh…\n$ Race3            &lt;fct&gt; White, NA, White, NA, NA, NA, NA, NA, White, NA, NA, …\n$ Education        &lt;fct&gt; Some College, High School, College Grad, College Grad…\n$ MaritalStatus    &lt;fct&gt; Married, Married, Divorced, Widowed, NeverMarried, Ne…\n$ HHIncome         &lt;fct&gt; 25000-34999, 25000-34999, 35000-44999, 45000-54999, 7…\n$ HHIncomeMid      &lt;int&gt; 30000, 30000, 40000, 50000, 87500, 12500, 60000, 2500…\n$ Poverty          &lt;dbl&gt; 1.41, 1.36, 2.16, 4.16, 3.51, 0.39, 2.33, 0.05, 5.00,…\n$ HomeRooms        &lt;int&gt; 6, 6, 10, 7, 7, 5, 9, 6, 7, 6, 4, 12, 6, 6, 8, 1, 5, …\n$ HomeOwn          &lt;fct&gt; Own, Own, Own, Own, Own, Own, Own, Other, Own, Own, R…\n$ Work             &lt;fct&gt; NotWorking, NotWorking, NotWorking, NotWorking, Worki…\n$ Weight           &lt;dbl&gt; 106.8, 77.4, 70.5, 61.7, 70.3, 92.6, 55.6, 82.0, 88.2…\n$ Length           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HeadCirc         &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Height           &lt;dbl&gt; 188.8, 168.2, 161.8, 158.1, 168.1, 165.8, 155.6, 156.…\n$ BMI              &lt;dbl&gt; 30.00, 27.36, 26.90, 24.68, 24.88, 33.69, 22.96, 33.5…\n$ BMICatUnder20yrs &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ BMI_WHO          &lt;fct&gt; NA, 25.0_to_29.9, 25.0_to_29.9, 18.5_to_24.9, 18.5_to…\n$ Pulse            &lt;int&gt; 88, 70, 76, 64, 74, 78, 82, 96, 44, 60, 72, 88, 66, 6…\n$ BPSysAve         &lt;int&gt; 112, 123, 152, 132, 107, 126, 111, 114, 137, 122, 124…\n$ BPDiaAve         &lt;int&gt; 76, 69, 103, 81, 58, 75, 76, 71, 77, 78, 89, 66, 66, …\n$ BPSys1           &lt;int&gt; 114, 128, 144, 146, 106, 126, 116, 116, 134, 124, 128…\n$ BPDia1           &lt;int&gt; 78, 78, 104, 84, 62, 86, 72, 66, 78, 70, 94, 72, 62, …\n$ BPSys2           &lt;int&gt; 114, 126, 150, 130, 108, 130, 112, 116, 140, 120, 124…\n$ BPDia2           &lt;int&gt; 76, 76, 106, 80, 52, 74, 76, 72, 76, 80, 90, 64, 66, …\n$ BPSys3           &lt;int&gt; 110, 120, 154, 134, 106, 122, 110, 112, 134, 124, 124…\n$ BPDia3           &lt;int&gt; 76, 62, 100, 82, 64, 76, 76, 70, 78, 76, 88, 68, 66, …\n$ Testosterone     &lt;dbl&gt; 390.16, NA, 8.17, NA, NA, NA, NA, NA, 327.89, NA, NA,…\n$ DirectChol       &lt;dbl&gt; 1.19, 1.22, 2.43, NA, 1.84, 1.40, 1.24, 1.60, 1.11, 0…\n$ TotChol          &lt;dbl&gt; 4.84, 3.75, 5.92, NA, 4.78, 6.96, 5.77, 6.03, 5.25, 5…\n$ UrineVol1        &lt;int&gt; 57, 49, 30, 33, 150, 100, 17, 56, 104, 272, 120, 29, …\n$ UrineFlow1       &lt;dbl&gt; 0.074, 0.551, 1.304, 0.673, 0.342, 0.917, 0.283, 0.34…\n$ UrineVol2        &lt;int&gt; NA, NA, 114, 122, NA, NA, 61, NA, NA, NA, NA, 49, NA,…\n$ UrineFlow2       &lt;dbl&gt; NA, NA, 1.118, 1.220, NA, NA, 0.407, NA, NA, NA, NA, …\n$ Diabetes         &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, Yes, No, No, …\n$ DiabetesAge      &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ HealthGen        &lt;fct&gt; Fair, Fair, Vgood, Vgood, Fair, Fair, Good, Fair, NA,…\n$ DaysPhysHlthBad  &lt;int&gt; 12, 20, 0, 0, 2, 0, 4, 0, NA, 0, 20, 2, 0, 2, NA, 7, …\n$ DaysMentHlthBad  &lt;int&gt; 30, 30, 0, 0, 0, 0, 5, 5, NA, 0, 10, 0, 8, 3, NA, 14,…\n$ LittleInterest   &lt;fct&gt; Several, None, None, None, None, Several, Several, No…\n$ Depressed        &lt;fct&gt; Several, None, None, None, None, None, Several, Most,…\n$ nPregnancies     &lt;int&gt; NA, NA, 3, 3, 2, NA, 3, 2, NA, NA, 7, 3, NA, NA, NA, …\n$ nBabies          &lt;int&gt; NA, NA, 3, 3, 2, NA, 3, 2, NA, NA, 2, 3, NA, NA, NA, …\n$ Age1stBaby       &lt;int&gt; NA, NA, 27, 23, 17, NA, 31, 22, NA, NA, 23, 20, NA, N…\n$ SleepHrsNight    &lt;int&gt; 9, 3, 6, 6, 6, 6, 6, 4, 7, 4, 8, 8, 7, 6, 4, 4, 5, 8,…\n$ SleepTrouble     &lt;fct&gt; Yes, Yes, Yes, No, No, No, No, Yes, No, No, No, No, Y…\n$ PhysActive       &lt;fct&gt; No, Yes, Yes, Yes, No, No, No, No, Yes, No, Yes, No, …\n$ PhysActiveDays   &lt;int&gt; NA, 3, 4, 7, NA, NA, NA, NA, 4, NA, 3, NA, NA, NA, NA…\n$ TVHrsDay         &lt;fct&gt; 1_hr, NA, 1_hr, NA, NA, NA, NA, NA, 2_hr, NA, NA, NA,…\n$ CompHrsDay       &lt;fct&gt; 1_hr, NA, 1_hr, NA, NA, NA, NA, NA, More_4_hr, NA, NA…\n$ TVHrsDayChild    &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ CompHrsDayChild  &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ Alcohol12PlusYr  &lt;fct&gt; Yes, Yes, Yes, Yes, Yes, Yes, No, Yes, NA, Yes, Yes, …\n$ AlcoholDay       &lt;int&gt; 2, NA, 1, 1, 5, 12, 1, 12, NA, NA, NA, 1, 1, 11, NA, …\n$ AlcoholYear      &lt;int&gt; 2, 0, 364, 52, 24, 168, 4, 364, NA, 0, 0, 4, 2, 52, N…\n$ SmokeNow         &lt;fct&gt; NA, No, NA, No, Yes, Yes, No, Yes, NA, NA, NA, NA, NA…\n$ Smoke100         &lt;fct&gt; No, Yes, No, Yes, Yes, Yes, Yes, Yes, No, No, No, No,…\n$ Smoke100n        &lt;fct&gt; Non-Smoker, Smoker, Non-Smoker, Smoker, Smoker, Smoke…\n$ SmokeAge         &lt;int&gt; NA, 11, NA, 18, 14, 14, 10, 30, NA, NA, NA, NA, NA, N…\n$ Marijuana        &lt;fct&gt; Yes, Yes, No, NA, Yes, Yes, Yes, No, NA, No, Yes, NA,…\n$ AgeFirstMarij    &lt;int&gt; 16, 17, NA, NA, 11, 14, 11, NA, NA, NA, 17, NA, NA, 2…\n$ RegularMarij     &lt;fct&gt; No, Yes, No, NA, Yes, Yes, Yes, No, NA, No, Yes, NA, …\n$ AgeRegMarij      &lt;int&gt; NA, 17, NA, NA, 16, 14, 11, NA, NA, NA, 20, NA, NA, N…\n$ HardDrugs        &lt;fct&gt; Yes, No, No, NA, No, Yes, No, No, NA, No, Yes, NA, No…\n$ SexEver          &lt;fct&gt; Yes, Yes, Yes, NA, Yes, Yes, Yes, Yes, NA, Yes, Yes, …\n$ SexAge           &lt;int&gt; 15, 17, 17, NA, 13, 15, 15, 17, NA, 21, 16, NA, 17, 1…\n$ SexNumPartnLife  &lt;int&gt; 50, 81, 4, NA, 10, 8, 3, 5, NA, 5, 45, NA, 4, 1, NA, …\n$ SexNumPartYear   &lt;int&gt; 1, 10, 1, NA, 3, 1, 1, 0, NA, 5, 2, NA, 1, 1, NA, 2, …\n$ SameSex          &lt;fct&gt; No, No, No, NA, No, No, No, No, NA, No, Yes, NA, No, …\n$ SexOrientation   &lt;fct&gt; Heterosexual, Heterosexual, Heterosexual, NA, Heteros…\n$ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, No, NA, No, NA, NA, NA, No, NA, NA, N…\n\n\nYour notes:\n\n\nskim()\nskim() from the skimr package gives you a comprehensive summary of your data, including summary statistics and mini histograms.\n\nskim(nhanes.samp.adult)\n\n\nData summary\n\n\nName\nnhanes.samp.adult\n\n\nNumber of rows\n135\n\n\nNumber of columns\n76\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nfactor\n31\n\n\nnumeric\n45\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: factor\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nordered\nn_unique\ntop_counts\n\n\n\n\nSurveyYr\n0\n1.00\nFALSE\n2\n201: 69, 200: 66\n\n\nGender\n0\n1.00\nFALSE\n2\nfem: 70, mal: 65\n\n\nAgeDecade\n2\n0.99\nFALSE\n6\n20: 32, 30: 29, 50: 25, 40: 23\n\n\nRace1\n0\n1.00\nFALSE\n5\nWhi: 95, Bla: 12, Mex: 11, Oth: 9\n\n\nRace3\n66\n0.51\nFALSE\n6\nWhi: 49, His: 6, Mex: 6, Bla: 5\n\n\nEducation\n0\n1.00\nFALSE\n5\nCol: 46, Som: 39, Hig: 27, 9 -: 16\n\n\nMaritalStatus\n0\n1.00\nFALSE\n6\nMar: 78, Nev: 25, Div: 13, Liv: 13\n\n\nHHIncome\n10\n0.93\nFALSE\n12\nmor: 27, 350: 18, 250: 14, 750: 14\n\n\nHomeOwn\n0\n1.00\nFALSE\n3\nOwn: 88, Ren: 43, Oth: 4\n\n\nWork\n0\n1.00\nFALSE\n3\nWor: 90, Not: 40, Loo: 5\n\n\nBMICatUnder20yrs\n135\n0.00\nFALSE\n0\nUnd: 0, Nor: 0, Ove: 0, Obe: 0\n\n\nBMI_WHO\n1\n0.99\nFALSE\n4\n30.: 49, 25.: 46, 18.: 35, 12.: 4\n\n\nDiabetes\n0\n1.00\nFALSE\n2\nNo: 122, Yes: 13\n\n\nHealthGen\n11\n0.92\nFALSE\n5\nGoo: 45, Vgo: 32, Fai: 30, Exc: 16\n\n\nLittleInterest\n11\n0.92\nFALSE\n3\nNon: 92, Sev: 27, Mos: 5\n\n\nDepressed\n11\n0.92\nFALSE\n3\nNon: 94, Sev: 21, Mos: 9\n\n\nSleepTrouble\n0\n1.00\nFALSE\n2\nNo: 99, Yes: 36\n\n\nPhysActive\n0\n1.00\nFALSE\n2\nYes: 76, No: 59\n\n\nTVHrsDay\n66\n0.51\nFALSE\n7\n1_h: 15, 2_h: 15, 3_h: 15, 4_h: 10\n\n\nCompHrsDay\n66\n0.51\nFALSE\n7\n0_h: 16, 0_t: 14, 1_h: 14, 2_h: 12\n\n\nAlcohol12PlusYr\n11\n0.92\nFALSE\n2\nYes: 102, No: 22\n\n\nSmokeNow\n70\n0.48\nFALSE\n2\nYes: 36, No: 29\n\n\nSmoke100\n0\n1.00\nFALSE\n2\nNo: 70, Yes: 65\n\n\nSmoke100n\n0\n1.00\nFALSE\n2\nNon: 70, Smo: 65\n\n\nMarijuana\n38\n0.72\nFALSE\n2\nYes: 58, No: 39\n\n\nRegularMarij\n38\n0.72\nFALSE\n2\nNo: 65, Yes: 32\n\n\nHardDrugs\n26\n0.81\nFALSE\n2\nNo: 87, Yes: 22\n\n\nSexEver\n26\n0.81\nFALSE\n2\nYes: 106, No: 3\n\n\nSameSex\n26\n0.81\nFALSE\n2\nNo: 103, Yes: 6\n\n\nSexOrientation\n41\n0.70\nFALSE\n2\nHet: 93, Bis: 1, Hom: 0\n\n\nPregnantNow\n95\n0.30\nFALSE\n2\nNo: 38, Yes: 2, Unk: 0\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nID\n0\n1.00\n62139.76\n5722.89\n51780.00\n57277.00\n62229.00\n67475.00\n71581.00\n▆▆▇▅▇\n\n\nAge\n0\n1.00\n44.47\n16.07\n21.00\n30.50\n42.00\n57.00\n80.00\n▇▆▆▅▃\n\n\nAgeMonths\n70\n0.48\n519.66\n188.92\n259.00\n332.00\n486.00\n683.00\n910.00\n▇▆▃▅▂\n\n\nHHIncomeMid\n10\n0.93\n57180.00\n31608.39\n2500.00\n30000.00\n50000.00\n87500.00\n100000.00\n▃▇▃▂▇\n\n\nPoverty\n11\n0.92\n2.78\n1.70\n0.00\n1.28\n2.71\n4.82\n5.00\n▅▆▅▂▇\n\n\nHomeRooms\n0\n1.00\n5.96\n2.31\n1.00\n4.50\n6.00\n7.00\n13.00\n▂▅▇▂▁\n\n\nWeight\n0\n1.00\n83.96\n23.72\n39.70\n67.45\n80.70\n98.50\n187.50\n▅▇▃▁▁\n\n\nLength\n135\n0.00\nNaN\nNA\nNA\nNA\nNA\nNA\nNA\n\n\n\nHeadCirc\n135\n0.00\nNaN\nNA\nNA\nNA\nNA\nNA\nNA\n\n\n\nHeight\n0\n1.00\n169.49\n9.95\n140.00\n162.55\n168.50\n177.80\n191.30\n▁▃▇▅▃\n\n\nBMI\n0\n1.00\n29.10\n7.55\n17.10\n24.24\n27.90\n33.46\n69.00\n▇▆▂▁▁\n\n\nPulse\n4\n0.97\n73.11\n12.58\n44.00\n64.00\n72.00\n80.00\n116.00\n▂▇▇▂▁\n\n\nBPSysAve\n5\n0.96\n120.74\n17.10\n91.00\n110.00\n120.00\n129.00\n202.00\n▆▇▂▁▁\n\n\nBPDiaAve\n5\n0.96\n71.18\n11.36\n21.00\n65.00\n71.00\n78.00\n103.00\n▁▁▇▇▁\n\n\nBPSys1\n11\n0.92\n121.69\n17.97\n90.00\n110.00\n119.00\n130.00\n202.00\n▅▇▂▁▁\n\n\nBPDia1\n11\n0.92\n71.35\n11.65\n42.00\n64.00\n71.00\n78.00\n108.00\n▂▇▇▃▁\n\n\nBPSys2\n7\n0.95\n121.33\n17.30\n90.00\n110.00\n119.00\n130.00\n204.00\n▆▇▂▁▁\n\n\nBPDia2\n7\n0.95\n71.59\n11.15\n40.00\n65.50\n72.00\n78.00\n106.00\n▁▅▇▃▁\n\n\nBPSys3\n8\n0.94\n120.63\n17.23\n90.00\n110.00\n118.00\n128.00\n200.00\n▆▇▂▁▁\n\n\nBPDia3\n8\n0.94\n70.58\n12.40\n0.00\n64.00\n70.00\n78.00\n100.00\n▁▁▂▇▂\n\n\nTestosterone\n67\n0.50\n195.32\n196.22\n7.21\n20.92\n137.92\n322.30\n651.53\n▇▃▂▁▂\n\n\nDirectChol\n3\n0.98\n1.39\n0.45\n0.70\n1.09\n1.29\n1.60\n3.72\n▇▆▂▁▁\n\n\nTotChol\n3\n0.98\n5.16\n1.05\n3.18\n4.40\n5.08\n5.80\n8.77\n▅▇▆▁▁\n\n\nUrineVol1\n1\n0.99\n119.96\n93.90\n1.00\n49.25\n94.50\n162.50\n402.00\n▇▆▂▂▁\n\n\nUrineFlow1\n5\n0.96\n1.14\n1.42\n0.01\n0.37\n0.74\n1.29\n12.35\n▇▁▁▁▁\n\n\nUrineVol2\n112\n0.17\n98.78\n72.73\n23.00\n54.00\n63.00\n123.50\n314.00\n▇▃▁▁▁\n\n\nUrineFlow2\n112\n0.17\n0.90\n0.74\n0.14\n0.42\n0.55\n1.17\n2.80\n▇▂▁▁▁\n\n\nDiabetesAge\n124\n0.08\n41.45\n15.44\n12.00\n32.50\n42.00\n52.50\n63.00\n▂▅▇▅▇\n\n\nDaysPhysHlthBad\n11\n0.92\n3.85\n8.18\n0.00\n0.00\n0.00\n2.00\n30.00\n▇▁▁▁▁\n\n\nDaysMentHlthBad\n11\n0.92\n5.02\n8.66\n0.00\n0.00\n0.00\n5.00\n30.00\n▇▁▁▁▁\n\n\nnPregnancies\n86\n0.36\n3.10\n1.62\n1.00\n2.00\n3.00\n4.00\n7.00\n▇▆▂▁▂\n\n\nnBabies\n88\n0.35\n2.23\n1.05\n0.00\n2.00\n2.00\n3.00\n6.00\n▃▇▃▁▁\n\n\nAge1stBaby\n97\n0.28\n23.45\n4.92\n16.00\n20.00\n23.00\n26.00\n34.00\n▅▇▅▂▃\n\n\nSleepHrsNight\n0\n1.00\n6.90\n1.39\n2.00\n6.00\n7.00\n8.00\n11.00\n▁▁▇▅▁\n\n\nPhysActiveDays\n69\n0.49\n3.91\n1.76\n1.00\n3.00\n4.00\n5.00\n7.00\n▇▇▃▇▆\n\n\nTVHrsDayChild\n135\n0.00\nNaN\nNA\nNA\nNA\nNA\nNA\nNA\n\n\n\nCompHrsDayChild\n135\n0.00\nNaN\nNA\nNA\nNA\nNA\nNA\nNA\n\n\n\nAlcoholDay\n38\n0.72\n3.10\n2.84\n1.00\n1.00\n2.00\n5.00\n12.00\n▇▂▁▁▁\n\n\nAlcoholYear\n21\n0.84\n74.60\n102.54\n0.00\n3.00\n24.00\n104.00\n364.00\n▇▁▂▁▁\n\n\nSmokeAge\n73\n0.46\n17.50\n5.60\n7.00\n14.00\n16.50\n19.00\n45.00\n▃▇▁▁▁\n\n\nAgeFirstMarij\n77\n0.43\n17.00\n4.85\n9.00\n15.00\n16.00\n19.00\n46.00\n▇▇▁▁▁\n\n\nAgeRegMarij\n103\n0.24\n18.03\n6.19\n11.00\n15.00\n17.00\n19.25\n46.00\n▇▃▁▁▁\n\n\nSexAge\n29\n0.79\n16.94\n3.11\n9.00\n15.00\n17.00\n19.00\n33.00\n▂▇▃▁▁\n\n\nSexNumPartnLife\n26\n0.81\n25.41\n93.67\n0.00\n3.00\n6.00\n13.00\n800.00\n▇▁▁▁▁\n\n\nSexNumPartYear\n38\n0.72\n1.27\n1.33\n0.00\n1.00\n1.00\n1.00\n10.00\n▇▁▁▁▁\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#tibbles",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#tibbles",
-    "title": "Data Wrangling and Visualization",
-    "section": "Tibbles",
-    "text": "Tibbles\nA tibble is the tidyverse version of a data frame. It’s essentially the same thing, just with nicer printing.\n\n# Print the data\nnhanes.samp.adult\n\n# A tibble: 135 × 76\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n * &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#the-pipe-operator",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#the-pipe-operator",
-    "title": "Data Wrangling and Visualization",
-    "section": "The Pipe Operator: %>%",
-    "text": "The Pipe Operator: %&gt;%\nThe pipe operator %&gt;% takes the output from one function and passes it as input to the next function.\nThink of it as: “and then…”\n\nWithout pipes (nested functions)\n\n# Read from inside-out\nhead(nhanes.samp.adult)\n\n# A tibble: 6 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\n\n\nWith pipes\n\n# Read from left to right (or top to bottom)\nnhanes.samp.adult %&gt;% \n  head()\n\n# A tibble: 6 × 76\n     ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n  &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#dplyr-the-main-verbs",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#dplyr-the-main-verbs",
-    "title": "Data Wrangling and Visualization",
-    "section": "dplyr: The main verbs",
-    "text": "dplyr: The main verbs\nThe dplyr package gives us functions (verbs) for manipulating data:\n\nfilter() - keep rows that meet a condition\nselect() - keep or drop columns\nmutate() - create new columns or modify existing ones\ngroup_by() - group data for analysis\narrange() - sort rows"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#filter",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#filter",
-    "title": "Data Wrangling and Visualization",
-    "section": "filter()",
-    "text": "filter()\nfilter() keeps rows that meet certain conditions.\n\nFilter to one condition\n\n# Keep only people with diabetes\nnhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\")\n\n# A tibble: 13 × 76\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3   Education    \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;        \n 1 58162 2009_10  female    32 \" 30-39\"        391 White   &lt;NA&gt;    Some College \n 2 58845 2009_10  male      63 \" 60-69\"        760 White   &lt;NA&gt;    9 - 11th Gra…\n 3 59541 2009_10  male      49 \" 40-49\"        593 White   &lt;NA&gt;    High School  \n 4 71581 2011_12  male      36 \" 30-39\"         NA Mexican Mexican High School  \n 5 70064 2011_12  female    38 \" 30-39\"         NA White   White   High School  \n 6 53154 2009_10  male      55 \" 50-59\"        665 White   &lt;NA&gt;    Some College \n 7 55436 2009_10  female    57 \" 50-59\"        694 Other   &lt;NA&gt;    8th Grade    \n 8 56254 2009_10  female    59 \" 50-59\"        714 White   &lt;NA&gt;    9 - 11th Gra…\n 9 67668 2011_12  female    70 \" 70+\"           NA White   White   Some College \n10 60854 2009_10  female    61 \" 60-69\"        742 White   &lt;NA&gt;    High School  \n11 57287 2009_10  female    33 \" 30-39\"        398 White   &lt;NA&gt;    Some College \n12 63288 2011_12  female    58 \" 50-59\"         NA Black   Black   College Grad \n13 61687 2009_10  male      57 \" 50-59\"        693 White   &lt;NA&gt;    High School  \n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;,\n#   TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, UrineFlow1 &lt;dbl&gt;, UrineVol2 &lt;int&gt;, …\n\n\n\n\nFilter with multiple conditions\n\n# Keep only females over age 50\nnhanes.samp.adult %&gt;%\n  filter(Gender == \"female\", Age &gt; 50)\n\n# A tibble: 23 × 76\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1    Race3    Education  \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;      \n 1 57313 2009_10  female    74 \" 70+\"          889 White    &lt;NA&gt;     College Gr…\n 2 53095 2009_10  female    52 \" 50-59\"        632 White    &lt;NA&gt;     9 - 11th G…\n 3 58284 2009_10  female    72 \" 70+\"          868 White    &lt;NA&gt;     College Gr…\n 4 67285 2011_12  female    70 \" 70+\"           NA Hispanic Hispanic College Gr…\n 5 63510 2011_12  female    56 \" 50-59\"         NA White    White    Some Colle…\n 6 59171 2009_10  female    74 \" 70+\"          897 White    &lt;NA&gt;     High School\n 7 58824 2009_10  female    59 \" 50-59\"        712 White    &lt;NA&gt;     High School\n 8 64676 2011_12  female    56 \" 50-59\"         NA Hispanic Hispanic Some Colle…\n 9 55436 2009_10  female    57 \" 50-59\"        694 Other    &lt;NA&gt;     8th Grade  \n10 56254 2009_10  female    59 \" 50-59\"        714 White    &lt;NA&gt;     9 - 11th G…\n# ℹ 13 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\n\n\nOther comparison operators\n\n# Greater than or equal to\nnhanes.samp.adult %&gt;%\n  filter(BMI &gt;= 30)\n\n# A tibble: 50 × 76\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1    Race3    Education  \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;      \n 1 63147 2011_12  male      41 \" 40-49\"         NA White    White    Some Colle…\n 2 57056 2009_10  male      26 \" 20-29\"        316 Mexican  &lt;NA&gt;     High School\n 3 53095 2009_10  female    52 \" 50-59\"        632 White    &lt;NA&gt;     9 - 11th G…\n 4 60273 2009_10  male      39 \" 30-39\"        472 Black    &lt;NA&gt;     9 - 11th G…\n 5 58162 2009_10  female    32 \" 30-39\"        391 White    &lt;NA&gt;     Some Colle…\n 6 67285 2011_12  female    70 \" 70+\"           NA Hispanic Hispanic College Gr…\n 7 69403 2011_12  male      61 \" 60-69\"         NA White    White    College Gr…\n 8 51912 2009_10  female    27 \" 20-29\"        332 White    &lt;NA&gt;     9 - 11th G…\n 9 71564 2011_12  male      25 \" 20-29\"         NA White    White    High School\n10 58845 2009_10  male      63 \" 60-69\"        760 White    &lt;NA&gt;     9 - 11th G…\n# ℹ 40 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#select",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#select",
-    "title": "Data Wrangling and Visualization",
-    "section": "select()",
-    "text": "select()\nselect() keeps (or drops) specific columns.\n\nSelect certain columns\n\n# Keep only demographic variables\nnhanes.samp.adult %&gt;%\n  select(Age, Gender, Race1, Education)\n\n# A tibble: 135 × 4\n     Age Gender Race1   Education     \n   &lt;int&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;         \n 1    41 male   White   Some College  \n 2    48 male   Black   High School   \n 3    50 female White   College Grad  \n 4    74 female White   College Grad  \n 5    27 female White   9 - 11th Grade\n 6    26 male   Mexican High School   \n 7    41 female White   College Grad  \n 8    52 female White   9 - 11th Grade\n 9    56 male   White   College Grad  \n10    39 male   Black   9 - 11th Grade\n# ℹ 125 more rows\n\n\n\n\nSelect a range of columns\n\n# Keep columns from Age through Education\nnhanes.samp.adult %&gt;%\n  select(Age:Education)\n\n# A tibble: 135 × 6\n     Age AgeDecade AgeMonths Race1   Race3 Education     \n   &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1    41 \" 40-49\"         NA White   White Some College  \n 2    48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3    50 \" 50-59\"         NA White   White College Grad  \n 4    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6    26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9    56 \" 50-59\"         NA White   White College Grad  \n10    39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n\n\n\n\nDrop columns\n\n# Drop the ID column\nnhanes.samp.adult %&gt;%\n  select(-ID)\n\n# A tibble: 135 × 75\n   SurveyYr Gender   Age AgeDecade AgeMonths Race1 Race3 Education MaritalStatus\n   &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;     &lt;fct&gt;        \n 1 2011_12  male      41 \" 40-49\"         NA White White Some Col… Married      \n 2 2009_10  male      48 \" 40-49\"        586 Black &lt;NA&gt;  High Sch… Married      \n 3 2011_12  female    50 \" 50-59\"         NA White White College … Divorced     \n 4 2009_10  female    74 \" 70+\"          889 White &lt;NA&gt;  College … Widowed      \n 5 2009_10  female    27 \" 20-29\"        329 White &lt;NA&gt;  9 - 11th… NeverMarried \n 6 2009_10  male      26 \" 20-29\"        316 Mexi… &lt;NA&gt;  High Sch… NeverMarried \n 7 2009_10  female    41 \" 40-49\"        503 White &lt;NA&gt;  College … Married      \n 8 2009_10  female    52 \" 50-59\"        632 White &lt;NA&gt;  9 - 11th… NeverMarried \n 9 2011_12  male      56 \" 50-59\"         NA White White College … Married      \n10 2009_10  male      39 \" 30-39\"        472 Black &lt;NA&gt;  9 - 11th… Married      \n# ℹ 125 more rows\n# ℹ 66 more variables: HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;,\n#   HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;, Length &lt;dbl&gt;,\n#   HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;,\n#   BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;, BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;,\n#   BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;, BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;,\n#   Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, TotChol &lt;dbl&gt;, UrineVol1 &lt;int&gt;, …\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#mutate",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#mutate",
-    "title": "Data Wrangling and Visualization",
-    "section": "mutate()",
-    "text": "mutate()\nmutate() creates new columns or modifies existing ones.\nImportant: mutate() does NOT change your original data unless you save it!\n\nCreate a new column\n\n# Create BMI categories\nnhanes.samp.adult %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 18.5 ~ \"Underweight\",\n    BMI &lt; 25 ~ \"Normal\",\n    BMI &lt; 30 ~ \"Overweight\",\n    BMI &gt;= 30 ~ \"Obese\"\n  ))\n\n# A tibble: 135 × 77\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 68 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\n\n\nCreate multiple columns at once\n\n# Create height in meters and weight in kg\nnhanes.samp.adult %&gt;%\n  mutate(\n    height_m = Height / 100,\n    weight_kg = Weight * 0.453592\n  )\n\n# A tibble: 135 × 78\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 69 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#combining-dplyr-verbs",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#combining-dplyr-verbs",
-    "title": "Data Wrangling and Visualization",
-    "section": "Combining dplyr verbs",
-    "text": "Combining dplyr verbs\nYou can chain multiple operations together with the pipe!\n\n# Filter, select, and mutate in one pipeline\nnhanes.samp.adult %&gt;%\n  filter(Age &gt;= 40) %&gt;%\n  select(Age, Gender, BMI, Diabetes) %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 25 ~ \"Normal or underweight\",\n    BMI &gt;= 25 ~ \"Overweight or obese\"\n  ))\n\n# A tibble: 74 × 5\n     Age Gender   BMI Diabetes bmi_category         \n   &lt;int&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;chr&gt;                \n 1    41 male    30   No       Overweight or obese  \n 2    48 male    27.4 No       Overweight or obese  \n 3    50 female  26.9 No       Overweight or obese  \n 4    74 female  24.7 No       Normal or underweight\n 5    41 female  23.0 No       Normal or underweight\n 6    52 female  33.5 No       Overweight or obese  \n 7    56 male    26.8 No       Overweight or obese  \n 8    72 female  25.2 No       Overweight or obese  \n 9    49 female  24.4 No       Normal or underweight\n10    49 male    23.8 No       Normal or underweight\n# ℹ 64 more rows\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#group_by",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#group_by",
-    "title": "Data Wrangling and Visualization",
-    "section": "group_by()",
-    "text": "group_by()\ngroup_by() groups your data by one or more variables. It’s most useful when combined with other functions.\n\n# Group by gender\nnhanes.samp.adult %&gt;%\n  group_by(Gender)\n\n# A tibble: 135 × 76\n# Groups:   Gender [2]\n      ID SurveyYr Gender   Age AgeDecade AgeMonths Race1   Race3 Education     \n   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;         \n 1 63147 2011_12  male      41 \" 40-49\"         NA White   White Some College  \n 2 57165 2009_10  male      48 \" 40-49\"        586 Black   &lt;NA&gt;  High School   \n 3 69465 2011_12  female    50 \" 50-59\"         NA White   White College Grad  \n 4 57313 2009_10  female    74 \" 70+\"          889 White   &lt;NA&gt;  College Grad  \n 5 56047 2009_10  female    27 \" 20-29\"        329 White   &lt;NA&gt;  9 - 11th Grade\n 6 57056 2009_10  male      26 \" 20-29\"        316 Mexican &lt;NA&gt;  High School   \n 7 54643 2009_10  female    41 \" 40-49\"        503 White   &lt;NA&gt;  College Grad  \n 8 53095 2009_10  female    52 \" 50-59\"        632 White   &lt;NA&gt;  9 - 11th Grade\n 9 67434 2011_12  male      56 \" 50-59\"         NA White   White College Grad  \n10 60273 2009_10  male      39 \" 30-39\"        472 Black   &lt;NA&gt;  9 - 11th Grade\n# ℹ 125 more rows\n# ℹ 67 more variables: MaritalStatus &lt;fct&gt;, HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;,\n#   Poverty &lt;dbl&gt;, HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;, Weight &lt;dbl&gt;,\n#   Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;, Height &lt;dbl&gt;, BMI &lt;dbl&gt;,\n#   BMICatUnder20yrs &lt;fct&gt;, BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;,\n#   BPDiaAve &lt;int&gt;, BPSys1 &lt;int&gt;, BPDia1 &lt;int&gt;, BPSys2 &lt;int&gt;, BPDia2 &lt;int&gt;,\n#   BPSys3 &lt;int&gt;, BPDia3 &lt;int&gt;, Testosterone &lt;dbl&gt;, DirectChol &lt;dbl&gt;, …\n\n\nNote: By itself, group_by() doesn’t change how the data looks. It sets up groups for the next operation.\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#summary-tables-with-janitor",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#summary-tables-with-janitor",
-    "title": "Data Wrangling and Visualization",
-    "section": "Summary tables with janitor",
-    "text": "Summary tables with janitor\nThe janitor package makes creating frequency tables much easier than base R!\n\ntabyl() - frequency tables\n\n# One-way frequency table\nnhanes.samp.adult %&gt;%\n  tabyl(Gender)\n\n Gender  n   percent\n female 70 0.5185185\n   male 65 0.4814815\n\n\n\n# Two-way table (cross-tabulation)\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes)\n\n Gender No Yes\n female 62   8\n   male 60   5\n\n\n\n\nAdding percentages\n\n# Add row percentages\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes) %&gt;%\n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1)\n\n Gender    No   Yes\n female 88.6% 11.4%\n   male 92.3%  7.7%\n\n\n\n# Add totals\nnhanes.samp.adult %&gt;%\n  tabyl(Gender, Diabetes) %&gt;%\n  adorn_totals(c(\"row\", \"col\"))\n\n Gender  No Yes Total\n female  62   8    70\n   male  60   5    65\n  Total 122  13   135\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#summary-statistics-with-rstatix",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#summary-statistics-with-rstatix",
-    "title": "Data Wrangling and Visualization",
-    "section": "Summary statistics with rstatix",
-    "text": "Summary statistics with rstatix\nThe rstatix package provides easy-to-use functions for summary statistics.\n\nget_summary_stats()\n\n# Summary stats for BMI\nnhanes.samp.adult %&gt;%\n  get_summary_stats(BMI, type = \"mean_sd\")\n\n# A tibble: 1 × 4\n  variable     n  mean    sd\n  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 BMI        135  29.1  7.55\n\n\n\n\nSummary stats by group\n\n# BMI summary by gender\nnhanes.samp.adult %&gt;%\n  group_by(Gender) %&gt;%\n  get_summary_stats(BMI, type = \"mean_sd\")\n\n# A tibble: 2 × 5\n  Gender variable     n  mean    sd\n  &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 female BMI         70  29.0  8.82\n2 male   BMI         65  29.2  5.97\n\n\n\n# Multiple variables\nnhanes.samp.adult %&gt;%\n  group_by(Gender) %&gt;%\n  get_summary_stats(BMI, Height, Weight, type = \"mean_sd\")\n\n# A tibble: 6 × 5\n  Gender variable     n  mean    sd\n  &lt;fct&gt;  &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 female BMI         70  29.0  8.82\n2 female Height      70 163.   7.50\n3 female Weight      70  77.3 25.8 \n4 male   BMI         65  29.2  5.97\n5 male   Height      65 177.   7.09\n6 male   Weight      65  91.1 18.9 \n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#data-visualization-with-ggplot2",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#data-visualization-with-ggplot2",
-    "title": "Data Wrangling and Visualization",
-    "section": "Data Visualization with ggplot2",
-    "text": "Data Visualization with ggplot2\nggplot2 is a powerful package for creating visualizations.\n\nThe grammar of graphics\nEvery ggplot has three essential components:\n\nData - the dataset you’re plotting\nAesthetics (aes()) - what variables map to x, y, color, etc.\nGeoms - the type of plot (points, bars, lines, etc.)"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#basic-ggplot-template",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#basic-ggplot-template",
-    "title": "Data Wrangling and Visualization",
-    "section": "Basic ggplot template",
-    "text": "Basic ggplot template\n\nggplot(data = DATA, mapping = aes(x = X_VAR, y = Y_VAR)) +\n  geom_TYPE()\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#geom_histogram---distribution-of-one-numerical-variable",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#geom_histogram---distribution-of-one-numerical-variable",
-    "title": "Data Wrangling and Visualization",
-    "section": "geom_histogram() - Distribution of one numerical variable",
-    "text": "geom_histogram() - Distribution of one numerical variable\nHistograms show the distribution of a single numerical variable.\n\n# Distribution of BMI\nggplot(data = nhanes.samp.adult, mapping = aes(x = BMI)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value `binwidth`.\n\n\n\n\n\n\n\n\n\n\n# Control the number of bins\nggplot(data = nhanes.samp.adult, mapping = aes(x = BMI)) +\n  geom_histogram(bins = 30)\n\n\n\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#geom_boxplot---compare-distributions-across-groups",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#geom_boxplot---compare-distributions-across-groups",
-    "title": "Data Wrangling and Visualization",
-    "section": "geom_boxplot() - Compare distributions across groups",
-    "text": "geom_boxplot() - Compare distributions across groups\nBoxplots show the distribution of a numerical variable across different groups.\n\n# BMI by gender\nggplot(data = nhanes.samp.adult, mapping = aes(x = Gender, y = BMI)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n# BMI by diabetes status\nggplot(data = nhanes.samp.adult, mapping = aes(x = Diabetes, y = BMI)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#geom_point---scatterplot-for-two-numerical-variables",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#geom_point---scatterplot-for-two-numerical-variables",
-    "title": "Data Wrangling and Visualization",
-    "section": "geom_point() - Scatterplot for two numerical variables",
-    "text": "geom_point() - Scatterplot for two numerical variables\nScatterplots show the relationship between two numerical variables.\n\n# Height vs Weight\nggplot(data = nhanes.samp.adult, mapping = aes(x = Height, y = Weight)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\n# Add color by group\nggplot(data = nhanes.samp.adult, mapping = aes(x = Height, y = Weight, color = Gender)) +\n  geom_point()\n\n\n\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#geom_bar---bar-chart-for-categorical-variables",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#geom_bar---bar-chart-for-categorical-variables",
-    "title": "Data Wrangling and Visualization",
-    "section": "geom_bar() - Bar chart for categorical variables",
-    "text": "geom_bar() - Bar chart for categorical variables\nBar charts show counts or frequencies of categorical variables.\n\n# Count of diabetes status\nggplot(data = nhanes.samp.adult, mapping = aes(x = Diabetes)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n# Count of education levels\nggplot(data = nhanes.samp.adult, mapping = aes(x = Education)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#combining-ggplot-with-dplyr",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#combining-ggplot-with-dplyr",
-    "title": "Data Wrangling and Visualization",
-    "section": "Combining ggplot with dplyr",
-    "text": "Combining ggplot with dplyr\nYou can pipe data into ggplot!\n\n# Filter then plot\nnhanes.samp.adult %&gt;%\n  filter(Age &gt;= 50) %&gt;%\n  ggplot(aes(x = Height, y = Weight)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\n# Create new variable then plot\nnhanes.samp.adult %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 25 ~ \"Normal or underweight\",\n    BMI &gt;= 25 ~ \"Overweight or obese\"\n  )) %&gt;%\n  ggplot(aes(x = bmi_category)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#saving-your-work",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#saving-your-work",
-    "title": "Data Wrangling and Visualization",
-    "section": "Saving your work",
-    "text": "Saving your work\nRemember: all these operations create NEW data frames - they don’t modify the original!\nTo save your work, use the assignment operator &lt;-:\n\n# Save filtered data\nadults_with_diabetes &lt;- nhanes.samp.adult %&gt;%\n  filter(Diabetes == \"Yes\")\n\n\n# Save data with new variables\nnhanes_with_bmi_cat &lt;- nhanes.samp.adult %&gt;%\n  mutate(bmi_category = case_when(\n    BMI &lt; 18.5 ~ \"Underweight\",\n    BMI &lt; 25 ~ \"Normal\",\n    BMI &lt; 30 ~ \"Overweight\",\n    BMI &gt;= 30 ~ \"Obese\"\n  ))\n\nYour notes:"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#key-takeaways",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#key-takeaways",
-    "title": "Data Wrangling and Visualization",
-    "section": "Key takeaways",
-    "text": "Key takeaways\n\nPipes (%&gt;%) let you chain operations together\ndplyr verbs manipulate data: filter(), select(), mutate(), group_by()\njanitor::tabyl() makes clean frequency tables\nrstatix::get_summary_stats() calculates summary statistics easily\nggplot2 creates visualizations using data + aesthetics + geoms\nNothing changes your original data unless you explicitly save it with &lt;-"
-  },
-  {
-    "objectID": "code_for_students/08_eda_and_data_viz_code.html#practice-on-your-own",
-    "href": "code_for_students/08_eda_and_data_viz_code.html#practice-on-your-own",
-    "title": "Data Wrangling and Visualization",
-    "section": "Practice on your own",
-    "text": "Practice on your own\nTry these exercises:\n\nFilter the data to people with BMI &gt; 30\nCreate a scatterplot of Age vs BMI\nCalculate mean height by gender\nMake a histogram of Age\nCreate a two-way table of Gender and Diabetes status\n\nYour notes:"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html",
-    "href": "resources/keyboard_shortcuts.html",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "",
-    "text": "These are the keyboard shortcuts you’ll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Most Essential Shortcuts",
-    "text": "Most Essential Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nInsert pipe %&gt;%\nCmd + Shift + M\nCtrl + Shift + M\n\n\nInsert code chunk\nCmd + Option + I\nCtrl + Alt + I\n\n\nRun current line/selection\nCmd + Enter\nCtrl + Enter\n\n\nRun current chunk\nCmd + Shift + Enter\nCtrl + Shift + Enter\n\n\nRun all chunks above\nCmd + Option + P\nCtrl + Alt + P\n\n\nComment/uncomment line(s)\nCmd + Shift + C\nCtrl + Shift + C\n\n\nInsert assignment &lt;-\nOption + - (minus)\nAlt + - (minus)"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Additional Helpful Shortcuts",
-    "text": "Additional Helpful Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nMove cursor to source editor\nCtrl + 1\nCtrl + 1\n\n\nMove cursor to console\nCtrl + 2\nCtrl + 2\n\n\nClear console\nCtrl + L\nCtrl + L\n\n\nRestart R session\nCmd + Shift + 0\nCtrl + Shift + F10\n\n\nShow keyboard shortcut reference\nOption + Shift + K\nAlt + Shift + K\n\n\nFind in files\nCmd + Shift + F\nCtrl + Shift + F\n\n\nAuto-complete\nTab\nTab\n\n\nGet help for function\nF1 (cursor on function)\nF1 (cursor on function)"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Tips for Learning Shortcuts",
-    "text": "Tips for Learning Shortcuts\n\nStart with 2-3: Don’t try to memorize all of these at once. Start with the pipe operator and running code.\nUse them consistently: The more you use a shortcut, the more automatic it becomes.\nView all shortcuts: In RStudio, go to Tools → Keyboard Shortcuts Help or press Option/Alt + Shift + K to see the complete list.\nCustomize shortcuts: You can customize shortcuts in Tools → Modify Keyboard Shortcuts."
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
-    "href": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "The Shortcuts You’ll Use Every Class",
-    "text": "The Shortcuts You’ll Use Every Class\nIf you only remember three shortcuts, make them these:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line\nCmd/Ctrl + Shift + C - Comment/uncomment\n\nThese three will save you countless hours of typing!"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
-    "href": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "RStudio Cheatsheets",
-    "text": "RStudio Cheatsheets\nRStudio provides official cheatsheets for many packages and topics. Access them in RStudio:\nHelp → Cheatsheets\nOr download them directly from: https://posit.co/resources/cheatsheets/\n\nMost relevant cheatsheets for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and shortcuts\nData Transformation with dplyr - The dplyr verbs we use constantly\nData Visualization with ggplot2 - Creating plots\nR Markdown - Works for Quarto documents too\n\n\nTip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!"
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
     "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
+      "Home"
     ]
   },
   {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
     "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
+      "Home"
     ]
   },
   {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html",
-    "href": "weeks/week_02.html",
-    "title": "Week 2",
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "weeks/week_03.html",
+    "href": "weeks/week_03.html",
+    "title": "Week 3",
+    "section": "",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#announcements",
-    "href": "weeks/week_02.html#announcements",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#announcements",
+    "href": "weeks/week_03.html#announcements",
+    "title": "Week 3",
     "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#overview",
-    "href": "weeks/week_02.html#overview",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#overview",
+    "href": "weeks/week_03.html#overview",
+    "title": "Week 3",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
+    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#readings-before-class",
-    "href": "weeks/week_02.html#readings-before-class",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#readings-before-class",
+    "href": "weeks/week_03.html#readings-before-class",
+    "title": "Week 3",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#materials",
-    "href": "weeks/week_02.html#materials",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#materials",
+    "href": "weeks/week_03.html#materials",
+    "title": "Week 3",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
+    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive)\n\nCode along\n\n[Download EDA and Data Viz code along (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQCrK8NNN6T5Ta1pfd6elDidAc3o8LB2RXSvu4CsIRkiRV0?e=lRkBtq”}\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#homework",
-    "href": "weeks/week_02.html#homework",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#homework",
+    "href": "weeks/week_03.html#homework",
+    "title": "Week 3",
     "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 2\n\nDue Sunday, January 25 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
-    "href": "weeks/week_02.html#post-class-check-in-attendance",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#post-class-check-in-attendance",
+    "href": "weeks/week_03.html#post-class-check-in-attendance",
+    "title": "Week 3",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_02.html#looking-ahead",
-    "href": "weeks/week_02.html#looking-ahead",
-    "title": "Week 2",
+    "objectID": "weeks/week_03.html#looking-ahead",
+    "href": "weeks/week_03.html#looking-ahead",
+    "title": "Week 3",
     "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 2"
+      "Week 3"
     ]
   },
   {
@@ -2128,153 +1923,190 @@
     ]
   },
   {
-    "objectID": "weeks/week_03.html",
-    "href": "weeks/week_03.html",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html",
+    "href": "weeks/week_02.html",
+    "title": "Week 2",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#announcements",
-    "href": "weeks/week_03.html#announcements",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#announcements",
+    "href": "weeks/week_02.html#announcements",
+    "title": "Week 2",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#overview",
-    "href": "weeks/week_03.html#overview",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#overview",
+    "href": "weeks/week_02.html#overview",
+    "title": "Week 2",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2.",
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#readings-before-class",
-    "href": "weeks/week_03.html#readings-before-class",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#readings-before-class",
+    "href": "weeks/week_02.html#readings-before-class",
+    "title": "Week 2",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#materials",
-    "href": "weeks/week_03.html#materials",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#materials",
+    "href": "weeks/week_02.html#materials",
+    "title": "Week 2",
     "section": "Materials",
-    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive – links coming)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)\n\nCode along\n\nDownload EDA code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#homework",
-    "href": "weeks/week_03.html#homework",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#homework",
+    "href": "weeks/week_02.html#homework",
+    "title": "Week 2",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Sunday, January 25 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#post-class-check-in-attendance",
-    "href": "weeks/week_03.html#post-class-check-in-attendance",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
+    "href": "weeks/week_02.html#post-class-check-in-attendance",
+    "title": "Week 2",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "weeks/week_03.html#looking-ahead",
-    "href": "weeks/week_03.html#looking-ahead",
-    "title": "Week 3",
+    "objectID": "weeks/week_02.html#looking-ahead",
+    "href": "weeks/week_02.html#looking-ahead",
+    "title": "Week 2",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course.",
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 3"
+      "Week 2"
     ]
   },
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
     "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
-      "Homework"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
     "crumbs": [
       "Home",
-      "Homework"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
     "crumbs": [
       "Home",
-      "Homework"
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
     "crumbs": [
-      "Home"
+      "Home",
+      "Course info",
+      "Instructors"
     ]
   },
   {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
+    "objectID": "resources/keyboard_shortcuts.html",
+    "href": "resources/keyboard_shortcuts.html",
+    "title": "Essential RStudio Keyboard Shortcuts",
     "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "These are the keyboard shortcuts you’ll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Most Essential Shortcuts",
+    "text": "Most Essential Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nInsert pipe %&gt;%\nCmd + Shift + M\nCtrl + Shift + M\n\n\nInsert code chunk\nCmd + Option + I\nCtrl + Alt + I\n\n\nRun current line/selection\nCmd + Enter\nCtrl + Enter\n\n\nRun current chunk\nCmd + Shift + Enter\nCtrl + Shift + Enter\n\n\nRun all chunks above\nCmd + Option + P\nCtrl + Alt + P\n\n\nComment/uncomment line(s)\nCmd + Shift + C\nCtrl + Shift + C\n\n\nInsert assignment &lt;-\nOption + - (minus)\nAlt + - (minus)"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Additional Helpful Shortcuts",
+    "text": "Additional Helpful Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nMove cursor to source editor\nCtrl + 1\nCtrl + 1\n\n\nMove cursor to console\nCtrl + 2\nCtrl + 2\n\n\nClear console\nCtrl + L\nCtrl + L\n\n\nRestart R session\nCmd + Shift + 0\nCtrl + Shift + F10\n\n\nShow keyboard shortcut reference\nOption + Shift + K\nAlt + Shift + K\n\n\nFind in files\nCmd + Shift + F\nCtrl + Shift + F\n\n\nAuto-complete\nTab\nTab\n\n\nGet help for function\nF1 (cursor on function)\nF1 (cursor on function)"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Tips for Learning Shortcuts",
+    "text": "Tips for Learning Shortcuts\n\nStart with 2-3: Don’t try to memorize all of these at once. Start with the pipe operator and running code.\nUse them consistently: The more you use a shortcut, the more automatic it becomes.\nView all shortcuts: In RStudio, go to Tools → Keyboard Shortcuts Help or press Option/Alt + Shift + K to see the complete list.\nCustomize shortcuts: You can customize shortcuts in Tools → Modify Keyboard Shortcuts."
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
+    "href": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "The Shortcuts You’ll Use Every Class",
+    "text": "The Shortcuts You’ll Use Every Class\nIf you only remember three shortcuts, make them these:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line\nCmd/Ctrl + Shift + C - Comment/uncomment\n\nThese three will save you countless hours of typing!"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
+    "href": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "RStudio Cheatsheets",
+    "text": "RStudio Cheatsheets\nRStudio provides official cheatsheets for many packages and topics. Access them in RStudio:\nHelp → Cheatsheets\nOr download them directly from: https://posit.co/resources/cheatsheets/\n\nMost relevant cheatsheets for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and shortcuts\nData Transformation with dplyr - The dplyr verbs we use constantly\nData Visualization with ggplot2 - Creating plots\nR Markdown - Works for Quarto documents too\n\n\nTip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!"
   },
   {
     "objectID": "about.html",
