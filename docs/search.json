@@ -1770,7 +1770,7 @@
     "href": "weeks/week_03.html#materials",
     "title": "Week 3",
     "section": "Materials",
-    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive – links coming)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
+    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive – links coming)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)\n\nCode along\n\nDownload EDA code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
     "crumbs": [
       "Home",
       "Weekly materials",
