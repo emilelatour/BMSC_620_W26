@@ -66,6 +66,9 @@ By the end of the week, you should be able to:
 - **Slides**
   - Exploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)
 
+- **Code along**
+  - [Download EDA code along (.qmd)](/lessons/08_eda_and_data_viz/eda_code_along.qmd){download="eda_code_along.qmd"}
+
 - **Recording**
   - Exploratory Data Analysis and Data Visualization (link coming)
   
