@@ -1722,56 +1722,96 @@
     "href": "weeks/week_03.html",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm"
+    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#announcements",
     "href": "weeks/week_03.html#announcements",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm"
+    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#overview",
     "href": "weeks/week_03.html#overview",
     "title": "Week 3",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2."
+    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#readings-before-class",
     "href": "weeks/week_03.html#readings-before-class",
     "title": "Week 3",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)"
+    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#materials",
     "href": "weeks/week_03.html#materials",
     "title": "Week 3",
     "section": "Materials",
-    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive – links coming)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed."
+    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive – links coming)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#homework",
     "href": "weeks/week_03.html#homework",
     "title": "Week 3",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Sunday, January 25 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page."
+    "text": "Homework\n\nHW 2\n\nDue Sunday, January 25 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#post-class-check-in-attendance",
     "href": "weeks/week_03.html#post-class-check-in-attendance",
     "title": "Week 3",
     "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in"
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "weeks/week_03.html#looking-ahead",
     "href": "weeks/week_03.html#looking-ahead",
     "title": "Week 3",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course."
+    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 3"
+    ]
   },
   {
     "objectID": "homework.html",
