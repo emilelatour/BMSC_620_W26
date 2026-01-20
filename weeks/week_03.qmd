@@ -1,0 +1,105 @@
+---
+title: "Week 3"
+description: "Exploratory Data Analysis and Data Visualization"
+format:
+  html:
+    toc: true
+---
+
+<!--
+Think of the weekly page as answering just five student questions:
+	1.	What are we doing this week?
+	2.	What do I need to read/watch before class?
+	3.	What materials should I have open during class?
+	4.	What is due (and when)?
+	5.	Where do I go if I want to review later?
+	-->
+
+## Announcements
+
+- No class Monday, January 19 (MLK Day)
+- HW 1 due Sunday at 11:00 pm
+
+
+## Overview
+
+This week focuses on **exploratory data analysis (EDA) and data visualization**.
+
+We will learn how to explore and visualize data using histograms, box plots, and scatterplots. We'll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with `ggplot2` for creating publication-quality graphics.
+
+By the end of the week, you should be able to:
+
+- create and interpret histograms and box plots for numeric data,
+- use scatterplots to explore relationships between variables,
+- understand the difference between data frames and tibbles,
+- subset and filter data effectively,
+- create basic plots using `ggplot2`.
+
+## Readings (before class)
+
+- Textbook section 2.2 (Bayes' Theorem)
+- Textbook section 1.7 (exploratory data analysis (EDA) and data visualization)
+
+(Additional resources will be posted if helpful.)
+
+## Materials
+
+### Monday — No class (MLK Day)
+
+**Optional review materials:**
+
+- Bayes' Theorem supplemental recording (HTML | PDF | OneDrive – links coming)
+  - [Link to recording - TBD]
+
+---
+
+### Wednesday — Exploratory Data Analysis and Data Visualization
+
+- **Topics**
+  - Histograms and distribution shapes
+  - Box plots and identifying outliers
+  - Scatterplots and relationships
+  - Data frames vs tibbles
+  - Subsetting and filtering data
+  - Introduction to `ggplot2`
+
+- **Slides**
+  - Exploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)
+
+- **Recording**
+  - Exploratory Data Analysis and Data Visualization (link coming)
+  
+- **Muddy points**
+  
+  I will review post-class feedback and post clarifications if needed.
+
+---
+
+## Homework
+
+- **HW 2**
+  - Due **Sunday, January 25 at 11:00 pm**
+  - Covers:
+    - data wrangling with `dplyr` (`filter()`, `select()`, `mutate()`)
+    - summary statistics with `rstatix`
+    - frequency tables with `janitor`
+    - data visualization with `ggplot2` (histograms, boxplots, scatterplots, bar charts)
+    - probability concepts (marginal, joint, and conditional probabilities)
+  - [View HW 2 instructions](/homework/HW02/HW02.qmd)
+
+- See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+- Please complete the post-class check-in after each class meeting.
+- Used for attendance credit and to identify topics that need clarification.
+- Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+Next week we will introduce **random variables and probability distributions**:
+
+- **Monday**: Random variables and the binomial distribution
+- **Wednesday**: Normal distribution and sampling distributions
+
+These concepts form the foundation for statistical inference and hypothesis testing later in the course.

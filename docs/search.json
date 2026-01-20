@@ -3037,5 +3037,103 @@
     "title": "Exploratory Data Analysis and Data Visualization",
     "section": "Building a ggplot step by step",
     "text": "Building a ggplot step by step\nStep 3: Add geom\n\nggplot(nhanes.samp.adult, aes(x = BMI)) +\n  geom_histogram()"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#recap-what-we-did-last-time",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#recap-what-we-did-last-time",
+    "title": "Bayes’ Theorem",
+    "section": "Recap: What we did last time",
+    "text": "Recap: What we did last time\n\n\nLast class, we calculated the Positive Predictive Value (PPV) using a contingency table:\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\\[P(\\text{Disease} \\mid \\text{Test +}) = \\frac{90}{1,080} \\approx 0.083\\]\n\n\nToday we’ll see the formula that lets us calculate this directly."
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#the-question-were-asking",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#the-question-were-asking",
+    "title": "Bayes’ Theorem",
+    "section": "The question we’re asking",
+    "text": "The question we’re asking\n\n\nWe want to flip the conditional probability:\n\n\n\n\nWhat we know:\n\n\\(P(\\text{Test +} \\mid \\text{Disease})\\) (sensitivity)\n\\(P(\\text{Test +} \\mid \\text{No Disease})\\) (1 - specificity)\n\\(P(\\text{Disease})\\) (prevalence)\n\n\nWhat we want:\n\n\\(P(\\text{Disease} \\mid \\text{Test +})\\) (PPV)\n\n\n\n\nBayes’ Theorem gives us a formula to “flip” the conditional."
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-general-form",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-general-form",
+    "title": "Bayes’ Theorem",
+    "section": "Bayes’ Theorem: General form",
+    "text": "Bayes’ Theorem: General form\n\n\n\\[\nP(A \\mid B) = \\frac{P(B \\mid A) \\times P(A)}{P(B)}\n\\]\n\n\nIn words:\n\n\\(P(A \\mid B)\\) = posterior (what we want to know)\n\\(P(B \\mid A)\\) = likelihood (what we can measure)\n\\(P(A)\\) = prior (base rate)\n\\(P(B)\\) = marginal probability of \\(B\\)"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-medical-testing-version",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-medical-testing-version",
+    "title": "Bayes’ Theorem",
+    "section": "Bayes’ Theorem: Medical testing version",
+    "text": "Bayes’ Theorem: Medical testing version\n\n\nFor our diagnostic test:\n\\[\nP(\\text{Disease} \\mid \\text{Test +}) = \\frac{P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease})}{P(\\text{Test +})}\n\\]\n\n\nIn words:\n\n\\(P(\\text{Disease} \\mid \\text{Test +})\\) = PPV (what we want)\n\\(P(\\text{Test +} \\mid \\text{Disease})\\) = sensitivity (what test manufacturer tells us)\n\\(P(\\text{Disease})\\) = prevalence (base rate in population)\n\\(P(\\text{Test +})\\) = overall rate of positive tests"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#the-tricky-part-ptexttest",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#the-tricky-part-ptexttest",
+    "title": "Bayes’ Theorem",
+    "section": "The tricky part: \\(P(\\text{Test +})\\)",
+    "text": "The tricky part: \\(P(\\text{Test +})\\)\n\n\nHow do we find \\(P(\\text{Test +})\\)?\n\n\nThere are two ways to test positive:\n\nHave disease AND test positive: \\(P(\\text{Disease and Test +})\\)\nNo disease AND test positive: \\(P(\\text{No Disease and Test +})\\)\n\n\n\nUsing the law of total probability:\n\\[\nP(\\text{Test +}) = P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease}) + P(\\text{Test +} \\mid \\text{No Disease}) \\times P(\\text{No Disease})\n\\]"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-complete-formula",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-theorem-complete-formula",
+    "title": "Bayes’ Theorem",
+    "section": "Bayes’ Theorem: Complete formula",
+    "text": "Bayes’ Theorem: Complete formula\n\n\n\\[\nP(\\text{Disease} \\mid \\text{Test +}) = \\frac{P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease})}{P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease}) + P(\\text{Test +} \\mid \\text{No Disease}) \\times P(\\text{No Disease})}\n\\]\n\n\nThis looks complicated, but we have all the pieces!"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#applying-bayes-theorem-to-our-example",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#applying-bayes-theorem-to-our-example",
+    "title": "Bayes’ Theorem",
+    "section": "Applying Bayes’ Theorem to our example",
+    "text": "Applying Bayes’ Theorem to our example\n\n\nGiven:\n\nSensitivity = 90% = \\(P(\\text{Test +} \\mid \\text{Disease}) = 0.90\\)\nSpecificity = 90%, so \\(P(\\text{Test +} \\mid \\text{No Disease}) = 0.10\\)\nPrevalence = 1% = \\(P(\\text{Disease}) = 0.01\\)\nTherefore: \\(P(\\text{No Disease}) = 0.99\\)"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-1-calculate-the-numerator",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-1-calculate-the-numerator",
+    "title": "Bayes’ Theorem",
+    "section": "Step 1: Calculate the numerator",
+    "text": "Step 1: Calculate the numerator\n\n\n\\[\n\\begin{aligned}\n\\text{Numerator} &= P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease}) \\\\\n&= 0.90 \\times 0.01 \\\\\n&= 0.009\n\\end{aligned}\n\\]\n\n\nThis represents the true positives (people who have disease AND test positive)."
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-2-calculate-the-denominator",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-2-calculate-the-denominator",
+    "title": "Bayes’ Theorem",
+    "section": "Step 2: Calculate the denominator",
+    "text": "Step 2: Calculate the denominator\n\n\n\\[\n\\begin{aligned}\n\\text{Denominator} &= P(\\text{Test +} \\mid \\text{Disease}) \\times P(\\text{Disease}) \\\\\n&\\quad + P(\\text{Test +} \\mid \\text{No Disease}) \\times P(\\text{No Disease}) \\\\\n&= (0.90 \\times 0.01) + (0.10 \\times 0.99) \\\\\n&= 0.009 + 0.099 \\\\\n&= 0.108\n\\end{aligned}\n\\]\n\n\nThis represents all positive tests (true positives + false positives)."
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-3-calculate-ppv",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#step-3-calculate-ppv",
+    "title": "Bayes’ Theorem",
+    "section": "Step 3: Calculate PPV",
+    "text": "Step 3: Calculate PPV\n\n\n\\[\n\\begin{aligned}\nP(\\text{Disease} \\mid \\text{Test +}) &= \\frac{0.009}{0.108} \\\\\n&\\approx 0.083 \\\\\n&= 8.3\\%\n\\end{aligned}\n\\]\n\n\nSame answer as before! But now we calculated it directly from the formula."
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#connecting-to-the-contingency-table",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#connecting-to-the-contingency-table",
+    "title": "Bayes’ Theorem",
+    "section": "Connecting to the contingency table",
+    "text": "Connecting to the contingency table\n\n\n\n\nBayes’ Theorem:\n\\[\n\\frac{0.90 \\times 0.01}{(0.90 \\times 0.01) + (0.10 \\times 0.99)} = 0.083\n\\]\n\n\nNumerator: true positives\nDenominator: all positives\n\nContingency table:\n\n\n\n\n\n\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n990\n1,080\n\n\nTest -\n10\n8,910\n8,920\n\n\nTotal\n100\n9,900\n10,000\n\n\n\n\n\n\\[\\frac{\\textcolor{red}{90}}{\\textcolor{purple}{1,080}} = 0.083\\]\n\n\n\nThe formula gives us the proportions directly!"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#why-is-this-useful",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#why-is-this-useful",
+    "title": "Bayes’ Theorem",
+    "section": "Why is this useful?",
+    "text": "Why is this useful?\n\n\nWithout Bayes’ Theorem:\n\nBuild entire contingency table\nNeed to choose a population size\nMore steps, more chances for errors\n\n\n\nWith Bayes’ Theorem:\n\nPlug numbers directly into formula\nGet answer immediately\nWorks with any probabilities (don’t need counts)\n\n\n\nBoth approaches work - use whichever makes more sense to you!"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#what-to-remember-about-bayes-theorem",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#what-to-remember-about-bayes-theorem",
+    "title": "Bayes’ Theorem",
+    "section": "What to remember about Bayes’ Theorem",
+    "text": "What to remember about Bayes’ Theorem\n\n\nThe formula:\n\\[\nP(A \\mid B) = \\frac{P(B \\mid A) \\times P(A)}{P(B)}\n\\]\n\n\nKey concepts:\n\nBayes’ Theorem “flips” conditional probabilities\nAlways consider base rates (priors)\nLow prevalence → low PPV, even with accurate tests\nCan use formula OR contingency table (both work!)\nPosterior = (Likelihood × Prior) / Evidence"
+  },
+  {
+    "objectID": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-vs.-contingency-tables",
+    "href": "lessons/07_bayes-theorem/07_bayes_theorem.html#bayes-vs.-contingency-tables",
+    "title": "Bayes’ Theorem",
+    "section": "Bayes vs. Contingency tables",
+    "text": "Bayes vs. Contingency tables\n\n\n\n\nContingency table approach:\nPros:\n\nVisual and intuitive\nSee all relationships\nGood for teaching\n\nCons:\n\nRequires choosing population size\nMore steps\nCan’t easily see effect of changing parameters\n\n\nBayes’ Theorem approach:\nPros:\n\nDirect calculation\nWorks with proportions\nEasy to see how prevalence affects PPV\n\nCons:\n\nFormula can seem abstract\nNeed to remember to calculate denominator\n\n\n\n\nUse whichever approach makes more sense to you!\n\n\n\nBMSC 620 | Bayes’ Theorem"
   }
 ]
