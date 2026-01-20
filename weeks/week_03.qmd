@@ -67,7 +67,7 @@ By the end of the week, you should be able to:
   - Exploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive – links coming)
 
 - **Code along**
-  - [Download EDA code along (.qmd)](/code_for_students/08_eda_and_data_viz_code.qmd){download="08_eda_and_data_viz_code.qmd"}
+  - [Download EDA and Data Viz code along (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQCrK8NNN6T5Ta1pfd6elDidAc3o8LB2RXSvu4CsIRkiRV0?e=lRkBtq"}
 
 - **Recording**
   - Exploratory Data Analysis and Data Visualization (link coming)
