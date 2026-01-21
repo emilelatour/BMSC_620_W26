@@ -18,7 +18,7 @@ Think of the weekly page as answering just five student questions:
 ## Announcements
 
 - No class Monday, January 19 (MLK Day)
-- HW 1 due Sunday at 11:00 pm
+- HW 2 due **Monday, January 27 at 11:00 pm**
 
 
 ## Overview
@@ -81,7 +81,7 @@ By the end of the week, you should be able to:
 ## Homework
 
 - **HW 2**
-  - Due **Sunday, January 25 at 11:00 pm**
+  - Due **Monday, January 27 at 11:00 pm**
   - Covers:
     - data wrangling with `dplyr` (`filter()`, `select()`, `mutate()`)
     - summary statistics with `rstatix`

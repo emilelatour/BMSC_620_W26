@@ -23,7 +23,8 @@ hw1 = cal_dates[14]
 ## Week 3 dates
 w3d1 = cal_dates[15] # No class
 w3d2 = cal_dates[17]
-hw2 = cal_dates[21]
+# hw2 = cal_dates[21]
+hw2 = cal_dates[23]
 
 ## Week 4 dates
 w4d1 = cal_dates[22]

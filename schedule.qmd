@@ -69,11 +69,11 @@ source(here("class_dates.R"))
 |		|	`{r} format(w2d2, '%a, %m/%d')`	|	4	|	Probability and conditional probability	|	2.1-2.4	|
 |		|	[**`{r} format(hw1, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 1 due @ 11 pm**]{.hw-row}	|		|
 |		|		|		|		|		|
-|	3	|	**`{r} format(w3d1, '%a, %m/%d')`**	|		|	**No class, Martin Luther King Jr. Day**	|		|
-|		|	`{r} format(w3d2, '%a, %m/%d')`	|	5	|	Data visualization and exploratory data analysis (EDA)	|	1.5-1.7	|
-|		|	[**`{r} format(hw2, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 2 due @ 11 pm**]{.hw-row}	|		|
+|	[3](/weeks/week_03.qmd)	|	**`{r} format(w3d1, '%a, %m/%d')`**	|		|	**No class, Martin Luther King Jr. Day**	|		|
+|		|	`{r} format(w3d2, '%a, %m/%d')`	|	5	|	Exploratory data analysis (EDA) and data visualization	|	1.5-1.7	|
 |		|		|		|		|		|
 |	4	|	`{r} format(w4d1, '%a, %m/%d')`	|	6	|	Random variables and the binomial distribution	|	3.1-3.2	|
+|		|	[**`{r} format(hw2, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 2 due @ 11 pm**]{.hw-row}	|		|
 |		|	`{r} format(w4d2, '%a, %m/%d')`	|	7	|	Normal distribution and sampling distributions	|	3.3-3.4	|
 |		|	[**`{r} format(hw3, '%a, %m/%d')`**]{.hw-row}	|		|	[**HW 3 due @ 11 pm**]{.hw-row}	|		|
 |		|		|		|		|		|
