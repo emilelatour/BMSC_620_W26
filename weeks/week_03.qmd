@@ -70,8 +70,8 @@ By the end of the week, you should be able to:
   - [Download EDA and Data Viz code along (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQD_Phae_hH1S51TFZpGWdpYAU6-QNqwjTAvZsXn3mqDp18?e=UPhf58)
 
 - **Recording**
-  - [Exploratory Data Analysis and Data Visualization - part 1](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQB5chbMsYDuTKNNI5vYg2JvAd64-I0iuD2HZZURpQwaQ-U?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=jreQ1d)
-  - [Exploratory Data Analysis and Data Visualization - part 2](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBUQtGR8ffIT5aBHJYYd6DOAReYWp1eF9bS3fG0dYNMh-M?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=IaZfBb)
+  - [Exploratory Data Analysis and Data Visualization - part 1](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBUQtGR8ffIT5aBHJYYd6DOAReYWp1eF9bS3fG0dYNMh-M?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=O6GBnt)
+  - [Exploratory Data Analysis and Data Visualization - part 2](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQB5chbMsYDuTKNNI5vYg2JvAd64-I0iuD2HZZURpQwaQ-U?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=S6ScpD)
   
 - **Muddy points**
   
