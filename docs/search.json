@@ -2002,7 +2002,7 @@
     "href": "weeks/week_03.html",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Monday, January 27 at 11:00 pm",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -2014,7 +2014,7 @@
     "href": "weeks/week_03.html#announcements",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Monday, January 27 at 11:00 pm",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -2050,7 +2050,7 @@
     "href": "weeks/week_03.html#materials",
     "title": "Week 3",
     "section": "Materials",
-    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive)\n\n[Link to recording - TBD]\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive)\n\nCode along\n\nDownload EDA and Data Viz code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
+    "text": "Materials\n\nMonday — No class (MLK Day)\nOptional review materials:\n\nBayes’ Theorem supplemental recording (HTML | PDF | OneDrive)\n\nLink to recording\n\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive)\n\nCode along\n\nDownload EDA and Data Viz code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization (link coming)\n\nMuddy points\nI will review post-class feedback and post clarifications if needed.",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -2062,7 +2062,7 @@
     "href": "weeks/week_03.html#homework",
     "title": "Week 3",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Monday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 2\n\nDue Monday, Tuesday 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
