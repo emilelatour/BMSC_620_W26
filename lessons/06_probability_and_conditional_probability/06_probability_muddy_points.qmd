@@ -80,6 +80,7 @@ $$P(A \text{ and } B) = P(B|A) \times P(A)$$
 ### Example with numbers
 
 Suppose:
+
 - 1% of people have a disease: $P(\text{disease}) = 0.01$
 - The test is 95% accurate for those with disease: $P(\text{positive}|\text{disease}) = 0.95$
 
