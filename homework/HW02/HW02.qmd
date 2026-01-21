@@ -1,0 +1,380 @@
+---
+title: "BMSC 620 — Homework 2"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+execute:
+  echo: true
+---
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW##`
+
+Examples:
+
+- Smith_J_HW02.qmd
+- Smith_J_HW02.html
+
+
+When submitting Homework 2, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Homework 2
+
+This assignment reviews:
+
+- data wrangling with `dplyr`
+- summary tables with `janitor` and `rstatix`
+- data visualization with `ggplot2`
+- probability concepts: marginal, joint, and conditional probabilities
+
+Unless stated otherwise, show your work using R code chunks.
+
+---
+
+
+## Part 0: Setup
+
+1. In the chunk below, load the packages you need for this homework.
+2. Run the chunk to confirm there are no errors.
+
+```{r}
+#| message: false
+#| warning: false
+
+# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.
+# install.packages("devtools")
+# devtools::install_github("OI-Biostat/oi_biostat_data", force = TRUE)
+
+library(oibiostat)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+library(rstatix)
+
+```
+
+## Part 1: Exploring data with tidyverse tools
+
+In this homework, you will work with the **nhanes.samp** dataset (the same dataset from HW1, but now using tidyverse tools!).
+
+Load the dataset:
+
+```{r}
+data("nhanes.samp")
+```
+
+### 1A. Initial data inspection
+
+Use the following tidyverse functions to explore the data:
+
+1. `glimpse()` to see the structure
+2. Use the pipe `%>%` with `head()` to see first 5 rows (e.g., `nhanes.samp %>% head(5)`)
+3. `dim()` to get dimensions
+
+```{r}
+
+```
+
+Answer in plain text:
+
+1. How many rows and columns does nhanes.samp have?
+2. What type of variable is `Race1`? What about `Age`?
+3. How is this different from using `str()` in HW1?
+
+Answers:
+1.
+2.
+3.
+
+### 1B. Using filter() and select()
+
+1. Use `filter()` to keep only people with `PhysActive == "Yes"` (physically active)
+2. Then use `select()` to keep only the columns: `Age`, `Gender`, `Race1`, `PhysActive`, `Pulse`
+3. Assign this filtered/selected data to a new object called `active_people`
+
+```{r}
+
+```
+
+How many physically active people are in the dataset? (Use `nrow()` on your new object)
+
+```{r}
+
+```
+
+Answer:
+
+### 1C. Creating new variables with mutate()
+
+Using the full `nhanes.samp` dataset:
+
+1. Use `mutate()` to create a new variable called `age_group` that categorizes age:
+   - "Child" if Age < 18
+   - "Adult" if Age < 65
+   - "Senior" if Age >= 65
+2. Use `select()` to show just `ID`, `Age`, and `age_group`
+3. Use `head()` to show the first 10 rows
+
+Hint: Use `case_when()` inside `mutate()`.
+
+```{r}
+
+```
+
+## Part 2: Summary statistics with rstatix
+
+### 2A. Summary for one variable
+
+Use `get_summary_stats()` from the `rstatix` package to calculate the mean and standard deviation of `Pulse`. Use `type = "mean_sd"`.
+
+```{r}
+
+```
+
+### 2B. Summary by groups
+
+Use `group_by()` and `get_summary_stats()` to calculate the mean and standard deviation of `Pulse` by `PhysActive` (physically active yes/no).
+
+```{r}
+
+```
+
+Do physically active people have a higher or lower mean pulse rate? What might explain this?
+
+Answer:
+
+### 2C. Multiple variables and groups
+
+Calculate summary statistics for `Age`, `Pulse`, and `Weight` grouped by both `Gender` AND `PhysActive` status. Use `type = "mean_sd"`.
+
+```{r}
+
+```
+
+## Part 3: Frequency tables with janitor
+
+### 3A. One-way frequency table
+
+Use `tabyl()` to create a frequency table for the `Race1` variable.
+
+```{r}
+
+```
+
+Which racial/ethnic group has the highest percentage in this sample?
+
+Answer:
+
+### 3B. Two-way table
+
+Create a two-way table showing the relationship between `Gender` and `PhysActive` using `tabyl()`.
+
+```{r}
+
+```
+
+### 3C. Adorned tables
+
+1. Create the same Gender × PhysActive table
+2. Add row percentages using `adorn_percentages("row")`
+3. Format percentages with one decimal place using `adorn_pct_formatting(digits = 1)`
+4. Add totals for rows and columns using `adorn_totals(c("row", "col"))`
+
+```{r}
+
+```
+
+Among females, what percentage are physically active? Among males? (Look at the row percentages)
+
+Answer:
+
+## Part 4: Data visualization with ggplot2
+
+### 4A. Histogram
+
+Create a histogram of `Age` using `ggplot2`. Include:
+
+- `bins = 20`
+- A title: "Distribution of Age in NHANES Sample"
+- An x-axis label: "Age (years)"
+
+```{r}
+
+```
+
+Describe the distribution in 1-2 sentences (shape, center, spread, any interesting features).
+
+Answer:
+
+### 4B. Boxplot by group
+
+Create a boxplot comparing `Pulse` across `PhysActive` groups. Include:
+
+- Appropriate axis labels
+- A title
+- Try adding `fill = PhysActive` inside `aes()` for color
+
+```{r}
+
+```
+
+Do physically active people appear to have different pulse rates? Are there any outliers?
+
+Answer:
+
+### 4C. Scatterplot
+
+Create a scatterplot of `Age` (x-axis) vs `Pulse` (y-axis). 
+
+- Color the points by `Gender`
+- Set `alpha = 0.5` for transparency
+- Add appropriate labels and a title
+
+```{r}
+
+```
+
+Describe any relationship between age and pulse rate in 1-2 sentences.
+
+Answer:
+
+### 4D. Bar chart
+
+Create a bar chart showing counts of the `Race1` variable.
+
+- Add a title and axis labels
+- Use `coord_flip()` at the end to make horizontal bars (easier to read the labels)
+
+```{r}
+
+```
+
+## Part 5: Combining dplyr and ggplot2 (BONUS - Optional)
+
+**This section is optional but recommended for extra practice combining dplyr and ggplot2.**
+
+### 5A. Filter then visualize
+
+1. Use pipes to filter to people under age 20 (children/adolescents)
+2. Create a histogram of their `Pulse`
+3. Use `facet_wrap(~Gender)` to create separate panels by gender
+
+```{r}
+
+```
+
+Do the pulse rate distributions look similar between males and females in this age group?
+
+Answer:
+
+### 5B. Complex workflow
+
+Create a workflow that:
+
+1. Filters to people who are physically active (`PhysActive == "Yes"`)
+2. Creates a new variable `age_category`:
+   - "Under 30" if Age < 30
+   - "30-50" if Age < 50
+   - "50+" if Age >= 50
+3. Creates a boxplot of `Pulse` by `age_category`
+4. Colors the boxes by `age_category` using `fill = age_category` in `aes()`
+5. Facets by `Gender`
+
+```{r}
+
+```
+
+## Part 6: Probability concepts
+
+For this section, we'll work with a medical testing scenario. 
+
+Consider the following contingency table showing disease status and test results for 1,000 patients:
+
+|            | Disease | No Disease | Total |
+|------------|:-------:|:----------:|:-----:|
+| **Test +** | 90      | 180        | 270   |
+| **Test -** | 10      | 720        | 730   |
+| **Total**  | 100     | 900        | 1,000 |
+
+### 6A. Marginal probabilities
+
+Calculate the following marginal probabilities:
+
+1. $P(\text{Disease})$
+2. $P(\text{Test +})$
+3. $P(\text{No Disease})$
+
+Show your calculations below (you can do this by hand or in R):
+
+```{r}
+
+```
+
+Answers:
+1. P(Disease) = 
+2. P(Test +) = 
+3. P(No Disease) = 
+
+### 6B. Joint probabilities
+
+Calculate the following joint probabilities:
+
+1. $P(\text{Disease and Test +})$
+2. $P(\text{No Disease and Test -})$
+3. $P(\text{Disease and Test -})$
+
+```{r}
+
+```
+
+Answers:
+1. P(Disease and Test +) = 
+2. P(No Disease and Test -) = 
+3. P(Disease and Test -) = 
+
+### 6C. Conditional probabilities
+
+Calculate the following conditional probabilities. Remember: 
+
+$$P(A \mid B) = \frac{P(A \text{ and } B)}{P(B)}$$
+
+1. $P(\text{Disease} \mid \text{Test +})$ - This is the Positive Predictive Value (PPV)
+2. $P(\text{No Disease} \mid \text{Test -})$ - This is the Negative Predictive Value (NPV)
+3. $P(\text{Test +} \mid \text{Disease})$ - This is the sensitivity
+
+Show your work:
+
+```{r}
+
+```
+
+Answers:
+1. P(Disease | Test +) = 
+2. P(No Disease | Test -) = 
+3. P(Test + | Disease) = 
+
+### 6D. Interpretation
+
+In 2-3 sentences, explain what the Positive Predictive Value (PPV) from 6C.1 tells us. Why might this value be lower than the sensitivity?
+
+Answer:
+
+## Final check
+
+Before submitting, confirm that:
+
+- The document renders to HTML without errors
+- All code chunks run successfully
+- Your name appears at the top
+- You've answered all text questions in Parts 1-6
+- You uploaded both the .qmd and .html files
+- (Optional) If you completed Part 5, make sure those chunks run too!
