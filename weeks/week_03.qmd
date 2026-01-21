@@ -18,7 +18,7 @@ Think of the weekly page as answering just five student questions:
 ## Announcements
 
 - No class Monday, January 19 (MLK Day)
-- HW 2 due **Monday, January 27 at 11:00 pm**
+- HW 2 due **Tuesday, January 27 at 11:00 pm**
 
 
 ## Overview
@@ -49,7 +49,7 @@ By the end of the week, you should be able to:
 **Optional review materials:**
 
 - Bayes' Theorem supplemental recording ([HTML](/lessons/07_bayes-theorem/07_bayes_theorem.qmd) | [PDF](/lessons/07_bayes-theorem/07_bayes_theorem.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
-  - [Link to recording - TBD]
+  - [Link to recording](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQC3sF8kNSW7RKGIoDXTa61hAezLmBqGleAtQBGwXeFUGm8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=7Lueja)
 
 ---
 
@@ -81,7 +81,7 @@ By the end of the week, you should be able to:
 ## Homework
 
 - **HW 2**
-  - Due **Monday, January 27 at 11:00 pm**
+  - Due **Monday, Tuesday 27 at 11:00 pm**
   - Covers:
     - data wrangling with `dplyr` (`filter()`, `select()`, `mutate()`)
     - summary statistics with `rstatix`
