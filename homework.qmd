@@ -40,7 +40,7 @@ Homework solutions will be posted in Sakai after the submission deadline. These 
 |:----------------:|:----------------:|:----------------:|:----------------:|
 | 0 | `{r} format(hw0, '%m/%d')` | [HW 00 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5) | [View HW 00](/homework/HW00/HW00.qmd) |
 | 1 | `{r} format(hw1, '%m/%d')` | [HW 01 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDNPvsaCmCLTJ4_EDwtr1_WAXRAjlX6jdEOt08nffiJOV4?e=WMUc7T) | [View HW 01](/homework/HW01/HW01.qmd) |
-| 2 | `{r} format(hw2, '%m/%d')` | (to be posted) | (to be posted) |
+| 2 | `{r} format(hw2, '%m/%d')` | [HW 02 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDNPvsaCmCLTJ4_EDwtr1_WAXRAjlX6jdEOt08nffiJOV4?e=WMUc7T) | [View HW 02](/homework/HW02/HW02.qmd) |
 | 3 | `{r} format(hw3, '%m/%d')` | (to be posted) | (to be posted) |
 | 4 | `{r} format(hw4, '%m/%d')` | (to be posted) | (to be posted) |
 | 5 | `{r} format(hw5, '%m/%d')` | (to be posted) | (to be posted) |
