@@ -4,7 +4,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "🎥 Lecture Recordings (OneDrive folder) – Lectures 1, 2, and Part 1 of Lecture 3, Lecture 4\n🎥 Lecture Recordings (loom.com) – Part 2 of Lecture 3, Lecture 4\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nSummarizing categorical data and contingency tables\n1.5-1.7\n\n\n\nWed, 01/14\n4\nProbability and conditional probability\n2.1-2.4\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nData visualization and exploratory data analysis (EDA)\n1.5-1.7\n\n\n\nSun, 01/25\n\nHW 2 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
+    "text": "🎥 Lecture Recordings (OneDrive folder) – Lectures 1, 2, and Part 1 of Lecture 3, Lecture 4\n🎥 Lecture Recordings (loom.com) – Part 2 of Lecture 3, Lecture 4\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nLesson\nTopics\nChapter sections\n\n\n\n\n1\nMon, 01/05\n0\nWelcome\n\n\n\n\n\n1\nIntro to Data, Summarizing numerical data\n1.1-1.4\n\n\n\nWed, 01/07\n2\nIntroduction to R & RStudio\n\n\n\n\nSun, 01/11\n\nHW 0 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n2\nMon, 01/12\n3\nSummarizing categorical data and contingency tables\n1.5-1.7\n\n\n\nWed, 01/14\n4\nProbability and conditional probability\n2.1-2.4\n\n\n\nSun, 01/18\n\nHW 1 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n3\nMon, 01/19\n\nNo class, Martin Luther King Jr. Day\n\n\n\n\nWed, 01/21\n5\nExploratory data analysis (EDA) and data visualization\n1.5-1.7\n\n\n\n\n\n\n\n\n\n4\nMon, 01/26\n6\nRandom variables and the binomial distribution\n3.1-3.2\n\n\n\nTue, 01/27\n\nHW 2 due @ 11 pm\n\n\n\n\nWed, 01/28\n7\nNormal distribution and sampling distributions\n3.3-3.4\n\n\n\nSun, 02/01\n\nHW 3 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n5\nMon, 02/02\n8\nEstimation and confidence intervals\n4.1-4.2\n\n\n\nWed, 02/04\n9\nHypothesis testing concepts; One-sample t-tests\n4.3, 5.1\n\n\n\nSun, 02/08\n\nHW 4 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n6\nMon, 02/09\n10\nPaired data and paired t-tests; Two-sample independent t-tests\n5.2-5.3\n\n\n\nWed, 02/11\n11\nPower; Midterm review\n5.4\n\n\n\nWed, 02/11\n\nMIDTERM opens at 3pm\n\n\n\n\n\n\nMidterm will cover Lessons 1–9\n\n\n\n\nSun, 02/15\n\nMIDTERM closes at 11pm\n\n\n\n\n\n\n\n\n\n\n7\nMon, 02/16\n\nNo class, Presidents Day\n\n\n\n\nWed, 02/18\n12\nPower (continued)\n5.4, extra\n\n\n\nSun, 02/22\n\nHW 5 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n8\nMon, 02/23\n13\nInference for proportions and 2x2 tables\n8.1-8.2\n\n\n\nWed, 02/25\n14\nChi-squared tests, Fishers exact test\n8.3-8.4\n\n\n\nSun, 03/01\n\nHW 6 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n9\nMon, 03/02\n15\nComparing Means with ANOVA\n5.5, extra\n\n\n\nWed, 03/04\n16\nNonparametric tests\nExtra\n\n\n\nSun, 03/08\n\nHW 7 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n10\nMon, 03/09\n17\nCorrelation and association\n1.6, extra\n\n\n\nWed, 03/11\n18\nSimple Linear Regression\n6.1-6.2\n\n\n\nSun, 03/15\n\nHW 8 due @ 11 pm\n\n\n\n\n\n\n\n\n\n\n11\nMon, 03/16\n19\nSimple Linear Regression; Finals review\n6.3-6.4\n\n\n\nMon, 03/16\n\nFINAL opens at 3pm\n\n\n\n\n\n\nFinal exam is cumulative, with emphasis on Lessons 10–19\n\n\n\n\nWed, 03/18\n20\nOptional: Review and questions (no new material)\n7.1\n\n\n\nFri, 03/20\n\nFINAL closes at 5pm",
     "crumbs": [
       "Home",
       "Schedule"
@@ -1713,7 +1713,7 @@
     "href": "homework.html#homework-schedule",
     "title": "Homework",
     "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/25\n(to be posted)\n(to be posted)\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/27\nHW 02 files (OneDrive)\nView HW 02\n\n\n3\n02/01\n(to be posted)\n(to be posted)\n\n\n4\n02/08\n(to be posted)\n(to be posted)\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
     "crumbs": [
       "Home",
       "Homework"
@@ -1735,7 +1735,7 @@
     "href": "weeks/week_03.html",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Monday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -1747,7 +1747,7 @@
     "href": "weeks/week_03.html#announcements",
     "title": "Week 3",
     "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 1 due Sunday at 11:00 pm",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Monday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -1795,7 +1795,7 @@
     "href": "weeks/week_03.html#homework",
     "title": "Week 3",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Sunday, January 25 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 2\n\nDue Monday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
