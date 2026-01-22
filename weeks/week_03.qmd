@@ -75,7 +75,13 @@ By the end of the week, you should be able to:
   
 - **Muddy points**
   
-  I will review post-class feedback and post clarifications if needed.
+  I reviewed your post-class feedback and wrote clarifications here:
+  
+    - [Muddy Points - Lesson 5](/lessons/08_eda_and_data_viz/08_eda_and_dataviz_muddy_points.qmd)
+  
+  
+  
+  
 
 ---
 
