@@ -46,10 +46,17 @@ By the end of the week, you should be able to:
 
 ### Monday — No class (MLK Day)
 
-**Optional review materials:**
+**Please review on your own:**
 
-- Bayes' Theorem supplemental recording ([HTML](/lessons/07_bayes-theorem/07_bayes_theorem.qmd) | [PDF](/lessons/07_bayes-theorem/07_bayes_theorem.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+
+- Bayes' Theorem recording ([HTML](/lessons/07_bayes-theorem/07_bayes_theorem.qmd) | [PDF](/lessons/07_bayes-theorem/07_bayes_theorem.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
   - [Link to recording](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQC3sF8kNSW7RKGIoDXTa61hAezLmBqGleAtQBGwXeFUGm8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=7Lueja)
+  
+**Additional Bayes' Theorem resources:**
+
+- [An Intuitive (and Short) Explanation of Bayes' Theorem](https://betterexplained.com/articles/an-intuitive-and-short-explanation-of-bayes-theorem/) — A clear, accessible introduction
+- [Bayes' Theorem (3Blue1Brown video)](https://www.3blue1brown.com/lessons/bayes-theorem) — Excellent visual explanation
+- [Bayes' Theorem: A Primer](https://reflect.ucl.ac.uk/ad-veturi/2021/03/09/bayes-theorem-a-primer/) — Another helpful walkthrough
 
 ---
 
