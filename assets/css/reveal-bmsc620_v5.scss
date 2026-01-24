@@ -207,3 +207,17 @@ div.cell-output-stdout {
 .reveal .compact-list li {
   margin-bottom: 0.2em;
 }
+
+// Make callout boxes readable in slides
+.reveal .callout {
+  font-size: 1em !important;
+  
+  .callout-body {
+    font-size: 1em !important;
+  }
+  
+  .callout-title {
+    font-size: 1.1em !important;
+    font-weight: bold;
+  }
+}

@@ -3315,5 +3315,1188 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#learning-objectives",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#learning-objectives",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s class, you should be able to:\n\nDefine random variables and distinguish between discrete and continuous random variables\nCalculate the expected value (mean) and variance of discrete random variables\nCalculate the expected value and variance of linear combinations of random variables\nIdentify when the Binomial distribution is appropriate and calculate probabilities using it"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#roadmap-for-today",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#roadmap-for-today",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\nPart 1: Random Variables (Section 3.1)\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\n\nPart 2: Binomial Distribution (Section 3.2)\n\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with the Binomial"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#motivation-from-data-to-probability-models",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#motivation-from-data-to-probability-models",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Motivation: From Data to Probability Models",
+    "text": "Motivation: From Data to Probability Models\nSo far we’ve worked with:\n\nData points: \\(x_1, x_2, x_3, \\ldots, x_n\\) (observed values)\nSample statistics: mean, variance, standard deviation\n\nNow we’re moving to:\n\nRandom variables: mathematical models for uncertain outcomes\nProbability distributions: theoretical descriptions of random phenomena\nParameters: population-level quantities (like \\(\\mu\\) and \\(\\sigma\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#what-is-a-random-variable",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#what-is-a-random-variable",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "What is a Random Variable?",
+    "text": "What is a Random Variable?\n\n\n\nDefinition: Random Variable\n\n\nA random variable (r.v.) assigns numerical values to the outcomes of a random phenomenon.\n\n\n\nNotation:\n\nWe use capital letters like \\(X\\), \\(Y\\), \\(Z\\) for random variables\nWe use lowercase letters like \\(x\\), \\(y\\), \\(z\\) for specific values\n\nKey idea: A random variable connects random outcomes to numbers and probabilities"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-rolling-a-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-rolling-a-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Rolling a Die",
+    "text": "Example: Rolling a Die\nSuppose you roll a fair 6-sided die. Let \\(X\\) be the outcome of the roll.\nQuestion 1: What is the probability distribution of \\(X\\)?\n\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n1/6\n1/6\n1/6\n1/6\n1/6\n1/6\n\n\n\n\n\nNote:\n\nEach outcome has equal probability (fair die)\nProbabilities sum to 1: \\(\\sum_{x=1}^6 P(X=x) = 1\\)\nAll outcomes are disjoint (mutually exclusive)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#probability-distributions-quick-review",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#probability-distributions-quick-review",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Probability Distributions: Quick Review",
+    "text": "Probability Distributions: Quick Review\n\n\n\nRules for a Probability Distribution\n\n\nA probability distribution must satisfy three rules:\n\nThe outcomes must be disjoint (mutually exclusive)\nEach probability must be between 0 and 1\nThe probabilities must sum to 1\n\n\n\n\nThese are the same rules we learned in our probability unit!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#discrete-vs.-continuous-random-variables",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#discrete-vs.-continuous-random-variables",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Discrete vs. Continuous Random Variables",
+    "text": "Discrete vs. Continuous Random Variables\n\n\n\n\n\nDiscrete Random Variable\n\n\nA discrete r.v. takes on:\n\nA finite number of values, OR\nA countably infinite number of values\n\nExamples:\n\nNumber of heads in 10 coin flips\nNumber of students in a class\nNumber of COVID cases per day\n\n\n\n\n\n\n\n\nContinuous Random Variable\n\n\nA continuous r.v. can take:\n\nAny real value in an interval\nAny value in a union of intervals\n\nExamples:\n\nHeight\nBlood pressure\nTime until an event occurs\n\n\n\n\n\n\nToday’s focus: Discrete random variables (continuous coming soon!)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-mean",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-mean",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Expected Value (Mean)",
+    "text": "Expected Value (Mean)\nThe expected value of a random variable is its long-run average value.\n\n\n\nDefinition: Expected Value of a Discrete R.V.\n\n\nIf \\(X\\) takes on outcomes \\(x_1, \\ldots, x_k\\) with probabilities \\(P(X=x_1), \\ldots, P(X=x_k)\\), then:\n\\[E(X) = \\mu = \\sum_{i=1}^k x_i \\cdot P(X=x_i)\\]\nThe expected value is a weighted average where weights are probabilities.\n\n\n\nNotation: \\(E(X)\\) or \\(\\mu\\) (mu)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-value-of-rolling-a-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-value-of-rolling-a-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Expected Value of Rolling a Die",
+    "text": "Example: Expected Value of Rolling a Die\nQuestion 2: What is the expected outcome when rolling a fair die?\n\n\\[\\begin{aligned}\nE(X) &= \\sum_{x=1}^6 x \\cdot P(X=x) \\\\\n&= 1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + 3 \\cdot \\frac{1}{6} + 4 \\cdot \\frac{1}{6} + 5 \\cdot \\frac{1}{6} + 6 \\cdot \\frac{1}{6} \\\\\n&= \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} \\\\\n&= \\frac{21}{6} = 3.5\n\\end{aligned}\\]\n\n\nInterpretation: If you rolled the die many times, the average would approach 3.5\nNote: The expected value doesn’t have to be a possible outcome!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-unfair-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-unfair-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Unfair Die",
+    "text": "Example: Unfair Die\nQuestion 3: What if the die is not fair?\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n0.10\n0.20\n0.05\n0.05\n0.25\n0.35\n\n\n\n\n\\[\\begin{aligned}\nE(X) &= 1(0.10) + 2(0.20) + 3(0.05) + 4(0.05) + 5(0.25) + 6(0.35) \\\\\n&= 0.10 + 0.40 + 0.15 + 0.20 + 1.25 + 2.10 \\\\\n&= 4.20\n\\end{aligned}\\]\n\n\nThe die is “loaded” toward higher values (mean is 4.20 vs. 3.5 for fair die)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-and-standard-deviation",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-and-standard-deviation",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Variance and Standard Deviation",
+    "text": "Variance and Standard Deviation\nJust like with data, we measure spread with variance and standard deviation.\n\n\n\nDefinition: Variance of a Discrete R.V.\n\n\nIf \\(X\\) has expected value \\(\\mu = E(X)\\), then:\n\\[\\text{Var}(X) = \\sigma^2 = \\sum_{i=1}^k (x_i - \\mu)^2 \\cdot P(X=x_i)\\]\nThe standard deviation is: \\(SD(X) = \\sigma = \\sqrt{\\text{Var}(X)}\\)\n\n\n\nKey idea: Squared deviations from the mean, weighted by probabilities"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-a-fair-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-a-fair-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Variance of a Fair Die",
+    "text": "Example: Variance of a Fair Die\nWe found \\(E(X) = 3.5\\). What is \\(\\text{Var}(X)\\)?\n\n\\[\\begin{aligned}\n\\text{Var}(X) &= \\sum_{x=1}^6 (x - 3.5)^2 \\cdot P(X=x) \\\\\n&= (1-3.5)^2 \\cdot \\frac{1}{6} + (2-3.5)^2 \\cdot \\frac{1}{6} + \\cdots + (6-3.5)^2 \\cdot \\frac{1}{6} \\\\\n&= (-2.5)^2 \\cdot \\frac{1}{6} + (-1.5)^2 \\cdot \\frac{1}{6} + (-0.5)^2 \\cdot \\frac{1}{6} \\\\\n&\\quad + (0.5)^2 \\cdot \\frac{1}{6} + (1.5)^2 \\cdot \\frac{1}{6} + (2.5)^2 \\cdot \\frac{1}{6} \\\\\n&= \\frac{6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25}{6} \\\\\n&= \\frac{17.5}{6} \\approx 2.92\n\\end{aligned}\\]\n\n\nStandard deviation: \\(SD(X) = \\sqrt{2.92} \\approx 1.71\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#pause-for-a-quick-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#pause-for-a-quick-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Pause for a Quick Example",
+    "text": "Pause for a Quick Example\nApgar scores for newborns\nJust after birth, each child is rated on the Apgar scale, with scores determined by color, heart rate, reflex irritability, muscle tone, and respiratory effort.\n\n\nLet \\(X\\) = Apgar score. Historical data suggests the following probability distribution:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\nQuestions:\n\nWhat is \\(E(X)\\)?\nWhat is \\(\\text{Var}(X)\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-covid-vaccination-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-covid-vaccination-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: COVID Vaccination Example",
+    "text": "Solution: COVID Vaccination Example\n1. Probability distribution:\n\n\n\n\\(x\\)\n0\n1\n\n\n\n\n\\(P(X=x)\\)\n0.75\n0.25\n\n\n\n\n2. Expected value: \\[E(X) = 0(0.75) + 1(0.25) = 0.25\\]\n\n\n3. Variance: \\[\\begin{aligned}\n\\text{Var}(X) &= (0 - 0.25)^2(0.75) + (1 - 0.25)^2(0.25) \\\\\n&= 0.0469 + 0.1406 \\\\\n&= 0.1875\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#linear-combinations-of-random-variables",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#linear-combinations-of-random-variables",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nOften in research, we combine multiple measurements into a composite score.\n\n\n\nDefinition: Linear Combination\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[aX + bY\\]\nis a linear combination of the random variables.\n\n\n\nExamples in biomedical research:\n\nComposite health scores (sum of multiple domains)\nWeighted risk scores\nTotal costs (sum of different service types)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-of-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-of-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Expected Value of Linear Combinations",
+    "text": "Expected Value of Linear Combinations\n\n\n\nTheorem: Expected Value of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[E(aX + bY) = aE(X) + bE(Y)\\]\nand\n\\[E(aX + b) = aE(X) + b\\]\n\n\n\nKey properties:\n\nExpectation is linear - it distributes over addition\nWorks whether or not \\(X\\) and \\(Y\\) are independent\nConstants factor out: \\(E(cX) = cE(X)\\)\n\nThis is intuitive: The average of a sum is the sum of the averages!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-money-from-rolling-3-dice",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-money-from-rolling-3-dice",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Expected Money from Rolling 3 Dice",
+    "text": "Example: Expected Money from Rolling 3 Dice\nLet \\(X_1, X_2, X_3\\) be the values from rolling 3 fair dice.\nYou receive: \\[\\text{Money} = X_1 + 2X_2 + 4X_3\\] dollars\nQuestion: How much money do you expect to receive?\n\n\\[\\begin{aligned}\nE(\\text{Money}) &= E(X_1 + 2X_2 + 4X_3) \\\\\n&= E(X_1) + 2E(X_2) + 4E(X_3) \\\\\n&= 3.5 + 2(3.5) + 4(3.5) \\\\\n&= 3.5 + 7 + 14 \\\\\n&= \\$24.50\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-of-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-of-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Variance of Linear Combinations",
+    "text": "Variance of Linear Combinations\n\n\n\nTheorem: Variance of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are INDEPENDENT random variables and \\(a\\) and \\(b\\) are constants:\n\\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\n\n\nKey differences from expected value:\n\nRequires independence of the random variables\nConstants are squared: \\(a^2\\) and \\(b^2\\) (not just \\(a\\) and \\(b\\))\nVariances add, but standard deviations do NOT simply add\n\nWhy squared? Variance measures squared deviations, so scaling by \\(a\\) scales variance by \\(a^2\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-money-from-3-dice",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-money-from-3-dice",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Variance of Money from 3 Dice",
+    "text": "Example: Variance of Money from 3 Dice\nRecall: Money \\(= X_1 + 2X_2 + 4X_3\\) with independent fair dice\nWe know \\(\\text{Var}(X_i) = 2.92\\) for each die\nQuestion: What is the variance and SD of the money received?\n\n\\[\\begin{aligned}\n\\text{Var}(\\text{Money}) &= \\text{Var}(X_1 + 2X_2 + 4X_3) \\\\\n&= \\text{Var}(X_1) + 4\\text{Var}(X_2) + 16\\text{Var}(X_3) \\\\\n&= 2.92 + 4(2.92) + 16(2.92) \\\\\n&= 2.92 + 11.67 + 46.67 \\\\\n&= 61.25\n\\end{aligned}\\]\n\n\n\\[SD(\\text{Money}) = \\sqrt{61.25} \\approx \\$7.83\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#note-about-textbook-typo",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#note-about-textbook-typo",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Note About Textbook Typo",
+    "text": "Note About Textbook Typo\nImportant: There is a typo in the textbook (page 145)\nThe example shows: \\(E(X_1 + X_2 + X_3 + X_4 + X_5) = E(5X_1)\\)\nThis is incorrect!\nThe correct relationship is: \\[E(X_1 + X_2 + X_3 + X_4 + X_5) = 5E(X_1)\\]\nwhen all five random variables have the same distribution."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binary-outcomes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binary-outcomes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binary Outcomes",
+    "text": "Binary Outcomes\nMany situations involve two possible outcomes:\n\nFlipping a coin: heads or tails\nMedical test: positive or negative\n\nSurgery outcome: success or failure\nManufacturing: defective or non-defective\n\nWe call these binary or Bernoulli trials:\n\nOne outcome is called a “success” (probability \\(p\\))\nThe other is called a “failure” (probability \\(q = 1-p\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli Distribution",
+    "text": "Bernoulli Distribution\n\n\n\nDefinition: Bernoulli Random Variable\n\n\nIf \\(X\\) is a random variable that takes:\n\nValue 1 with probability \\(p\\) (success)\nValue 0 with probability \\(1-p\\) (failure)\n\nThen \\(X\\) is a Bernoulli random variable.\nNotation: \\(X \\sim \\text{Bernoulli}(p)\\) or \\(X \\sim \\text{Bern}(p)\\)\n\n\n\nParameter: \\(p\\) is the probability of success (between 0 and 1)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nExample with diabetes:\n\nAmong US adults aged 65-74, about 20.3% have diabetes\nDefine \\(X = 1\\) if a randomly selected adult has diabetes, \\(X = 0\\) otherwise\n\\(E(X) = 0.203\\)\n\\(\\text{Var}(X) = 0.203(0.797) = 0.162\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Randomly select 10 adults aged 65-74. How many have diabetes?\n\nEach person: Bernoulli(0.203)\nTotal number with diabetes: Binomial(10, 0.203)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]\n\n\n\n\n\n\nThe Bernoulli distribution is a special case of the Binomial distribution where \\(n=1\\)\n\nSpecifically: \\[\\text{Binomial}(1, p) = \\text{Bernoulli}(p) \\]\n\nTo get a Binomial distribution, we simply extend the scenario from a single trial to multiple independent trials.\n\nIf we conduct \\(n\\) independent Bernoulli trials with the same success probability \\(p\\), the total number of successes across these \\(n\\) trials will follow a Binomial distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-mean-and-variance",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-mean-and-variance",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial: Mean and Variance",
+    "text": "Binomial: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Binomial R.V.\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), then:\n\\[E(X) = np\\] \\[\\text{Var}(X) = np(1-p)\\] \\[SD(X) = \\sqrt{np(1-p)}\\]\n\n\n\nIntuition:\n\nIf each trial has probability \\(p\\) of success, and we do \\(n\\) trials, we expect \\(np\\) successes on average\nThe variance formula comes from summing \\(n\\) independent Bernoulli variances"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-covid-vaccination-10-people",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-covid-vaccination-10-people",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: COVID Vaccination (10 people)",
+    "text": "Example: COVID Vaccination (10 people)\nAbout 25% of people who test positive for COVID-19 are vaccinated. Suppose 10 people test positive (independently).\nLet \\(X\\) = number vaccinated among the 10 people\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.25)\\)\n\nQuestion 1: What is the expected value of \\(X\\)?\n\\[E(X) = np = 10(0.25) = 2.5\\]\n\n\nQuestion 2: What is the standard deviation of \\(X\\)?\n\\[SD(X) = \\sqrt{np(1-p)} = \\sqrt{10(0.25)(0.75)} = \\sqrt{1.875} \\approx 1.37\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-vaccinated",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-vaccinated",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Exactly 4 Vaccinated",
+    "text": "Example: Exactly 4 Vaccinated\nQuestion 3: What is the probability that exactly 4 of the 10 are vaccinated?\n\\[P(X = 4) = \\binom{10}{4} (0.25)^4 (0.75)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.25)^4 (0.75)^6 = 210 \\times 0.00391 \\times 0.178 \\approx 0.146\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.25)\n\n[1] 0.145998\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-vaccinated",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-vaccinated",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Most 3 Vaccinated",
+    "text": "Example: At Most 3 Vaccinated\nQuestion 4: What is the probability that at most 3 are vaccinated?\n\\[P(X \\leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\\]\n\nWe could calculate each term, but there’s an easier way!\n\n\nIn R:\n\npbinom(q = 3, size = 10, prob = 0.25)\n\n[1] 0.7758751\n\n\nThe p in pbinom stands for “cumulative probability” (\\(P(X \\leq k)\\))\nResult: About 78% chance that 3 or fewer are vaccinated"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-vaccinated",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-vaccinated",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Least 5 Vaccinated",
+    "text": "Example: At Least 5 Vaccinated\nQuestion 5: What is the probability that at least 5 are vaccinated?\n\\[P(X \\geq 5) = P(X=5) + P(X=6) + \\cdots + P(X=10)\\]\n\nApproach 1: Use complement rule \\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\n\n1 - pbinom(q = 4, size = 10, prob = 0.25)\n\n[1] 0.07812691\n\n\n\n\nApproach 2: Use lower.tail = FALSE\n\npbinom(q = 4, size = 10, prob = 0.25, lower.tail = FALSE)\n\n[1] 0.07812691\n\n\nResult: About 7.8% chance that 5 or more are vaccinated"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#r-functions-for-binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#r-functions-for-binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "R Functions for Binomial Distribution",
+    "text": "R Functions for Binomial Distribution\n\n\n\n\n\n\n\n\nFunction\nWhat it does\nExample\n\n\n\n\ndbinom()\nProbability at specific value: \\(P(X=k)\\)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n\npbinom()\nCumulative probability: \\(P(X \\leq k)\\)\npbinom(q = 3, size = 10, prob = 0.203)\n\n\nqbinom()\nQuantile: Find \\(k\\) for given probability\nqbinom(p = 0.5, size = 10, prob = 0.203)\n\n\nrbinom()\nGenerate random samples\nrbinom(n = 100, size = 10, prob = 0.203)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#visualizing-the-binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#visualizing-the-binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Visualizing the Binomial Distribution",
+    "text": "Visualizing the Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\nRandom Variables:\n\nConnect random outcomes to numerical values and probabilities\nExpected value: weighted average using probabilities\nVariance: measures spread around the expected value\nLinear combinations: \\(E(aX+bY) = aE(X) + bE(Y)\\), but \\(\\text{Var}(aX+bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\) (if independent)\n\nBinomial Distribution:\n\nModels number of successes in \\(n\\) independent trials\nParameters: \\(n\\) (trials) and \\(p\\) (success probability)\n\\(E(X) = np\\), \\(\\text{Var}(X) = np(1-p)\\)\nUse R functions: dbinom(), pbinom(), etc."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#looking-ahead",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#looking-ahead",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWednesday:\n\nNormal distribution\nCentral Limit Theorem\nSampling distributions\n\nNext steps:\n\nReview textbook sections 3.1-3.2\nWork on HW 2 (due Tuesday, January 27)\nPractice calculating binomial probabilities in R"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#questions",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#questions",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Questions?",
+    "text": "Questions?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-apgar-score-example-12",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-apgar-score-example-12",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Apgar Score Example (1/2)",
+    "text": "Solution: Apgar Score Example (1/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\n1. Expected value:\n\\[\\begin{aligned}\nE(X) = \\mu &= 0(0.002) + 1(0.001) + 2(0.002) + 3(0.005) \\dots + 8(0.25) + 9(0.12) + 10(0.01) \\\\\n&= 0 + 0.001 + 0.004 + 0.015 + \\dots + 2.00 + 1.08 + 0.10 \\\\\n&= 7.17\n\\end{aligned}\\]\nThe average Apgar score is about 7.2."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-apgar-score-example-22",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-apgar-score-example-22",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Apgar Score Example (2/2)",
+    "text": "Solution: Apgar Score Example (2/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\n2. Variance:\n\\[\\begin{aligned}\n\\text{Var}(X) &= \\sum_{x=0}^{10} (x - 7.17)^2 \\cdot P(X=x) \\\\\n&= (0-7.17)^2(0.002) + (1-7.17)^2(0.001) + \\cdots + (10-7.17)^2(0.01) \\\\\n&= 0.103 + 0.038 + 0.053 + 0.087 + 0.201 + 0.188 \\\\\n&\\quad + 0.246 + 0.011 + 0.171 + 0.402 + 0.080 \\\\\n&= 1.58\n\\end{aligned}\\]\n\nStandard deviation: \\(SD(X) = \\sqrt{1.58} \\approx 1.26\\)\nInterpretation: Most babies score between 6 and 9 (within 1 SD of the mean)."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-clinical-trial-health-score-setup",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-clinical-trial-health-score-setup",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Clinical Trial Health Score (Setup)",
+    "text": "Example: Clinical Trial Health Score (Setup)\nIn a clinical trial, researchers measure three patient-reported outcomes (PROs):\n\nPain score \\((X_1)\\): Scale 0-10, where 0 = no pain\n\n\\(E(X_1) = 4\\), \\(SD(X_1) = 2\\)\n\nMobility score \\((X_2)\\): Scale 0-10, where 10 = full mobility\n\n\\(E(X_2) = 6\\), \\(SD(X_2) = 1.5\\)\n\nQuality of life score \\((X_3)\\): Scale 0-10, where 10 = excellent\n\n\\(E(X_3) = 5\\), \\(SD(X_3) = 2.5\\)\n\n\nA composite health score is calculated as: \\[H = X_1 + X_2 + X_3\\]\nAssume the three scores are independent (one doesn’t influence the others)."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-expected-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Expected Composite Score",
+    "text": "Example: Expected Composite Score\nQuestion: What is the expected composite health score?\n\n\\[\\begin{aligned}\nE(H) &= E(X_1 + X_2 + X_3) \\\\\n&= E(X_1) + E(X_2) + E(X_3) \\\\\n&= 4 + 6 + 5 \\\\\n&= 15\n\\end{aligned}\\]\n\n\nInterpretation: On average, patients have a composite health score of 15 out of 30."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-variance-of-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Variance of Composite Score",
+    "text": "Example: Variance of Composite Score\nQuestion: What is the variance and standard deviation of the composite health score?\nRecall: \\(H = X_1 + X_2 + X_3\\)\n\n\\(\\text{Var}(X_1) = 2^2 = 4\\)\n\\(\\text{Var}(X_2) = 1.5^2 = 2.25\\)\n\n\\(\\text{Var}(X_3) = 2.5^2 = 6.25\\)\n\n\n\\[\\begin{aligned}\n\\text{Var}(H) &= \\text{Var}(X_1 + X_2 + X_3) \\\\\n&= \\text{Var}(X_1) + \\text{Var}(X_2) + \\text{Var}(X_3) \\\\\n&= 4 + 2.25 + 6.25 \\\\\n&= 12.5\n\\end{aligned}\\]\n\n\n\\[SD(H) = \\sqrt{12.5} \\approx 3.54\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-weighted-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-weighted-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Weighted Composite Score",
+    "text": "Example: Weighted Composite Score\nNow suppose researchers want to weight the scores differently:\n\\[H_{\\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\\]\n(Giving more weight to pain and mobility than quality of life)\nQuestions:\n\nWhat is \\(E(H_{\\text{weighted}})\\)?\nWhat is \\(\\text{Var}(H_{\\text{weighted}})\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-weighted-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#solution-weighted-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Weighted Composite Score",
+    "text": "Solution: Weighted Composite Score\n1. Expected value:\n\\[\\begin{aligned}\nE(H_{\\text{weighted}}) &= E(0.5X_1 + 0.3X_2 + 0.2X_3) \\\\\n&= 0.5E(X_1) + 0.3E(X_2) + 0.2E(X_3) \\\\\n&= 0.5(4) + 0.3(6) + 0.2(5) \\\\\n&= 2 + 1.8 + 1.0 \\\\\n&= 4.8\n\\end{aligned}\\]\n\n2. Variance:\n\\[\\begin{aligned}\n\\text{Var}(H_{\\text{weighted}}) &= (0.5)^2\\text{Var}(X_1) + (0.3)^2\\text{Var}(X_2) + (0.2)^2\\text{Var}(X_3) \\\\\n&= 0.25(4) + 0.09(2.25) + 0.04(6.25) \\\\\n&= 1.0 + 0.20 + 0.25 \\\\\n&= 1.45\n\\end{aligned}\\]\n\\[SD(H_{\\text{weighted}}) = \\sqrt{1.45} \\approx 1.20\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways: Linear Combinations",
+    "text": "Key Takeaways: Linear Combinations\nExpected value: \\[E(aX + bY) = aE(X) + bE(Y)\\]\n\nLinear property\nNo independence needed\nConstants factor out\n\nVariance: \\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\nRequires independence\nConstants are squared\nStandard deviations don’t simply add\n\n\n\nWhy this matters: Many biomedical measures are composite scores!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#linear-combinations-of-random-variables-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#linear-combinations-of-random-variables-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nOften we combine multiple random variables:\n\nSum of multiple die rolls\nTotal cost from multiple purchases\nSum of multiple test scores\n\n\n\n\nDefinition: Linear Combination\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[aX + bY\\]\nis a linear combination of the random variables."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-of-linear-combinations-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#expected-value-of-linear-combinations-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Expected Value of Linear Combinations",
+    "text": "Expected Value of Linear Combinations\n\n\n\nTheorem: Expected Value of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[E(aX + bY) = aE(X) + bE(Y)\\]\n\n\n\nSpecial cases:\n\n\\(E(X + Y) = E(X) + E(Y)\\) (set \\(a=b=1\\))\n\\(E(cX) = cE(X)\\) (constants factor out)\n\\(E(X + c) = E(X) + c\\) (adding a constant)\n\nImportant: This holds whether or not \\(X\\) and \\(Y\\) are independent!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-of-linear-combinations-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#variance-of-linear-combinations-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Variance of Linear Combinations",
+    "text": "Variance of Linear Combinations\n\n\n\nTheorem: Variance of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are INDEPENDENT random variables and \\(a\\) and \\(b\\) are constants:\n\\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\n\n\nKey differences from expected value:\n\nRequires independence\nConstants are squared\nThis explains why \\(SD(X+Y) \\neq SD(X) + SD(Y)\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-diabetes-in-older-adults-10-people",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-diabetes-in-older-adults-10-people",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Diabetes in Older Adults (10 people)",
+    "text": "Example: Diabetes in Older Adults (10 people)\nApproximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).\nLet \\(X\\) = number with diabetes among the 10 people\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\nQuestion 1: What is the expected value of \\(X\\)?\n\\[E(X) = np = 10(0.203) = 2.03\\]\n\n\nQuestion 2: What is the standard deviation of \\(X\\)?\n\\[SD(X) = \\sqrt{np(1-p)} = \\sqrt{10(0.203)(0.797)} = \\sqrt{1.618} \\approx 1.27\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Exactly 4 with Diabetes",
+    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.00170 \\times 0.245 \\approx 0.087\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Most 3 with Diabetes",
+    "text": "Example: At Most 3 with Diabetes\nQuestion 4: What is the probability that at most 3 have diabetes?\n\\[P(X \\leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\\]\n\nWe could calculate each term, but there’s an easier way!\n\n\nIn R:\n\npbinom(q = 3, size = 10, prob = 0.203)\n\n[1] 0.8737821\n\n\nThe p in pbinom stands for “cumulative probability” (\\(P(X \\leq k)\\))\nResult: About 86% chance that 3 or fewer have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Least 5 with Diabetes",
+    "text": "Example: At Least 5 with Diabetes\nQuestion 5: What is the probability that at least 5 have diabetes?\n\\[P(X \\geq 5) = P(X=5) + P(X=6) + \\cdots + P(X=10)\\]\n\nApproach 1: Use complement rule \\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\n\n1 - pbinom(q = 4, size = 10, prob = 0.203)\n\n[1] 0.03481642\n\n\n\n\nApproach 2: Use lower.tail = FALSE\n\npbinom(q = 4, size = 10, prob = 0.203, lower.tail = FALSE)\n\n[1] 0.03481642\n\n\nResult: About 2.4% chance that 5 or more have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nQuick check with our COVID example:\n\n\\(X = 1\\) (vaccinated) with \\(p = 0.25\\)\n\\(E(X) = 0.25\\) ✓\n\\(\\text{Var}(X) = 0.25(0.75) = 0.1875\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Flip a coin 10 times. How many heads do we get?\n\nEach flip: Bernoulli(0.5)\nTotal number of heads: Binomial(10, 0.5)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-mean-and-variance-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-mean-and-variance-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial: Mean and Variance",
+    "text": "Binomial: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Binomial R.V.\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), then:\n\\[E(X) = np\\] \\[\\text{Var}(X) = np(1-p)\\] \\[SD(X) = \\sqrt{np(1-p)}\\]\n\n\n\nIntuition:\n\nIf each trial has probability \\(p\\) of success, and we do \\(n\\) trials, we expect \\(np\\) successes on average\nThe variance formula comes from summing \\(n\\) independent Bernoulli variances"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#r-functions-for-binomial-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#r-functions-for-binomial-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "R Functions for Binomial Distribution",
+    "text": "R Functions for Binomial Distribution\n\n\n\n\n\n\n\n\nFunction\nWhat it does\nExample\n\n\n\n\ndbinom()\nProbability at specific value: \\(P(X=k)\\)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n\npbinom()\nCumulative probability: \\(P(X \\leq k)\\)\npbinom(q = 3, size = 10, prob = 0.203)\n\n\nqbinom()\nQuantile: Find \\(k\\) for given probability\nqbinom(p = 0.5, size = 10, prob = 0.203)\n\n\nrbinom()\nGenerate random samples\nrbinom(n = 100, size = 10, prob = 0.203)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#visualizing-the-binomial-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#visualizing-the-binomial-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Visualizing the Binomial Distribution",
+    "text": "Visualizing the Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binary-outcomes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binary-outcomes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binary Outcomes",
+    "text": "Binary Outcomes\nMany situations involve two possible outcomes:\n\nFlipping a coin: heads or tails\nMedical test: positive or negative\n\nSurgery outcome: success or failure\nManufacturing: defective or non-defective\n\nWe call these binary or Bernoulli trials:\n\nOne outcome is called a “success” (probability \\(p\\))\nThe other is called a “failure” (probability \\(q = 1-p\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli Distribution",
+    "text": "Bernoulli Distribution\n\n\n\nDefinition: Bernoulli Random Variable\n\n\nIf \\(X\\) is a random variable that takes:\n\nValue 1 with probability \\(p\\) (success)\nValue 0 with probability \\(1-p\\) (failure)\n\nThen \\(X\\) is a Bernoulli random variable.\nNotation: \\(X \\sim \\text{Bernoulli}(p)\\) or \\(X \\sim \\text{Bern}(p)\\)\n\n\n\nParameter: \\(p\\) is the probability of success (between 0 and 1)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nExample with diabetes:\n\nAmong US adults aged 65-74, about 20.3% have diabetes\nDefine \\(X = 1\\) if a randomly selected adult has diabetes, \\(X = 0\\) otherwise\n\\(E(X) = 0.203\\)\n\\(\\text{Var}(X) = 0.203(0.797) = 0.162\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Randomly select 10 adults aged 65-74. How many have diabetes?\n\nEach person: Bernoulli(0.203)\nTotal number with diabetes: Binomial(10, 0.203)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\n\nThe Bernoulli distribution is a special case of the Binomial distribution where \\(n=1\\)\n\nSpecifically: \\[\\text{Binomial}(1, p) = \\text{Bernoulli}(p) \\]\n\nTo get a Binomial distribution, we simply extend the scenario from a single trial to multiple independent trials.\n\nIf we conduct \\(n\\) independent Bernoulli trials with the same success probability \\(p\\), the total number of successes across these \\(n\\) trials will follow a Binomial distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#derivation-by-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#derivation-by-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Derivation by example",
+    "text": "Derivation by example\nApproximately 20.3% of US adults aged 65-74 have diabetes.\nHere, let’s define\n\n“Success” (S) to be the event that a person has diabetes, then\n“Failure” (F) is the event that a person does not have diabetes.\n\nAmong US adults aged 65-74:\n\n\\(P(\\text{has diabetes}) = 0.203 = p\\)\n\\(P(\\text{no diabetes}) = 1 - p = 0.797\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#define-an-experiment",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#define-an-experiment",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Define an experiment",
+    "text": "Define an experiment\nSuppose we conduct an experiment in which \\(n = 3\\) US adults aged 65-74 are tested for diabetes.\n\nThe testing of each adult represents a trial.\nThe outcome from each trial is either a success (has diabetes) or a failure (does not have diabetes).\nThe outcome (S/F) of any one trial is not influenced by earlier outcomes nor does it affect later outcomes (independent trials).\nThe probability of having diabetes (\\(p = 0.203\\)) is the same for each adult sampled."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#possible-outcomes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#possible-outcomes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Possible outcomes",
+    "text": "Possible outcomes\nWith 3 trials and 2 possible outcomes (S/F), there are 8 possible arrangements.\n\n\n\n\\(FFF\\)\n\\(FSS\\)\n\n\n\\(FFS\\)\n\\(SFS\\)\n\n\n\\(FSF\\)\n\\(SSF\\)\n\n\n\\(SFF\\)\n\\(SSS\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#define-the-rv",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#define-the-rv",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Define the rv",
+    "text": "Define the rv\nLet \\(X =\\) the number of adults that have diabetes among the \\(n = 3\\) sampled.\n\n\nRe-organize the possible arrangements:\n\n\\(X = 0 \\Longleftrightarrow FFF\\)\n\\(X = 1 \\Longleftrightarrow FFS \\cup FSF \\cup SFF\\)\n\\(X = 2 \\Longleftrightarrow FSS \\cup SFS \\cup SSF\\)\n\\(X = 3 \\Longleftrightarrow SSS\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities",
+    "text": "Compute the probabilities\n\n\nCase: \\(X = 0\\) (no one has diabetes)\n\\[\\begin{aligned}\nP(X = 0) &= P(FFF) \\\\\n&\\overset{\\text{ind.}}{=} (1 - p)(1 - p)(1 - p) \\\\\n&= (1 - p)^3 = 0.797^3 \\approx 0.506\n\\end{aligned}\\]\nBecause of the general multiplication rule for independent events, we simplified the event \\(FFF\\) into the product of \\(n = 3\\) separate terms."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 1\\) (exactly 1 has diabetes)\n\n\\(FFS \\Longrightarrow (1 - p)(1 - p)p = p(1 - p)^2\\)\n\\(FSF \\Longrightarrow (1 - p)p(1 - p) = p(1 - p)^2\\)\n\\(SFF \\Longrightarrow p(1 - p)(1 - p) = p(1 - p)^2\\)\n\n\n\nSubstitute for \\(p\\) and \\((1-p)\\) then for each \\(p(1 - p)^2 = (0.203)(0.797)^2 \\approx 0.129\\).\n\n\n\\[\\begin{aligned}\nP(X = 1) &= P(FFS \\cup FSF \\cup SFF) \\\\\n&= P(FFS) + P(FSF) + P(SFF) \\\\\n&= 3p(1 - p)^2 \\approx 3(0.129) = 0.387\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 2\\) (exactly 2 have diabetes)\nSimilar reasoning gives\n\n\\(FSS \\Longrightarrow (1 - p)pp = p^2(1 - p)\\)\n\\(SFS \\Longrightarrow p(1 - p)p = p^2(1 - p)\\)\n\\(SSF \\Longrightarrow pp(1 - p) = p^2(1 - p)\\)\n\n\n\nEach of the three parts is approximately \\(0.033\\)\n\n\n\\[\\begin{aligned}\nP(X = 2) &= P(FSS \\cup SFS \\cup SSF) \\\\\n&= P(FSS) + P(SFS) + P(SSF) \\\\\n&= 3p^2(1 - p) \\approx 3(0.033) = 0.099\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#the-pattern-emerges",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#the-pattern-emerges",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "The Pattern Emerges",
+    "text": "The Pattern Emerges\nLooking at our calculations:\n\n\n\n\\(X\\)\nNumber of arrangements\nProbability\n\n\n\n\n0\n1\n\\(1 \\times (0.203)^0(0.797)^3 = 0.506\\)\n\n\n1\n3\n\\(3 \\times (0.203)^1(0.797)^2 = 0.387\\)\n\n\n2\n3\n\\(3 \\times (0.203)^2(0.797)^1 = 0.099\\)\n\n\n3\n1\n\\(1 \\times (0.203)^3(0.797)^0 = 0.008\\)\n\n\n\n\nPattern: \\[P(X = k) = (\\text{number of arrangements}) \\times p^k(1-p)^{n-k}\\]\nQuestion: How do we count the number of arrangements for any \\(n\\) and \\(k\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#counting-arrangements-n-choose-k",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#counting-arrangements-n-choose-k",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Counting Arrangements: “n choose k”",
+    "text": "Counting Arrangements: “n choose k”\nThe number of ways to arrange \\(k\\) successes among \\(n\\) trials is:\n\\[\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\]\nThis is called the binomial coefficient or “n choose k”\nReminder: \\(n!\\) (read “n factorial”) means \\(n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1\\)\n\nExample: \\(3! = 3 \\times 2 \\times 1 = 6\\)\nSpecial case: \\(0! = 1\\) (by definition)\n\n\nFor our example with \\(n=3\\):\n\n\\(\\binom{3}{0} = \\frac{3!}{0!3!} = \\frac{6}{1 \\times 6} = 1\\) ✓\n\\(\\binom{3}{1} = \\frac{3!}{1!2!} = \\frac{6}{1 \\times 2} = 3\\) ✓\n\\(\\binom{3}{2} = \\frac{3!}{2!1!} = \\frac{6}{2 \\times 1} = 3\\) ✓\n\\(\\binom{3}{3} = \\frac{3!}{3!0!} = \\frac{6}{6 \\times 1} = 1\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#verify-with-our-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#verify-with-our-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Verify with our example",
+    "text": "Verify with our example\nDoes our formula work for \\(n=3, p=0.203\\)?\n\n# Calculate P(X=0), P(X=1), P(X=2), P(X=3)\n\nx &lt;- 0:3\n\nprobs &lt;- dbinom(x, size = 3, prob = 0.203)\n\ndata.frame(x = x, probability = round(probs, 3))\n\n  x probability\n1 0       0.506\n2 1       0.387\n3 2       0.099\n4 3       0.008\n\n\n\nMatches what we calculated by hand! ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#now-extend-to-10-adults",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#now-extend-to-10-adults",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Now extend to 10 adults",
+    "text": "Now extend to 10 adults\nNow we can easily calculate probabilities for \\(n=10\\) adults:\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\nWithout the formula: We’d need to enumerate \\(2^{10} = 1024\\) possible arrangements!\nWith the formula: We can calculate any probability directly:\n\n# P(X = 4)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\nThe binomial formula saves us from tedious counting!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-diabetes-in-older-adults-10-people-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-diabetes-in-older-adults-10-people-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Diabetes in Older Adults (10 people)",
+    "text": "Example: Diabetes in Older Adults (10 people)\nApproximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).\nLet \\(X\\) = number with diabetes among the 10 people\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\nQuestion 1: What is the expected value of \\(X\\)?\n\\[E(X) = np = 10(0.203) = 2.03\\]\n\n\nQuestion 2: What is the standard deviation of \\(X\\)?\n\\[SD(X) = \\sqrt{np(1-p)} = \\sqrt{10(0.203)(0.797)} = \\sqrt{1.618} \\approx 1.27\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-exactly-4-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Exactly 4 with Diabetes",
+    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.00170 \\times 0.245 \\approx 0.087\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-most-3-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Most 3 with Diabetes",
+    "text": "Example: At Most 3 with Diabetes\nQuestion 4: What is the probability that at most 3 have diabetes?\n\\[P(X \\leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\\]\n\nWe could calculate each term, but there’s an easier way!\n\n\nIn R:\n\npbinom(q = 3, size = 10, prob = 0.203)\n\n[1] 0.8737821\n\n\nThe p in pbinom stands for “cumulative probability” (\\(P(X \\leq k)\\))\nResult: About 86% chance that 3 or fewer have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#example-at-least-5-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Least 5 with Diabetes",
+    "text": "Example: At Least 5 with Diabetes\nQuestion 5: What is the probability that at least 5 have diabetes?\n\\[P(X \\geq 5) = P(X=5) + P(X=6) + \\cdots + P(X=10)\\]\n\nApproach 1: Use complement rule \\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\n\n1 - pbinom(q = 4, size = 10, prob = 0.203)\n\n[1] 0.03481642\n\n\n\n\nApproach 2: Use lower.tail = FALSE\n\npbinom(q = 4, size = 10, prob = 0.203, lower.tail = FALSE)\n\n[1] 0.03481642\n\n\nResult: About 2.4% chance that 5 or more have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#bernoulli-mean-and-variance-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nQuick check with our COVID example:\n\n\\(X = 1\\) (vaccinated) with \\(p = 0.25\\)\n\\(E(X) = 0.25\\) ✓\n\\(\\text{Var}(X) = 0.25(0.75) = 0.1875\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-4",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#from-bernoulli-to-binomial-4",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Flip a coin 10 times. How many heads do we get?\n\nEach flip: Bernoulli(0.5)\nTotal number of heads: Binomial(10, 0.5)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution-definition-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-4",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-probability-formula-4",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#key-takeaways-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\nRandom Variables:\n\nConnect random outcomes to numerical values and probabilities\nExpected value: weighted average using probabilities\nVariance: measures spread around the expected value\nLinear combinations: \\(E(aX+bY) = aE(X) + bE(Y)\\), but \\(\\text{Var}(aX+bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\) (if independent)\n\nBinomial Distribution:\n\nModels number of successes in \\(n\\) independent trials\nParameters: \\(n\\) (trials) and \\(p\\) (success probability)\n\\(E(X) = np\\), \\(\\text{Var}(X) = np(1-p)\\)\nUse R functions: dbinom(), pbinom(), etc."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#looking-ahead-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#looking-ahead-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWednesday:\n\nNormal distribution\nCentral Limit Theorem\nSampling distributions\n\nNext steps:\n\nReview textbook sections 3.1-3.2\nWork on HW 2 (due Tuesday, January 27)\nPractice calculating binomial probabilities in R"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#questions-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#questions-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Questions?",
+    "text": "Questions?\n\n\n\n\nBMSC 620 | Random Variables & Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#maybe",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#maybe",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Maybe",
+    "text": "Maybe\n\\[\\begin{aligned}\nP(X = 1) &= P(FFS \\cup FSF \\cup SFF) \\\\\n&= P(FFS) + P(FSF) + P(SFF) \\\\\n&= (0.797)(0.797)(0.203) + (0.797)(0.203)(0.797) + (0.203)(0.797)(0.797) \\\\\n&= 3 \\times (0.203)^1(0.797)^2 \\\\\n&\\approx 0.387\n\\end{aligned}\\]\nKey insight: Each arrangement has the same probability! We just need to count how many arrangements there are."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#compute-the-probabilities-continued-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 3\\) (all 3 have diabetes)\n\\[\\begin{aligned}\nP(X = 3) &= P(SSS) \\\\\n&= ppp \\\\\n&= p^3 = (0.203)^3 \\approx 0.008\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial.html#binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial distribution",
+    "text": "Binomial distribution\nThe final rule is\n\n\n\nDistribution of a Binomial random variable\n\n\nLet \\(X\\) be the total number of successes in \\(n\\) independent trials, each with probability \\(p\\) of a success. Then probability of observing exactly \\(k\\) successes in \\(n\\) independent trials is\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k},  k= 0, 1, 2, \\dots, n \\]\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#learning-objectives",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#learning-objectives",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of today’s class, you should be able to:\n\nDefine random variables and distinguish between discrete and continuous random variables\nCalculate the expected value (mean) and variance of discrete random variables\nCalculate the expected value and variance of linear combinations of random variables\nIdentify when the Binomial distribution is appropriate and calculate probabilities using it"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#roadmap-for-today",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#roadmap-for-today",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\nPart 1: Random Variables (Section 3.1)\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\n\nPart 2: Binomial Distribution (Section 3.2)\n\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with the Binomial"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#motivation-from-data-to-probability-models",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#motivation-from-data-to-probability-models",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Motivation: From Data to Probability Models",
+    "text": "Motivation: From Data to Probability Models\nSo far we’ve worked with:\n\nData points: \\(x_1, x_2, x_3, \\ldots, x_n\\) (observed values)\nSample statistics: mean, variance, standard deviation\n\nNow we’re moving to:\n\nRandom variables: mathematical models for uncertain outcomes\nProbability distributions: theoretical descriptions of random phenomena\nParameters: population-level quantities (like \\(\\mu\\) and \\(\\sigma\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#what-is-a-random-variable",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#what-is-a-random-variable",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "What is a Random Variable?",
+    "text": "What is a Random Variable?\n\n\n\nDefinition: Random Variable\n\n\nA random variable (r.v.) assigns numerical values to the outcomes of a random phenomenon.\n\n\n\nNotation:\n\nWe use capital letters like \\(X\\), \\(Y\\), \\(Z\\) for random variables\nWe use lowercase letters like \\(x\\), \\(y\\), \\(z\\) for specific values\n\nKey idea: A random variable connects random outcomes to numbers and probabilities"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-rolling-a-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-rolling-a-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Rolling a Die",
+    "text": "Example: Rolling a Die\nSuppose you roll a fair 6-sided die. Let \\(X\\) be the outcome of the roll.\nQuestion 1: What is the probability distribution of \\(X\\)?\n\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n1/6\n1/6\n1/6\n1/6\n1/6\n1/6\n\n\n\n\n\nNote:\n\nEach outcome has equal probability (fair die)\nProbabilities sum to 1: \\(\\sum_{x=1}^6 P(X=x) = 1\\)\nAll outcomes are disjoint (mutually exclusive)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#probability-distributions-quick-review",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#probability-distributions-quick-review",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Probability Distributions: Quick Review",
+    "text": "Probability Distributions: Quick Review\n\n\n\nRules for a Probability Distribution\n\n\nA probability distribution must satisfy three rules:\n\nThe outcomes must be disjoint (mutually exclusive)\nEach probability must be between 0 and 1\nThe probabilities must sum to 1\n\n\n\n\nThese are the same rules we learned in our probability unit!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#discrete-vs.-continuous-random-variables",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#discrete-vs.-continuous-random-variables",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Discrete vs. Continuous Random Variables",
+    "text": "Discrete vs. Continuous Random Variables\n\n\n\n\n\nDiscrete Random Variable\n\n\nA discrete r.v. takes on:\n\nA finite number of values, OR\nA countably infinite number of values\n\nExamples:\n\nNumber of heads in 10 coin flips\nNumber of students in a class\nNumber of COVID cases per day\n\n\n\n\n\n\n\n\nContinuous Random Variable\n\n\nA continuous r.v. can take:\n\nAny real value in an interval\nAny value in a union of intervals\n\nExamples:\n\nHeight\nBlood pressure\nTime until an event occurs\n\n\n\n\n\n\nToday’s focus: Discrete random variables (continuous coming soon!)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#expected-value-mean",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#expected-value-mean",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Expected Value (Mean)",
+    "text": "Expected Value (Mean)\nThe expected value of a random variable is its long-run average value.\n\n\n\nDefinition: Expected Value of a Discrete R.V.\n\n\nIf \\(X\\) takes on outcomes \\(x_1, \\ldots, x_k\\) with probabilities \\(P(X=x_1), \\ldots, P(X=x_k)\\), then:\n\\[E(X) = \\mu = \\sum_{i=1}^k x_i \\cdot P(X=x_i)\\]\nThe expected value is a weighted average where weights are probabilities.\n\n\n\nNotation: \\(E(X)\\) or \\(\\mu\\) (mu)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-expected-value-of-rolling-a-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-expected-value-of-rolling-a-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Expected Value of Rolling a Die",
+    "text": "Example: Expected Value of Rolling a Die\nQuestion 2: What is the expected outcome when rolling a fair die?\n\n\\[\\begin{aligned}\nE(X) &= \\sum_{x=1}^6 x \\cdot P(X=x) \\\\\n&= 1 ( \\frac{1}{6}) + 2(\\frac{1}{6}) + 3(\\frac{1}{6}) + 4(\\frac{1}{6}) + 5(\\frac{1}{6}) + 6 (\\frac{1}{6}) \\\\\n&= \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} \\\\\n&= \\frac{21}{6} = 3.5\n\\end{aligned}\\]\n\n\nInterpretation: If you rolled the die many times, the average would approach 3.5\nNote: The expected value doesn’t have to be a possible outcome!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-unfair-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-unfair-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Unfair Die",
+    "text": "Example: Unfair Die\nQuestion 3: What if the die is not fair?\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n1/9\n1/9\n1/9\n1/9\n2/9\n3/9\n\n\n\n\n\\[\\begin{aligned}\nE(X) &= 1 ( \\frac{1}{9}) + 2(\\frac{1}{9}) + 3(\\frac{1}{9}) + 4(\\frac{1}{9}) + 5(\\frac{2}{9}) + 6 (\\frac{3}{9}) \\\\\n&= 0.11 + 0.22 + 0.33 + 0.33 + 1.11 + 2.0 \\\\\n&= 4.22\n\\end{aligned}\\]\n\n\nThe die is “loaded” toward higher values (mean is 4.22 vs. 3.5 for fair die)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-and-standard-deviation",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-and-standard-deviation",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Variance and Standard Deviation",
+    "text": "Variance and Standard Deviation\nJust like with data, we measure spread with variance and standard deviation.\n\n\n\nDefinition: Variance of a Discrete R.V.\n\n\nIf \\(X\\) has expected value \\(\\mu = E(X)\\), then:\n\\[\\text{Var}(X) = \\sigma^2 = \\sum_{i=1}^k (x_i - \\mu)^2 \\cdot P(X=x_i)\\]\nThe standard deviation is: \\(SD(X) = \\sigma = \\sqrt{\\text{Var}(X)}\\)\n\n\n\nKey idea: Squared deviations from the mean, weighted by probabilities"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-variance-of-a-fair-die",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-variance-of-a-fair-die",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Variance of a Fair Die",
+    "text": "Example: Variance of a Fair Die\nWe found \\(E(X) = 3.5\\). What is \\(\\text{Var}(X)\\)?\n\n\\[\\begin{aligned}\n\\text{Var}(X) &= \\sum_{x=1}^6 (x - 3.5)^2 \\cdot P(X=x) \\\\\n&= (1-3.5)^2 \\cdot \\frac{1}{6} + (2-3.5)^2 \\cdot \\frac{1}{6} + \\cdots + (6-3.5)^2 \\cdot \\frac{1}{6} \\\\\n&= \\frac{6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25}{6} \\\\\n&= \\frac{17.5}{6} \\approx 2.92\n\\end{aligned}\\]\n\n\nStandard deviation: \\(SD(X) = \\sqrt{2.92} \\approx 1.71\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#pause-for-a-quick-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#pause-for-a-quick-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Pause for a Quick Example",
+    "text": "Pause for a Quick Example\nApgar scores for newborns\nJust after birth, each child is rated on the Apgar scale, with scores determined by color, heart rate, reflex irritability, muscle tone, and respiratory effort.\n\n\nLet \\(X\\) = Apgar score. Historical data suggests the following probability distribution:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\nQuestions:\n\nWhat is \\(E(X)\\)?\nWhat is \\(\\text{Var}(X)\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-apgar-score-example-12",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-apgar-score-example-12",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Apgar Score Example (1/2)",
+    "text": "Solution: Apgar Score Example (1/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\n1. Expected value:\n\\[\\begin{aligned}\nE(X) = \\mu &= 0(0.002) + 1(0.001) + 2(0.002) + 3(0.005) \\dots + 8(0.25) + 9(0.12) + 10(0.01) \\\\\n&= 0 + 0.001 + 0.004 + 0.015 + \\dots + 2.00 + 1.08 + 0.10 \\\\\n&= 7.17\n\\end{aligned}\\]\nThe average Apgar score is about 7.2."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-apgar-score-example-22",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-apgar-score-example-22",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Apgar Score Example (2/2)",
+    "text": "Solution: Apgar Score Example (2/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x\\)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n\\(P(X=x)\\)\n0.002\n0.001\n0.002\n0.005\n0.02\n0.04\n0.18\n0.37\n0.25\n0.12\n0.01\n\n\n\n\n\n2. Variance:\n\\[\\begin{aligned}\n\\text{Var}(X) &= \\sum_{x=0}^{10} (x - 7.17)^2 \\cdot P(X=x) \\\\\n&= (0-7.17)^2(0.002) + (1-7.17)^2(0.001) + \\cdots + (10-7.17)^2(0.01) \\\\\n&= 0.103 + 0.038 + 0.053 + 0.087 + 0.201 + 0.188 \\\\\n&\\quad + 0.246 + 0.011 + 0.171 + 0.402 + 0.080 \\\\\n&= 1.58\n\\end{aligned}\\]\n\nStandard deviation: \\(SD(X) = \\sqrt{1.58} \\approx 1.26\\)\nInterpretation: Most babies score between 6 and 9 (within 1 SD of the mean)."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#linear-combinations-of-random-variables",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#linear-combinations-of-random-variables",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Linear Combinations of Random Variables",
+    "text": "Linear Combinations of Random Variables\nOften in research, we combine multiple measurements into a composite score.\n\n\n\nDefinition: Linear Combination\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[aX + bY\\]\nis a linear combination of the random variables.\n\n\n\nExamples in biomedical research:\n\nComposite health scores (sum of multiple domains)\nWeighted risk scores\nTotal costs (sum of different service types)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#expected-value-of-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#expected-value-of-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Expected Value of Linear Combinations",
+    "text": "Expected Value of Linear Combinations\n\n\n\nTheorem: Expected Value of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are random variables and \\(a\\) and \\(b\\) are constants:\n\\[E(aX + bY) = aE(X) + bE(Y)\\]\nand\n\\[E(aX + b) = aE(X) + b\\]\n\n\n\nKey properties:\n\nExpectation is linear - it distributes over addition\nWorks whether or not \\(X\\) and \\(Y\\) are independent\nConstants factor out: \\(E(cX) = cE(X)\\)\n\nThis is intuitive: The average of a sum is the sum of the averages!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-clinical-trial-health-score-setup",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-clinical-trial-health-score-setup",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Clinical Trial Health Score (Setup)",
+    "text": "Example: Clinical Trial Health Score (Setup)\nIn a clinical trial, researchers measure three patient-reported outcomes (PROs):\n\nPain score \\((X_1)\\): Scale 0-10, where 0 = no pain\n\n\\(E(X_1) = 4\\), \\(SD(X_1) = 2\\)\n\nMobility score \\((X_2)\\): Scale 0-10, where 10 = full mobility\n\n\\(E(X_2) = 6\\), \\(SD(X_2) = 1.5\\)\n\nQuality of life score \\((X_3)\\): Scale 0-10, where 10 = excellent\n\n\\(E(X_3) = 5\\), \\(SD(X_3) = 2.5\\)\n\n\nA composite health score is calculated as: \\[H = X_1 + X_2 + X_3\\]\nAssume the three scores are independent (one doesn’t influence the others)."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-expected-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-expected-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Expected Composite Score",
+    "text": "Example: Expected Composite Score\nQuestion: What is the expected composite health score?\n\n\\[\\begin{aligned}\nE(H) &= E(X_1 + X_2 + X_3) \\\\\n&= E(X_1) + E(X_2) + E(X_3) \\\\\n&= 4 + 6 + 5 \\\\\n&= 15\n\\end{aligned}\\]\n\n\nInterpretation: On average, patients have a composite health score of 15 out of 30."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-of-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-of-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Variance of Linear Combinations",
+    "text": "Variance of Linear Combinations\n\n\n\nTheorem: Variance of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are INDEPENDENT random variables and \\(a\\) and \\(b\\) are constants:\n\\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\n\n\nKey differences from expected value:\n\nRequires independence of the random variables\nConstants are squared: \\(a^2\\) and \\(b^2\\) (not just \\(a\\) and \\(b\\))\nVariances add, but standard deviations do NOT simply add\n\nWhy squared? Variance measures squared deviations, so scaling by \\(a\\) scales variance by \\(a^2\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-variance-of-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-variance-of-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Variance of Composite Score",
+    "text": "Example: Variance of Composite Score\nQuestion: What is the variance and standard deviation of the composite health score?\nRecall: \\(H = X_1 + X_2 + X_3\\)\n\n\\(\\text{Var}(X_1) = 2^2 = 4\\)\n\\(\\text{Var}(X_2) = 1.5^2 = 2.25\\)\n\n\\(\\text{Var}(X_3) = 2.5^2 = 6.25\\)\n\n\n\\[\\begin{aligned}\n\\text{Var}(H) &= \\text{Var}(X_1 + X_2 + X_3) \\\\\n&= \\text{Var}(X_1) + \\text{Var}(X_2) + \\text{Var}(X_3) \\\\\n&= 4 + 2.25 + 6.25 \\\\\n&= 12.5\n\\end{aligned}\\]\n\n\n\\[SD(H) = \\sqrt{12.5} \\approx 3.54\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-weighted-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-weighted-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Weighted Composite Score",
+    "text": "Example: Weighted Composite Score\nNow suppose researchers want to weight the scores differently:\n\\[H_{\\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\\]\n(Giving more weight to pain and mobility than quality of life)\nQuestions:\n\nWhat is \\(E(H_{\\text{weighted}})\\)?\nWhat is \\(\\text{Var}(H_{\\text{weighted}})\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-weighted-composite-score",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-weighted-composite-score",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Solution: Weighted Composite Score",
+    "text": "Solution: Weighted Composite Score\n1. Expected value:\n\\[\\begin{aligned}\nE(H_{\\text{weighted}}) &= E(0.5X_1 + 0.3X_2 + 0.2X_3) \\\\\n&= 0.5E(X_1) + 0.3E(X_2) + 0.2E(X_3) \\\\\n&= 0.5(4) + 0.3(6) + 0.2(5) \\\\\n&= 2 + 1.8 + 1.0 \\\\\n&= 4.8\n\\end{aligned}\\]\n\n2. Variance:\n\\[\\begin{aligned}\n\\text{Var}(H_{\\text{weighted}}) &= (0.5)^2\\text{Var}(X_1) + (0.3)^2\\text{Var}(X_2) + (0.2)^2\\text{Var}(X_3) \\\\\n&= 0.25(4) + 0.09(2.25) + 0.04(6.25) \\\\\n&= 1.0 + 0.20 + 0.25 \\\\\n&= 1.45\n\\end{aligned}\\]\n\\[SD(H_{\\text{weighted}}) = \\sqrt{1.45} \\approx 1.20\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways-linear-combinations",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways-linear-combinations",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways: Linear Combinations",
+    "text": "Key Takeaways: Linear Combinations\nExpected value: \\[E(aX + bY) = aE(X) + bE(Y)\\]\n\nLinear property\nNo independence needed\nConstants factor out\n\nVariance: \\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\nRequires independence\nConstants are squared\nStandard deviations don’t simply add\n\n\n\nWhy this matters: Many biomedical measures are composite scores!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binary-outcomes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binary-outcomes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binary Outcomes",
+    "text": "Binary Outcomes\nMany situations involve two possible outcomes:\n\nFlipping a coin: heads or tails\nMedical test: positive or negative\n\nSurgery outcome: success or failure\nManufacturing: defective or non-defective\n\nWe call these binary or Bernoulli trials:\n\nOne outcome is called a “success” (probability \\(p\\))\nThe other is called a “failure” (probability \\(q = 1-p\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli Distribution",
+    "text": "Bernoulli Distribution\n\n\n\nDefinition: Bernoulli Random Variable\n\n\nIf \\(X\\) is a random variable that takes:\n\nValue 1 with probability \\(p\\) (success)\nValue 0 with probability \\(1-p\\) (failure)\n\nThen \\(X\\) is a Bernoulli random variable.\nNotation: \\(X \\sim \\text{Bernoulli}(p)\\) or \\(X \\sim \\text{Bern}(p)\\)\n\n\n\nParameter: \\(p\\) is the probability of success (between 0 and 1)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nExample with diabetes:\n\nAmong US adults aged 65-74, about 20.3% have diabetes\nDefine \\(X = 1\\) if a randomly selected adult has diabetes, \\(X = 0\\) otherwise\n\\(E(X) = 0.203\\)\n\\(\\text{Var}(X) = 0.203(0.797) = 0.162\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Randomly select 10 adults aged 65-74. How many have diabetes?\n\nEach person: Bernoulli(0.203)\nTotal number with diabetes: Binomial(10, 0.203)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-mean-and-variance",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-mean-and-variance",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial: Mean and Variance",
+    "text": "Binomial: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Binomial R.V.\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), then:\n\\[E(X) = np\\] \\[\\text{Var}(X) = np(1-p)\\] \\[SD(X) = \\sqrt{np(1-p)}\\]\n\n\n\nIntuition:\n\nIf each trial has probability \\(p\\) of success, and we do \\(n\\) trials, we expect \\(np\\) successes on average\nThe variance formula comes from summing \\(n\\) independent Bernoulli variances"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-diabetes-in-older-adults-10-people",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-diabetes-in-older-adults-10-people",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Diabetes in Older Adults (10 people)",
+    "text": "Example: Diabetes in Older Adults (10 people)\n\n\nApproximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).\n\n\nLet \\(X\\) = number with diabetes among the 10 people\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\n\nQuestion 1: What is the expected value of \\(X\\)?\n\\[E(X) = np = 10(0.203) = 2.03\\]\n\n\n\n\nQuestion 2: What is the standard deviation of \\(X\\)?\n\\[SD(X) = \\sqrt{np(1-p)} = \\sqrt{10(0.203)(0.797)} = \\sqrt{1.618} \\approx 1.27\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-exactly-4-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-exactly-4-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Exactly 4 with Diabetes",
+    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.0017 \\times 0.256 \\approx 0.091\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-most-3-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-most-3-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Most 3 with Diabetes",
+    "text": "Example: At Most 3 with Diabetes\nQuestion 4: What is the probability that at most 3 have diabetes?\n\\[P(X \\leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\\]\n\nWe could calculate each term, but there’s an easier way!\n\n\n\n\nIn R:\n\npbinom(q = 3, size = 10, prob = 0.203)\n\n[1] 0.8737821\n\n\n\n\nThe p in pbinom stands for “cumulative probability”, \\(P(X \\leq k)\\)\n\n\nResult: About 87% chance that 3 or fewer have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-least-5-with-diabetes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-least-5-with-diabetes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Least 5 with Diabetes",
+    "text": "Example: At Least 5 with Diabetes\nQuestion 5: What is the probability that at least 5 have diabetes?\n\\[P(X \\geq 5) = P(X=5) + P(X=6) + \\cdots + P(X=10)\\]\n\nApproach 1: Use complement rule \\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\n\n1 - pbinom(q = 4, size = 10, prob = 0.203)\n\n[1] 0.03481642\n\n\n\n\n\n\nApproach 2: Use lower.tail = FALSE\n\npbinom(q = 4, size = 10, prob = 0.203, lower.tail = FALSE)\n\n[1] 0.03481642\n\n\nResult: About 3.4% chance that 5 or more have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-functions-for-binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-functions-for-binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "R Functions for Binomial Distribution",
+    "text": "R Functions for Binomial Distribution\n\n\n\n\n\n\n\n\n\n\nFunction\nWhat it does\nExample\n\n\n\n\ndbinom()\nProbability at specific value: \\(P(X=k)\\)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n\npbinom()\nCumulative probability: \\(P(X \\leq k)\\)\npbinom(q = 3, size = 10, prob = 0.203)\n\n\nqbinom()\nQuantile: Find \\(k\\) for given probability\nqbinom(p = 0.5, size = 10, prob = 0.203)\n\n\nrbinom()\nGenerate random samples\nrbinom(n = 100, size = 10, prob = 0.203)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#visualizing-the-binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#visualizing-the-binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Visualizing the Binomial Distribution",
+    "text": "Visualizing the Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nQuick check with our COVID example:\n\n\\(X = 1\\) (vaccinated) with \\(p = 0.25\\)\n\\(E(X) = 0.25\\) ✓\n\\(\\text{Var}(X) = 0.25(0.75) = 0.1875\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Flip a coin 10 times. How many heads do we get?\n\nEach flip: Bernoulli(0.5)\nTotal number of heads: Binomial(10, 0.5)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\nRandom Variables:\n\nConnect random outcomes to numerical values and probabilities\nExpected value: weighted average using probabilities\nVariance: measures spread around the expected value\nLinear combinations: \\(E(aX+bY) = aE(X) + bE(Y)\\), but \\(\\text{Var}(aX+bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\) (if independent)\n\nBinomial Distribution:\n\nModels number of successes in \\(n\\) independent trials\nParameters: \\(n\\) (trials) and \\(p\\) (success probability)\n\\(E(X) = np\\), \\(\\text{Var}(X) = np(1-p)\\)\nUse R functions: dbinom(), pbinom(), etc."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#looking-ahead",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#looking-ahead",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWednesday:\n\nNormal distribution\nCentral Limit Theorem\nSampling distributions\n\nNext steps:\n\nReview textbook sections 3.1-3.2\nWork on HW 2 (due Tuesday, January 27)\nPractice calculating binomial probabilities in R"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#questions",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#questions",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Questions?",
+    "text": "Questions?\n\n\n\n\nBMSC 620 | Random Variables & Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binary-outcomes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binary-outcomes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binary Outcomes",
+    "text": "Binary Outcomes\nMany situations involve two possible outcomes:\n\nFlipping a coin: heads or tails\nMedical test: positive or negative\n\nSurgery outcome: success or failure\nManufacturing: defective or non-defective\n\nWe call these binary or Bernoulli trials:\n\nOne outcome is called a “success” (probability \\(p\\))\nThe other is called a “failure” (probability \\(q = 1-p\\))"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli Distribution",
+    "text": "Bernoulli Distribution\n\n\n\nDefinition: Bernoulli Random Variable\n\n\nIf \\(X\\) is a random variable that takes:\n\nValue 1 with probability \\(p\\) (success)\nValue 0 with probability \\(1-p\\) (failure)\n\nThen \\(X\\) is a Bernoulli random variable.\nNotation: \\(X \\sim \\text{Bernoulli}(p)\\) or \\(X \\sim \\text{Bern}(p)\\)\n\n\n\nParameter: \\(p\\) is the probability of success (between 0 and 1)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nExample with diabetes:\n\nAmong US adults aged 65-74, about 20.3% have diabetes\nDefine \\(X = 1\\) if a randomly selected adult has diabetes, \\(X = 0\\) otherwise\n\\(E(X) = 0.203\\)\n\\(\\text{Var}(X) = 0.203(0.797) = 0.162\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Randomly select 10 adults aged 65-74. How many have diabetes?\n\nEach person: Bernoulli(0.203)\nTotal number with diabetes: Binomial(10, 0.203)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\n\nThe Bernoulli distribution is a special case of the Binomial distribution where \\(n=1\\)\n\nSpecifically: \\[\\text{Binomial}(1, p) = \\text{Bernoulli}(p) \\]\n\nTo get a Binomial distribution, we simply extend the scenario from a single trial to multiple independent trials.\n\nIf we conduct \\(n\\) independent Bernoulli trials with the same success probability \\(p\\), the total number of successes across these \\(n\\) trials will follow a Binomial distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#derivation-by-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#derivation-by-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Derivation by example",
+    "text": "Derivation by example\nApproximately 20.3% of US adults aged 65-74 have diabetes.\nHere, let’s define\n\n“Success” (S) to be the event that a person has diabetes, then\n“Failure” (F) is the event that a person does not have diabetes.\n\nAmong US adults aged 65-74:\n\n\\(P(\\text{has diabetes}) = 0.203 = p\\)\n\\(P(\\text{no diabetes}) = 1 - p = 0.797\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#define-an-experiment",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#define-an-experiment",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Define an experiment",
+    "text": "Define an experiment\nSuppose we conduct an experiment in which \\(n = 3\\) US adults aged 65-74 are tested for diabetes.\n\nThe testing of each adult represents a trial.\nThe outcome from each trial is either a success (has diabetes) or a failure (does not have diabetes).\nThe outcome (S/F) of any one trial is not influenced by earlier outcomes nor does it affect later outcomes (independent trials).\nThe probability of having diabetes (\\(p = 0.203\\)) is the same for each adult sampled."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#possible-outcomes",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#possible-outcomes",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Possible outcomes",
+    "text": "Possible outcomes\nWith 3 trials and 2 possible outcomes (S/F), there are 8 possible arrangements.\n\n\n\n\\(FFF\\)\n\\(FSS\\)\n\n\n\\(FFS\\)\n\\(SFS\\)\n\n\n\\(FSF\\)\n\\(SSF\\)\n\n\n\\(SFF\\)\n\\(SSS\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#define-the-rv",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#define-the-rv",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Define the rv",
+    "text": "Define the rv\nLet \\(X =\\) the number of adults that have diabetes among the \\(n = 3\\) sampled.\n\n\nRe-organize the possible arrangements:\n\n\\(X = 0 \\Longleftrightarrow FFF\\)\n\\(X = 1 \\Longleftrightarrow FFS \\cup FSF \\cup SFF\\)\n\\(X = 2 \\Longleftrightarrow FSS \\cup SFS \\cup SSF\\)\n\\(X = 3 \\Longleftrightarrow SSS\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities",
+    "text": "Compute the probabilities\n\n\nCase: \\(X = 0\\) (no one has diabetes)\n\\[\\begin{aligned}\nP(X = 0) &= P(FFF) \\\\\n&\\overset{\\text{ind.}}{=} (1 - p)(1 - p)(1 - p) \\\\\n&= (1 - p)^3 = 0.797^3 \\approx 0.506\n\\end{aligned}\\]\nBecause of the general multiplication rule for independent events, we simplified the event \\(FFF\\) into the product of \\(n = 3\\) separate terms."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 1\\) (exactly 1 has diabetes)\n\n\\(FFS \\Longrightarrow (1 - p)(1 - p)p = p(1 - p)^2\\)\n\\(FSF \\Longrightarrow (1 - p)p(1 - p) = p(1 - p)^2\\)\n\\(SFF \\Longrightarrow p(1 - p)(1 - p) = p(1 - p)^2\\)\n\n\n\nSubstitute for \\(p\\) and \\((1-p)\\) then for each \\(p(1 - p)^2 = (0.203)(0.797)^2 \\approx 0.129\\).\n\n\n\\[\\begin{aligned}\nP(X = 1) &= P(FFS \\cup FSF \\cup SFF) \\\\\n&= P(FFS) + P(FSF) + P(SFF) \\\\\n&= 3p(1 - p)^2 \\approx 3(0.129) = 0.387\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 2\\) (exactly 2 have diabetes)\nSimilar reasoning gives\n\n\\(FSS \\Longrightarrow (1 - p)pp = p^2(1 - p)\\)\n\\(SFS \\Longrightarrow p(1 - p)p = p^2(1 - p)\\)\n\\(SSF \\Longrightarrow pp(1 - p) = p^2(1 - p)\\)\n\n\n\nEach of the three parts is approximately \\(0.033\\)\n\n\n\\[\\begin{aligned}\nP(X = 2) &= P(FSS \\cup SFS \\cup SSF) \\\\\n&= P(FSS) + P(SFS) + P(SSF) \\\\\n&= 3p^2(1 - p) \\approx 3(0.033) = 0.099\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#compute-the-probabilities-continued-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Compute the probabilities (continued)",
+    "text": "Compute the probabilities (continued)\n\n\nCase: \\(X = 3\\) (all 3 have diabetes)\n\\[\\begin{aligned}\nP(X = 3) &= P(SSS) \\\\\n&= ppp \\\\\n&= p^3 = (0.203)^3 \\approx 0.008\n\\end{aligned}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#the-pattern-emerges",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#the-pattern-emerges",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "The Pattern Emerges",
+    "text": "The Pattern Emerges\nLooking at our calculations:\n\n\n\n\\(X\\)\nNumber of arrangements\nProbability\n\n\n\n\n0\n1\n\\(1 \\times (0.203)^0(0.797)^3 = 0.506\\)\n\n\n1\n3\n\\(3 \\times (0.203)^1(0.797)^2 = 0.387\\)\n\n\n2\n3\n\\(3 \\times (0.203)^2(0.797)^1 = 0.099\\)\n\n\n3\n1\n\\(1 \\times (0.203)^3(0.797)^0 = 0.008\\)\n\n\n\n\nPattern: \\[P(X = k) = (\\text{number of arrangements}) \\times p^k(1-p)^{n-k}\\]\nQuestion: How do we count the number of arrangements for any \\(n\\) and \\(k\\)?"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#counting-arrangements-n-choose-k",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#counting-arrangements-n-choose-k",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Counting Arrangements: “n choose k”",
+    "text": "Counting Arrangements: “n choose k”\nThe number of ways to arrange \\(k\\) successes among \\(n\\) trials is:\n\\[\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\]\nThis is called the binomial coefficient or “n choose k”\nReminder: \\(n!\\) (read “n factorial”) means \\(n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1\\)\n\nExample: \\(3! = 3 \\times 2 \\times 1 = 6\\)\nSpecial case: \\(0! = 1\\) (by definition)\n\n\nFor our example with \\(n=3\\):\n\n\\(\\binom{3}{0} = \\frac{3!}{0!3!} = \\frac{6}{1 \\times 6} = 1\\) ✓\n\\(\\binom{3}{1} = \\frac{3!}{1!2!} = \\frac{6}{1 \\times 2} = 3\\) ✓\n\\(\\binom{3}{2} = \\frac{3!}{2!1!} = \\frac{6}{2 \\times 1} = 3\\) ✓\n\\(\\binom{3}{3} = \\frac{3!}{3!0!} = \\frac{6}{6 \\times 1} = 1\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial distribution",
+    "text": "Binomial distribution\nThe final rule is\n\n\n\nDistribution of a Binomial random variable\n\n\nLet \\(X\\) be the total number of successes in \\(n\\) independent trials, each with probability \\(p\\) of a success. Then probability of observing exactly \\(k\\) successes in \\(n\\) independent trials is\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k},  k= 0, 1, 2, \\dots, n \\]\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#verify-with-our-example",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#verify-with-our-example",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Verify with our example",
+    "text": "Verify with our example\nDoes our formula work for \\(n=3, p=0.203\\)?\n\n# Calculate P(X=0), P(X=1), P(X=2), P(X=3)\n\nx &lt;- 0:3\n\nprobs &lt;- dbinom(x, size = 3, prob = 0.203)\n\ndata.frame(x = x, probability = round(probs, 3))\n\n  x probability\n1 0       0.506\n2 1       0.387\n3 2       0.099\n4 3       0.008\n\n\n\nMatches what we calculated by hand! ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Now extend to 10 adults",
+    "text": "Now extend to 10 adults\nNow we can easily calculate probabilities for \\(n=10\\) adults:\n\n\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\nWithout the formula: We’d need to enumerate \\(2^{10} = 1024\\) possible arrangements!\n\n\nWith the formula: We can calculate any probability directly:\n\n# P(X = 4)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe binomial formula saves us from tedious counting!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-mean-and-variance-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-mean-and-variance-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial: Mean and Variance",
+    "text": "Binomial: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Binomial R.V.\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), then:\n\\[E(X) = np\\] \\[\\text{Var}(X) = np(1-p)\\] \\[SD(X) = \\sqrt{np(1-p)}\\]\n\n\n\nIntuition:\n\nIf each trial has probability \\(p\\) of success, and we do \\(n\\) trials, we expect \\(np\\) successes on average\nThe variance formula comes from summing \\(n\\) independent Bernoulli variances"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-diabetes-in-older-adults-10-people-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-diabetes-in-older-adults-10-people-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Diabetes in Older Adults (10 people)",
+    "text": "Example: Diabetes in Older Adults (10 people)\n\n\nApproximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).\n\n\nLet \\(X\\) = number with diabetes among the 10 people\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\n\nQuestion 1: What is the expected value of \\(X\\)?\n\\[E(X) = np = 10(0.203) = 2.03\\]\n\n\n\n\nQuestion 2: What is the standard deviation of \\(X\\)?\n\\[SD(X) = \\sqrt{np(1-p)} = \\sqrt{10(0.203)(0.797)} = \\sqrt{1.618} \\approx 1.27\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-exactly-4-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-exactly-4-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: Exactly 4 with Diabetes",
+    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.0017 \\times 0.256 \\approx 0.091\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-most-3-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-most-3-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Most 3 with Diabetes",
+    "text": "Example: At Most 3 with Diabetes\nQuestion 4: What is the probability that at most 3 have diabetes?\n\\[P(X \\leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\\]\n\nWe could calculate each term, but there’s an easier way!\n\n\n\n\nIn R:\n\npbinom(q = 3, size = 10, prob = 0.203)\n\n[1] 0.8737821\n\n\n\n\nThe p in pbinom stands for “cumulative probability”, \\(P(X \\leq k)\\)\n\n\nResult: About 87% chance that 3 or fewer have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-least-5-with-diabetes-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-least-5-with-diabetes-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Example: At Least 5 with Diabetes",
+    "text": "Example: At Least 5 with Diabetes\nQuestion 5: What is the probability that at least 5 have diabetes?\n\\[P(X \\geq 5) = P(X=5) + P(X=6) + \\cdots + P(X=10)\\]\n\nApproach 1: Use complement rule \\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\n\n1 - pbinom(q = 4, size = 10, prob = 0.203)\n\n[1] 0.03481642\n\n\n\n\n\n\nApproach 2: Use lower.tail = FALSE\n\npbinom(q = 4, size = 10, prob = 0.203, lower.tail = FALSE)\n\n[1] 0.03481642\n\n\nResult: About 3.4% chance that 5 or more have diabetes"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-functions-for-binomial-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-functions-for-binomial-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "R Functions for Binomial Distribution",
+    "text": "R Functions for Binomial Distribution\n\n\n\n\n\n\n\n\nFunction\nWhat it does\nExample\n\n\n\n\ndbinom()\nProbability at specific value: \\(P(X=k)\\)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n\npbinom()\nCumulative probability: \\(P(X \\leq k)\\)\npbinom(q = 3, size = 10, prob = 0.203)\n\n\nqbinom()\nQuantile: Find \\(k\\) for given probability\nqbinom(p = 0.5, size = 10, prob = 0.203)\n\n\nrbinom()\nGenerate random samples\nrbinom(n = 100, size = 10, prob = 0.203)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#visualizing-the-binomial-distribution-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#visualizing-the-binomial-distribution-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Visualizing the Binomial Distribution",
+    "text": "Visualizing the Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#bernoulli-mean-and-variance-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Bernoulli: Mean and Variance",
+    "text": "Bernoulli: Mean and Variance\n\n\n\nTheorem: Mean and Variance of Bernoulli R.V.\n\n\nIf \\(X \\sim \\text{Bernoulli}(p)\\), then:\n\\[E(X) = p\\] \\[\\text{Var}(X) = p(1-p)\\]\n\n\n\nQuick check with our COVID example:\n\n\\(X = 1\\) (vaccinated) with \\(p = 0.25\\)\n\\(E(X) = 0.25\\) ✓\n\\(\\text{Var}(X) = 0.25(0.75) = 0.1875\\) ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-4",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-4",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial",
+    "text": "From Bernoulli to Binomial\nWhat if we repeat a Bernoulli trial multiple times?\nExample: Flip a coin 10 times. How many heads do we get?\n\nEach flip: Bernoulli(0.5)\nTotal number of heads: Binomial(10, 0.5)\n\n\n\n\nKey Relationship\n\n\n\\[\\text{Binomial}(n, p) = \\text{Sum of } n \\text{ independent Bernoulli}(p) \\text{ trials}\\]"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-3",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-distribution-definition-3",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Distribution: Definition",
+    "text": "Binomial Distribution: Definition\n\n\n\nDefinition: Binomial Random Variable\n\n\n\\(X\\) is a Binomial random variable if:\n\nThere are \\(n\\) independent trials\nEach trial has two outcomes: success or failure\nProbability of success is \\(p\\) (same for all trials)\n\\(X\\) counts the total number of successes\n\nNotation: \\(X \\sim \\text{Binomial}(n, p)\\) or \\(X \\sim \\text{Binom}(n, p)\\)\n\n\n\nParameters: \\(n\\) (number of trials) and \\(p\\) (probability of success)\nPossible values: \\(X \\in \\{0, 1, 2, \\ldots, n\\}\\)"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula-2",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-probability-formula-2",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Binomial Probability Formula",
+    "text": "Binomial Probability Formula\n\n\n\nProbability Mass Function\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\), the probability of exactly \\(k\\) successes is:\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\nwhere \\(\\binom{n}{k} = \\frac{n!}{k!(n-k)!}\\) is the binomial coefficient (“n choose k”)\n\n\n\nComponents:\n\n\\(\\binom{n}{k}\\): number of ways to arrange \\(k\\) successes in \\(n\\) trials\n\\(p^k\\): probability of \\(k\\) successes\n\\((1-p)^{n-k}\\): probability of \\(n-k\\) failures"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#key-takeaways-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\nRandom Variables:\n\nConnect random outcomes to numerical values and probabilities\nExpected value: weighted average using probabilities\nVariance: measures spread around the expected value\nLinear combinations: \\(E(aX+bY) = aE(X) + bE(Y)\\), but \\(\\text{Var}(aX+bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\) (if independent)\n\nBinomial Distribution:\n\nModels number of successes in \\(n\\) independent trials\nParameters: \\(n\\) (trials) and \\(p\\) (success probability)\n\\(E(X) = np\\), \\(\\text{Var}(X) = np(1-p)\\)\nUse R functions: dbinom(), pbinom(), etc."
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#looking-ahead-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#looking-ahead-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWednesday:\n\nNormal distribution\nCentral Limit Theorem\nSampling distributions\n\nNext steps:\n\nReview textbook sections 3.1-3.2\nWork on HW 2 (due Tuesday, January 27)\nPractice calculating binomial probabilities in R"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#questions-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#questions-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Questions?",
+    "text": "Questions?\n\n\n\n\nBMSC 620 | Random Variables & Binomial Distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-continued",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#from-bernoulli-to-binomial-continued",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "From Bernoulli to Binomial (continued)",
+    "text": "From Bernoulli to Binomial (continued)\n\nThe Bernoulli distribution is a special case of the Binomial distribution where \\(n=1\\)\n\nSpecifically: \\[\\text{Binomial}(1, p) = \\text{Bernoulli}(p) \\]\n\nTo get a Binomial distribution, we simply extend the scenario from a single trial to multiple independent trials.\n\nIf we conduct \\(n\\) independent Bernoulli trials with the same success probability \\(p\\), the total number of successes across these \\(n\\) trials will follow a Binomial distribution"
   }
 ]
