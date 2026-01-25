@@ -1,0 +1,126 @@
+---
+title: "Week 4"
+description: "Random Variables and Probability Distributions"
+format:
+  html:
+    toc: true
+---
+
+<!--
+Think of the weekly page as answering just five student questions:
+	1.	What are we doing this week?
+	2.	What do I need to read/watch before class?
+	3.	What materials should I have open during class?
+	4.	What is due (and when)?
+	5.	Where do I go if I want to review later?
+	-->
+
+## Announcements
+
+- HW 2 due **Tuesday, January 27 at 11:00 pm**
+- HW 3 released **Monday, January 26**
+
+
+## Overview
+
+This week focuses on **random variables and probability distributions**.
+
+We will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.
+
+By the end of the week, you should be able to:
+
+- define random variables and distinguish between discrete and continuous types,
+- calculate expected values and variances of random variables,
+- work with linear combinations of random variables,
+- identify when the Binomial distribution applies and calculate probabilities,
+- understand properties of the Normal distribution,
+- work with sampling distributions and the Central Limit Theorem.
+
+## Readings (before class)
+
+- Textbook section 3.1 (Random variables)
+- Textbook section 3.2 (Binomial distribution)
+- Textbook section 3.3 (Normal distribution)
+- Textbook section 3.4 (Sampling distributions)
+
+(Additional resources will be posted if helpful.)
+
+## Materials
+
+### Monday — Random Variables and Binomial Distribution
+
+- **Topics**
+  - What are random variables?
+  - Expected value and variance
+  - Linear combinations of random variables
+  - Bernoulli distribution
+  - Binomial distribution
+  - Calculating probabilities with R
+
+- **Slides**
+  - Random Variables and Binomial Distribution ([HTML](/lessons/09_random_variables_binomial/09_random_variables_binomial.qmd) | [PDF](/lessons/09_random_variables_binomial/09_random_variables_binomial.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+
+- **Recording**
+  - [Recording coming](#)
+
+---
+
+### Wednesday — Normal Distribution and Sampling Distributions
+
+- **Topics**
+  - The Normal distribution
+  - Standard Normal (Z) distribution
+  - Normal probability calculations
+  - Sampling distributions
+  - Central Limit Theorem
+  - Standard error
+
+- **Slides**
+  - Normal Distribution and Sampling Distributions ([HTML](#) | [PDF](#) | [OneDrive](#))
+
+- **Code along**
+  - [Download Normal Distribution code along (.qmd)](#)
+
+- **Recording**
+  - [Normal Distribution and Sampling Distributions](#)
+
+---
+
+## Homework
+
+- **HW 2**
+  - Due **Tuesday, January 27 at 11:00 pm**
+  - Covers:
+    - data wrangling with `dplyr`
+    - summary statistics with `rstatix`
+    - frequency tables with `janitor`
+    - data visualization with `ggplot2`
+    - probability concepts (marginal, joint, and conditional probabilities)
+  - [View HW 2 instructions](/homework/HW02/HW02.qmd)
+
+- **HW 3**
+  - Released **Monday, January 26**
+  - Due **Tuesday, February 3 at 11:00 pm**
+  - Covers:
+    - Bayes' Theorem
+    - Random variables and expected value
+    - Binomial distribution
+    - Continued practice with tidyverse tools
+  - [View HW 3 instructions](/homework/HW03/HW03.qmd)
+
+- See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+- Please complete the post-class check-in after each class meeting.
+- Used for attendance credit and to identify topics that need clarification.
+- Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+Next week we will begin **statistical inference**:
+
+- **Monday**: Confidence intervals
+- **Wednesday**: Hypothesis testing introduction
+
+These concepts are the foundation for drawing conclusions from data and making decisions based on evidence.
