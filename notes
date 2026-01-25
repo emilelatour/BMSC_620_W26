@@ -51,3 +51,27 @@ The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 # set ggplot theme for slides 
 theme_set(theme_bw(base_size = 22))
 # theme_update(text = element_text(size=16))  # set global text size for ggplots
+
+
+
+
+```{r}
+#| include: false
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(eval = FALSE)
+
+```
+
+
+
+
+I need helping making this Wednesdays lecture on the Normal Distribution and maybe the Poisson Distribution. Attached are Nicky and Meike's slides. Nicky originally did them both in one lecture on the same day. Then she split them up. Meike's is in one lecture still
+
+
+
+The normal distribution is super important. The Poisson -- I'd really just like for them to recognize it and to know when they might need it (counts and rates). Or maybe its an optional recorded lecture. I'm not sure what;s best. But the Normal needs to be covered for sure. I'd take your thoughts and advice.
+
+
+
+The book covers the normal dist on pages 152-167. And the Poisson on pages 168-169

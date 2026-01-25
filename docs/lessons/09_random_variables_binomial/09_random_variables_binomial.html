@@ -489,6 +489,28 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li><strong>Parameters</strong>: population-level quantities (like <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>)</li>
 </ul>
 </section>
+<section id="random-variables-vs-observed-data" class="slide level2">
+<h2>Random Variables vs Observed Data</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Three related (but different) ideas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p><strong>Random variable</strong>:<br>
+<span class="math inline">\(X\)</span> = the random process before we observe anything</p></li>
+<li><p><strong>Observed data</strong>:<br>
+<span class="math inline">\(x_1, x_2, \dots, x_n\)</span> = the numbers we actually observe</p></li>
+<li><p><strong>Probability distribution</strong>:<br>
+Describes how <span class="math inline">\(X\)</span> behaves <em>before</em> data are collected</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Key idea:</strong><br>
+Data are <em>realizations</em> of a random variable, not the random variable itself.</p>
+</section>
 <section id="what-is-a-random-variable" class="slide level2">
 <h2>What is a Random Variable?</h2>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -565,6 +587,21 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 <p>These are the same rules we learned in our probability unit!</p>
+<p><br>
+</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Probability Distributions (Discrete)</strong></p>
+</div>
+<div class="callout-content">
+<p>For a <strong>discrete</strong> random variable, the <strong>probability mass function (pmf)</strong> is</p>
+<p><span class="math display">\[
+f(x) = P(X = x)
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="discrete-vs.-continuous-random-variables" class="slide level2">
 <h2>Discrete vs.&nbsp;Continuous Random Variables</h2>
@@ -667,24 +704,25 @@ E(X) &amp;= \sum_{x=1}^6 x \cdot P(X=x) \\
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(P(X=x)\)</span></td>
-<td>0.10</td>
-<td>0.20</td>
-<td>0.05</td>
-<td>0.05</td>
-<td>0.25</td>
-<td>0.35</td>
+<td>1/9</td>
+<td>1/9</td>
+<td>1/9</td>
+<td>1/9</td>
+<td>2/9</td>
+<td>3/9</td>
 </tr>
 </tbody>
 </table>
 <div class="fragment">
 <p><span class="math display">\[\begin{aligned}
-E(X) &amp;= 1(0.10) + 2(0.20) + 3(0.05) + 4(0.05) + 5(0.25) + 6(0.35) \\
-&amp;= 0.10 + 0.40 + 0.15 + 0.20 + 1.25 + 2.10 \\
-&amp;= 4.20
+E(X) &amp;= 1 ( \frac{1}{9}) + 2(\frac{1}{9}) + 3(\frac{1}{9}) + 4(\frac{1}{9}) + 5(\frac{2}{9}) + 6 (\frac{3}{9}) \\
+&amp;= (\frac{1 + 2 + 3 + 4}{9})  + (\frac{10}{9}) + (\frac{18}{9}) \\
+&amp;= (\frac{38}{9}) \\
+&amp;= 4.222 \dots
 \end{aligned}\]</span></p>
 </div>
 <div class="fragment">
-<p>The die is “loaded” toward higher values (mean is 4.20 vs.&nbsp;3.5 for fair die)</p>
+<p>The die is “loaded” toward higher values (mean is 4.22 vs.&nbsp;3.5 for fair die)</p>
 </div>
 </section>
 <section id="variance-and-standard-deviation" class="slide level2">
@@ -711,8 +749,6 @@ E(X) &amp;= 1(0.10) + 2(0.20) + 3(0.05) + 4(0.05) + 5(0.25) + 6(0.35) \\
 <p><span class="math display">\[\begin{aligned}
 \text{Var}(X) &amp;= \sum_{x=1}^6 (x - 3.5)^2 \cdot P(X=x) \\
 &amp;= (1-3.5)^2 \cdot \frac{1}{6} + (2-3.5)^2 \cdot \frac{1}{6} + \cdots + (6-3.5)^2 \cdot \frac{1}{6} \\
-&amp;= (-2.5)^2 \cdot \frac{1}{6} + (-1.5)^2 \cdot \frac{1}{6} + (-0.5)^2 \cdot \frac{1}{6} \\
-&amp;\quad + (0.5)^2 \cdot \frac{1}{6} + (1.5)^2 \cdot \frac{1}{6} + (2.5)^2 \cdot \frac{1}{6} \\
 &amp;= \frac{6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25}{6} \\
 &amp;= \frac{17.5}{6} \approx 2.92
 \end{aligned}\]</span></p>
@@ -840,8 +876,8 @@ E(X) &amp;= 1(0.10) + 2(0.20) + 3(0.05) + 4(0.05) + 5(0.25) + 6(0.35) \\
 </p>
 <p><strong>1. Expected value:</strong></p>
 <p><span class="math display">\[\begin{aligned}
-E(X) = \mu &amp;= 0(0.002) + 1(0.001) + 2(0.002) + 3(0.005) \dots + 8(0.25) + 9(0.12) + 10(0.01) \\
-&amp;= 0 + 0.001 + 0.004 + 0.015 + \dots + 2.00 + 1.08 + 0.10 \\
+E(X) = \mu &amp;= 0(0.002) + 1(0.001) + 2(0.002) + 3(0.005) +  \cdots + 8(0.25) + 9(0.12) + 10(0.01) \\
+&amp;= 0 + 0.001 + 0.004 + 0.015 + \cdots + 2.00 + 1.08 + 0.10 \\
 &amp;= 7.17
 \end{aligned}\]</span></p>
 <p>The average Apgar score is about 7.2.</p>
@@ -1002,17 +1038,22 @@ E(H) &amp;= E(X_1 + X_2 + X_3) \\
 </div>
 <div class="callout-content">
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>INDEPENDENT</strong> random variables and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants:</p>
-<p><span class="math display">\[\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y)\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(aX + bY) = a^2\mathrm{Var}(X) + b^2\mathrm{Var}(Y)\]</span></p>
 </div>
 </div>
 </div>
-<p><strong>Key differences from expected value:</strong></p>
-<ul>
-<li>Requires <strong>independence</strong> of the random variables</li>
-<li>Constants are <strong>squared</strong>: <span class="math inline">\(a^2\)</span> and <span class="math inline">\(b^2\)</span> (not just <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>)</li>
-<li>Variances add, but standard deviations do NOT simply add</li>
-</ul>
-<p><strong>Why squared?</strong> Variance measures squared deviations, so scaling by <span class="math inline">\(a\)</span> scales variance by <span class="math inline">\(a^2\)</span></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>General formula when not independent</strong></p>
+</div>
+<div class="callout-content">
+<p>The general formula is</p>
+<p><span class="math display">\[\mathrm{Var}(aX + bY) = a^2\mathrm{Var}(X) + b^2\mathrm{Var}(Y) + 2ab\, \mathrm{Cov}(X,Y)\]</span> If independent, <span class="math inline">\(\mathrm{Cov}(X,Y) = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<p>The standard deviation is the square root of the variance.</p>
 </section>
 <section id="example-variance-of-composite-score" class="slide level2">
 <h2>Example: Variance of Composite Score</h2>
@@ -1040,7 +1081,12 @@ E(H) &amp;= E(X_1 + X_2 + X_3) \\
 <h2>Example: Weighted Composite Score</h2>
 <p>Now suppose researchers want to weight the scores differently:</p>
 <p><span class="math display">\[H_{\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\]</span></p>
-<p>(Giving more weight to pain and mobility than quality of life)</p>
+<ul>
+<li>Weights sum to 1, so this is a weighted average (0-10 scale), not a total score.</li>
+<li>Gives more weight to pain and mobility than quality of life.</li>
+</ul>
+<p><br>
+</p>
 <p><strong>Questions:</strong></p>
 <ol type="1">
 <li>What is <span class="math inline">\(E(H_{\text{weighted}})\)</span>?</li>
@@ -1166,8 +1212,9 @@ E(H_{\text{weighted}}) &amp;= E(0.5X_1 + 0.3X_2 + 0.2X_3) \\
 </div>
 </div>
 </div>
-<p><br>
-</p>
+</section>
+<section id="from-bernoulli-to-binomial-continued" class="slide level2">
+<h2>From Bernoulli to Binomial (continued)</h2>
 <ul>
 <li><p>The <strong>Bernoulli distribution</strong> is a special case of the Binomial distribution where <span class="math inline">\(n=1\)</span></p>
 <ul>
@@ -1201,397 +1248,31 @@ E(H_{\text{weighted}}) &amp;= E(0.5X_1 + 0.3X_2 + 0.2X_3) \\
 <p><strong>Parameters:</strong> <span class="math inline">\(n\)</span> (number of trials) and <span class="math inline">\(p\)</span> (probability of success)</p>
 <p><strong>Possible values:</strong> <span class="math inline">\(X \in \{0, 1, 2, \ldots, n\}\)</span></p>
 </section>
-<section id="binomial-probability-formula" class="slide level2">
-<h2>Binomial Probability Formula</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
+<section id="when-not-to-use-a-binomial-model" class="slide level2">
+<h2>When NOT to Use a Binomial Model</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Probability Mass Function</strong></p>
+<p><strong>Common Pitfalls</strong></p>
 </div>
 <div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>, the probability of exactly <span class="math inline">\(k\)</span> successes is:</p>
-<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
-<p>where <span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> is the binomial coefficient (“n choose k”)</p>
-</div>
-</div>
-</div>
-<p><strong>Components:</strong></p>
+<p>A Binomial model is <strong>NOT appropriate</strong> when:</p>
 <ul>
-<li><span class="math inline">\(\binom{n}{k}\)</span>: number of ways to arrange <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> trials</li>
-<li><span class="math inline">\(p^k\)</span>: probability of <span class="math inline">\(k\)</span> successes</li>
-<li><span class="math inline">\((1-p)^{n-k}\)</span>: probability of <span class="math inline">\(n-k\)</span> failures</li>
-</ul>
-</section>
-<section id="binomial-mean-and-variance" class="slide level2">
-<h2>Binomial: Mean and Variance</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Theorem: Mean and Variance of Binomial R.V.</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>, then:</p>
-<p><span class="math display">\[E(X) = np\]</span> <span class="math display">\[\text{Var}(X) = np(1-p)\]</span> <span class="math display">\[SD(X) = \sqrt{np(1-p)}\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Intuition:</strong></p>
+<li>Trials are not independent
 <ul>
-<li>If each trial has probability <span class="math inline">\(p\)</span> of success, and we do <span class="math inline">\(n\)</span> trials, we expect <span class="math inline">\(np\)</span> successes on average</li>
-<li>The variance formula comes from summing <span class="math inline">\(n\)</span> independent Bernoulli variances</li>
-</ul>
-</section>
-<section id="example-diabetes-in-older-adults-10-people" class="slide level2">
-<h2>Example: Diabetes in Older Adults (10 people)</h2>
-<p>Approximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).</p>
-<p>Let <span class="math inline">\(X\)</span> = number with diabetes among the 10 people</p>
-<p><strong>Setup:</strong> <span class="math inline">\(X \sim \text{Binomial}(n=10, p=0.203)\)</span></p>
-<div class="fragment">
-<p><strong>Question 1:</strong> What is the expected value of <span class="math inline">\(X\)</span>?</p>
-<p><span class="math display">\[E(X) = np = 10(0.203) = 2.03\]</span></p>
-</div>
-<div class="fragment">
-<p><strong>Question 2:</strong> What is the standard deviation of <span class="math inline">\(X\)</span>?</p>
-<p><span class="math display">\[SD(X) = \sqrt{np(1-p)} = \sqrt{10(0.203)(0.797)} = \sqrt{1.618} \approx 1.27\]</span></p>
-</div>
-</section>
-<section id="example-exactly-4-with-diabetes" class="slide level2">
-<h2>Example: Exactly 4 with Diabetes</h2>
-<p><strong>Question 3:</strong> What is the probability that exactly 4 of the 10 have diabetes?</p>
-<p><span class="math display">\[P(X = 4) = \binom{10}{4} (0.203)^4 (0.797)^6\]</span></p>
-<div class="fragment">
-<p><span class="math display">\[= \frac{10!}{4! \cdot 6!} (0.203)^4 (0.797)^6 = 210 \times 0.00170 \times 0.245 \approx 0.087\]</span></p>
-</div>
-<div class="fragment">
-<p><strong>In R:</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09140151</code></pre>
-</div>
-</div>
-<p>The <code>d</code> in <code>dbinom</code> stands for “density” (probability at a specific value)</p>
-</div>
-</section>
-<section id="example-at-most-3-with-diabetes" class="slide level2">
-<h2>Example: At Most 3 with Diabetes</h2>
-<p><strong>Question 4:</strong> What is the probability that at most 3 have diabetes?</p>
-<p><span class="math display">\[P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\]</span></p>
-<div class="fragment">
-<p>We could calculate each term, but there’s an easier way!</p>
-</div>
-<div class="fragment">
-<p><strong>In R:</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8737821</code></pre>
-</div>
-</div>
-<p>The <code>p</code> in <code>pbinom</code> stands for “cumulative probability” (<span class="math inline">\(P(X \leq k)\)</span>)</p>
-<p>Result: About 86% chance that 3 or fewer have diabetes</p>
-</div>
-</section>
-<section id="example-at-least-5-with-diabetes" class="slide level2">
-<h2>Example: At Least 5 with Diabetes</h2>
-<p><strong>Question 5:</strong> What is the probability that at least 5 have diabetes?</p>
-<p><span class="math display">\[P(X \geq 5) = P(X=5) + P(X=6) + \cdots + P(X=10)\]</span></p>
-<div class="fragment">
-<p><strong>Approach 1:</strong> Use complement rule <span class="math display">\[P(X \geq 5) = 1 - P(X \leq 4)\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03481642</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p><strong>Approach 2:</strong> Use <code>lower.tail = FALSE</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03481642</code></pre>
-</div>
-</div>
-<p>Result: About 2.4% chance that 5 or more have diabetes</p>
-</div>
-</section>
-<section id="r-functions-for-binomial-distribution" class="slide level2">
-<h2>R Functions for Binomial Distribution</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 31%">
-<col style="width: 39%">
-<col style="width: 28%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Function</th>
-<th>What it does</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>dbinom()</code></td>
-<td>Probability at specific value: <span class="math inline">\(P(X=k)\)</span></td>
-<td><code>dbinom(x = 4, size = 10, prob = 0.203)</code></td>
-</tr>
-<tr class="even">
-<td><code>pbinom()</code></td>
-<td>Cumulative probability: <span class="math inline">\(P(X \leq k)\)</span></td>
-<td><code>pbinom(q = 3, size = 10, prob = 0.203)</code></td>
-</tr>
-<tr class="odd">
-<td><code>qbinom()</code></td>
-<td>Quantile: Find <span class="math inline">\(k\)</span> for given probability</td>
-<td><code>qbinom(p = 0.5, size = 10, prob = 0.203)</code></td>
-</tr>
-<tr class="even">
-<td><code>rbinom()</code></td>
-<td>Generate random samples</td>
-<td><code>rbinom(n = 100, size = 10, prob = 0.203)</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="visualizing-the-binomial-distribution" class="slide level2">
-<h2>Visualizing the Binomial Distribution</h2>
-
-<img data-src="09_random_variables_binomial_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="bernoulli-mean-and-variance-1" class="slide level2">
-<h2>Bernoulli: Mean and Variance</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Theorem: Mean and Variance of Bernoulli R.V.</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Bernoulli}(p)\)</span>, then:</p>
-<p><span class="math display">\[E(X) = p\]</span> <span class="math display">\[\text{Var}(X) = p(1-p)\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Quick check with our COVID example:</strong></p>
-<ul>
-<li><span class="math inline">\(X = 1\)</span> (vaccinated) with <span class="math inline">\(p = 0.25\)</span></li>
-<li><span class="math inline">\(E(X) = 0.25\)</span> ✓</li>
-<li><span class="math inline">\(\text{Var}(X) = 0.25(0.75) = 0.1875\)</span> ✓</li>
-</ul>
-</section>
-<section id="from-bernoulli-to-binomial-1" class="slide level2">
-<h2>From Bernoulli to Binomial</h2>
-<p>What if we repeat a Bernoulli trial multiple times?</p>
-<p><strong>Example:</strong> Flip a coin 10 times. How many heads do we get?</p>
-<ul>
-<li>Each flip: Bernoulli(0.5)</li>
-<li>Total number of heads: Binomial(10, 0.5)</li>
-</ul>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Key Relationship</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\text{Binomial}(n, p) = \text{Sum of } n \text{ independent Bernoulli}(p) \text{ trials}\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="binomial-distribution-definition-1" class="slide level2">
-<h2>Binomial Distribution: Definition</h2>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Definition: Binomial Random Variable</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(X\)</span> is a <strong>Binomial random variable</strong> if:</p>
-<ol type="1">
-<li>There are <span class="math inline">\(n\)</span> independent trials</li>
-<li>Each trial has two outcomes: success or failure</li>
-<li>Probability of success is <span class="math inline">\(p\)</span> (same for all trials)</li>
-<li><span class="math inline">\(X\)</span> counts the total number of successes</li>
-</ol>
-<p><strong>Notation:</strong> <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> or <span class="math inline">\(X \sim \text{Binom}(n, p)\)</span></p>
-</div>
-</div>
-</div>
-<p><strong>Parameters:</strong> <span class="math inline">\(n\)</span> (number of trials) and <span class="math inline">\(p\)</span> (probability of success)</p>
-<p><strong>Possible values:</strong> <span class="math inline">\(X \in \{0, 1, 2, \ldots, n\}\)</span></p>
-</section>
-<section id="binomial-probability-formula-1" class="slide level2">
-<h2>Binomial Probability Formula</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Probability Mass Function</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>, the probability of exactly <span class="math inline">\(k\)</span> successes is:</p>
-<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
-<p>where <span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> is the binomial coefficient (“n choose k”)</p>
-</div>
-</div>
-</div>
-<p><strong>Components:</strong></p>
-<ul>
-<li><span class="math inline">\(\binom{n}{k}\)</span>: number of ways to arrange <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> trials</li>
-<li><span class="math inline">\(p^k\)</span>: probability of <span class="math inline">\(k\)</span> successes</li>
-<li><span class="math inline">\((1-p)^{n-k}\)</span>: probability of <span class="math inline">\(n-k\)</span> failures</li>
-</ul>
-</section>
-<section id="key-takeaways" class="slide level2">
-<h2>Key Takeaways</h2>
-<p><strong>Random Variables:</strong></p>
-<ul>
-<li>Connect random outcomes to numerical values and probabilities</li>
-<li>Expected value: weighted average using probabilities</li>
-<li>Variance: measures spread around the expected value</li>
-<li>Linear combinations: <span class="math inline">\(E(aX+bY) = aE(X) + bE(Y)\)</span>, but <span class="math inline">\(\text{Var}(aX+bY) = a^2\text{Var}(X) + b^2\text{Var}(Y)\)</span> (if independent)</li>
-</ul>
-<p><strong>Binomial Distribution:</strong></p>
-<ul>
-<li>Models number of successes in <span class="math inline">\(n\)</span> independent trials</li>
-<li>Parameters: <span class="math inline">\(n\)</span> (trials) and <span class="math inline">\(p\)</span> (success probability)</li>
-<li><span class="math inline">\(E(X) = np\)</span>, <span class="math inline">\(\text{Var}(X) = np(1-p)\)</span></li>
-<li>Use R functions: <code>dbinom()</code>, <code>pbinom()</code>, etc.</li>
-</ul>
-</section>
-<section id="looking-ahead" class="slide level2">
-<h2>Looking Ahead</h2>
-<p><strong>Wednesday:</strong></p>
-<ul>
-<li>Normal distribution</li>
-<li>Central Limit Theorem</li>
-<li>Sampling distributions</li>
-</ul>
-<p><strong>Next steps:</strong></p>
-<ul>
-<li>Review textbook sections 3.1-3.2</li>
-<li>Work on HW 2 (due Tuesday, January 27)</li>
-<li>Practice calculating binomial probabilities in R</li>
-</ul>
-</section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-
-<img data-src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif" class="quarto-figure quarto-figure-center r-stretch" width="400"></section></section>
-<section>
-<section id="part-2-binomial-distribution-1" class="title-slide slide level1 center">
-<h1>Part 2: Binomial Distribution</h1>
-<p>Section 3.2</p>
-</section>
-<section id="binary-outcomes-1" class="slide level2">
-<h2>Binary Outcomes</h2>
-<p>Many situations involve <strong>two possible outcomes</strong>:</p>
-<ul>
-<li>Flipping a coin: heads or tails</li>
-<li>Medical test: positive or negative<br>
-</li>
-<li>Surgery outcome: success or failure</li>
-<li>Manufacturing: defective or non-defective</li>
-</ul>
-<p>We call these <strong>binary</strong> or <strong>Bernoulli</strong> trials:</p>
-<ul>
-<li>One outcome is called a “success” (probability <span class="math inline">\(p\)</span>)</li>
-<li>The other is called a “failure” (probability <span class="math inline">\(q = 1-p\)</span>)</li>
-</ul>
-</section>
-<section id="bernoulli-distribution-1" class="slide level2">
-<h2>Bernoulli Distribution</h2>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Definition: Bernoulli Random Variable</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X\)</span> is a random variable that takes:</p>
-<ul>
-<li>Value 1 with probability <span class="math inline">\(p\)</span> (success)</li>
-<li>Value 0 with probability <span class="math inline">\(1-p\)</span> (failure)</li>
-</ul>
-<p>Then <span class="math inline">\(X\)</span> is a <strong>Bernoulli random variable</strong>.</p>
-<p><strong>Notation:</strong> <span class="math inline">\(X \sim \text{Bernoulli}(p)\)</span> or <span class="math inline">\(X \sim \text{Bern}(p)\)</span></p>
-</div>
-</div>
-</div>
-<p><strong>Parameter:</strong> <span class="math inline">\(p\)</span> is the probability of success (between 0 and 1)</p>
-</section>
-<section id="bernoulli-mean-and-variance-2" class="slide level2">
-<h2>Bernoulli: Mean and Variance</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Theorem: Mean and Variance of Bernoulli R.V.</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Bernoulli}(p)\)</span>, then:</p>
-<p><span class="math display">\[E(X) = p\]</span> <span class="math display">\[\text{Var}(X) = p(1-p)\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Example with diabetes:</strong></p>
-<ul>
-<li>Among US adults aged 65-74, about 20.3% have diabetes</li>
-<li>Define <span class="math inline">\(X = 1\)</span> if a randomly selected adult has diabetes, <span class="math inline">\(X = 0\)</span> otherwise</li>
-<li><span class="math inline">\(E(X) = 0.203\)</span></li>
-<li><span class="math inline">\(\text{Var}(X) = 0.203(0.797) = 0.162\)</span></li>
-</ul>
-</section>
-<section id="from-bernoulli-to-binomial-2" class="slide level2">
-<h2>From Bernoulli to Binomial</h2>
-<p>What if we repeat a Bernoulli trial multiple times?</p>
-<p><strong>Example:</strong> Randomly select 10 adults aged 65-74. How many have diabetes?</p>
-<ul>
-<li>Each person: Bernoulli(0.203)</li>
-<li>Total number with diabetes: Binomial(10, 0.203)</li>
-</ul>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Key Relationship</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\text{Binomial}(n, p) = \text{Sum of } n \text{ independent Bernoulli}(p) \text{ trials}\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="from-bernoulli-to-binomial-3" class="slide level2">
-<h2>From Bernoulli to Binomial</h2>
-<ul>
-<li><p>The <strong>Bernoulli distribution</strong> is a special case of the Binomial distribution where <span class="math inline">\(n=1\)</span></p>
-<ul>
-<li>Specifically: <span class="math display">\[\text{Binomial}(1, p) = \text{Bernoulli}(p) \]</span></li>
+<li>Example: sampling without replacement from a small population</li>
+<li>(Probabilities change after each draw)</li>
 </ul></li>
-<li><p>To get a <strong>Binomial distribution</strong>, we simply extend the scenario from a <strong>single</strong> trial to <strong>multiple</strong> independent trials.</p>
+<li>Probability of success is not constant
 <ul>
-<li>If we conduct <span class="math inline">\(n\)</span> independent Bernoulli trials with the same success probability <span class="math inline">\(p\)</span>, the total number of successes across these <span class="math inline">\(n\)</span> trials will follow a Binomial distribution</li>
+<li>Example: different subjects have different risk levels</li>
+<li>(<span class="math inline">\(p\)</span> varies across trials)</li>
 </ul></li>
 </ul>
-</section>
-<section id="binomial-distribution-definition-2" class="slide level2">
-<h2>Binomial Distribution: Definition</h2>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Definition: Binomial Random Variable</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(X\)</span> is a <strong>Binomial random variable</strong> if:</p>
-<ol type="1">
-<li>There are <span class="math inline">\(n\)</span> independent trials</li>
-<li>Each trial has two outcomes: success or failure</li>
-<li>Probability of success is <span class="math inline">\(p\)</span> (same for all trials)</li>
-<li><span class="math inline">\(X\)</span> counts the total number of successes</li>
-</ol>
-<p><strong>Notation:</strong> <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> or <span class="math inline">\(X \sim \text{Binom}(n, p)\)</span></p>
 </div>
 </div>
 </div>
-<p><strong>Parameters:</strong> <span class="math inline">\(n\)</span> (number of trials) and <span class="math inline">\(p\)</span> (probability of success)</p>
-<p><strong>Possible values:</strong> <span class="math inline">\(X \in \{0, 1, 2, \ldots, n\}\)</span></p>
+<p><strong>Rule of thumb:</strong> If independence or constant <span class="math inline">\(p\)</span> is violated → not Binomial</p>
 </section>
 <section id="derivation-by-example" class="slide level2">
 <h2>Derivation by example</h2>
@@ -1803,21 +1484,39 @@ P(X = 3) &amp;= P(SSS) \\
 <section id="verify-with-our-example" class="slide level2">
 <h2>Verify with our example</h2>
 <p>Does our formula work for <span class="math inline">\(n=3, p=0.203\)</span>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Calculate P(X=0), P(X=1), P(X=2), P(X=3)</span></span>
-<span id="cb9-2"><a></a></span>
-<span id="cb9-3"><a></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb9-4"><a></a></span>
-<span id="cb9-5"><a></a>probs <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span>
-<span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a><span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">probability =</span> <span class="fu">round</span>(probs, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  x probability
-1 0       0.506
-2 1       0.387
-3 2       0.099
-4 3       0.008</code></pre>
-</div>
+<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th>Formula</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><span class="math inline">\(\binom{3}{0} (0.203)^0(0.797)^3\)</span></td>
+<td>0.506</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><span class="math inline">\(\binom{3}{1} (0.203)^1(0.797)^2\)</span></td>
+<td>0.387</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><span class="math inline">\(\binom{3}{2} (0.203)^2(0.797)^1\)</span></td>
+<td>0.099</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><span class="math inline">\(\binom{3}{3} (0.203)^3(0.797)^0\)</span></td>
+<td>0.008</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="fragment">
 <p>Matches what we calculated by hand! ✓</p>
@@ -1827,39 +1526,42 @@ P(X = 3) &amp;= P(SSS) \\
 <h2>Now extend to 10 adults</h2>
 <p>Now we can easily calculate probabilities for <span class="math inline">\(n=10\)</span> adults:</p>
 <p><strong>Setup:</strong> <span class="math inline">\(X \sim \text{Binomial}(n=10, p=0.203)\)</span></p>
+<p><br>
+</p>
 <p><strong>Without the formula:</strong> We’d need to enumerate <span class="math inline">\(2^{10} = 1024\)</span> possible arrangements!</p>
+<p><br>
+</p>
 <p><strong>With the formula:</strong> We can calculate any probability directly:</p>
+<p><span class="math display">\[P(X = 4) = \binom{10}{4} (0.203)^4 (0.797)^6 = \frac{10!}{4!6!} (0.203)^4 (0.797)^6 \approx 0.091\]</span></p>
+<p><br>
+</p>
+<p><strong>The binomial formula saves us from tedious counting!</strong></p>
+</section>
+<section id="r-makes-this-even-easier" class="slide level2">
+<h2>R Makes This Even Easier!</h2>
+<p><br>
+</p>
+<p>We can also use R to calculate binomial probabilities:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># P(X = 4)</span></span>
-<span id="cb11-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Verify our n=3 calculations</span></span>
+<span id="cb1-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.506261573 0.386842281 0.098530719 0.008365427</code></pre>
+</div>
+</div>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Calculate P(X = 4) for n=10</span></span>
+<span id="cb3-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09140151</code></pre>
 </div>
 </div>
-<p><strong>The binomial formula saves us from tedious counting!</strong></p>
+<p>&nbsp;</p>
+<p>This is especially helpful when you need many probabilities or when <span class="math inline">\(n\)</span> is large!</p>
 </section>
-<section id="binomial-probability-formula-2" class="slide level2">
-<h2>Binomial Probability Formula</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Probability Mass Function</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>, the probability of exactly <span class="math inline">\(k\)</span> successes is:</p>
-<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
-<p>where <span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> is the binomial coefficient (“n choose k”)</p>
-</div>
-</div>
-</div>
-<p><strong>Components:</strong></p>
-<ul>
-<li><span class="math inline">\(\binom{n}{k}\)</span>: number of ways to arrange <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> trials</li>
-<li><span class="math inline">\(p^k\)</span>: probability of <span class="math inline">\(k\)</span> successes</li>
-<li><span class="math inline">\((1-p)^{n-k}\)</span>: probability of <span class="math inline">\(n-k\)</span> failures</li>
-</ul>
-</section>
-<section id="binomial-mean-and-variance-1" class="slide level2">
+<section id="binomial-mean-and-variance" class="slide level2">
 <h2>Binomial: Mean and Variance</h2>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -1878,88 +1580,111 @@ P(X = 3) &amp;= P(SSS) \\
 <li>The variance formula comes from summing <span class="math inline">\(n\)</span> independent Bernoulli variances</li>
 </ul>
 </section>
-<section id="example-diabetes-in-older-adults-10-people-1" class="slide level2">
+<section id="example-diabetes-in-older-adults-10-people" class="slide level2">
 <h2>Example: Diabetes in Older Adults (10 people)</h2>
+<p><br>
+</p>
 <p>Approximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly select 10 adults in this age group (independently).</p>
+<p><br>
+</p>
 <p>Let <span class="math inline">\(X\)</span> = number with diabetes among the 10 people</p>
 <p><strong>Setup:</strong> <span class="math inline">\(X \sim \text{Binomial}(n=10, p=0.203)\)</span></p>
+<p><br>
+</p>
 <div class="fragment">
 <p><strong>Question 1:</strong> What is the expected value of <span class="math inline">\(X\)</span>?</p>
 <p><span class="math display">\[E(X) = np = 10(0.203) = 2.03\]</span></p>
+<p><br>
+</p>
 </div>
 <div class="fragment">
 <p><strong>Question 2:</strong> What is the standard deviation of <span class="math inline">\(X\)</span>?</p>
 <p><span class="math display">\[SD(X) = \sqrt{np(1-p)} = \sqrt{10(0.203)(0.797)} = \sqrt{1.618} \approx 1.27\]</span></p>
 </div>
 </section>
-<section id="example-exactly-4-with-diabetes-1" class="slide level2">
+<section id="example-exactly-4-with-diabetes" class="slide level2">
 <h2>Example: Exactly 4 with Diabetes</h2>
 <p><strong>Question 3:</strong> What is the probability that exactly 4 of the 10 have diabetes?</p>
 <p><span class="math display">\[P(X = 4) = \binom{10}{4} (0.203)^4 (0.797)^6\]</span></p>
 <div class="fragment">
-<p><span class="math display">\[= \frac{10!}{4! \cdot 6!} (0.203)^4 (0.797)^6 = 210 \times 0.00170 \times 0.245 \approx 0.087\]</span></p>
+<p><span class="math display">\[= \frac{10!}{4! \cdot 6!} (0.203)^4 (0.797)^6 = 210 \times 0.0017 \times 0.256 \approx 0.091\]</span></p>
 </div>
 <div class="fragment">
 <p><strong>In R:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09140151</code></pre>
 </div>
 </div>
-<p>The <code>d</code> in <code>dbinom</code> stands for “density” (probability at a specific value)</p>
+<p><br>
+</p>
+<ul>
+<li><code>dbinom</code> gives the <strong>pmf</strong>: <span class="math inline">\(P(X = x)\)</span> for a discrete distribution. (probability at a specific value)</li>
+<li>R uses “d” for these functions to stand for “density”; for discrete distributions it returns the probability mass.</li>
+</ul>
 </div>
 </section>
-<section id="example-at-most-3-with-diabetes-1" class="slide level2">
+<section id="example-at-most-3-with-diabetes" class="slide level2">
 <h2>Example: At Most 3 with Diabetes</h2>
 <p><strong>Question 4:</strong> What is the probability that at most 3 have diabetes?</p>
 <p><span class="math display">\[P(X \leq 3) = P(X=0) + P(X=1) + P(X=2) + P(X=3)\]</span></p>
 <div class="fragment">
 <p>We could calculate each term, but there’s an easier way!</p>
+<p><br>
+</p>
 </div>
 <div class="fragment">
 <p><strong>In R:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8737821</code></pre>
 </div>
 </div>
-<p>The <code>p</code> in <code>pbinom</code> stands for “cumulative probability” (<span class="math inline">\(P(X \leq k)\)</span>)</p>
-<p>Result: About 86% chance that 3 or fewer have diabetes</p>
+<p><br>
+</p>
+<p>The <code>p</code> in <code>pbinom</code> stands for “cumulative probability”, <span class="math inline">\(P(X \leq k)\)</span></p>
+<p><br>
+</p>
+<p>Result: About 87% chance that 3 or fewer have diabetes</p>
 </div>
 </section>
-<section id="example-at-least-5-with-diabetes-1" class="slide level2">
+<section id="example-at-least-5-with-diabetes" class="slide level2">
 <h2>Example: At Least 5 with Diabetes</h2>
 <p><strong>Question 5:</strong> What is the probability that at least 5 have diabetes?</p>
 <p><span class="math display">\[P(X \geq 5) = P(X=5) + P(X=6) + \cdots + P(X=10)\]</span></p>
 <div class="fragment">
 <p><strong>Approach 1:</strong> Use complement rule <span class="math display">\[P(X \geq 5) = 1 - P(X \leq 4)\]</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03481642</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 </div>
 <div class="fragment">
 <p><strong>Approach 2:</strong> Use <code>lower.tail = FALSE</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.03481642</code></pre>
 </div>
 </div>
-<p>Result: About 2.4% chance that 5 or more have diabetes</p>
+<p>Result: About 3.4% chance that 5 or more have diabetes</p>
 </div>
 </section>
-<section id="r-functions-for-binomial-distribution-1" class="slide level2">
+<section id="r-functions-for-binomial-distribution" class="slide level2">
 <h2>R Functions for Binomial Distribution</h2>
+<p><br>
+</p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 31%">
-<col style="width: 39%">
-<col style="width: 28%">
+<col style="width: 18%">
+<col style="width: 36%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1992,93 +1717,11 @@ P(X = 3) &amp;= P(SSS) \\
 </tbody>
 </table>
 </section>
-<section id="visualizing-the-binomial-distribution-1" class="slide level2">
+<section id="visualizing-the-binomial-distribution" class="slide level2">
 <h2>Visualizing the Binomial Distribution</h2>
 
-<img data-src="09_random_variables_binomial_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="bernoulli-mean-and-variance-3" class="slide level2">
-<h2>Bernoulli: Mean and Variance</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Theorem: Mean and Variance of Bernoulli R.V.</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Bernoulli}(p)\)</span>, then:</p>
-<p><span class="math display">\[E(X) = p\]</span> <span class="math display">\[\text{Var}(X) = p(1-p)\]</span></p>
-</div>
-</div>
-</div>
-<p><strong>Quick check with our COVID example:</strong></p>
-<ul>
-<li><span class="math inline">\(X = 1\)</span> (vaccinated) with <span class="math inline">\(p = 0.25\)</span></li>
-<li><span class="math inline">\(E(X) = 0.25\)</span> ✓</li>
-<li><span class="math inline">\(\text{Var}(X) = 0.25(0.75) = 0.1875\)</span> ✓</li>
-</ul>
-</section>
-<section id="from-bernoulli-to-binomial-4" class="slide level2">
-<h2>From Bernoulli to Binomial</h2>
-<p>What if we repeat a Bernoulli trial multiple times?</p>
-<p><strong>Example:</strong> Flip a coin 10 times. How many heads do we get?</p>
-<ul>
-<li>Each flip: Bernoulli(0.5)</li>
-<li>Total number of heads: Binomial(10, 0.5)</li>
-</ul>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Key Relationship</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[\text{Binomial}(n, p) = \text{Sum of } n \text{ independent Bernoulli}(p) \text{ trials}\]</span></p>
-</div>
-</div>
-</div>
-</section>
-<section id="binomial-distribution-definition-3" class="slide level2">
-<h2>Binomial Distribution: Definition</h2>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Definition: Binomial Random Variable</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math inline">\(X\)</span> is a <strong>Binomial random variable</strong> if:</p>
-<ol type="1">
-<li>There are <span class="math inline">\(n\)</span> independent trials</li>
-<li>Each trial has two outcomes: success or failure</li>
-<li>Probability of success is <span class="math inline">\(p\)</span> (same for all trials)</li>
-<li><span class="math inline">\(X\)</span> counts the total number of successes</li>
-</ol>
-<p><strong>Notation:</strong> <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> or <span class="math inline">\(X \sim \text{Binom}(n, p)\)</span></p>
-</div>
-</div>
-</div>
-<p><strong>Parameters:</strong> <span class="math inline">\(n\)</span> (number of trials) and <span class="math inline">\(p\)</span> (probability of success)</p>
-<p><strong>Possible values:</strong> <span class="math inline">\(X \in \{0, 1, 2, \ldots, n\}\)</span></p>
-</section>
-<section id="binomial-probability-formula-3" class="slide level2">
-<h2>Binomial Probability Formula</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Probability Mass Function</strong></p>
-</div>
-<div class="callout-content">
-<p>If <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span>, the probability of exactly <span class="math inline">\(k\)</span> successes is:</p>
-<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
-<p>where <span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> is the binomial coefficient (“n choose k”)</p>
-</div>
-</div>
-</div>
-<p><strong>Components:</strong></p>
-<ul>
-<li><span class="math inline">\(\binom{n}{k}\)</span>: number of ways to arrange <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> trials</li>
-<li><span class="math inline">\(p^k\)</span>: probability of <span class="math inline">\(k\)</span> successes</li>
-<li><span class="math inline">\((1-p)^{n-k}\)</span>: probability of <span class="math inline">\(n-k\)</span> failures</li>
-</ul>
-</section>
-<section id="key-takeaways-1" class="slide level2">
+<img data-src="09_random_variables_binomial_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section id="key-takeaways" class="slide level2">
 <h2>Key Takeaways</h2>
 <p><strong>Random Variables:</strong></p>
 <ul>
@@ -2095,7 +1738,7 @@ P(X = 3) &amp;= P(SSS) \\
 <li>Use R functions: <code>dbinom()</code>, <code>pbinom()</code>, etc.</li>
 </ul>
 </section>
-<section id="looking-ahead-1" class="slide level2">
+<section id="looking-ahead" class="slide level2">
 <h2>Looking Ahead</h2>
 <p><strong>Wednesday:</strong></p>
 <ul>
@@ -2110,7 +1753,7 @@ P(X = 3) &amp;= P(SSS) \\
 <li>Practice calculating binomial probabilities in R</li>
 </ul>
 </section>
-<section id="questions-1" class="slide level2">
+<section id="questions" class="slide level2">
 <h2>Questions?</h2>
 
 
