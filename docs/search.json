@@ -2196,56 +2196,96 @@
     "href": "weeks/week_04.html",
     "title": "Week 4",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26"
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#announcements",
     "href": "weeks/week_04.html#announcements",
     "title": "Week 4",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26"
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#overview",
     "href": "weeks/week_04.html#overview",
     "title": "Week 4",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution,\nwork with sampling distributions and the Central Limit Theorem."
+    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution,\nwork with sampling distributions and the Central Limit Theorem.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#readings-before-class",
     "href": "weeks/week_04.html#readings-before-class",
     "title": "Week 4",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Sampling distributions)\n\n(Additional resources will be posted if helpful.)"
+    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Sampling distributions)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#materials",
     "href": "weeks/week_04.html#materials",
     "title": "Week 4",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRecording coming\n\n\n\n\n\nWednesday — Normal Distribution and Sampling Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations\nSampling distributions\nCentral Limit Theorem\nStandard error\n\nSlides\n\nNormal Distribution and Sampling Distributions (HTML | PDF | OneDrive)\n\nCode along\n\nDownload Normal Distribution code along (.qmd)\n\nRecording\n\nNormal Distribution and Sampling Distributions"
+    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRecording coming\n\n\n\n\n\nWednesday — Normal Distribution and Sampling Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations\nSampling distributions\nCentral Limit Theorem\nStandard error\n\nSlides\n\nNormal Distribution and Sampling Distributions (HTML | PDF | OneDrive)\n\nCode along\n\nDownload Normal Distribution code along (.qmd)\n\nRecording\n\nNormal Distribution and Sampling Distributions",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#homework",
     "href": "weeks/week_04.html#homework",
     "title": "Week 4",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Tuesday, February 3 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page."
+    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Tuesday, February 3 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#post-class-check-in-attendance",
     "href": "weeks/week_04.html#post-class-check-in-attendance",
     "title": "Week 4",
     "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in"
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "weeks/week_04.html#looking-ahead",
     "href": "weeks/week_04.html#looking-ahead",
     "title": "Week 4",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence."
+    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
     "objectID": "homework.html",
