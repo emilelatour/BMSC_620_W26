@@ -489,6 +489,28 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li><strong>Parameters</strong>: population-level quantities (like <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>)</li>
 </ul>
 </section>
+<section id="random-variables-vs-observed-data" class="slide level2">
+<h2>Random Variables vs Observed Data</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Three related (but different) ideas</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p><strong>Random variable</strong>:<br>
+<span class="math inline">\(X\)</span> = the random process before we observe anything</p></li>
+<li><p><strong>Observed data</strong>:<br>
+<span class="math inline">\(x_1, x_2, \dots, x_n\)</span> = the numbers we actually observe</p></li>
+<li><p><strong>Probability distribution</strong>:<br>
+Describes how <span class="math inline">\(X\)</span> behaves <em>before</em> data are collected</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Key idea:</strong><br>
+Data are <em>realizations</em> of a random variable, not the random variable itself.</p>
+</section>
 <section id="what-is-a-random-variable" class="slide level2">
 <h2>What is a Random Variable?</h2>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -565,6 +587,21 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 <p>These are the same rules we learned in our probability unit!</p>
+<p><br>
+</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Probability Distributions (Discrete)</strong></p>
+</div>
+<div class="callout-content">
+<p>For a <strong>discrete</strong> random variable, the <strong>probability mass function (pmf)</strong> is</p>
+<p><span class="math display">\[
+f(x) = P(X = x)
+\]</span></p>
+</div>
+</div>
+</div>
 </section>
 <section id="discrete-vs.-continuous-random-variables" class="slide level2">
 <h2>Discrete vs.&nbsp;Continuous Random Variables</h2>
@@ -639,7 +676,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="fragment">
 <p><span class="math display">\[\begin{aligned}
 E(X) &amp;= \sum_{x=1}^6 x \cdot P(X=x) \\
-&amp;= 1 ( \frac{1}{6}) + 2(\frac{1}{6}) + 3(\frac{1}{6}) + 4(\frac{1}{6}) + 5(\frac{1}{6}) + 6 (\frac{1}{6}) \\
+&amp;= 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6} \\
 &amp;= \frac{1 + 2 + 3 + 4 + 5 + 6}{6} \\
 &amp;= \frac{21}{6} = 3.5
 \end{aligned}\]</span></p>
@@ -679,8 +716,9 @@ E(X) &amp;= \sum_{x=1}^6 x \cdot P(X=x) \\
 <div class="fragment">
 <p><span class="math display">\[\begin{aligned}
 E(X) &amp;= 1 ( \frac{1}{9}) + 2(\frac{1}{9}) + 3(\frac{1}{9}) + 4(\frac{1}{9}) + 5(\frac{2}{9}) + 6 (\frac{3}{9}) \\
-&amp;= 0.11 + 0.22 + 0.33 + 0.33 + 1.11 + 2.0 \\
-&amp;= 4.22
+&amp;= (\frac{1 + 2 + 3 + 4}{9})  + (\frac{10}{9}) + (\frac{18}{9}) \\
+&amp;= (\frac{38}{9}) \\
+&amp;= 4.222 \dots
 \end{aligned}\]</span></p>
 </div>
 <div class="fragment">
@@ -1000,17 +1038,22 @@ E(H) &amp;= E(X_1 + X_2 + X_3) \\
 </div>
 <div class="callout-content">
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>INDEPENDENT</strong> random variables and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are constants:</p>
-<p><span class="math display">\[\text{Var}(aX + bY) = a^2\text{Var}(X) + b^2\text{Var}(Y)\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(aX + bY) = a^2\mathrm{Var}(X) + b^2\mathrm{Var}(Y)\]</span></p>
 </div>
 </div>
 </div>
-<p><strong>Key differences from expected value:</strong></p>
-<ul>
-<li>Requires <strong>independence</strong> of the random variables</li>
-<li>Constants are <strong>squared</strong>: <span class="math inline">\(a^2\)</span> and <span class="math inline">\(b^2\)</span> (not just <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>)</li>
-<li>Variances add, but standard deviations do NOT simply add</li>
-</ul>
-<p><strong>Why squared?</strong> Variance measures squared deviations, so scaling by <span class="math inline">\(a\)</span> scales variance by <span class="math inline">\(a^2\)</span></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>General formula when not independent</strong></p>
+</div>
+<div class="callout-content">
+<p>The general formula is</p>
+<p><span class="math display">\[\mathrm{Var}(aX + bY) = a^2\mathrm{Var}(X) + b^2\mathrm{Var}(Y) + 2ab\, \mathrm{Cov}(X,Y)\]</span> If independent, <span class="math inline">\(\mathrm{Cov}(X,Y) = 0\)</span>.</p>
+</div>
+</div>
+</div>
+<p>The standard deviation is the square root of the variance.</p>
 </section>
 <section id="example-variance-of-composite-score" class="slide level2">
 <h2>Example: Variance of Composite Score</h2>
@@ -1038,7 +1081,12 @@ E(H) &amp;= E(X_1 + X_2 + X_3) \\
 <h2>Example: Weighted Composite Score</h2>
 <p>Now suppose researchers want to weight the scores differently:</p>
 <p><span class="math display">\[H_{\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\]</span></p>
-<p>(Giving more weight to pain and mobility than quality of life)</p>
+<ul>
+<li>The weights sum to 1, so this is a weighted average on a 0-10 scale, not a total score.</li>
+<li>Gives more weight to pain and mobility than quality of life.</li>
+</ul>
+<p><br>
+</p>
 <p><strong>Questions:</strong></p>
 <ol type="1">
 <li>What is <span class="math inline">\(E(H_{\text{weighted}})\)</span>?</li>
@@ -1199,6 +1247,35 @@ E(H_{\text{weighted}}) &amp;= E(0.5X_1 + 0.3X_2 + 0.2X_3) \\
 </div>
 <p><strong>Parameters:</strong> <span class="math inline">\(n\)</span> (number of trials) and <span class="math inline">\(p\)</span> (probability of success)</p>
 <p><strong>Possible values:</strong> <span class="math inline">\(X \in \{0, 1, 2, \ldots, n\}\)</span></p>
+</section>
+<section id="when-not-to-use-a-binomial-model" class="slide level2">
+<h2>When NOT to Use a Binomial Model</h2>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Common Pitfalls</strong></p>
+</div>
+<div class="callout-content">
+<p>A Binomial model is <strong>NOT appropriate</strong> when:</p>
+<ul>
+<li>Trials are not independent
+<ul>
+<li>Example: sampling without replacement from a small population</li>
+<li>(Probabilities change after each draw)</li>
+</ul></li>
+<li>Probability of success is not constant
+<ul>
+<li>Example: different subjects have different risk levels</li>
+<li>(<span class="math inline">\(p\)</span> varies across trials)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>Rule of thumb:</strong> If independence or constant <span class="math inline">\(p\)</span> is violated → not Binomial</p>
 </section>
 <section id="derivation-by-example" class="slide level2">
 <h2>Derivation by example</h2>
@@ -1410,21 +1487,39 @@ P(X = 3) &amp;= P(SSS) \\
 <section id="verify-with-our-example" class="slide level2">
 <h2>Verify with our example</h2>
 <p>Does our formula work for <span class="math inline">\(n=3, p=0.203\)</span>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Calculate P(X=0), P(X=1), P(X=2), P(X=3)</span></span>
-<span id="cb1-2"><a></a></span>
-<span id="cb1-3"><a></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
-<span id="cb1-4"><a></a></span>
-<span id="cb1-5"><a></a>probs <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span>
-<span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">probability =</span> <span class="fu">round</span>(probs, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  x probability
-1 0       0.506
-2 1       0.387
-3 2       0.099
-4 3       0.008</code></pre>
-</div>
+<p><span class="math display">\[P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\]</span></p>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(k\)</span></th>
+<th>Formula</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><span class="math inline">\(\binom{3}{0} (0.203)^0(0.797)^3\)</span></td>
+<td>0.506</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><span class="math inline">\(\binom{3}{1} (0.203)^1(0.797)^2\)</span></td>
+<td>0.387</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><span class="math inline">\(\binom{3}{2} (0.203)^2(0.797)^1\)</span></td>
+<td>0.099</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><span class="math inline">\(\binom{3}{3} (0.203)^3(0.797)^0\)</span></td>
+<td>0.008</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="fragment">
 <p>Matches what we calculated by hand! ✓</p>
@@ -1433,8 +1528,6 @@ P(X = 3) &amp;= P(SSS) \\
 <section id="now-extend-to-10-adults" class="slide level2">
 <h2>Now extend to 10 adults</h2>
 <p>Now we can easily calculate probabilities for <span class="math inline">\(n=10\)</span> adults:</p>
-<p><br>
-</p>
 <p><strong>Setup:</strong> <span class="math inline">\(X \sim \text{Binomial}(n=10, p=0.203)\)</span></p>
 <p><br>
 </p>
@@ -1442,16 +1535,34 @@ P(X = 3) &amp;= P(SSS) \\
 <p><br>
 </p>
 <p><strong>With the formula:</strong> We can calculate any probability directly:</p>
+<p><span class="math display">\[P(X = 4) = \binom{10}{4} (0.203)^4 (0.797)^6 = \frac{10!}{4!6!} (0.203)^4 (0.797)^6 \approx 0.091\]</span></p>
+<p><br>
+</p>
+<p><strong>The binomial formula saves us from tedious counting!</strong></p>
+</section>
+<section id="r-makes-this-even-easier" class="slide level2">
+<h2>R Makes This Even Easier!</h2>
+<p><br>
+</p>
+<p>We can also use R to calculate binomial probabilities:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># P(X = 4)</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Verify our n=3 calculations</span></span>
+<span id="cb1-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.506261573 0.386842281 0.098530719 0.008365427</code></pre>
+</div>
+</div>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Calculate P(X = 4) for n=10</span></span>
 <span id="cb3-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.203</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09140151</code></pre>
 </div>
 </div>
-<p><br>
-</p>
-<p><strong>The binomial formula saves us from tedious counting!</strong></p>
+<p>&nbsp;</p>
+<p>This is especially helpful when you need many probabilities or when <span class="math inline">\(n\)</span> is large!</p>
 </section>
 <section id="binomial-mean-and-variance" class="slide level2">
 <h2>Binomial: Mean and Variance</h2>
@@ -1511,7 +1622,10 @@ P(X = 3) &amp;= P(SSS) \\
 </div>
 <p><br>
 </p>
-<p>The <code>d</code> in <code>dbinom</code> stands for “density” (probability at a specific value)</p>
+<ul>
+<li>The <code>d</code> in <code>dbinom</code> stands for “density” (probability at a specific value)</li>
+<li>It gives the <strong>pmf</strong>: <span class="math inline">\(P(X = k)\)</span> for a discrete distribution.</li>
+</ul>
 </div>
 </section>
 <section id="example-at-most-3-with-diabetes" class="slide level2">

@@ -3993,7 +3993,7 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#probability-distributions-quick-review",
     "title": "Random Variables and Binomial Distribution",
     "section": "Probability Distributions: Quick Review",
-    "text": "Probability Distributions: Quick Review\n\n\n\nRules for a Probability Distribution\n\n\nA probability distribution must satisfy three rules:\n\nThe outcomes must be disjoint (mutually exclusive)\nEach probability must be between 0 and 1\nThe probabilities must sum to 1\n\n\n\n\nThese are the same rules we learned in our probability unit!"
+    "text": "Probability Distributions: Quick Review\n\n\n\nRules for a Probability Distribution\n\n\nA probability distribution must satisfy three rules:\n\nThe outcomes must be disjoint (mutually exclusive)\nEach probability must be between 0 and 1\nThe probabilities must sum to 1\n\n\n\n\nThese are the same rules we learned in our probability unit!\n\n\n\n\n\nProbability Distributions (Discrete)\n\n\nFor a discrete random variable, the probability mass function (pmf) is\n\\[\nf(x) = P(X = x)\n\\]"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#discrete-vs.-continuous-random-variables",
@@ -4014,14 +4014,14 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-expected-value-of-rolling-a-die",
     "title": "Random Variables and Binomial Distribution",
     "section": "Example: Expected Value of Rolling a Die",
-    "text": "Example: Expected Value of Rolling a Die\nQuestion 2: What is the expected outcome when rolling a fair die?\n\n\\[\\begin{aligned}\nE(X) &= \\sum_{x=1}^6 x \\cdot P(X=x) \\\\\n&= 1 ( \\frac{1}{6}) + 2(\\frac{1}{6}) + 3(\\frac{1}{6}) + 4(\\frac{1}{6}) + 5(\\frac{1}{6}) + 6 (\\frac{1}{6}) \\\\\n&= \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} \\\\\n&= \\frac{21}{6} = 3.5\n\\end{aligned}\\]\n\n\nInterpretation: If you rolled the die many times, the average would approach 3.5\nNote: The expected value doesn’t have to be a possible outcome!"
+    "text": "Example: Expected Value of Rolling a Die\nQuestion 2: What is the expected outcome when rolling a fair die?\n\n\\[\\begin{aligned}\nE(X) &= \\sum_{x=1}^6 x \\cdot P(X=x) \\\\\n&= 1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + 3 \\cdot \\frac{1}{6} + 4 \\cdot \\frac{1}{6} + 5 \\cdot \\frac{1}{6} + 6 \\cdot \\frac{1}{6} \\\\\n&= \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} \\\\\n&= \\frac{21}{6} = 3.5\n\\end{aligned}\\]\n\n\nInterpretation: If you rolled the die many times, the average would approach 3.5\nNote: The expected value doesn’t have to be a possible outcome!"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-unfair-die",
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-unfair-die",
     "title": "Random Variables and Binomial Distribution",
     "section": "Example: Unfair Die",
-    "text": "Example: Unfair Die\nQuestion 3: What if the die is not fair?\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n1/9\n1/9\n1/9\n1/9\n2/9\n3/9\n\n\n\n\n\\[\\begin{aligned}\nE(X) &= 1 ( \\frac{1}{9}) + 2(\\frac{1}{9}) + 3(\\frac{1}{9}) + 4(\\frac{1}{9}) + 5(\\frac{2}{9}) + 6 (\\frac{3}{9}) \\\\\n&= 0.11 + 0.22 + 0.33 + 0.33 + 1.11 + 2.0 \\\\\n&= 4.22\n\\end{aligned}\\]\n\n\nThe die is “loaded” toward higher values (mean is 4.22 vs. 3.5 for fair die)"
+    "text": "Example: Unfair Die\nQuestion 3: What if the die is not fair?\n\n\n\n\\(x\\)\n1\n2\n3\n4\n5\n6\n\n\n\n\n\\(P(X=x)\\)\n1/9\n1/9\n1/9\n1/9\n2/9\n3/9\n\n\n\n\n\\[\\begin{aligned}\nE(X) &= 1 ( \\frac{1}{9}) + 2(\\frac{1}{9}) + 3(\\frac{1}{9}) + 4(\\frac{1}{9}) + 5(\\frac{2}{9}) + 6 (\\frac{3}{9}) \\\\\n&= (\\frac{1 + 2 + 3 + 4}{9})  + (\\frac{10}{9}) + (\\frac{18}{9}) \\\\\n&= (\\frac{38}{9}) \\\\\n&= 4.222 \\dots\n\\end{aligned}\\]\n\n\nThe die is “loaded” toward higher values (mean is 4.22 vs. 3.5 for fair die)"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-and-standard-deviation",
@@ -4091,7 +4091,7 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#variance-of-linear-combinations",
     "title": "Random Variables and Binomial Distribution",
     "section": "Variance of Linear Combinations",
-    "text": "Variance of Linear Combinations\n\n\n\nTheorem: Variance of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are INDEPENDENT random variables and \\(a\\) and \\(b\\) are constants:\n\\[\\text{Var}(aX + bY) = a^2\\text{Var}(X) + b^2\\text{Var}(Y)\\]\n\n\n\nKey differences from expected value:\n\nRequires independence of the random variables\nConstants are squared: \\(a^2\\) and \\(b^2\\) (not just \\(a\\) and \\(b\\))\nVariances add, but standard deviations do NOT simply add\n\nWhy squared? Variance measures squared deviations, so scaling by \\(a\\) scales variance by \\(a^2\\)"
+    "text": "Variance of Linear Combinations\n\n\n\nTheorem: Variance of Linear Combinations\n\n\nIf \\(X\\) and \\(Y\\) are INDEPENDENT random variables and \\(a\\) and \\(b\\) are constants:\n\\[\\mathrm{Var}(aX + bY) = a^2\\mathrm{Var}(X) + b^2\\mathrm{Var}(Y)\\]\n\n\n\n\n\n\nGeneral formula when not independent\n\n\nThe general formula is\n\\[\\mathrm{Var}(aX + bY) = a^2\\mathrm{Var}(X) + b^2\\mathrm{Var}(Y) + 2ab\\, \\mathrm{Cov}(X,Y)\\] If independent, \\(\\mathrm{Cov}(X,Y) = 0\\).\n\n\n\nThe standard deviation is the square root of the variance."
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-variance-of-composite-score",
@@ -4105,7 +4105,7 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-weighted-composite-score",
     "title": "Random Variables and Binomial Distribution",
     "section": "Example: Weighted Composite Score",
-    "text": "Example: Weighted Composite Score\nNow suppose researchers want to weight the scores differently:\n\\[H_{\\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\\]\n(Giving more weight to pain and mobility than quality of life)\nQuestions:\n\nWhat is \\(E(H_{\\text{weighted}})\\)?\nWhat is \\(\\text{Var}(H_{\\text{weighted}})\\)?"
+    "text": "Example: Weighted Composite Score\nNow suppose researchers want to weight the scores differently:\n\\[H_{\\text{weighted}} = 0.5X_1 + 0.3X_2 + 0.2X_3\\]\n\nThe weights sum to 1, so this is a weighted average on a 0-10 scale, not a total score.\nGives more weight to pain and mobility than quality of life.\n\n\n\nQuestions:\n\nWhat is \\(E(H_{\\text{weighted}})\\)?\nWhat is \\(\\text{Var}(H_{\\text{weighted}})\\)?"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#solution-weighted-composite-score",
@@ -4182,7 +4182,7 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-exactly-4-with-diabetes",
     "title": "Random Variables and Binomial Distribution",
     "section": "Example: Exactly 4 with Diabetes",
-    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.0017 \\times 0.256 \\approx 0.091\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe d in dbinom stands for “density” (probability at a specific value)"
+    "text": "Example: Exactly 4 with Diabetes\nQuestion 3: What is the probability that exactly 4 of the 10 have diabetes?\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6\\]\n\n\\[= \\frac{10!}{4! \\cdot 6!} (0.203)^4 (0.797)^6 = 210 \\times 0.0017 \\times 0.256 \\approx 0.091\\]\n\n\nIn R:\n\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\n\nThe d in dbinom stands for “density” (probability at a specific value)\nIt gives the pmf: \\(P(X = k)\\) for a discrete distribution."
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#example-at-most-3-with-diabetes",
@@ -4385,14 +4385,14 @@
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#verify-with-our-example",
     "title": "Random Variables and Binomial Distribution",
     "section": "Verify with our example",
-    "text": "Verify with our example\nDoes our formula work for \\(n=3, p=0.203\\)?\n\n# Calculate P(X=0), P(X=1), P(X=2), P(X=3)\n\nx &lt;- 0:3\n\nprobs &lt;- dbinom(x, size = 3, prob = 0.203)\n\ndata.frame(x = x, probability = round(probs, 3))\n\n  x probability\n1 0       0.506\n2 1       0.387\n3 2       0.099\n4 3       0.008\n\n\n\nMatches what we calculated by hand! ✓"
+    "text": "Verify with our example\nDoes our formula work for \\(n=3, p=0.203\\)?\n\\[P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\]\n\n\n\n\n\\(k\\)\nFormula\nProbability\n\n\n\n\n0\n\\(\\binom{3}{0} (0.203)^0(0.797)^3\\)\n0.506\n\n\n1\n\\(\\binom{3}{1} (0.203)^1(0.797)^2\\)\n0.387\n\n\n2\n\\(\\binom{3}{2} (0.203)^2(0.797)^1\\)\n0.099\n\n\n3\n\\(\\binom{3}{3} (0.203)^3(0.797)^0\\)\n0.008\n\n\n\n\n\nMatches what we calculated by hand! ✓"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults",
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults",
     "title": "Random Variables and Binomial Distribution",
     "section": "Now extend to 10 adults",
-    "text": "Now extend to 10 adults\nNow we can easily calculate probabilities for \\(n=10\\) adults:\n\n\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\nWithout the formula: We’d need to enumerate \\(2^{10} = 1024\\) possible arrangements!\n\n\nWith the formula: We can calculate any probability directly:\n\n# P(X = 4)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe binomial formula saves us from tedious counting!"
+    "text": "Now extend to 10 adults\nNow we can easily calculate probabilities for \\(n=10\\) adults:\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\nWithout the formula: We’d need to enumerate \\(2^{10} = 1024\\) possible arrangements!\n\n\nWith the formula: We can calculate any probability directly:\n\\[P(X = 4) = \\binom{10}{4} (0.203)^4 (0.797)^6 = \\frac{10!}{4!6!} (0.203)^4 (0.797)^6 \\approx 0.091\\]\n\n\nThe binomial formula saves us from tedious counting!"
   },
   {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#binomial-mean-and-variance-1",
@@ -4498,5 +4498,40 @@
     "title": "Random Variables and Binomial Distribution",
     "section": "From Bernoulli to Binomial (continued)",
     "text": "From Bernoulli to Binomial (continued)\n\nThe Bernoulli distribution is a special case of the Binomial distribution where \\(n=1\\)\n\nSpecifically: \\[\\text{Binomial}(1, p) = \\text{Bernoulli}(p) \\]\n\nTo get a Binomial distribution, we simply extend the scenario from a single trial to multiple independent trials.\n\nIf we conduct \\(n\\) independent Bernoulli trials with the same success probability \\(p\\), the total number of successes across these \\(n\\) trials will follow a Binomial distribution"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-makes-this-even-easier",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#r-makes-this-even-easier",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "R Makes This Even Easier!",
+    "text": "R Makes This Even Easier!\n\n\nWe can also use R to calculate binomial probabilities:\n\n# Verify our n=3 calculations\ndbinom(x = 0:3, size = 3, prob = 0.203)\n\n[1] 0.506261573 0.386842281 0.098530719 0.008365427\n\n\n\n\n\n# Calculate P(X = 4) for n=10\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n \nThis is especially helpful when you need many probabilities or when \\(n\\) is large!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#verify-with-our-example-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#verify-with-our-example-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Verify with our example",
+    "text": "Verify with our example\nDoes our formula work for \\(n=3, p=0.203\\)?\n\n# Calculate P(X=0), P(X=1), P(X=2), P(X=3)\n\nx &lt;- 0:3\n\nprobs &lt;- dbinom(x, size = 3, prob = 0.203)\n\ndata.frame(x = x, probability = round(probs, 3))\n\n  x probability\n1 0       0.506\n2 1       0.387\n3 2       0.099\n4 3       0.008\n\n\n\nMatches what we calculated by hand! ✓"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults-1",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#now-extend-to-10-adults-1",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Now extend to 10 adults",
+    "text": "Now extend to 10 adults\nNow we can easily calculate probabilities for \\(n=10\\) adults:\n\n\nSetup: \\(X \\sim \\text{Binomial}(n=10, p=0.203)\\)\n\n\nWithout the formula: We’d need to enumerate \\(2^{10} = 1024\\) possible arrangements!\n\n\nWith the formula: We can calculate any probability directly:\n\n# P(X = 4)\ndbinom(x = 4, size = 10, prob = 0.203)\n\n[1] 0.09140151\n\n\n\n\nThe binomial formula saves us from tedious counting!"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#when-not-to-use-a-binomial-model",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#when-not-to-use-a-binomial-model",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "When NOT to Use a Binomial Model",
+    "text": "When NOT to Use a Binomial Model\n\n\n\n\n\n\nCommon Pitfalls\n\n\nA Binomial model is NOT appropriate when:\n\nTrials are not independent\n\nExample: sampling without replacement from a small population\n(Probabilities change after each draw)\n\nProbability of success is not constant\n\nExample: different subjects have different risk levels\n(\\(p\\) varies across trials)\n\n\n\n\n\nRule of thumb: If independence or constant \\(p\\) is violated → not Binomial"
+  },
+  {
+    "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#random-variables-vs-observed-data",
+    "href": "lessons/09_random_variables_binomial/09_random_variables_binomial2.html#random-variables-vs-observed-data",
+    "title": "Random Variables and Binomial Distribution",
+    "section": "Random Variables vs Observed Data",
+    "text": "Random Variables vs Observed Data\n\n\n\nThree related (but different) ideas\n\n\n\nRandom variable:\n\\(X\\) = the random process before we observe anything\nObserved data:\n\\(x_1, x_2, \\dots, x_n\\) = the numbers we actually observe\nProbability distribution:\nDescribes how \\(X\\) behaves before data are collected\n\n\n\n\nKey idea:\nData are realizations of a random variable, not the random variable itself."
   }
 ]
