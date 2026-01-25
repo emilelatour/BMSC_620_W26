@@ -1,0 +1,571 @@
+---
+title: "BMSC 620 — Homework 3"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+execute:
+  echo: true
+---
+
+```{r}
+#| include: false
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(eval = FALSE)
+
+```
+
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW##`
+
+Examples:
+
+- Smith_J_HW03.qmd
+- Smith_J_HW03.html
+
+
+When submitting Homework 3, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Homework 3
+
+This assignment reviews:
+
+- Bayes' Theorem and medical testing
+- Random variables: expected value and variance
+- Binomial distribution and probability calculations
+- Continued practice with `dplyr`, `janitor`, `rstatix`, and `ggplot2`
+
+Unless stated otherwise, show your work using R code chunks.
+
+---
+
+## Part 0: Setup
+
+1. In the chunk below, load the packages you need for this homework.
+2. Run the chunk to confirm there are no errors.
+
+```{r}
+#| message: false
+#| warning: false
+
+library(oibiostat)
+library(dplyr)
+library(ggplot2)
+library(janitor)
+library(rstatix)
+
+```
+
+## Part 1: Bayes' Theorem
+
+### Background
+
+A new rapid test for influenza has been developed. Clinical trials show:
+
+- **Sensitivity:** 85% (probability of testing positive given you have flu)
+- **Specificity:** 92% (probability of testing negative given you don't have flu)
+
+During flu season, approximately 5% of people who visit their doctor with flu-like symptoms actually have influenza.
+
+### 1A. Set up the problem
+
+Write out the given information using probability notation:
+
+1. $P(\text{Test +} \mid \text{Flu}) =$ ___________
+2. $P(\text{Test -} \mid \text{No Flu}) =$ ___________
+3. $P(\text{Test +} \mid \text{No Flu}) =$ ___________ (Calculate this from specificity)
+4. $P(\text{Flu}) =$ ___________
+5. $P(\text{No Flu}) =$ ___________
+
+Fill in your answers above, then verify them in the code chunk below:
+
+```{r}
+# Given information
+sensitivity <- 
+specificity <- 
+prevalence <- 
+
+# Calculate derived values
+p_test_pos_given_no_flu <- 
+p_no_flu <- 
+
+# Display
+sensitivity
+p_test_pos_given_no_flu
+prevalence
+p_no_flu
+```
+
+### 1B. Calculate PPV using Bayes' Theorem
+
+Use Bayes' Theorem to calculate the Positive Predictive Value (PPV): What is the probability someone has flu given they tested positive?
+
+$$
+P(\text{Flu} \mid \text{Test +}) = \frac{P(\text{Test +} \mid \text{Flu}) \times P(\text{Flu})}{P(\text{Test +} \mid \text{Flu}) \times P(\text{Flu}) + P(\text{Test +} \mid \text{No Flu}) \times P(\text{No Flu})}
+$$
+
+**Step 1:** Calculate the numerator (true positives)
+
+```{r}
+numerator <- 
+
+numerator
+```
+
+**Step 2:** Calculate the denominator (all positive tests)
+
+```{r}
+denominator <- 
+
+denominator
+```
+
+**Step 3:** Calculate PPV
+
+```{r}
+ppv <- 
+
+ppv
+
+# As a percentage
+ppv * 100
+```
+
+### 1C. Interpretation
+
+Answer in 2-3 sentences:
+
+1. If someone tests positive, what is the probability they actually have the flu?
+2. Why is the PPV lower than the sensitivity (85%)?
+
+**Answers:**
+
+1. 
+2. 
+
+### 1D. Calculate NPV
+
+Now calculate the Negative Predictive Value (NPV): What is the probability someone does NOT have flu given they tested negative?
+
+$$
+P(\text{No Flu} \mid \text{Test -}) = \frac{P(\text{Test -} \mid \text{No Flu}) \times P(\text{No Flu})}{P(\text{Test -} \mid \text{No Flu}) \times P(\text{No Flu}) + P(\text{Test -} \mid \text{Flu}) \times P(\text{Flu})}
+$$
+
+Hint: $P(\text{Test -} \mid \text{Flu}) = 1 - \text{sensitivity}$
+
+```{r}
+# Calculate NPV
+
+
+```
+
+What is the NPV? Is it higher or lower than the PPV? Why?
+
+**Answer:**
+
+---
+
+## Part 2: Random Variables
+
+### 2A. Discrete probability distribution
+
+A hospital emergency department tracks the number of patients arriving per hour during overnight shifts. The probability distribution is:
+
+| Number of patients ($x$) | 0 | 1 | 2 | 3 | 4 | 5 |
+|--------------------------|---|---|---|---|---|---|
+| $P(X = x)$               | 0.05 | 0.15 | 0.30 | 0.25 | 0.15 | 0.10 |
+
+**Question 1:** Verify this is a valid probability distribution. What must be true?
+
+```{r}
+# Create the probability distribution
+x <- c(0, 1, 2, 3, 4, 5)
+prob <- c(0.05, 0.15, 0.30, 0.25, 0.15, 0.10)
+
+# Check if probabilities sum to 1
+sum(prob)
+
+# Hint: probabilities in a valid distribution must sum to 1
+# You may find sum() helpful here (see ?sum)
+```
+
+**Answer:** 
+
+**Question 2:** Calculate the expected value (mean). On average, how many patients arrive per hour?
+
+$$E(X) = \sum x_i \cdot P(X = x_i)$$
+
+```{r}
+# Calculate expected value
+# Hint: expected value is a weighted average
+# In R, this can be computed as sum(x * prob)
+
+
+
+```
+
+**Answer:** The expected number of patients per hour is ________.
+
+**Question 3:** Calculate the variance and standard deviation.
+
+$$\text{Var}(X) = \sum (x_i - \mu)^2 \cdot P(X = x_i)$$
+
+```{r}
+# Calculate variance
+# Hint: first compute the mean (mu), then use
+# sum((x - mu)^2 * prob)
+
+
+
+# Calculate standard deviation
+# Hint: SD is the square root of the variance (see sqrt())
+
+```
+
+**Answer:** 
+
+- Variance = ________
+- Standard deviation = ________
+
+### 2B. Linear combinations
+
+Suppose the hospital emergency department operates for 3 hours during an overnight shift. Let $X_1$, $X_2$, and $X_3$ be the number of patients arriving in hours 1, 2, and 3, respectively. Assume each has the same distribution as above and arrivals are independent across hours.
+
+**Question 1:** What is the expected total number of patients arriving during the 3-hour shift?
+
+Use: $E(X_1 + X_2 + X_3) = E(X_1) + E(X_2) + E(X_3)$
+
+```{r}
+# Calculate expected total
+
+
+```
+
+**Answer:**
+
+**Question 2:** What is the variance and standard deviation of the total number of patients?
+
+Use: $\text{Var}(X_1 + X_2 + X_3) = \text{Var}(X_1) + \text{Var}(X_2) + \text{Var}(X_3)$ (for independent random variables)
+
+```{r}
+# Calculate variance of total
+
+
+# Calculate standard deviation of total
+
+
+```
+
+**Answer:**
+
+- Variance = ________
+- Standard deviation = ________
+
+---
+
+## Part 3: Binomial Distribution
+
+### 3A. Identifying binomial scenarios
+
+For each scenario below, state whether it follows a binomial distribution. If yes, identify $n$ (number of trials) and $p$ (probability of success). If no, explain why not.
+
+**Scenario 1:** A researcher tests 20 patients for a genetic mutation. Each patient has a 15% chance of having the mutation. We count how many patients have the mutation.
+
+**Answer:**
+
+**Scenario 2:** A doctor sees patients until they find 5 patients with high blood pressure. We count how many patients the doctor had to see.
+
+**Answer:**
+
+**Scenario 3:** A clinical trial enrolls 50 patients. Each patient is randomly assigned to treatment (probability 0.5) or control (probability 0.5). We count how many patients receive treatment.
+
+**Answer:**
+
+### 3B. Binomial calculations
+
+According to recent data, approximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly sample 15 adults from this age group.
+
+Let $X$ = the number of adults with diabetes in our sample.
+
+**Question 1:** What distribution does $X$ follow? Write this using notation.
+
+**Answer:** $X \sim$ ________________
+
+**Question 2:** What is the expected number of adults with diabetes in the sample?
+
+$$E(X) = np$$
+
+```{r}
+# Calculate expected value
+n <- 
+p <- 
+
+expected_value <- 
+
+expected_value
+```
+
+**Answer:**
+
+**Question 3:** What is the standard deviation?
+
+$$SD(X) = \sqrt{np(1-p)}$$
+
+```{r}
+# Calculate standard deviation
+
+
+```
+
+**Answer:**
+
+**Question 4:** What is the probability that exactly 4 adults have diabetes?
+
+Use the formula: $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
+
+Or use R: `dbinom(x = k, size = n, prob = p)`
+
+```{r}
+# Calculate P(X = 4)
+
+
+```
+
+**Answer:**
+
+**Question 5:** What is the probability that at most 2 adults have diabetes?
+
+$$P(X \leq 2) = P(X=0) + P(X=1) + P(X=2)$$
+
+Use R: `pbinom(q = k, size = n, prob = p)`
+
+```{r}
+# Calculate P(X <= 2)
+
+
+```
+
+**Answer:**
+
+**Question 6:** What is the probability that at least 5 adults have diabetes?
+
+$$P(X \geq 5) = 1 - P(X \leq 4)$$
+
+Or use: `pbinom(q = 4, size = n, prob = p, lower.tail = FALSE)`
+
+```{r}
+# Calculate P(X >= 5) using both methods
+
+# Method 1: complement rule
+
+
+# Method 2: lower.tail = FALSE
+
+
+```
+
+**Answer:**
+
+### 3C. Visualizing the binomial distribution
+
+Create a bar plot showing the binomial probability distribution for $n = 15$ and $p = 0.203$.
+
+```{r}
+# Create probability distribution data
+x_values <- 0:15
+probabilities <- dbinom(x_values, size = 15, prob = 0.203)
+
+# Create a data frame
+binom_data <- data.frame(
+  x = x_values,
+  probability = probabilities
+)
+
+# Create bar plot
+ggplot(binom_data, aes(x = x, y = probability)) +
+  geom_col(fill = "steelblue", color = "black") +
+  labs(
+    title = "Binomial Distribution: n = 15, p = 0.203",
+    x = "Number of Adults with Diabetes",
+    y = "Probability"
+  ) +
+  scale_x_continuous(breaks = 0:15) # controls x-axis tick marks (we'll learn more about scale_* later; see ?scale_x_continuous)
+```
+
+Looking at the plot, what is the most likely number of adults with diabetes in a sample of 15? Does this match the expected value you calculated?
+
+**Answer:**
+
+---
+
+## Part 4: Data analysis with tidyverse (continued practice)
+
+For this section, we'll continue working with the `nhanes.samp` dataset. You may use either the formula or R, but show the code you use.
+
+```{r}
+data("nhanes.samp")
+```
+
+### 4A. Data wrangling
+
+Create a new dataset called `diabetes_subset` that:
+
+1. Filters to people aged 40 or older
+2. Removes rows with missing `Diabetes` values (use `filter(!is.na(Diabetes))`)
+3. Selects the columns: `ID`, `Age`, `Gender`, `Race1`, `BMI`, `Diabetes`
+
+```{r}
+
+
+```
+
+How many people are in this subset? (Use `nrow()`)
+
+```{r}
+
+```
+
+**Answer:**
+
+### 4B. Summary statistics by group
+
+Using your `diabetes_subset`, calculate the mean and standard deviation of `BMI` grouped by `Diabetes` status. [Hint: use `group_by` and `get_summary_stats` from the `rstatix` pacakge]
+
+```{r}
+
+
+```
+
+Do people with diabetes have higher or lower BMI on average? Does this match what you'd expect?
+
+**Answer:**
+
+### 4C. Two-way frequency table
+
+Create a two-way table showing the relationship between `Diabetes` and `Gender` using `tabyl()`. Add row percentages.
+
+```{r}
+
+
+```
+
+Among people aged 40+, what percentage of females have diabetes? What about males?
+
+**Answer:**
+
+### 4D. Visualization
+
+Create a boxplot comparing `BMI` across `Diabetes` groups. Color the boxes by `Diabetes` status.
+
+```{r}
+
+
+```
+
+Describe what you see in 1-2 sentences.
+
+**Answer:**
+
+---
+
+## Part 5: Connecting concepts (Integration)
+
+### 5A. Binomial to data
+
+In Part 3, we calculated that with $n=15$ and $p=0.203$, the expected number of adults with diabetes is approximately 3.
+
+Now let's check this against real data. Using the full `nhanes.samp` dataset:
+
+1. Filter to adults aged 65-74 (use `filter(Age >= 65 & Age <= 74)`)
+2. Calculate the proportion who have diabetes (use `tabyl(Diabetes)`)
+
+```{r}
+
+
+```
+
+**Questions:**
+
+1. What proportion of adults aged 65-74 in this sample have diabetes?
+2. How does this compare to the 20.3% we used in our binomial calculations?
+3. If you randomly selected 15 people from this sample, would you expect about 3 to have diabetes?
+
+**Answers:**
+
+1. 
+2. 
+3. 
+
+### 5B. Bayes' Theorem with data
+
+Suppose we use `BMI >= 30` as a "test" for diabetes (obese BMI as a predictor).
+
+Calculate the following using the `diabetes_subset` you created in Part 4A:
+
+```{r}
+# Create BMI test variable
+diabetes_subset <- diabetes_subset %>%
+  mutate(BMI_test = if_else(BMI >= 30, "Positive", "Negative"))
+
+# Create contingency table
+table_diabetes_bmi <- diabetes_subset %>%
+  tabyl(Diabetes, BMI_test)
+
+table_diabetes_bmi
+```
+
+Treat BMI_test as the test result and Diabetes as the true condition.
+
+- "Positive" = BMI ≥ 30
+- "Negative" = BMI < 30
+
+
+**Question 1:** What is the sensitivity? (Among people with diabetes, what proportion have BMI >= 30?)
+
+Hint: Look at the "Yes" row of the Diabetes column
+
+**Answer:**
+
+**Question 2:** What is the specificity? (Among people without diabetes, what proportion have BMI < 30?)
+
+**Answer:**
+
+**Question 3:** Using the table, calculate the PPV: Among people with BMI >= 30, what proportion have diabetes?
+
+**Answer:**
+
+---
+
+## Part 6: Reflection (Optional but encouraged)
+
+In 3-4 sentences, reflect on the connection between:
+
+- Bayes' Theorem (flipping conditional probabilities)
+- Binomial distribution (modeling repeated trials)
+- Real data analysis (testing these concepts)
+
+How do these topics relate to biomedical research?
+
+**Answer:**
+
+---
+
+## Final check
+
+Before submitting, confirm that:
+
+- The document renders to HTML without errors
+- All code chunks run successfully
+- Your name appears at the top
+- You've answered all required questions
+- You uploaded both the .qmd and .html files
