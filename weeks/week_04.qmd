@@ -61,7 +61,7 @@ By the end of the week, you should be able to:
   - Random Variables and Binomial Distribution ([HTML](/lessons/09_random_variables_binomial/09_random_variables_binomial.qmd) | [PDF](/lessons/09_random_variables_binomial/09_random_variables_binomial.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
-  - [Recording coming](#)
+  - [Random Variables and Binomial Distribution](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBMO2Tu5cfHSpSLFjpvgizfAYWjszPUYd89oxobQzMM2Io?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=BrSDnO)
 
 ---
 
@@ -76,13 +76,13 @@ By the end of the week, you should be able to:
   - Standard error
 
 - **Slides**
-  - Normal Distribution and Sampling Distributions ([HTML](#) | [PDF](#) | [OneDrive](#))
+  - Normal Distribution and Sampling Distributions ([HTML] | [PDF] | [OneDrive])
 
 - **Code along**
-  - [Download Normal Distribution code along (.qmd)](#)
+  - [Download Normal Distribution code along (.qmd)]
 
 - **Recording**
-  - [Normal Distribution and Sampling Distributions](#)
+  - [Normal Distribution and Sampling Distributions]
 
 ---
 
