@@ -3873,5 +3873,61 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#roadmap-for-today",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#roadmap-for-today",
+    "title": "Normal and Poisson Distributions",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Understanding the Normal Distribution\n\nWhat makes it special?\nParameters and notation\nStandard Normal distribution\n\nPart 2: Z-scores & Standardization\n\nConverting to standard units\nInterpretation and comparison\n\nPart 3: The Empirical Rule\n\nThe 68-95-99.7 rule\nQuick probability estimates\n\n\nPart 4: Calculating Probabilities\n\nUsing R functions\nTypes of probability questions\nReal-world applications\n\nPart 5: Finding Percentiles\n\nInverse problems\nClinical thresholds\n\nPart 6: Normal Approximation\n\nWhen and why to use it\nConnecting to Binomial"
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#last-time-discrete-vs.-continuous-random-variables",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#last-time-discrete-vs.-continuous-random-variables",
+    "title": "Normal and Poisson Distributions",
+    "section": "Last time: Discrete vs. Continuous Random Variables",
+    "text": "Last time: Discrete vs. Continuous Random Variables\n\n\n\n\n\nDiscrete Random Variable\n\n\nA discrete r.v. takes on:\n\nA finite number of values, OR\nA countably infinite number of values\n\nExamples:\n\nNumber of heads in 10 coin flips\nNumber of students in a class\nNumber of COVID cases per day\n\n\n\n\n\n\n\n\nContinuous Random Variable\n\n\nA continuous r.v. can take:\n\nAny real value in an interval\nAny value in a union of intervals\n\nExamples:\n\nHeight\nBlood pressure\nTime until an event occurs\n\n\n\n\n\n\nToday’s focus: Continuous random variables"
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#continuous-rv-in-general",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#continuous-rv-in-general",
+    "title": "Normal and Poisson Distributions",
+    "section": "Continuous rv in general",
+    "text": "Continuous rv in general\n\nThe distribution of a continuous rv is governed by a density function/curve.\nProbabilities are calculated as area under the curve over an interval.\nTotal area beneath the density function/curve is 1."
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#probability-between-a-and-b",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#probability-between-a-and-b",
+    "title": "Normal and Poisson Distributions",
+    "section": "Probability between a and b",
+    "text": "Probability between a and b\nThe area beneath the density curve/function between two points a and b represents the probability that the random variable (\\(X\\), say) will assume some value between a and b\nWhen working with continuous random variables, probability is found for intervals of values rather than individual values.\n\nThe probability that a continuous r.v. \\(X\\) takes on any single individual value is 0\n\nThat is, \\(P(X = x) = 0\\).\n\nThus, \\(P(a &lt; X &lt; b)\\) is equivalent to \\(P(a \\leq X \\leq b)\\)"
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#probability-at-exactly-a",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#probability-at-exactly-a",
+    "title": "Normal and Poisson Distributions",
+    "section": "Probability at exactly a",
+    "text": "Probability at exactly a\nFor a continuous random variable X:\n\nProbability comes from areas under the curve\nAreas require width\nA single point has no width\n\n\n\nSo:\n\n\\(P(X = a) = 0\\)\nOnly intervals have non-zero probability (for example, \\(P(a ≤ X ≤ b)\\))\n\n\nIntuition: you can shade an interval, but you can’t shade a point."
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#all-the-following-are-equivalent",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#all-the-following-are-equivalent",
+    "title": "Normal and Poisson Distributions",
+    "section": "All the following are equivalent",
+    "text": "All the following are equivalent\nFor a continuous r.v. \\(X\\), all of the following are equivalent:\n\\[P(a \\leq X \\leq b) = P(a &lt; X \\leq b)\\] \\[= P(a \\leq X &lt; b) = P(a &lt; X &lt; b)\\]\nThat is, we can safely ignore equality when defining the endpoints of a given interval. [This is certainly not true for discrete rv]"
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#normal-distribution-1",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#normal-distribution-1",
+    "title": "Normal and Poisson Distributions",
+    "section": "Normal distribution",
+    "text": "Normal distribution\n\n\n\nA random variable X is modeled with a normal distribution if:\n\nShape: symmetric, unimodal bell curve\nCenter: mean \\(\\mu\\)\nSpread (variability): standard deviation \\(\\sigma\\)\n\n\n \n\nShorthand for a random variable, \\(X\\), that has a Normal distribution: \\[X \\sim \\text{Normal}(\\mu, \\sigma)\\]\n\n\n\n\n\nExample: We recorded the high temperature in the past 100 years for today. The mean high is 19°C (66.2°F)"
+  },
+  {
+    "objectID": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#different-means-same-sd",
+    "href": "lessons/10_normal_distribution_and_poisson_distribution/10_normal_poisson_EJL.html#different-means-same-sd",
+    "title": "Normal and Poisson Distributions",
+    "section": "Different means, Same SD",
+    "text": "Different means, Same SD\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBMSC 620 | Normal + Poisson"
   }
 ]

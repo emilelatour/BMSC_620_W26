@@ -1,0 +1,594 @@
+---
+title: "Normal and Poisson Distributions"
+subtitle: "Textbook Sections 3.3–3.4"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w4d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Normal + Poisson"
+    html-math-method: mathjax
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(knitr)
+
+library(laviz)        # devtools::install_github("emilelatour/laviz") 
+
+# Set theme for plots
+# theme_set(theme_bw(base_size = 16))
+
+theme_set(laviz::theme_minimal_white(grid = "none", 
+                             axis = "xy", 
+                             base_size = 16))
+  
+```
+
+# Learning Objectives 
+
+By the end of today's lecture, you will be able to:
+
+1. Describe the characteristics and importance of the Normal distribution
+2. Calculate and interpret Z-scores to standardize observations
+3. Use the Empirical Rule to estimate probabilities
+4. Calculate probabilities using the Normal distribution (with R and tables)
+5. Find percentiles and critical values
+6. Apply the Normal approximation to the Binomial distribution
+
+## Roadmap for Today
+
+:::: {.columns}
+::: {.column width="50%"}
+**Part 1: Understanding the Normal Distribution**
+
+- What makes it special?
+- Parameters and notation
+- Standard Normal distribution
+
+**Part 2: Z-scores & Standardization**
+
+- Converting to standard units
+- Interpretation and comparison
+
+**Part 3: The Empirical Rule**
+
+- The 68-95-99.7 rule
+- Quick probability estimates
+:::
+
+::: {.column width="50%"}
+**Part 4: Calculating Probabilities**
+
+- Using R functions
+- Types of probability questions
+- Real-world applications
+
+**Part 5: Finding Percentiles**
+
+- Inverse problems
+- Clinical thresholds
+
+**Part 6: Normal Approximation**
+
+- When and why to use it
+- Connecting to Binomial
+:::
+::::
+
+## Last time: Discrete vs. Continuous Random Variables
+
+::::::: columns
+:::: {.column width="48%"}
+::: {.callout-important icon="false"}
+## Discrete Random Variable
+
+A **discrete r.v.** takes on:
+
+-   A finite number of values, OR
+-   A countably infinite number of values
+
+**Examples:**
+
+-   Number of heads in 10 coin flips
+-   Number of students in a class
+-   Number of COVID cases per day
+:::
+::::
+
+:::: {.column width="48%"}
+::: {.callout-warning icon="false"}
+## Continuous Random Variable
+
+A **continuous r.v.** can take:
+
+-   Any real value in an interval
+-   Any value in a union of intervals
+
+**Examples:**
+
+-   Height
+-   Blood pressure
+-   Time until an event occurs
+:::
+::::
+:::::::
+
+::: fragment
+**Today's focus:** Continuous random variables
+:::
+
+
+# Continuous random variables
+
+## Continuous rv in general
+
+- The distribution of a continuous rv is governed by a *density function/curve*.
+- Probabilities are calculated as *area* under the curve over an *interval*.
+- Total area beneath the density function/curve is 1.
+
+```{r}
+#| echo: false
+mu <- 10
+sigma <- 4
+a <- 4
+b <- 14
+
+df <- tibble::tibble(
+  x = seq(-3, 28, length.out = 1000),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+ggplot(df, aes(x = x, 
+               y = y)) +
+  geom_line(linewidth = 0.8) +
+  geom_area(fill = "gray80", 
+            alpha = 0.8) +
+  labs(
+    x = "X",
+    y = "Density"
+  ) +
+  annotate(
+    "text",
+    x = 10,
+    y = 0.02,
+    label = "Total area = 1",
+    size = 4
+  ) + 
+  # Customize axes
+  scale_x_continuous(breaks = c(0, a, 10, b, 20, 25),
+                     labels = c("0", "a", "10", "b", "20", "25"),
+                     limits = c(-2, 26)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df$y) * 1.1)) +
+  
+  # Labels and theme
+  labs(x = "X", y = "Density")
+```
+
+## Probability between *a* and *b*
+
+The area beneath the density curve/function between two points *a* and *b* represents the probability that the random variable ($X$, say) will assume some value between *a* and *b*
+
+When working with continuous random variables, probability is found for
+**intervals of values** rather than **individual values**.
+
+-   The probability that a continuous r.v. $X$ takes on any single
+    individual value is 0
+
+    -   That is, $P(X = x) = 0$.
+
+-   Thus, $P(a < X < b)$ is equivalent to $P(a \leq X \leq b)$
+
+	<!-- •	Probability for a continuous RV is an area under the density curve. -->
+	<!-- •	P(a <= X <= b) is the area from a to b. -->
+	<!-- •	P(X = a) = 0, so endpoints do not matter. -->
+
+```{r}
+#| echo: false
+
+
+mu <- 10
+sigma <- 4
+a <- 4
+b <- 14
+
+df <- tibble::tibble(
+  x = seq(-3, 28, length.out = 1000),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+ya <- dnorm(a, mean = mu, sd = sigma)
+yb <- dnorm(b, mean = mu, sd = sigma)
+
+lab <- "P(a \u2264 X \u2264 b)"
+
+# lab <- sprintf("P(%s \u2264 X \u2264 %s)", "a", "b")  # \u2264 is the <= symbol
+
+
+ggplot() +
+  # Draw the full distribution curve
+  geom_line(data = df,
+            aes(x = x, y = y), 
+            linewidth = 0.8) +
+  
+  # Add shaded area for P(a ≤ X ≤ b)
+  geom_area(data = df %>% filter(x >= a & x <= b),
+            aes(x = x, y = y), 
+            fill = "gray80", 
+            alpha = 0.8) +
+  
+  # Add vertical lines at a and b
+  geom_segment(aes(x = a, xend = a, 
+                   y = 0, yend = ya), 
+               linewidth = 0.8) + 
+  geom_segment(aes(x = b, xend = b, 
+                   y = 0, yend = yb), 
+               linewidth = 0.8) + 
+  
+  # Add the probability notation text
+  annotate("text", x = 10, y = 0.035, 
+           label = lab, 
+           parse = FALSE, size = 5)  + 
+  
+  # Add axis labels
+  annotate("text", x = a, y = -0.003, label = "a", size = 4) +
+  annotate("text", x = b, y = -0.003, label = "b", size = 4) +
+  
+  # Customize axes
+  scale_x_continuous(breaks = c(0, a, 10, b, 20, 25),
+                     labels = c("0", "a", "10", "b", "20", "25"),
+                     limits = c(-2, 26)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df$y) * 1.1)) +
+  
+  # Labels and theme
+  labs(x = "X", y = "Density")
+
+
+
+```
+
+## Probability at exactly *a*
+
+For a **continuous** random variable X:
+
+- Probability comes from **areas under the curve**
+- Areas require **width**
+- A single point has **no width**
+
+\
+
+So:
+
+- $P(X = a) = 0$
+- Only intervals have non-zero probability (for example, $P(a ≤ X ≤ b)$)
+
+\
+**Intuition**: you can shade an interval, but you can't shade a point.
+
+## All the following are equivalent
+
+For a **continuous** r.v. $X$, all of the following are equivalent:
+
+$$P(a \leq X \leq b) = P(a < X \leq b)$$
+$$= P(a \leq X < b) = P(a < X < b)$$
+
+That is, we can safely ignore equality when defining the endpoints of a given interval. **[This is certainly not true for discrete rv]**
+
+# Normal distribution
+
+![Artwork by Allison Horst](/img_slides/horst_normal_not_normal.png){width="350px"}
+
+## Normal distribution
+
+::::: columns
+::: {.column width="40%"}
+-   A random variable X is modeled with a normal distribution if:
+
+    -   **Shape:** symmetric, unimodal bell curve
+    -   **Center:** mean $\mu$
+    -   **Spread (variability):** standard deviation $\sigma$
+
+ 
+
+-   Shorthand for a random variable, $X$, that has a Normal
+    distribution: $$X \sim \text{Normal}(\mu, \sigma)$$
+:::
+
+::: {.column width="60%"}
+![](../img_slides/Normal_examples.png)
+:::
+:::::
+
+-   **Example:** We recorded the high temperature in the past 100 years
+    for today. The mean high is 19°C (66.2°F)
+
+## Different means, Same SD
+
+```{r}
+#| echo: false
+
+
+mu1 <- 15
+sigma1 <- 3
+
+df1 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu1, sd = sigma1)
+)
+
+mu2 <- 20
+sigma2 <- 3
+
+df2 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu2, sd = sigma2)
+)
+
+
+
+ggplot() + 
+  geom_line(data = df1, 
+            aes(x = x, 
+                y = y),
+             color = "orange") + 
+  geom_line(data = df2, 
+            aes(x = x, 
+                y = y), 
+            color = "blue") + 
+  # Customize axes
+  scale_x_continuous(breaks = seq(5, 30, 5),
+                     limits = c(2, 32)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df2$y) * 1.1)) +
+  labs(
+    x = "X",
+    y = "Density"
+  )
+
+  # annotate(
+  #   "text",
+  #   x = 10,
+  #   y = 0.02,
+  #   label = "Total area = 1",
+  #   size = 4
+  # ) + 
+  # # Customize axes
+  # scale_x_continuous(breaks = c(0, a, 10, b, 20, 25),
+  #                    labels = c("0", "a", "10", "b", "20", "25"),
+  #                    limits = c(-2, 26)) +
+  # scale_y_continuous(expand = c(0, 0), limits = c(0, max(df$y) * 1.1)) +
+  # 
+  # # Labels and theme
+  # labs(x = "X", y = "Density") +
+  # theme_minimal() +
+  # theme(
+  #   axis.title.y = element_text(angle = 0, vjust = 0.5),
+  #   panel.grid = element_blank(),
+  #   axis.line = element_line(color = "black"),
+  #   axis.ticks = element_line(color = "black"),
+  #   axis.text = element_text(size = 10)
+  # )
+```
+
+
+
+<!-- ## Today -->
+
+<!-- - Normal distribution -->
+<!-- - Standard normal and Z-scores -->
+<!-- - Normal probabilities in R -->
+<!-- - Normal approximation to the binomial -->
+<!-- - Poisson distribution -->
+
+<!-- ## Normal distribution -->
+
+<!-- A random variable X is modeled with a normal distribution if: -->
+
+<!-- - Shape: symmetric, unimodal, bell-shaped -->
+<!-- - Center: mean (mu) -->
+<!-- - Spread: standard deviation (sigma) -->
+
+<!-- Notation: -->
+
+<!-- X ~ N(mu, sigma) -->
+
+<!-- ## Normal density -->
+
+<!-- The probability density function is: -->
+
+<!-- f(x) = (1 / (sigma * sqrt(2*pi))) * exp(-(x - mu)^2 / (2 * sigma^2)) -->
+
+<!-- ## Visualizing normal distributions -->
+
+<!-- ```{r} -->
+<!-- x <- seq(-4, 4, length.out = 500) -->
+<!-- plot(x, dnorm(x), type = "l", lwd = 2, -->
+<!--      ylab = "Density", xlab = "x", -->
+<!--      main = "Standard normal distribution") -->
+<!-- ``` -->
+
+<!-- ## Empirical rule (68–95–99.7) -->
+
+<!-- For a normal distribution: -->
+
+<!-- - ~68% within 1 SD of the mean -->
+<!-- - ~95% within 2 SDs -->
+<!-- - ~99.7% within 3 SDs -->
+
+<!-- ## Standard normal distribution -->
+
+<!-- - Mean = 0 -->
+<!-- - SD = 1 -->
+<!-- - Denoted Z -->
+
+<!-- Any normal variable can be converted to Z using: -->
+
+<!-- Z = (X - mu) / sigma -->
+
+<!-- ## Z-scores -->
+
+<!-- Interpretation: -->
+
+<!-- - Z = 0: exactly at the mean -->
+<!-- - Z = 1: one SD above the mean -->
+<!-- - Z = -2: two SDs below the mean -->
+
+<!-- ## Normal probabilities in R -->
+
+<!-- For Z ~ N(0, 1): -->
+
+<!-- ```{r} -->
+<!-- pnorm(1.96) -->
+<!-- ``` -->
+
+<!-- This gives P(Z <= 1.96) -->
+
+<!-- ## Examples -->
+
+<!-- ```{r} -->
+<!-- pnorm(2.67) -->
+<!-- 1 - pnorm(-0.37) -->
+<!-- pnorm(2.46) - pnorm(-2.18) -->
+<!-- ``` -->
+
+<!-- Note: P(Z = 1.53) = 0 for a continuous distribution -->
+
+<!-- ## General normal probabilities -->
+
+<!-- Example: -->
+
+<!-- X ~ N(8, 2) -->
+
+<!-- Find P(X > 10) -->
+
+<!-- ## Solution -->
+
+<!-- ```{r} -->
+<!-- 1 - pnorm(10, mean = 8, sd = 2) -->
+<!-- ``` -->
+
+<!-- ## Normal approximation to the binomial -->
+
+<!-- Recall: -->
+
+<!-- X ~ Binomial(n, p) -->
+
+<!-- When n is large and p is not extreme, the binomial distribution is approximately normal. -->
+
+<!-- ## Conditions -->
+
+<!-- Normal approximation is reasonable if: -->
+
+<!-- - n * p >= 10 -->
+<!-- - n * (1 - p) >= 10 -->
+
+<!-- ## Mean and SD of binomial -->
+
+<!-- If X ~ Bin(n, p): -->
+
+<!-- - mu = n * p -->
+<!-- - sigma = sqrt(n * p * (1 - p)) -->
+
+<!-- ## Poisson distribution -->
+
+<!-- - Discrete distribution -->
+<!-- - Models counts in a fixed interval -->
+<!-- - Often used for rare events -->
+
+<!-- Parameter: -->
+
+<!-- - lambda (average rate) -->
+
+<!-- ## Poisson probability mass function -->
+
+<!-- For X ~ Poisson(lambda): -->
+
+<!-- P(X = k) = (lambda^k * exp(-lambda)) / k! -->
+
+<!-- ## Mean and variance -->
+
+<!-- If X ~ Poisson(lambda): -->
+
+<!-- - Mean = lambda -->
+<!-- - Variance = lambda -->
+
+<!-- ## Poisson probabilities in R -->
+
+<!-- ```{r} -->
+<!-- dpois(3, lambda = 5) -->
+<!-- ppois(3, lambda = 5) -->
+<!-- ``` -->
+
+<!-- ## Example -->
+
+<!-- Suppose deaths occur at an average rate of 5 per year. -->
+
+<!-- Probability of exactly 3 deaths in one year: -->
+
+<!-- ```{r} -->
+<!-- dpois(3, lambda = 5) -->
+<!-- ``` -->
+
+<!-- ## Example: different interval -->
+
+<!-- Probability of 2 deaths in 0.5 years: -->
+
+<!-- ```{r} -->
+<!-- dpois(2, lambda = 5 * 0.5) -->
+<!-- ``` -->
+
+<!-- ## Key takeaways -->
+
+<!-- - Normal distribution models continuous, symmetric data -->
+<!-- - Z-scores standardize normal variables -->
+<!-- - Normal probabilities are easy in R -->
+<!-- - Poisson distribution models counts and rare events -->

@@ -63,6 +63,11 @@ By the end of the week, you should be able to:
 - **Recording**
   - [Random Variables and Binomial Distribution](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBMO2Tu5cfHSpSLFjpvgizfAYWjszPUYd89oxobQzMM2Io?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=BrSDnO)
 
+- **Muddy points**
+  
+  I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 6](/lessons/09_random_variables_binomial/09_random_variables_binomial_muddy_points.qmd)
+
 ---
 
 ### Wednesday — Normal Distribution and Sampling Distributions
