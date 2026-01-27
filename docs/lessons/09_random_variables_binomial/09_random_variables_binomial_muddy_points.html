@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -266,14 +300,16 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#thanks-for-the-feedback" id="toc-thanks-for-the-feedback" class="nav-link active" data-scroll-target="#thanks-for-the-feedback">Thanks for the feedback</a></li>
-  <li><a href="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" id="toc-mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="nav-link" data-scroll-target="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</a></li>
-  <li><a href="#markdown-vs.-comments-in-.qmd-files" id="toc-markdown-vs.-comments-in-.qmd-files" class="nav-link" data-scroll-target="#markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</a></li>
-  <li><a href="#source-vs.-visual-editor" id="toc-source-vs.-visual-editor" class="nav-link" data-scroll-target="#source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</a></li>
-  <li><a href="#is-.qmd-something-people-actually-use" id="toc-is-.qmd-something-people-actually-use" class="nav-link" data-scroll-target="#is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</a></li>
-  <li><a href="#pace-and-in-class-practice" id="toc-pace-and-in-class-practice" class="nav-link" data-scroll-target="#pace-and-in-class-practice">5. Pace and in-class practice</a></li>
-  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final note</a></li>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#what-do-i-need-to-memorizeknow-how-to-do" id="toc-what-do-i-need-to-memorizeknow-how-to-do" class="nav-link" data-scroll-target="#what-do-i-need-to-memorizeknow-how-to-do">What Do I Need to Memorize/Know How to Do?</a></li>
+  <li><a href="#variable-notation-confusion" id="toc-variable-notation-confusion" class="nav-link" data-scroll-target="#variable-notation-confusion">Variable Notation Confusion</a></li>
+  <li><a href="#too-many-formulas-feeling-abstract" id="toc-too-many-formulas-feeling-abstract" class="nav-link" data-scroll-target="#too-many-formulas-feeling-abstract">Too Many Formulas / Feeling Abstract</a></li>
+  <li><a href="#variance-of-linear-combinations" id="toc-variance-of-linear-combinations" class="nav-link" data-scroll-target="#variance-of-linear-combinations">Variance of Linear Combinations</a></li>
+  <li><a href="#clarifying-bernoulli-variance-conceptual" id="toc-clarifying-bernoulli-variance-conceptual" class="nav-link" data-scroll-target="#clarifying-bernoulli-variance-conceptual">Clarifying Bernoulli Variance (Conceptual)</a></li>
+  <li><a href="#r-functions-still-confusing" id="toc-r-functions-still-confusing" class="nav-link" data-scroll-target="#r-functions-still-confusing">R Functions Still Confusing</a></li>
+  <li><a href="#expected-value-calculation-question" id="toc-expected-value-calculation-question" class="nav-link" data-scroll-target="#expected-value-calculation-question">Expected Value Calculation Question</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions?</a></li>
   </ul>
 </nav>
     </div>
@@ -283,7 +319,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Getting Started with Data, R, and Quarto</p>
+<p class="subtitle lead">Random Variables and Binomial Distribution</p>
 </div>
 
 
@@ -306,66 +342,339 @@ window.Quarto = {
 </header>
 
 
-<section id="thanks-for-the-feedback" class="level2">
-<h2 class="anchored" data-anchor-id="thanks-for-the-feedback">Thanks for the feedback</h2>
-<p>Thank you to everyone who submitted post-class feedback. Overall, the material from our first week was reported as quite clear, which is great to hear. Below I address the main points that came up as muddy or unclear.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Thank you for your feedback on Monday’s lecture! The pacing feedback was excellent - 69% felt it was “about right” and 31% “slightly too fast,” which tells me most of you are keeping up well. I’ll continue with strategic pauses and check-ins to help everyone stay on track.</p>
+<p>Several clear themes emerged from your muddy points. Let me address them:</p>
 <hr>
 </section>
-<section id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="level2">
-<h2 class="anchored" data-anchor-id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</h2>
-<p>One question that came up was why we sometimes use symbols like <strong>μ</strong> and <strong>σ</strong> instead of <strong>x̄</strong> (x-bar) and <strong>s</strong>, particularly when drawing or describing a normal curve.</p>
-<p>A helpful rule of thumb:</p>
+<section id="what-do-i-need-to-memorizeknow-how-to-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-do-i-need-to-memorizeknow-how-to-do">What Do I Need to Memorize/Know How to Do?</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“What should we memorize in terms of formulas? Are we supposed to know how to do these formulas by hand, or using the R functions?”</p>
+</blockquote>
+<p><strong>The Answer:</strong></p>
+<p>For this course, I care about <strong>three things</strong>:</p>
+<section id="conceptual-understanding" class="level3">
+<h3 class="anchored" data-anchor-id="conceptual-understanding">1. Conceptual understanding</h3>
+<p>You should be able to explain, in words:</p>
 <ul>
-<li><strong>x̄ (x-bar)</strong> and <strong>s</strong> are <em>sample statistics</em> — they summarize data you actually observed.</li>
-<li><strong>μ (mu)</strong> and <strong>σ (sigma)</strong> are <em>population parameters</em> — they describe an underlying population or theoretical distribution.</li>
+<li>What kind of random variable you are working with (discrete vs continuous)</li>
+<li>When a binomial model is appropriate</li>
+<li>What the parameters mean (for example: n and p)</li>
+<li>What a probability, mean, or variance is describing in context</li>
 </ul>
-<p>When we draw a normal curve, we often label it with <strong>μ</strong> and <strong>σ</strong> even if, in practice, we estimate those values using <strong>x̄</strong> and <strong>s</strong> from data. This is just a convention and something we will revisit once we start formal inference.</p>
-<p>Relatedly, one person mentioned confusion about the “squared SD”:</p>
+<p>You do not need to reproduce derivations, but you should understand what the formulas are doing.</p>
+</section>
+<section id="using-r-correctly" class="level3">
+<h3 class="anchored" data-anchor-id="using-r-correctly">2. Using R correctly</h3>
+<p>You should be comfortable with:</p>
 <ul>
-<li>The <strong>variance</strong> is the standard deviation squared.</li>
-<li>Variance has squared units, which is why we usually <em>report</em> the standard deviation instead.</li>
+<li>Choosing the right R function (<code>dbinom()</code>, <code>pbinom()</code>, etc.)</li>
+<li>Knowing what each argument represents</li>
+<li>Interpreting the output in words</li>
 </ul>
-<hr>
-</section>
-<section id="markdown-vs.-comments-in-.qmd-files" class="level2">
-<h2 class="anchored" data-anchor-id="markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</h2>
-<p>A few questions came up about when to use different symbols in Quarto files:</p>
+<p>For example:</p>
 <ul>
-<li><code>#</code> inside an R code chunk is a <strong>code comment</strong> (for humans, not output).</li>
-<li><code>&lt;!-- --&gt;</code> is an <strong>HTML comment</strong> in the markdown text (also not shown in output).</li>
-<li><code>&gt;</code> creates a <strong>block quote</strong>, which <em>does</em> appear in the rendered document.</li>
+<li>“Exactly k successes” → <code>dbinom()</code></li>
+<li>“At most k successes” → <code>pbinom()</code></li>
 </ul>
-<p>In short: - Use comments (<code>#</code> or <code>&lt;!-- --&gt;</code>) for notes to yourself or graders. - Use block quotes (<code>&gt;</code>) when you want text to appear as part of the document.</p>
-<hr>
+<p>Being able to explain why you chose a function matters more than the numeric answer itself.</p>
 </section>
-<section id="source-vs.-visual-editor" class="level2">
-<h2 class="anchored" data-anchor-id="source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</h2>
-<p>Some people weren’t sure why we would use the <strong>Source</strong> editor at this point.</p>
-<p>For now, think of this as:</p>
+<section id="explaining-your-reasoning" class="level3">
+<h3 class="anchored" data-anchor-id="explaining-your-reasoning">3. Explaining your reasoning</h3>
+<p>On homework and exams, you should be able to:</p>
 <ul>
-<li><strong>Visual editor</strong>: helpful for getting started, especially if you’re new.</li>
-<li><strong>Source editor</strong>: shows the underlying text and structure of the document.</li>
+<li>Describe your approach in plain language</li>
+<li>Explain what distribution you used and why</li>
+<li>Interpret results in the context of the problem</li>
 </ul>
-<p>They are just two ways of editing the <em>same</em> file. Over time, you may find that the Source editor gives you more control, but you are free to use whichever view feels more comfortable right now.</p>
+</section>
+<section id="what-you-are-not-expected-to-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-are-not-expected-to-do">What you are <strong>not</strong> expected to do</h3>
+<p>You do not need to:</p>
+<ul>
+<li>Memorize probability formulas</li>
+<li>Calculate probabilities by hand</li>
+<li>Derive distributions from scratch</li>
+<li>Memorize every symbol used on slides</li>
+</ul>
+<p>Formulas are shown to build understanding and connect to R — not because I expect you to reproduce them from memory.</p>
+</section>
+</section>
+<section id="variable-notation-confusion" class="level2">
+<h2 class="anchored" data-anchor-id="variable-notation-confusion">Variable Notation Confusion</h2>
+<p><strong>The Issue:</strong></p>
+<blockquote class="blockquote">
+<p>“The way variables were switching from X to k was confusing. It would be helpful if there was a legend on each slide for what each variable means.”</p>
+</blockquote>
+<p><strong>Why This Happens:</strong></p>
+<p>Different contexts use different notation conventions:</p>
+<ul>
+<li><strong>X</strong> = the random variable itself (e.g., “number of successes”)</li>
+<li><strong>x or k</strong> = a specific value X might take (e.g., “exactly 3 successes”)</li>
+<li><strong>n</strong> = number of trials</li>
+<li><strong>p</strong> = probability of success on each trial</li>
+</ul>
+<p>I’ll be more explicit about this on slides going forward.</p>
+<section id="common-notation-guide" class="level3">
+<h3 class="anchored" data-anchor-id="common-notation-guide">Common Notation Guide</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(X\)</span></td>
+<td>Random variable</td>
+<td>“Number of heads in 10 flips”</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(x\)</span> or <span class="math inline">\(k\)</span></td>
+<td>Specific value</td>
+<td>“Exactly 3 heads”</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(n\)</span></td>
+<td>Number of trials</td>
+<td>10 flips</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p\)</span></td>
+<td>Probability of success</td>
+<td>0.5 for fair coin</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mu\)</span></td>
+<td>Mean/Expected value</td>
+<td>Average outcome</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma\)</span></td>
+<td>Standard deviation</td>
+<td>Spread of outcomes</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>Variance</td>
+<td>Squared spread</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
-<section id="is-.qmd-something-people-actually-use" class="level2">
-<h2 class="anchored" data-anchor-id="is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</h2>
-<p>Yes — documents that combine code, text, and output are very common in statistics and data analysis.</p>
-<p>Some people use: - Quarto (<code>.qmd</code>) - R Markdown (<code>.Rmd</code>) - Jupyter notebooks - Similar tools in Python or other languages</p>
-<p>We are using Quarto in this course because it supports reproducible analysis and clear communication in one place. The skills you learn here will transfer easily to other tools.</p>
+</section>
+<section id="too-many-formulas-feeling-abstract" class="level2">
+<h2 class="anchored" data-anchor-id="too-many-formulas-feeling-abstract">Too Many Formulas / Feeling Abstract</h2>
+<p><strong>The Concern:</strong></p>
+<blockquote class="blockquote">
+<p>“Felt like there were just a whole lot of formulas… Some of the formulas started to feel a bit abstract.”</p>
+</blockquote>
+<p><strong>My Response:</strong></p>
+<p>You’re absolutely right. There <em>are</em> a lot of formulas. Here’s how to think about them:</p>
+<section id="the-core-ideas-not-the-formulas" class="level3">
+<h3 class="anchored" data-anchor-id="the-core-ideas-not-the-formulas">The Core Ideas (Not the Formulas)</h3>
+<p><strong>For any distribution, we care about:</strong></p>
+<ol type="1">
+<li><strong>What values can it take?</strong> (support)</li>
+<li><strong>How likely is each value?</strong> (probability/density)</li>
+<li><strong>What’s the typical value?</strong> (mean/expected value)</li>
+<li><strong>How spread out is it?</strong> (variance/standard deviation)</li>
+</ol>
+<p><strong>For binomial specifically:</strong></p>
+<ul>
+<li>“How many successes in n tries?” → use <code>dbinom()</code> or <code>pbinom()</code></li>
+<li>That’s it. The formulas are just showing <em>why</em> R gives you those answers.</li>
+</ul>
+</section>
+<section id="plain-language-interpretations" class="level3">
+<h3 class="anchored" data-anchor-id="plain-language-interpretations">Plain Language Interpretations</h3>
+<p>I’ll make sure to add these after formulas. For example:</p>
+<p><strong>Formula:</strong> <span class="math inline">\(P(X = k) = \binom{n}{k}p^k(1-p)^{n-k}\)</span></p>
+<p><strong>Plain English:</strong> “The probability of getting exactly k successes in n trials, when each trial has probability p of success”</p>
+<p><strong>R Code:</strong> <code>dbinom(k, size = n, prob = p)</code></p>
+<p><strong>Even Plainer:</strong> “Use this when you want to know: What are the chances of getting <em>exactly</em> this many successes?”</p>
 <hr>
 </section>
-<section id="pace-and-in-class-practice" class="level2">
-<h2 class="anchored" data-anchor-id="pace-and-in-class-practice">5. Pace and in-class practice</h2>
-<p>A small number of people mentioned that the R portion felt a little fast, especially for those completely new to R.</p>
-<p>That is expected early on. The goal of in-class practice is <strong>exposure</strong>, not mastery in the moment. It’s okay if you don’t finish everything during class — we’ll continue to reinforce these ideas through homework and repeated use.</p>
+</section>
+<section id="variance-of-linear-combinations" class="level2">
+<h2 class="anchored" data-anchor-id="variance-of-linear-combinations">Variance of Linear Combinations</h2>
+<p><strong>The Concern:</strong></p>
+<blockquote class="blockquote">
+<p>“Variance of linear combinations was confusing to me, especially if it will need to be applied to real/our data.”</p>
+</blockquote>
+<p><strong>My Response:</strong></p>
+<p>This is a very reasonable concern.</p>
+<p>For this course, variance of linear combinations is <strong>not</strong> something you will be expected to apply directly to real data by hand.</p>
+<p>What I want you to take away is the <strong>idea</strong>, not the formula:</p>
+<ul>
+<li>When you combine independent random variables, their variances add</li>
+<li>Standard deviations do not add directly</li>
+<li>In practice, software (R) handles these calculations for us</li>
+</ul>
+<p>You will <strong>not</strong> be asked to derive or memorize variance formulas for linear combinations.</p>
+<p>Later in the course, you will see variance show up in applied settings (for example, through standard errors and uncertainty in estimates), but at that point we will rely on:</p>
+<ul>
+<li><p>Interpretation</p></li>
+<li><p>Software output</p></li>
+<li><p>Intuition about variability</p></li>
+<li><p><strong>not</strong> manual variance calculations.</p></li>
+</ul>
+<p><strong>Bottom line:</strong> Understand the concept that variances add, but don’t worry about doing these calculations by hand. This topic is covered in introductory probability courses because it is important in fields like finance and engineering, but in this course we focus on understanding the idea rather than doing the calculations by hand.</p>
+</section>
+<section id="clarifying-bernoulli-variance-conceptual" class="level2">
+<h2 class="anchored" data-anchor-id="clarifying-bernoulli-variance-conceptual">Clarifying Bernoulli Variance (Conceptual)</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“It is a bit unclear where the equation for the variance for the Bernoulli distribution came from. I don’t understand how it relates to other variance equations.”</p>
+</blockquote>
+<p><strong>My Response:</strong></p>
+<p>This is a great question.</p>
+<p>The Bernoulli variance formula is <strong>not</strong> a new or special definition of variance. It comes from the same definition of variance we use for any random variable — it just simplifies nicely because a Bernoulli variable can only take two values (0 and 1).</p>
+<p><strong>What’s important to know:</strong></p>
+<ul>
+<li>Variance always measures how spread out values are around the mean</li>
+<li>For a Bernoulli variable:
+<ul>
+<li>The mean is <span class="math inline">\(p\)</span></li>
+<li>Outcomes are either 0 or 1</li>
+</ul></li>
+<li>Because of that simplicity, the general variance definition reduces to the compact result:</li>
+</ul>
+<p><span class="math display">\[\text{Var}(X) = p(1 - p)\]</span></p>
+<p>You do <strong>not</strong> need to derive this yourself. The key takeaway is the <strong>behavior</strong> of the variance:</p>
+<ul>
+<li>It is largest when outcomes are most uncertain (<span class="math inline">\(p\)</span> near 0.5)
+<ul>
+<li>Example: <span class="math inline">\(p = 0.5 \rightarrow \text{Var}(X) = 0.5(0.5) = 0.25\)</span></li>
+</ul></li>
+<li>It is smaller when outcomes are more predictable (<span class="math inline">\(p\)</span> near 0 or 1)
+<ul>
+<li>Example: <span class="math inline">\(p = 0.9 \rightarrow \text{Var}(X) = 0.9(0.1) = 0.09\)</span> (less variable)</li>
+<li>Example: <span class="math inline">\(p = 0.1 \rightarrow \text{Var}(X) = 0.1(0.9) = 0.09\)</span> (less variable)</li>
+</ul></li>
+</ul>
+<p>We’ll continue to rely on this intuition and on R for calculations, rather than algebraic derivations.</p>
+</section>
+<section id="r-functions-still-confusing" class="level2">
+<h2 class="anchored" data-anchor-id="r-functions-still-confusing">R Functions Still Confusing</h2>
+<p><strong>The Concern:</strong></p>
+<blockquote class="blockquote">
+<p>“I’m still a little confused on some of the different binomial functions in R, and pbinom’s link to p-values.”</p>
+</blockquote>
+<p><strong>Let Me Break This Down:</strong></p>
+<section id="the-four-binomial-functions" class="level3">
+<h3 class="anchored" data-anchor-id="the-four-binomial-functions">The Four Binomial Functions</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># d = density/probability (exactly)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># "What's P(X = 3)? Probability of EXACTLY 3 successes"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># p = cumulative probability (at most)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># "What's P(X ≤ 3)? Probability of 3 OR FEWER successes"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># q = quantile (what value gives this cumulative probability?)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">qbinom</span>(<span class="at">p =</span> <span class="fl">0.25</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># "What value of x has 25% of the distribution below it?"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># r = random (generate random samples)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># "Simulate 100 draws from this distribution"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="visual-guide" class="level3">
+<h3 class="anchored" data-anchor-id="visual-guide">Visual Guide</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_random_variables_binomial_muddy_points_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09_random_variables_binomial_muddy_points_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="about-p-values" class="level3">
+<h3 class="anchored" data-anchor-id="about-p-values">About p-values</h3>
+<p><strong>Important:</strong> <code>pbinom()</code> calculates cumulative probabilities, but it’s not <em>directly</em> a p-value.</p>
+<p>A <strong>p-value</strong> is “the probability of getting results as extreme or more extreme than what we observed, <em>assuming the null hypothesis is true</em>.”</p>
+<p>We can <em>use</em> <code>pbinom()</code> to calculate p-values, but they’re not the same thing:</p>
+<ul>
+<li><code>pbinom()</code> = general cumulative probability function</li>
+<li>p-value = specific probability used for hypothesis testing</li>
+</ul>
+<p>We’ll cover this more when we get to hypothesis testing!</p>
 <hr>
 </section>
-<section id="final-note" class="level2">
-<h2 class="anchored" data-anchor-id="final-note">Final note</h2>
-<p>If something still feels muddy after this clarification, that’s okay. Many ideas in statistics (and in R) only become clear after you see them used multiple times.</p>
-<p>Please keep using the post-class check-ins. They are genuinely helpful for guiding what we revisit or slow down on.</p>
+</section>
+<section id="expected-value-calculation-question" class="level2">
+<h2 class="anchored" data-anchor-id="expected-value-calculation-question">Expected Value Calculation Question</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“I didn’t understand the expected value (mean) calculations. Why does the value of the dice face factor into the equation since it’s an equal chance of rolling any value? Additionally, where did the 1/9 value come from?”</p>
+</blockquote>
+<p><strong>Let Me Walk Through This:</strong></p>
+<section id="fair-die-expected-value" class="level3">
+<h3 class="anchored" data-anchor-id="fair-die-expected-value">Fair Die Expected Value</h3>
+<p>For a fair 6-sided die, each outcome has probability 1/6:</p>
+<p><span class="math display">\[E(X) = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + 3 \cdot \frac{1}{6} + 4 \cdot \frac{1}{6} + 5 \cdot \frac{1}{6} + 6 \cdot \frac{1}{6}\]</span></p>
+<p><span class="math display">\[E(X) = \frac{1+2+3+4+5+6}{6} = \frac{21}{6} = 3.5\]</span></p>
+<p><strong>Why do the face values matter?</strong></p>
+<ul>
+<li>Even though each face has equal probability (1/6), the <em>values</em> are different (1, 2, 3, 4, 5, 6)</li>
+<li>We’re calculating the <em>average value</em> we’d get in the long run</li>
+<li>Rolling a 6 contributes more to the average than rolling a 1!</li>
+</ul>
+</section>
+<section id="where-did-19-come-from" class="level3">
+<h3 class="anchored" data-anchor-id="where-did-19-come-from">Where did 1/9 come from?</h3>
+<p>I just made up the probabilities for the rolls with the unfair dice. I aimed to show that the probabilities don’t have to be the same for all possible outcomes.</p>
+<ul>
+<li>Rolls of 1, 2, 3, or 4 all had the same probability: <span class="math inline">\(1/9\)</span></li>
+<li>A roll of 5 had a probability of <span class="math inline">\(2/9\)</span></li>
+<li>A roll of 6 had a probability of <span class="math inline">\(3/9\)</span></li>
+<li>Probabilities add to 1. Check: <span class="math inline">\(1/9 + 1/9 + 1/9 + 1/9 + 2/9 + 3/9 = 1\)</span></li>
+</ul>
+<p>The dice is loaded toward higher numbers.</p>
+</section>
+<section id="the-big-picture-for-expected-value" class="level3">
+<h3 class="anchored" data-anchor-id="the-big-picture-for-expected-value">The big picture for expected value</h3>
+<p>Expected value is best thought of as a long-run average, not a prediction of what will happen on a single trial.</p>
+<ul>
+<li>It combines all possible values of a random variable</li>
+<li>Each value is weighted by how likely it is</li>
+<li>Larger values contribute more to the average than smaller values</li>
+</ul>
+<p>This same idea applies to any random variable (not just dice) and is why expected value shows up throughout statistics.</p>
+<p>You do not need to compute expected values by hand beyond simple examples like this. In practice, we’ll often:</p>
+<ul>
+<li>rely on formulas (for known distributions), or</li>
+<li>let software do the calculation for us.</li>
+</ul>
+<p>The important skill is understanding what expected value represents, not the mechanics of summing terms.</p>
+</section>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions?</h2>
+<p>If anything is still muddy, please:</p>
+<ul>
+<li>Come to office hours</li>
+<li>Ask in class on Wednesday</li>
+</ul>
+<p>Thanks for the thoughtful feedback! 🎲</p>
 
 
 </section>
