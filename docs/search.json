@@ -3943,5 +3943,516 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#roadmap-for-today",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#roadmap-for-today",
+    "title": "Normal and Poisson Distributions",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Normal Distribution Basics\n\nContinuous distributions\nNormal parameters (μ, σ)\nStandard Normal distribution\n\nPart 2: Z-scores & The Empirical Rule\n\nStandardization\n68-95-99.7 rule\nIdentifying unusual observations\n\nPart 3: Calculating with R\n\npnorm() for probabilities\nqnorm() for percentiles\nReal-world examples\n\n\nPart 4: Normal Approximation\n\nWhen Binomial → Normal\nConditions: \\(np \\geq 10\\), \\(n(1-p) \\geq 10\\)\nContinuity correction\n\nPart 5: Poisson Distribution\n\nModeling rare events\nRate × time = λ\nPoisson approximation to Binomial\n\nPart 6: Wrap-up\n\nSummary\nNext steps"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#last-time-discrete-vs.-continuous-random-variables",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#last-time-discrete-vs.-continuous-random-variables",
+    "title": "Normal and Poisson Distributions",
+    "section": "Last time: Discrete vs. Continuous Random Variables",
+    "text": "Last time: Discrete vs. Continuous Random Variables\n\n\n\n\n\nDiscrete Random Variable\n\n\nA discrete r.v. takes on:\n\nA finite number of values, OR\nA countably infinite number of values\n\nExamples:\n\nNumber of heads in 10 coin flips\nNumber of students in a class\nNumber of COVID cases per day\n\n\n\n\n\n\n\n\nContinuous Random Variable\n\n\nA continuous r.v. can take:\n\nAny real value in an interval\nAny value in a union of intervals\n\nExamples:\n\nHeight\nBlood pressure\nTime until an event occurs\n\n\n\n\n\n\nToday’s focus: Continuous random variables"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#continuous-rv-in-general",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#continuous-rv-in-general",
+    "title": "Normal and Poisson Distributions",
+    "section": "Continuous rv in general",
+    "text": "Continuous rv in general\n\nThe distribution of a continuous rv is governed by a density function/curve.\nProbabilities are calculated as area under the curve over an interval.\nTotal area beneath the density function/curve is 1."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#probability-between-a-and-b",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#probability-between-a-and-b",
+    "title": "Normal and Poisson Distributions",
+    "section": "Probability between a and b",
+    "text": "Probability between a and b\nThe area beneath the density curve/function between two points a and b represents the probability that the random variable (\\(X\\), say) will assume some value between a and b\nWhen working with continuous random variables, probability is found for intervals of values rather than individual values.\n\nThe probability that a continuous r.v. \\(X\\) takes on any single individual value is 0\nThat is, \\(P(X = x) = 0\\).\nThus, \\(P(a &lt; X &lt; b)\\) is equivalent to \\(P(a \\leq X \\leq b)\\)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#probability-at-exactly-a",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#probability-at-exactly-a",
+    "title": "Normal and Poisson Distributions",
+    "section": "Probability at exactly a",
+    "text": "Probability at exactly a\nFor a continuous random variable X:\n\nProbability comes from areas under the curve\nAreas require width\nA single point has no width\n\n\n\nSo:\n\n\\(P(X = a) = 0\\)\nOnly intervals have non-zero probability (for example, \\(P(a ≤ X ≤ b)\\))\n\n\nIntuition: you can shade an interval, but you can’t shade a point."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#all-the-following-are-equivalent",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#all-the-following-are-equivalent",
+    "title": "Normal and Poisson Distributions",
+    "section": "All the following are equivalent",
+    "text": "All the following are equivalent\nFor a continuous r.v. \\(X\\), all of the following are equivalent:\n\\[P(a \\leq X \\leq b) = P(a &lt; X \\leq b)\\] \\[= P(a \\leq X &lt; b) = P(a &lt; X &lt; b)\\]\nThat is, we can safely ignore equality when defining the endpoints of a given interval. [This is certainly not true for discrete rv]"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#normal-distribution-1",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#normal-distribution-1",
+    "title": "Normal and Poisson Distributions",
+    "section": "Normal distribution",
+    "text": "Normal distribution\n\n\n\nA random variable X is modeled with a normal distribution:\nShape: symmetric, unimodal bell curve\nCenter: mean \\(\\mu\\)\nSpread (variability): standard deviation \\(\\sigma\\)\nShorthand for a random variable, \\(X\\), that has a Normal distribution: \\[X \\sim \\text{Normal}(\\mu, \\sigma)\\]\n\n\n\n\n\nExample: We recorded the high temperature in the past 100 years for today. The mean high is 19°C (66.2°F)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#different-means-same-sd",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#different-means-same-sd",
+    "title": "Normal and Poisson Distributions",
+    "section": "Different means, Same SD",
+    "text": "Different means, Same SD\n\n\n\nOrange curve: \\(\\mu = 15\\), \\(\\sigma = 3\\)\nBlue curve: \\(\\mu = 20\\), \\(\\sigma = 3\\)\nSame spread (width), different centers\nThe mean determines where the bell curve is centered on the x-axis"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-mean-different-sds",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-mean-different-sds",
+    "title": "Normal and Poisson Distributions",
+    "section": "Same mean, Different SDs",
+    "text": "Same mean, Different SDs\n\n\n\nPurple curve: \\(\\mu = 20\\), \\(\\sigma = 2\\)\nGreen curve: \\(\\mu = 20\\), \\(\\sigma = 5\\)\nSame center, different spreads\nSmaller SD = taller, narrower curve (less variability)\nLarger SD = shorter, wider curve (more variability)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#why-standardize",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#why-standardize",
+    "title": "Normal and Poisson Distributions",
+    "section": "Why standardize?",
+    "text": "Why standardize?\nDifferent normal distributions have different scales:\n\nHeights measured in centimeters: \\(X \\sim N(170, 10)\\)\nTest scores: \\(Y \\sim N(75, 8)\\)\nBlood pressure: \\(Z \\sim N(120, 15)\\)\n\nProblem: How do we compare observations across different distributions?\nSolution: Convert to a common scale using Z-scores"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-is-a-z-score",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-is-a-z-score",
+    "title": "Normal and Poisson Distributions",
+    "section": "What is a Z-score?",
+    "text": "What is a Z-score?\nThe Z-score tells you how many standard deviations an observation is from the mean:\nSuppose \\(X\\) is an arbitrary random variable that follows a normal distribution with mean \\(\\mu\\) and standard deviation \\(\\sigma\\), i.e. \\(X \\sim N(\\mu, \\sigma)\\)\n\\[Z = \\dfrac{X - \\mu}{\\sigma} \\Longleftrightarrow X = \\mu + Z\\sigma\\]\nNotation:\n\n\\(X\\) = original observation\n\\(\\mu\\) = mean of the distribution\n\\(\\sigma\\) = standard deviation of the distribution\n\\(Z\\) = standardized score"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#interpreting-z-scores",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#interpreting-z-scores",
+    "title": "Normal and Poisson Distributions",
+    "section": "Interpreting Z-scores",
+    "text": "Interpreting Z-scores\n\n\n\nZ-score\nInterpretation\n\n\n\n\n\\(Z = 0\\)\nExactly at the mean\n\n\n\\(Z = 1\\)\nOne SD above the mean\n\n\n\\(Z = -1\\)\nOne SD below the mean\n\n\n\\(Z = 2.5\\)\n2.5 SDs above the mean\n\n\n\\(Z = -1.8\\)\n1.8 SDs below the mean\n\n\n\n\nRule of thumb:\n\nZ-scores between -2 and 2 are common\nZ-scores beyond ±3 are rare (unusual observations)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-height-standardization",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-height-standardization",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Height standardization",
+    "text": "Example: Height standardization\nSuppose adult male heights follow \\(N(\\mu = 175, \\sigma = 7)\\) cm.\nQuestion: What is the Z-score for a man who is 189 cm tall?\n\n\\[Z = \\frac{X - \\mu}{\\sigma} = \\frac{189 - 175}{7} = \\frac{14}{7} = 2\\]\nInterpretation: This man is 2 standard deviations above the mean height."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#standard-normal-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#standard-normal-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "Standard Normal Distribution",
+    "text": "Standard Normal Distribution\nWhen we standardize a normal random variable, we get the Standard Normal distribution:\n\\[Z \\sim N(\\mu = 0, \\sigma = 1)\\]\nProperties:\n\nMean = 0\nStandard deviation = 1\nDenoted by \\(Z\\)\nAll normal distributions can be converted to this standard form"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#the-68-95-99.7-rule",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#the-68-95-99.7-rule",
+    "title": "Normal and Poisson Distributions",
+    "section": "The 68-95-99.7 Rule",
+    "text": "The 68-95-99.7 Rule\nFor any normal distribution:\n\n68% of observations fall within 1 SD of the mean\n95% of observations fall within 2 SDs of the mean\n99.7% of observations fall within 3 SDs of the mean\n\n\nEmpirical rule (68–95–99.7).Source: OpenIntro Biostatistics."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#using-the-empirical-rule",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#using-the-empirical-rule",
+    "title": "Normal and Poisson Distributions",
+    "section": "Using the Empirical Rule",
+    "text": "Using the Empirical Rule\nExample: IQ scores follow \\(N(\\mu = 100, \\sigma = 15)\\)\nQuestions:\n\nWhat percentage of people have IQ between 85 and 115?\n\n\n\n85 = 100 - 15 = μ - σ\n115 = 100 + 15 = μ + σ\nAnswer: About 68%. So about 2/3 of people fall within 15 points of 100.\n\n\n\n\nWhat percentage have IQ between 70 and 130?\n\n\n\n\n70 = 100 - 30 = μ - 2σ\n130 = 100 + 30 = μ + 2σ\nAnswer: About 95%"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#why-is-the-empirical-rule-useful",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#why-is-the-empirical-rule-useful",
+    "title": "Normal and Poisson Distributions",
+    "section": "Why is the Empirical Rule useful?",
+    "text": "Why is the Empirical Rule useful?\n\n\nQuick estimates without calculations\nIdentify unusual observations\n\nValues beyond 2 SDs are uncommon (&lt;5%)\nValues beyond 3 SDs are very rare (&lt;0.3%)\n\nCheck data quality\n\nIf your data doesn’t follow this pattern, it may not be normally distributed"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#r-functions-for-the-normal-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#r-functions-for-the-normal-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "R functions for the Normal distribution",
+    "text": "R functions for the Normal distribution\n\n\n\nFour key functions\n\n\n\n\n\nFunction\nPurpose\nExample\n\n\n\n\ndnorm()\nDensity at a point\nHeight of curve at x\n\n\npnorm()\nCumulative probability\nP(X ≤ x)\n\n\nqnorm()\nQuantile/percentile\nWhat x gives P(X ≤ x) = p?\n\n\nrnorm()\nRandom samples\nGenerate random normal data\n\n\n\nMost common: pnorm() and qnorm()"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#pnorm-cumulative-probabilities",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#pnorm-cumulative-probabilities",
+    "title": "Normal and Poisson Distributions",
+    "section": "pnorm(): Cumulative probabilities",
+    "text": "pnorm(): Cumulative probabilities\n\n\npnorm(q, mean, sd, lower.tail = TRUE)\nCumulative probability is the total area under the curve to the left of a value, i.e. the probability that a random variable is less than or equal to a value: \\(P(X \\le q)\\).\n\nq = the value you’re interested in\nmean \\(= \\mu\\)\nsd \\(= \\sigma\\)\nlower.tail = TRUE \\(\\longrightarrow P(X \\le q)\\)\nlower.tail = FALSE \\(\\longrightarrow P(X \\gt q)\\)\n\n\n\n\nExample: For standard normal \\(Z \\sim N(0, 1)\\):\n\n# P(Z ≤ 1.96)\npnorm(1.96, mean = 0, sd = 1)\n\n[1] 0.9750021\n\n\n\n\nInterpretation: About 97.5% of observations fall below Z = 1.96"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-standard-normal-probabilities",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-standard-normal-probabilities",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Standard normal probabilities",
+    "text": "Example: Standard normal probabilities\n\n\nLet \\(Z \\sim N(0, 1)\\). Calculate:\n\n\n1. \\(P(Z &lt; 2.67)\\)\n\npnorm(2.67)  # mean=0, sd=1 is the default\n\n[1] 0.9962074\n\n\n\n\n\n2. \\(P(Z &gt; -0.37)\\)\n\npnorm(-0.37, lower.tail = FALSE)\n\n[1] 0.6443088\n\n\n\n\nOr\n\n1 - pnorm(-0.37)\n\n[1] 0.6443088"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-standard-normal-probabilities-continued",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-standard-normal-probabilities-continued",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Standard normal probabilities (continued)",
+    "text": "Example: Standard normal probabilities (continued)\n\n\n3. \\(P(-2.18 &lt; Z &lt; 2.46)\\)\n\npnorm(2.46) - pnorm(-2.18)\n\n[1] 0.9784244\n\n\n\n\n\n4. P(Z = 1.53)\n\n# For continuous distributions, P(X = x) = 0\n0\n\n[1] 0\n\n\n\nRemember: For continuous random variables, the probability of any single exact value is 0!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-general-normal-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-general-normal-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: General normal distribution",
+    "text": "Example: General normal distribution\n\n\nSuppose the distribution of diastolic blood pressure (DBP) in 35- to 44-year old men is normally distributed with mean 80 mm Hg and variance 144 mm Hg.\n\n\n\\[X \\sim N(\\mu = 80, \\sigma = 12)\\]\n(Note: \\(variance = 144\\), so \\(SD = \\sqrt{144} = 12\\))\n\n\nQuestion 1: What proportion has mild hypertension (DBP between 90 and 99)?\n\n\n# P(90 ≤ X ≤ 99)\npnorm(99, mean = 80, sd = 12) - pnorm(90, mean = 80, sd = 12)\n\n[1] 0.1456556\n\n\nAbout 14.6% have mild hypertension."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visualizing-the-probability",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visualizing-the-probability",
+    "title": "Normal and Poisson Distributions",
+    "section": "Visualizing the probability",
+    "text": "Visualizing the probability"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#qnorm-finding-percentiles",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#qnorm-finding-percentiles",
+    "title": "Normal and Poisson Distributions",
+    "section": "qnorm(): Finding percentiles",
+    "text": "qnorm(): Finding percentiles\n\n\nqnorm(p, mean, sd, lower.tail = TRUE)\n\n\nA percentile is the value below which a given percentage of observations fall;\nqnorm() returns the value on the x-axis corresponding to a cumulative probability.\n\np = the probability/percentile (as a decimal)\nmean = μ\nsd = σ\nReturns the value where \\(P(X ≤ value) = p\\)\n\n\n\n\nExample: What Z-score has 97.5% of data below it?\n\nqnorm(0.975, mean = 0, sd = 1)\n\n[1] 1.959964\n\n\nThis is the famous 1.96 critical value!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-blood-pressure-percentiles",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-blood-pressure-percentiles",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Blood pressure percentiles",
+    "text": "Example: Blood pressure percentiles\n\n\nDBP: \\(X \\sim N(80, 12)\\)\n\n\nQuestion 2: What is the 10th percentile?\n\nqnorm(0.10, mean = 80, sd = 12)\n\n[1] 64.62138\n\n\n10% of men have DBP below about 64.6 mm Hg.\n\n\n\nQuestion 3: What is the 95th percentile?\n\nqnorm(0.95, mean = 80, sd = 12)\n\n[1] 99.73824\n\n\n95% of men have DBP below about 99.7 mm Hg."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#connecting-percentiles-to-z-scores",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#connecting-percentiles-to-z-scores",
+    "title": "Normal and Poisson Distributions",
+    "section": "Connecting percentiles to Z-scores",
+    "text": "Connecting percentiles to Z-scores\nAny percentile question can be solved with Z-scores:\nWhat is the 10th percentile of N(80, 12)?\n\n\nStep 1: Find Z-score for 10th percentile\n\nz &lt;- qnorm(0.10)\nz\n\n[1] -1.281552\n\n\n\n\nStep 2: Convert back to original scale\n\nx &lt;- 80 + z * 12\nx\n\n[1] 64.62138\n\n\n\n\nFormula: \\(X = \\mu + Z \\cdot \\sigma\\)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-is-a-binomial-approximately-normal",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-is-a-binomial-approximately-normal",
+    "title": "Normal and Poisson Distributions",
+    "section": "When is a binomial approximately normal?",
+    "text": "When is a binomial approximately normal?\nRecall that a binomial random variable \\(X\\) counts the total number of successes in \\(n\\) independent trials, each with probability \\(p\\) of a success.\nProbability function for \\(k = 0, 1, ..., n\\) : \\[P(X = k) = {n\\choose k}p^k(1-p)^{n-k}\\]\nAs n gets larger, the binomial distribution becomes more symmetric and can be approximated by a normal distribution.\n\n\n\nNote\n\n\nRule of thumb: Normal approximation works well when:\n\\[np \\geq 10 \\quad \\text{and} \\quad n(1-p) \\geq 10\\]\n\nEnsures sample size (\\(n\\)) is moderately large and the \\(p\\) is not too close to 0 or 1\nOther resources use other criteria (like \\(npq&gt;5\\) or \\(np&gt;5\\))"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-approaching-normal",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-approaching-normal",
+    "title": "Normal and Poisson Distributions",
+    "section": "Visual: Binomial approaching Normal",
+    "text": "Visual: Binomial approaching Normal\nBinomial distributions for different \\(n\\) (columns) and \\(p\\) (rows)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#normal-approximation-parameters",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#normal-approximation-parameters",
+    "title": "Normal and Poisson Distributions",
+    "section": "Normal approximation parameters",
+    "text": "Normal approximation parameters\n\n\nIf \\(X \\sim \\text{Binomial}(n, p)\\) and the conditions are met:\n\\[X \\approx N(\\mu, \\sigma)\\]\nwhere:\n\\[\\mu = np \\quad \\text{and} \\quad \\sigma = \\sqrt{np(1-p)}\\]\n\nThese are the same formulas for the mean and SD of a binomial distribution!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-covid-vaccination-status",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-covid-vaccination-status",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: COVID vaccination status",
+    "text": "Example: COVID vaccination status\n\n\nAbout 25% of people that test positive for Covid-19 are vaccinated for it. Suppose 100 people have tested positive for Covid-19 (independently of each other). Let \\(X\\) denote the number of people that are vaccinated among the 100 that tested positive. What is the probability that fewer than 20 of the people that tested positive are vaccinated?\nLet \\(X\\) = number vaccinated among the 100.\n\n\nQuestion: What is \\(P(X &lt; 20)\\)?\n\nCheck conditions:\n\nn &lt;- 100\np &lt;- 0.25\n\nn * p  # Should be ≥ 10\n\n[1] 25\n\nn * (1 - p)  # Should be ≥ 10\n\n[1] 75\n\n\n✓ Conditions met!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability",
+    "title": "Normal and Poisson Distributions",
+    "section": "Exact vs. Approximate probability",
+    "text": "Exact vs. Approximate probability\nMethod 1: Exact (Binomial)\n\\[P(X &lt; 20) = P(X \\leq 19) = P(X=0) + P(X=1) + \\cdots + P(X=19)\\]\n\npbinom(19, size = 100, prob = 0.25)\n\n[1] 0.09953041\n\n\n\nMethod 2: Normal Approximation\n\nmu &lt;- n * p\nsigma &lt;- sqrt(n * p * (1 - p))\n\npnorm(19, mean = mu, sd = sigma)\n\n[1] 0.08292833\n\n\n\n\nVery close! The normal approximation is 0.083 vs. exact 0.100.\n…\nMethod 3: Normal Approximation with continuity correction\nBecause we want \\(P(X &lt; 20) = P(X \\le 19)\\), we use 19.5 in the normal approximation.\n\nmu &lt;- n * p\nsigma &lt;- sqrt(n * p * (1 - p))\n\npnorm(19 + 0.5, mean = mu, sd = sigma)\n\n[1] 0.1020119\n\n\nWith continuity correction: 0.102 . . ."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-to-use-each-method",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-to-use-each-method",
+    "title": "Normal and Poisson Distributions",
+    "section": "When to use each method?",
+    "text": "When to use each method?\nUse Binomial (exact):\n\nWhen n is small or moderate\nWhen you need exact probabilities\nR handles this easily with pbinom()\n\nUse Normal approximation:\n\nWhen n is very large (computing binomial probabilities becomes slow)\nFor theoretical understanding\nHistorically important (before computers!)\n\n\n\nIn practice: With modern computers, we usually just use the exact binomial."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-we-covered-today",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-we-covered-today",
+    "title": "Normal and Poisson Distributions",
+    "section": "What we covered today",
+    "text": "What we covered today\n\n\nNormal Distribution: - Symmetric, bell-shaped, continuous - Characterized by μ and σ - Many natural phenomena follow this\nZ-scores: - Standardize to N(0, 1) - Measure distance from mean in SDs - Enable comparison across scales\n\nEmpirical Rule: - 68% within 1 SD - 95% within 2 SDs - 99.7% within 3 SDs\nR Functions: - pnorm() for probabilities - qnorm() for percentiles - Normal approximation to binomial"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#key-formulas-to-remember",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#key-formulas-to-remember",
+    "title": "Normal and Poisson Distributions",
+    "section": "Key formulas to remember",
+    "text": "Key formulas to remember\nZ-score transformation: \\[Z = \\frac{X - \\mu}{\\sigma}\\]\nNormal approximation to Binomial:\nWhen \\(np \\geq 10\\) and \\(n(1-p) \\geq 10\\): \\[X \\sim \\text{Binomial}(n, p) \\approx N(\\mu = np, \\sigma = \\sqrt{np(1-p)})\\]"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#practice-problems-to-try",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#practice-problems-to-try",
+    "title": "Normal and Poisson Distributions",
+    "section": "Practice problems to try",
+    "text": "Practice problems to try\n\nIf heights follow N(170, 10), what proportion are between 160 and 180 cm?\nTest scores follow N(75, 12). What score represents the 90th percentile?\nIn a sample of 200 people where 40% support a policy, approximate the probability that fewer than 70 support it."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#next-time",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#next-time",
+    "title": "Normal and Poisson Distributions",
+    "section": "Next time",
+    "text": "Next time\n\nPoisson distribution\nOther continuous distributions\nChoosing the right distribution for your data\n\nReminder: Homework due Friday!\n\n\n\nBMSC 620 | Normal + Poisson"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-mean-different-sd",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-mean-different-sd",
+    "title": "Normal and Poisson Distributions",
+    "section": "Same mean, Different SD",
+    "text": "Same mean, Different SD\n\n\n\nOrange curve: \\(\\mu = 20\\), \\(\\sigma = 2\\)\nBlue curve: \\(\\mu = 20\\), \\(\\sigma = 5\\)\nSame center, different spreads\nSmaller SD = taller, narrower curve (less variability)\nLarger SD = shorter, wider curve (more variability)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#different-means-different-sd",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#different-means-different-sd",
+    "title": "Normal and Poisson Distributions",
+    "section": "Different means, different SD",
+    "text": "Different means, different SD\n\n\n\nOrange curve: mu = 15, sigma = 2 (centered left, narrow/tall)\nBlue curve: mu = 24, sigma = 5 (centered right, wide/short)\nThe mean controls the horizontal location (center)\nThe standard deviation controls the spread (width/height)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#functional-form",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#functional-form",
+    "title": "Normal and Poisson Distributions",
+    "section": "Functional form",
+    "text": "Functional form\n\nThe shape of the density curve is given by\n\\[\nf(x;\\mu,\\sigma)\n= \\frac{1}{\\sqrt{2\\pi}\\,\\sigma}\n  e^{-\\frac{1}{2}\\left(\\frac{x-\\mu}{\\sigma}\\right)^2},\n\\quad \\text{for } -\\infty &lt; x &lt; \\infty,\\;\n-\\infty &lt; \\mu &lt; \\infty,\\;\n\\sigma &gt; 0\n\\]"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#anatomy-of-the-normal-curve",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#anatomy-of-the-normal-curve",
+    "title": "Normal and Poisson Distributions",
+    "section": "Anatomy of the Normal curve",
+    "text": "Anatomy of the Normal curve\n\n\n\n\n\n\n\n\n\n\nThe Normal distribution has a closed-form equation, but for this course:\n\nYou do not need to memorize it\nYou do not need to compute it by hand\nWhat matters is how \\(\\mu\\) and \\(\\sigma\\) shape the curve"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#from-the-book",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#from-the-book",
+    "title": "Normal and Poisson Distributions",
+    "section": "From the book",
+    "text": "From the book\n\nEmpirical rule (68–95–99.7). Source: OpenIntro Statistics.Source: OpenIntro Statistics, Diez, Çetinkaya-Rundel, Barr."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#calculating-probabilities-from-a-normal-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#calculating-probabilities-from-a-normal-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "Calculating probabilities from a Normal distribution",
+    "text": "Calculating probabilities from a Normal distribution\nThere are several ways to calculate probabilities from a normal distribution:\n\nCalculus\n(not for us!)\nNormal probability tables\n\nIncluded in the textbook (Appendix B.1)\nHelpful historically, but not required for this course\n\nR commands (what we will use)\n\n\\(P(Z \\leq q) =\\) pnorm(q, mean = 0, sd = 1)\n\\(P(Z &gt; q) =\\) pnorm(q, mean = 0, sd = 1, lower.tail = FALSE)\n\n\n\nIn this course, we will calculate normal probabilities using R."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-probability-different-scale",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#same-probability-different-scale",
+    "title": "Normal and Poisson Distributions",
+    "section": "Same probability, different scale",
+    "text": "Same probability, different scale\n\n\nRecall the Z-score transformation:\n\\[\nZ = \\frac{X - \\mu}{\\sigma}\n\\]\nThis means any probability from a normal distribution can be computed in two equivalent ways:\n\n\nOriginal scale\n\npnorm(99, mean = 80, sd = 12)\n\n[1] 0.9433272\n\n\n\nStandardized scale\n\npnorm((99 - 80) / 12, mean = 0, sd = 1)\n\n[1] 0.9433272\n\n\n\n \n\nThese two probabilities are identical.\nStandardization changes the scale, not the probability."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#whats-really-happening",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#whats-really-happening",
+    "title": "Normal and Poisson Distributions",
+    "section": "What’s really happening?",
+    "text": "What’s really happening?\n\nA binomial counts the number of successes\nWhen n is large, this count behaves like a normal variable\nThe normal approximation lets us:\n\nUse Z-scores\nUse pnorm()\nReuse everything we just learned"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-approaching-normal-1",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-approaching-normal-1",
+    "title": "Normal and Poisson Distributions",
+    "section": "Visual: Binomial approaching Normal",
+    "text": "Visual: Binomial approaching Normal\nBinomial distributions for different \\(n\\) (columns) and \\(p\\) (rows)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability-12",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability-12",
+    "title": "Normal and Poisson Distributions",
+    "section": "Exact vs. Approximate probability (1/2)",
+    "text": "Exact vs. Approximate probability (1/2)\nMethod 1: Exact (Binomial)\n\\[P(X &lt; 20) = P(X \\leq 19) = P(X=0) + P(X=1) + \\cdots + P(X=19)\\]\n\npbinom(19, size = 100, prob = 0.25)\n\n[1] 0.09953041\n\n\n\n\n\nMethod 2: Normal Approximation\n\nmu &lt;- n * p\nsigma &lt;- sqrt(n * p * (1 - p))\n\npnorm(19, mean = mu, sd = sigma)\n\n[1] 0.08292833\n\n\n\n\n\n\nVery close! The normal approximation is 0.083 vs. exact 0.100."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability-22",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#exact-vs.-approximate-probability-22",
+    "title": "Normal and Poisson Distributions",
+    "section": "Exact vs. Approximate probability (2/2)",
+    "text": "Exact vs. Approximate probability (2/2)\n\n\nMethod 3: Normal Approximation with continuity correction\nBecause we want \\(P(X &lt; 20) = P(X \\le 19)\\), we use 19.5 in the normal approximation.\n\nmu &lt;- n * p\nsigma &lt;- sqrt(n * p * (1 - p))\n\npnorm(19 + 0.5, mean = mu, sd = sigma)\n\n[1] 0.1020119\n\n\n\n\nWith continuity correction: 0.102"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable",
+    "title": "Normal and Poisson Distributions",
+    "section": "Checking whether Normal is reasonable",
+    "text": "Checking whether Normal is reasonable\nIn practice, we check normality visually:\n\nHistogram or density plot (shape: roughly symmetric, unimodal)\nQ-Q plot (points close to a straight line)\nIf using a normal model: check residuals, not raw outcomes\n\nWe usually avoid hypothesis tests (e.g., Shapiro-Wilk) because:\n\nWith large n, tiny deviations look “significant”\nWith small n, tests have low power\nVisuals + context are more informative\n\n\nggplot(df, aes(sample = y)) +\n  stat_qq() +\n  stat_qq_line()\n\n\n#| echo: false\nset.seed(1)\n\nlibrary(patchwork)\n\nmu &lt;- 10\nsigma &lt;- 4\n\ndf_samp1 &lt;- tibble(\n  x = rnorm(40, mean = mu, sd = sigma)\n)\n\ndf_samp2 &lt;- tibble(\n  x = rnorm(100, mean = mu, sd = sigma)\n)\n\ndf_samp3 &lt;- tibble(\n  x = rnorm(400, mean = mu, sd = sigma)\n)\n\n\n\n\ndo_hist &lt;- function(df, x, \n                    alpha = 0.8, \n                    fill = \"yellow\", \n                    title = NULL) {\n\nmean_sd &lt;- df %&gt;%\n    dplyr::summarise(mean = mean({{ x }}, na.rm = TRUE),\n                     sd = sd({{ x }}, na.rm = TRUE))\n\n  n_bins &lt;- df %&gt;%\n    dplyr::summarise(n = sum(!is.na({{ x }}))) %&gt;%\n    dplyr::mutate(sqrt_n = round(sqrt(n)),\n                  ten_log_10 = round(10 * log10(n))) %&gt;%\n    dplyr::summarise(n_bins = min(sqrt_n, ten_log_10))\n\n\n  ggplot(data = df,\n         aes(x = {{ x }})) +\n    geom_histogram(aes(y = ..density..),\n                   bins = n_bins$n_bins,\n                   fill =  fill,\n                   alpha = alpha,\n                   color = \"black\") +\n    stat_function(fun = dnorm,\n                  args = list(mean = mean_sd$mean,\n                              sd = mean_sd$sd),\n                  size = 1.0,\n                  line_color = \"black\",\n                        line_type = \"solid\") +\n    labs(x = NULL,\n         y = NULL, \n         title = title) + \n    laviz::theme_minimal_white(grid = \"none\", \n                               base_size = 16) + \n    theme(axis.text.y = element_blank())\n}\n\n\ndo_one_qq &lt;- function(df, x, \n                    alpha = 0.8, \n                    fill = \"yellow\") {\n  \n  a &lt;- ggplot(df, aes(sample = x)) +\n  stat_qq(color = fill) +\n  stat_qq_line() + \n  laviz::theme_minimal_white(grid = \"XY\", \n                               base_size = 16) + \n  labs(x = \"Theoretical quantiles\", \n       y = \"Observed\")\n\n\ntitle &lt;- dim(df)[1]\ntitle &lt;- glue::glue(\"n = {title}\")\n\nb &lt;- do_hist(df = df, \n        x = x, \n        alpha = alpha, \n        fill = fill, \n        title = title)\n\nb / a\n  \n  \n}\n\n\np1 &lt;- do_one_qq(df = df_samp1,\n          x = x, \n          fill = \"#0072B2\")\n\np2 &lt;- do_one_qq(df = df_samp2,\n          x = x, \n          fill = \"#009E73\")\n\np3 &lt;- do_one_qq(df = df_samp3,\n          x = x, \n          fill = \"#E69F00\")\n\n\np1 | p2 | p3"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable-12",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable-12",
+    "title": "Normal and Poisson Distributions",
+    "section": "Checking whether Normal is reasonable (1/2)",
+    "text": "Checking whether Normal is reasonable (1/2)\nIn practice, we check normality visually:\n\nHistogram or density plot (shape: roughly symmetric, unimodal)\nQ-Q plot (points close to a straight line)\nIf using a normal model: check residuals, not raw outcomes\n\nWe usually avoid hypothesis tests (e.g., Shapiro-Wilk) because:\n\nWith large n, tiny deviations look “significant”\nWith small n, tests have low power\nVisuals + context are more informative\n\nQuantile-quantile plots in ggplot2\n\n# Example code\nggplot(data, \n       aes(sample = x)) +\n  stat_qq() +\n  stat_qq_line()"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable-22",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#checking-whether-normal-is-reasonable-22",
+    "title": "Normal and Poisson Distributions",
+    "section": "Checking whether Normal is reasonable (2/2)",
+    "text": "Checking whether Normal is reasonable (2/2)\nA Q-Q plot compares your sample quantiles to theoretical Normal quantiles; straight-line agreement means the distributional shape matches Normal (especially in the tails)."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-counts",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-counts",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson distribution (counts)",
+    "text": "Poisson distribution (counts)\nUse a Poisson model for the number of events in a fixed interval when:\n\nEvents occur independently\nThe event rate is roughly constant over the interval\nWe are counting events (0, 1, 2, …)\n\n\n\nNotation:\n\\[X \\sim \\text{Pois}(\\lambda)\\]\nInterpretation:\n\n\\(\\lambda\\) = expected number of events per interval (rate × time)\nMean = \\(\\lambda\\)\nSD = \\(\\sqrt{\\lambda}\\)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#r-functions-for-poisson",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#r-functions-for-poisson",
+    "title": "Normal and Poisson Distributions",
+    "section": "R functions for Poisson",
+    "text": "R functions for Poisson\n\n\n\nFour key functions\n\n\n\n\n\nFunction\nPurpose\nExample\n\n\n\n\ndpois()\nProbability at a value\nP(X = x)\n\n\nppois()\nCumulative probability\nP(X ≤ x)\n\n\nqpois()\nQuantile\nWhat x gives P(X ≤ x) = p?\n\n\nrpois()\nRandom samples\nSimulate counts\n\n\n\nMost common: dpois() and ppois()"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#shape-depends-on-λ",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#shape-depends-on-λ",
+    "title": "Normal and Poisson Distributions",
+    "section": "Shape depends on λ",
+    "text": "Shape depends on λ\n\nAs λ increases:\n\nThe distribution shifts to the right (larger expected counts)\nThe distribution becomes more symmetric\nFor large λ, it starts to look approximately Normal"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-deaths-λ-scaling",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-deaths-λ-scaling",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Typhoid deaths (λ scaling)",
+    "text": "Example: Typhoid deaths (λ scaling)\nSuppose there are on average 5 deaths per year.\n1. Probability of exactly 3 deaths in 1 year:\n\ndpois(x = 3, lambda = 5)\n\n[1] 0.1403739\n\n\n\n\n2. Probability of exactly 2 deaths in 0.5 years:\nRate scales with time, so \\(\\lambda_{0.5} = 5 \\times 0.5 = 2.5\\)\n\ndpois(x = 2, lambda = 2.5)\n\n[1] 0.2565156\n\n\n\n\n3. Probability of more than 12 deaths in 2 years:\n\\(\\lambda_{2} = 5 \\times 2 = 10\\)\n\nppois(q = 12, lambda = 10, lower.tail = FALSE)\n\n[1] 0.2084435\n\n# or: 1 - ppois(12, lambda = 10)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-approximation-to-binomial-rare-events",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-approximation-to-binomial-rare-events",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson approximation to Binomial (rare events)",
+    "text": "Poisson approximation to Binomial (rare events)\nWhen \\(n\\) is large and \\(p\\) is small, a Binomial can be approximated by a Poisson:\nIf \\(X \\sim \\text{Binomial}(n, p)\\) and \\(p\\) is small, then \\[X \\approx \\text{Pois}(\\lambda = np)\\]\nThis is most useful when the Normal approximation is not appropriate (because \\(p\\) is too close to 0).\n\n\nQuick example:\n\nn &lt;- 1000\np &lt;- 0.002\nlambda &lt;- n * p\n\n# Approx P(X &lt;= 3)\npbinom(3, size = n, prob = p)\n\n[1] 0.8573042\n\nppois(3, lambda = lambda)\n\n[1] 0.8571235\n\n\nVery close! (0.857 vs 0.857)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#introduction-to-the-poisson-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#introduction-to-the-poisson-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "Introduction to the Poisson distribution",
+    "text": "Introduction to the Poisson distribution\n\nThe Poisson distribution is often used to model count data (# of successes), especially for rare events\n\nIt is a discrete distribution!\n\nIt is used most often in settings where events happen at a rate \\(\\lambda\\) per unit of population and per unit time\n\n\n\nExample: Historical records of hospitalizations in New York City indicate that an average of 4.4 people are hospitalized each day for an acute myocardial infarction (AMI)\n\nWe can plot the distribution of hospitalizations on each day"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-2",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-2",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson distribution",
+    "text": "Poisson distribution\n\nSuppose events occur over time in such a way that\n\nThe probability an event occurs in an interval is proportional to the length of the interval.\nEvents occur independently at a rate \\(\\lambda\\) per unit of time.\n\nThen the probability of exactly \\(x\\) events in one unit of time is \\[P(X = k) = \\frac{e^{-\\lambda}\\lambda^{k}}{k!}, \\,\\, k = 0, 1, 2, \\ldots\\]\nFor the Poisson distribution modeling the number of events in one unit of time:\n\nThe mean is \\(\\lambda\\).\nThe standard deviation is \\(\\sqrt{\\lambda}\\).\n\nShorthand for a random variable, \\(X\\), that has a Poisson distribution: \\[X \\sim \\text{Pois}(\\lambda)\\]"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-r-commands",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-r-commands",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson distribution: R commands",
+    "text": "Poisson distribution: R commands\n\n\n\nFour key functions\n\n\n\n\n\nFunction\nPurpose\nExample\n\n\n\n\ndpois()\nProbability at a value\nP(X = x)\n\n\nppois()\nCumulative probability\nP(X ≤ x)\n\n\nqpois()\nQuantile\nWhat x gives P(X ≤ x) = p?\n\n\nrpois()\nRandom samples\nGenerate random Poisson data\n\n\n\nMost common: dpois() and ppois()"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visualizing-poisson-distributions",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visualizing-poisson-distributions",
+    "title": "Normal and Poisson Distributions",
+    "section": "Visualizing Poisson distributions",
+    "text": "Visualizing Poisson distributions\n\n\n\nThe distribution is discrete (bars, not a curve)\nAs λ increases, the distribution becomes more symmetric\nWhen λ is large (≥20), it starts to look approximately normal"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-14",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-14",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Typhoid fever (1/4)",
+    "text": "Example: Typhoid fever (1/4)\nScenario: Suppose there are on average 5 deaths per year from typhoid fever.\nQuestions:\n\nWhat is the probability of 3 deaths in a year?\nWhat is the probability of 2 deaths in 0.5 years?\nWhat is the probability of more than 12 deaths in 2 years?"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-24",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-24",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Typhoid fever (2/4)",
+    "text": "Example: Typhoid fever (2/4)\nQuestion 1: What is the probability of 3 deaths in a year?\n\n\\(\\lambda = 5\\) and we want \\(P(X = 3)\\)\n\n\\[P(X=3) = \\frac{e^{-5}5^{3}}{3!} = 0.1404\\]\n\ndpois(x = 3, lambda = 5)\n\n[1] 0.1403739"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-34",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-34",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Typhoid fever (3/4)",
+    "text": "Example: Typhoid fever (3/4)\nQuestion 2: What is the probability of 2 deaths in 0.5 years?\n\n\\(\\lambda = 5\\) was the rate for one year\nFor half a year, we need to adjust λ:\n\n\\[\\lambda = \\frac{5 \\text{ deaths}}{1 \\text{ year}} \\cdot \\frac{1 \\text{ year}}{2 \\text{ half-years}} = \\frac{2.5 \\text{ deaths}}{1 \\text{ half-year}}\\]\n\\[P(X=2) = \\frac{e^{-2.5}2.5^{2}}{2!} = 0.2565\\]\n\ndpois(x = 2, lambda = 2.5)\n\n[1] 0.2565156\n\n\nKey insight: λ scales with the time interval!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-44",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#example-typhoid-fever-44",
+    "title": "Normal and Poisson Distributions",
+    "section": "Example: Typhoid fever (4/4)",
+    "text": "Example: Typhoid fever (4/4)\nQuestion 3: What is the probability of more than 12 deaths in 2 years?\n\nFor two years, adjust λ:\n\n\\[\\lambda = \\frac{5 \\text{ deaths}}{1 \\text{ year}} \\cdot 2 \\text{ years} = 10 \\text{ deaths per 2 years}\\]\n\\[P(X&gt;12) = 1 - P(X \\leq 12) = 1 - \\sum_{k=0}^{12}\\frac{e^{-10}10^{k}}{k!} = 0.2084\\]\n\n\n\n1 - ppois(q = 12, lambda = 10)\n\n[1] 0.2084435\n\n\n\n\nppois(q = 12, lambda = 10, \n      lower.tail = FALSE)\n\n[1] 0.2084435"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-approximation-to-binomial",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-approximation-to-binomial",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson approximation to Binomial",
+    "text": "Poisson approximation to Binomial\nThe Poisson distribution can be used to approximate the binomial distribution when:\n\n\\(n\\) is large\n\\(p\\) is small\n\nThis is useful when the Normal approximation doesn’t work (because p is too extreme).\nApproximation: If \\(X \\sim \\text{Binomial}(n, p)\\) with large n and small p:\n\\[X \\approx \\text{Pois}(\\lambda = np)\\]"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-poisson-approximation",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#visual-binomial-poisson-approximation",
+    "title": "Normal and Poisson Distributions",
+    "section": "Visual: Binomial → Poisson approximation",
+    "text": "Visual: Binomial → Poisson approximation\n\nBlue = Binomial, Orange = Poisson(λ = np). They become nearly identical as n increases!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-to-use-poisson-vs-normal-approximation",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#when-to-use-poisson-vs-normal-approximation",
+    "title": "Normal and Poisson Distributions",
+    "section": "When to use Poisson vs Normal approximation",
+    "text": "When to use Poisson vs Normal approximation\n\n\nUse Poisson approximation when:\n\n\\(n\\) is large\n\\(p\\) is small (close to 0)\nEvents are rare\n\\(np &lt; 10\\) (Normal approximation fails)\n\nExample: - n = 1000, p = 0.002 - λ = np = 2\n\nUse Normal approximation when:\n\n\\(n\\) is large\n\\(p\\) is not too extreme\n\\(np \\geq 10\\) AND \\(n(1-p) \\geq 10\\)\n\nExample: - n = 100, p = 0.25 - Both conditions met ✓"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#summary-poisson-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#summary-poisson-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "Summary: Poisson distribution",
+    "text": "Summary: Poisson distribution\nKey characteristics:\n\nModels count data for rare events\nParameter: \\(\\lambda\\) = rate × time\nMean = \\(\\lambda\\), SD = \\(\\sqrt{\\lambda}\\)\n\nR functions:\n\ndpois(x, lambda) → P(X = x)\nppois(q, lambda) → P(X ≤ q)\n\nImportant: Remember to adjust λ when changing the time interval!\nApproximation: Can approximate Binomial when n is large and p is small."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-when-you-see-it-think-poisson",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#poisson-distribution-when-you-see-it-think-poisson",
+    "title": "Normal and Poisson Distributions",
+    "section": "Poisson distribution: when you see it, think Poisson",
+    "text": "Poisson distribution: when you see it, think Poisson\n\n\n\nNote\n\n\nPoisson models counts of events in a fixed interval.\nAsk yourself:\n“How many times does something happen in a given amount of time or space?”\n\n\n\nCommon examples:\n\nNumber of ER arrivals per hour\nNumber of emails received per day\nNumber of mutations per gene\nNumber of accidents per mile of highway per year\n\n\nKey clues:\n\nCounting events: 0, 1, 2, 3, …\nFixed interval (time, distance, area)\nEvents are relatively rare and independent"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-you-need-to-know-normal-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-you-need-to-know-normal-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "What you need to know: Normal distribution",
+    "text": "What you need to know: Normal distribution\nConceptual understanding:\n\nNormal distributions are symmetric, bell-shaped, continuous\nFully characterized by mean (μ) and standard deviation (σ)\nZ-scores standardize to N(0, 1): \\(Z = \\frac{X - \\mu}{\\sigma}\\)\n\n\n\nEmpirical Rule (68-95-99.7):\n\n68% of data within 1 SD, 95% within 2 SDs, 99.7% within 3 SDs\nValues beyond ±3 SDs are very rare\n\n\n\nR skills:\n\npnorm(q, mean, sd) → P(X ≤ q)\nqnorm(p, mean, sd) → value at pth percentile\nNormal approximation when \\(np \\geq 10\\) AND \\(n(1-p) \\geq 10\\)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-you-need-to-know-poisson-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#what-you-need-to-know-poisson-distribution",
+    "title": "Normal and Poisson Distributions",
+    "section": "What you need to know: Poisson distribution",
+    "text": "What you need to know: Poisson distribution\nWhen to use Poisson:\n\nCounting rare events in a fixed interval\nEvents occur independently at rate λ\n\n\n\nKey concepts:\n\nParameter: λ = rate × time\nMean = λ, SD = \\(\\sqrt{\\lambda}\\)\nAdjust λ when changing time intervals\n\n\n\nR skills:\n\ndpois(x, lambda) → P(X = x)\nppois(q, lambda) → P(X ≤ q)\nPoisson approximates Binomial when n is large and p is small"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#key-formulas-for-reference",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#key-formulas-for-reference",
+    "title": "Normal and Poisson Distributions",
+    "section": "Key formulas (for reference)",
+    "text": "Key formulas (for reference)\nYou don’t need to memorize these, but understand what they represent:\n\n\nZ-score transformation: \\[Z = \\frac{X - \\mu}{\\sigma} \\quad \\text{or} \\quad X = \\mu + Z\\sigma\\]\n\n\nNormal approximation to Binomial:\nWhen \\(np \\geq 10\\) and \\(n(1-p) \\geq 10\\): \\[X \\sim \\text{Binomial}(n, p) \\approx N\\left(\\mu = np, \\sigma = \\sqrt{np(1-p)}\\right)\\]\n\n\nPoisson approximation to Binomial:\nWhen \\(n\\) is large and \\(p\\) is small: \\[X \\sim \\text{Binomial}(n, p) \\approx \\text{Pois}(\\lambda = np)\\]\n\n\n\nBMSC 620 | Normal + Poisson"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#looking-ahead",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#looking-ahead",
+    "title": "Normal and Poisson Distributions",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext class:\n\nSampling distributions\nCentral Limit Theorem\nIntroduction to inference\n\n\n\nFor this week:\n\nPractice problems in textbook sections 3.3-3.4\nHomework due Friday\nOffice hours: [your times here]\n\n\n\nStudy tips:\n\nFocus on when to use each distribution\nPractice with R functions\nDon’t memorize formulas—understand the concepts!\n\n\n\n\nBMSC 620 | Normal + Poisson"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_complete.html#continuity-correction",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_complete.html#continuity-correction",
+    "title": "Normal and Poisson Distributions",
+    "section": "Continuity correction",
+    "text": "Continuity correction\nThe binomial is discrete (0, 1, 2, …), but the Normal is continuous.\n\n\nSo we “nudge” the cutoff by 0.5 when using the Normal approximation.\n\nFor left-tail probabilities (\\(&lt;\\) or \\(\\le\\)): add 0.5\n\n\\(P(X \\le k)\\) becomes \\(P(Y \\le k + 0.5)\\)\n\\(P(X &lt; k)\\) becomes \\(P(Y \\le k - 0.5)\\) (since \\(X &lt; k\\) means \\(X \\le k-1\\))\n\nFor right-tail probabilities (\\(&gt;\\) or \\(\\ge\\)): subtract 0.5\n\n\\(P(X \\ge k)\\) becomes \\(P(Y \\ge k - 0.5)\\)\n\\(P(X &gt; k)\\) becomes \\(P(Y \\ge k + 0.5)\\) (since \\(X &gt; k\\) means \\(X \\ge k+1\\))\n\n\n\nWhere \\(X\\) is binomial, and \\(Y\\) is the Normal approximation."
   }
 ]

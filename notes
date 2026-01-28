@@ -8,6 +8,16 @@ Then
 3) instructors.qmd (clean, complete, calm)
 
 
+   Okabe–Ito color system
+   ============================ */
+$oi-blue:        #0072B2;  /* headings / structure */
+$oi-green:       #009E73;  /* links */
+$oi-black:       #000000;
+$oi-grey:        #999999;
+$oi-orange:      #E69F00;  /* for warnings/notes */
+$oi-yellow:      #F0E442;  /* for highlights */
+
+
 
 
 Then:
@@ -75,3 +85,8 @@ The normal distribution is super important. The Poisson -- I'd really just like 
 
 
 The book covers the normal dist on pages 152-167. And the Poisson on pages 168-169
+
+
+
+
+c("\u2264", "\u2265")

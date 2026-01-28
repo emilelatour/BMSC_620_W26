@@ -33,15 +33,15 @@ By the end of the week, you should be able to:
 - calculate expected values and variances of random variables,
 - work with linear combinations of random variables,
 - identify when the Binomial distribution applies and calculate probabilities,
-- understand properties of the Normal distribution,
-- work with sampling distributions and the Central Limit Theorem.
+- understand properties of the Normal distribution and calculate probabilities using R,
+- identify when the Poisson distribution applies and calculate probabilities using R.
 
 ## Readings (before class)
 
 - Textbook section 3.1 (Random variables)
 - Textbook section 3.2 (Binomial distribution)
 - Textbook section 3.3 (Normal distribution)
-- Textbook section 3.4 (Sampling distributions)
+- Textbook section 3.4 (Poisson distribution)
 
 (Additional resources will be posted if helpful.)
 
@@ -75,19 +75,19 @@ By the end of the week, you should be able to:
 - **Topics**
   - The Normal distribution
   - Standard Normal (Z) distribution
-  - Normal probability calculations
-  - Sampling distributions
-  - Central Limit Theorem
-  - Standard error
+  - Normal probability calculations (`pnorm()`, `qnorm()`)
+  - Normal approximation to the Binomial (with continuity correction)
+  - The Poisson distribution
+  - Poisson probability calculations (`dpois()`, `ppois()`)
+  - Poisson approximation to the Binomial (rare events)
 
 - **Slides**
-  - Normal Distribution and Sampling Distributions ([HTML] | [PDF] | [OneDrive])
+  - Normal and Poisson Distributions ([HTML](/lessons/10_normal_poisson/10_normal_poisson.qmd) | [PDF] | [OneDrive])
 
-- **Code along**
-  - [Download Normal Distribution code along (.qmd)]
+/Users/latour/Library/CloudStorage/Dropbox/teaching/BMSC_620_W26
 
 - **Recording**
-  - [Normal Distribution and Sampling Distributions]
+  - [Normal and Poisson Distributions]
 
 ---
 

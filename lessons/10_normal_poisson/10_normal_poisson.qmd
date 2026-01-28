@@ -1,0 +1,2165 @@
+---
+title: "Normal and Poisson Distributions"
+subtitle: "Textbook Sections 3.3–3.4"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w4d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Normal + Poisson"
+    html-math-method: mathjax
+    chalkboard: true
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(glue)
+library(knitr)
+library(patchwork)
+
+library(lamisc)
+library(laviz)        # devtools::install_github("emilelatour/laviz") 
+
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none", 
+                                     axis = "xy", 
+                                     base_size = 16))
+
+```
+
+# Learning Objectives 
+
+By the end of today's lecture, you will be able to:
+
+1. Describe the characteristics of the Normal distribution
+2. Calculate and interpret Z-scores to standardize observations
+3. Use the Empirical Rule (68-95-99.7) to estimate probabilities
+4. Calculate probabilities using `pnorm()` and find percentiles using `qnorm()`
+5. Apply the Normal approximation to the Binomial distribution
+6. Recognize when to use a Poisson distribution and calculate probabilities
+
+## Roadmap for Today
+
+:::: {.columns}
+::: {.column width="50%"}
+**Part 1: Normal Distribution Basics**
+
+- Continuous distributions
+- Normal parameters (μ, σ)
+- Standard Normal distribution
+
+**Part 2: Z-scores & The Empirical Rule**
+
+- Standardization
+- 68-95-99.7 rule
+- Identifying unusual observations
+
+**Part 3: Calculating with R**
+
+- `pnorm()` for probabilities
+- `qnorm()` for percentiles
+- Real-world examples
+:::
+
+::: {.column width="50%"}
+**Part 4: Normal Approximation**
+
+- When Binomial → Normal
+- Conditions: $np \geq 10$, $n(1-p) \geq 10$
+- Continuity correction
+
+**Part 5: Poisson Distribution**
+
+- Modeling rare events
+- Rate × time = λ
+- Poisson approximation to Binomial
+
+**Part 6: Wrap-up**
+
+- Summary
+- Next steps
+:::
+::::
+
+## Last time: Discrete vs. Continuous Random Variables
+
+::::::: columns
+:::: {.column width="48%"}
+::: {.callout-important icon="false"}
+## Discrete Random Variable
+
+A **discrete r.v.** takes on:
+
+-   A finite number of values, OR
+-   A countably infinite number of values
+
+**Examples:**
+
+-   Number of heads in 10 coin flips
+-   Number of students in a class
+-   Number of COVID cases per day
+:::
+::::
+
+:::: {.column width="48%"}
+::: {.callout-warning icon="false"}
+## Continuous Random Variable
+
+A **continuous r.v.** can take:
+
+-   Any real value in an interval
+-   Any value in a union of intervals
+
+**Examples:**
+
+-   Height
+-   Blood pressure
+-   Time until an event occurs
+:::
+::::
+:::::::
+
+::: fragment
+**Today's focus:** Continuous random variables
+:::
+
+
+# Continuous random variables
+
+## Continuous rv in general
+
+- The distribution of a continuous rv is governed by a *density function/curve*.
+- Probabilities are calculated as *area* under the curve over an *interval*.
+- Total area beneath the density function/curve is 1.
+
+```{r}
+#| echo: false
+mu <- 10
+sigma <- 4
+a <- 4
+b <- 14
+
+df <- tibble::tibble(
+  x = seq(-3, 28, length.out = 1000),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+ggplot(df, aes(x = x, 
+               y = y)) +
+  geom_line(linewidth = 0.8) +
+  geom_area(fill = "gray80", 
+            alpha = 0.8) +
+  labs(
+    x = "X",
+    y = "Density"
+  ) +
+  annotate(
+    "text",
+    x = 10,
+    y = 0.02,
+    label = "Total area = 1",
+    size = 4
+  ) + 
+  # Customize axes
+  scale_x_continuous(breaks = c(0, a, 10, b, 20, 25),
+                     labels = c("0", "a", "10", "b", "20", "25"),
+                     limits = c(-2, 26)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df$y) * 1.1)) +
+  
+  # Labels and theme
+  labs(x = "X", y = "Density")
+```
+
+## Probability between *a* and *b*
+
+The area beneath the density curve/function between two points *a* and *b* represents the probability that the random variable ($X$, say) will assume some value between *a* and *b*
+
+When working with continuous random variables, probability is found for
+**intervals of values** rather than **individual values**.
+
+-   The probability that a continuous r.v. $X$ takes on any single
+individual value is 0
+
+-   That is, $P(X = x) = 0$.
+
+-   Thus, $P(a < X < b)$ is equivalent to $P(a \leq X \leq b)$
+
+```{r}
+#| echo: false
+
+mu <- 10
+sigma <- 4
+a <- 4
+b <- 14
+
+df <- tibble::tibble(
+  x = seq(-3, 28, length.out = 1000),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+ya <- dnorm(a, mean = mu, sd = sigma)
+yb <- dnorm(b, mean = mu, sd = sigma)
+
+lab <- "P(a \u2264 X \u2264 b)"
+
+ggplot() +
+  # Draw the full distribution curve
+  geom_line(data = df,
+            aes(x = x, y = y), 
+            linewidth = 0.8) +
+  
+  # Add shaded area for P(a ≤ X ≤ b)
+  geom_area(data = df %>% filter(x >= a & x <= b),
+            aes(x = x, y = y), 
+            fill = "gray80", 
+            alpha = 0.8) +
+  
+  # Add vertical lines at a and b
+  geom_segment(aes(x = a, xend = a, 
+                   y = 0, yend = ya), 
+               linewidth = 0.8) + 
+  geom_segment(aes(x = b, xend = b, 
+                   y = 0, yend = yb), 
+               linewidth = 0.8) + 
+  
+  # Add the probability notation text
+  annotate("text", x = 10, y = 0.035, 
+           label = lab, 
+           parse = FALSE, size = 5)  + 
+  
+  # Add axis labels
+  annotate("text", x = a, y = -0.003, label = "a", size = 4) +
+  annotate("text", x = b, y = -0.003, label = "b", size = 4) +
+  
+  # Customize axes
+  scale_x_continuous(breaks = c(0, a, 10, b, 20, 25),
+                     labels = c("0", "a", "10", "b", "20", "25"),
+                     limits = c(-2, 26)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df$y) * 1.1)) +
+  
+  # Labels and theme
+  labs(x = "X", y = "Density")
+```
+
+## Probability at exactly *a*
+
+For a **continuous** random variable X:
+
+- Probability comes from **areas under the curve**
+- Areas require **width**
+- A single point has **no width**
+
+\
+
+So:
+
+- $P(X = a) = 0$
+- Only intervals have non-zero probability (for example, $P(a ≤ X ≤ b)$)
+
+\
+**Intuition**: you can shade an interval, but you can't shade a point.
+
+## All the following are equivalent
+
+For a **continuous** r.v. $X$, all of the following are equivalent:
+
+$$P(a \leq X \leq b) = P(a < X \leq b)$$
+$$= P(a \leq X < b) = P(a < X < b)$$
+
+That is, we can safely ignore equality when defining the endpoints of a given interval. **[This is certainly not true for discrete rv]**
+
+# Normal distribution
+
+![Artwork by Allison Horst](/img_slides/horst_normal_not_normal.png){width="350px"}
+
+## Normal distribution
+
+::::: columns
+::: {.column width="40%"}
+-   A random variable X is modeled with a normal distribution:
+
+-   **Shape:** symmetric, unimodal bell curve
+-   **Center:** mean $\mu$
+-   **Spread (variability):** standard deviation $\sigma$
+
+
+
+-   Shorthand for a random variable, $X$, that has a Normal
+distribution: $$X \sim \text{Normal}(\mu, \sigma)$$
+:::
+
+::: {.column width="60%"}
+![](../img_slides/Normal_examples.png)
+:::
+:::::
+
+-   **Example:** We recorded the high temperature in the past 100 years
+for today. The mean high is 19°C (66.2°F)
+
+<!-- ## Functional form -->
+## Anatomy of the Normal curve
+
+```{r}
+#| echo: false
+
+mu <- 10
+sigma <- 4
+
+df <- tibble::tibble(
+  x = seq(mu - 4*sigma, mu + 4*sigma, length.out = 1000),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+x1 <- mu - sigma
+x2 <- mu
+x3 <- mu + sigma
+
+y1 <- dnorm(x1, mean = mu, sd = sigma)
+y2 <- dnorm(x2, mean = mu, sd = sigma)  # peak
+y3 <- dnorm(x3, mean = mu, sd = sigma)  # same as y1
+
+ggplot(df, aes(x = x, y = y)) +
+  # density curve
+  geom_line(linewidth = 0.8) +
+  
+  # vertical lines at mu-sigma, mu, mu+sigma
+  geom_segment(aes(x = x1, xend = x1, y = 0, yend = y1), linewidth = 0.7) +
+  geom_segment(aes(x = x2, xend = x2, y = 0, yend = y2), linewidth = 0.7) +
+  geom_segment(aes(x = x3, xend = x3, y = 0, yend = y3), linewidth = 0.7) +
+  
+  # dashed horizontal line connecting the two cutpoints
+  geom_segment(aes(x = x1, xend = x3, y = y1, yend = y3),
+               linetype = "dashed", linewidth = 0.6) +
+  
+  # optional arrows pointing down at the cutpoints
+  annotate("segment", x = x1, xend = x1, y = y1, yend = 0,
+           arrow = arrow(length = unit(0.15, "inches")),
+           linewidth = 0.4) +
+  annotate("segment", x = x3, xend = x3, y = y3, yend = 0,
+           arrow = arrow(length = unit(0.15, "inches")),
+           linewidth = 0.4) +
+  
+  # x-axis labels using Greek letters (plotmath)
+  # annotate("text", x = x1, y = -0.0045, label = expression(mu - 1*sigma), size = 5) +
+  # annotate("text", x = x2, y = -0.0025, label = ,           size = 5) +
+  # annotate("text", x = x3, y = -0.0025, label = , size = 5) +
+  
+  # axes
+  scale_x_continuous(breaks = c(x1, x2, x3),
+                     labels = c(expression(mu - 1*sigma), expression(mu), expression(mu + 1*sigma)),
+                     limits = c(mu - 4*sigma, mu + 4*sigma)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(x = "X", 
+       y = "Density") + 
+  theme(
+    # axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+
+<!-- The shape of the density curve is given by -->
+
+<!-- $$ -->
+<!-- f(x;\mu,\sigma) -->
+<!-- = \frac{1}{\sqrt{2\pi}\,\sigma} -->
+<!--   e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}, -->
+<!-- \quad \text{for } -\infty < x < \infty,\; -->
+<!-- -\infty < \mu < \infty,\; -->
+<!-- \sigma > 0 -->
+<!-- $$ -->
+
+The **Normal distribution has a closed-form equation**, but for this course:
+
+- You do **not** need to memorize it
+- You do **not** need to compute it by hand
+- What matters is how $\mu$ and $\sigma$ shape the curve
+
+## Different means, Same SD
+
+```{r}
+#| echo: false
+
+col_left <- "orange"
+col_right <- "blue"
+
+
+mu1 <- 15
+sigma1 <- 3
+
+df1 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu1, sd = sigma1)
+)
+
+mu2 <- 20
+sigma2 <- 3
+
+df2 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu2, sd = sigma2)
+)
+
+ggplot() + 
+  geom_line(data = df1, 
+            aes(x = x, 
+                y = y),
+            color = col_left) + 
+  geom_line(data = df2, 
+            aes(x = x, 
+                y = y), 
+            color = col_right) + 
+  # Mean lines
+  geom_segment(
+    aes(x = mu1, xend = mu1,
+        y = 0, yend = dnorm(mu1, mean = mu1, sd = sigma1)),
+    color = col_left,
+    linewidth = 0.8
+  ) +
+  geom_segment(
+    aes(x = mu2, xend = mu2,
+        y = 0, yend = dnorm(mu2, mean = mu2, sd = sigma2)),
+    color = col_right,
+    linewidth = 0.8
+  ) +
+  # Customize axes
+  scale_x_continuous(breaks = seq(5, 30, 5),
+                     limits = c(2, 32)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df2$y) * 1.1)) +
+  labs(
+    x = "X",
+    y = "Density"
+  )  + 
+  annotate(
+    "text",
+    x = 8, y = 0.1,
+    label = expression(N(mu == 15, sigma == 3)),
+    color = col_left,
+    size = 5
+  ) +
+  annotate(
+    "text",
+    x = 27, y = 0.1,
+    label = expression(N(mu == 20, sigma == 3)),
+    color = col_right,
+    size = 5
+  )
+```
+
+```{r}
+#| echo: false
+
+# set.seed(42)
+# dat <- tibble::tibble(
+#   Normal_dist1 = rnorm(1000000, mean = 80, sd = 4),
+#   Normal_dist2 = rnorm(1000000, mean = 100, sd = 4),
+#   Normal_dist3 = rnorm(1000000, mean = 120, sd = 4)
+# )
+# 
+# 
+# dat <- dat %>% 
+#   tidyr::pivot_longer(cols = dplyr::everything(), 
+#                       names_to = "variable", 
+#                       values_to = "value") %>% 
+#   mutate(variable = factor(variable, 
+#                            levels = c("Normal_dist1", 
+#                                       "Normal_dist2", 
+#                                       "Normal_dist3"), 
+#                            labels = c("mean = 80",
+#                                       "mean = 100",
+#                                       "mean = 120")))
+# 
+# 
+# ggplot(dat) +
+#   aes(x = value, fill = variable) +
+#   geom_density(alpha = 0.25) +
+#   scale_fill_hue() +
+#   labs(title = "Normal distributions with different means", fill = "Distributions", subtitle = "Variance = 16") 
+# 
+# dat <- data.frame(
+#   Normal_dist1 = rnorm(1000000, mean = 100, sd = 3),
+#   Normal_dist2 = rnorm(1000000, mean = 100, sd = 6),
+#   Normal_dist3 = rnorm(1000000, mean = 100, sd = 10)
+# )
+# 
+# dat <- dat %>% 
+#   tidyr::pivot_longer(cols = dplyr::everything(), 
+#                       names_to = "variable", 
+#                       values_to = "value") %>% 
+#   mutate(variable = factor(variable, 
+#                            levels = c("Normal_dist1", 
+#                                       "Normal_dist2", 
+#                                       "Normal_dist3"), 
+#                            labels = c(
+#   "variance = 9",
+#   "variance = 36",
+#   "variance = 100"
+# )))
+# 
+# 
+# ggplot(dat) +
+#   aes(x = value, fill = variable) +
+#   geom_density(alpha = 0.25) +
+#   scale_fill_hue() +
+#   labs(title = "Normal distributions with different variances", fill = "Distributions", subtitle = "Mean = 100")
+```
+
+
+
+
+::: notes
+- Orange curve: $\mu = 15$, $\sigma = 3$
+- Blue curve: $\mu = 20$, $\sigma = 3$
+- Same spread (width), different centers
+- The mean determines where the bell curve is centered on the x-axis
+:::
+
+## Same mean, Different SD
+
+```{r}
+#| echo: false
+
+mu1 <- 20
+sigma1 <- 2
+
+df1 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu1, sd = sigma1)
+)
+
+mu2 <- 20
+sigma2 <- 5
+
+df2 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu2, sd = sigma2)
+)
+
+ggplot() + 
+  geom_line(data = df1, 
+            aes(x = x, 
+                y = y),
+            color = col_left) + 
+  geom_line(data = df2, 
+            aes(x = x, 
+                y = y), 
+            color = col_right) + 
+  # Mean lines
+  geom_segment(
+    aes(x = mu1, xend = mu1,
+        y = 0, yend = dnorm(mu1, mean = mu1, sd = sigma1)),
+    color = col_left,
+    linewidth = 0.8
+  ) +
+  geom_segment(
+    aes(x = mu2, xend = mu2,
+        y = 0, yend = dnorm(mu2, mean = mu2, sd = sigma2)),
+    color = col_right,
+    linewidth = 0.8
+  ) +
+  scale_x_continuous(breaks = seq(0, 40, 5),
+                     limits = c(2, 38)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, max(df1$y) * 1.1)) +
+  labs(
+    x = "X",
+    y = "Density"
+  )  + 
+  annotate(
+    "text",
+    x = 12.5, y = 0.1,
+    label = expression(N(mu == 20, sigma == 2)),
+    color = col_left,
+    size = 5
+  ) +
+  annotate(
+    "text",
+    x = 29, y = 0.06,
+    label = expression(N(mu == 20, sigma == 5)),
+    color = col_right,
+    size = 5
+  )
+
+
+
+
+```
+
+::: notes
+- Orange curve: $\mu = 20$, $\sigma = 2$
+- Blue curve: $\mu = 20$, $\sigma = 5$
+- Same center, different spreads
+- Smaller SD = taller, narrower curve (less variability)
+- Larger SD = shorter, wider curve (more variability)
+:::
+
+## Different means, different SD
+
+```{r}
+#| echo: false
+
+mu1 <- 15
+sigma1 <- 2
+
+df1 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu1, sd = sigma1)
+)
+
+mu2 <- 24
+sigma2 <- 5
+
+df2 <- tibble::tibble(
+  x = seq(-3, 40, length.out = 1000),
+  y = dnorm(x, mean = mu2, sd = sigma2)
+)
+
+ggplot() + 
+  geom_line(data = df1, 
+            aes(x = x, y = y),
+            color = col_left) + 
+  geom_line(data = df2, 
+            aes(x = x, y = y), 
+            color = col_right) + 
+  
+  # Mean lines
+  geom_segment(
+    aes(x = mu1, xend = mu1,
+        y = 0, yend = dnorm(mu1, mean = mu1, sd = sigma1)),
+    color = col_left,
+    linewidth = 0.8
+  ) +
+  geom_segment(
+    aes(x = mu2, xend = mu2,
+        y = 0, yend = dnorm(mu2, mean = mu2, sd = sigma2)),
+    color = col_right,
+    linewidth = 0.8
+  ) +
+  
+  # Customize axes
+  scale_x_continuous(breaks = seq(0, 40, 5),
+                     limits = c(2, 38)) +
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(0, max(c(df1$y, df2$y)) * 1.1)) +
+  labs(x = "X", y = "Density") +
+  
+  # Labels
+  annotate(
+    "text",
+    x = 8.5, y = 0.16,
+    label = expression(N(mu == 15, sigma == 2)),
+    color = col_left,
+    size = 5
+  ) +
+  annotate(
+    "text",
+    x = 33, y = 0.06,
+    label = expression(N(mu == 24, sigma == 5)),
+    color = col_right,
+    size = 5
+  )
+```
+
+
+::: notes    
+- Orange curve: mu = 15, sigma = 2 (centered left, narrow/tall)
+- Blue curve: mu = 24, sigma = 5 (centered right, wide/short)
+- The mean controls the horizontal location (center)
+- The standard deviation controls the spread (width/height)
+:::
+
+# Z-scores & Standardization
+
+## Why standardize?
+
+Different normal distributions have different scales:
+
+- Heights measured in centimeters: $X \sim N(170, 10)$
+- Test scores: $Y \sim N(75, 8)$
+- Blood pressure: $Z \sim N(120, 15)$
+
+**Problem:** How do we compare observations across different distributions?
+
+**Solution:** Convert to a common scale using **Z-scores**
+
+## What is a Z-score?
+
+The **Z-score** tells you how many standard deviations an observation is from the mean:
+
+Suppose $X$ is an arbitrary random variable that follows a normal distribution with mean $\mu$ and standard deviation $\sigma$, i.e. $X \sim N(\mu, \sigma)$
+
+$$Z = \dfrac{X - \mu}{\sigma} \Longleftrightarrow X = \mu + Z\sigma$$
+
+**Notation:**
+
+- $X$ = original observation
+- $\mu$ = mean of the distribution
+- $\sigma$ = standard deviation of the distribution
+- $Z$ = standardized score
+
+## Interpreting Z-scores
+
+| Z-score | Interpretation |
+|---------|----------------|
+| $Z = 0$ | Exactly at the mean |
+| $Z = 1$ | One SD above the mean |
+| $Z = -1$ | One SD below the mean |
+| $Z = 2.5$ | 2.5 SDs above the mean |
+| $Z = -1.8$ | 1.8 SDs below the mean |
+
+::: fragment
+**Rule of thumb:**
+
+- Z-scores between -2 and 2 are common
+- Z-scores beyond ±3 are rare (unusual observations)
+:::
+
+## Example: Height standardization
+
+Suppose adult male heights follow $N(\mu = 175, \sigma = 7)$ cm.
+
+**Question:** What is the Z-score for a man who is 189 cm tall?
+
+. . .
+
+$$Z = \frac{X - \mu}{\sigma} = \frac{189 - 175}{7} = \frac{14}{7} = 2$$
+
+**Interpretation:** This man is 2 standard deviations above the mean height.
+
+## Standard Normal Distribution
+
+When we standardize a normal random variable, we get the **Standard Normal distribution**:
+
+$$Z \sim N(\mu = 0, \sigma = 1)$$
+
+**Properties:**
+
+- Mean = 0
+- Standard deviation = 1
+- Denoted by $Z$
+- All normal distributions can be converted to this standard form
+
+```{r}
+#| echo: false
+#| fig-height: 4
+
+# x <- seq(-4, 4, length.out = 1000)
+# y <- dnorm(x, mean = 0, sd = 1)
+# 
+# df <- tibble(x = x, y = y)
+# 
+# ggplot(df, aes(x = x, y = y)) +
+#   geom_line(linewidth = 1) +
+#   geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
+#   scale_x_continuous(breaks = -3:3,
+#                      labels = c("-3", "-2", "-1", "0", "1", "2", "3")) +
+#   labs(x = "Z", y = "Density",
+#        title = "Standard Normal Distribution") +
+#   theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-height: 4.0
+
+
+# --- Choose a Normal distribution and two cutpoints on the X scale ---
+mu <- 10
+sigma <- 4
+# x1 <- 3
+# x2 <- 7
+x1 <- mu - 2*sigma
+x2 <- mu - 1*sigma
+
+
+y1 <- dnorm(x1, mean = mu, sd = sigma)
+y2 <- dnorm(x2, mean = mu, sd = sigma)  # peak
+
+# Standardized cutpoints
+z1 <- (x1 - mu) / sigma
+z2 <- (x2 - mu) / sigma
+
+yz1 <- dnorm(z1, mean = 0, sd = 1)
+yz2 <- dnorm(z2, mean = 0, sd = 1)  # peak
+
+# Data for X-scale plot
+dfX <- tibble(
+  x = seq(mu - 4*sigma, mu + 4*sigma, length.out = 1200),
+  y = dnorm(x, mean = mu, sd = sigma)
+)
+
+dfX_shade <- dfX %>% filter(x >= x1, x <= x2)
+
+# Data for Z-scale plot
+dfZ <- tibble(
+  z = seq(-4, 4, length.out = 1200),
+  y = dnorm(z, mean = 0, sd = 1)
+)
+
+dfZ_shade <- dfZ %>% filter(z >= z1, z <= z2)
+
+# --- Left panel: original scale ---
+pX <- ggplot(dfX, 
+             aes(x = x, y = y)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = dfX_shade, aes(x = x, y = y), fill = "skyblue", alpha = 0.4) +
+  # geom_vline(xintercept = mu, linetype = "dashed", linewidth = 0.8) +
+  geom_segment(aes(x = mu, xend = mu, y = 0, yend = dnorm(mu, mean = mu, sd = sigma)), linewidth = 0.8, linetype = "dashed") +
+  geom_segment(aes(x = x1, xend = x1, y = 0, yend = y1), linewidth = 0.7) +
+  geom_segment(aes(x = x2, xend = x2, y = 0, yend = y2), linewidth = 0.7) + 
+  annotate(
+    "text",
+    x = mu + 1.4 * sigma + .7,
+    y = dnorm(mu + 1.4 * sigma, mean = mu, sd = sigma) + .01,
+    label = expression(sigma),
+    size = 8,
+    fontface = "bold"
+  ) + 
+  labs(
+    title = NULL,
+    # subtitle = bquote(X %~% N(.(mu), .(sigma))),
+    x = NULL,
+    y = NULL
+  ) +
+  scale_x_continuous(breaks = c(x1, x2, mu),
+                     labels = c(expression(x[1]), expression(x[2]), expression(mu)),
+                     limits = c(mu - 4*sigma, mu + 4*sigma)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  coord_cartesian(clip = "off") + 
+  laviz::theme_minimal_white(grid = "none", 
+                             axis = "none", 
+                             base_size = 16) + 
+  theme(axis.text.y = element_blank())
+
+
+
+# --- Right panel: standardized scale ---
+pZ <- ggplot(dfZ, 
+             aes(x = z, y = y)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = dfZ_shade, aes(x = z, y = y), fill = "skyblue", alpha = 0.4) +
+  # geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  geom_segment(aes(x = 0, xend = 0, y = 0, yend = dnorm(0, mean = 0, sd = 1)), linewidth = 0.8, linetype = "dashed") +
+  geom_segment(aes(x = z1, xend = z1, y = 0, yend = yz1), linewidth = 0.7) +
+  geom_segment(aes(x = z2, xend = z2, y = 0, yend = yz2), linewidth = 0.7) + 
+  annotate(
+    "text",
+    x = 1.4 + .8,
+    y = dnorm(1.4) + .01,
+    label = expression(sigma == 1),
+    size = 8,
+    fontface = "bold"
+  ) + 
+  labs(
+    title = NULL,
+    # subtitle = bquote(X %~% N(.(mu), .(sigma))),
+    x = NULL,
+    y = NULL
+  ) +
+  scale_x_continuous(breaks = c(z1, z2, 0),
+                     labels = c(expression(z[1]), expression(z[2]), expression(0)),
+                     limits = c(-4, 4)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  coord_cartesian(clip = "off") + 
+  laviz::theme_minimal_white(grid = "none", 
+                             axis = "none", 
+                             base_size = 16) + 
+  theme(axis.text.y = element_blank())
+
+
+
+pX <- pX +
+  labs(title = "Original scale") +
+  annotate("text", x = mu, y = max(dfX$y) * 1.08,
+           label = expression(X %~% N(mu, sigma)),
+           size = 6, fontface = "bold")
+
+pZ <- pZ +
+  labs(title = "Standardized scale") +
+  annotate("text", x = 0, y = max(dfZ$y) * 1.08,
+           label = expression(Z %~% N(0, 1)),
+           size = 6, fontface = "bold")
+
+
+
+# Combine
+# pX + pZ + plot_annotation(title = "Standard Normal Distribution (standardization)") &
+#   theme(plot.margin = margin(10, 10, 20, 10))
+pX + pZ
+```
+
+
+# The Empirical Rule
+
+## The 68-95-99.7 Rule
+
+For **any** normal distribution:
+
+- **68%** of observations fall within **1 SD** of the mean
+- **95%** of observations fall within **2 SDs** of the mean
+- **99.7%** of observations fall within **3 SDs** of the mean
+
+![Empirical rule (68–95–99.7).](/img_slides/empirical_rule_openintro.png){width="350px"}
+
+<small>Source: *OpenIntro Biostatistics*.</small>
+
+## Using the Empirical Rule
+
+**Example:** IQ scores follow $N(\mu = 100, \sigma = 15)$
+
+**Questions:**
+
+1. What percentage of people have IQ between 85 and 115?
+
+. . .
+
+- 85 = 100 - 15 = μ - σ
+- 115 = 100 + 15 = μ + σ
+- **Answer: About 68%**. So about 2/3 of people fall within 15 points of 100.
+
+. . .
+
+2. What percentage have IQ between 70 and 130?
+
+. . .
+
+- 70 = 100 - 30 = μ - 2σ
+- 130 = 100 + 30 = μ + 2σ
+- **Answer: About 95%**
+
+## Why is the Empirical Rule useful?
+
+::: incremental
+1. **Quick estimates** without calculations
+2. **Identify unusual observations**
+    - Values beyond 2 SDs are uncommon (<5%)
+    - Values beyond 3 SDs are very rare (<0.3%)
+3. **Check data quality**
+    - If your data doesn't follow this pattern, it may not be normally distributed
+:::
+
+# Calculating Probabilities with R
+
+## Calculating probabilities from a Normal distribution
+
+There are several ways to calculate probabilities from a normal distribution:
+
+1. **Calculus**  
+   *(not for us!)*
+
+2. **Normal probability tables**
+   - Included in the [textbook (Appendix B.1)](https://www.openintro.org/go/?id=stat_prob_tables_normal_t_chisq&referrer=/book/os/index.php)
+   - Helpful historically, but not required for this course
+
+3. **R commands (what we will use)**
+   - $P(Z \leq q) =$ `pnorm(q, mean = 0, sd = 1)`
+   - $P(Z > q) =$ `pnorm(q, mean = 0, sd = 1, lower.tail = FALSE)`
+
+> In this course, we will calculate normal probabilities using **R**.
+
+## R functions for the Normal distribution
+
+::: {.callout-tip icon="false"}
+## Four key functions
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `dnorm()` | **Density** at a point | Height of curve at x |
+| `pnorm()` | **Cumulative probability** | P(X ≤ x) |
+| `qnorm()` | **Quantile/percentile** | What x gives P(X ≤ x) = p? |
+| `rnorm()` | **Random** samples | Generate random normal data |
+
+**Most common:** `pnorm()` and `qnorm()`
+:::
+
+## `pnorm()`: Cumulative probabilities
+
+\
+
+`pnorm(q, mean, sd, lower.tail = TRUE)`
+
+**Cumulative probability** is the total area under the curve to the left of a value, i.e. the probability that a random variable is **less than or equal to a value**: $P(X \le q)$.
+
+- `q` = the value you're interested in
+- `mean` $= \mu$
+- `sd` $= \sigma$
+- `lower.tail = TRUE` $\longrightarrow P(X \le q)$
+- `lower.tail = FALSE` $\longrightarrow P(X \gt q)$
+
+. . .
+
+\
+
+**Example:** For standard normal $Z \sim N(0, 1)$:
+
+```{r}
+# P(Z ≤ 1.96)
+pnorm(1.96, mean = 0, sd = 1)
+```
+
+. . .
+
+**Interpretation:** About 97.5% of observations fall below Z = 1.96
+
+## Example: Standard normal probabilities
+
+\
+
+Let $Z \sim N(0, 1)$. Calculate:
+
+\
+
+**1. $P(Z < 2.67)$**
+
+```{r}
+pnorm(2.67)  # mean=0, sd=1 is the default
+```
+
+. . .
+
+\
+
+**2. $P(Z > -0.37)$**
+
+```{r}
+pnorm(-0.37, lower.tail = FALSE)
+```
+
+. . .
+
+Or 
+
+```{r}
+1 - pnorm(-0.37)
+```
+
+
+## Example: Standard normal probabilities (continued)
+
+\
+
+**3. $P(-2.18 < Z < 2.46)$**
+
+```{r}
+pnorm(2.46) - pnorm(-2.18)
+```
+
+. . .
+
+\
+
+**4. P(Z = 1.53)**
+
+```{r}
+# For continuous distributions, P(X = x) = 0
+0
+```
+
+::: fragment
+**Remember:** For continuous random variables, the probability of any single exact value is 0!
+:::
+
+## Example: General normal distribution
+
+\
+
+Suppose the distribution of diastolic blood pressure (DBP) in 35- to
+44-year old men is normally distributed with mean 80 mm Hg and variance
+144 mm Hg.
+
+\
+
+$$X \sim N(\mu = 80, \sigma = 12)$$ 
+
+(Note: $variance = 144$, so $SD = \sqrt{144} = 12$)
+
+\
+
+**Question 1:** What proportion has mild hypertension (DBP between 90 and 99)?
+
+. . .
+
+```{r}
+# P(90 ≤ X ≤ 99)
+pnorm(99, mean = 80, sd = 12) - pnorm(90, mean = 80, sd = 12)
+```
+
+```{r}
+#| echo: false
+
+norm_diff <- pnorm(99, mean = 80, sd = 12) - pnorm(90, mean = 80, sd = 12)
+norm_diff_pct <- lamisc::fmt_pct(norm_diff)
+norm_diff <- lamisc::fmt_num(norm_diff, accuracy = 0.001)
+```
+
+About `r norm_diff_pct` have mild hypertension.
+
+## Visualizing the probability
+
+```{r}
+#| echo: false
+#| fig-height: 5
+
+mu <- 80
+sigma <- 12
+a <- 90
+b <- 99
+
+x <- seq(40, 120, length.out = 1000)
+y <- dnorm(x, mean = mu, sd = sigma)
+
+df <- tibble(x = x, y = y)
+
+ggplot(df, aes(x = x, y = y)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = df %>% filter(x >= a & x <= b),
+            fill = "coral", alpha = 0.6) +
+  geom_segment(aes(x = a, 
+                   xend = a, 
+                   y = 0, 
+                   yend = dnorm(a, mu, sigma)), 
+               linetype = "dashed") + 
+  geom_segment(aes(x = b, 
+                   xend = b, 
+                   y = 0, 
+                   yend = dnorm(b, mu, sigma)), 
+               linetype = "dashed") + 
+  annotate("text", x = b + 10, y = 0.015,
+           label = glue::glue("P(90 ≤ X ≤ 99) = {norm_diff}"),
+           size = 6) +
+  scale_x_continuous(breaks = seq(40, 120, 10)) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(x = "Diastolic Blood Pressure (mm Hg)",
+       y = "Density",
+       title = "Mild Hypertension Range")
+```
+
+## Same probability, different scale
+
+\
+
+Recall the Z-score transformation:
+
+$$
+Z = \frac{X - \mu}{\sigma}
+$$
+
+This means any probability from a normal distribution can be computed in two equivalent ways:
+
+:::: {.columns}
+::: {.column width="50%"}
+**Original scale**
+
+```{r}
+pnorm(99, mean = 80, sd = 12)
+```
+
+:::
+::: {.column width="50%"}
+**Standardized scale**
+```{r}
+pnorm((99 - 80) / 12, mean = 0, sd = 1)
+```
+
+:::
+::::
+
+\ 
+
+- These two probabilities are **identical**.
+- Standardization changes the **scale**, not the probability.
+
+
+
+# Finding Percentiles
+
+## `qnorm()`: Finding percentiles
+\
+
+
+`qnorm(p, mean, sd, lower.tail = TRUE)`
+
+\
+
+A **percentile** is the value below which a given percentage of observations fall;  
+`qnorm()` returns the **value on the x-axis** corresponding to a cumulative probability.
+
+- `p` = the probability/percentile (as a decimal)
+- `mean` = μ
+- `sd` = σ
+- Returns the **value** where $P(X ≤ value) = p$
+
+. . .
+
+\
+
+**Example:** What Z-score has 97.5% of data below it?
+
+```{r}
+qnorm(0.975, mean = 0, sd = 1)
+```
+
+This is the famous **1.96** critical value!
+
+## Example: Blood pressure percentiles
+
+\
+
+DBP: $X \sim N(80, 12)$
+
+\
+
+**Question 2:** What is the 10th percentile?
+
+```{r}
+qnorm(0.10, mean = 80, sd = 12)
+```
+
+10% of men have DBP below about 64.6 mm Hg.
+
+. . .
+
+\
+
+**Question 3:** What is the 95th percentile?
+
+```{r}
+qnorm(0.95, mean = 80, sd = 12)
+```
+
+95% of men have DBP below about 99.7 mm Hg.
+
+## Connecting percentiles to Z-scores
+
+Any percentile question can be solved with Z-scores:
+
+**What is the 10th percentile of N(80, 12)?**
+
+\
+
+**Step 1:** Find Z-score for 10th percentile
+
+```{r}
+z <- qnorm(0.10)
+z
+```
+
+\
+
+**Step 2:** Convert back to original scale
+```{r}
+x <- 80 + z * 12
+x
+```
+
+\
+
+Formula: $X = \mu + Z \cdot \sigma$
+
+# Normal Approximation to Binomial
+
+## When is a binomial approximately normal?
+
+Recall that a binomial random variable $X$ counts the total number of successes in $n$ independent trials, each with probability $p$ of a success.
+
+Probability function for $k = 0, 1, ..., n$ :
+    $$P(X = k) = {n\choose k}p^k(1-p)^{n-k}$$
+
+As *n* gets larger, the binomial distribution becomes more **symmetric** and can be approximated by a normal distribution.
+
+::: {.callout-note icon="false"}
+**Rule of thumb:** Normal approximation works well when:
+
+$$np \geq 10 \quad \text{and} \quad n(1-p) \geq 10$$
+
+- Ensures sample size ($n$) is moderately large and the $p$ is not too close to 0 or 1
+- Other resources use other criteria (like $npq>5$ or $np>5$)
+
+:::
+
+## Visual: Binomial approaching Normal
+
+**Binomial distributions for different $n$ (columns) and $p$ (rows)**
+
+```{r}
+#| echo: false
+
+
+n_vals <- c(6, 14, 30, 60)
+p_vals <- c(0.1, 0.5)
+
+binom <- tidyr::crossing(
+  n = n_vals,
+  p = p_vals,
+  x = 0:max(n_vals)
+) %>%
+  mutate(prob = dbinom(x, size = n, prob = p)) %>%
+  filter(prob > 1e-5)
+
+ggplot(binom, 
+       aes(x = x, 
+                  y = prob, 
+           fill = factor(p))) +
+  # geom_col(width = 0.9, fill = "gray50") +
+  geom_col(width = 0.9) +
+  facet_grid(rows = vars(p), cols = vars(n),
+             # scales = "free_x", space = "free_x",
+             labeller = label_both) +
+  scale_fill_manual(values = c("0.1" = "#6BAED6", "0.5" = "#9ECAE1")) +
+  labs(x = "Number of successes", 
+  y = "P(X = x)", 
+  subtitle = "As n increases, the distribution becomes more symmetric") + 
+  laviz::theme_minimal_white(border = TRUE, 
+                             base_size = 14, 
+                             grid = "XY") +
+  theme(legend.position = "none")
+```
+
+
+## Normal approximation parameters
+
+\
+
+If $X \sim \text{Binomial}(n, p)$ and the conditions are met:
+
+$$X \approx N(\mu, \sigma)$$
+
+where:
+
+$$\mu = np \quad \text{and} \quad \sigma = \sqrt{np(1-p)}$$
+
+::: fragment
+**These are the same formulas** for the mean and SD of a binomial distribution!
+:::
+
+## Continuity correction
+
+The binomial is **discrete** (0, 1, 2, ...), but the Normal is **continuous**.  
+\
+
+So we "nudge" the cutoff by 0.5 when using the Normal approximation.
+
+- For **left-tail** probabilities ($<$ or $\le$): **add 0.5**
+  - $P(X \le k)$  becomes  $P(Y \le k + 0.5)$
+  - $P(X < k)$    becomes  $P(Y \le k - 0.5)$  (since $X < k$ means $X \le k-1$)
+
+
+- For **right-tail** probabilities ($>$ or $\ge$): **subtract 0.5**
+  - $P(X \ge k)$  becomes  $P(Y \ge k - 0.5)$
+  - $P(X > k)$    becomes  $P(Y \ge k + 0.5)$  (since $X > k$ means $X \ge k+1$)
+
+\
+Where $X$ is binomial, and $Y$ is the Normal approximation.
+
+## Example: COVID vaccination status
+
+\
+
+About 25% of people that test positive for Covid-19 are vaccinated for
+it. Suppose 100 people have tested positive for Covid-19 (independently
+of each other). Let $X$ denote the number of people that are vaccinated
+among the 100 that tested positive. What is the probability that fewer
+than 20 of the people that tested positive are vaccinated?
+
+
+Let $X$ = number vaccinated among the 100.
+
+\
+
+**Question:** What is $P(X < 20)$?
+
+. . .
+
+**Check conditions:**
+```{r}
+n <- 100
+p <- 0.25
+
+n * p  # Should be ≥ 10
+n * (1 - p)  # Should be ≥ 10
+```
+
+✓ Conditions met!
+
+## Exact vs. Approximate probability (1/2)
+
+**Method 1: Exact (Binomial)**
+
+$$P(X < 20) = P(X \leq 19) = P(X=0) + P(X=1) + \cdots + P(X=19)$$
+
+```{r}
+pbinom(19, size = 100, prob = 0.25)
+```
+
+```{r}
+#| echo: false
+
+res_binom <- pbinom(19, size = 100, prob = 0.25)
+res_binom <- lamisc::fmt_num(res_binom, accuracy = 0.001)
+
+```
+
+
+. . .
+
+\
+
+**Method 2: Normal Approximation**
+
+```{r}
+mu <- n * p
+sigma <- sqrt(n * p * (1 - p))
+
+pnorm(19, mean = mu, sd = sigma)
+```
+
+```{r}
+#| echo: false
+
+res_norm <- pnorm(19, mean = mu, sd = sigma)
+res_norm <- lamisc::fmt_num(res_norm, accuracy = 0.001)
+
+```
+
+. . .
+
+\
+
+Very close! The normal approximation is `r res_norm` vs. exact `r res_binom`.
+
+. . .
+
+## Exact vs. Approximate probability (2/2)
+
+\
+
+***Method 3: Normal Approximation with continuity correction***
+
+Because we want $P(X < 20) = P(X \le 19)$, we use 19.5 in the normal approximation.
+
+```{r}
+mu <- n * p
+sigma <- sqrt(n * p * (1 - p))
+
+pnorm(19 + 0.5, mean = mu, sd = sigma)
+```
+
+```{r}
+#| echo: false
+
+res_norm_cc <- pnorm(19.5, mean = mu, sd = sigma)
+res_norm_cc <- lamisc::fmt_num(res_norm_cc, accuracy = 0.001)
+```
+
+\
+
+With continuity correction: `r res_norm_cc`
+
+## What’s really happening?
+
+- A binomial counts the number of successes
+- When n is large, this count behaves like a normal variable
+- The normal approximation lets us:
+  - Use Z-scores
+  - Use `pnorm()`
+  - Reuse everything we just learned
+
+## When to use each method?
+
+**Use Binomial (exact):**
+
+- When n is small or moderate
+- When you need exact probabilities
+- R handles this easily with `pbinom()`
+
+**Use Normal approximation:**
+
+- When n is very large (computing binomial probabilities becomes slow)
+- For theoretical understanding
+- Historically important (before computers!)
+
+\
+
+**In practice:** With modern computers, we usually just use the exact binomial.
+
+## Checking whether Normal is reasonable (1/2)
+
+In practice, we check normality visually:
+
+- Histogram or density plot (shape: roughly symmetric, unimodal)
+- Q-Q plot (points close to a straight line)
+- If using a normal model: check residuals, not raw outcomes
+
+We usually avoid hypothesis tests (e.g., Shapiro-Wilk) because:
+
+- With large n, tiny deviations look "significant"
+- 	With small n, tests have low power
+- Visuals + context are more informative
+
+
+[Quantile-quantile plots in ggplot2](https://ggplot2.tidyverse.org/reference/geom_qq.html)
+
+```{r}
+#| eval: false
+
+# Example code
+ggplot(data, 
+       aes(sample = x)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+
+## Checking whether Normal is reasonable (2/2)
+
+A Q-Q plot compares your sample quantiles to theoretical Normal quantiles; straight-line agreement means the distributional shape matches Normal (especially in the tails).
+
+```{r}
+#| echo: false
+set.seed(1)
+
+
+mu <- 10
+sigma <- 4
+
+df_samp1 <- tibble(
+  x = rnorm(40, mean = mu, sd = sigma)
+)
+
+df_samp2 <- tibble(
+  x = rnorm(100, mean = mu, sd = sigma)
+)
+
+df_samp3 <- tibble(
+  x = rnorm(400, mean = mu, sd = sigma)
+)
+
+
+
+
+do_hist <- function(df, x, 
+                    alpha = 0.8, 
+                    fill = "yellow", 
+                    title = NULL) {
+
+mean_sd <- df %>%
+    dplyr::summarise(mean = mean({{ x }}, na.rm = TRUE),
+                     sd = sd({{ x }}, na.rm = TRUE))
+
+  n_bins <- df %>%
+    dplyr::summarise(n = sum(!is.na({{ x }}))) %>%
+    dplyr::mutate(sqrt_n = round(sqrt(n)),
+                  ten_log_10 = round(10 * log10(n))) %>%
+    dplyr::summarise(n_bins = min(sqrt_n, ten_log_10))
+
+
+  ggplot(data = df,
+         aes(x = {{ x }})) +
+    geom_histogram(aes(y = after_stat(density)),
+                   bins = n_bins$n_bins,
+                   fill =  fill,
+                   alpha = alpha,
+                   color = "black") +
+    stat_function(fun = dnorm,
+                  args = list(mean = mean_sd$mean,
+                              sd = mean_sd$sd),
+                  size = 1.0,
+                  color = "black",
+                        linetype = "solid") +
+    labs(x = NULL,
+         y = NULL, 
+         title = title) + 
+    laviz::theme_minimal_white(grid = "none", 
+                               base_size = 14) + 
+    theme(axis.text.y = element_blank())
+}
+
+
+do_one_qq <- function(df, x, 
+                    alpha = 0.8, 
+                    fill = "yellow") {
+  
+  a <- ggplot(df, aes(sample = {{ x }})) +
+  stat_qq(color = fill) +
+  stat_qq_line() + 
+  laviz::theme_minimal_white(grid = "XY", 
+                               base_size = 14) + 
+  labs(x = "Theoretical quantiles", 
+       y = "Observed")
+
+
+title <- dim(df)[1]
+title <- glue::glue("n = {title}")
+
+b <- do_hist(df = df, 
+        x = x, 
+        alpha = alpha, 
+        fill = fill, 
+        title = title)
+
+b / a
+  
+  
+}
+
+
+p1 <- do_one_qq(df = df_samp1,
+          x = x, 
+          fill = "#0072B2")
+
+p2 <- do_one_qq(df = df_samp2,
+          x = x, 
+          fill = "#009E73")
+
+p3 <- do_one_qq(df = df_samp3,
+          x = x, 
+          fill = "#E69F00")
+
+
+p1 | p2 | p3
+
+```
+
+
+# Poisson Distribution
+
+## Poisson distribution (counts)
+
+Use a Poisson model for the number of events in a fixed interval when:
+
+* Events occur independently
+* The event rate is roughly constant over the interval
+* We are counting events (0, 1, 2, …)
+
+\
+
+**Notation:**
+
+$$X \sim \text{Pois}(\lambda)$$
+
+**Interpretation:**
+
+* $\lambda$ = expected number of events per interval (rate × time)
+* Mean = $\lambda$
+* SD = $\sqrt{\lambda}$
+
+\
+
+## Poisson distribution: when you see it, think Poisson
+
+::: {.callout-note icon="false"}
+Poisson models counts of events in a fixed interval.
+
+Ask yourself:
+
+"How many times does something happen in a given amount of time or space?"
+:::
+
+Common examples:
+
+- Number of ER arrivals per hour
+- Number of emails received per day
+- Number of mutations per gene
+- Number of accidents per mile of highway per year
+
+::: fragment
+Key clues:
+
+- Counting events: 0, 1, 2, 3, …
+- Fixed interval (time, distance, area)
+- Events are relatively rare and independent
+:::
+
+## R functions for Poisson
+
+::: {.callout-tip icon="false"}
+## Four key functions
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `dpois()` | **Probability** at a value | P(X = x) |
+| `ppois()` | **Cumulative probability** | P(X ≤ x) |
+| `qpois()` | **Quantile** | What x gives P(X ≤ x) = p? |
+| `rpois()` | **Random** samples | Simulate counts |
+
+**Most common:** `dpois()` and `ppois()`
+:::
+
+## Shape depends on λ
+
+```{r}
+#| echo: false
+#| fig-height: 5
+
+
+lambda_vals <- c(1, 5, 10)
+
+df <- tidyr::crossing(
+  lambda = lambda_vals,
+  x = 0:20
+) %>%
+  mutate(prob = dpois(x, lambda = lambda))
+
+ggplot(df, aes(x = x, y = prob)) +
+  geom_col(width = 0.7, fill = "steelblue") +
+  facet_wrap(~ lambda, nrow = 1, labeller = label_both) +
+  labs(
+    x = "Count (x)",
+    y = "P(X = x)",
+    title = "Poisson distribution: shape depends on λ"
+  ) +
+  scale_x_continuous(breaks = seq(0, 20, 2)) +
+  laviz::theme_minimal_white(grid = "XY", 
+                             base_size = 14)
+```
+
+As λ increases:
+
+- The distribution shifts to the right (larger expected counts)
+- The distribution becomes more symmetric
+- For large λ, it starts to look approximately Normal
+
+
+
+
+## Example: Typhoid deaths (λ scaling)
+
+Suppose there are on average 5 deaths per year.
+
+**1. Probability of exactly 3 deaths in 1 year:**
+```{r}
+dpois(x = 3, lambda = 5)
+```
+
+\
+
+**2. Probability of exactly 2 deaths in 0.5 years:**
+
+Rate scales with time, so $\lambda_{0.5} = 5 \times 0.5 = 2.5$
+```{r}
+dpois(x = 2, lambda = 2.5)
+```
+
+\
+
+**3. Probability of more than 12 deaths in 2 years:**
+
+$\lambda_{2} = 5 \times 2 = 10$
+```{r}
+ppois(q = 12, lambda = 10, lower.tail = FALSE)
+# or: 1 - ppois(12, lambda = 10)
+```
+
+## Poisson approximation to Binomial (rare events)
+
+When $n$ is large and $p$ is small, a Binomial can be approximated by a Poisson:
+
+If $X \sim \text{Binomial}(n, p)$ and $p$ is small, then
+$$X \approx \text{Pois}(\lambda = np)$$
+
+This is most useful when the **Normal approximation is not appropriate** (because $p$ is too close to 0).
+
+\
+
+**Quick example:**
+```{r}
+n <- 1000
+p <- 0.002
+lambda <- n * p
+
+# Approx P(X <= 3)
+pbinom(3, size = n, prob = p)
+ppois(3, lambda = lambda)
+```
+
+Very close! (0.857 vs 0.857)
+
+<!-- # Poisson Distribution -->
+
+<!-- ## Introduction to the Poisson distribution -->
+
+<!-- -   The Poisson distribution is often used to model **count data (# of successes)**, especially for **rare events** -->
+
+<!--     -   It is a **discrete distribution!** -->
+
+
+
+<!-- -   It is used most often in settings where **events happen at a rate** $\lambda$ per unit of population and per unit time -->
+
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- **Example:** Historical records of hospitalizations in New York City indicate that an average of 4.4 people are hospitalized each day for an acute myocardial infarction (AMI) -->
+
+<!-- - We can plot the distribution of hospitalizations on each day -->
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-height: 4 -->
+
+<!-- lambda <- 4.4 -->
+<!-- x <- 0:15 -->
+
+<!-- df <- tibble(x = x, prob = dpois(x, lambda = lambda)) -->
+
+<!-- ggplot(df, aes(x = x, y = prob)) + -->
+<!--   geom_col(width = 0.7, fill = "steelblue", alpha = 0.7) + -->
+<!--   labs( -->
+<!--     x = "Number of hospitalizations", -->
+<!--     y = "Probability", -->
+<!--     title = paste0("Poisson(λ = ", lambda, ")") -->
+<!--   ) -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- :::: -->
+
+<!-- ## Poisson distribution -->
+
+<!-- -   Suppose events occur over time in such a way that -->
+
+<!--     1.  The probability an event occurs in an interval is proportional to the length of the interval. -->
+
+<!--     2.  Events occur independently at a rate $\lambda$ per unit of time. -->
+
+<!-- -   Then the probability of exactly $x$ events in one unit of time is  -->
+<!-- $$P(X = k) = \frac{e^{-\lambda}\lambda^{k}}{k!}, \,\, k = 0, 1, 2, \ldots$$ -->
+
+<!-- -   For the Poisson distribution modeling the number of events in one unit of time: -->
+
+<!--     -   The mean is $\lambda$. -->
+<!--     -   The standard deviation is $\sqrt{\lambda}$. -->
+
+<!-- -   Shorthand for a random variable, $X$, that has a Poisson distribution:  -->
+<!-- $$X \sim \text{Pois}(\lambda)$$ -->
+
+<!-- ## Poisson distribution: R commands -->
+
+<!-- ::: {.callout-tip icon="false"} -->
+<!-- ## Four key functions -->
+
+<!-- | Function | Purpose | Example | -->
+<!-- |----------|---------|---------| -->
+<!-- | `dpois()` | **Probability** at a value | P(X = x) | -->
+<!-- | `ppois()` | **Cumulative probability** | P(X ≤ x) | -->
+<!-- | `qpois()` | **Quantile** | What x gives P(X ≤ x) = p? | -->
+<!-- | `rpois()` | **Random** samples | Generate random Poisson data | -->
+
+<!-- **Most common:** `dpois()` and `ppois()` -->
+<!-- ::: -->
+
+<!-- ## Visualizing Poisson distributions -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-height: 5 -->
+
+<!-- lambda <- 5 -->
+<!-- x <- 0:20 -->
+
+<!-- df <- tibble(x = x, prob = dpois(x, lambda = lambda)) -->
+
+<!-- ggplot(df, aes(x = x, y = prob)) + -->
+<!--   geom_col(width = 0.7, fill = "steelblue", alpha = 0.7) + -->
+<!--   geom_segment(aes(x = x, xend = x, y = 0, yend = prob),  -->
+<!--                linewidth = 0.8, alpha = 0.5) + -->
+<!--   labs( -->
+<!--     x = "Number of successes (x)", -->
+<!--     y = "Probability, P(X = x)", -->
+<!--     title = "Poisson distribution with λ = 5" -->
+<!--   ) + -->
+<!--   scale_x_continuous(breaks = seq(0, 20, 2)) -->
+<!-- ``` -->
+
+<!-- ::: notes -->
+<!-- - The distribution is discrete (bars, not a curve) -->
+<!-- - As λ increases, the distribution becomes more symmetric -->
+<!-- - When λ is large (≥20), it starts to look approximately normal -->
+<!-- ::: -->
+
+<!-- ## Example: Typhoid fever (1/4) -->
+
+<!-- **Scenario:** Suppose there are on average 5 deaths per year from typhoid fever. -->
+
+<!-- **Questions:** -->
+
+<!-- 1.  What is the probability of 3 deaths in a year? -->
+
+<!-- 2.  What is the probability of 2 deaths in 0.5 years? -->
+
+<!-- 3.  What is the probability of more than 12 deaths in 2 years? -->
+
+<!-- ## Example: Typhoid fever (2/4) -->
+
+<!-- **Question 1:** What is the probability of 3 deaths in a year? -->
+
+<!-- - $\lambda = 5$ and we want $P(X = 3)$ -->
+
+<!-- $$P(X=3) = \frac{e^{-5}5^{3}}{3!} = 0.1404$$ -->
+<!-- ```{r} -->
+<!-- dpois(x = 3, lambda = 5) -->
+<!-- ``` -->
+
+<!-- ## Example: Typhoid fever (3/4) -->
+
+<!-- **Question 2:** What is the probability of 2 deaths in 0.5 years? -->
+
+<!-- - $\lambda = 5$ was the rate for **one year** -->
+<!-- - For **half a year**, we need to adjust λ: -->
+
+<!-- $$\lambda = \frac{5 \text{ deaths}}{1 \text{ year}} \cdot \frac{1 \text{ year}}{2 \text{ half-years}} = \frac{2.5 \text{ deaths}}{1 \text{ half-year}}$$ -->
+
+<!-- $$P(X=2) = \frac{e^{-2.5}2.5^{2}}{2!} = 0.2565$$ -->
+<!-- ```{r} -->
+<!-- dpois(x = 2, lambda = 2.5) -->
+<!-- ``` -->
+
+<!-- **Key insight:** λ scales with the time interval! -->
+
+<!-- ## Example: Typhoid fever (4/4) -->
+
+<!-- **Question 3:** What is the probability of more than 12 deaths in 2 years? -->
+
+<!-- - For **two years**, adjust λ: -->
+
+<!-- $$\lambda = \frac{5 \text{ deaths}}{1 \text{ year}} \cdot 2 \text{ years} = 10 \text{ deaths per 2 years}$$ -->
+
+<!-- $$P(X>12) = 1 - P(X \leq 12) = 1 - \sum_{k=0}^{12}\frac{e^{-10}10^{k}}{k!} = 0.2084$$ -->
+
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- 1 - ppois(q = 12, lambda = 10) -->
+<!-- ``` -->
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- ```{r} -->
+<!-- ppois(q = 12, lambda = 10,  -->
+<!--       lower.tail = FALSE) -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- :::: -->
+
+<!-- ## Poisson approximation to Binomial -->
+
+<!-- The Poisson distribution can be used to **approximate** the binomial distribution when: -->
+
+<!-- - $n$ is **large** -->
+<!-- - $p$ is **small** -->
+
+<!-- This is useful when the Normal approximation doesn't work (because p is too extreme). -->
+
+<!-- **Approximation:** If $X \sim \text{Binomial}(n, p)$ with large n and small p: -->
+
+<!-- $$X \approx \text{Pois}(\lambda = np)$$ -->
+
+<!-- ## Visual: Binomial → Poisson approximation -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-width: 10 -->
+
+<!-- library(patchwork) -->
+
+<!-- # Small p, varying n -->
+<!-- n_vals <- c(60, 100, 200, 400) -->
+<!-- p <- 0.005 -->
+
+<!-- plots <- lapply(n_vals, function(n) { -->
+<!--   x <- 0:15 -->
+<!--   lambda <- n * p -->
+
+<!--   df <- tibble( -->
+<!--     x = x, -->
+<!--     binomial = dbinom(x, size = n, prob = p), -->
+<!--     poisson = dpois(x, lambda = lambda) -->
+<!--   ) -->
+
+<!--   ggplot(df, aes(x = x)) + -->
+<!--     geom_col(aes(y = binomial), fill = "steelblue", alpha = 0.5, width = 0.4, position = position_nudge(x = -0.2)) + -->
+<!--     geom_col(aes(y = poisson), fill = "coral", alpha = 0.5, width = 0.4, position = position_nudge(x = 0.2)) + -->
+<!--     labs(title = paste0("n = ", n, ", p = ", p), -->
+<!--          x = "Number of successes", -->
+<!--          y = "Probability") + -->
+<!--     theme(plot.title = element_text(hjust = 0.5, size = 14)) -->
+<!-- }) -->
+
+<!-- (plots[[1]] + plots[[2]]) / (plots[[3]] + plots[[4]]) -->
+<!-- ``` -->
+
+<!-- Blue = Binomial, Orange = Poisson(λ = np). They become nearly identical as n increases! -->
+
+<!-- ## When to use Poisson vs Normal approximation -->
+
+<!-- :::: {.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- **Use Poisson approximation when:** -->
+
+<!-- - $n$ is large -->
+<!-- - $p$ is small (close to 0) -->
+<!-- - Events are rare -->
+<!-- - $np < 10$ (Normal approximation fails) -->
+
+<!-- **Example:**  -->
+<!-- - n = 1000, p = 0.002 -->
+<!-- - λ = np = 2 -->
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- **Use Normal approximation when:** -->
+
+<!-- - $n$ is large -->
+<!-- - $p$ is not too extreme -->
+<!-- - $np \geq 10$ AND $n(1-p) \geq 10$ -->
+
+<!-- **Example:** -->
+<!-- - n = 100, p = 0.25 -->
+<!-- - Both conditions met ✓ -->
+<!-- ::: -->
+<!-- :::: -->
+
+## Summary: Poisson distribution
+
+**Key characteristics:**
+
+- Models **count data** for rare events
+- Parameter: $\lambda$ = rate × time
+- Mean = $\lambda$, SD = $\sqrt{\lambda}$
+
+**R functions:**
+
+- `dpois(x, lambda)` → P(X = x)
+- `ppois(q, lambda)` → P(X ≤ q)
+
+**Important:** Remember to adjust λ when changing the time interval!
+
+**Approximation:** Can approximate Binomial when n is large and p is small.
+
+
+
+
+# Summary & Next Steps
+
+## What you need to know: Normal distribution
+
+**Conceptual understanding:**
+
+- Normal distributions are symmetric, bell-shaped, continuous
+- Fully characterized by mean (μ) and standard deviation (σ)
+- Z-scores standardize to N(0, 1): $Z = \frac{X - \mu}{\sigma}$
+
+\
+
+**Empirical Rule (68-95-99.7):**
+
+- 68% of data within 1 SD, 95% within 2 SDs, 99.7% within 3 SDs
+- Values beyond ±3 SDs are very rare
+
+\
+
+**R skills:**
+
+- `pnorm(q, mean, sd)` → P(X ≤ q)
+- `qnorm(p, mean, sd)` → value at pth percentile
+- Normal approximation when $np \geq 10$ AND $n(1-p) \geq 10$
+
+## What you need to know: Poisson distribution
+
+**When to use Poisson:**
+
+- Counting rare events in a fixed interval
+- Events occur independently at rate λ
+
+\
+
+**Key concepts:**
+
+- Parameter: λ = rate × time
+- Mean = λ, SD = $\sqrt{\lambda}$
+- Adjust λ when changing time intervals
+
+\
+
+**R skills:**
+
+- `dpois(x, lambda)` → P(X = x)
+- `ppois(q, lambda)` → P(X ≤ q)
+- Poisson approximates Binomial when n is large and p is small
+
+## Key formulas (for reference)
+
+You don't need to memorize these, but understand what they represent:
+
+\
+
+**Z-score transformation:**
+$$Z = \frac{X - \mu}{\sigma} \quad \text{or} \quad X = \mu + Z\sigma$$
+
+\
+
+**Normal approximation to Binomial:**
+
+When $np \geq 10$ and $n(1-p) \geq 10$:
+$$X \sim \text{Binomial}(n, p) \approx N\left(\mu = np, \sigma = \sqrt{np(1-p)}\right)$$
+
+\
+
+**Poisson approximation to Binomial:**
+
+When $n$ is large and $p$ is small:
+$$X \sim \text{Binomial}(n, p) \approx \text{Pois}(\lambda = np)$$
+
