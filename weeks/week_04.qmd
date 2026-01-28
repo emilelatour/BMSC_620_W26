@@ -70,7 +70,7 @@ By the end of the week, you should be able to:
 
 ---
 
-### Wednesday — Normal Distribution and Sampling Distributions
+### Wednesday — Normal and Poisson Distributions
 
 - **Topics**
   - The Normal distribution
