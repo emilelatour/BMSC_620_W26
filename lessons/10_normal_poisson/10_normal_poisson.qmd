@@ -1102,7 +1102,7 @@ pnorm(2.46) - pnorm(-2.18)
 
 \
 
-**4. P(Z = 1.53)**
+**4. $P(Z = 1.53)$**
 
 ```{r}
 # For continuous distributions, P(X = x) = 0

@@ -404,7 +404,7 @@
     "href": "lessons/10_normal_poisson/10_normal_poisson.html#example-standard-normal-probabilities-continued",
     "title": "Normal and Poisson Distributions",
     "section": "Example: Standard normal probabilities (continued)",
-    "text": "Example: Standard normal probabilities (continued)\n\n\n3. \\(P(-2.18 &lt; Z &lt; 2.46)\\)\n\npnorm(2.46) - pnorm(-2.18)\n\n[1] 0.9784244\n\n\n\n\n\n4. P(Z = 1.53)\n\n# For continuous distributions, P(X = x) = 0\n0\n\n[1] 0\n\n\n\nRemember: For continuous random variables, the probability of any single exact value is 0!"
+    "text": "Example: Standard normal probabilities (continued)\n\n\n3. \\(P(-2.18 &lt; Z &lt; 2.46)\\)\n\npnorm(2.46) - pnorm(-2.18)\n\n[1] 0.9784244\n\n\n\n\n\n4. \\(P(Z = 1.53)\\)\n\n# For continuous distributions, P(X = x) = 0\n0\n\n[1] 0\n\n\n\nRemember: For continuous random variables, the probability of any single exact value is 0!"
   },
   {
     "objectID": "lessons/10_normal_poisson/10_normal_poisson.html#example-general-normal-distribution",
@@ -1895,7 +1895,7 @@
     "href": "weeks/week_04.html#materials",
     "title": "Week 4",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\n[Normal and Poisson Distributions]",
+    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\nNormal and Poisson Distributions",
     "crumbs": [
       "Home",
       "Weekly materials",
