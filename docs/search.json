@@ -285,7 +285,7 @@
     "href": "lessons/10_normal_poisson/10_normal_poisson.html#normal-distribution-1",
     "title": "Normal and Poisson Distributions",
     "section": "Normal distribution",
-    "text": "Normal distribution\n\n\n\nA random variable X is modeled with a normal distribution:\nShape: symmetric, unimodal bell curve\nCenter: mean \\(\\mu\\)\nSpread (variability): standard deviation \\(\\sigma\\)\nShorthand for a random variable, \\(X\\), that has a Normal distribution: \\[X \\sim \\text{Normal}(\\mu, \\sigma)\\]\n\n\n\n\n\nExample: We recorded the high temperature in the past 100 years for today. The mean high is 19°C (66.2°F)"
+    "text": "Normal distribution\n\n\n\nA random variable X is modeled with a normal distribution:\nShape: symmetric, unimodal bell curve\nCenter: mean \\(\\mu\\)\nSpread (variability): standard deviation \\(\\sigma\\)\nShorthand for a random variable, \\(X\\), that has a Normal distribution: \\[X \\sim \\text{Normal}(\\mu, \\sigma)\\]\n\n\n\n\nExample: We recorded the high temperature in the past 100 years for today. The mean high is 19°C (66.2°F)"
   },
   {
     "objectID": "lessons/10_normal_poisson/10_normal_poisson.html#anatomy-of-the-normal-curve",

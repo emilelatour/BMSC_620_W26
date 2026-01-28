@@ -341,9 +341,9 @@ That is, we can safely ignore equality when defining the endpoints of a given in
 distribution: $$X \sim \text{Normal}(\mu, \sigma)$$
 :::
 
-::: {.column width="60%"}
-![](../img_slides/Normal_examples.png)
-:::
+<!-- ::: {.column width="60%"} -->
+<!-- ![](/img_slides/Normal_examples.png) -->
+<!-- ::: -->
 :::::
 
 -   **Example:** We recorded the high temperature in the past 100 years
