@@ -1,0 +1,445 @@
+---
+title: "Muddy Points"
+subtitle: "Normal Distribution and Poisson Distribution"
+date-modified: "today"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    code-fold: false
+---
+
+::: {.callout-note}
+You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.
+:::
+
+## Overview
+
+Thank you for your feedback on yesterday's lecture! The pacing feedback was excellent - 93% felt it was "about right" and only 7% "slightly too fast," which tells me the pace is working well for most of you. I'll continue being mindful of pacing as we move forward.
+
+Several themes emerged from your muddy points. Let me address them:
+
+---
+
+## The "About" in Probability Interpretations
+
+**The Question:**
+
+> "For the blood pressure percentiles, all of the interpretations have statements like '95% of men have DBP below about 99.7 mmHg.' Do you include the 'about' because it's rounded from the R output value? Would I say '95% of men have DBP below 99.73824 mmHg' or is the 'about' phrasing required by the actual mathematical formula?"
+
+**The Answer:**
+
+Great question! The "about" serves multiple purposes:
+
+### Reason 1: Acknowledging Model Uncertainty
+
+The normal distribution is a **model** of reality, not reality itself. Real blood pressure distributions are only *approximately* normal. So when we say "about 99.7 mmHg," we're acknowledging that:
+
+- The model is an approximation
+- Real biological data has natural variability
+- The exact cutoff is somewhat fuzzy
+
+### Reason 2: Practical Precision
+
+In context, reporting "99.73824 mmHg" implies false precision:
+
+- Blood pressure is typically measured to the nearest whole number
+- The extra decimal places suggest more certainty than we actually have
+- "About 100 mmHg" or "about 99.7 mmHg" is more honest
+
+### When to Use "About"
+
+**Use "about" when:**
+
+- Interpreting real-world data (blood pressure, heights, test scores)
+- Rounding R output for readability
+- The context doesn't demand exact precision
+
+**You can omit "about" when:**
+
+- The problem asks for a precise calculation
+- You're reporting the exact R output in a technical context
+- The value is exact by definition (like standardized z-scores)
+
+**Bottom line:** Using "about" shows good statistical judgment. It acknowledges that models are approximations and that excessive precision can be misleading.
+
+---
+
+## `pnorm()` and `lower.tail`
+
+**The Question:**
+
+> "For pnorm in R, is the 'lower.tail' automatically equal true if not included in the function?"
+
+**The Answer:**
+
+Yes! The default is `lower.tail = TRUE`.
+
+### What This Means
+
+```r
+# These are equivalent:
+pnorm(1.96)
+pnorm(1.96, lower.tail = TRUE)
+# Both give P(Z ≤ 1.96) ≈ 0.975
+```
+
+### When to Use `lower.tail = FALSE`
+
+Use this when you want the upper tail probability:
+
+```r
+# P(Z > 1.96)
+pnorm(1.96, lower.tail = FALSE)  # ≈ 0.025
+```
+
+### Visual Guide
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-width: 9
+#| fig-height: 4
+
+library(ggplot2)
+library(patchwork)
+
+# Create standard normal data
+x <- seq(-4, 4, length.out = 1000)
+y <- dnorm(x)
+
+
+# Lower tail plot
+p1 <- ggplot() +
+  geom_line(aes(x = x, y = y), linewidth = 1) +
+  geom_area(aes(x = x[x <= 1.96], y = y[x <= 1.96]), 
+            fill = "steelblue", alpha = 0.6) +
+  geom_vline(xintercept = 1.96, linetype = "dashed", color = "darkgrey") +
+  scale_y_continuous(limits = c(0, 0.6)) + 
+  annotate("text", x = -2, y = 0.5, 
+           label = "pnorm(1.96)\nlower.tail = TRUE\nP(Z ≤ 1.96)", 
+           size = 4, fontface = "bold") +
+  labs(title = "Lower Tail (default)",
+       x = "Z", y = "Density") +
+  laviz::theme_minimal_white(grid = "XY", base_size = 11)
+
+# Upper tail plot
+p2 <- ggplot() +
+  geom_line(aes(x = x, y = y), linewidth = 1) +
+  geom_area(aes(x = x[x > 1.96], y = y[x > 1.96]), 
+            fill = "coral", alpha = 0.6) +
+  geom_vline(xintercept = 1.96, linetype = "dashed", color = "darkgrey") +
+  scale_y_continuous(limits = c(0, 0.6)) + 
+  annotate("text", x = 1.5, y = 0.5, 
+           label = "pnorm(1.96, lower.tail = FALSE)\nP(Z > 1.96)", 
+           size = 4, fontface = "bold") +
+  labs(title = "Upper Tail",
+       x = "Z", y = "Density") +
+  laviz::theme_minimal_white(grid = "XY", base_size = 11)
+
+p1 + p2
+```
+
+**Pro tip:** Instead of using `lower.tail = FALSE`, you can also use the relationship:
+
+```r
+# These are equivalent:
+pnorm(1.96, lower.tail = FALSE)
+1 - pnorm(1.96)
+```
+
+Choose whichever feels more intuitive to you!
+
+---
+
+## Continuous Distributions: Intervals and Single Points
+
+**The Question:**
+
+> "Why are intervals always inclusive on a continuous distribution? Why is probability of a single point at a continuous distribution always 0? When do you use 'lower.tail = FALSE'?"
+
+**Great Questions! Let me break these down:**
+
+### Why is P(X = exact value) = 0?
+
+For continuous distributions, there are **infinitely many possible values** in any interval.
+
+Think about height:
+
+- What's the probability someone is *exactly* 170.00000... cm tall?
+- Not 170.001 cm or 169.999 cm, but precisely 170?
+
+The probability is essentially 0 because any single point is infinitesimal compared to the infinite continuum.
+
+**Important:** This doesn't mean it's *impossible*; it just means the probability is so small (infinitely small) that it's mathematically zero.
+
+### Why doesn't it matter if we include endpoints?
+
+Because P(X = exact value) = 0, these are all equivalent:
+
+```r
+# All of these give the SAME answer for continuous distributions:
+pnorm(1.96) - pnorm(0)     # P(0 < Z < 1.96)
+pnorm(1.96) - pnorm(0)     # P(0 ≤ Z ≤ 1.96)
+pnorm(1.96) - pnorm(0)     # P(0 < Z ≤ 1.96)
+pnorm(1.96) - pnorm(0)     # P(0 ≤ Z < 1.96)
+```
+
+Adding or removing a single point (like including/excluding exactly 0 or exactly 1.96) doesn't change the probability because each single point contributes 0.
+
+### When to use `lower.tail = FALSE`
+
+Already covered above, but the key is:
+
+- `lower.tail = TRUE` (default): P(X ≤ value)
+- `lower.tail = FALSE`: P(X > value)
+
+---
+
+## Normal Approximation vs. Exact Binomial
+
+**The Question:**
+
+> "Why would you use normal approximation if you can use exact (binomial) and it's more accurate and requires fewer lines of code?"
+
+**Excellent question! Here's why:**
+
+### Historical Context
+
+The normal approximation was developed **before computers existed**.
+
+When statisticians had to calculate probabilities by hand or using printed tables:
+
+- Computing $\binom{1000}{487}$ was essentially impossible
+- Normal tables were available in the back of every textbook
+- The approximation was much faster and "good enough"
+
+### Modern Practice
+
+Today, with R, you're absolutely right:
+
+```r
+# Exact (better!)
+pbinom(487, size = 1000, prob = 0.5)
+
+# Approximation (more work, less accurate)
+pnorm(487.5, mean = 500, sd = sqrt(250))
+```
+
+**Use the exact binomial when you can!**
+
+### When Normal Approximation Still Matters
+
+There are a few cases where we still use it:
+
+1. **Very large n**: When n is extremely large (n > 10,000), even computers can struggle with exact binomial calculations, and the normal approximation works very well
+
+2. **Theoretical understanding**: It helps you understand the connection between discrete and continuous distributions - a key concept in statistics
+
+3. **Historical methods**: Some older statistical techniques were built on normal approximations, and understanding them helps you read older research
+
+4. **Conceptual foundation**: The Central Limit Theorem (coming soon!) relies on this same approximation idea
+
+**Bottom line:** In practice, prefer the exact binomial. But understanding *why* the normal approximation works helps build your statistical intuition.
+
+### Summary: Exact vs. Normal Approximation (When to Use Which)
+
+#### Exact Binomial
+
+Uses the true binomial probability formula:
+
+```r
+dbinom(k, size = n, prob = p)  # P(X = k)
+pbinom(k, size = n, prob = p)  # P(X ≤ k)
+```
+
+**Advantages:**
+
+- Completely accurate
+- No approximation error
+- Easy in R
+
+**Disadvantages:**
+
+- Can be slow for very large n
+- Wasn't practical before computers
+
+#### Normal Approximation
+
+Treats the binomial as approximately normal when n is large:
+
+```r
+# Approximate a Binomial(n, p) with Normal(μ = np, σ² = np(1-p))
+pnorm(k + 0.5, mean = n*p, sd = sqrt(n*p*(1-p)))
+```
+
+**Advantages:**
+
+- Fast even for huge n
+- Connects discrete and continuous ideas
+
+**Disadvantages:**
+
+- Less accurate (especially for small n or extreme p)
+- Requires continuity correction (the + 0.5)
+- More work in R
+
+#### When is the Approximation Good?
+
+**Rules of thumb:**
+
+- np ≥ 10 **and** n(1-p) ≥ 10
+
+Or more conservatively:
+
+- np ≥ 5 **and** n(1-p) ≥ 5
+
+If these conditions aren't met, stick with the exact binomial!
+
+#### Key takeaway
+
+In this course, use the exact binomial when possible.
+
+We study the normal approximation to understand why it works and how discrete and continuous distributions connect.
+
+---
+
+## Outliers in Normal Distributions
+
+**The Question:**
+
+> "In a boxplot we can call any observations that fall beyond 1.5x IQR (not standard deviation) above or below the 75th/25th percentile as outliers. In normal distributions given that 95% of observances fall within 2 SDs/ z-score of 2, can we call anything beyond 2 an outlier? Beyond 3 since these are considered 'very rare'? Or is there a different metric that can be used?"
+
+**Great Connection to Make!**
+
+There's some confusion here about boxplot rules vs. z-scores, so let me clarify:
+
+### Boxplot Rule (IQR Method)
+
+Boxplots define outliers as:
+
+- Below Q1 - 1.5×IQR
+- Above Q3 + 1.5×IQR
+
+This is a **data-driven** rule that works for any distribution shape.
+
+Note: This is 1.5 times the **interquartile range (IQR)**, not 1.5 standard deviations!
+
+### Z-Score Method for Outliers
+
+For normal distributions, common thresholds are:
+
+**|z| > 2:** Somewhat unusual (about 5% of data falls here)
+
+- Not necessarily "outliers" but worth noting
+- This is where roughly 95% of data falls within ±2 SD
+
+**|z| > 3:** Very unusual (about 0.3% of data falls here)
+
+- Often considered outliers
+- These are quite rare in truly normal data
+
+**|z| > 4:** Extremely unusual (about 0.006% of data falls here)
+
+- Almost certainly outliers or errors
+- Very rare in normal distributions
+
+### Which Method to Use?
+
+**Use the z-score method when:**
+
+- You're confident the data is approximately normal
+- You want to identify unusually extreme values
+- You're working with standardized scores
+
+**Use the IQR method when:**
+
+- You don't know if the data is normal
+- The data might be skewed
+- You want a robust method that works for any distribution
+
+**Bottom line:** There's no single "correct" threshold. In practice:
+
+- |z| > 3 is a reasonable outlier cutoff for normal data
+- The IQR method (boxplot rule) is more robust for unknown distributions
+- Always visualize your data and use domain knowledge!
+
+---
+
+## Quick Refresher on Binomial Distribution
+
+**The Request:**
+
+> "I think the binomial distribution stuff relied a lot on previous knowledge so a quick refresher from Monday's class would have been nice"
+
+**Fair point! Here's a quick recap:**
+
+### What is a Binomial Random Variable?
+
+A binomial counts **the number of successes in n independent trials**, where:
+
+- Each trial has only two outcomes (success/failure)
+- Probability of success p is the same for every trial
+- Trials are independent
+
+**Notation:** X ~ Binomial(n, p)
+
+### Key R Functions
+
+```r
+# P(X = k): exactly k successes
+dbinom(k, size = n, prob = p)
+
+# P(X ≤ k): at most k successes  
+pbinom(k, size = n, prob = p)
+
+# P(X > k): more than k successes
+pbinom(k, size = n, prob = p, lower.tail = FALSE)
+```
+
+### Example
+
+"Flip a fair coin 10 times. What's the probability of exactly 6 heads?"
+
+```r
+dbinom(6, size = 10, prob = 0.5)
+```
+
+Going forward, I'll make sure to include brief refreshers when building on previous material!
+
+---
+
+## Deriving Equations and Establishing Values
+
+**The Concern:**
+
+> "Deriving the equations and how we established certain values was a little unclear."
+
+**My Response:**
+
+You're not expected to derive distribution formulas from scratch - that's advanced probability theory.
+
+What matters is:
+
+1. **Recognizing when to use each distribution** (binomial for counting successes, normal for continuous measurements, Poisson for rare events)
+
+2. **Understanding what the parameters mean** (n and p for binomial, μ and σ for normal, λ for Poisson)
+
+3. **Using R correctly** to calculate probabilities
+
+4. **Interpreting results** in context
+
+The derivations are shown to give you insight into *why* the formulas work and to connect mathematical theory to practice - not because you need to reproduce them.
+
+If specific derivations are still unclear, feel free to ask in office hours and I can walk through the intuition!
+
+---
+
+## Questions?
+
+If anything is still muddy, please:
+
+- Come to office hours
+- Ask in class
+
+Thanks for the thoughtful feedback! 📊

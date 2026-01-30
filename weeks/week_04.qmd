@@ -86,6 +86,11 @@ By the end of the week, you should be able to:
 
 - **Recording**
   - [Normal and Poisson Distributions](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQCTuB2DKAzASabJFpu2-CKZAbUohIzPX20cxzbvKcD8NnI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Xci14x)
+  
+- **Muddy points**
+  
+  I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 7](/lessons/10_normal_poisson/10_normal_poisson_muddy_points.qmd)
 
 ---
 

@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Muddy Points – BMSC 620: Introduction to Biostatistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exams.html"> 
+<span class="menu-text">Exams</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Muddy Points</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homework</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course info</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-about-in-probability-interpretations" id="toc-the-about-in-probability-interpretations" class="nav-link" data-scroll-target="#the-about-in-probability-interpretations">The “About” in Probability Interpretations</a></li>
+  <li><a href="#pnorm-and-lower.tail" id="toc-pnorm-and-lower.tail" class="nav-link" data-scroll-target="#pnorm-and-lower.tail"><code>pnorm()</code> and <code>lower.tail</code></a></li>
+  <li><a href="#continuous-distributions-intervals-and-single-points" id="toc-continuous-distributions-intervals-and-single-points" class="nav-link" data-scroll-target="#continuous-distributions-intervals-and-single-points">Continuous Distributions: Intervals and Single Points</a></li>
+  <li><a href="#normal-approximation-vs.-exact-binomial" id="toc-normal-approximation-vs.-exact-binomial" class="nav-link" data-scroll-target="#normal-approximation-vs.-exact-binomial">Normal Approximation vs.&nbsp;Exact Binomial</a></li>
+  <li><a href="#outliers-in-normal-distributions" id="toc-outliers-in-normal-distributions" class="nav-link" data-scroll-target="#outliers-in-normal-distributions">Outliers in Normal Distributions</a></li>
+  <li><a href="#quick-refresher-on-binomial-distribution" id="toc-quick-refresher-on-binomial-distribution" class="nav-link" data-scroll-target="#quick-refresher-on-binomial-distribution">Quick Refresher on Binomial Distribution</a></li>
+  <li><a href="#deriving-equations-and-establishing-values" id="toc-deriving-equations-and-establishing-values" class="nav-link" data-scroll-target="#deriving-equations-and-establishing-values">Deriving Equations and Establishing Values</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Muddy Points</h1>
+<p class="subtitle lead">Normal Distribution and Poisson Distribution</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">January 29, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.</p>
+</div>
+</div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Thank you for your feedback on yesterday’s lecture! The pacing feedback was excellent - 93% felt it was “about right” and only 7% “slightly too fast,” which tells me the pace is working well for most of you. I’ll continue being mindful of pacing as we move forward.</p>
+<p>Several themes emerged from your muddy points. Let me address them:</p>
+<hr>
+</section>
+<section id="the-about-in-probability-interpretations" class="level2">
+<h2 class="anchored" data-anchor-id="the-about-in-probability-interpretations">The “About” in Probability Interpretations</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“For the blood pressure percentiles, all of the interpretations have statements like ‘95% of men have DBP below about 99.7 mmHg.’ Do you include the ‘about’ because it’s rounded from the R output value? Would I say ‘95% of men have DBP below 99.73824 mmHg’ or is the ‘about’ phrasing required by the actual mathematical formula?”</p>
+</blockquote>
+<p><strong>The Answer:</strong></p>
+<p>Great question! The “about” serves multiple purposes:</p>
+<section id="reason-1-acknowledging-model-uncertainty" class="level3">
+<h3 class="anchored" data-anchor-id="reason-1-acknowledging-model-uncertainty">Reason 1: Acknowledging Model Uncertainty</h3>
+<p>The normal distribution is a <strong>model</strong> of reality, not reality itself. Real blood pressure distributions are only <em>approximately</em> normal. So when we say “about 99.7 mmHg,” we’re acknowledging that:</p>
+<ul>
+<li>The model is an approximation</li>
+<li>Real biological data has natural variability</li>
+<li>The exact cutoff is somewhat fuzzy</li>
+</ul>
+</section>
+<section id="reason-2-practical-precision" class="level3">
+<h3 class="anchored" data-anchor-id="reason-2-practical-precision">Reason 2: Practical Precision</h3>
+<p>In context, reporting “99.73824 mmHg” implies false precision:</p>
+<ul>
+<li>Blood pressure is typically measured to the nearest whole number</li>
+<li>The extra decimal places suggest more certainty than we actually have</li>
+<li>“About 100 mmHg” or “about 99.7 mmHg” is more honest</li>
+</ul>
+</section>
+<section id="when-to-use-about" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-about">When to Use “About”</h3>
+<p><strong>Use “about” when:</strong></p>
+<ul>
+<li>Interpreting real-world data (blood pressure, heights, test scores)</li>
+<li>Rounding R output for readability</li>
+<li>The context doesn’t demand exact precision</li>
+</ul>
+<p><strong>You can omit “about” when:</strong></p>
+<ul>
+<li>The problem asks for a precise calculation</li>
+<li>You’re reporting the exact R output in a technical context</li>
+<li>The value is exact by definition (like standardized z-scores)</li>
+</ul>
+<p><strong>Bottom line:</strong> Using “about” shows good statistical judgment. It acknowledges that models are approximations and that excessive precision can be misleading.</p>
+<hr>
+</section>
+</section>
+<section id="pnorm-and-lower.tail" class="level2">
+<h2 class="anchored" data-anchor-id="pnorm-and-lower.tail"><code>pnorm()</code> and <code>lower.tail</code></h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“For pnorm in R, is the ‘lower.tail’ automatically equal true if not included in the function?”</p>
+</blockquote>
+<p><strong>The Answer:</strong></p>
+<p>Yes! The default is <code>lower.tail = TRUE</code>.</p>
+<section id="what-this-means" class="level3">
+<h3 class="anchored" data-anchor-id="what-this-means">What This Means</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Both give P(Z ≤ 1.96) ≈ 0.975</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="when-to-use-lower.tail-false" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-lower.tail-false">When to Use <code>lower.tail = FALSE</code></h3>
+<p>Use this when you want the upper tail probability:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(Z &gt; 1.96)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)  <span class="co"># ≈ 0.025</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="visual-guide" class="level3">
+<h3 class="anchored" data-anchor-id="visual-guide">Visual Guide</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_normal_poisson_muddy_points_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Pro tip:</strong> Instead of using <code>lower.tail = FALSE</code>, you can also use the relationship:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">1.96</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Choose whichever feels more intuitive to you!</p>
+<hr>
+</section>
+</section>
+<section id="continuous-distributions-intervals-and-single-points" class="level2">
+<h2 class="anchored" data-anchor-id="continuous-distributions-intervals-and-single-points">Continuous Distributions: Intervals and Single Points</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“Why are intervals always inclusive on a continuous distribution? Why is probability of a single point at a continuous distribution always 0? When do you use ‘lower.tail = FALSE’?”</p>
+</blockquote>
+<p><strong>Great Questions! Let me break these down:</strong></p>
+<section id="why-is-px-exact-value-0" class="level3">
+<h3 class="anchored" data-anchor-id="why-is-px-exact-value-0">Why is P(X = exact value) = 0?</h3>
+<p>For continuous distributions, there are <strong>infinitely many possible values</strong> in any interval.</p>
+<p>Think about height:</p>
+<ul>
+<li>What’s the probability someone is <em>exactly</em> 170.00000… cm tall?</li>
+<li>Not 170.001 cm or 169.999 cm, but precisely 170?</li>
+</ul>
+<p>The probability is essentially 0 because any single point is infinitesimal compared to the infinite continuum.</p>
+<p><strong>Important:</strong> This doesn’t mean it’s <em>impossible</em>; it just means the probability is so small (infinitely small) that it’s mathematically zero.</p>
+</section>
+<section id="why-doesnt-it-matter-if-we-include-endpoints" class="level3">
+<h3 class="anchored" data-anchor-id="why-doesnt-it-matter-if-we-include-endpoints">Why doesn’t it matter if we include endpoints?</h3>
+<p>Because P(X = exact value) = 0, these are all equivalent:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All of these give the SAME answer for continuous distributions:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">0</span>)     <span class="co"># P(0 &lt; Z &lt; 1.96)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">0</span>)     <span class="co"># P(0 ≤ Z ≤ 1.96)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">0</span>)     <span class="co"># P(0 &lt; Z ≤ 1.96)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">1.96</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">0</span>)     <span class="co"># P(0 ≤ Z &lt; 1.96)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Adding or removing a single point (like including/excluding exactly 0 or exactly 1.96) doesn’t change the probability because each single point contributes 0.</p>
+</section>
+<section id="when-to-use-lower.tail-false-1" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-lower.tail-false-1">When to use <code>lower.tail = FALSE</code></h3>
+<p>Already covered above, but the key is:</p>
+<ul>
+<li><code>lower.tail = TRUE</code> (default): P(X ≤ value)</li>
+<li><code>lower.tail = FALSE</code>: P(X &gt; value)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="normal-approximation-vs.-exact-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="normal-approximation-vs.-exact-binomial">Normal Approximation vs.&nbsp;Exact Binomial</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“Why would you use normal approximation if you can use exact (binomial) and it’s more accurate and requires fewer lines of code?”</p>
+</blockquote>
+<p><strong>Excellent question! Here’s why:</strong></p>
+<section id="historical-context" class="level3">
+<h3 class="anchored" data-anchor-id="historical-context">Historical Context</h3>
+<p>The normal approximation was developed <strong>before computers existed</strong>.</p>
+<p>When statisticians had to calculate probabilities by hand or using printed tables:</p>
+<ul>
+<li>Computing <span class="math inline">\(\binom{1000}{487}\)</span> was essentially impossible</li>
+<li>Normal tables were available in the back of every textbook</li>
+<li>The approximation was much faster and “good enough”</li>
+</ul>
+</section>
+<section id="modern-practice" class="level3">
+<h3 class="anchored" data-anchor-id="modern-practice">Modern Practice</h3>
+<p>Today, with R, you’re absolutely right:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exact (better!)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">487</span>, <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximation (more work, less accurate)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">487.5</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">250</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Use the exact binomial when you can!</strong></p>
+</section>
+<section id="when-normal-approximation-still-matters" class="level3">
+<h3 class="anchored" data-anchor-id="when-normal-approximation-still-matters">When Normal Approximation Still Matters</h3>
+<p>There are a few cases where we still use it:</p>
+<ol type="1">
+<li><p><strong>Very large n</strong>: When n is extremely large (n &gt; 10,000), even computers can struggle with exact binomial calculations, and the normal approximation works very well</p></li>
+<li><p><strong>Theoretical understanding</strong>: It helps you understand the connection between discrete and continuous distributions - a key concept in statistics</p></li>
+<li><p><strong>Historical methods</strong>: Some older statistical techniques were built on normal approximations, and understanding them helps you read older research</p></li>
+<li><p><strong>Conceptual foundation</strong>: The Central Limit Theorem (coming soon!) relies on this same approximation idea</p></li>
+</ol>
+<p><strong>Bottom line:</strong> In practice, prefer the exact binomial. But understanding <em>why</em> the normal approximation works helps build your statistical intuition.</p>
+</section>
+<section id="summary-exact-vs.-normal-approximation-when-to-use-which" class="level3">
+<h3 class="anchored" data-anchor-id="summary-exact-vs.-normal-approximation-when-to-use-which">Summary: Exact vs.&nbsp;Normal Approximation (When to Use Which)</h3>
+<section id="exact-binomial" class="level4">
+<h4 class="anchored" data-anchor-id="exact-binomial">Exact Binomial</h4>
+<p>Uses the true binomial probability formula:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> p)  <span class="co"># P(X = k)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> p)  <span class="co"># P(X ≤ k)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Completely accurate</li>
+<li>No approximation error</li>
+<li>Easy in R</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Can be slow for very large n</li>
+<li>Wasn’t practical before computers</li>
+</ul>
+</section>
+<section id="normal-approximation" class="level4">
+<h4 class="anchored" data-anchor-id="normal-approximation">Normal Approximation</h4>
+<p>Treats the binomial as approximately normal when n is large:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate a Binomial(n, p) with Normal(μ = np, σ² = np(1-p))</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(k <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">mean =</span> n<span class="sc">*</span>p, <span class="at">sd =</span> <span class="fu">sqrt</span>(n<span class="sc">*</span>p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Fast even for huge n</li>
+<li>Connects discrete and continuous ideas</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Less accurate (especially for small n or extreme p)</li>
+<li>Requires continuity correction (the + 0.5)</li>
+<li>More work in R</li>
+</ul>
+</section>
+<section id="when-is-the-approximation-good" class="level4">
+<h4 class="anchored" data-anchor-id="when-is-the-approximation-good">When is the Approximation Good?</h4>
+<p><strong>Rules of thumb:</strong></p>
+<ul>
+<li>np ≥ 10 <strong>and</strong> n(1-p) ≥ 10</li>
+</ul>
+<p>Or more conservatively:</p>
+<ul>
+<li>np ≥ 5 <strong>and</strong> n(1-p) ≥ 5</li>
+</ul>
+<p>If these conditions aren’t met, stick with the exact binomial!</p>
+</section>
+<section id="key-takeaway" class="level4">
+<h4 class="anchored" data-anchor-id="key-takeaway">Key takeaway</h4>
+<p>In this course, use the exact binomial when possible.</p>
+<p>We study the normal approximation to understand why it works and how discrete and continuous distributions connect.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="outliers-in-normal-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="outliers-in-normal-distributions">Outliers in Normal Distributions</h2>
+<p><strong>The Question:</strong></p>
+<blockquote class="blockquote">
+<p>“In a boxplot we can call any observations that fall beyond 1.5x IQR (not standard deviation) above or below the 75th/25th percentile as outliers. In normal distributions given that 95% of observances fall within 2 SDs/ z-score of 2, can we call anything beyond 2 an outlier? Beyond 3 since these are considered ‘very rare’? Or is there a different metric that can be used?”</p>
+</blockquote>
+<p><strong>Great Connection to Make!</strong></p>
+<p>There’s some confusion here about boxplot rules vs.&nbsp;z-scores, so let me clarify:</p>
+<section id="boxplot-rule-iqr-method" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot-rule-iqr-method">Boxplot Rule (IQR Method)</h3>
+<p>Boxplots define outliers as:</p>
+<ul>
+<li>Below Q1 - 1.5×IQR</li>
+<li>Above Q3 + 1.5×IQR</li>
+</ul>
+<p>This is a <strong>data-driven</strong> rule that works for any distribution shape.</p>
+<p>Note: This is 1.5 times the <strong>interquartile range (IQR)</strong>, not 1.5 standard deviations!</p>
+</section>
+<section id="z-score-method-for-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="z-score-method-for-outliers">Z-Score Method for Outliers</h3>
+<p>For normal distributions, common thresholds are:</p>
+<p><strong>|z| &gt; 2:</strong> Somewhat unusual (about 5% of data falls here)</p>
+<ul>
+<li>Not necessarily “outliers” but worth noting</li>
+<li>This is where roughly 95% of data falls within ±2 SD</li>
+</ul>
+<p><strong>|z| &gt; 3:</strong> Very unusual (about 0.3% of data falls here)</p>
+<ul>
+<li>Often considered outliers</li>
+<li>These are quite rare in truly normal data</li>
+</ul>
+<p><strong>|z| &gt; 4:</strong> Extremely unusual (about 0.006% of data falls here)</p>
+<ul>
+<li>Almost certainly outliers or errors</li>
+<li>Very rare in normal distributions</li>
+</ul>
+</section>
+<section id="which-method-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="which-method-to-use">Which Method to Use?</h3>
+<p><strong>Use the z-score method when:</strong></p>
+<ul>
+<li>You’re confident the data is approximately normal</li>
+<li>You want to identify unusually extreme values</li>
+<li>You’re working with standardized scores</li>
+</ul>
+<p><strong>Use the IQR method when:</strong></p>
+<ul>
+<li>You don’t know if the data is normal</li>
+<li>The data might be skewed</li>
+<li>You want a robust method that works for any distribution</li>
+</ul>
+<p><strong>Bottom line:</strong> There’s no single “correct” threshold. In practice:</p>
+<ul>
+<li>|z| &gt; 3 is a reasonable outlier cutoff for normal data</li>
+<li>The IQR method (boxplot rule) is more robust for unknown distributions</li>
+<li>Always visualize your data and use domain knowledge!</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="quick-refresher-on-binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="quick-refresher-on-binomial-distribution">Quick Refresher on Binomial Distribution</h2>
+<p><strong>The Request:</strong></p>
+<blockquote class="blockquote">
+<p>“I think the binomial distribution stuff relied a lot on previous knowledge so a quick refresher from Monday’s class would have been nice”</p>
+</blockquote>
+<p><strong>Fair point! Here’s a quick recap:</strong></p>
+<section id="what-is-a-binomial-random-variable" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-binomial-random-variable">What is a Binomial Random Variable?</h3>
+<p>A binomial counts <strong>the number of successes in n independent trials</strong>, where:</p>
+<ul>
+<li>Each trial has only two outcomes (success/failure)</li>
+<li>Probability of success p is the same for every trial</li>
+<li>Trials are independent</li>
+</ul>
+<p><strong>Notation:</strong> X ~ Binomial(n, p)</p>
+</section>
+<section id="key-r-functions" class="level3">
+<h3 class="anchored" data-anchor-id="key-r-functions">Key R Functions</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X = k): exactly k successes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> p)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X ≤ k): at most k successes  </span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> p)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X &gt; k): more than k successes</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(k, <span class="at">size =</span> n, <span class="at">prob =</span> p, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>“Flip a fair coin 10 times. What’s the probability of exactly 6 heads?”</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">6</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Going forward, I’ll make sure to include brief refreshers when building on previous material!</p>
+<hr>
+</section>
+</section>
+<section id="deriving-equations-and-establishing-values" class="level2">
+<h2 class="anchored" data-anchor-id="deriving-equations-and-establishing-values">Deriving Equations and Establishing Values</h2>
+<p><strong>The Concern:</strong></p>
+<blockquote class="blockquote">
+<p>“Deriving the equations and how we established certain values was a little unclear.”</p>
+</blockquote>
+<p><strong>My Response:</strong></p>
+<p>You’re not expected to derive distribution formulas from scratch - that’s advanced probability theory.</p>
+<p>What matters is:</p>
+<ol type="1">
+<li><p><strong>Recognizing when to use each distribution</strong> (binomial for counting successes, normal for continuous measurements, Poisson for rare events)</p></li>
+<li><p><strong>Understanding what the parameters mean</strong> (n and p for binomial, μ and σ for normal, λ for Poisson)</p></li>
+<li><p><strong>Using R correctly</strong> to calculate probabilities</p></li>
+<li><p><strong>Interpreting results</strong> in context</p></li>
+</ol>
+<p>The derivations are shown to give you insight into <em>why</em> the formulas work and to connect mathematical theory to practice - not because you need to reproduce them.</p>
+<p>If specific derivations are still unclear, feel free to ask in office hours and I can walk through the intuition!</p>
+<hr>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions?</h2>
+<p>If anything is still muddy, please:</p>
+<ul>
+<li>Come to office hours</li>
+<li>Ask in class</li>
+</ul>
+<p>Thanks for the thoughtful feedback! 📊</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

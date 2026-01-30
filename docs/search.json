@@ -4300,5 +4300,75 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html",
+    "title": "Muddy Points",
+    "section": "",
+    "text": "Note\n\n\n\nYou do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#overview",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#overview",
+    "title": "Muddy Points",
+    "section": "Overview",
+    "text": "Overview\nThank you for your feedback on yesterday’s lecture! The pacing feedback was excellent - 93% felt it was “about right” and only 7% “slightly too fast,” which tells me the pace is working well for most of you. I’ll continue being mindful of pacing as we move forward.\nSeveral themes emerged from your muddy points. Let me address them:"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#the-about-in-probability-interpretations",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#the-about-in-probability-interpretations",
+    "title": "Muddy Points",
+    "section": "The “About” in Probability Interpretations",
+    "text": "The “About” in Probability Interpretations\nThe Question:\n\n“For the blood pressure percentiles, all of the interpretations have statements like ‘95% of men have DBP below about 99.7 mmHg.’ Do you include the ‘about’ because it’s rounded from the R output value? Would I say ‘95% of men have DBP below 99.73824 mmHg’ or is the ‘about’ phrasing required by the actual mathematical formula?”\n\nThe Answer:\nGreat question! The “about” serves multiple purposes:\n\nReason 1: Acknowledging Model Uncertainty\nThe normal distribution is a model of reality, not reality itself. Real blood pressure distributions are only approximately normal. So when we say “about 99.7 mmHg,” we’re acknowledging that:\n\nThe model is an approximation\nReal biological data has natural variability\nThe exact cutoff is somewhat fuzzy\n\n\n\nReason 2: Practical Precision\nIn context, reporting “99.73824 mmHg” implies false precision:\n\nBlood pressure is typically measured to the nearest whole number\nThe extra decimal places suggest more certainty than we actually have\n“About 100 mmHg” or “about 99.7 mmHg” is more honest\n\n\n\nWhen to Use “About”\nUse “about” when:\n\nInterpreting real-world data (blood pressure, heights, test scores)\nRounding R output for readability\nThe context doesn’t demand exact precision\n\nYou can omit “about” when:\n\nThe problem asks for a precise calculation\nYou’re reporting the exact R output in a technical context\nThe value is exact by definition (like standardized z-scores)\n\nBottom line: Using “about” shows good statistical judgment. It acknowledges that models are approximations and that excessive precision can be misleading."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#pnorm-and-lower.tail",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#pnorm-and-lower.tail",
+    "title": "Muddy Points",
+    "section": "pnorm() and lower.tail",
+    "text": "pnorm() and lower.tail\nThe Question:\n\n“For pnorm in R, is the ‘lower.tail’ automatically equal true if not included in the function?”\n\nThe Answer:\nYes! The default is lower.tail = TRUE.\n\nWhat This Means\n# These are equivalent:\npnorm(1.96)\npnorm(1.96, lower.tail = TRUE)\n# Both give P(Z ≤ 1.96) ≈ 0.975\n\n\nWhen to Use lower.tail = FALSE\nUse this when you want the upper tail probability:\n# P(Z &gt; 1.96)\npnorm(1.96, lower.tail = FALSE)  # ≈ 0.025\n\n\nVisual Guide\n\n\n\n\n\n\n\n\n\nPro tip: Instead of using lower.tail = FALSE, you can also use the relationship:\n# These are equivalent:\npnorm(1.96, lower.tail = FALSE)\n1 - pnorm(1.96)\nChoose whichever feels more intuitive to you!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#continuous-distributions-intervals-and-single-points",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#continuous-distributions-intervals-and-single-points",
+    "title": "Muddy Points",
+    "section": "Continuous Distributions: Intervals and Single Points",
+    "text": "Continuous Distributions: Intervals and Single Points\nThe Question:\n\n“Why are intervals always inclusive on a continuous distribution? Why is probability of a single point at a continuous distribution always 0? When do you use ‘lower.tail = FALSE’?”\n\nGreat Questions! Let me break these down:\n\nWhy is P(X = exact value) = 0?\nFor continuous distributions, there are infinitely many possible values in any interval.\nThink about height:\n\nWhat’s the probability someone is exactly 170.00000… cm tall?\nNot 170.001 cm or 169.999 cm, but precisely 170?\n\nThe probability is essentially 0 because any single point is infinitesimal compared to the infinite continuum.\nImportant: This doesn’t mean it’s impossible; it just means the probability is so small (infinitely small) that it’s mathematically zero.\n\n\nWhy doesn’t it matter if we include endpoints?\nBecause P(X = exact value) = 0, these are all equivalent:\n# All of these give the SAME answer for continuous distributions:\npnorm(1.96) - pnorm(0)     # P(0 &lt; Z &lt; 1.96)\npnorm(1.96) - pnorm(0)     # P(0 ≤ Z ≤ 1.96)\npnorm(1.96) - pnorm(0)     # P(0 &lt; Z ≤ 1.96)\npnorm(1.96) - pnorm(0)     # P(0 ≤ Z &lt; 1.96)\nAdding or removing a single point (like including/excluding exactly 0 or exactly 1.96) doesn’t change the probability because each single point contributes 0.\n\n\nWhen to use lower.tail = FALSE\nAlready covered above, but the key is:\n\nlower.tail = TRUE (default): P(X ≤ value)\nlower.tail = FALSE: P(X &gt; value)"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#normal-approximation-vs.-exact-binomial",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#normal-approximation-vs.-exact-binomial",
+    "title": "Muddy Points",
+    "section": "Normal Approximation vs. Exact Binomial",
+    "text": "Normal Approximation vs. Exact Binomial\nThe Question:\n\n“Why would you use normal approximation if you can use exact (binomial) and it’s more accurate and requires fewer lines of code?”\n\nExcellent question! Here’s why:\n\nHistorical Context\nThe normal approximation was developed before computers existed.\nWhen statisticians had to calculate probabilities by hand or using printed tables:\n\nComputing \\(\\binom{1000}{487}\\) was essentially impossible\nNormal tables were available in the back of every textbook\nThe approximation was much faster and “good enough”\n\n\n\nModern Practice\nToday, with R, you’re absolutely right:\n# Exact (better!)\npbinom(487, size = 1000, prob = 0.5)\n\n# Approximation (more work, less accurate)\npnorm(487.5, mean = 500, sd = sqrt(250))\nUse the exact binomial when you can!\n\n\nWhen Normal Approximation Still Matters\nThere are a few cases where we still use it:\n\nVery large n: When n is extremely large (n &gt; 10,000), even computers can struggle with exact binomial calculations, and the normal approximation works very well\nTheoretical understanding: It helps you understand the connection between discrete and continuous distributions - a key concept in statistics\nHistorical methods: Some older statistical techniques were built on normal approximations, and understanding them helps you read older research\nConceptual foundation: The Central Limit Theorem (coming soon!) relies on this same approximation idea\n\nBottom line: In practice, prefer the exact binomial. But understanding why the normal approximation works helps build your statistical intuition.\n\n\nSummary: Exact vs. Normal Approximation (When to Use Which)\n\nExact Binomial\nUses the true binomial probability formula:\ndbinom(k, size = n, prob = p)  # P(X = k)\npbinom(k, size = n, prob = p)  # P(X ≤ k)\nAdvantages:\n\nCompletely accurate\nNo approximation error\nEasy in R\n\nDisadvantages:\n\nCan be slow for very large n\nWasn’t practical before computers\n\n\n\nNormal Approximation\nTreats the binomial as approximately normal when n is large:\n# Approximate a Binomial(n, p) with Normal(μ = np, σ² = np(1-p))\npnorm(k + 0.5, mean = n*p, sd = sqrt(n*p*(1-p)))\nAdvantages:\n\nFast even for huge n\nConnects discrete and continuous ideas\n\nDisadvantages:\n\nLess accurate (especially for small n or extreme p)\nRequires continuity correction (the + 0.5)\nMore work in R\n\n\n\nWhen is the Approximation Good?\nRules of thumb:\n\nnp ≥ 10 and n(1-p) ≥ 10\n\nOr more conservatively:\n\nnp ≥ 5 and n(1-p) ≥ 5\n\nIf these conditions aren’t met, stick with the exact binomial!\n\n\nKey takeaway\nIn this course, use the exact binomial when possible.\nWe study the normal approximation to understand why it works and how discrete and continuous distributions connect."
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#outliers-in-normal-distributions",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#outliers-in-normal-distributions",
+    "title": "Muddy Points",
+    "section": "Outliers in Normal Distributions",
+    "text": "Outliers in Normal Distributions\nThe Question:\n\n“In a boxplot we can call any observations that fall beyond 1.5x IQR (not standard deviation) above or below the 75th/25th percentile as outliers. In normal distributions given that 95% of observances fall within 2 SDs/ z-score of 2, can we call anything beyond 2 an outlier? Beyond 3 since these are considered ‘very rare’? Or is there a different metric that can be used?”\n\nGreat Connection to Make!\nThere’s some confusion here about boxplot rules vs. z-scores, so let me clarify:\n\nBoxplot Rule (IQR Method)\nBoxplots define outliers as:\n\nBelow Q1 - 1.5×IQR\nAbove Q3 + 1.5×IQR\n\nThis is a data-driven rule that works for any distribution shape.\nNote: This is 1.5 times the interquartile range (IQR), not 1.5 standard deviations!\n\n\nZ-Score Method for Outliers\nFor normal distributions, common thresholds are:\n|z| &gt; 2: Somewhat unusual (about 5% of data falls here)\n\nNot necessarily “outliers” but worth noting\nThis is where roughly 95% of data falls within ±2 SD\n\n|z| &gt; 3: Very unusual (about 0.3% of data falls here)\n\nOften considered outliers\nThese are quite rare in truly normal data\n\n|z| &gt; 4: Extremely unusual (about 0.006% of data falls here)\n\nAlmost certainly outliers or errors\nVery rare in normal distributions\n\n\n\nWhich Method to Use?\nUse the z-score method when:\n\nYou’re confident the data is approximately normal\nYou want to identify unusually extreme values\nYou’re working with standardized scores\n\nUse the IQR method when:\n\nYou don’t know if the data is normal\nThe data might be skewed\nYou want a robust method that works for any distribution\n\nBottom line: There’s no single “correct” threshold. In practice:\n\n|z| &gt; 3 is a reasonable outlier cutoff for normal data\nThe IQR method (boxplot rule) is more robust for unknown distributions\nAlways visualize your data and use domain knowledge!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#quick-refresher-on-binomial-distribution",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#quick-refresher-on-binomial-distribution",
+    "title": "Muddy Points",
+    "section": "Quick Refresher on Binomial Distribution",
+    "text": "Quick Refresher on Binomial Distribution\nThe Request:\n\n“I think the binomial distribution stuff relied a lot on previous knowledge so a quick refresher from Monday’s class would have been nice”\n\nFair point! Here’s a quick recap:\n\nWhat is a Binomial Random Variable?\nA binomial counts the number of successes in n independent trials, where:\n\nEach trial has only two outcomes (success/failure)\nProbability of success p is the same for every trial\nTrials are independent\n\nNotation: X ~ Binomial(n, p)\n\n\nKey R Functions\n# P(X = k): exactly k successes\ndbinom(k, size = n, prob = p)\n\n# P(X ≤ k): at most k successes  \npbinom(k, size = n, prob = p)\n\n# P(X &gt; k): more than k successes\npbinom(k, size = n, prob = p, lower.tail = FALSE)\n\n\nExample\n“Flip a fair coin 10 times. What’s the probability of exactly 6 heads?”\ndbinom(6, size = 10, prob = 0.5)\nGoing forward, I’ll make sure to include brief refreshers when building on previous material!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#deriving-equations-and-establishing-values",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#deriving-equations-and-establishing-values",
+    "title": "Muddy Points",
+    "section": "Deriving Equations and Establishing Values",
+    "text": "Deriving Equations and Establishing Values\nThe Concern:\n\n“Deriving the equations and how we established certain values was a little unclear.”\n\nMy Response:\nYou’re not expected to derive distribution formulas from scratch - that’s advanced probability theory.\nWhat matters is:\n\nRecognizing when to use each distribution (binomial for counting successes, normal for continuous measurements, Poisson for rare events)\nUnderstanding what the parameters mean (n and p for binomial, μ and σ for normal, λ for Poisson)\nUsing R correctly to calculate probabilities\nInterpreting results in context\n\nThe derivations are shown to give you insight into why the formulas work and to connect mathematical theory to practice - not because you need to reproduce them.\nIf specific derivations are still unclear, feel free to ask in office hours and I can walk through the intuition!"
+  },
+  {
+    "objectID": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#questions",
+    "href": "lessons/10_normal_poisson/10_normal_poisson_muddy_points.html#questions",
+    "title": "Muddy Points",
+    "section": "Questions?",
+    "text": "Questions?\nIf anything is still muddy, please:\n\nCome to office hours\nAsk in class\n\nThanks for the thoughtful feedback! 📊"
   }
 ]
