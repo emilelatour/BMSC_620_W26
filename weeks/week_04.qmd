@@ -108,7 +108,7 @@ By the end of the week, you should be able to:
 
 - **HW 3**
   - Released **Monday, January 26**
-  - Due **Tuesday, February 3 at 11:00 pm**
+  - Due **Sunday, February 1 at 11:00 pm**
   - Covers:
     - Bayes' Theorem
     - Random variables and expected value

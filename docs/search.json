@@ -1990,7 +1990,7 @@
     "href": "weeks/week_04.html#homework",
     "title": "Week 4",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Tuesday, February 3 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Sunday, February 1 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
