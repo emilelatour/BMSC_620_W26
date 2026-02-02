@@ -8,7 +8,7 @@
 
 <meta name="author" content="Your Name">
 
-<title>BMSC 620 — Homework 1 – BMSC 620: Introduction to Biostatistics</title>
+<title>BMSC 620 — Homework 4 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4841,7 +4841,7 @@ white-space: nowrap;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">BMSC 620 — Homework 1</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">BMSC 620 — Homework 4</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -4965,38 +4965,39 @@ white-space: nowrap;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#homework-1" id="toc-homework-1" class="nav-link active" data-scroll-target="#homework-1">Homework 1</a></li>
-  <li><a href="#part-0-setup" id="toc-part-0-setup" class="nav-link" data-scroll-target="#part-0-setup">Part 0: Setup</a></li>
-  <li><a href="#part-1-r-objects-and-vectors" id="toc-part-1-r-objects-and-vectors" class="nav-link" data-scroll-target="#part-1-r-objects-and-vectors">Part 1: R objects and vectors</a>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#part-1-the-normal-distribution" id="toc-part-1-the-normal-distribution" class="nav-link" data-scroll-target="#part-1-the-normal-distribution">Part 1: The Normal Distribution</a>
   <ul class="collapse">
-  <li><a href="#a.-calculator-practice" id="toc-a.-calculator-practice" class="nav-link" data-scroll-target="#a.-calculator-practice">1A. Calculator practice</a></li>
-  <li><a href="#b.-create-vectors-and-summarize" id="toc-b.-create-vectors-and-summarize" class="nav-link" data-scroll-target="#b.-create-vectors-and-summarize">1B. Create vectors and summarize</a></li>
-  <li><a href="#c.-missing-values" id="toc-c.-missing-values" class="nav-link" data-scroll-target="#c.-missing-values">1C. Missing values</a></li>
+  <li><a href="#a.-properties-of-the-normal-distribution" id="toc-a.-properties-of-the-normal-distribution" class="nav-link" data-scroll-target="#a.-properties-of-the-normal-distribution">1A. Properties of the Normal distribution</a></li>
   </ul></li>
-  <li><a href="#part-2-inspecting-a-dataset-nhanes.samp" id="toc-part-2-inspecting-a-dataset-nhanes.samp" class="nav-link" data-scroll-target="#part-2-inspecting-a-dataset-nhanes.samp">Part 2: Inspecting a dataset (nhanes.samp)</a>
+  <li><a href="#part-2-z-scores-and-standardization" id="toc-part-2-z-scores-and-standardization" class="nav-link" data-scroll-target="#part-2-z-scores-and-standardization">Part 2: Z-scores and Standardization</a>
   <ul class="collapse">
-  <li><a href="#a.-basic-inspection" id="toc-a.-basic-inspection" class="nav-link" data-scroll-target="#a.-basic-inspection">2A. Basic inspection</a></li>
-  <li><a href="#b.-accessing-a-single-variable-with" id="toc-b.-accessing-a-single-variable-with" class="nav-link" data-scroll-target="#b.-accessing-a-single-variable-with">2B. Accessing a single variable with $</a></li>
-  <li><a href="#c.-working-with-na-values." id="toc-c.-working-with-na-values." class="nav-link" data-scroll-target="#c.-working-with-na-values.">2C. Working with <code>NA</code> values.</a></li>
+  <li><a href="#a.-calculating-z-scores" id="toc-a.-calculating-z-scores" class="nav-link" data-scroll-target="#a.-calculating-z-scores">2A. Calculating z-scores</a></li>
   </ul></li>
-  <li><a href="#part-3-summarizing-one-categorical-variable" id="toc-part-3-summarizing-one-categorical-variable" class="nav-link" data-scroll-target="#part-3-summarizing-one-categorical-variable">Part 3: Summarizing one categorical variable</a>
+  <li><a href="#part-3-probabilities-from-the-normal-distribution" id="toc-part-3-probabilities-from-the-normal-distribution" class="nav-link" data-scroll-target="#part-3-probabilities-from-the-normal-distribution">Part 3: Probabilities from the Normal Distribution</a>
   <ul class="collapse">
-  <li><a href="#a.-counts-and-proportions" id="toc-a.-counts-and-proportions" class="nav-link" data-scroll-target="#a.-counts-and-proportions">3A. Counts and proportions</a></li>
-  <li><a href="#b.-bar-plot" id="toc-b.-bar-plot" class="nav-link" data-scroll-target="#b.-bar-plot">3B. Bar plot</a></li>
+  <li><a href="#a.-probabilities" id="toc-a.-probabilities" class="nav-link" data-scroll-target="#a.-probabilities">3A. Probabilities</a></li>
   </ul></li>
-  <li><a href="#part-4-two-categorical-variables-contingency-tables" id="toc-part-4-two-categorical-variables-contingency-tables" class="nav-link" data-scroll-target="#part-4-two-categorical-variables-contingency-tables">Part 4: Two categorical variables (contingency tables)</a>
+  <li><a href="#part-4-quantiles-and-cutoffs" id="toc-part-4-quantiles-and-cutoffs" class="nav-link" data-scroll-target="#part-4-quantiles-and-cutoffs">Part 4: Quantiles and Cutoffs</a>
   <ul class="collapse">
-  <li><a href="#a.-contingency-table-counts" id="toc-a.-contingency-table-counts" class="nav-link" data-scroll-target="#a.-contingency-table-counts">4A. Contingency table (counts)</a></li>
-  <li><a href="#b.-row-proportions-vs-column-proportions" id="toc-b.-row-proportions-vs-column-proportions" class="nav-link" data-scroll-target="#b.-row-proportions-vs-column-proportions">4B. Row proportions vs column proportions</a></li>
-  <li><a href="#c.-interpretation" id="toc-c.-interpretation" class="nav-link" data-scroll-target="#c.-interpretation">4C. Interpretation</a></li>
+  <li><a href="#a.-percentiles" id="toc-a.-percentiles" class="nav-link" data-scroll-target="#a.-percentiles">4A. Percentiles</a></li>
   </ul></li>
-  <li><a href="#part-5-visual-summaries-for-numeric-variables" id="toc-part-5-visual-summaries-for-numeric-variables" class="nav-link" data-scroll-target="#part-5-visual-summaries-for-numeric-variables">Part 5: Visual summaries for numeric variables</a>
+  <li><a href="#part-5-binomial-distribution" id="toc-part-5-binomial-distribution" class="nav-link" data-scroll-target="#part-5-binomial-distribution">Part 5: Binomial Distribution</a>
   <ul class="collapse">
-  <li><a href="#a.-histogram" id="toc-a.-histogram" class="nav-link" data-scroll-target="#a.-histogram">5A. Histogram</a></li>
-  <li><a href="#b.-box-plot-overall" id="toc-b.-box-plot-overall" class="nav-link" data-scroll-target="#b.-box-plot-overall">5B. Box plot (overall)</a></li>
-  <li><a href="#c.-box-plot-by-group" id="toc-c.-box-plot-by-group" class="nav-link" data-scroll-target="#c.-box-plot-by-group">5C. Box plot by group</a></li>
+  <li><a href="#a.-exact-binomial-probabilities" id="toc-a.-exact-binomial-probabilities" class="nav-link" data-scroll-target="#a.-exact-binomial-probabilities">5A. Exact Binomial probabilities</a></li>
   </ul></li>
-  <li><a href="#final-check" id="toc-final-check" class="nav-link" data-scroll-target="#final-check">Final check</a></li>
+  <li><a href="#part-6-normal-approximation-to-the-binomial" id="toc-part-6-normal-approximation-to-the-binomial" class="nav-link" data-scroll-target="#part-6-normal-approximation-to-the-binomial">Part 6: Normal Approximation to the Binomial</a>
+  <ul class="collapse">
+  <li><a href="#a.-check-conditions" id="toc-a.-check-conditions" class="nav-link" data-scroll-target="#a.-check-conditions">6A. Check conditions</a></li>
+  <li><a href="#b.-approximate-probability" id="toc-b.-approximate-probability" class="nav-link" data-scroll-target="#b.-approximate-probability">6B. Approximate probability</a></li>
+  </ul></li>
+  <li><a href="#part-7-poisson-distribution" id="toc-part-7-poisson-distribution" class="nav-link" data-scroll-target="#part-7-poisson-distribution">Part 7: Poisson Distribution</a>
+  <ul class="collapse">
+  <li><a href="#a.-probabilities-1" id="toc-a.-probabilities-1" class="nav-link" data-scroll-target="#a.-probabilities-1">7A. Probabilities</a></li>
+  </ul></li>
+  <li><a href="#part-8-choosing-the-right-distribution" id="toc-part-8-choosing-the-right-distribution" class="nav-link" data-scroll-target="#part-8-choosing-the-right-distribution">Part 8: Choosing the Right Distribution</a></li>
+  <li><a href="#optional-not-graded-reflection" id="toc-optional-not-graded-reflection" class="nav-link" data-scroll-target="#optional-not-graded-reflection">Optional (Not Graded): Reflection</a></li>
+  <li><a href="#submission-checklist" id="toc-submission-checklist" class="nav-link" data-scroll-target="#submission-checklist">Submission checklist</a></li>
   </ul>
 </nav>
     </div>
@@ -5005,7 +5006,8 @@ white-space: nowrap;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BMSC 620 — Homework 1</h1>
+<h1 class="title">BMSC 620 — Homework 4</h1>
+<p class="subtitle lead">Normal, Binomial, and Poisson Distributions</p>
 </div>
 
 
@@ -5043,234 +5045,289 @@ Note
 <p><code>Lastname_FirstInitial_HW##</code></p>
 <p>Examples:</p>
 <ul>
-<li>Smith_J_HW01.qmd</li>
-<li>Smith_J_HW01.html</li>
+<li>Smith_J_HW04.qmd</li>
+<li>Smith_J_HW04.html</li>
 </ul>
-<p>When submitting Homework 1, upload <strong>both</strong>:</p>
+<p>When submitting Homework 4, upload <strong>both</strong>:</p>
 <ul>
 <li>the <code>.qmd</code> file</li>
 <li>the rendered <code>.html</code> file</li>
 </ul>
 </div>
 </div>
-<section id="homework-1" class="level2">
-<h2 class="anchored" data-anchor-id="homework-1">Homework 1</h2>
-<p>This assignment reviews:</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ul>
-<li>writing and running code in Quarto</li>
-<li>summarizing numeric and categorical variables</li>
-<li>frequency tables and contingency tables</li>
-<li>bar plots, histograms, and box plots</li>
+<li>Answer each question clearly and concisely.</li>
+<li>Show your work when calculations are involved.</li>
+<li>Use R to compute probabilities and quantiles when requested.</li>
+<li>You may round final answers to 3 decimal places unless otherwise noted.</li>
+<li><strong>Do not use continuity correction</strong> for Normal approximations in this assignment.</li>
 </ul>
-<p>Unless stated otherwise, show your work using R code chunks.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some code chunks are intentionally incomplete. Fill in the missing values so the code runs correctly.</p>
+</div>
+</div>
 <hr>
 </section>
-<section id="part-0-setup" class="level2">
-<h2 class="anchored" data-anchor-id="part-0-setup">Part 0: Setup</h2>
+<section id="part-1-the-normal-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-the-normal-distribution">Part 1: The Normal Distribution</h2>
+<section id="a.-properties-of-the-normal-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="a.-properties-of-the-normal-distribution">1A. Properties of the Normal distribution</h3>
+<p>Answer briefly (1–2 sentences each).</p>
 <ol type="1">
-<li>In the chunk below, load the packages you need for this homework.</li>
-<li>Run the chunk to confirm there are no errors.</li>
+<li>What does it mean for a distribution to be symmetric?</li>
+<li>What parameters define a Normal distribution?</li>
+<li>Why is the Normal distribution important in statistics?</li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: If you don&#39;t already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;OI-Biostat/oi_biostat_data&quot;, force = TRUE)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(oibiostat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><strong>Answers:</strong></p>
+<ol type="1">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<hr>
 </section>
-<section id="part-1-r-objects-and-vectors" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-r-objects-and-vectors">Part 1: R objects and vectors</h2>
-<section id="a.-calculator-practice" class="level3">
-<h3 class="anchored" data-anchor-id="a.-calculator-practice">1A. Calculator practice</h3>
-<p>Create code that computes each of the following (one line each):</p>
+</section>
+<section id="part-2-z-scores-and-standardization" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-z-scores-and-standardization">Part 2: Z-scores and Standardization</h2>
+<p>Suppose adult systolic blood pressure (SBP) is Normally distributed with:</p>
 <ul>
-<li>12 / 5</li>
-<li>3^4</li>
-<li>sqrt(81)</li>
-<li>4^3 - 2 * 7 + 9 / 2</li>
+<li>Mean = 120 mmHg</li>
+<li>Standard deviation = 15 mmHg</li>
 </ul>
+<section id="a.-calculating-z-scores" class="level3">
+<h3 class="anchored" data-anchor-id="a.-calculating-z-scores">2A. Calculating z-scores</h3>
+<ol type="1">
+<li>Compute the z-score for an individual with SBP = 135 mmHg.</li>
+<li>Interpret this z-score in words.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">135</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute z-score: z = (x - mu) / sigma</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="b.-create-vectors-and-summarize" class="level3">
-<h3 class="anchored" data-anchor-id="b.-create-vectors-and-summarize">1B. Create vectors and summarize</h3>
+<p><strong>Answers:</strong></p>
 <ol type="1">
-<li>Create a vector named x containing the numbers: 4, 9, 2, 10, 7, 7</li>
-<li>Compute the mean and standard deviation of x</li>
-<li>Compute the median and IQR of x</li>
+<li></li>
+<li></li>
 </ol>
+<hr>
 </section>
-<section id="c.-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="c.-missing-values">1C. Missing values</h3>
+</section>
+<section id="part-3-probabilities-from-the-normal-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-probabilities-from-the-normal-distribution">Part 3: Probabilities from the Normal Distribution</h2>
+<p>Using the same SBP distribution:</p>
+<section id="a.-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="a.-probabilities">3A. Probabilities</h3>
 <ol type="1">
-<li>Create a vector named y containing: 2, 5, NA, 7, 9</li>
-<li>Compute mean(y). What happens?</li>
-<li>Compute the mean again ignoring missing values</li>
+<li>What proportion of adults have SBP above 140 mmHg?</li>
+<li>What proportion have SBP between 110 and 130 mmHg?</li>
 </ol>
-<p>Write 1 to 2 sentences explaining what na.rm = TRUE does.</p>
-<p><strong>Your explanation:</strong></p>
-</section>
-</section>
-<section id="part-2-inspecting-a-dataset-nhanes.samp" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-inspecting-a-dataset-nhanes.samp">Part 2: Inspecting a dataset (nhanes.samp)</h2>
-<p>In this homework, you will work with the dataset <strong>nhanes.samp</strong>, which is included in the <code>oibiostat</code> package.</p>
-<p>The National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a <strong>sample of 200 individuals</strong> from NHANES, provided for instructional purposes.</p>
-<p>To load the dataset, run:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(oibiostat)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;nhanes.samp&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion above 140</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">q =</span> ,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> ,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> ,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportion between 110 and 130</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># P(110 &lt; X &lt; 130) = P(X &lt; 130) - P(X &lt; 110)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="a.-basic-inspection" class="level3">
-<h3 class="anchored" data-anchor-id="a.-basic-inspection">2A. Basic inspection</h3>
-<p>Run the following functions:</p>
-<ul>
-<li>dim(nhanes.samp)</li>
-<li>names(nhanes.samp)</li>
-<li>str(nhanes.samp)</li>
-<li>head(nhanes.samp)</li>
-</ul>
-<p>Answer the questions below in plain text.</p>
+<p><strong>Answers:</strong></p>
 <ol type="1">
-<li>How many rows and columns does nhanes.samp have?</li>
-<li>Name two categorical variables? (i.e. <code>Factor</code> variable type)</li>
-<li>Give one example of a numeric variable. (<code>int</code> or <code>num</code>)</li>
+<li></li>
+<li></li>
 </ol>
-<p>Answers: 1. 2. 3.</p>
+<hr>
 </section>
-<section id="b.-accessing-a-single-variable-with" class="level3">
-<h3 class="anchored" data-anchor-id="b.-accessing-a-single-variable-with">2B. Accessing a single variable with $</h3>
+</section>
+<section id="part-4-quantiles-and-cutoffs" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-quantiles-and-cutoffs">Part 4: Quantiles and Cutoffs</h2>
+<section id="a.-percentiles" class="level3">
+<h3 class="anchored" data-anchor-id="a.-percentiles">4A. Percentiles</h3>
 <ol type="1">
-<li>Use $ to pull out <code>Age</code></li>
-<li>Compute the mean, sd, median, and IQR of <code>Age</code></li>
+<li>What SBP value corresponds to the 90th percentile?</li>
+<li>Hypertension screening flags the top 10% of SBP values. What is the cutoff?</li>
 </ol>
-</section>
-<section id="c.-working-with-na-values." class="level3">
-<h3 class="anchored" data-anchor-id="c.-working-with-na-values.">2C. Working with <code>NA</code> values.</h3>
-<p>We can see that some variables in the dataset have missing values (<code>NA</code>) like the variable <code>Height</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(nhanes.samp<span class="sc">$</span>Height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-   90.6   156.6   166.2   162.6   175.7   191.3      10 </code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 90th percentile</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> ,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> ,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p><strong>Answers:</strong></p>
 <ol type="1">
-<li>Use $ to pull out <code>Height</code></li>
-<li>Compute the mean, sd, median, and IQR of <code>Height</code>. Hint: you will need to remove the <code>NA</code> values by adding the argument <code>na.rm = TRUE</code> to the function calls.</li>
+<li></li>
+<li></li>
 </ol>
+<p>Interpret the cutoff in one sentence:</p>
+<hr>
 </section>
 </section>
-<section id="part-3-summarizing-one-categorical-variable" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-summarizing-one-categorical-variable">Part 3: Summarizing one categorical variable</h2>
-<p>We will summarize <code>Gender</code></p>
-<section id="a.-counts-and-proportions" class="level3">
-<h3 class="anchored" data-anchor-id="a.-counts-and-proportions">3A. Counts and proportions</h3>
+<section id="part-5-binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-binomial-distribution">Part 5: Binomial Distribution</h2>
+<p>A new medication has a 30% chance of success for each patient. Suppose 20 patients are treated.</p>
+<section id="a.-exact-binomial-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="a.-exact-binomial-probabilities">5A. Exact Binomial probabilities</h3>
 <ol type="1">
-<li>Use table() to get counts of <code>Gender</code></li>
-<li>Use prop.table() to get proportions of <code>Gender</code></li>
-<li>Convert proportions to percentages</li>
+<li>What is the probability that exactly 8 patients respond?</li>
+<li>What is the probability that at least 5 patients respond?</li>
 </ol>
-<p>Hint: <code>table(nhanes.samp$Gender)</code> and <code>prop.table(...)</code></p>
-</section>
-<section id="b.-bar-plot" class="level3">
-<h3 class="anchored" data-anchor-id="b.-bar-plot">3B. Bar plot</h3>
-<p>Make a bar plot of <code>Gender</code> using the <code>barplot</code> function.</p>
-</section>
-</section>
-<section id="part-4-two-categorical-variables-contingency-tables" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-two-categorical-variables-contingency-tables">Part 4: Two categorical variables (contingency tables)</h2>
-<p>We can use the <code>table()</code> function to examine the relationships between two categorical variables. Here is an example using <code>Gender</code> and <code>Race1</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(nhanes.samp<span class="sc">$</span>Gender, nhanes.samp<span class="sc">$</span>Race1)   <span class="co"># counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        
-         Black Hispanic Mexican White Other
-  female     7        8       9    65    13
-  male      16        6      13    57     6</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exactly 8 successes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> ,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> ,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># At least 5 successes</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X &gt;= 5) = P(X &gt; 4) = 1 - P(X &lt;= 4)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">q =</span> ,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> ,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> ,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(nhanes.samp<span class="sc">$</span>Gender, nhanes.samp<span class="sc">$</span>Race1), <span class="at">margin =</span> <span class="dv">1</span>)  <span class="co"># row proportions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        
-              Black   Hispanic    Mexican      White      Other
-  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098
-  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(nhanes.samp<span class="sc">$</span>Gender, nhanes.samp<span class="sc">$</span>Race1), <span class="at">margin =</span> <span class="dv">2</span>)  <span class="co"># column proportions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        
-             Black  Hispanic   Mexican     White     Other
-  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105
-  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895</code></pre>
-</div>
-</div>
-<p>Using <strong>row percentages (margin = 1)</strong>, where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.</p>
-<p>Using <strong>column percentages (margin = 2)</strong>, where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.</p>
-<section id="a.-contingency-table-counts" class="level3">
-<h3 class="anchored" data-anchor-id="a.-contingency-table-counts">4A. Contingency table (counts)</h3>
-<p>Choose either the <code>Diabetes</code> or <code>SmokeNow</code> variable in the data set. Create a contingency table similar to above with <code>Gender</code> and the variable that you choose.</p>
-</section>
-<section id="b.-row-proportions-vs-column-proportions" class="level3">
-<h3 class="anchored" data-anchor-id="b.-row-proportions-vs-column-proportions">4B. Row proportions vs column proportions</h3>
+<p><strong>Answers:</strong></p>
 <ol type="1">
-<li>Create a row proportion table (each row sums to 1)</li>
-<li>Create a column proportion table (each column sums to 1)</li>
+<li></li>
+<li></li>
 </ol>
-<p>Hint:</p>
-<ul>
-<li><code>prop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)</code></li>
-<li><code>prop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)</code></li>
-</ul>
+<hr>
 </section>
-<section id="c.-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="c.-interpretation">4C. Interpretation</h3>
-<p>Answer each question in 1 to 2 sentences.</p>
+</section>
+<section id="part-6-normal-approximation-to-the-binomial" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-normal-approximation-to-the-binomial">Part 6: Normal Approximation to the Binomial</h2>
+<p>Suppose a manufacturing process has a defect rate of 10%. Out of 200 items produced:</p>
+<section id="a.-check-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="a.-check-conditions">6A. Check conditions</h3>
 <ol type="1">
-<li>Provide 1 or 2 short sentences describing the <em>row</em> percentages.</li>
-<li>Provide 1 or 2 short sentences describing the <em>column</em> percentages.</li>
+<li>State the mean and standard deviation of the Binomial distribution.</li>
+<li>Verify whether a Normal approximation is reasonable.</li>
 </ol>
-<p>Answers: 1. 2.</p>
-</section>
-</section>
-<section id="part-5-visual-summaries-for-numeric-variables" class="level2">
-<h2 class="anchored" data-anchor-id="part-5-visual-summaries-for-numeric-variables">Part 5: Visual summaries for numeric variables</h2>
-<section id="a.-histogram" class="level3">
-<h3 class="anchored" data-anchor-id="a.-histogram">5A. Histogram</h3>
-<p>Make a histogram of <code>BMI</code>.</p>
-<p>Using the <code>hist()</code> function, you can add:</p>
-<ul>
-<li>a title by adding an argument <code>main = &quot;Histogram of BMI&quot;</code></li>
-<li>and a label for the x-axis using <code>xlab = &quot;BMI&quot;</code></li>
-<li>When in doubt about arguments to functions, use the <code>?</code> then the function name to get help. i.e. type in the console <code>?hist</code> to get help for the <code>hist()</code> function.</li>
-</ul>
-<p>If you get an error due to missing values, use <code>na.omit()</code> or remove <code>NA</code> values before calling <code>hist()</code>.</p>
-</section>
-<section id="b.-box-plot-overall" class="level3">
-<h3 class="anchored" data-anchor-id="b.-box-plot-overall">5B. Box plot (overall)</h3>
-<p>Make a single box plot of <code>Height</code> using <code>boxplot()</code>. Include a title “Box plot of Height” and a label for the y-axis (<code>ylab = &quot;Height&quot;</code>). Get help using <code>?boxplot</code> if you need it.</p>
-<p>NOTE: We saw earlier that <code>Height</code> contained <code>NA</code> values. <code>boxplot()</code> will ignore <code>NA</code> values automatically.</p>
-</section>
-<section id="c.-box-plot-by-group" class="level3">
-<h3 class="anchored" data-anchor-id="c.-box-plot-by-group">5C. Box plot by group</h3>
-<p>Make a box plot of <code>Height</code> by <code>Gender</code>.</p>
-<p>If you look at the first example in the help for the boxplot function <code>?boxplot</code>, they give an example of a box plot of <code>count</code> by <code>spray</code> using the <code>InsectSprays</code> dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(count <span class="sc">~</span> spray, <span class="at">data =</span> InsectSprays, <span class="at">col =</span> <span class="st">&quot;lightgray&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.10</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean of binomial: mu = n * p</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mu_b <span class="ot">&lt;-</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># SD of binomial: sd = sqrt(n * p * (1 - p))</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>sd_b <span class="ot">&lt;-</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>mu_b</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>sd_b</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Check conditions: np &gt;= 10 and n(1-p) &gt;= 10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Follow their example to make your <code>Height</code> by <code>Gender</code> box plot with the <code>nhanes.samp</code> data.</p>
-<p>Which group has a higher median height? How can you tell from the figure? Are there any outliers?</p>
-<p>Answer:</p>
+<p><strong>Answers:</strong></p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+</section>
+<section id="b.-approximate-probability" class="level3">
+<h3 class="anchored" data-anchor-id="b.-approximate-probability">6B. Approximate probability</h3>
+<p>Use a Normal approximation <strong>without continuity correction</strong>.</p>
+<p>What is the approximate probability that more than 30 items are defective?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X &gt; 30) using Normal approximation</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">q =</span> ,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> ,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> ,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<p>Briefly comment on whether this approximation seems reasonable:</p>
+<hr>
 </section>
 </section>
-<section id="final-check" class="level2">
-<h2 class="anchored" data-anchor-id="final-check">Final check</h2>
-<p>Before submitting, confirm that:</p>
-<ul>
-<li>The document renders to HTML without errors</li>
-<li>All code chunks run successfully</li>
-<li>Your name appears at the top</li>
-<li>You uploaded both the .qmd and .html files</li>
+<section id="part-7-poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-7-poisson-distribution">Part 7: Poisson Distribution</h2>
+<p>Emergency room arrivals follow a Poisson distribution with an average rate of 3 arrivals per hour.</p>
+<section id="a.-probabilities-1" class="level3">
+<h3 class="anchored" data-anchor-id="a.-probabilities-1">7A. Probabilities</h3>
+<ol type="1">
+<li>What is the probability of exactly 2 arrivals in an hour?</li>
+<li>What is the probability of at least 5 arrivals in an hour?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exactly 2 arrivals</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> ,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># At least 5 arrivals: P(X &gt;= 5) = 1 - P(X &lt;= 4)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">q =</span> ,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> ,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answers:</strong></p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="part-8-choosing-the-right-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="part-8-choosing-the-right-distribution">Part 8: Choosing the Right Distribution</h2>
+<p>For each scenario, state which distribution (<strong>Normal</strong>, <strong>Binomial</strong>, or <strong>Poisson</strong>) is most appropriate and briefly explain why.</p>
+<ol type="1">
+<li>Number of typos on a randomly selected manuscript page</li>
+<li>Proportion of voters in a sample who support a candidate</li>
+<li>Adult heights in a large population</li>
+</ol>
+<p><strong>Answers:</strong></p>
+<ol type="1">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<hr>
+</section>
+<section id="optional-not-graded-reflection" class="level2">
+<h2 class="anchored" data-anchor-id="optional-not-graded-reflection">Optional (Not Graded): Reflection</h2>
+<p>In 2–3 sentences, describe one situation where using the wrong distribution could lead to misleading conclusions.</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="submission-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="submission-checklist">Submission checklist</h2>
+<p>Before submitting, make sure you have:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Answered all required questions</label></li>
+<li><label><input type="checkbox">Included R output where requested</label></li>
+<li><label><input type="checkbox">Written brief interpretations in words when asked</label></li>
+<li><label><input type="checkbox">Rendered your HTML successfully</label></li>
+<li><label><input type="checkbox">Uploaded both .qmd and .html files</label></li>
 </ul>
 
 

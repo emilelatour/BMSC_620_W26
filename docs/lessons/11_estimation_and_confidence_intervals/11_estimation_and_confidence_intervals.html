@@ -543,7 +543,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="population-vs.-sample-visual" class="slide level2">
 <h2>Population vs.&nbsp;Sample: Visual</h2>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-1-1.png" width="1152" class="r-stretch"></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-1-1.png" width="1152" class="r-stretch"></section>
 <section id="population-parameters-vs.-sample-statistics" class="slide level2">
 <h2>Population parameters vs.&nbsp;Sample statistics</h2>
 <p>Understanding the notation is crucial for clear statistical thinking.</p>
@@ -727,7 +727,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Visualizing sampling variability (3/3)</h2>
 <p>What if we took many, many samples?</p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="the-sampling-distribution" class="title-slide slide level1 center">
 <h1>The Sampling Distribution</h1>
@@ -815,7 +815,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="visual-three-distributions" class="slide level2">
 <h2>Visual: Three distributions</h2>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-7-1.png" width="1248" class="r-stretch"></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-7-1.png" width="1248" class="r-stretch"></section>
 <section id="why-does-the-standard-error-exist" class="slide level2">
 <h2>Why does the standard error exist?</h2>
 <p>Before we introduce the formula, let’s understand the concept:</p>
@@ -928,7 +928,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Why does sample size matter?</h2>
 <p>Let’s see the effect of sample size on the sampling distribution:</p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"></section></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"></section></section>
 <section>
 <section id="central-limit-theorem" class="title-slide slide level1 center">
 <h1>Central Limit Theorem</h1>
@@ -1002,12 +1002,12 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>CLT in action: Starting with a skewed population</h2>
 <p>Let’s see what happens when we start with a <strong>highly skewed</strong> population:</p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-9-1.png" width="1248" class="r-stretch"></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-9-1.png" width="1248" class="r-stretch"></section>
 <section id="sampling-distributions-at-different-sample-sizes" class="slide level2">
 <h2>Sampling distributions at different sample sizes</h2>
 <p>Now watch what happens to the sampling distribution as we increase <span class="math inline">\(n\)</span>:</p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-10-1.png" width="1248" class="r-stretch"></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-10-1.png" width="1248" class="r-stretch"></section>
 <section id="why-the-clt-is-remarkable" class="slide level2">
 <h2>Why the CLT is remarkable</h2>
 <p><strong>The CLT works even if the population is:</strong></p>
@@ -1078,7 +1078,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>Step 3:</strong> Calculate the probability using R</p>
 <p>We want <span class="math inline">\(P(\bar{X} &gt; 66)\)</span></p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="example-continued-using-r-1" class="slide level2">
 <h2>Example continued: Using R</h2>
 <p><strong>Step 3:</strong> Calculate the probability using R</p>
@@ -1247,7 +1247,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Some new notation</h2>
 <p>Before we construct confidence intervals, we need to understand the notation for critical values:</p>
 
-<img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"><p><br>
+<img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"><p><br>
 </p>
 <ul>
 <li><span class="math inline">\(\pm z_{1-\alpha/2}\)</span> is the value of <span class="math inline">\(z\)</span> such that <span class="math inline">\((1 - \alpha) \times 100\%\)</span> of the standard normal distribution is contained <br>between <span class="math inline">\(- z_{1-\alpha/2}\)</span> and <span class="math inline">\(+ z_{1-\alpha/2}\)</span>.</li>
@@ -1283,7 +1283,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-15-1.png" width="480"></p>
+<p><img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-15-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1311,7 +1311,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+<p><img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1715,7 +1715,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11_sampling_ci_reinforced_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="11_estimation_and_confidence_intervals_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
 </figure>
 </div>
 </div>
