@@ -4370,5 +4370,852 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#roadmap-for-today",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#roadmap-for-today",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Sampling Fundamentals\n\nPopulation parameters vs. sample statistics\nPoint estimates\nSampling variability\n\nPart 2: Sampling Distributions\n\nWhat is a sampling distribution?\nProperties of the sampling distribution of means\nStandard error\n\nPart 3: Central Limit Theorem\n\nStatement of the CLT\nWhen the CLT applies\nApplications with R\n\n\nPart 4: Introduction to Inference\n\nFrom point estimates to interval estimates\nConfidence intervals: concept and interpretation\n\nPart 5: Confidence Intervals in Practice\n\nCI when σ is known (z-based)\nCI when σ is unknown (t-based)\nThe t-distribution\n\nPart 6: Wrap-up\n\nSummary\nCommon misconceptions\nNext steps"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-do-we-sample",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-do-we-sample",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why do we sample?",
+    "text": "Why do we sample?\n\n\n\nThe fundamental challenge of statistics\n\n\nWe want to learn about a population, but we can only observe a sample.\n\n\n\n\n\nPopulations:\n\nToo large to measure everyone\nToo expensive or time-consuming\nSometimes impossible (would you destroy every lightbulb to test lifespan?)\n\n\n\nSamples:\n\nSmaller, manageable\nIf chosen properly, can tell us about the population\nBut there’s uncertainty…"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#population-vs.-sample-visual",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#population-vs.-sample-visual",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Population vs. Sample: Visual",
+    "text": "Population vs. Sample: Visual"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#population-parameters-vs.-sample-statistics",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#population-parameters-vs.-sample-statistics",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Population parameters vs. Sample statistics",
+    "text": "Population parameters vs. Sample statistics\nUnderstanding the notation is crucial for clear statistical thinking.\n\n\n\n\n\n\n\nPopulation Parameter\n\n\nFixed (but unknown) values describing the population\nFor the mean:\n\nSymbol: \\(\\mu\\) (mu)\nWe want to know it but usually can’t measure it\n\nFor standard deviation:\n\nSymbol: \\(\\sigma\\) (sigma)\nAlso fixed and unknown\n\nFor proportion:\n\nSymbol: \\(p\\) or \\(\\pi\\) (pi)\n\n\n\n\n\n\n\n\nSample Statistic\n\n\nCalculated values from our sample data\nFor the mean:\n\nSymbol: \\(\\bar{x}\\) (x-bar)\nOur best guess at \\(\\mu\\)\n\nFor standard deviation:\n\nSymbol: \\(s\\)\nOur estimate of \\(\\sigma\\)\n\nFor proportion:\n\nSymbol: \\(\\hat{p}\\) (p-hat)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-point-estimate",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-point-estimate",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a point estimate?",
+    "text": "What is a point estimate?\nA point estimate is a single value calculated from sample data used to estimate a population parameter.\n\n\nExamples:\n\nSample mean (\\(\\bar{x}\\)) estimates population mean (\\(\\mu\\))\nSample proportion (\\(\\hat{p}\\)) estimates population proportion (\\(p\\))\nSample standard deviation (\\(s\\)) estimates population SD (\\(\\sigma\\))\n\n\n\n\n\n\nThe problem with point estimates\n\n\nThey’re just single numbers. They don’t tell us:\n\nHow much uncertainty there is\nHow close we might be to the true value\nWhether our sample was typical or unusual"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#sampling-variability-a-demonstration-in-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#sampling-variability-a-demonstration-in-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Sampling variability: A demonstration in R",
+    "text": "Sampling variability: A demonstration in R\nLet’s see what happens when we take multiple samples from the same population.\n\n# Create a population\nset.seed(123)\npopulation &lt;- tibble(\n  height = rnorm(100000, mean = 65, sd = 3)\n)\n\n# Take 5 samples of size 50\nset.seed(456)\nresults &lt;- tibble(\n  sample_num = 1:5,\n  mean_height = map_dbl(1:5, ~ mean(sample(population$height, 50)))\n)\n\nresults\n\n# A tibble: 5 × 2\n  sample_num mean_height\n       &lt;int&gt;       &lt;dbl&gt;\n1          1        64.5\n2          2        64.1\n3          3        64.8\n4          4        65.4\n5          5        65.3\n\n\nNotice: Even from the same population, our sample means vary!\nThis is sampling variability - it’s not error, it’s natural variation."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visualizing-sampling-variability",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visualizing-sampling-variability",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability",
+    "text": "Visualizing sampling variability\nWhat if we took many, many samples?\n\n# Take 1000 samples, each of size 50\nset.seed(789)\nmany_samples &lt;- tibble(\n  sample_num = 1:1000\n) %&gt;%\n  mutate(\n    mean_height = map_dbl(sample_num, ~ mean(sample(population$height, 50)))\n  )\n\nggplot(many_samples, aes(x = mean_height)) +\n  geom_histogram(bins = 40, fill = \"steelblue\", color = \"black\", alpha = 0.7) +\n  geom_vline(xintercept = 65, color = \"red\", linewidth = 1.5, linetype = \"dashed\") +\n  labs(\n    title = \"Distribution of 1000 sample means (n = 50)\",\n    subtitle = \"Red line shows true population mean (μ = 65)\",\n    x = \"Sample mean (x̄)\",\n    y = \"Count\"\n  )"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-sampling-distribution",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-sampling-distribution",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a sampling distribution?",
+    "text": "What is a sampling distribution?\n\n\n\nDefinition\n\n\nThe sampling distribution of a statistic is the distribution of that statistic’s values across all possible samples of a given size from a population.\n\n\n\n\n\nThink of it this way:\n\nImagine taking a sample of size \\(n\\)\nCalculate a statistic (like the mean)\nWrite it down\nRepeat steps 1-3 for all possible samples\nThe distribution of those statistics is the sampling distribution\n\n\n\nKey insight: The sampling distribution tells us how our estimates behave across different samples."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#three-distributions-to-keep-straight",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#three-distributions-to-keep-straight",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Three distributions to keep straight",
+    "text": "Three distributions to keep straight\nIt’s crucial to distinguish between these three concepts:\n\n\n\n\nPopulation Distribution\n\nDistribution of the variable in the population\nMean: \\(\\mu\\)\nSD: \\(\\sigma\\)\n\n\nSample Distribution\n\nDistribution of the variable in one sample\nMean: \\(\\bar{x}\\)\nSD: \\(s\\)\n\n\nSampling Distribution\n\nDistribution of sample means across all samples\nMean: \\(\\mu_{\\bar{X}} = \\mu\\)\nSD: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visual-three-distributions",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visual-three-distributions",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visual: Three distributions",
+    "text": "Visual: Three distributions"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#standard-error-a-special-name",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#standard-error-a-special-name",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Standard error: A special name",
+    "text": "Standard error: A special name\nThe standard deviation of a sampling distribution has a special name:\n\n\n\nStandard Error (SE)\n\n\nThe standard error is the standard deviation of a sampling distribution.\nFor the sampling distribution of sample means:\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\sigma\\) = population standard deviation\n\n\\(n\\) = sample size\n\n\n\n\n\n\nKey points:\n\nLarger samples → smaller SE → more precise estimates\nSE decreases as \\(\\sqrt{n}\\), not as \\(n\\)\nIn practice, we often use \\(s\\) instead of \\(\\sigma\\): \\(SE = \\frac{s}{\\sqrt{n}}\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-does-sample-size-matter",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-does-sample-size-matter",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why does sample size matter?",
+    "text": "Why does sample size matter?\nLet’s see the effect of sample size on the sampling distribution:"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#the-central-limit-theorem-clt",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#the-central-limit-theorem-clt",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The Central Limit Theorem (CLT)",
+    "text": "The Central Limit Theorem (CLT)\n\n\n\nCentral Limit Theorem\n\n\nFor sufficiently large sample sizes (\\(n \\geq 30\\)), the sampling distribution of the sample mean is approximately normal, regardless of the shape of the population distribution.\nSpecifically, if we have a random sample of size \\(n\\) from a population with mean \\(\\mu\\) and standard deviation \\(\\sigma\\):\n\\[\\bar{X} \\sim N\\left(\\mu, \\frac{\\sigma}{\\sqrt{n}}\\right)\\]\nor equivalently:\n\\[\\bar{X} \\sim N\\left(\\mu_{\\bar{X}} = \\mu, \\quad SE = \\frac{\\sigma}{\\sqrt{n}}\\right)\\]"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-the-clt-is-remarkable",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-the-clt-is-remarkable",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why the CLT is remarkable",
+    "text": "Why the CLT is remarkable\nThe CLT works even if the population is:\n\nHighly skewed\nUniform\nBimodal\nAnything else!\n\n\n\nAs long as \\(n \\geq 30\\), the sampling distribution of \\(\\bar{X}\\) is approximately normal.\n\n\n\n\n\nException\n\n\nIf the population itself is normally distributed, then the sampling distribution is exactly normal for any sample size (even \\(n &lt; 30\\))."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#clt-in-action-starting-with-a-skewed-population",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#clt-in-action-starting-with-a-skewed-population",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "CLT in action: Starting with a skewed population",
+    "text": "CLT in action: Starting with a skewed population"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#when-can-we-use-the-clt",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#when-can-we-use-the-clt",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When can we use the CLT?",
+    "text": "When can we use the CLT?\nGeneral rule: \\(n \\geq 30\\) for most distributions\n\n\nMore nuanced guidelines:\n\nIf population is approximately normal → CLT works for any \\(n\\)\nIf population is slightly skewed → \\(n \\geq 30\\) is usually fine\nIf population is very skewed → \\(n \\geq 50\\) or larger may be needed\nIf population has extreme outliers → even larger \\(n\\) may be needed\n\n\n\n\n\n\nIn practice\n\n\nWhen in doubt, look at your sample data:\n\nIs it approximately symmetric?\nAre there extreme outliers?\nIf yes to both, you’re probably okay with \\(n \\geq 30\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#applying-the-clt-example",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#applying-the-clt-example",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Applying the CLT: Example",
+    "text": "Applying the CLT: Example\n\n\n\nExample: Heights\n\n\nSuppose the heights of adults in a population have mean \\(\\mu = 65\\) inches and standard deviation \\(\\sigma = 3.5\\) inches. We take a random sample of 50 adults.\nWhat is the probability that the sample mean is greater than 66 inches?\n\n\n\n\n\nStep 1: Check if we can use CLT\n\n\\(n = 50 \\geq 30\\) ✓\nWe can assume the sampling distribution of \\(\\bar{X}\\) is approximately normal\n\nStep 2: Find the distribution of \\(\\bar{X}\\)\n\\[\\bar{X} \\sim N\\left(\\mu = 65, \\quad SE = \\frac{3.5}{\\sqrt{50}} = 0.495\\right)\\]"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-continued-using-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-continued-using-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example continued: Using R",
+    "text": "Example continued: Using R\nStep 3: Calculate the probability\nWe want \\(P(\\bar{X} &gt; 66)\\)\n\n# Calculate SE\nn &lt;- 50\nmu &lt;- 65\nsigma &lt;- 3.5\nSE &lt;- sigma / sqrt(n)\n\nSE\n\n[1] 0.4949747\n\n# Calculate probability\npnorm(q = 66, mean = mu, sd = SE, lower.tail = FALSE)\n\n[1] 0.02167588\n\n\nInterpretation: There is about a 2.2% chance of observing a sample mean greater than 66 inches if the true population mean is 65 inches."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-the-clt-tells-us-in-plain-language",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-the-clt-tells-us-in-plain-language",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What the CLT tells us in plain language",
+    "text": "What the CLT tells us in plain language\nThe Central Limit Theorem means:\n\nSample means are normally distributed (for large enough \\(n\\))\nSample means cluster around the population mean (\\(\\mu\\))\nThe spread depends on sample size (larger \\(n\\) → smaller spread)\n\n\n\nThis gives us a framework to:\n\nUnderstand how estimates vary\nQuantify uncertainty\nMake probability statements about sample means\nEventually, construct confidence intervals!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#from-estimation-to-inference",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#from-estimation-to-inference",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "From estimation to inference",
+    "text": "From estimation to inference\nSo far we’ve learned:\n\nPopulation parameters vs. sample statistics\nSampling distributions\nThe Central Limit Theorem\n\n\n\nNow we ask a bigger question:\n\n\n\nThe inference question\n\n\nGiven a sample statistic (like \\(\\bar{x} = 66.1\\)), what can we say about the population parameter (\\(\\mu\\))?\n\n\n\n\n\nPoint estimates aren’t enough - they give us one number but no sense of uncertainty.\nSolution: Use interval estimates!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#point-estimates-vs.-interval-estimates",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#point-estimates-vs.-interval-estimates",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Point estimates vs. Interval estimates",
+    "text": "Point estimates vs. Interval estimates\n\n\n\n\n\nPoint Estimate\n\n\nA single value used to estimate a parameter\nExample: “The mean height is 66.1 inches”\nPros:\n\nSimple\nEasy to communicate\n\nCons:\n\nNo uncertainty quantified\nDoesn’t acknowledge sampling variability\n\n\n\n\n\n\n\n\nInterval Estimate\n\n\nA range of plausible values for a parameter\nExample: “The mean height is between 65.1 and 67.1 inches”\nPros:\n\nQuantifies uncertainty\nMore honest about what we know\n\nCons:\n\nLess precise\nRequires interpretation"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-confidence-interval",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-is-a-confidence-interval",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a confidence interval?",
+    "text": "What is a confidence interval?\n\n\n\nConfidence Interval\n\n\nA confidence interval is a range of values that is likely to contain the true population parameter with a specified level of confidence.\nGeneral form:\n\\[\\text{point estimate} \\pm \\text{margin of error}\\]\nFor a mean:\n\\[\\bar{x} \\pm \\text{(critical value)} \\times SE\\]\n\n\n\n\n\nThe critical value depends on:\n\nThe confidence level (commonly 95%)\nThe distribution we’re using (normal or t)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visualizing-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#visualizing-confidence-intervals",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing confidence intervals",
+    "text": "Visualizing confidence intervals\nLet’s look at what confidence intervals represent:"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#confidence-interval-when-σ-is-known",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#confidence-interval-when-σ-is-known",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence interval when σ is known",
+    "text": "Confidence interval when σ is known\nWhen we know the population standard deviation \\(\\sigma\\):\n\n\n\nCI for μ (with known σ)\n\n\n\\[\\bar{x} \\pm z^* \\times \\frac{\\sigma}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(z^*\\) = critical value from standard normal distribution\n\\(\\sigma\\) = population standard deviation (known)\n\\(n\\) = sample size\n\n\n\n\n\n\nFor a 95% confidence interval:\n\nqnorm(0.975)  # 2.5% in each tail\n\n[1] 1.959964\n\n\nSo \\(z^* = 1.96\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-ci-with-known-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-ci-with-known-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example: CI with known σ",
+    "text": "Example: CI with known σ\n\n\n\nExample\n\n\nA random sample of 50 adults has mean height \\(\\bar{x} = 66.1\\) inches. Assume the population standard deviation is known to be \\(\\sigma = 3\\) inches. Find a 95% confidence interval for the population mean height.\n\n\n\n\n\nSolution:\n\nxbar &lt;- 66.1\nsigma &lt;- 3\nn &lt;- 50\nz_star &lt;- 1.96\n\n# Calculate SE\nSE &lt;- sigma / sqrt(n)\nSE\n\n[1] 0.4242641\n\n# Calculate CI\nlower &lt;- xbar - z_star * SE\nupper &lt;- xbar + z_star * SE\n\nc(lower, upper)\n\n[1] 65.26844 66.93156\n\n\nWe are 95% confident that the population mean height is between 65.27 and 66.93 inches."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#interpreting-confidence-intervals-what-they-mean",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#interpreting-confidence-intervals-what-they-mean",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Interpreting confidence intervals: What they mean",
+    "text": "Interpreting confidence intervals: What they mean\n\n\n\nCorrect interpretation\n\n\n“We are 95% confident that the interval (65.27, 66.93) contains the true population mean height.”\nWhat this really means:\nIf we were to take many samples and construct a 95% CI from each one, about 95% of those intervals would contain the true population mean \\(\\mu\\).\n\n\n\n\n\nHelpful analogy:\nThink of each CI as a “net” trying to catch the true parameter. With 95% confidence, our net catches the parameter 95% of the time."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#interpreting-confidence-intervals-what-they-dont-mean",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#interpreting-confidence-intervals-what-they-dont-mean",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Interpreting confidence intervals: What they DON’T mean",
+    "text": "Interpreting confidence intervals: What they DON’T mean\n\n\n\nCommon misconceptions\n\n\nWRONG: “There is a 95% probability that μ is in this interval.”\n\nThe parameter μ is fixed (not random)\nIt either is or isn’t in the interval\nThe randomness comes from the sampling process\n\nWRONG: “95% of the data falls in this interval.”\n\nThe CI is about the parameter, not the data\nThe data is in the sample, not in the CI\n\nWRONG: “If we repeat the study, there’s a 95% chance the new mean will be in this interval.”\n\nCIs are for parameters, not future statistics"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#different-confidence-levels",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#different-confidence-levels",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Different confidence levels",
+    "text": "Different confidence levels\nWe can construct CIs at different confidence levels:\n\n# 90% CI\nz_90 &lt;- qnorm(0.95)  # 5% in each tail\nc(xbar - z_90 * SE, xbar + z_90 * SE)\n\n[1] 65.40215 66.79785\n\n# 95% CI\nz_95 &lt;- qnorm(0.975)  # 2.5% in each tail\nc(xbar - z_95 * SE, xbar + z_95 * SE)\n\n[1] 65.26846 66.93154\n\n# 99% CI\nz_99 &lt;- qnorm(0.995)  # 0.5% in each tail\nc(xbar - z_99 * SE, xbar + z_99 * SE)\n\n[1] 65.00717 67.19283\n\n\nTrade-off: Higher confidence → wider interval (less precision)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-if-we-dont-know-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-if-we-dont-know-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What if we don’t know σ?",
+    "text": "What if we don’t know σ?\nReality check: We almost never know the population standard deviation \\(\\sigma\\).\n\n\nProblem: If we replace \\(\\sigma\\) with \\(s\\) in our CI formula:\n\\[\\bar{x} \\pm z^* \\times \\frac{s}{\\sqrt{n}}\\]\nThis adds extra uncertainty - we’re now estimating both \\(\\mu\\) and \\(\\sigma\\)!\n\n\nSolution: Use a different distribution that accounts for this extra uncertainty - the t-distribution."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#the-t-distribution-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#the-t-distribution-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The t-distribution",
+    "text": "The t-distribution\n\n\n\nStudent’s t-distribution\n\n\nThe t-distribution:\n\nIs symmetric and bell-shaped (like the normal)\nHas heavier tails than the normal distribution\nDepends on degrees of freedom (\\(df = n - 1\\))\nApproaches the normal distribution as \\(df\\) increases"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-degrees-of-freedom-n---1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#why-degrees-of-freedom-n---1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why degrees of freedom = n - 1?",
+    "text": "Why degrees of freedom = n - 1?\nDegrees of freedom = number of independent pieces of information\n\n\nWhen calculating the sample standard deviation \\(s\\):\n\nWe use \\(n\\) observations\nBut we first calculate \\(\\bar{x}\\) (which uses all \\(n\\) values)\nThis “uses up” one degree of freedom\nWe’re left with \\(n - 1\\) independent pieces of information\n\n\n\nIntuition: If you know the mean and \\(n-1\\) values, the \\(n\\)th value is determined."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#confidence-interval-with-unknown-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#confidence-interval-with-unknown-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence interval with unknown σ",
+    "text": "Confidence interval with unknown σ\nWhen \\(\\sigma\\) is unknown (which is almost always):\n\n\n\nCI for μ (with unknown σ)\n\n\n\\[\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(t^*\\) = critical value from t-distribution with \\(df = n - 1\\)\n\\(s\\) = sample standard deviation\n\\(n\\) = sample size\n\n\n\n\n\n\nFinding the critical value in R:\n\n# For 95% CI with n = 50 (so df = 49)\nqt(0.975, df = 49)\n\n[1] 2.009575\n\n\nCompare to \\(z^* = 1.96\\) - slightly larger!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-ci-with-unknown-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#example-ci-with-unknown-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example: CI with unknown σ",
+    "text": "Example: CI with unknown σ\n\n\n\nExample\n\n\nA random sample of 50 adults has:\n\nMean height: \\(\\bar{x} = 66.1\\) inches\nSample SD: \\(s = 3.5\\) inches\n\nFind a 95% confidence interval for the population mean height.\n\n\n\n\n\nSolution:\n\nxbar &lt;- 66.1\ns &lt;- 3.5\nn &lt;- 50\ndf &lt;- n - 1\n\n# Critical value\nt_star &lt;- qt(0.975, df = df)\nt_star\n\n[1] 2.009575\n\n# Calculate SE (using s instead of σ)\nSE &lt;- s / sqrt(n)\n\n# Calculate CI\nlower &lt;- xbar - t_star * SE\nupper &lt;- xbar + t_star * SE\n\nc(lower, upper)\n\n[1] 65.10531 67.09469"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#comparing-z-based-vs.-t-based-cis",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#comparing-z-based-vs.-t-based-cis",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Comparing z-based vs. t-based CIs",
+    "text": "Comparing z-based vs. t-based CIs\nFor our example (\\(n = 50\\)):\n\n# If we knew σ = 3.5 (z-based)\nz_star &lt;- qnorm(0.975)\nci_z &lt;- xbar + c(-1, 1) * z_star * (3.5 / sqrt(n))\nci_z\n\n[1] 65.12987 67.07013\n\n# Using s = 3.5 (t-based)\nt_star &lt;- qt(0.975, df = 49)\nci_t &lt;- xbar + c(-1, 1) * t_star * (s / sqrt(n))\nci_t\n\n[1] 65.10531 67.09469\n\n\nNotice: The t-based CI is slightly wider (because \\(t^* &gt; z^*\\)) - this reflects the extra uncertainty from estimating σ."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#when-to-use-t-vs.-z",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#when-to-use-t-vs.-z",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When to use t vs. z?",
+    "text": "When to use t vs. z?\n\n\n\nDecision rule\n\n\nUse t-distribution when:\n\nYou don’t know the population standard deviation \\(\\sigma\\)\nYou’re using the sample standard deviation \\(s\\)\n(This is almost always in practice!)\n\nUse normal (z) distribution when:\n\nYou know the population standard deviation \\(\\sigma\\)\n(This is rare in real applications)\n\n\n\n\n\n\nRule of thumb we’ll use in this class:\nAlways use the t-distribution unless explicitly told you know \\(\\sigma\\)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-you-need-to-know-sampling-distributions",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-you-need-to-know-sampling-distributions",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What you need to know: Sampling distributions",
+    "text": "What you need to know: Sampling distributions\nKey concepts:\n\nSampling variability is natural - different samples give different estimates\nThe sampling distribution describes how statistics vary across samples\nStandard error (SE) measures the variability of sample means: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nThe Central Limit Theorem says that for \\(n \\geq 30\\), sample means follow a normal distribution\n\n\n\nIn plain language:\nIf we repeatedly sample from a population and calculate the mean each time, those means will form a normal distribution centered at the true population mean, with spread determined by the standard error."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-you-need-to-know-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#what-you-need-to-know-confidence-intervals",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What you need to know: Confidence intervals",
+    "text": "What you need to know: Confidence intervals\nKey concepts:\n\nA confidence interval gives a range of plausible values for a parameter\n95% confidence means that 95% of such intervals would contain the true parameter\nUse the t-distribution when \\(\\sigma\\) is unknown (almost always)\nGeneral form: \\(\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\)\n\n\n\nCritical R functions:\n\n# Finding critical values\nqt(0.975, df = n - 1)  # For 95% CI\n\n# Or for different confidence levels\nqt(0.95, df = n - 1)   # For 90% CI\nqt(0.995, df = n - 1)  # For 99% CI"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#common-mistakes-to-avoid",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#common-mistakes-to-avoid",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\n\n\nWatch out for these!\n\n\n\nConfusing the three distributions\n\nPopulation distribution ≠ sample distribution ≠ sampling distribution\n\nMisinterpreting confidence intervals\n\nNot “95% chance μ is in the interval”\nRather “95% of such intervals contain μ”\n\nUsing z when you should use t\n\nIf you calculated \\(s\\) from your data, use t!\n\nForgetting the assumptions\n\nCLT needs \\(n \\geq 30\\) (or normal population)\nOr: smaller \\(n\\) is okay if data is approximately symmetric"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#key-formulas-for-reference",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#key-formulas-for-reference",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Key formulas for reference",
+    "text": "Key formulas for reference\nYou don’t need to memorize these, but understand what they mean:\n\n\nStandard Error: \\[SE = \\frac{\\sigma}{\\sqrt{n}} \\quad \\text{or} \\quad SE = \\frac{s}{\\sqrt{n}}\\]\n\n\nConfidence Interval (t-based): \\[\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\]\nwhere \\(t^*\\) comes from a t-distribution with \\(df = n - 1\\)\n\n\nConfidence Interval (z-based, if σ known): \\[\\bar{x} \\pm z^* \\times \\frac{\\sigma}{\\sqrt{n}}\\]"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#looking-ahead",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#looking-ahead",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nMore practice with confidence intervals\nIntroduction to hypothesis testing\nThe logic of statistical inference\n\n\n\nFor now:\n\nPractice calculating CIs with different confidence levels\nGet comfortable with the t-distribution in R\nWork on understanding (not just calculating) what CIs mean\n\n\n\n\n\n\nRemember\n\n\nStatistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say “we don’t know exactly, but here’s a plausible range.”\n\n\n\n\n\n\nBMSC 620 | Sampling & Confidence Intervals"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#roadmap-for-today",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#roadmap-for-today",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Sampling Fundamentals\n\nPopulation parameters vs. sample statistics\nPoint estimates\nSampling variability\n\nPart 2: Sampling Distributions\n\nWhat is a sampling distribution?\nProperties of the sampling distribution of means\nStandard error\n\nPart 3: Central Limit Theorem\n\nStatement of the CLT\nWhen the CLT applies\nApplications with R\n\n\nPart 4: Introduction to Inference\n\nFrom point estimates to interval estimates\nConfidence intervals: concept and interpretation\n\nPart 5: Confidence Intervals in Practice\n\nCI when σ is known (z-based)\nCI when σ is unknown (t-based)\nThe t-distribution\n\nPart 6: Wrap-up\n\nSummary\nCommon misconceptions\nNext steps"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-do-we-sample",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-do-we-sample",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why do we sample?",
+    "text": "Why do we sample?\n\n\n\nThe fundamental challenge of statistics\n\n\nWe want to learn about a population, but we can only observe a sample.\n\n\n\n\n\nPopulations:\n\nToo large to measure everyone\nToo expensive or time-consuming\nSometimes impossible (would you destroy every lightbulb to test lifespan?)\n\n\n\nSamples:\n\nSmaller, manageable\nIf chosen properly, can tell us about the population\nBut there’s uncertainty…"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#population-vs.-sample-visual",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#population-vs.-sample-visual",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Population vs. Sample: Visual",
+    "text": "Population vs. Sample: Visual"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#population-parameters-vs.-sample-statistics",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#population-parameters-vs.-sample-statistics",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Population parameters vs. Sample statistics",
+    "text": "Population parameters vs. Sample statistics\nUnderstanding the notation is crucial for clear statistical thinking.\n\n\n\n\n\n\n\nPopulation Parameter\n\n\nFixed (but unknown) values describing the population\nFor the mean:\n\nSymbol: \\(\\mu\\) (mu)\nWe want to know it but usually can’t measure it\n\nFor standard deviation:\n\nSymbol: \\(\\sigma\\) (sigma)\nAlso fixed and unknown\n\nFor proportion:\n\nSymbol: \\(p\\) or \\(\\pi\\) (pi)\n\n\n\n\n\n\n\n\nSample Statistic\n\n\nCalculated values from our sample data\nFor the mean:\n\nSymbol: \\(\\bar{x}\\) (x-bar)\nOur best guess at \\(\\mu\\)\n\nFor standard deviation:\n\nSymbol: \\(s\\)\nOur estimate of \\(\\sigma\\)\n\nFor proportion:\n\nSymbol: \\(\\hat{p}\\) (p-hat)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-point-estimate",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-point-estimate",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a point estimate?",
+    "text": "What is a point estimate?\nA point estimate is a single value calculated from sample data used to estimate a population parameter.\n\n\nExamples:\n\nSample mean (\\(\\bar{x}\\)) estimates population mean (\\(\\mu\\))\nSample proportion (\\(\\hat{p}\\)) estimates population proportion (\\(p\\))\nSample standard deviation (\\(s\\)) estimates population SD (\\(\\sigma\\))\n\n\n\n\n\n\nThe problem with point estimates\n\n\nThey’re just single numbers. They don’t tell us:\n\nHow much uncertainty there is\nHow close we might be to the true value\nWhether our sample was typical or unusual"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Sampling variability: A demonstration in R",
+    "text": "Sampling variability: A demonstration in R\nLet’s see what happens when we take multiple samples from the same population.\n\n# Create a population\npopulation &lt;- tibble(\n  height = rnorm(100000, mean = 65, sd = 3)\n)\n\n# Take 5 samples of size 50\nresults &lt;- tibble(\n  sample_num = 1:5,\n  mean_height = NA_real_  # Initialize with missing values\n)\n\n# Calculate mean for each sample\nfor (i in 1:5) {\n  one_sample &lt;- sample(population$height, size = 50)\n  results$mean_height[i] &lt;- mean(one_sample)\n}\n\nresults\n\n# A tibble: 5 × 2\n  sample_num mean_height\n       &lt;int&gt;       &lt;dbl&gt;\n1          1        65.0\n2          2        65.2\n3          3        65.4\n4          4        65.1\n5          5        64.3\n\n\nNotice: Even from the same population, our sample means vary! This is sampling variability - it’s not error, it’s natural variation."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability",
+    "text": "Visualizing sampling variability\nWhat if we took many, many samples?\n\n# Take 1000 samples, each of size 50\nmany_samples &lt;- tibble(\n  sample_num = 1:1000\n) %&gt;%\n  mutate(\n    mean_height = map_dbl(sample_num, ~ mean(sample(population$height, 50)))\n  )\n\nggplot(many_samples, aes(x = mean_height)) +\n  geom_histogram(bins = 40, fill = \"steelblue\", color = \"black\", alpha = 0.7) +\n  geom_vline(xintercept = 65, color = \"red\", linewidth = 1.5, linetype = \"dashed\") +\n  labs(\n    title = \"Distribution of 1000 sample means (n = 50)\",\n    subtitle = \"Red line shows true population mean (μ = 65)\",\n    x = \"Sample mean (x̄)\",\n    y = \"Count\"\n  )"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-sampling-distribution",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-sampling-distribution",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a sampling distribution?",
+    "text": "What is a sampling distribution?\n\n\n\nDefinition\n\n\nThe sampling distribution of a statistic is the distribution of that statistic’s values across all possible samples of a given size from a population.\n\n\n\n\n\nThink of it this way:\n\nImagine taking a sample of size \\(n\\)\nCalculate a statistic (like the mean)\nWrite it down\nRepeat steps 1-3 for all possible samples\nThe distribution of those statistics is the sampling distribution\n\n\n\nKey insight: The sampling distribution tells us how our estimates behave across different samples."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-random-here",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-random-here",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is random here?",
+    "text": "What is random here?\nUnderstanding what varies and what doesn’t is crucial:\n\n\nPopulation\n\nFixed, unknown\nDescribed by parameters (e.g., \\(\\mu\\), \\(\\sigma\\))\nWe never observe the whole population\n\nSample\n\nRandom\nChanges from sample to sample\nWhat we actually observe\n\n\nStatistic (e.g., sample mean)\n\nComputed from the sample\nRandom because the sample is random\nVaries from sample to sample\n\nSampling distribution\n\nThe distribution of a statistic\nFormed by taking many samples and recomputing the statistic\nDescribes the variability of the statistic\n\n\n\n\n\n\n\nImportant distinction\n\n\n\nDistribution of data → one sample (what you observe)\nDistribution of means → many samples (theoretical concept)\n\nA sampling distribution is not the distribution of the raw data."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#three-distributions-to-keep-straight",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#three-distributions-to-keep-straight",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Three distributions to keep straight",
+    "text": "Three distributions to keep straight\n\n\n\n\n\nPopulation Distribution\n\n\n\nDistribution of the variable in the population\nMean: \\(\\mu\\), SD: \\(\\sigma\\)\nFixed, but unknown\nWe never observe this directly\n\n\n\n\n\n\n\n\nSample Distribution\n\n\n\nDistribution of the variable in one sample\nMean: \\(\\bar{x}\\), SD: \\(s\\)\nRandom (changes sample to sample)\nWhat we actually observe\n\n\n\n\n\n\n\n\nSampling Distribution\n\n\n\nDistribution of a sample statistic across many samples\nMean: \\(\\mu_{\\bar{X}} = \\mu\\), SD (SE): \\(\\frac{\\sigma}{\\sqrt{n}}\\)\nTheoretical (describes variability of \\(\\bar{x}\\))\nNot the distribution of raw data!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visual-three-distributions",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visual-three-distributions",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visual: Three distributions",
+    "text": "Visual: Three distributions"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-does-the-standard-error-exist",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-does-the-standard-error-exist",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why does the standard error exist?",
+    "text": "Why does the standard error exist?\nBefore we introduce the formula, let’s understand the concept:\n\n\n\n\nThe logic:\n\nEach random sample produces a slightly different estimate\nThose estimates vary from sample to sample\nThat variability forms a sampling distribution\n\n\nThe standard error (SE) is:\n\nThe standard deviation of the sampling distribution\nA measure of how much a statistic varies across repeated samples\n\n\n\n\n\n\n\nKey distinction\n\n\nStandard error quantifies sampling variability, not data variability.\n\nStandard deviation (\\(s\\)) → spread of data in one sample\nStandard error (\\(SE\\)) → spread of statistics across many samples"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-a-special-name",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-a-special-name",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Standard error: A special name",
+    "text": "Standard error: A special name\nThe standard deviation of a sampling distribution has a special name:\n\n\n\nStandard Error (SE)\n\n\nThe standard error is the standard deviation of a sampling distribution.\nFor the sampling distribution of sample means:\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\nwhere \\(\\sigma\\) = population standard deviation and \\(n\\) = sample size\n\n\n\nWhat does SE tell us?\nThe SE describes how far the sample mean (\\(\\bar{x}\\)) is expected to deviate from the true population mean (\\(\\mu\\)) across many different random samples of size \\(n\\).\nKey properties:\n\nLarger samples → smaller SE → more precise estimates\nSE decreases as \\(\\sqrt{n}\\) increases, not as \\(n\\) (doubling sample size doesn’t halve SE.)\nIn practice, we rarely know \\(\\sigma\\), so we use: \\(SE = \\frac{s}{\\sqrt{n}}\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-does-sample-size-matter",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-does-sample-size-matter",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why does sample size matter?",
+    "text": "Why does sample size matter?\nLet’s see the effect of sample size on the sampling distribution:"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-central-limit-theorem-clt",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-central-limit-theorem-clt",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The Central Limit Theorem (CLT)",
+    "text": "The Central Limit Theorem (CLT)\n\n\n\nCentral Limit Theorem\n\n\nFor sufficiently large sample sizes, the sampling distribution of the sample mean is approximately normal, regardless of the shape of the population distribution.\nSpecifically, if we have a random sample of size \\(n\\) from a population with mean \\(\\mu\\) and standard deviation \\(\\sigma\\):\n\\[\\bar{X} \\sim N\\left(\\mu_{\\bar{X}} = \\mu, \\quad SE = \\frac{\\sigma}{\\sqrt{n}}\\right)\\]\n\n\n\n\n\nThe key question: What counts as “sufficiently large”?"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-the-clt-is-remarkable",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-the-clt-is-remarkable",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why the CLT is remarkable",
+    "text": "Why the CLT is remarkable\nThe CLT works even if the population is:\n\nSlightly or moderately skewed\nUniform\n\nBimodal\nMany other non-normal shapes\n\n\n\nThe key insight: Averages are less variable than individual observations, and with enough averaging (large enough \\(n\\)), the distribution of those averages becomes normal.\n\n\n\n\n\nDon’t blindly trust n ≥ 30\n\n\nThe “\\(n \\geq 30\\)” rule is a rough guideline, not a guarantee.\n\nFor symmetric distributions, 30 is usually plenty\nFor highly skewed distributions (like we just saw), you may need 50, 100, or more\nAlways look at your actual data before trusting the CLT"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "CLT in action: Starting with a skewed population",
+    "text": "CLT in action: Starting with a skewed population\nLet’s see what happens when we start with a highly skewed population:"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-can-we-use-the-clt",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-can-we-use-the-clt",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When can we use the CLT?",
+    "text": "When can we use the CLT?\nThe required sample size depends on the shape of the population distribution:\n\n\nPopulation approximately normal\n\nCLT works for any sample size\nEven \\(n = 5\\) is fine\nThe sampling distribution is exactly normal\n\nPopulation slightly skewed\n\nUsually \\(n \\geq 30\\) is sufficient\nThis is the common “rule of thumb”\n\n\nPopulation highly skewed\n\nMay need \\(n \\geq 50\\) or even larger\nThe “30” rule doesn’t apply here!\nMore skewness → need larger \\(n\\)\n\nPopulation with extreme outliers\n\nMay need \\(n \\geq 100\\) or more\nOutliers slow down convergence to normality\n\n\n\n\n\n\n\nIn practice\n\n\nLook at your sample data:\n\nIs it approximately symmetric with no extreme outliers? → \\(n \\geq 30\\) likely okay\nIs it very skewed or has outliers? → Consider larger \\(n\\) or non-parametric methods"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#applying-the-clt-example",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#applying-the-clt-example",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Applying the CLT: Example",
+    "text": "Applying the CLT: Example\n\n\n\nExample: Heights\n\n\nSuppose the heights of adults in a population have mean \\(\\mu = 65\\) inches and standard deviation \\(\\sigma = 3.5\\) inches. We take a random sample of 50 adults.\nWhat is the probability that the sample mean (yet to be determined) is greater than 66 inches?\n\n\n\n\n\nStep 1: Check if we can use CLT\n\n\\(n = 50 \\geq 30\\) ✓\nHeights are generally approximately normal (or at least not heavily skewed) ✓\nWe can assume the sampling distribution of \\(\\bar{X}\\) is approximately normal\n\nStep 2: Find the distribution of \\(\\bar{X}\\)\n\\[\\bar{X} \\sim N\\left(\\mu = 65, \\quad SE = \\frac{3.5}{\\sqrt{50}} = 0.495\\right)\\]"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-continued-using-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-continued-using-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example continued: Using R",
+    "text": "Example continued: Using R\nStep 3: Calculate the probability using R\nWe want \\(P(\\bar{X} &gt; 66)\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-the-clt-tells-us-in-plain-language",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-the-clt-tells-us-in-plain-language",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What the CLT tells us in plain language",
+    "text": "What the CLT tells us in plain language\nThe Central Limit Theorem means:\n\nSample means tend toward normality (for large enough \\(n\\), even if the data aren’t normal)\nSample means cluster around the population mean (\\(\\mu\\))\nThe spread depends on sample size (larger \\(n\\) → smaller spread)\n\n\n\nWhy this matters:\n\nWe can use normal distribution tools even when our data aren’t normal\nWe can quantify uncertainty about sample means\nWe can make probability statements (like we just did)\nThis is the foundation for confidence intervals and hypothesis tests\n\n\n\n\n\n\nLooking ahead\n\n\nThe CLT is why we can construct confidence intervals and do hypothesis tests even when our data aren’t perfectly normal - as long as our sample size is large enough!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#from-estimation-to-inference",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#from-estimation-to-inference",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "From estimation to inference",
+    "text": "From estimation to inference\nSo far we’ve learned:\n\nPopulation parameters vs. sample statistics\nSampling distributions\nThe Central Limit Theorem\n\n\n\nNow we ask a bigger question:\n\n\n\nThe inference question\n\n\nGiven a sample statistic (like \\(\\bar{x} = 66.1\\)), what can we say about the population parameter (\\(\\mu\\))?\n\n\n\n\n\nPoint estimates aren’t enough - they give us one number but no sense of uncertainty.\nSolution: Use interval estimates!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#point-estimates-vs.-interval-estimates",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#point-estimates-vs.-interval-estimates",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Point estimates vs. Interval estimates",
+    "text": "Point estimates vs. Interval estimates\n\n\n\n\n\nPoint Estimate\n\n\nA single value used to estimate a parameter\nExample: “The mean height is 66.1 inches”\nPros:\n\nSimple\nEasy to communicate\n\nCons:\n\nNo uncertainty quantified\nDoesn’t acknowledge sampling variability\n\n\n\n\n\n\n\n\nInterval Estimate\n\n\nA range of plausible values for a parameter\nExample: “The mean height is between 65.1 and 67.1 inches”\nPros:\n\nQuantifies uncertainty\nMore honest about what we know\n\nCons:\n\nLess precise\nRequires interpretation"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-confidence-interval",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-is-a-confidence-interval",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What is a confidence interval?",
+    "text": "What is a confidence interval?\n\n\n\nConfidence Interval\n\n\nA confidence interval is a range of values that is likely to contain the true population parameter with a specified level of confidence.\nGeneral form:\n\\[\\text{point estimate} \\pm \\text{margin of error}\\]\nFor a mean:\n\\[\\bar{x} \\pm \\text{(critical value)} \\times SE\\]\n\n\n\n\n\nThe critical value depends on:\n\nThe confidence level (commonly 95%)\nThe distribution we’re using (normal or t)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing confidence intervals",
+    "text": "Visualizing confidence intervals\nLet’s look at what confidence intervals represent:\n\n\n\nThe figure shows CI’s from 100 samples:\n\n100 samples: Calculate the mean and confidence interval of each sample\nThe true value of \\(\\mu =65\\) is the vertical black line\nThe horizontal lines are 95% CI’s from 100 samples\n\nBlue: the CI contains the true value of \\(\\mu\\)\nRed: the CI did not contain the true value of \\(\\mu\\)\n\n\n\n\nWhat percent of CI’s captured the true value of \\(\\mu\\)?"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-when-σ-is-known",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-when-σ-is-known",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence interval when σ is known",
+    "text": "Confidence interval when σ is known\nWhen we know the population standard deviation \\(\\sigma\\):\n\n\n\nCI for μ (with known σ)\n\n\n\\[\\bar{x} \\pm z^* \\times \\frac{\\sigma}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(z^*\\) = critical value from standard normal distribution\n\\(\\sigma\\) = population standard deviation (known)\n\\(n\\) = sample size\n\n\n\n\n\n\nFor a 95% confidence interval:\n\nqnorm(0.975)  # 2.5% in each tail\n\n[1] 1.959964\n\n\nSo \\(z^* = 1.96\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-makes-a-confidence-interval-wide-or-narrow",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-makes-a-confidence-interval-wide-or-narrow",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What makes a confidence interval wide or narrow?",
+    "text": "What makes a confidence interval wide or narrow?\nBefore we calculate CIs, let’s build intuition about what affects their width:\n\n\n\n\nCI gets narrower when:\n\nSample size increases\n(\\(\\uparrow n\\) → \\(\\downarrow SE\\))\nPopulation variability is smaller\n(\\(\\downarrow \\sigma\\) → \\(\\downarrow SE\\))\n\n\nCI gets wider when:\n\nSample size is small\n(\\(\\downarrow n\\) → \\(\\uparrow SE\\))\nPopulation variability is large\n(\\(\\uparrow \\sigma\\) → \\(\\uparrow SE\\))\nConfidence level increases\n(99% vs 95% → larger critical value)\n\n\n\n\n\n\n\nNothing else affects CI width\n\n\nYou can only make a CI narrower by:\n\nCollecting more data\nReducing measurement error\n\nAccepting less confidence"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-ci-with-known-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-ci-with-known-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example: CI with known σ",
+    "text": "Example: CI with known σ\n\n\n\nExample\n\n\n\nA random sample of 50 adults has mean height \\(\\bar{x} = 66.1\\) inches.\nAssume the population standard deviation is known to be \\(\\sigma = 3\\) inches.\nFind a 95% confidence interval for the population mean height.\n\n\n\n\n\n\nSolution:\n\nxbar &lt;- 66.1\nsigma &lt;- 3\nn &lt;- 50\nz_star &lt;- qnorm(0.975)  # 1.96\n\n\n# Calculate SE\nSE &lt;- sigma / sqrt(n)\nSE\n\n[1] 0.4242641\n\n\n\n\n\n\n# Calculate CI\nlower_ci &lt;- xbar - z_star * SE\nupper_ci &lt;- xbar + z_star * SE\n\nc(lower_ci, upper_ci)\n\n[1] 65.26846 66.93154\n\n\n\n\n\nWe are 95% confident that the population mean height is between 65.27 and 66.93 inches."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#interpreting-confidence-intervals-what-they-mean",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#interpreting-confidence-intervals-what-they-mean",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Interpreting confidence intervals: What they mean",
+    "text": "Interpreting confidence intervals: What they mean\n\n\n\nCorrect interpretation\n\n\n“We are 95% confident that the interval (65.27, 66.93) contains the true population mean height.”\nWhat this really means:\nIf we were to take many samples and construct a 95% CI from each one, about 95% of those intervals would contain the true population mean \\(\\mu\\).\n\n\n\n\n\nHelpful analogy:\nThink of each CI as a “net” trying to catch the true parameter. With 95% confidence, our net catches the parameter 95% of the time."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#interpreting-confidence-intervals-what-they-dont-mean",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#interpreting-confidence-intervals-what-they-dont-mean",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Interpreting confidence intervals: What they DON’T mean",
+    "text": "Interpreting confidence intervals: What they DON’T mean\n\n\n\nCommon misconceptions\n\n\nWRONG: “There is a 95% probability that μ is in this interval.”\n\nThe parameter μ is fixed (not random)\nIt either is or isn’t in the interval\nThe randomness comes from the sampling process\n\nWRONG: “95% of the data falls in this interval.”\n\nThe CI is about the parameter, not the data\nThe data is in the sample, not in the CI\n\nWRONG: “If we repeat the study, there’s a 95% chance the new mean will be in this interval.”\n\nCIs are for parameters, not future statistics"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-a-95-confidence-interval-actually-means",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-a-95-confidence-interval-actually-means",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What a 95% confidence interval actually means",
+    "text": "What a 95% confidence interval actually means\nThis is the most important slide about interpretation:\n\n\n\n\n\nThe key to understanding CIs\n\n\nThe method used to create the interval has 95% long-run coverage.\nIf we repeated the study many times:\n\nEach time, we’d get a different sample\nEach sample would produce a different confidence interval\nAbout 95% of those intervals would contain the true parameter \\(\\mu\\)\n\n\n\n\n\n\n\nThe critical insight\n\n\nThe parameter is fixed. The interval is random.\nThe confidence is about the procedure, not about any single interval.\nYou cannot assess whether a specific CI is “correct” using just one dataset. The 95% guarantee comes from the long-run behavior of the method."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#different-confidence-levels",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#different-confidence-levels",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Different confidence levels",
+    "text": "Different confidence levels\nWe can construct CIs at different confidence levels:\n\nxbar &lt;- 66.1\nsigma &lt;- 3\nn &lt;- 50\n\n# Calculate SE\nSE &lt;- sigma / sqrt(n)\n\n\n# 90% CI\nz_90 &lt;- qnorm(0.95)  # 5% in each tail\nc(xbar - z_90 * SE, xbar + z_90 * SE)\n\n[1] 65.40215 66.79785\n\n\n\n\n\n# 95% CI\nz_95 &lt;- qnorm(0.975)  # 2.5% in each tail\nc(xbar - z_95 * SE, xbar + z_95 * SE)\n\n[1] 65.26846 66.93154\n\n\n\n\n\n# 99% CI\nz_99 &lt;- qnorm(0.995)  # 0.5% in each tail\nc(xbar - z_99 * SE, xbar + z_99 * SE)\n\n[1] 65.00717 67.19283\n\n\n\n\nTrade-off: Higher confidence → wider interval (less precision)\nNotice: - 90% CI: (65.41, 66.79) - narrowest, but least confident - 99% CI: (65.00, 67.20) - widest, but most confident"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-intervals-are-about-procedures",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-intervals-are-about-procedures",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence intervals are about procedures",
+    "text": "Confidence intervals are about procedures\nLet’s emphasize the key conceptual point before moving on:\n\n\n\n\nOne dataset → one confidence interval\n\nYou conduct one study\nYou get one sample\nYou calculate one interval\nThat interval either contains \\(\\mu\\) or it doesn’t\n\nWe just don’t know which!\n\nThe guarantee applies to the method, not a single interval\n\nThe 95% comes from the procedure’s long-run behavior\nIf everyone repeated your study, 95% of their CIs would contain \\(\\mu\\)\nYour specific CI is one realization from that process\n\n\n\n\n\n\n\nCoverage is a long-run property\n\n\nYou cannot assess CI correctness using one dataset.\nConfidence comes from the repetition (in principle), not from the data alone.\nThis is why we say “we are confident” rather than “there is a probability.”"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-if-we-dont-know-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-if-we-dont-know-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What if we don’t know σ?",
+    "text": "What if we don’t know σ?\n\n\nReality check: We almost never know the population standard deviation \\(\\sigma\\).\n\n\nProblem: If we replace \\(\\sigma\\) with \\(s\\) in our CI formula:\n\\[\\bar{x} \\pm z^* \\times \\frac{s}{\\sqrt{n}}\\]\nThis adds extra uncertainty - we’re now estimating both \\(\\mu\\) and \\(\\sigma\\)!\n\n\nSolution: Use a different distribution that accounts for this extra uncertainty - the t-distribution."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-t-distribution-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-t-distribution-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The t-distribution",
+    "text": "The t-distribution\n\n\n\n\n\n\n\nStudent’s t-distribution\n\n\n\nIs symmetric and bell-shaped (like the normal)\nHas heavier tails than the normal distribution\n\nt-based intervals will be wider than Z based intervals\n\nDepends on degrees of freedom (which for one sample: \\(df = n - 1\\))\nApproaches the normal distribution as \\(df\\) increases"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-degrees-of-freedom-n---1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-degrees-of-freedom-n---1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why degrees of freedom = n - 1?",
+    "text": "Why degrees of freedom = n - 1?\n\n\nDegrees of freedom = number of independent pieces of information\n\n\nWhen calculating the sample standard deviation \\(s\\):\n\nWe use \\(n\\) observations\nBut we first calculate \\(\\bar{x}\\) (which uses all \\(n\\) values)\nThis “uses up” one degree of freedom\nWe’re left with \\(n - 1\\) independent pieces of information\n\n\n\nIntuition: If you know the mean and \\(n-1\\) values, the \\(n\\)th value is determined."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-with-unknown-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-with-unknown-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence interval with unknown σ",
+    "text": "Confidence interval with unknown σ\nWhen \\(\\sigma\\) is unknown (which is almost always):\n\n\n\nCI for μ (with unknown σ)\n\n\n\\[\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(t^*\\) = critical value from t-distribution with \\(df = n - 1\\)\n\\(s\\) = sample standard deviation\n\\(n\\) = sample size"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-ci-with-unknown-σ",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-ci-with-unknown-σ",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example: CI with unknown σ",
+    "text": "Example: CI with unknown σ\n\n\n\nExample\n\n\nA random sample of 50 adults has:\n\nMean height: \\(\\bar{x} = 66.1\\) inches\nSample SD: \\(s = 3.5\\) inches\n\nFind a 95% confidence interval for the population mean height.\n\n\n\n\n\nSolution:\n\n\n\nxbar &lt;- 66.1\ns &lt;- 3.5\nn &lt;- 50\ndf &lt;- n - 1\n\n# Critical value\nt_star &lt;- qt(0.975, df = df)\nt_star\n\n[1] 2.009575\n\n\n\n\n# Calculate SE (using s instead of σ)\nSE &lt;- s / sqrt(n)\n\n# Calculate CI\nlower_ci &lt;- xbar - t_star * SE\nupper_ci &lt;- xbar + t_star * SE\n\nc(lower_ci, upper_ci)\n\n[1] 65.10531 67.09469"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#comparing-z-based-vs.-t-based-cis",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#comparing-z-based-vs.-t-based-cis",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Comparing z-based vs. t-based CIs",
+    "text": "Comparing z-based vs. t-based CIs\nFor our example (\\(n = 50\\)):\n\n\n\n\n\nCase 1: We know the population standard deviation\n\n\n\n# If we knew σ = 3.5 (z-based CI)\nz_star &lt;- qnorm(0.975)\nSE &lt;- (3.5 / sqrt(n))\n\nci_z &lt;- xbar + c(-1, 1) * z_star * SE\nci_z\n\n[1] 65.12987 67.07013\n\n\n\n\n\n\n\n\n\nCase 2: We do not know the population sd\n\n\n\n# Using s = 3.5 (t-based CI)\nt_star &lt;- qt(0.975, df = 49)\nSE &lt;- (s / sqrt(n))\n\nci_t &lt;- xbar + c(-1, 1) * t_star * SE\nci_t\n\n[1] 65.10531 67.09469\n\n\n\n\n\n\n\n\nNotice: The t-based CI is slightly wider (because \\(t^* &gt; z^*\\)) - this reflects the extra uncertainty from estimating σ."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-to-use-t-vs.-z",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-to-use-t-vs.-z",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When to use t vs. z?",
+    "text": "When to use t vs. z?\n\n\n\nDecision rule\n\n\nUse t-distribution when:\n\nYou don’t know the population standard deviation \\(\\sigma\\)\nYou’re using the sample standard deviation \\(s\\)\n(This is almost always in practice!)\n\nUse normal (z) distribution when:\n\nYou know the population standard deviation \\(\\sigma\\)\n(This is rare in real applications)\n\n\n\n\n\n\nRule of thumb we’ll use in this class:\nAlways use the t-distribution unless explicitly told you know \\(\\sigma\\)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-you-need-to-know-sampling-distributions",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-you-need-to-know-sampling-distributions",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What you need to know: Sampling distributions",
+    "text": "What you need to know: Sampling distributions\nKey concepts:\n\nSampling variability is natural - different samples give different estimates\nThe sampling distribution describes how statistics vary across samples\nStandard error (SE) measures the variability of sample means: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)\nThe Central Limit Theorem says that for \\(n \\geq 30\\), sample means follow approximately normal (often for n &gt;= 30, depending on skew/outliers)\n\n\n\nIn plain language:\nIf we repeatedly sample from a population and calculate the mean each time, those means will form a normal distribution centered at the true population mean, with spread determined by the standard error."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-you-need-to-know-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-you-need-to-know-confidence-intervals",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What you need to know: Confidence intervals",
+    "text": "What you need to know: Confidence intervals\nKey concepts:\n\nA confidence interval gives a range of plausible values for a parameter\n95% confidence means that 95% of such intervals would contain the true parameter\nUse the t-distribution when \\(\\sigma\\) is unknown (almost always)\nGeneral form: \\(\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\)\n\n\n\nCritical R functions:\n\n# Finding critical values\nqt(0.975, df = n - 1)  # For 95% CI\n\n# Or for different confidence levels\nqt(0.95, df = n - 1)   # For 90% CI\nqt(0.995, df = n - 1)  # For 99% CI"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#common-mistakes-to-avoid",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#common-mistakes-to-avoid",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\n\n\nWatch out for these!\n\n\n\nConfusing the three distributions\n\nPopulation distribution ≠ sample distribution ≠ sampling distribution\n\nMisinterpreting confidence intervals\n\nNot “95% chance μ is in the interval”\nRather “95% of such intervals contain μ”\n\nUsing z when you should use t\n\nIf you calculated \\(s\\) from your data, use t!\n\nForgetting the assumptions\n\nCLT needs \\(n \\geq 30\\) (or normal population)\nOr: smaller \\(n\\) is okay if data is approximately symmetric"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#key-formulas-for-reference",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#key-formulas-for-reference",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Key formulas for reference",
+    "text": "Key formulas for reference\nYou don’t need to memorize these, but understand what they mean:\n\n\nStandard Error: \\[SE = \\frac{\\sigma}{\\sqrt{n}} \\quad \\text{or} \\quad SE = \\frac{s}{\\sqrt{n}}\\]\n\n\nConfidence Interval (t-based): \\[\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\]\nwhere \\(t^*\\) comes from a t-distribution with \\(df = n - 1\\)\n\n\nConfidence Interval (z-based, if σ known): \\[\\bar{x} \\pm z^* \\times \\frac{\\sigma}{\\sqrt{n}}\\]"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-inference-pipeline",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-inference-pipeline",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The inference pipeline",
+    "text": "The inference pipeline\nLet’s tie everything together:\n\n\n\n\n\nFrom population to inference\n\n\nPopulation → Sample → Statistic → Sampling distribution → Confidence interval\n\n\n\n\n\nThe process:\n\nPopulation with unknown parameter \\(\\mu\\)\nTake a random sample of size \\(n\\)\nCalculate a statistic (e.g., \\(\\bar{x}\\))\nUse the sampling distribution to understand variability\nConstruct a confidence interval to quantify uncertainty\n\n\n\nKey insights: We never observe the population directly, so we use sampling distributions to quantify uncertainty and construct plausible ranges for parameters."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#looking-ahead",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#looking-ahead",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nMore practice with confidence intervals\nIntroduction to hypothesis testing\nThe logic of statistical inference\n\n\n\nFor now:\n\nPractice calculating CIs with different confidence levels\nGet comfortable with the t-distribution in R\nWork on understanding (not just calculating) what CIs mean\n\n\n\n\n\n\nRemember\n\n\nStatistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say “we don’t know exactly, but here’s a plausible range.”\n\n\n\n\n\n\nBMSC 620 | Sampling & Confidence Intervals"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#section",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#section",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "",
+    "text": "Artwork by @allison_horst"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#from-week-1-population-vs.-sample",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#from-week-1-population-vs.-sample",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "From Week 1: Population vs. sample",
+    "text": "From Week 1: Population vs. sample\n\n\n\n\n\n(Target) Population\n\n\n\nGroup of interest being studied\nGroup from which the sample is selected\n\nstudies often have inclusion and/or exclusion criteria\n\nAlmost always too expensive or logistically impossible to collect data for every case in a population\n\n\n\n\n\n\n\n\nSample\n\n\n\nGroup on which data are collected\nA subset (of measurements) from the population\n\n\n\n\n\n\nWe use information from a sample to learn about the population from which it was drawn.\nGoal is to get a representative sample of the population: the characteristics of the sample are similar to the characteristics of the population"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r-12",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r-12",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Sampling variability: A demonstration in R (1/2)",
+    "text": "Sampling variability: A demonstration in R (1/2)\nLet’s see what happens when we take multiple samples from the same population.\n\n# Create a population\npopulation &lt;- tibble(\n  height = rnorm(10000, mean = 65, sd = 3)\n)\n\n# Take 5 samples of size 50\nresults &lt;- tibble(\n  sample_num = 1:5,\n  mean_height = NA_real_  # Initialize with missing values\n)\n\n# Calculate mean for each sample\nfor (i in 1:5) {\n  one_sample &lt;- sample(population$height, size = 50)   # Take a random sample\n  results$mean_height[i] &lt;- mean(one_sample)           # Calculate the mean\n}"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r-22",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-variability-a-demonstration-in-r-22",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Sampling variability: A demonstration in R (2/2)",
+    "text": "Sampling variability: A demonstration in R (2/2)\nThe results from taking\n\n5 random samples,\neach size 50,\nfrom our population of 10,000\n\n\nresults\n\n# A tibble: 5 × 2\n  sample_num mean_height\n       &lt;int&gt;       &lt;dbl&gt;\n1          1        64.8\n2          2        64.4\n3          3        64.8\n4          4        65.5\n5          5        64.7\n\n\n\n\nNotice: Even from the same population, our sample means vary! This is sampling variability - it’s not error, it’s natural variation."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-12",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-12",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability (1/2)",
+    "text": "Visualizing sampling variability (1/2)\nWhat if we took many, many samples?\n\nFrom the same population size 10,000 with \\(\\mu = 65\\) and \\(\\sigma = 3\\)\n\n\n# Take 1000 samples, each of size 50\nmany_samples &lt;- tibble(\n  sample_num = 1:1000,\n  mean_height = NA_real_  # Initialize with missing values\n)\n\n# Calculate mean for each sample\nfor (i in 1:1000) {\n  one_sample &lt;- sample(population$height, size = 50)   # Take a random sample\n  many_samples$mean_height[i] &lt;- mean(one_sample)      # Calculate the mean\n}\n\ndim(many_samples)\n\n[1] 1000    2\n\nhead(many_samples)\n\n# A tibble: 6 × 2\n  sample_num mean_height\n       &lt;int&gt;       &lt;dbl&gt;\n1          1        64.7\n2          2        64.7\n3          3        65.2\n4          4        64.3\n5          5        64.6\n6          6        65.1"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-12-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-12-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability (1/2)",
+    "text": "Visualizing sampling variability (1/2)\nWhat if we took many, many samples?"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-13",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-13",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability (1/3)",
+    "text": "Visualizing sampling variability (1/3)\nWhat if we took many, many samples?\n\nFrom the same population size 10,000 with \\(\\mu = 65\\) and \\(\\sigma = 3\\)\n\n\n# Take 1000 samples, each of size 50\nmany_samples &lt;- tibble(\n  sample_num = 1:1000,\n  mean_height = NA_real_  # Initialize with missing values\n)\n\n# Calculate mean for each sample\nfor (i in 1:1000) {\n  one_sample &lt;- sample(population$height, size = 50)   # Take a random sample\n  many_samples$mean_height[i] &lt;- mean(one_sample)      # Calculate the mean\n}"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-23",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-23",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability (2/3)",
+    "text": "Visualizing sampling variability (2/3)\nWhat if we took many, many samples?\n\nFrom the same population size 10,000 with \\(\\mu = 65\\) and \\(\\sigma = 3\\)\n\n\ndim(many_samples)\n\n[1] 1000    2\n\nhead(many_samples)\n\n# A tibble: 6 × 2\n  sample_num mean_height\n       &lt;int&gt;       &lt;dbl&gt;\n1          1        64.3\n2          2        65.0\n3          3        65.1\n4          4        65.0\n5          5        63.9\n6          6        63.7"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-33",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-sampling-variability-33",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing sampling variability (3/3)",
+    "text": "Visualizing sampling variability (3/3)\nWhat if we took many, many samples?"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#three-distributions-to-keep-straight-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#three-distributions-to-keep-straight-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Three distributions to keep straight",
+    "text": "Three distributions to keep straight\nIt’s crucial to distinguish between these three concepts:\n\n\n\n\nPopulation Distribution\n\nDistribution of the variable in the population\nMean: \\(\\mu\\)\nSD: \\(\\sigma\\)\n\n\nSample Distribution\n\nDistribution of the variable in one sample\nMean: \\(\\bar{x}\\)\nSD: \\(s\\)\n\n\nSampling Distribution\n\nDistribution of sample means across all samples\nMean: \\(\\mu_{\\bar{X}} = \\mu\\)\nSD: \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#important-distinction",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#important-distinction",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Important distinction",
+    "text": "Important distinction\n\nDistribution of data → one sample (what you observe)\nDistribution of means → many samples (theoretical concept)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-to-report-se-vs.-sd",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-to-report-se-vs.-sd",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When to report SE vs. SD",
+    "text": "When to report SE vs. SD\nWhen presenting results, choose based on your goal:\n\n\n\n\n\nReport SD when…\n\n\nGoal: Describe the data\nUse: \\(\\bar{x} \\pm s\\)\nExample: “Heights were 65.2 ± 3.1 inches”\nInterpretation: Shows the spread of individual observations\n\n\n\n\n\n\n\nReport SE when…\n\n\nGoal: Estimate population parameter\nUse: \\(\\bar{x} \\pm SE\\)\nExample: “Mean height was 65.2 ± 0.44 inches”\nInterpretation: Shows precision of the estimate\n\n\n\n\n\n\n\n\n\nCommon mistake\n\n\nDon’t report SE to make your data look “better” (less variable). Use SD to describe variability in your sample, SE to quantify uncertainty about the population mean."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-a-special-name-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-a-special-name-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Standard error: A special name",
+    "text": "Standard error: A special name\nThe standard deviation of a sampling distribution has a special name:\n\n\n\nStandard Error (SE)\n\n\nThe standard error is the standard deviation of a sampling distribution.\nFor the sampling distribution of sample means:\n\\[SE = \\frac{\\sigma}{\\sqrt{n}}\\]\nwhere:\n\n\\(\\sigma\\) = population standard deviation\n\n\\(n\\) = sample size\n\n\n\n\nKey points:\n\nLarger samples → smaller SE → more precise estimates\nSE decreases as \\(\\sqrt{n}\\), not as \\(n\\)\nIn practice, we often use \\(s\\) instead of \\(\\sigma\\): \\(SE = \\frac{s}{\\sqrt{n}}\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-of-the-sample-mean-sem",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#standard-error-of-the-sample-mean-sem",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Standard error of the sample mean (SEM)",
+    "text": "Standard error of the sample mean (SEM)\nThe standard error of the sample mean (SEM) describes how far the the sample mean is expected to deviate from \\(\\mu\\) across many different random samples of size \\(n\\)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-to-report-and-when",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#what-to-report-and-when",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "What to report and when",
+    "text": "What to report and when\nWhen preparing data for a publication, people often wonder whether to report the sample mean and standard deviation, or to report the sample mean and the standard error of the mean (SEM).\n\nIf your intention is to describe the data, then report \\(\\bar{x}\\) and \\(s\\).\nIf you’re using \\(\\bar{x}\\) to estimate the mean in the underlying population, then report \\(\\bar{x} \\pm \\text{sem}\\)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population-12",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population-12",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "CLT in action: Starting with a skewed population (1/2)",
+    "text": "CLT in action: Starting with a skewed population (1/2)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population-22",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#clt-in-action-starting-with-a-skewed-population-22",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "CLT in action: Starting with a skewed population (2/2)",
+    "text": "CLT in action: Starting with a skewed population (2/2)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-can-we-use-the-clt-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#when-can-we-use-the-clt-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "When can we use the CLT?",
+    "text": "When can we use the CLT?\nGeneral rule: \\(n \\geq 30\\) for most distributions\n\n\nMore nuanced guidelines:\n\nIf population is approximately normal → CLT works for any \\(n\\)\nIf population is slightly skewed → \\(n \\geq 30\\) is usually fine\nIf population is very skewed → \\(n \\geq 50\\) or larger may be needed\nIf population has extreme outliers → even larger \\(n\\) may be needed\n\n\n\n\n\n\nIn practice\n\n\nWhen in doubt, look at your sample data:\n\nIs it approximately symmetric?\nAre there extreme outliers?\nIf yes to both, you’re probably okay with \\(n \\geq 30\\)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-distributions-at-different-sample-sizes",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#sampling-distributions-at-different-sample-sizes",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Sampling distributions at different sample sizes",
+    "text": "Sampling distributions at different sample sizes\nNow watch what happens to the sampling distribution as we increase \\(n\\):"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#looking-ahead-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#looking-ahead-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nMore practice with confidence intervals\nIntroduction to hypothesis testing\nThe logic of statistical inference\n\n\n\nFor now:\n\nPractice calculating CIs with different confidence levels\nGet comfortable with the t-distribution in R\nWork on understanding (not just calculating) what CIs mean\n\n\n\n\n\n\nRemember\n\n\nStatistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say “we don’t know exactly, but here’s a plausible range.”\n\n\n\n\n\n\nBMSC 620 | Sampling & Confidence Intervals"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-is-this-useful",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#why-is-this-useful",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Why is this useful?",
+    "text": "Why is this useful?\n\n\n\nRoutine studies involve data from a single sample, not repeated samples.\nIf \\(n\\) is large, then regardless of the distribution of the original population, CLT provides a way of treating our single sample mean as one observation from a normal distribution.\nThe distribution of sample means derived from discrete distributions will also be normal provided \\(n\\) is large."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-continued-using-r-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#example-continued-using-r-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Example continued: Using R",
+    "text": "Example continued: Using R\nStep 3: Calculate the probability using R\nWe want \\(P(\\bar{X} &gt; 66)\\)\n\n# Define parameters\nn &lt;- 50\nmu &lt;- 65\nsigma &lt;- 3.5\n\n# Calculate SE\nSE &lt;- sigma / sqrt(n)\nSE\n\n[1] 0.4949747\n\n\n\n\n\n# Calculate probability\npnorm(q = 66, mean = mu, sd = SE, lower.tail = FALSE)\n\n[1] 0.02167588\n\n\n\n\nInterpretation: There is about a 2.2% chance of observing a sample mean greater than 66 inches if the true population mean is 65 inches."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals-12",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals-12",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing confidence intervals (1/2)",
+    "text": "Visualizing confidence intervals (1/2)\nLet’s look at what confidence intervals represent:\n\n\n\nThe figure shows CIs from 100 samples:\n\n100 samples: Calculate the mean and confidence interval of each sample\nThe true value of \\(\\mu =65\\) is the vertical black line\nThe horizontal lines are 95% CIs from 100 samples\n\nBlue: the CI contains the true value of \\(\\mu\\)\nRed: the CI did not contain the true value of \\(\\mu\\)\n\n\nWhat percent of CIs captured the true value of \\(\\mu\\)?"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals-22",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#visualizing-confidence-intervals-22",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Visualizing confidence intervals (2/2)",
+    "text": "Visualizing confidence intervals (2/2)\nLet’s look at what confidence intervals represent:\n\n\n\n\nInterpretation \\((1 - \\alpha) \\times 100\\%\\)\n\n\nIf many samples are collected from a population, and a confidence interval is calculated for each one.\n\n\nWe expect that \\((1 - \\alpha) \\times 100\\%\\) of those intervals will contain the true population mean, \\(\\mu\\)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#how-do-we-interpret-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#how-do-we-interpret-confidence-intervals",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "How do we interpret confidence intervals?",
+    "text": "How do we interpret confidence intervals?\nActual interpretation:\n\nIf we were to\n\nrepeatedly take random samples from a population and\ncalculate a 95% CI for each random sample,\n\nthen we would expect 95% of our CIs to contain the true population parameter \\(\\mu\\).\n\n\n\n\n\n\nWhat we typically write as “shorthand”:\n\nIn general form: We are 95% confident that (the 95% confidence interval) captures the value of the population parameter.\n\n\n\nWRONG interpretation:\n\nThere is a 95% chance that (the 95% confidence interval) captures the value of the population parameter.\n\nFor one CI on its own, it either does or doesn’t contain the population parameter with probability 0 or 1. We just don’t know which!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#some-new-notation",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci.html#some-new-notation",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Some new notation",
+    "text": "Some new notation\n\n\n\n\n\\(\\pm z_{1-\\alpha/2}\\) is the value of \\(z\\) such that \\((1 - \\alpha) \\times 100\\%\\) of the standard normal distribution is contained between \\(- z_{1-\\alpha/2}\\) and \\(+ z_{1-\\alpha/2}\\).\nEquivalently, \\(\\alpha \\times 100\\%\\) is greater than \\(+ z_{1-\\alpha/2}\\) and less than \\(- z_{1-\\alpha/2}\\) combined."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#some-new-notation",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#some-new-notation",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Some new notation",
+    "text": "Some new notation\nBefore we construct confidence intervals, we need to understand the notation for critical values:\n\n\n\n\n\\(\\pm z_{1-\\alpha/2}\\) is the value of \\(z\\) such that \\((1 - \\alpha) \\times 100\\%\\) of the standard normal distribution is contained between \\(- z_{1-\\alpha/2}\\) and \\(+ z_{1-\\alpha/2}\\).\nEquivalently, \\(\\alpha \\times 100\\%\\) is greater than \\(+ z_{1-\\alpha/2}\\) and less than \\(- z_{1-\\alpha/2}\\) combined."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-intervals-are-about-procedures-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-intervals-are-about-procedures-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence intervals are about procedures",
+    "text": "Confidence intervals are about procedures\n\n\nOne dataset → one interval\n\nYou conduct one study\nYou get one sample\nYou calculate one interval\nThat interval either contains \\(\\mu\\) or it doesn’t\n\nWe just don’t know which!\n\nThe 95% guarantee\n\nApplies to the method, not a single interval\nIf everyone repeated your study, 95% of their CIs would contain \\(\\mu\\)\nYour CI is one realization from that process\n\n\n\n\n\n\n\nKey point\n\n\nYou cannot assess whether your specific CI is correct. Confidence comes from the long-run behavior of the procedure, not from one dataset.\nThis is why we say “we are confident” rather than “there is a probability.”"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#different-confidence-levels-a-different-way",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#different-confidence-levels-a-different-way",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Different confidence levels (a different way)",
+    "text": "Different confidence levels (a different way)\nJust showing another way to do with with R\n\nxbar &lt;- 66.1\nsigma &lt;- 3\nn &lt;- 50\nSE &lt;- sigma / sqrt(n)\n\n# Instead of three separate calculations:\nconfidence_levels &lt;- c(0.90, 0.95, 0.99)\nz_values &lt;- qnorm(1 - (1 - confidence_levels)/2)\n\nresults &lt;- tibble(\n  level = confidence_levels,\n  z_star = z_values,\n  lower = xbar - z_values * SE,\n  upper = xbar + z_values * SE\n)\n\nresults\n\n# A tibble: 3 × 4\n  level z_star lower upper\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1  0.9    1.64  65.4  66.8\n2  0.95   1.96  65.3  66.9\n3  0.99   2.58  65.0  67.2"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-t-distribution-2",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#the-t-distribution-2",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "The t-distribution",
+    "text": "The t-distribution\n\n\n\n\n\n\n\nStudent’s t-distribution\n\n\n\nIs symmetric and bell-shaped (like the normal)\nHas heavier tails than the normal distribution\n\nt-based intervals will be wider than Z based intervals\n\nDepends on degrees of freedom (which for one sample: \\(df = n - 1\\))\nApproaches the normal distribution as \\(df\\) increases"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#students-t-distribution-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#students-t-distribution-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Student’s t-distribution",
+    "text": "Student’s t-distribution\nThe t-distribution:\n\nIs symmetric and bell-shaped (like the normal)\nHas heavier tails than the normal distribution\nDepends on degrees of freedom (\\(df = n - 1\\))\nApproaches the normal distribution as \\(df\\) increases"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#finding-the-critical-value-in-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#finding-the-critical-value-in-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Finding the critical value in R:",
+    "text": "Finding the critical value in R:\n\n\n\n# For 95% CI with n = 50 (so df = 49)\nqt(0.975, df = 49)\n\n[1] 2.009575\n\n\nCompare to \\(z^* = 1.96\\) - slightly larger!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#qt-finding-the-critical-value-in-r",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#qt-finding-the-critical-value-in-r",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "qt(): Finding the critical value in R",
+    "text": "qt(): Finding the critical value in R\nThe qt() function finds critical values from the t-distribution:\nqt(p, df, lower.tail = TRUE)\n\n\nParameters:\n\np = cumulative probability (e.g., 0.975 for 95% CI)\ndf = degrees of freedom (\\(n - 1\\))\nlower.tail = TRUE (default) gives left-tail probability\n\n\n\nReturns: The t-value where \\(P(T \\leq \\text{value}) = p\\)\n\n\n\nExample: 95% CI with n = 50\n\n# For 95% CI, we want 2.5% in each tail, so p = 0.975\n# Degrees of freedom: df = n - 1 = 49\nqt(p = 0.975, df = 49)\n\n[1] 2.009575\n\n\nCompare to \\(z^* = 1.96\\) from the normal distribution - the t-value is slightly larger!"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-ci-for-the-mean-mu-z-vs.-t",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#confidence-interval-ci-for-the-mean-mu-z-vs.-t",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Confidence interval (CI) for the mean \\(\\mu\\) (\\(z\\) vs. \\(t\\))",
+    "text": "Confidence interval (CI) for the mean \\(\\mu\\) (\\(z\\) vs. \\(t\\))\n\nIn summary, we have two cases that lead to different ways to calculate the confidence interval\n\n\n\n\n\n\nCase 1: We know the population standard deviation\n\n\n\\[\\overline{x}\\ \\pm\\ z^*\\times \\text{SE}\\]\n\nwith \\(\\text{SE} = \\frac{\\sigma}{\\sqrt{n}}\\) and \\(\\sigma\\) is the population standard deviation\n\n\n\n\nFor 95% CI, we use:\n\n\\(z^* =\\) qnorm(p = 0.975) \\(=1.96\\)\n\n\n\n\n\n\n\n\n\nCase 2: We do not know the population sd\n\n\n\\[\\overline{x}\\ \\pm\\ t^*\\times \\text{SE}\\]\n\nwith \\(\\text{SE} = \\frac{s}{\\sqrt{n}}\\) and \\(s\\) is the sample standard deviation\n\n\n\n\nFor 95% CI, we use:\n\n\\(t^* =\\) qt(p = 0.975, df = n-1)"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#comparing-z-based-vs.-t-based-cis-1",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_sampling_ci_reinforced.html#comparing-z-based-vs.-t-based-cis-1",
+    "title": "Sampling Distributions and Confidence Intervals",
+    "section": "Comparing z-based vs. t-based CIs",
+    "text": "Comparing z-based vs. t-based CIs\nFor our example (\\(n = 50\\), \\(\\bar{x} = 66.1\\)):\n\n\n\n\n\nKnown σ (z-based)\n\n\n\nz_star &lt;- qnorm(0.975)\nci_z &lt;- xbar + c(-1, 1) * z_star * (3.5 / sqrt(n))\nci_z\n\n[1] 65.12987 67.07013\n\n\n\n\n\n\n\n\n\nUnknown σ (t-based)\n\n\n\nt_star &lt;- qt(0.975, df = 49)\nci_t &lt;- xbar + c(-1, 1) * t_star * (s / sqrt(n))\nci_t\n\n[1] 65.10531 67.09469\n\n\n\n\n\n\n\n\nKey difference: t-based CI is slightly wider because \\(t^* &gt; z^*\\) (extra uncertainty from estimating \\(\\sigma\\))"
   }
 ]

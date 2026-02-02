@@ -17,7 +17,16 @@ $oi-grey:        #999999;
 $oi-orange:      #E69F00;  /* for warnings/notes */
 $oi-yellow:      #F0E442;  /* for highlights */
 
-
+Colors and Hex Codes
+Black: #000000
+Orange: #E69F00
+Sky Blue: #56B4E9
+Bluish Green: #009E73
+Yellow: #F0E442
+Blue: #0072B2
+Vermilion: #D55E00
+Reddish Purple: #CC79A7
+Grey: #999999 (or sometimes black is replaced with grey in 8-color sets) 
 
 
 Then:
