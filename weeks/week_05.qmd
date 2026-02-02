@@ -58,7 +58,7 @@ By the end of the week, you should be able to:
   - Calculating confidence intervals in R
 
 - **Slides**
-  - Estimation and Confidence Intervals ([HTML](/lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.qmd) | [PDF](/lessons/11_confidence_intervals/11_confidence_intervals.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Estimation and Confidence Intervals ([HTML](/lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.qmd) | [PDF](/lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
   - Coming soon
