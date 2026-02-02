@@ -1,6 +1,6 @@
 ---
 title: "Week 5"
-description: "Random Variables and Probability Distributions"
+description: "Statistical Inference: Estimation and Hypothesis Testing"
 format:
   html:
     toc: true
@@ -17,23 +17,24 @@ Think of the weekly page as answering just five student questions:
 
 ## Announcements
 
-- HW 3 released **Monday, February 2**
+- HW 4 released **Monday, February 2**
 
 
 ## Overview
 
-This week focuses on **random variables and probability distributions**.
+This week focuses on **statistical inference**: making conclusions about populations based on sample data.
 
-We will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.
+We will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.
 
 By the end of the week, you should be able to:
 
-- define random variables and distinguish between discrete and continuous types,
-- calculate expected values and variances of random variables,
-- work with linear combinations of random variables,
-- identify when the Binomial distribution applies and calculate probabilities,
-- understand properties of the Normal distribution and calculate probabilities using R,
-- identify when the Poisson distribution applies and calculate probabilities using R.
+- understand the concept of a sampling distribution and standard error,
+- construct and interpret confidence intervals for a population mean,
+- explain what a confidence level means,
+- state null and alternative hypotheses,
+- conduct and interpret one-sample t-tests,
+- understand p-values and statistical significance,
+- recognize the connection between confidence intervals and hypothesis tests.
 
 ## Readings (before class)
 
@@ -46,74 +47,63 @@ By the end of the week, you should be able to:
 
 ## Materials
 
-### Monday — Random Variables and Binomial Distribution
+### Monday — Estimation and Confidence Intervals
 
 - **Topics**
-  - What are random variables?
-  - Expected value and variance
-  - Linear combinations of random variables
-  - Bernoulli distribution
-  - Binomial distribution
-  - Calculating probabilities with R
+  - Sampling distributions and standard error
+  - Point estimates vs. interval estimates
+  - Confidence intervals for population means
+  - Interpreting confidence levels (e.g., 95% CI)
+  - Using the t-distribution when σ is unknown
+  - Calculating confidence intervals in R
 
 - **Slides**
-  - Random Variables and Binomial Distribution ([HTML](/lessons/09_random_variables_binomial/09_random_variables_binomial.qmd) | [PDF](/lessons/09_random_variables_binomial/09_random_variables_binomial.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Estimation and Confidence Intervals ([HTML](/lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.qmd) | [PDF](/lessons/11_confidence_intervals/11_confidence_intervals.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
-  - [Random Variables and Binomial Distribution](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBMO2Tu5cfHSpSLFjpvgizfAYWjszPUYd89oxobQzMM2Io?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=BrSDnO)
-
+  - Coming soon
+  
 - **Muddy points**
   
-  I reviewed your post-class feedback and wrote clarifications here:
-    - [Muddy Points - Lesson 6](/lessons/09_random_variables_binomial/09_random_variables_binomial_muddy_points.qmd)
+  Coming soon.
 
 ---
 
-### Wednesday — Normal and Poisson Distributions
+### Wednesday — Hypothesis Testing and One-Sample t-Tests
 
 - **Topics**
-  - The Normal distribution
-  - Standard Normal (Z) distribution
-  - Normal probability calculations (`pnorm()`, `qnorm()`)
-  - Normal approximation to the Binomial (with continuity correction)
-  - The Poisson distribution
-  - Poisson probability calculations (`dpois()`, `ppois()`)
-  - Poisson approximation to the Binomial (rare events)
+  - The logic of hypothesis testing
+  - Null and alternative hypotheses
+  - Test statistics and p-values
+  - Statistical significance and decision rules
+  - One-sample t-tests
+  - Conducting t-tests in R
+  - Connection between confidence intervals and hypothesis tests
 
 - **Slides**
-  - Normal and Poisson Distributions ([HTML](/lessons/10_normal_poisson/10_normal_poisson.qmd) | [PDF](/lessons/10_normal_poisson/10_normal_poisson.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Hypothesis Testing and One-Sample t-Tests (HTML | PDF | OneDrive)
 
 - **Recording**
-  - [Normal and Poisson Distributions](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQCTuB2DKAzASabJFpu2-CKZAbUohIzPX20cxzbvKcD8NnI?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Xci14x)
+  - Coming soon
   
 - **Muddy points**
   
-  I reviewed your post-class feedback and wrote clarifications here:
-    - [Muddy Points - Lesson 7](/lessons/10_normal_poisson/10_normal_poisson_muddy_points.qmd)
+  Coming soon.
 
 ---
 
 ## Homework
 
-- **HW 2**
-  - Due **Tuesday, January 27 at 11:00 pm**
+- **HW 4**
+  - Released **Monday, February 2**
+  - Due **Sunday, February 8 at 11:00 pm**
   - Covers:
-    - data wrangling with `dplyr`
-    - summary statistics with `rstatix`
-    - frequency tables with `janitor`
-    - data visualization with `ggplot2`
-    - probability concepts (marginal, joint, and conditional probabilities)
-  - [View HW 2 instructions](/homework/HW02/HW02.qmd)
-
-- **HW 3**
-  - Released **Monday, January 26**
-  - Due **Sunday, February 1 at 11:00 pm**
-  - Covers:
-    - Bayes' Theorem
-    - Random variables and expected value
-    - Binomial distribution
-    - Continued practice with tidyverse tools
-  - [View HW 3 instructions](/homework/HW03/HW03.qmd)
+    - Normal distribution and properties
+    - Z-scores and standardization
+    - Calculating probabilities with `pnorm()` and `qnorm()`
+    - Normal approximation to the Binomial
+    - Poisson distribution
+  - [View HW 4 instructions](/homework/HW04/HW04.qmd)
 
 - See the full list of assignments on the [Homework](/homework.qmd) page.
 
@@ -125,9 +115,9 @@ By the end of the week, you should be able to:
 
 ## Looking ahead
 
-Next week we will begin **statistical inference**:
+Next week we will continue with **statistical inference**:
 
-- **Monday**: Confidence intervals
-- **Wednesday**: Hypothesis testing introduction
+- **Monday**: Paired data and paired t-tests; Two-sample independent t-tests
+- **Wednesday**: Midterm review
 
-These concepts are the foundation for drawing conclusions from data and making decisions based on evidence.
+These concepts extend our hypothesis testing framework to compare two groups and handle related measurements.

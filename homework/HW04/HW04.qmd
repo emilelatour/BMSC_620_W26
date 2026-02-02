@@ -1,0 +1,309 @@
+---
+title: "BMSC 620 — Homework 4"
+subtitle: "Normal, Binomial, and Poisson Distributions"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+execute:
+  echo: true
+---
+
+```{r}
+#| include: false
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(eval = FALSE)
+
+```
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW##`
+
+Examples:
+
+- Smith_J_HW04.qmd
+- Smith_J_HW04.html
+
+When submitting Homework 4, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Instructions
+
+- Answer each question clearly and concisely.
+- Show your work when calculations are involved.
+- Use R to compute probabilities and quantiles when requested.
+- You may round final answers to 3 decimal places unless otherwise noted.
+- **Do not use continuity correction** for Normal approximations in this assignment.
+
+
+::: {.callout-tip}
+Some code chunks are intentionally incomplete. Fill in the missing values so the code runs correctly.
+:::
+
+---
+
+## Part 1: The Normal Distribution
+
+### 1A. Properties of the Normal distribution
+
+Answer briefly (1–2 sentences each).
+
+1. What does it mean for a distribution to be symmetric?
+2. What parameters define a Normal distribution?
+3. Why is the Normal distribution important in statistics?
+
+**Answers:**
+
+1. 
+2. 
+3. 
+
+---
+
+## Part 2: Z-scores and Standardization
+
+Suppose adult systolic blood pressure (SBP) is Normally distributed with:
+
+- Mean = 120 mmHg
+- Standard deviation = 15 mmHg
+
+### 2A. Calculating z-scores
+
+1. Compute the z-score for an individual with SBP = 135 mmHg.
+2. Interpret this z-score in words.
+
+```{r}
+# Define parameters
+mu <- 120
+sigma <- 15
+x <- 135
+
+# Compute z-score: z = (x - mu) / sigma
+z <- 
+
+z
+```
+
+**Answers:**
+
+1. 
+2. 
+
+---
+
+## Part 3: Probabilities from the Normal Distribution
+
+Using the same SBP distribution:
+
+### 3A. Probabilities
+
+1. What proportion of adults have SBP above 140 mmHg?
+2. What proportion have SBP between 110 and 130 mmHg?
+
+```{r}
+# Proportion above 140
+pnorm(
+  q = ,
+  mean = ,
+  sd = ,
+  lower.tail = 
+)
+
+# Proportion between 110 and 130
+# P(110 < X < 130) = P(X < 130) - P(X < 110)
+
+
+```
+
+**Answers:**
+
+1. 
+2. 
+
+---
+
+## Part 4: Quantiles and Cutoffs
+
+### 4A. Percentiles
+
+1. What SBP value corresponds to the 90th percentile?
+2. Hypertension screening flags the top 10% of SBP values. What is the cutoff?
+
+```{r}
+# 90th percentile
+qnorm(
+  p = ,
+  mean = ,
+  sd = 
+)
+```
+
+**Answers:**
+
+1. 
+2. 
+
+Interpret the cutoff in one sentence:
+
+---
+
+## Part 5: Binomial Distribution
+
+A new medication has a 30% chance of success for each patient. Suppose 20 patients are treated.
+
+### 5A. Exact Binomial probabilities
+
+1. What is the probability that exactly 8 patients respond?
+2. What is the probability that at least 5 patients respond?
+
+```{r}
+# Exactly 8 successes
+dbinom(
+  x = ,
+  size = ,
+  prob = 
+)
+
+# At least 5 successes
+# P(X >= 5) = P(X > 4) = 1 - P(X <= 4)
+pbinom(
+  q = ,
+  size = ,
+  prob = ,
+  lower.tail = 
+)
+```
+
+**Answers:**
+
+1. 
+2. 
+
+---
+
+## Part 6: Normal Approximation to the Binomial
+
+Suppose a manufacturing process has a defect rate of 10%. Out of 200 items produced:
+
+### 6A. Check conditions
+
+1. State the mean and standard deviation of the Binomial distribution.
+2. Verify whether a Normal approximation is reasonable.
+
+```{r}
+n <- 200
+p <- 0.10
+
+# Mean of binomial: mu = n * p
+mu_b <- 
+
+# SD of binomial: sd = sqrt(n * p * (1 - p))
+sd_b <- 
+
+mu_b
+sd_b
+
+# Check conditions: np >= 10 and n(1-p) >= 10
+
+
+```
+
+**Answers:**
+
+1. 
+2. 
+
+### 6B. Approximate probability
+
+Use a Normal approximation **without continuity correction**.
+
+What is the approximate probability that more than 30 items are defective?
+
+```{r}
+# P(X > 30) using Normal approximation
+pnorm(
+  q = ,
+  mean = ,
+  sd = ,
+  lower.tail = 
+)
+```
+
+**Answer:**
+
+Briefly comment on whether this approximation seems reasonable:
+
+---
+
+## Part 7: Poisson Distribution
+
+Emergency room arrivals follow a Poisson distribution with an average rate of 3 arrivals per hour.
+
+### 7A. Probabilities
+
+1. What is the probability of exactly 2 arrivals in an hour?
+2. What is the probability of at least 5 arrivals in an hour?
+
+```{r}
+# Exactly 2 arrivals
+dpois(
+  x = ,
+  lambda = 
+)
+
+# At least 5 arrivals: P(X >= 5) = 1 - P(X <= 4)
+ppois(
+  q = ,
+  lambda = ,
+  lower.tail = 
+)
+```
+
+**Answers:**
+
+1. 
+2. 
+
+---
+
+## Part 8: Choosing the Right Distribution
+
+For each scenario, state which distribution (**Normal**, **Binomial**, or **Poisson**) is most appropriate and briefly explain why.
+
+1. Number of typos on a randomly selected manuscript page
+2. Proportion of voters in a sample who support a candidate
+3. Adult heights in a large population
+
+**Answers:**
+
+1. 
+2. 
+3. 
+
+---
+
+## Optional (Not Graded): Reflection
+
+In 2–3 sentences, describe one situation where using the wrong distribution could lead to misleading conclusions.
+
+**Answer:**
+
+---
+
+## Submission checklist
+
+Before submitting, make sure you have:
+
+- [ ] Answered all required questions
+- [ ] Included R output where requested
+- [ ] Written brief interpretations in words when asked
+- [ ] Rendered your HTML successfully
+- [ ] Uploaded both .qmd and .html files
