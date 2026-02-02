@@ -1095,6 +1095,92 @@ ggplot() +
 - $\pm z_{1-\alpha/2}$ is the value of $z$ such that $(1 - \alpha) \times 100\%$ of the standard normal distribution is contained <br>between $- z_{1-\alpha/2}$ and $+ z_{1-\alpha/2}$.
 - Equivalently, $\alpha \times 100\%$ is greater than $+ z_{1-\alpha/2}$ and less than $- z_{1-\alpha/2}$ combined. 
 
+<!-- SCRIPT FOR THIS SLIDE -->
+
+<!-- Here's a script/bullet points for explaining this slide: -->
+
+<!-- ## Script for "Some New Notation" Slide -->
+
+<!-- ### Opening (connect to what they know) -->
+<!-- **"Okay, we've been talking about 95% confidence intervals. Now I need to introduce some notation that will help us work with ANY confidence level - not just 95%."** -->
+
+<!-- ### Step 1: Introduce alpha -->
+<!-- **Point to the center of the curve:** -->
+<!-- - "Let's say we want to capture 95% of the distribution in the middle" -->
+<!-- - "That means we're LEAVING OUT 5% total in the tails" -->
+<!-- - "We call that 5% 'alpha' - written as α" -->
+<!-- - **"So: confidence level = (1 - α) × 100%"** -->
+<!--   - "If confidence level is 95%, then α = 0.05" -->
+<!--   - "If confidence level is 90%, then α = 0.10" -->
+
+<!-- ### Step 2: Why we split alpha -->
+<!-- **Point to the two gray tails:** -->
+<!-- - "Because we have a symmetric distribution, we split that leftover percentage into TWO equal tails" -->
+<!-- - "Each tail gets α/2" -->
+<!-- - **"For 95% CI: α = 0.05, so each tail gets 0.05/2 = 0.025 or 2.5%"** -->
+
+<!-- ### Step 3: Explain the z-value notation -->
+<!-- **Point to the right cutoff point:** -->
+<!-- - "Now here's the tricky notation: $z_{1-\alpha/2}$" -->
+<!-- - "This is just the z-value that marks where the middle section ends" -->
+<!-- - **"Break down the subscript:** -->
+<!--   - "The subscript tells you: 'go up to THIS percentile'" -->
+<!--   - "For 95% CI: 1 - α/2 = 1 - 0.025 = 0.975" -->
+<!--   - "So $z_{0.975}$ means 'the z-value where 97.5% of the distribution is to the LEFT'" -->
+
+<!-- **Point to both cutoffs:** -->
+<!-- - "Because it's symmetric, we have $+z_{1-\alpha/2}$ on the right and $-z_{1-\alpha/2}$ on the left" -->
+
+<!-- ### Step 4: Connect to R (concrete example) -->
+<!-- **"Let's make this concrete with R - for a 95% CI:"** -->
+<!-- - α = 0.05 -->
+<!-- - 1 - α/2 = 0.975 -->
+<!-- - `qnorm(0.975)` gives us 1.96 -->
+<!-- - **"So $z_{0.975} = 1.96$ - the value you've already been using!"** -->
+
+<!-- ### Step 5: Summary bullets (what to emphasize) -->
+<!-- - "The middle part is (1-α) - that's your confidence level" -->
+<!-- - "The tails are α/2 each - the probability we're NOT capturing" -->
+<!-- - "The notation $z_{1-\alpha/2}$ just tells you which percentile to look up" -->
+
+<!-- ## Alternative: Simplified Talking Points -->
+
+<!-- If you want to be more concise, here's a shorter version: -->
+
+<!-- **"This notation looks complicated but it's not:"** -->
+
+<!-- 1. **Start with what we want:** "We want 95% in the middle" *(point to center)* -->
+
+<!-- 2. **What's left over:** "That means 5% total in the tails - we call that α" *(gesture to both tails)* -->
+
+<!-- 3. **Split it equally:** "α/2 in each tail, so 2.5% on each side" *(point to each tail)* -->
+
+<!-- 4. **The z-notation:** "$z_{1-\alpha/2}$ is just the cutoff point" -->
+<!--    - "For 95% CI: 1 - 0.05/2 = 0.975" -->
+<!--    - "So we look up the 97.5th percentile: `qnorm(0.975)` = 1.96" -->
+
+<!-- 5. **Bottom line:** "This notation lets us work with ANY confidence level, not just 95%" -->
+
+<!-- ## Common Student Confusions to Address -->
+
+<!-- **If students look confused:** -->
+
+<!-- - **Confusion about "1 - α/2":** "Think of it as 'percentage to the LEFT of the right cutoff' - it includes the left tail (α/2) plus the middle (1-α)" -->
+
+<!-- - **Why the subscript is so complicated:** "It's formal notation. In practice, you'll just use `qnorm(0.975)` for 95% CI and `qnorm(0.995)` for 99% CI" -->
+
+<!-- - **The negative sign:** "Just means 'flip it' - by symmetry, the left cutoff is negative" -->
+
+<!-- ## Visual Cues to Use While Explaining -->
+
+<!-- 1. **Trace the middle** with your hand when saying "(1 - α)" -->
+<!-- 2. **Point to left tail** when saying "α/2" the first time -->
+<!-- 3. **Point to right tail** when saying "α/2" the second time -->
+<!-- 4. **Circle the right cutoff** on the x-axis when explaining $z_{1-\alpha/2}$ -->
+<!-- 5. **Show on fingers:** "1 minus α over 2" (helps students see the math) -->
+
+<!-- Does this help? The key is building up from the intuitive (95% in middle, 5% in tails) to the formal notation, and constantly connecting back to concrete examples. -->
+
 # Confidence Intervals: The Basics
 
 ## Visualizing confidence intervals (1/2)
@@ -2099,3 +2185,85 @@ Statistical inference is about quantifying uncertainty. Confidence intervals giv
 <!-- ``` -->
 
 <!-- The lecture has great content, but it seems like you're being very thorough at the expense of pace and punch. Students probably felt like "okay, I get it" around the third time hearing about CI interpretation. Trust that they got it the first time, and move on! -->
+
+
+
+<!-- NORE NOTES for next year -->
+
+<!-- That's really helpful context! If you finished in 1:10 and students said the pace felt right, then you're actually in a good spot - you're not running over, and students aren't feeling rushed. -->
+
+<!-- That changes my advice a bit. The redundancy might not be a *timing* problem but more about how the lecture *feels* in the room. Here's my refined take: -->
+
+<!-- ## Redundancy vs. Useful Reinforcement -->
+
+<!-- The distinction is: -->
+<!-- - **Useful reinforcement**: Seeing the same concept from different angles, with new examples or applications -->
+<!-- - **Redundant**: Literally restating the same point with the same words/examples -->
+
+<!-- The slides that felt clunky to you (like "Why is this useful?") are probably the ones that are purely redundant rather than reinforcing through a new lens. -->
+
+<!-- ## Strategy for Next Year -->
+
+<!-- Since your timing is good, you have two options: -->
+
+<!-- ### Option 1: Trim redundancy, add depth elsewhere -->
+<!-- Cut the slides I identified as redundant, but use that saved time to: -->
+<!-- - Add more Think-Pair-Share moments -->
+<!-- - Include an additional worked example -->
+<!-- - Do a live polling question about CI interpretation -->
+<!-- - Have students calculate a CI together in R -->
+
+<!-- This keeps the timing the same but makes the lecture feel more dynamic and less "slide after slide saying similar things." -->
+
+<!-- ### Option 2: Trim redundancy, finish faster -->
+<!-- Cut the redundant content and aim for 60-65 minutes. This gives you: -->
+<!-- - More buffer for questions -->
+<!-- - Time for students to catch up if they fell behind -->
+<!-- - Less cognitive overload (especially for a concept-heavy topic) -->
+
+<!-- ## Specific Suggestions With Timing in Mind -->
+
+<!-- **High-impact cuts that won't hurt learning:** -->
+<!-- 1. **Delete "Why is this useful?"** - saves 1-2 minutes, students already get it from CLT slides -->
+<!-- 2. **Combine 2-3 of the CI interpretation slides** - saves 3-5 minutes, reduces the "okay I get it" feeling -->
+<!-- 3. **Delete "Confidence intervals are about procedures"** - saves 2 minutes, already covered in other interpretation slides -->
+
+<!-- That's potentially 6-10 minutes saved. -->
+
+<!-- **What to do with that time:** -->
+
+<!-- **Option A: Add active learning** -->
+<!-- - After showing the 100 CIs visualization, have students discuss: "If you see one CI in a paper, can you tell if it captured μ?" (Think-Pair-Share: 3 minutes) -->
+<!-- - After the t vs z comparison, give them a scenario and poll: "Which should you use here?" (2 minutes) -->
+<!-- - Add a "You try it" slide where they calculate a CI from summary statistics (5 minutes) -->
+
+<!-- **Option B: Keep the extra buffer** -->
+<!-- - More time for muddy points at the end -->
+<!-- - Time for students to ask questions without feeling rushed -->
+<!-- - Better ability to adjust pace if students seem lost -->
+
+<!-- ## The "Clunky" Feeling -->
+
+<!-- When you say something felt clunky (like "Why is this useful?"), I suspect it's because: -->
+<!-- - You could sense students already understood it -->
+<!-- - It felt like you were re-explaining something that didn't need re-explaining -->
+<!-- - There was no new information or perspective on that slide -->
+
+<!-- Trust that instinct! If it felt clunky to you as an instructor, it probably felt redundant to students too - even if they didn't consciously notice or mention it in feedback. -->
+
+<!-- ## My Recommendation -->
+
+<!-- Given that your timing is good and pace feedback is positive: -->
+
+<!-- 1. **Cut the most obviously redundant slides** (the 3-4 I flagged as "delete entirely") -->
+<!-- 2. **Streamline the CI interpretation section** from 5 slides to 3 (keep the best ones) -->
+<!-- 3. **Use the saved 8-10 minutes for**: -->
+<!--    - One additional worked example (showing the full process start to finish) -->
+<!--    - One Think-Pair-Share or Poll Everywhere check-in -->
+<!--    - More breathing room for questions -->
+
+<!-- This way you maintain the ~70 minute timing that works, but the lecture feels tighter and more interactive rather than "talking at them" for slides on end. -->
+
+<!-- The students saying "pace is about right" is good, but it doesn't mean the content flow is optimal. You can keep the same timing while improving the experience by cutting pure redundancy and adding active moments. -->
+
+<!-- What do you think? Does that match what you were feeling during the lecture? -->
