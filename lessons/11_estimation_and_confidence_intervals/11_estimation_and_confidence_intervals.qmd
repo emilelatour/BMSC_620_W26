@@ -1983,3 +1983,119 @@ Let's tie everything together:
 
 Statistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say "we don't know exactly, but here's a plausible range."
 :::
+
+
+
+<!-- NOTES for next year: -->
+
+<!-- Looking through your slides, I can identify several areas where there's redundancy that likely made the lecture feel repetitive. Here's my advice organized by topic: -->
+
+<!-- ## Major Redundancies to Address -->
+
+<!-- ### 1. **The "Why is this useful?" slide (after CLT)** -->
+<!-- **Problem:** This slide just restates what you already said about the CLT. The three bullets are: -->
+<!-- - "We only have one sample" (already obvious from the entire sampling discussion) -->
+<!-- - "CLT lets us use normal distribution" (literally what you just explained for 3-4 slides) -->
+<!-- - "Works for discrete distributions too" (minor technical point that interrupts flow) -->
+
+<!-- **Suggestion:** Delete this slide entirely. The "Looking ahead" callout box on the previous slide already bridges to inference better. Or, if you want to keep something, replace it with a concrete example showing HOW you'd use CLT in practice. -->
+
+<!-- ### 2. **CI Interpretation is covered in 5 separate slides** -->
+<!-- You have: -->
+<!-- - "How do we interpret confidence intervals?"  -->
+<!-- - "Interpreting confidence intervals: What they mean" -->
+<!-- - "Interpreting confidence intervals: What they DON'T mean" -->
+<!-- - "What a 95% confidence interval actually means" -->
+<!-- - "Confidence intervals are about procedures" -->
+
+<!-- **Problem:** While CI interpretation is important and students struggle with it, five slides pounds the same point. The "correct/wrong" format becomes repetitive. -->
+
+<!-- **Suggestion for next year:** -->
+<!-- - Combine "What they mean" and "What a 95% CI actually means" into ONE slide -->
+<!-- - Keep "What they DON'T mean" as a separate slide (the misconceptions are valuable) -->
+<!-- - Delete "Confidence intervals are about procedures" - it repeats the same "long-run coverage" concept that's already in the other interpretation slides -->
+<!-- - Consider making the "Visualizing confidence intervals" activity more interactive to build intuition INSTEAD of so much text -->
+
+<!-- ### 3. **"Why does sample size matter?" slide** -->
+<!-- **Problem:** You show sample size effects visually, but: -->
+<!-- - The SE formula already tells them this (larger n → smaller SE) -->
+<!-- - The CLT slides with different n values already showed this -->
+<!-- - It's somewhat redundant with the "What makes a CI wide or narrow?" slide -->
+
+<!-- **Suggestion:** Either delete this OR move it earlier to RIGHT AFTER you introduce SE (before CLT), as a visual proof that the formula makes sense. -->
+
+<!-- ### 4. **Three Distributions Explained Multiple Times** -->
+<!-- You explain population vs. sample vs. sampling distribution in: -->
+<!-- - "Three distributions to keep straight" (the good one with three columns) -->
+<!-- - "Visual: Three distributions" (the plot version) -->
+<!-- - Then references throughout -->
+
+<!-- **Suggestion:** Keep both of these BUT add a comment note to yourself: "Students will still confuse these - plan to revisit with examples later, but don't re-explain the definitions multiple times during lecture." -->
+
+<!-- ### 5. **t vs. z decision rule repeated three times** -->
+<!-- - "Confidence interval for the mean μ (z vs. t)" slide -->
+<!-- - "When to use t vs. z?" slide   -->
+<!-- - "Common mistakes to avoid" mentions it again -->
+
+<!-- **Suggestion:** The comparison slide is good. The "When to use t vs. z?" slide is also good. Delete the third mention in common mistakes OR just make it a bullet that says "Don't use z when you should use t" without re-explaining the rule. -->
+
+<!-- ## Other Streamlining Suggestions -->
+
+<!-- ### 6. **Standard Error coverage** -->
+<!-- You have: -->
+<!-- - "Why does the standard error exist?"  -->
+<!-- - "Standard error: A special name" -->
+<!-- - "When to report SE vs. SD" -->
+
+<!-- **Suggestion:** The three slides are fine but feel a bit drawn out. Consider: -->
+<!-- - Combine "Why does SE exist?" and "Standard error: A special name" into one slide -->
+<!-- - Keep "When to report SE vs. SD" separate as it's practical advice -->
+
+<!-- ### 7. **The summary section** -->
+<!-- Your "What you need to know" slides largely repeat what was already covered. -->
+
+<!-- **Suggestion:** Make these more action-oriented: -->
+<!-- - Instead of "Key concepts: 1. Sampling variability is natural..." (which you already taught) -->
+<!-- - Try "For homework/exams you need to: 1. Calculate SE using s/√n, 2. Find t* using qt(), 3. Construct CI using x̄ ± t* × SE" -->
+<!-- - This feels more helpful as a reference than restating concepts -->
+
+<!-- ## Structural Suggestions -->
+
+<!-- **Consider this flow for next year:** -->
+<!-- 1. Sampling fundamentals (keep as is) -->
+<!-- 2. Introduce sampling distribution and SE together (combine some slides) -->
+<!-- 3. Show why sample size matters (visual) RIGHT AFTER introducing SE -->
+<!-- 4. CLT (keep as is, delete "why is this useful") -->
+<!-- 5. Jump straight to "From estimation to inference"  -->
+<!-- 6. One CI interpretation slide (the good one), one misconceptions slide -->
+<!-- 7. Mechanics of CI calculation (keep as is) -->
+<!-- 8. t-distribution (keep as is) -->
+<!-- 9. Streamlined summary that's more practical/action-oriented -->
+
+<!-- ## What to Keep -->
+
+<!-- Don't change these - they worked well: -->
+<!-- - The Allison Horst artwork opener -->
+<!-- - The visual demonstrations (population vs. sample, sampling variability) -->
+<!-- - The CLT demonstration with skewed data -->
+<!-- - The 100 CIs visual -->
+<!-- - The t-distribution comparison plot -->
+<!-- - All the R code examples -->
+
+<!-- ## Comments to Add in Slides -->
+
+<!-- Here are specific comments you could add for next year: -->
+
+<!-- ``` -->
+<!-- <!-- NEXT YEAR: Delete "Why is this useful?" slide - redundant with CLT explanation --> -->
+
+<!-- <!-- NEXT YEAR: Combine CI interpretation slides - currently have 5 slides saying the same thing --> -->
+
+<!-- <!-- NEXT YEAR: Move "Why sample size matters" visual to right after SE introduction, or delete --> -->
+
+<!-- <!-- NEXT YEAR: "When to use t vs z" - already covered in comparison slide, maybe delete this one --> -->
+
+<!-- <!-- NEXT YEAR: Streamline summary - make it more "here's what you DO" rather than restating concepts --> -->
+<!-- ``` -->
+
+<!-- The lecture has great content, but it seems like you're being very thorough at the expense of pace and punch. Students probably felt like "okay, I get it" around the third time hearing about CI interpretation. Trust that they got it the first time, and move on! -->
