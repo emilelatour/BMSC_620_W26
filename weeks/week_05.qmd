@@ -65,7 +65,8 @@ By the end of the week, you should be able to:
   
 - **Muddy points**
   
-  Coming soon.
+  I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 8](/lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.qmd)
 
 ---
 

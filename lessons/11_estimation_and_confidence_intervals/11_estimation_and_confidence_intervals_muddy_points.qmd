@@ -1,0 +1,520 @@
+---
+title: "Muddy Points Responses: Sampling Distributions & Confidence Intervals"
+author: "BMSC 620"
+date: "Week 5, Day 1"
+format: html
+---
+
+::: {.callout-note}
+You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.
+:::
+
+Thank you for the thoughtful feedback. Most of you found the pace about right, and I’m glad the Z vs T distinction, distribution visualizations, and common-mistake callouts were helpful. Below I address the most common muddy points.
+
+## Critical Values and Margin of Error
+
+**Q: "I still don't understand what a critical value is"**
+
+**Q: "When we got to confidence intervals, especially when critical values were introduced I got lost. Specifically I'm having a hard time understanding logically how the margin of error contributes to confidence intervals."**
+
+A **critical value** (like $z^*$ or $t^*$) is just a multiplier that determines how wide your confidence interval needs to be to achieve your desired confidence level.
+
+It comes from the *sampling distribution*, not from your raw data.
+
+Think of it this way:
+
+- We start with a point estimate: $\bar{x}$ = 65 inches (our best guess for average height)
+- We know there's uncertainty: SE = 0.5 inches
+- **Question:** How many SEs should we go above and below our estimate to be 95% confident we've captured the true mean?
+- **Answer:** About 2 SEs (more precisely, 1.96 or ~2 for large samples)
+
+That multiplier (1.96) is the **critical value** - it tells you "go this many standard errors in each direction."
+
+**The margin of error** is: critical value × SE
+
+So if $t^* = 2.0$ and $SE = 0.5$, then $\text{margin of error} = 2.0 × 0.5 = 1.0 inch$.
+
+**Why does this work?** Because of how the normal/t-distribution works:
+
+- 95% of the probability sits within ±1.96 standard deviations of the mean
+- So if we go ±1.96 SEs from our sample mean, we'll capture μ about 95% of the time *across repeated samples*
+
+**In R:**
+```{r}
+# For a 95% CI with df = 30
+qt(0.975, df = 30)  # Returns ~2.04 (the critical value)
+# We use 0.975 because we want 2.5% in each tail (95% in middle)
+```
+
+The critical value gets smaller as your sample size increases (because you have more certainty).
+
+---
+
+## Confidence Interval Interpretation
+
+**Q: "Interpreting CI was not too clear to me"**
+
+The key insight: **The parameter is fixed, the interval is random.**
+
+**CORRECT interpretation:** "We are 95% confident that the true population mean μ is between 64.5 and 65.5 inches."
+
+What this really means: If we repeated this study 100 times and calculated 100 different CIs, about 95 of them would contain the true μ.
+
+**INCORRECT interpretation:** "There's a 95% probability that μ is in this interval."
+
+Why this is wrong: μ is a fixed (but unknown) value. Once you've calculated your CI, it either contains μ or it doesn't - there's no probability about it. The randomness is in the sampling process, not in μ.
+
+**Helpful analogy:** Imagine μ is a bullseye on a target that's hidden behind a curtain. Each sample is like throwing a net at the target. The net has a specific size (your CI). If you throw 100 nets, about 95 of them will catch the bullseye. But once you've thrown your net, it either caught the target or it didn't - you just don't know which.
+
+The "95% confidence" refers to the long-run success rate of the procedure, not the probability for one specific interval.
+
+---
+
+## Sample Distribution vs. Sampling Distribution
+
+**Q: "I'm still a little confused about the difference between the sample and sampling distribution. Which one comes up more often/is more relevant?"**
+
+Great question! The **sampling distribution** is way more important and comes up constantly.
+
+**Sample distribution:**
+
+- The distribution of values in YOUR specific sample
+- Example: Heights of the 50 people you actually measured
+- What you see when you do `hist(sample_data$height)`
+- You see this once per study
+
+**Sampling distribution:**
+
+- The distribution of sample means if you repeated the study infinitely
+- This is theoretical - you never actually see it
+- But it's what lets you do inference!
+- The CLT tells you its shape (approximately normal for large n)
+
+**Which is more relevant?** The **sampling distribution**!
+
+Why? Because when you calculate a CI or do a hypothesis test, you're asking: "If I repeated this study many times, how much would my sample mean vary?" That's the sampling distribution.
+
+You use your one sample to estimate properties of the sampling distribution:
+
+- $SE = \frac{s}{\sqrt{n}}$ estimates the standard deviation of the sampling distribution
+- Then you use that to build your CI
+
+**In practice:**
+
+- You collect one sample → calculate one $\bar{x}$ and one $s$
+- You use those to estimate properties of the sampling distribution (via SE)
+- You use the sampling distribution to make inferences about $\mu$
+
+The sample distribution tells you about your sample. The sampling distribution tells you how reliable your estimate is.
+
+If you remember only one thing for this course: **all confidence intervals and hypothesis tests live on the sampling distribution.**
+
+---
+
+## Degrees of Freedom
+
+**Q: "I am slightly unclear on degrees of freedom. If you start with sample # -1 how would you run out of degrees of freedom especially if it is a large dataset"**
+
+**Q: "I'm still a bit confused what you mean that the mean uses up a degree of freedom. I don't really understand what degrees of freedom are."**
+
+**Degrees of freedom (df)** = the number of independent pieces of information you have left after estimating something.
+
+**Why n-1 instead of n?**
+
+Imagine you have 3 numbers and I tell you:
+
+- Their mean is 10
+- Two of the numbers are 8 and 12
+- What's the third number?
+
+You can figure it out! It MUST be 10 (because (8 + 12 + 10)/3 = 10).
+
+Once you know the mean and n-1 values, the last value is completely determined. So you only have n-1 "free" values that contain independent information.
+
+**How does the mean "use up" a degree of freedom?**
+
+When you calculate the sample standard deviation (s), you use the formula:
+
+$$s = \sqrt{\frac{\sum(x_i - \bar{x})^2}{n-1}}$$
+
+You're calculating deviations from $\bar{x}$ (not from μ). Since you had to estimate $\bar{x}$ from the same data, you "used up" one piece of information. That leaves you with n-1 independent deviations. That’s why the t-distribution depends on df — it reflects how much uncertainty remains.
+
+**Large datasets:** You never "run out" of df. Larger samples simply have larger df.  As n gets large, df gets large too, and the t-distribution looks almost identical to the normal distribution.
+
+**Practical impact:**
+
+- Small samples (n = 5, df = 4): t-distribution has heavy tails, wider CIs
+- Large samples (n = 100, df = 99): t-distribution ≈ normal distribution, narrower CIs
+
+**In R:**
+```{r}
+# t-distribution with df = 4 (small sample)
+qt(0.975, df = 4)  # Returns ~2.78
+
+# t-distribution with df = 99 (large sample)  
+qt(0.975, df = 99)  # Returns ~1.98 (very close to z* = 1.96)
+```
+
+---
+
+## Why 95% for Confidence Intervals?
+
+**Q: "Why is 95% the most commonly used for confidence interval for biomedical research? Does it have to do with balancing size of the interval with confidence level? Am I thinking correctly that the intervals will be bigger at 99% than at 95%?"**
+
+**Yes, you're thinking correctly!** 99% CIs are wider than 95% CIs.
+
+**The tradeoff:**
+
+- Higher confidence (99%) → wider interval (less precise)
+- Lower confidence (90%) → narrower interval (more precise)
+
+**Why 95%?** It's mostly **convention**, established early in the history of statistics:
+
+1. **Historical precedent:** R.A. Fisher and other early statisticians popularized 0.05 as the significance level, which corresponds to 95% confidence
+2. **Reasonable balance:** 95% gives you high confidence without making intervals so wide they're useless
+3. **Field standard:** Everyone uses it, so it's easier to compare across studies
+
+**Is 95% "special"?** Not really. In some fields:
+
+- Particle physics uses 99.9999% (5-sigma rule) because errors are very costly
+- Some exploratory research uses 90% to be less conservative
+- Clinical trials might use 99% for safety endpoints
+
+**Your intuition is correct:** There's a balance between confidence and precision.
+
+Example:
+```{r}
+# For the same data (x̄ = 65, s = 3, n = 50)
+# 90% CI
+65 + qt(c(0.05, 0.95), df = 49) * (3/sqrt(50))
+# Narrower interval
+
+# 95% CI  
+65 + qt(c(0.025, 0.975), df = 49) * (3/sqrt(50))
+# Medium interval
+
+# 99% CI
+65 + qt(c(0.005, 0.995), df = 49) * (3/sqrt(50))
+# Wider interval
+```
+
+**In biomedical research:** 95% is standard, but you might see 99% for safety-critical decisions or 90% for preliminary/exploratory analyses.
+
+---
+
+## Three Distributions: Keeping Them Straight
+
+**Q: "The 3 distributions were the least clear and when to use what"**
+
+Here's a comparison table to keep them straight:
+
+| Distribution | What it shows | When you see it | Example |
+|--------------|---------------|-----------------|---------|
+| **Population distribution** | All values in the entire population | Almost never (you don't measure everyone!) | Heights of ALL adults in the US: μ = 65", σ = 3" |
+| **Sample distribution** | Values in your specific sample | Every time you collect data | Heights of the 50 people YOU measured: $\bar{x}$ = 64.8", s = 2.9" |
+| **Sampling distribution** | What sample means would look like if you repeated the study infinitely | Theoretical (you never actually see this) | Distribution of all possible $\bar{x}$ values from samples of size 50: mean = μ, SD = σ/√n |
+
+**Which one do you USE for inference?** The **sampling distribution**!
+
+**Key insight:** 
+
+- You have ONE sample (sample distribution)
+- You want to learn about the population (population distribution)  
+- You use the sampling distribution to connect them (via CLT and CIs)
+
+**In practice:**
+
+1. Collect your sample → look at sample distribution (histogram of your data)
+2. Calculate $\bar{x}$ and s from your sample
+3. Use CLT to know the sampling distribution is approximately normal with mean $\mu$ and $SE = \frac{s}{\sqrt{n}}$
+4. Use the sampling distribution to build your CI
+
+**Common mistake to avoid:** Don't confuse the sample distribution (spread of your data) with the sampling distribution (spread of possible sample means). The sampling distribution is MUCH narrower because means are less variable than individual values.
+
+---
+
+## When to Use Z vs. T in Practice
+
+**Q: "z and t distributions"**
+
+**Q: "I am unclear when z values are actually used with real life data."**
+
+**Simple rule: In real research, you almost always use t.**
+
+**Why?** Because you almost never know σ (the true population standard deviation). If you truly knew σ exactly for your population, inference would be much less common, which is why this situation is rare in practice.
+
+**When to use Z (rare):**
+
+- You know the population SD ($\sigma$) from extensive prior research
+- Example: IQ scores ($\sigma$ = 15 is well established)
+- Example: Standardized test scores where $\sigma$ is published
+
+**When to use t (almost always):**
+
+- You estimate the SD from your sample (use $s$ instead of $\sigma$)
+- This is the typical situation in biomedical research
+
+**Example scenarios:**
+
+✅ **Use t:** You measure blood pressure in 30 patients with a new treatment. You calculate $\bar{x}$ = 125 and s = 15 from your data.
+
+❌ **Don't use z:** You don't know σ for blood pressure in this population (you only have s from your sample)
+
+✅ **Could use z (but probably still use t):** You measure IQ in 30 patients. You know from decades of research that σ = 15 for IQ in the general population.
+
+**Practical advice:** Just use t-based CIs for everything. As sample size increases, the t-distribution converges to the normal distribution anyway, so you're not losing anything by using t.
+
+In R:
+```{r}
+#| eval: false
+# t-based CI (standard approach)
+t.test(data$variable)$conf.int
+
+# You rarely need to manually use z
+```
+
+---
+
+## Population Parameters in Lab/Basic Science Research
+
+**Q: "T-distributions makes sense to me when you have a clearly defined population (like humans) that can be sampled (height of n=50). What about lab work? I run n = 5 experiments and looking at stimulation of cells (for example). Would you ever know the population parameters for something like this? Would you theoretically have to test ALL the cells to get this?"**
+
+**Q: "More of how this all applies to scenarios we may see in our work: I am unsure when the goal of a research question is to describe the data or estimate a population. I work in cell biology and do lots of quantitative microscopy, and when reporting results I am describing what I see in the sample of cells I imaged, is the goal then to extrapolate this to the general population of cells?"**
+
+**Excellent questions!** The concept of "population" in lab research is more abstract but still applies.
+
+**For cell biology/microscopy:**
+
+Your **population** is not all cells that exist in the universe, but rather:
+
+- All cells that COULD be generated under the same experimental conditions
+- The "infinite hypothetical" cells you could culture/image under identical protocols
+- All cells of this type under these specific conditions
+
+**Example:**
+
+- You image 50 cells in a microscopy experiment
+- Those 50 cells are a SAMPLE
+- The POPULATION is "all cells of this type cultured under these conditions"
+- μ = the true mean fluorescence intensity for this cell line under these conditions
+- You'll never measure ALL possible cells, but μ exists conceptually
+
+**Do you ever know μ?** No, basically never. You always estimate it from your sample.
+
+**The statistical framework still applies:**
+
+- You have 5 independent experimental replicates (n = 5)
+- You calculate $\bar{x}$ (mean cell stimulation) and s (SD of your replicates)
+- You use df = 4, and the t-distribution to build a CI for μ
+- This tells you about the "true" mean response of cells under these conditions
+
+**When to use t-tests in lab work:**
+
+✅ Comparing treatment vs. control in cell stimulation (n = 5 replicates per group)
+✅ Comparing fluorescence intensity across conditions (n = 50 cells imaged per condition)
+✅ Any situation where you have a sample and want to infer about the broader biological phenomenon
+
+**Key insight:** The "population" in basic science is often **conceptual/theoretical** rather than an actual enumerable group. But that's okay! The statistics still work because you're making inferences about what would happen if you repeated the experiment infinitely.
+
+---
+
+## When to Report SE vs. SD in Your Work
+
+**Q: "Would it then be appropriate to report SE over SD or would I still report SD?"**
+
+**Q: "The semantics of standard error vs standard deviation have left me a little confused. The interpretation part for SE isn't clicking to me for some reason."**
+
+**Different purposes, both useful:**
+
+**Rule of thumb**: Use SD to describe variability in your data and SE (or a CI) to describe uncertainty in the mean.
+
+**Report SD when:**
+
+- Describing the variability in your sample/population
+- Showing "how spread out are the individual values?"
+- Example: "Cell diameter was 12.3 μm (SD = 2.1 μm)" → tells reader that individual cells vary by ~2 μm
+
+**Report SE when:**
+
+- Describing uncertainty in your ESTIMATE of the mean
+- Showing "how confident are we in our estimate of the population mean?"
+- Example: "Mean cell diameter was 12.3 μm (SE = 0.3 μm)" → tells reader that the true mean is probably very close to 12.3
+
+**In practice for cell biology/microscopy:**
+
+You often report **both** or use **error bars** to show uncertainty:
+
+- **Bar plots with error bars = SE** (shows precision of your mean estimate)
+- **Text description = SD** (shows biological variability)
+
+Example reporting:
+
+> "Mean fluorescence intensity was 1250 AU (SD = 300 AU, n = 50 cells). This represents a statistically significant increase compared to control (mean = 900 AU, SE = 45 AU, p < 0.001)."
+
+**Why both?**
+
+- SD (300) tells you: individual cells vary quite a bit
+- SE (45) tells you: but we're quite confident in the mean difference
+
+**Remember:**
+
+- SD describes your data (larger is more variable)
+- SE describes your uncertainty (larger is less certain)
+- SE = SD/√n (so SE is always smaller than SD)
+
+**Common in papers:**
+
+- Error bars in figures are often SEM or CIs (check journal conventions)
+- Text descriptions include both SD and n
+
+**Goal:** 
+
+- Are you describing the phenomenon? → SD
+- Are you making an inference about the population mean? → SE
+
+For your microscopy work: you're doing both! You're describing what you see (SD) AND extrapolating to the general population of cells (SE for uncertainty in your mean estimate).
+
+---
+
+## When and Why to Use CLT
+
+**Q: "Still a little unclear on why you would want to use CLT and in what context it would be useful by itself? Also, how do you determine the degree of skew is too much skew and you need to increase n? How is that defined, other than eye-balling a histogram?"**
+
+**Why CLT is useful:**
+
+The CLT allows you to do statistical inference even when your data are NOT normally distributed!
+
+**Example:** 
+
+- You measure hospital length of stay (very right-skewed: most stays are short, few are very long)
+- Your sample distribution looks nothing like a normal distribution
+- **But:** Because of CLT, you know that the sampling distribution of $\bar{x}$ IS approximately normal (if n is large enough)
+- This lets you use t-tests and CIs even though your raw data are skewed
+
+**When is n "large enough"?**
+
+**Rules of thumb**: These are heuristics, not strict rules. They’re meant to guide judgment, not replace it.
+
+- **n ≥ 30** is the classic rule (works for most distributions)
+- **n < 30** can still work if your data are not too skewed
+- **n > 15** usually fine for symmetric distributions
+- **Highly skewed data** might need n > 50
+
+**How to assess skewness:**
+
+Beyond eyeballing histograms...
+
+- Skewness < 1 and n ≥ 15: probably fine
+- Skewness between 1-2 and n ≥ 30: should be okay
+- Skewness > 2: might need n > 50, or consider transformations/non-parametric methods
+
+**When CLT "by itself" is useful:**
+
+You use CLT implicitly every time you:
+
+1. Calculate a CI for a mean (you assume the sampling distribution is normal)
+2. Do a t-test (same assumption)
+3. Make probability statements about sample means
+
+Example: "If we sample 50 patients, what's the probability our sample mean is within 2 units of the true mean?" CLT lets you answer this even if individual patient values are skewed.
+
+---
+
+## Understanding t* Beyond the R Code
+
+**Q: "I'm also kind of confused on what the calculations for t* actually is beyond plugging it into the R code."**
+
+**What t* actually represents:**
+
+The t* value tells you: "How many standard errors away from the mean do I need to go to capture the middle X% of the t-distribution?"
+
+**Example with 95% CI:**
+```{r}
+qt(0.975, df = 20)  # Returns ~2.086
+```
+
+This means: "In a t-distribution with 20 degrees of freedom, if I go ±2.086 standard errors from the mean, I'll capture 95% of the distribution."
+
+**Why 0.975 instead of 0.95?**
+
+The t-distribution (like the normal distribution) is symmetric. For a 95% CI:
+
+- You want 95% in the middle
+- That leaves 5% in the tails
+- Split evenly: 2.5% in each tail
+- So you want the value that has 2.5% to its right (97.5% to its left)
+- That's why we use `qt(0.975, df)` not `qt(0.95, df)`
+
+**What's happening inside qt()?**
+
+Without going into the math details:
+
+- R has the mathematical formula for the t-distribution
+- It's solving: "What value of t has exactly 97.5% of the distribution to its left?"
+- It uses numerical methods to find this value
+
+**Visual intuition:**
+
+Imagine the t-distribution as a hill:
+
+- The peak is at 0
+- `qt(0.975, df)` finds the point where 97.5% of the area under the curve is to the left
+- This point gets closer to 1.96 (the z value) as df increases
+
+**You don't need to calculate it by hand** - that's why we use R! But understanding that it's a percentile of the t-distribution (like how 1.96 is the 97.5th percentile of the normal distribution) helps build intuition.
+
+**Practical use:**
+
+- Small df (5) → t* is large (2.57) → wider CIs (less certainty)
+- Large df (100) → t* is small (1.98) → narrower CIs (more certainty)
+- Infinite df → t* = z* (1.96) → t-distribution becomes normal
+
+---
+
+## Homework and Exam Preparation
+
+**Q: "Not for class, but on the homework, sometimes the wording is confusing and it is unclear what we need to do. This is true when there is some of the code already given, just adding a 'given' comment and then saying more explicitly what is needed would be helpful. Also the homework is taking me approximately 3-4 hours to complete, I am concerned with how long this is that the exam will be extremely long. Also, I know we will have an exam review, but maybe letting us know what kind of tasks we will need to be able to perform would help direct us."**
+
+Thank you - this is helpful feedback.
+
+**Homework clarity:**
+
+- I will add clearer labels in the homework templates (e.g., GIVEN vs YOUR TASK) and make the prompt for each part more explicit.
+- If something feels ambiguous while you are working, please reach out right away (office hours or email). Often a 2-minute clarification can save you a lot of time.
+
+**Homework time:**
+
+Homework is meant to be the main place you practice and build fluency, so it may take a few hours. If you find that a particular question is confusing or taking disproportionately long, let us know - that is useful information for improving the assignment.
+
+**Midterm  expectations:**
+
+The midterm is not designed to be a short, in-class exam. It will be a longer, take-home style assessment that is intended to take roughly 3–5 hours.
+
+- You will not need to memorize formulas.
+- The focus will be on applying ideas correctly and communicating your reasoning.
+- You should expect tasks similar in style to the homework, but more focused.
+
+Before the midterm, I will provide guidance on:
+
+- the core concepts to prioritize,
+- the types of questions to expect,
+- and a small set of practice problems.
+
+---
+
+## Summary
+
+**Key takeaways:**
+
+1. **Critical values** are just multipliers that tell you how wide your CI needs to be
+2. **CI interpretation:** "95% confident" means the procedure works 95% of the time, not that there's a 95% probability for this specific interval
+3. **Sampling distribution** is more important than sample distribution - it's what lets you do inference
+4. **Degrees of freedom** = independent pieces of information left after estimation
+5. **95% CIs** are convention, not magic - balance confidence with precision
+6. **Use t almost always** in real research (you rarely know σ)
+7. **Population in lab work** is conceptual - "all cells under these conditions"
+8. **Report SD for variability, SE for uncertainty** in your estimate
+9. **CLT lets you use normal theory** even when data aren't normal
+10. **t\* is a percentile** of the t-distribution - R finds it for you
+
+**Keep the questions coming!** This is complex material and it's normal to need multiple exposures to fully understand it.
