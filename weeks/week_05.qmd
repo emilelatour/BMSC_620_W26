@@ -82,7 +82,7 @@ By the end of the week, you should be able to:
   - Connection between confidence intervals and hypothesis tests
 
 - **Slides**
-  - Hypothesis Testing and One-Sample t-Tests ([HTML](/lessons/12_hypothesis_testing/12_hypothesis_testing.qmd) | PDF | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - Hypothesis Testing and One-Sample t-Tests ([HTML](/lessons/12_hypothesis_testing/12_hypothesis_testing.qmd) | [PDF](/lessons/12_hypothesis_testing/12_hypothesis_testing.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 - **Recording**
   - Coming soon
