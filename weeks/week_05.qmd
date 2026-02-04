@@ -90,7 +90,7 @@ By the end of the week, you should be able to:
   - [Link to class OneDrive folder](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCzFL46JxYtQYOScuzb1OrIAfeUyniSwrT6HsHk6zlALVk?e=3JSQGX) – see data folder
 
 - **Recording**
-  - Coming soon
+  - [Hypothesis testing, one-sample t-tests, and R workflow](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBwDzGcGKt_RrGlFN7vvlUYAdQbUW8neMIEP4_JU0Oc4wo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=bahYWV)
   
 - **Muddy points**
   - Coming soon.
