@@ -5068,5 +5068,299 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#roadmap-for-today",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#roadmap-for-today",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: From CIs to Hypothesis Tests\n\nReview: CIs answer “what are plausible values?”\nNew question: “Is a specific value plausible?”\nThe logic of hypothesis testing\n\nPart 2: Hypothesis Testing Framework\n\nNull and alternative hypotheses\nSignificance level (α)\nTest statistics\nP-values\n\n\nPart 3: One-Sample t-Tests\n\nWhen to use a one-sample t-test\nCalculating the t-statistic\nInterpreting p-values\nMaking conclusions\n\nPart 4: Conducting Tests in R\n\nUsing t.test() function\nInterpreting R output\nConnecting CIs and hypothesis tests\n\nPart 5: Wrap-up\n\nCommon mistakes\nBest practices"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#review-what-we-learned-last-time",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#review-what-we-learned-last-time",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Review: What we learned last time",
+    "text": "Review: What we learned last time\nLast time we learned about confidence intervals:\n\nA 95% CI gives us a range of plausible values for \\(\\mu\\)\nIt’s based on sample data: \\(\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\)\nInterpretation: “We are 95% confident that \\(\\mu\\) is in this interval”\n\n\n\nExample from last time:\nSample of 50 adults: \\(\\bar{x} = 66.1\\) inches, \\(s = 3.5\\) inches\n95% CI: (65.12, 67.08)\nConclusion: We’re 95% confident the population mean height is between 65.12 and 67.08 inches."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#a-different-kind-of-question",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#a-different-kind-of-question",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "A different kind of question",
+    "text": "A different kind of question\nCIs answer: “What are plausible values for \\(\\mu\\)?”\n\n\nBut sometimes we want to know: “Is a specific value plausible?”\n\n\n\n\nCI approach:\n\nCalculate interval (65.12, 67.08)\nSee if our value of interest is in it\nIf 65 inches is in the interval → plausible\nIf 70 inches is NOT in the interval → implausible\n\n\nHypothesis test approach:\n\nStart with a specific claim about \\(\\mu\\)\nUse our data to evaluate evidence against that claim\nGet a number (p-value) that quantifies the strength of evidence\n\n\n\n\nBoth approaches use the same underlying statistics - just framed differently!\nIn fact, for two-sided tests, a hypothesis test at \\(\\alpha = 0.05\\) will always agree with a 95% confidence interval."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#motivating-example-body-temperature",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#motivating-example-body-temperature",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Motivating example: Body temperature",
+    "text": "Motivating example: Body temperature\nThe traditional claim: Average human body temperature is 98.6°F\n\n\nHistorical context:\n\nGerman physician Carl Wunderlich established 98.6°F in 1851\nBased on 25,000 patients in Leipzig, Germany\nThis value has been used for over 170 years\n\n\n\nRecent evidence suggests it might be lower:\n\n1992 JAMA study: sample mean = 98.25°F (n = 130, s = 0.733)\nMore recent studies suggest even lower (around 97.9°F)\n\n\n\n\n\n\nResearch Question\n\n\nBased on the 1992 data, is there evidence that the population mean body temperature is different from 98.6°F?"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#two-approaches-to-answer-this-question",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#two-approaches-to-answer-this-question",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Two approaches to answer this question",
+    "text": "Two approaches to answer this question\n\n\n\n\n\nApproach 1: Confidence Interval\n\n\nQuestion: Is 98.6°F a plausible value?\n\n\nMethod:\n\nCalculate 95% CI for \\(\\mu\\)\nSee if 98.6 falls in the interval\n\n\n\nWhat we get:\n\nA range of plausible values\nYes/no answer: “Is 98.6 plausible?”\n\n\n\n\n\n\n\n\nApproach 2: Hypothesis Test\n\n\nQuestion: How strong is evidence against 98.6°F?\n\n\nMethod:\n\nAssume \\(\\mu = 98.6\\) is true\nCalculate how unusual our data is\nGet a p-value\n\n\n\nWhat we get:\n\nStrength of evidence against 98.6\nCan compare to different values\n\n\n\n\n\nKey point: Both use the same math, different framing!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#approach-1-using-a-confidence-interval",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#approach-1-using-a-confidence-interval",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Approach 1: Using a confidence interval",
+    "text": "Approach 1: Using a confidence interval\nFrom our data: \\(\\bar{x} = 98.25\\), \\(s = 0.733\\), \\(n = 130\\)\n\n\n\n# Calculate 95% CI\nn &lt;- 130\nxbar &lt;- 98.25\ns &lt;- 0.733\n\nt_star &lt;- qt(0.975, df = n - 1)\nSE &lt;- s / sqrt(n)\n\nlower &lt;- xbar - t_star * SE\nupper &lt;- xbar + t_star * SE\n\nc(lower, upper)\n\n[1] 98.1228 98.3772\n\n\n\n\nConclusion: We are 95% confident that the (population) mean body temperature is between 98.12°F and 98.38°F, which is discernibly different than 98.6°F.\n\n\n98.6°F is NOT in this interval, so it’s not a plausible value for the population mean. There’s evidence the true mean is lower than 98.6°F."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-the-ci-approach",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-the-ci-approach",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Visualizing the CI approach",
+    "text": "Visualizing the CI approach\n\nThe claimed value (98.6°F) falls outside our confidence interval - this suggests it’s not plausible."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-logic-of-hypothesis-testing",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-logic-of-hypothesis-testing",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "The logic of hypothesis testing",
+    "text": "The logic of hypothesis testing\n\n\n\n\nStart with an assumption (the null hypothesis)\n\n“The population mean is 98.6°F”\n\nCollect data and see if it’s consistent with that assumption\n\nWe observed \\(\\bar{x} = 98.25°F\\)\n\nAsk: “If the assumption were true, how unusual would our data be?”\n\nThis gives us the p-value\n\nIf our data would be very unusual under the assumption\n\nWe have evidence against the assumption\nWe reject the null hypothesis\n\n\n\n\nAnalogy: Like a jury trial - we assume innocence (null hypothesis) unless evidence is strong enough to reject it."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#what-is-random-here-revisited",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#what-is-random-here-revisited",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "What is random here? (Revisited)",
+    "text": "What is random here? (Revisited)\nRemember from our sampling distribution lecture:\n\n\nIf the null hypothesis is true (\\(\\mu = 98.6\\)):\n\nThe population has mean \\(\\mu = 98.6\\)\nOur sample is random\nOur sample mean \\(\\bar{x}\\) is random\n\\(\\bar{x}\\) has a sampling distribution centered at 98.6\n\n\n\nThe hypothesis test asks:\n“Given that the sampling distribution is centered at 98.6, how likely is it to get a sample mean as extreme as 98.25 (or more extreme)?”\n\n\nIf that’s very unlikely → evidence against the null hypothesis"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-1-state-the-hypotheses",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-1-state-the-hypotheses",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 1: State the hypotheses",
+    "text": "Step 1: State the hypotheses\nEvery hypothesis test has two competing hypotheses:\n\n\n\n\n\nNull Hypothesis (\\(H_0\\))\n\n\nThe null hypothesis is the status quo or claim of “no effect/no difference”\n\nUsually states that a parameter equals a specific value\nWhat we assume is true unless we have strong evidence against it\nFor our example: \\(H_0: \\mu = 98.6\\)\n\n\n\n\n\n\n\n\n\nAlternative Hypothesis (\\(H_A\\))\n\n\nThe alternative hypothesis is what the researcher wants to show\n\nClaims the parameter is different from (or greater/less than) the null value\nWhat we conclude if we have sufficient evidence\nFor our example: \\(H_A: \\mu \\neq 98.6\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#writing-hypotheses-symbols-and-words",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#writing-hypotheses-symbols-and-words",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Writing hypotheses: Symbols and words",
+    "text": "Writing hypotheses: Symbols and words\nFor our body temperature example:\n\n\nIn symbols:\n\\[H_0: \\mu = 98.6\\] \\[H_A: \\mu \\neq 98.6\\]\n\n\nIn words:\n\n\\(H_0\\): The population mean body temperature is 98.6°F\n\\(H_A\\): The population mean body temperature is not 98.6°F\n\n\n\nKey points:\n\nThe null hypothesis uses = (equals sign)\nThe alternative uses \\(\\neq\\), \\(&gt;\\), or \\(&lt;\\)\n\\(\\mu_0\\) represents the “null value” (98.6 in this case)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#one-sided-vs.-two-sided-alternatives",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#one-sided-vs.-two-sided-alternatives",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "One-sided vs. two-sided alternatives",
+    "text": "One-sided vs. two-sided alternatives\nThe alternative hypothesis can take three forms:\n\n\n\n\n\n\n\nTwo-sided\n\n\n\\[H_A: \\mu \\neq \\mu_0\\]\nUse when: You don’t have a prior belief about direction\nExample: Is the mean different from 98.6?\nMost conservative and common\n\n\n\n\n\n\n\nOne-sided (greater)\n\n\n\\[H_A: \\mu &gt; \\mu_0\\]\nUse when: You only care if it’s higher\nExample: Is the mean greater than 98.6?\nLess common\n\n\n\n\n\n\n\nOne-sided (less)\n\n\n\\[H_A: \\mu &lt; \\mu_0\\]\nUse when: You only care if it’s lower\nExample: Is the mean less than 98.6?\nLess common\n\n\n\n\n\n\nDefault: Use two-sided unless you have a strong reason to be one-sided\nImportantly, the choice of one- vs two-sided must be made before seeing the data — not after."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-2-set-the-significance-level-α",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-2-set-the-significance-level-α",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 2: Set the significance level (α)",
+    "text": "Step 2: Set the significance level (α)\nBefore collecting data, we decide our threshold for “strong evidence”\n\n\n\n\n\nSignificance Level (α)\n\n\nThe significance level is the threshold below which we’ll reject \\(H_0\\)\n\nMost common: \\(\\alpha = 0.05\\) (5%)\nMeans we’re willing to wrongly reject \\(H_0\\) at most 5% of the time\n\nIf \\(H_0\\) were true and we repeated this study many times, about 5% of those studies would lead us to reject it just by chance\n\nConnected to confidence level: \\(\\alpha = 1 - \\text{confidence level}\\)\n\n\n\n\n\n\nCommon choices:\n\n\\(\\alpha = 0.05\\) (95% confidence) - most common\n\\(\\alpha = 0.01\\) (99% confidence) - more stringent\n\\(\\alpha = 0.10\\) (90% confidence) - more lenient\n\n\n\nFor our example: We’ll use \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-3-check-assumptions",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-3-check-assumptions",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 3: Check assumptions",
+    "text": "Step 3: Check assumptions\nBefore conducting any hypothesis test, verify the assumptions:\nFor a one-sample t-test:\n\nIndependence: Observations are independent of each other\n\nRandom sampling helps ensure this\n\nNormality or large sample:\n\nData are approximately normally distributed, OR\nSample size is large (\\(n \\geq 30\\)) so we can use CLT\n\n\n\n\nFor our body temperature example:\n\nSample of 130 individuals (presumably independent)\n\\(n = 130 \\geq 30\\), so CLT applies\nWe can proceed with the test!\n\n\n\n\nImportant\n\n\nIf assumptions are violated, the test may not be valid. Consider non-parametric alternatives."
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-4-calculate-the-test-statistic",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-4-calculate-the-test-statistic",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 4: Calculate the test statistic",
+    "text": "Step 4: Calculate the test statistic\nThe test statistic measures how far our sample mean is from the null value, in standard error units.\n\n\n\nt-statistic formula\n\n\n\\[t = \\frac{\\bar{x} - \\mu_0}{SE} = \\frac{\\bar{x} - \\mu_0}{s / \\sqrt{n}}\\]\nwhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(\\mu_0\\) = null value (from \\(H_0\\))\n\\(s\\) = sample standard deviation\n\\(n\\) = sample size\n\n\n\n\n\n\nInterpretation:\n\n\\(t\\) tells us how many standard errors \\(\\bar{x}\\) is from \\(\\mu_0\\)\nLarge absolute values of \\(t\\) → strong evidence against \\(H_0\\)\nUnder \\(H_0\\), \\(t\\) follows a t-distribution with \\(df = n - 1\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Calculating the t-statistic: Example",
+    "text": "Calculating the t-statistic: Example\nFor our body temperature data:\n\n\\(\\bar{x} = 98.25\\)\n\\(\\mu_0 = 98.6\\) (from \\(H_0\\))\n\\(s = 0.733\\)\n\\(n = 130\\)\n\n\n\n\n# Calculate t-statistic\nxbar &lt;- 98.25\nmu_0 &lt;- 98.6\ns &lt;- 0.733\nn &lt;- 130\n\nSE &lt;- s / sqrt(n)\nt_stat &lt;- (xbar - mu_0) / SE\n\nSE\n\n[1] 0.06428835\n\nt_stat\n\n[1] -5.444221\n\n\n\n\nInterpretation: Our sample mean is about 5.45 standard errors below the null value. This seems pretty far!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-the-test-statistic",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-the-test-statistic",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Visualizing the test statistic",
+    "text": "Visualizing the test statistic\n\nOur observed t-statistic is way out in the tail - this will lead to a small p-value!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 5: Calculate the p-value",
+    "text": "Step 5: Calculate the p-value\n\n\n\nWhat is a p-value?\n\n\nThe p-value is the probability of observing a test statistic as extreme as (or more extreme than) what we actually observed, assuming \\(H_0\\) is true.\n\n\n\n\n\nFor a two-sided test: We care about both tails\n\\[\\text{p-value} = P(|T| \\geq |t_{observed}| \\mid H_0 \\text{ is true})\\]\n\n\nIn plain language:\n“If the null hypothesis were true, what’s the probability of getting a sample mean at least as far from \\(\\mu_0\\) as ours?”\n\n\nIn R:\nFor a two-sided hypothesis test, the p-value is the probability of seeing a test statistic at least as far from zero as the one we observed, in either direction. So we\n\nTake the absolute value of the t-statistic (distance from zero),\nFind the probability of being that far out in one tail,\nMultiply by 2 to account for both tails.\n\n\n# Two-sided p-value\np_value &lt;- 2 * pt(t_stat, df = n - 1, lower.tail = TRUE)\np_value\n\n[1] 2.530265e-07"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#interpreting-p-values",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#interpreting-p-values",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Interpreting p-values",
+    "text": "Interpreting p-values\n\n\n\nP-value interpretation guidelines\n\n\n\n\nSmall p-value (&lt; α):\n\nOur data would be very unusual if \\(H_0\\) were true\nStrong evidence against \\(H_0\\)\nWe reject \\(H_0\\)\n\n\nLarge p-value (≥ α):\n\nOur data are not that unusual if \\(H_0\\) were true\nInsufficient evidence against \\(H_0\\)\nWe fail to reject \\(H_0\\) (we don’t say “accept”!)\n\n\n\n\n\n\n\nFor our example:\n\np-value \\(\\approx\\) 0.0000003 (very small!)\nThis is way less than \\(\\alpha = 0.05\\)\nWe reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#common-p-value-misconceptions",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#common-p-value-misconceptions",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Common p-value misconceptions",
+    "text": "Common p-value misconceptions\n\n\n\nWhat p-values ARE NOT\n\n\nWRONG: “The probability that \\(H_0\\) is true”\n\n\\(H_0\\) is either true or false (not a probability)\nP-value assumes \\(H_0\\) IS true\n\nWRONG: “The probability of making a mistake by rejecting \\(H_0\\)”\n\nThat’s the significance level α (set in advance)\nP-value is calculated from data\n\nWRONG: “The effect size or importance”\n\nSmall p-value just means “unusual under \\(H_0\\)”\nDoesn’t tell you if the difference matters practically\n\n\n\n\n\n\nCORRECT: P-value = “How surprising is our data if \\(H_0\\) were true?”"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-6-make-a-conclusion",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-6-make-a-conclusion",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 6: Make a conclusion",
+    "text": "Step 6: Make a conclusion\nDecision rule:\n\nIf p-value &lt; α: Reject \\(H_0\\)\nIf p-value ≥ α: Fail to reject \\(H_0\\)\n\n\n\nFor our example:\np-value \\(\\approx\\) 0.0000003 &lt; 0.05, so we reject \\(H_0\\)\n\n\nFormal conclusion:\n“At the α = 0.05 significance level, we reject the null hypothesis. There is statistically significant evidence that the population mean body temperature is different from 98.6°F.”\n\n\nContextual conclusion:\n“Based on this sample of 130 individuals, the data provide strong evidence that the average human body temperature is not 98.6°F. The sample suggests the true average is closer to 98.25°F.”"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-t.test-function",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-t.test-function",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "The t.test() function",
+    "text": "The t.test() function\nR makes hypothesis testing easy with the t.test() function:\n\n\n\nt.test(x, mu = 0, alternative = \"two.sided\", conf.level = 0.95)\n\n\n\nKey arguments:\n\nx = vector of data (or formula)\nmu = null value (\\(\\mu_0\\))\nalternative = “two.sided”, “less”, or “greater”\nconf.level = confidence level (default 0.95)\n\n\n\nFor our example (using summary statistics):\nWe don’t have the raw data, but we can work with what we have…"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-t.test-with-summary-statistics",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-t.test-with-summary-statistics",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Using t.test() with summary statistics",
+    "text": "Using t.test() with summary statistics\nWhen you only have summary statistics (not raw data), you can still test:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Our summary statistics\nxbar &lt;- 98.25\ns &lt;- 0.733\nn &lt;- 130\nmu_0 &lt;- 98.6\n\n# Calculate t-statistic\nt_stat &lt;- (xbar - mu_0) / (s / sqrt(n))\nt_stat\n\n[1] -5.444221\n\n# Calculate p-value (two-sided)\np_value &lt;- 2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)\np_value\n\n[1] 2.530265e-07\n\n# Calculate 95% CI\nt_crit &lt;- qt(0.975, df = n - 1)\nci &lt;- c(xbar - t_crit * (s / sqrt(n)),\n        xbar + t_crit * (s / sqrt(n)))\nci\n\n[1] 98.1228 98.3772"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#example-with-raw-data",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#example-with-raw-data",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Example with raw data",
+    "text": "Example with raw data\nLet’s use the full body temperature dataset:\n\n# Load the data\n# See ?readr::read_csv\nbodytemp &lt;- readr::read_csv(here::here(\"data\", \n                                       \"BodyTemperatures.csv\"))\n\n# See ?janitor::clean_names\nbodytemp &lt;- bodytemp |&gt; \n  janitor::clean_names()\n\n# Look at the data\ndplyr::glimpse(bodytemp)\n\nRows: 130\nColumns: 3\n$ temperature &lt;dbl&gt; 96.3, 96.7, 96.9, 97.0, 97.1, 97.1, 97.1, 97.2, 97.3, 97.4…\n$ gender      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ heart_rate  &lt;dbl&gt; 70, 71, 74, 80, 73, 75, 82, 64, 69, 70, 68, 72, 78, 70, 75…"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#conducting-the-t-test-in-r",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#conducting-the-t-test-in-r",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Conducting the t-test in R",
+    "text": "Conducting the t-test in R\n\n# Perform one-sample t-test\n# H0: mu = 98.6 vs HA: mu != 98.6\ntest_result &lt;- t.test(bodytemp$temperature, \n                      mu = 98.6, \n                      alternative = \"two.sided\")\n\n# Display results\ntest_result\n\n\n    One Sample t-test\n\ndata:  bodytemp$temperature\nt = -5.4548, df = 129, p-value = 2.411e-07\nalternative hypothesis: true mean is not equal to 98.6\n95 percent confidence interval:\n 98.12200 98.37646\nsample estimates:\nmean of x \n 98.24923"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#understanding-the-r-output",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#understanding-the-r-output",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Understanding the R output",
+    "text": "Understanding the R output\nLet’s break down what R tells us:\nt.test() output includes:\n\nt-statistic: how many SEs away from \\(\\mu_0\\)\ndegrees of freedom: \\(n - 1\\)\np-value: probability of seeing this (or more extreme) if \\(H_0\\) true\nconfidence interval: 95% CI for \\(\\mu\\)\nsample estimate: our sample mean\n\n\n\n\n\nFrom our output:\n\n\\(t = -5.45\\)\n\\(df = 129\\)\np-value &lt; 0.0001\n95% CI: (98.12, 98.38)\n\\(\\bar{x} = 98.25\\)\n\n\nWhat this means:\n\nSample mean is 5.45 SEs below 98.6\nVery strong evidence against \\(H_0\\)\nWe’re 95% confident the true mean is between 98.12 and 98.38\nBoth approaches agree: 98.6 is not plausible"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-the-broom-package-for-tidy-output",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-the-broom-package-for-tidy-output",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Using the broom package for tidy output",
+    "text": "Using the broom package for tidy output\nThe broom package makes output easier to work with:\n\nlibrary(broom)\n\n# Tidy the output\ntidy_result &lt;- tidy(test_result)\ntidy_result\n\n# A tibble: 1 × 8\n  estimate statistic     p.value parameter conf.low conf.high method alternative\n     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      \n1     98.2     -5.45 0.000000241       129     98.1      98.4 One S… two.sided  \n\n# Now it's a nice tibble we can manipulate\ntidy_result %&gt;%\n  select(estimate, statistic, p.value, conf.low, conf.high)\n\n# A tibble: 1 × 5\n  estimate statistic     p.value conf.low conf.high\n     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1     98.2     -5.45 0.000000241     98.1      98.4\n\n\n\n\nThis is especially useful when running multiple tests or creating tables!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-our-test",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#visualizing-our-test",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Visualizing our test",
+    "text": "Visualizing our test\nThis plot is descriptive — the hypothesis test is not based on the histogram, but on the sampling distribution of the mean"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#connection-between-cis-and-hypothesis-tests",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#connection-between-cis-and-hypothesis-tests",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Connection between CIs and hypothesis tests",
+    "text": "Connection between CIs and hypothesis tests\n\n\n\nKey relationship\n\n\nFor a two-sided test at significance level \\(\\alpha\\):\n\n\nIf the \\((1-\\alpha)×100\\%\\) CI does NOT contain \\(\\mu_0\\):\n→ We reject \\(H_0\\) at level α\n\nIf the \\((1-\\alpha)×100\\%\\) CI DOES contain \\(\\mu_0\\):\n→ We fail to reject \\(H_0\\) at level α\n\n\n\n\n\n\nFor our example:\n\n95% CI: (98.12, 98.38)\nDoes NOT contain 98.6\nSo we reject \\(H_0\\) at α = 0.05\nThis matches our p-value &lt; 0.05 conclusion\n\n\n\nThey’re two ways of saying the same thing!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#common-mistakes-to-avoid",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#common-mistakes-to-avoid",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\n\n\nMistake 1: “Accepting” the null hypothesis\n\n\nWRONG: “We accept \\(H_0\\)”\nCORRECT: “We fail to reject \\(H_0\\)”\nWhy? Absence of evidence ≠ evidence of absence. We never “prove” \\(H_0\\) true.\n\n\n\n\n\n\n\n\nMistake 2: Confusing practical and statistical significance\n\n\nSmall p-value = statistically significant (unusual under \\(H_0\\))\nBUT doesn’t mean the effect is large or important!\nWith large \\(n\\), even tiny differences can be “significant”"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#more-common-mistakes",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#more-common-mistakes",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "More common mistakes",
+    "text": "More common mistakes\n\n\n\nMistake 3: P-hacking\n\n\nDON’T:\n\nRun multiple tests and only report significant ones\nTry different cutoffs until you get p &lt; 0.05\nAdd data until you get significance\n\nThis inflates Type I error rate!\n\n\n\n\n\n\nMistake 4: Ignoring assumptions\n\n\nAlways check:\n\nIndependence of observations\nSample size or normality\nNo extreme outliers (for small samples)\n\nIf violated, results may not be trustworthy"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#best-practices-for-hypothesis-testing",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#best-practices-for-hypothesis-testing",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Best practices for hypothesis testing",
+    "text": "Best practices for hypothesis testing\n\n\n\n\nBefore collecting data:\n\nState your hypotheses clearly\nChoose your significance level (\\(\\alpha\\))\nDetermine your sample size\nPlan your analysis\n\n\n\nAfter collecting data:\n\nCheck assumptions\nCalculate test statistic and p-value\nMake a decision (reject or fail to reject)\nState conclusion in context\nReport confidence interval too!\n\n\nAlways:\n\nBe transparent about your methods\nReport exact p-values (not just “&lt; 0.05”)\nDiscuss practical significance, not just statistical"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#reporting-your-results",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#reporting-your-results",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Reporting your results",
+    "text": "Reporting your results\nGood statistical reporting includes:\n\nDescriptive statistics: \\(\\bar{x}\\), \\(s\\), \\(n\\)\nTest details: Which test, hypotheses, α level\nResults: Test statistic, df, p-value\nConfidence interval: Gives effect size estimate\nConclusion in context: What does it mean?\n\n\n\nExample:\n“A one-sample t-test was conducted to determine if mean body temperature differs from 98.6°F. The sample (n = 130) had a mean of 98.25°F (SD = 0.733). The test was statistically significant (t(129) = -5.45, p &lt; 0.001, 95% CI: [98.12, 98.38]), indicating that population mean body temperature is likely lower than the traditional 98.6°F value.”"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#what-we-learned-today",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#what-we-learned-today",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "What we learned today",
+    "text": "What we learned today\nConceptual understanding:\n\nHypothesis tests evaluate evidence against a claim (\\(H_0\\))\nP-values measure “how surprising” our data are if \\(H_0\\) is true\nSmall p-value → reject \\(H_0\\), large p-value → fail to reject \\(H_0\\)\nHypothesis tests and CIs are two sides of the same coin\n\n\n\nTechnical skills:\n\nState null and alternative hypotheses\nCalculate t-statistics and p-values\nUse t.test() in R\nInterpret output correctly\nConnect CIs and hypothesis tests"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-six-steps-of-hypothesis-testing",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#the-six-steps-of-hypothesis-testing",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "The six steps of hypothesis testing",
+    "text": "The six steps of hypothesis testing\n\nCheck assumptions (independence, normality/large n)\nSet significance level (usually α = 0.05)\nState hypotheses (\\(H_0\\) and \\(H_A\\))\nCalculate test statistic (\\(t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}\\))\nFind p-value (probability of seeing this or more extreme)\nMake conclusion (reject or fail to reject \\(H_0\\), with context)\n\n\n\nRemember: The p-value is NOT the probability that \\(H_0\\) is true!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#key-formulas-for-reference",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#key-formulas-for-reference",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Key formulas for reference",
+    "text": "Key formulas for reference\nTest statistic:\n\\[t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}\\]\n\n\nDegrees of freedom:\n\\[df = n - 1\\]\n\n\nDecision rule:\n\nIf p-value &lt; → Reject \\(H_0\\)\nIf p-value ≥ → Fail to reject \\(H_0\\)\n\n\n\nConnection to CI:\n\nIf \\((1-\\alpha)×100\\%\\) CI excludes \\(\\mu_0\\) → Reject \\(H_0\\)\nIf \\((1-\\alpha)×100\\%\\) CI includes \\(\\mu_0\\) → Fail to reject \\(H_0\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#looking-ahead",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#looking-ahead",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nPaired t-tests (dependent samples)\nTwo-sample t-tests (independent samples)\nMore hypothesis testing practice\n\n\n\nFor now:\n\nPractice stating hypotheses correctly\nGet comfortable with p-value interpretation\nWork on connecting CIs and hypothesis tests\nUse R to conduct tests\n\n\n\n\n\n\nRemember\n\n\nStatistical significance (p &lt; 0.05) doesn’t automatically mean practical importance. Always think about the context and effect size!\n\n\n\n\n\n\nBMSC 620 | Hypothesis Testing"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-2-set-the-significance-level-alpha",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-2-set-the-significance-level-alpha",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 2: Set the significance level (\\(\\alpha\\))",
+    "text": "Step 2: Set the significance level (\\(\\alpha\\))\nBefore collecting data, we decide our threshold for “strong evidence”\n\n\n\n\n\nSignificance Level (\\(\\alpha\\))\n\n\nThe significance level is the threshold below which we’ll reject \\(H_0\\)\n\nMost common: \\(\\alpha = 0.05\\) (5%)\nMeans we’re willing to wrongly reject \\(H_0\\) at most 5% of the time\n\nIf \\(H_0\\) were true and we repeated this study many times, about 5% of those studies would lead us to reject it just by chance\n\nConnected to confidence level: \\(\\alpha = 1 - \\text{confidence level}\\)\n\n\n\n\nCommon choices:\n\n\\(\\alpha = 0.05\\) (95% confidence) - most common\n\\(\\alpha = 0.01\\) (99% confidence) - more stringent\n\\(\\alpha = 0.10\\) (90% confidence) - more lenient\n\n\n\nFor our example: We’ll use \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example-1",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example-1",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Calculating the t-statistic: Example",
+    "text": "Calculating the t-statistic: Example\n\n\nFor our body temperature data:\n\n\\(\\bar{x} = 98.25\\)\n\\(\\mu_0 = 98.6\\) (from \\(H_0\\))\n\\(s = 0.733\\)\n\\(n = 130\\)\n\n\n\n# Calculate t-statistic\nxbar &lt;- 98.25\nmu_0 &lt;- 98.6\ns &lt;- 0.733\nn &lt;- 130\n\nSE &lt;- s / sqrt(n)\nt_stat &lt;- (xbar - mu_0) / SE\n\nSE\n\n[1] 0.06428835\n\nt_stat\n\n[1] -5.444221\n\n\n\n\n\nInterpretation: Our sample mean is about 5.45 standard errors below the null value. This seems pretty far!"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value-12",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value-12",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 5: Calculate the p-value (1/2)",
+    "text": "Step 5: Calculate the p-value (1/2)\n\n\n\nWhat is a p-value?\n\n\nThe p-value is the probability of observing a test statistic as extreme as (or more extreme than) what we actually observed, assuming \\(H_0\\) is true.\n\n\n\n\n\nFor a two-sided test: We care about both tails\n\\[\\text{p-value} = P(|T| \\geq |t_{observed}| \\mid H_0 \\text{ is true})\\]\nWhere: - \\(T\\) = a randomly chosen t-statistic from the null distribution - \\(t_{observed}\\) = the t-statistic computed from our sample\n\n\nIn plain language:\n“Given the null hypothesis is true, what’s the probability of getting a sample mean at least as far from \\(\\mu_0\\) as ours?”"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value-22",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-5-calculate-the-p-value-22",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Step 5: Calculate the p-value (2/2)",
+    "text": "Step 5: Calculate the p-value (2/2)\nIn R:\nFor a two-sided hypothesis test, the p-value is the probability of seeing a test statistic at least as far from zero as the one we observed, in either direction. So we\n\nTake the absolute value of the t-statistic (distance from zero),\nFind the probability of being that far out in one tail,\nMultiply by 2 to account for both tails.\n\n\n# Calculate t-statistic\nxbar &lt;- 98.25\nmu_0 &lt;- 98.6\ns &lt;- 0.733\nn &lt;- 130\n\nSE &lt;- s / sqrt(n)\nt_stat &lt;- (xbar - mu_0) / SE\n\n# Calculate p-value (two-sided)\np_value &lt;- 2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)\np_value\n\n[1] 2.530265e-07"
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-rstatix",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#using-rstatix",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "Using rstatix",
+    "text": "Using rstatix\n\nlibrary(rstatix)\n\nt_test(data = bodytemp, \n       temperature ~ 1, \n       mu = 98.6, \n       conf.level = 0.95, \n       detailed = TRUE)\n\n# A tibble: 1 × 12\n  estimate .y.    group1 group2     n statistic       p    df conf.low conf.high\n*    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1     98.2 tempe… 1      null …   130     -5.45 2.41e-7   129     98.1      98.4\n# ℹ 2 more variables: method &lt;chr&gt;, alternative &lt;chr&gt;"
   }
 ]
