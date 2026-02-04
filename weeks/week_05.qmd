@@ -87,6 +87,7 @@ By the end of the week, you should be able to:
   
 - **Resource**
   - [Hypothesis Testing: One-Page Reference](/resources/hypothesis_testing_handout.qmd)
+  - [Link to class OneDrive folder](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCzFL46JxYtQYOScuzb1OrIAfeUyniSwrT6HsHk6zlALVk?e=3JSQGX) – see data folder
 
 - **Recording**
   - Coming soon
