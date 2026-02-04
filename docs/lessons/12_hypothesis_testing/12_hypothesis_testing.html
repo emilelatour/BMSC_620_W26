@@ -432,7 +432,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>Part 2: Hypothesis Testing Framework</strong></p>
 <ul>
 <li>Null and alternative hypotheses</li>
-<li>Significance level (α)</li>
+<li>Significance level (<span class="math inline">\(\alpha\)</span>)</li>
 <li>Test statistics</li>
 <li>P-values</li>
 </ul>
@@ -491,7 +491,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <ul>
 <li>Calculate interval (65.12, 67.08)</li>
 <li>See if our value of interest is in it</li>
-<li>If 65 inches is in the interval → plausible</li>
+<li>If 66 inches is in the interval → plausible</li>
 <li>If 70 inches is NOT in the interval → implausible</li>
 </ul>
 </div><div class="column" style="width:48%;">
@@ -537,6 +537,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 </div>
+<!-- Is there more recent data than 1992? -->
 </section>
 <section id="two-approaches-to-answer-this-question" class="slide level2">
 <h2>Two approaches to answer this question</h2>
@@ -738,7 +739,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <ul>
 <li>The null hypothesis uses = (equals sign)</li>
 <li>The alternative uses <span class="math inline">\(\neq\)</span>, <span class="math inline">\(&gt;\)</span>, or <span class="math inline">\(&lt;\)</span></li>
-<li><span class="math inline">\(\mu_0\)</span> represents the “null value” (98.6 in this case)</li>
+<li>We call 98.6 the “null value” and often write it as <span class="math inline">\(\mu_0\)</span></li>
 </ul>
 </section>
 <section id="one-sided-vs.-two-sided-alternatives" class="slide level2">
@@ -847,8 +848,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </p>
 <p><strong>For our body temperature example:</strong></p>
 <ul>
-<li><label><input type="checkbox" checked="">Sample of 130 individuals (presumably independent)</label></li>
-<li><label><input type="checkbox" checked=""><span class="math inline">\(n = 130 \geq 30\)</span>, so CLT applies</label></li>
+<li>✓ Sample of 130 individuals (presumably independent)</li>
+<li>✓ <span class="math inline">\(n = 130 \geq 30\)</span>, so CLT applies</li>
 <li>We can proceed with the test!</li>
 </ul>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
@@ -948,7 +949,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </p>
 <p><strong>For a two-sided test:</strong> We care about both tails</p>
 <p><span class="math display">\[\text{p-value} = P(|T| \geq |t_{observed}| \mid H_0 \text{ is true})\]</span></p>
-<p>Where: - <span class="math inline">\(T\)</span> = a randomly chosen t-statistic from the null distribution - <span class="math inline">\(t_{observed}\)</span> = the t-statistic computed from our sample</p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(T\)</span> = a randomly chosen t-statistic from the null distribution</li>
+<li><span class="math inline">\(t_{observed}\)</span> = the t-statistic computed from our sample</li>
+</ul>
 <p><br>
 </p>
 <p><strong>In plain language:</strong></p>
@@ -991,14 +996,14 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="callout-content">
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><strong>Small p-value (&lt; α):</strong></p>
+<p><strong>Small p-value (&lt; <span class="math inline">\(\alpha\)</span>):</strong></p>
 <ul>
 <li>Our data would be very unusual if <span class="math inline">\(H_0\)</span> were true</li>
 <li>Strong evidence <strong>against</strong> <span class="math inline">\(H_0\)</span></li>
 <li>We <strong>reject</strong> <span class="math inline">\(H_0\)</span></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p><strong>Large p-value (≥ α):</strong></p>
+<p><strong>Large p-value (≥ <span class="math inline">\(\alpha\)</span>):</strong></p>
 <ul>
 <li>Our data are not that unusual if <span class="math inline">\(H_0\)</span> were true</li>
 <li>Insufficient evidence against <span class="math inline">\(H_0\)</span></li>
@@ -1032,7 +1037,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </ul>
 <p><strong>WRONG:</strong> “The probability of making a mistake by rejecting <span class="math inline">\(H_0\)</span>”</p>
 <ul>
-<li>That’s the significance level α (set in advance)</li>
+<li>That’s the significance level <span class="math inline">\(\alpha\)</span> (set in advance)</li>
 <li>P-value is calculated from data</li>
 </ul>
 <p><strong>WRONG:</strong> “The effect size or importance”</p>
@@ -1051,8 +1056,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Step 6: Make a conclusion</h2>
 <p><strong>Decision rule:</strong></p>
 <ul>
-<li>If p-value &lt; α: Reject <span class="math inline">\(H_0\)</span></li>
-<li>If p-value ≥ α: Fail to reject <span class="math inline">\(H_0\)</span></li>
+<li>If p-value &lt; <span class="math inline">\(\alpha\)</span>: Reject <span class="math inline">\(H_0\)</span></li>
+<li>If p-value ≥ <span class="math inline">\(\alpha\)</span>: Fail to reject <span class="math inline">\(H_0\)</span></li>
 </ul>
 <p><br>
 </p>
@@ -1061,7 +1066,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><br>
 </p>
 <p><strong>Formal conclusion:</strong></p>
-<p>“At the α = 0.05 significance level, we reject the null hypothesis. There is statistically significant evidence that the population mean body temperature is different from 98.6°F.”</p>
+<p>“At the <span class="math inline">\(\alpha\)</span> = 0.05 significance level, we reject the null hypothesis. There is statistically significant evidence that the population mean body temperature is different from 98.6°F.”</p>
 <p><br>
 </p>
 <p><strong>Contextual conclusion:</strong></p>
@@ -1094,8 +1099,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>For our example (using summary statistics):</strong></p>
 <p>We don’t have the raw data, but we can work with what we have…</p>
 </section>
-<section id="using-t.test-with-summary-statistics" class="slide level2">
-<h2>Using t.test() with summary statistics</h2>
+<section id="manual-calculation-with-summary-statistics" class="slide level2">
+<h2>Manual calculation with summary statistics</h2>
 <p>When you only have summary statistics (not raw data), you can still test:</p>
 <!-- ```{r} -->
 <!-- # Our summary statistics -->
@@ -1199,6 +1204,21 @@ mean of x
 </section>
 <section id="understanding-the-r-output" class="slide level2">
 <h2>Understanding the R output</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  bodytemp$temperature
+t = -5.4548, df = 129, p-value = 2.411e-07
+alternative hypothesis: true mean is not equal to 98.6
+95 percent confidence interval:
+ 98.12200 98.37646
+sample estimates:
+mean of x 
+ 98.24923 </code></pre>
+</div>
+</div>
 <p>Let’s break down what R tells us:</p>
 <p><strong>t.test() output includes:</strong></p>
 <ul>
@@ -1208,8 +1228,9 @@ mean of x
 <li><strong>confidence interval:</strong> 95% CI for <span class="math inline">\(\mu\)</span></li>
 <li><strong>sample estimate:</strong> our sample mean</li>
 </ul>
-<p><br>
-</p>
+</section>
+<section id="interpreting-our-results" class="slide level2">
+<h2>Interpreting our results</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>From our output:</strong></p>
@@ -1234,20 +1255,20 @@ mean of x
 <h2>Using the broom package for tidy output</h2>
 <p>The <code>broom</code> package makes output easier to work with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(broom)</span>
-<span id="cb20-2"><a></a></span>
-<span id="cb20-3"><a></a><span class="co"># Tidy the output</span></span>
-<span id="cb20-4"><a></a>tidy_result <span class="ot">&lt;-</span> <span class="fu">tidy</span>(test_result)</span>
-<span id="cb20-5"><a></a>tidy_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb21-2"><a></a></span>
+<span id="cb21-3"><a></a><span class="co"># Tidy the output</span></span>
+<span id="cb21-4"><a></a>tidy_result <span class="ot">&lt;-</span> <span class="fu">tidy</span>(test_result)</span>
+<span id="cb21-5"><a></a>tidy_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
   estimate statistic     p.value parameter conf.low conf.high method alternative
      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      
 1     98.2     -5.45 0.000000241       129     98.1      98.4 One S… two.sided  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Now it's a nice tibble we can manipulate</span></span>
-<span id="cb22-2"><a></a>tidy_result <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a></a>  <span class="fu">select</span>(estimate, statistic, p.value, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Now it's a nice tibble we can manipulate</span></span>
+<span id="cb23-2"><a></a>tidy_result <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">select</span>(estimate, statistic, p.value, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
   estimate statistic     p.value conf.low conf.high
@@ -1262,13 +1283,13 @@ mean of x
 <section id="using-rstatix" class="slide level2">
 <h2>Using rstatix</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb24-2"><a></a></span>
-<span id="cb24-3"><a></a><span class="fu">t_test</span>(<span class="at">data =</span> bodytemp, </span>
-<span id="cb24-4"><a></a>       temperature <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb24-5"><a></a>       <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
-<span id="cb24-6"><a></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>, </span>
-<span id="cb24-7"><a></a>       <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a><span class="fu">t_test</span>(<span class="at">data =</span> bodytemp, </span>
+<span id="cb25-4"><a></a>       temperature <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb25-5"><a></a>       <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
+<span id="cb25-6"><a></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>, </span>
+<span id="cb25-7"><a></a>       <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   estimate .y.    group1 group2     n statistic       p    df conf.low conf.high
@@ -1282,7 +1303,7 @@ mean of x
 <h2>Visualizing our test</h2>
 <p>This plot is descriptive — the hypothesis test is not based on the histogram, but on the sampling distribution of the mean</p>
 
-<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-12-1.png" width="1152" class="r-stretch"></section>
+<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-13-1.png" width="1152" class="r-stretch"></section>
 <section id="connection-between-cis-and-hypothesis-tests" class="slide level2">
 <h2>Connection between CIs and hypothesis tests</h2>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -1295,10 +1316,10 @@ mean of x
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>If the <span class="math inline">\((1-\alpha)×100\%\)</span> CI does NOT contain</strong> <span class="math inline">\(\mu_0\)</span>:</p>
-<p>→ We reject <span class="math inline">\(H_0\)</span> at level α</p>
+<p>→ We reject <span class="math inline">\(H_0\)</span> at level <span class="math inline">\(\alpha\)</span></p>
 </div><div class="column" style="width:50%;">
 <p><strong>If the <span class="math inline">\((1-\alpha)×100\%\)</span> CI DOES contain</strong> <span class="math inline">\(\mu_0\)</span>:</p>
-<p>→ We fail to reject <span class="math inline">\(H_0\)</span> at level α</p>
+<p>→ We fail to reject <span class="math inline">\(H_0\)</span> at level <span class="math inline">\(\alpha\)</span></p>
 </div></div>
 </div>
 </div>
@@ -1309,7 +1330,7 @@ mean of x
 <ul>
 <li>95% CI: (98.12, 98.38)</li>
 <li>Does NOT contain 98.6</li>
-<li>So we reject <span class="math inline">\(H_0\)</span> at α = 0.05</li>
+<li>So we reject <span class="math inline">\(H_0\)</span> at <span class="math inline">\(\alpha\)</span> = 0.05</li>
 <li>This matches our p-value &lt; 0.05 conclusion</li>
 </ul>
 <p><br>
@@ -1422,7 +1443,7 @@ mean of x
 <p><strong>Good statistical reporting includes:</strong></p>
 <ol type="1">
 <li><strong>Descriptive statistics:</strong> <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(n\)</span></li>
-<li><strong>Test details:</strong> Which test, hypotheses, α level</li>
+<li><strong>Test details:</strong> Which test, hypotheses, <span class="math inline">\(\alpha\)</span> level</li>
 <li><strong>Results:</strong> Test statistic, df, p-value</li>
 <li><strong>Confidence interval:</strong> Gives effect size estimate</li>
 <li><strong>Conclusion in context:</strong> What does it mean?</li>
@@ -1462,9 +1483,9 @@ mean of x
 <section id="the-six-steps-of-hypothesis-testing" class="slide level2">
 <h2>The six steps of hypothesis testing</h2>
 <ol type="1">
-<li><p><strong>Check assumptions</strong> (independence, normality/large n)</p></li>
-<li><p><strong>Set significance level</strong> (usually α = 0.05)</p></li>
 <li><p><strong>State hypotheses</strong> (<span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_A\)</span>)</p></li>
+<li><p><strong>Set significance level</strong> (usually <span class="math inline">\(\alpha\)</span> = 0.05)</p></li>
+<li><p><strong>Check assumptions</strong> (independence, normality/large n)</p></li>
 <li><p><strong>Calculate test statistic</strong> (<span class="math inline">\(t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}\)</span>)</p></li>
 <li><p><strong>Find p-value</strong> (probability of seeing this or more extreme)</p></li>
 <li><p><strong>Make conclusion</strong> (reject or fail to reject <span class="math inline">\(H_0\)</span>, with context)</p></li>
@@ -1550,9 +1571,9 @@ mean of x
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">10</td>
+<td style="text-align: center;">9</td>
 <td style="text-align: center;">5.1</td>
-<td style="text-align: center;">Pop mean</td>
+<td style="text-align: center;">Population mean</td>
 <td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
 <td style="text-align: center;">Sample mean</td>
 <td style="text-align: center;"><span class="math inline">\(\bar{x}\)</span></td>
@@ -1560,33 +1581,33 @@ mean of x
 <tr class="even">
 <td style="text-align: center;">10</td>
 <td style="text-align: center;">5.2</td>
-<td style="text-align: center;">Pop mean of paired diff</td>
+<td style="text-align: center;">Population mean of paired differences</td>
 <td style="text-align: center;"><span class="math inline">\(\mu_d\)</span> or <span class="math inline">\(\delta\)</span></td>
-<td style="text-align: center;">Sample mean of paired diff</td>
+<td style="text-align: center;">Sample mean of paired differences</td>
 <td style="text-align: center;"><span class="math inline">\(\bar{x}_{d}\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">11</td>
+<td style="text-align: center;">10</td>
 <td style="text-align: center;">5.3</td>
-<td style="text-align: center;">Diff in pop means</td>
+<td style="text-align: center;">Differences in population means</td>
 <td style="text-align: center;"><span class="math inline">\(\mu_1-\mu_2\)</span></td>
-<td style="text-align: center;">Diff in sample means</td>
+<td style="text-align: center;">Differences in sample means</td>
 <td style="text-align: center;"><span class="math inline">\(\bar{x}_1 - \bar{x}_2\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">12</td>
+<td style="text-align: center;">13</td>
 <td style="text-align: center;">8.1</td>
-<td style="text-align: center;">Pop proportion</td>
+<td style="text-align: center;">population proportion</td>
 <td style="text-align: center;"><span class="math inline">\(p\)</span></td>
-<td style="text-align: center;">Sample prop</td>
+<td style="text-align: center;">Sample proportions</td>
 <td style="text-align: center;"><span class="math inline">\(\widehat{p}\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">12</td>
+<td style="text-align: center;">14</td>
 <td style="text-align: center;">8.2</td>
-<td style="text-align: center;">Diff in pop prop’s</td>
+<td style="text-align: center;">Differences in pop prop’s</td>
 <td style="text-align: center;"><span class="math inline">\(p_1-p_2\)</span></td>
-<td style="text-align: center;">Diff in sample prop’s</td>
+<td style="text-align: center;">Differences in sample prop’s</td>
 <td style="text-align: center;"><span class="math inline">\(\widehat{p}_1-\widehat{p}_2\)</span></td>
 </tr>
 </tbody>

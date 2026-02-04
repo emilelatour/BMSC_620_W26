@@ -25,15 +25,18 @@ execute:
 #| label: setup
 #| include: false
 
-library(tidyverse)
-library(glue)
-library(knitr)
-library(patchwork)
+library(tidyverse) # ggplot2, 
+
 library(broom)
+library(glue)
+library(here)
+library(knitr)
 library(oibiostat)
+library(patchwork)
+library(rstatix)
 
 library(lamisc)
-library(laviz)        
+library(laviz)     
 
 # Set theme for plots
 theme_set(laviz::theme_minimal_white(grid = "none", 
@@ -66,7 +69,7 @@ By the end of today's lecture, you will be able to:
 **Part 2: Hypothesis Testing Framework**
 
 -   Null and alternative hypotheses
--   Significance level (α)
+-   Significance level ($\alpha$)
 -   Test statistics
 -   P-values
 :::
@@ -128,7 +131,7 @@ Sample of 50 adults: $\bar{x} = 66.1$ inches, $s = 3.5$ inches
 
 -   Calculate interval (65.12, 67.08)
 -   See if our value of interest is in it
--   If 65 inches is in the interval → plausible
+-   If 66 inches is in the interval → plausible
 -   If 70 inches is NOT in the interval → implausible
 :::
 
@@ -173,6 +176,8 @@ In fact, for two-sided tests, a hypothesis test at $\alpha = 0.05$ will always a
 
 Based on the 1992 data, is there evidence that the population mean body temperature is **different from** 98.6°F?
 :::
+
+<!-- Is there more recent data than 1992? -->
 
 ## Two approaches to answer this question
 
@@ -391,7 +396,7 @@ $$H_0: \mu = 98.6$$ $$H_A: \mu \neq 98.6$$
 
 -   The null hypothesis uses = (equals sign)
 -   The alternative uses $\neq$, $>$, or $<$
--   $\mu_0$ represents the "null value" (98.6 in this case)
+-   We call 98.6 the "null value" and often write it as $\mu_0$
 
 ## One-sided vs. two-sided alternatives
 
@@ -492,9 +497,9 @@ Before conducting any hypothesis test, verify the assumptions:
 
 **For our body temperature example:**
 
--   [x] Sample of 130 individuals (presumably independent)
--   [x] $n = 130 \geq 30$, so CLT applies
--   We can proceed with the test!
+- ✓ Sample of 130 individuals (presumably independent)
+- ✓ $n = 130 \geq 30$, so CLT applies
+- We can proceed with the test!
 
 ::: {.callout-warning icon="false"}
 ## Important
@@ -611,7 +616,10 @@ The **p-value** is the probability of observing a test statistic as extreme as (
 
 $$\text{p-value} = P(|T| \geq |t_{observed}| \mid H_0 \text{ is true})$$
 
-Where: - $T$ = a randomly chosen t-statistic from the null distribution - $t_{observed}$ = the t-statistic computed from our sample
+Where: 
+
+- $T$ = a randomly chosen t-statistic from the null distribution 
+- $t_{observed}$ = the t-statistic computed from our sample
 
 \
 
@@ -651,7 +659,7 @@ p_value
 
 ::::: columns
 ::: {.column width="50%"}
-**Small p-value (\< α):**
+**Small p-value (\< $\alpha$):**
 
 -   Our data would be very unusual if $H_0$ were true
 -   Strong evidence **against** $H_0$
@@ -659,7 +667,7 @@ p_value
 :::
 
 ::: {.column width="50%"}
-**Large p-value (≥ α):**
+**Large p-value (≥ $\alpha$):**
 
 -   Our data are not that unusual if $H_0$ were true
 -   Insufficient evidence against $H_0$
@@ -688,7 +696,7 @@ p_value
 
 **WRONG:** "The probability of making a mistake by rejecting $H_0$"
 
--   That's the significance level α (set in advance)
+-   That's the significance level $\alpha$ (set in advance)
 -   P-value is calculated from data
 
 **WRONG:** "The effect size or importance"
@@ -705,8 +713,8 @@ p_value
 
 **Decision rule:**
 
--   If p-value \< α: Reject $H_0$
--   If p-value ≥ α: Fail to reject $H_0$
+-   If p-value \< $\alpha$: Reject $H_0$
+-   If p-value ≥ $\alpha$: Fail to reject $H_0$
 
 \
 
@@ -718,7 +726,7 @@ p-value $\approx$ `r lamisc::fmt_num(p_value, accuracy = 0.0000001)` \< 0.05, so
 
 **Formal conclusion:**
 
-"At the α = 0.05 significance level, we reject the null hypothesis. There is statistically significant evidence that the population mean body temperature is different from 98.6°F."
+"At the $\alpha$ = 0.05 significance level, we reject the null hypothesis. There is statistically significant evidence that the population mean body temperature is different from 98.6°F."
 
 \
 
@@ -755,7 +763,7 @@ t.test(x, mu = 0, alternative = "two.sided", conf.level = 0.95)
 
 We don't have the raw data, but we can work with what we have...
 
-## Using t.test() with summary statistics
+## Manual calculation with summary statistics
 
 When you only have summary statistics (not raw data), you can still test:
 
@@ -856,6 +864,13 @@ test_result
 
 ## Understanding the R output
 
+```{r}
+#| echo: false
+
+test_result
+```
+
+
 Let's break down what R tells us:
 
 **t.test() output includes:**
@@ -866,7 +881,7 @@ Let's break down what R tells us:
 -   **confidence interval:** 95% CI for $\mu$
 -   **sample estimate:** our sample mean
 
-\
+## Interpreting our results
 
 ::::: columns
 ::: {.column width="48%"}
@@ -966,13 +981,13 @@ For a two-sided test at significance level $\alpha$:
 ::: {.column width="50%"}
 **If the $(1-\alpha)×100\%$ CI does NOT contain** $\mu_0$:
 
-→ We reject $H_0$ at level α
+→ We reject $H_0$ at level $\alpha$
 :::
 
 ::: {.column width="50%"}
 **If the $(1-\alpha)×100\%$ CI DOES contain** $\mu_0$:
 
-→ We fail to reject $H_0$ at level α
+→ We fail to reject $H_0$ at level $\alpha$
 :::
 :::
 
@@ -985,7 +1000,7 @@ For a two-sided test at significance level $\alpha$:
 
 -   95% CI: (98.12, 98.38)
 -   Does NOT contain 98.6
--   So we reject $H_0$ at α = 0.05
+-   So we reject $H_0$ at $\alpha$ = 0.05
 -   This matches our p-value \< 0.05 conclusion
 
 \
@@ -1084,7 +1099,7 @@ With large $n$, even tiny differences can be "significant"
 **Good statistical reporting includes:**
 
 1.  **Descriptive statistics:** $\bar{x}$, $s$, $n$
-2.  **Test details:** Which test, hypotheses, α level
+2.  **Test details:** Which test, hypotheses, $\alpha$ level
 3.  **Results:** Test statistic, df, p-value
 4.  **Confidence interval:** Gives effect size estimate
 5.  **Conclusion in context:** What does it mean?
@@ -1122,11 +1137,11 @@ With large $n$, even tiny differences can be "significant"
 
 ## The six steps of hypothesis testing
 
-1.  **Check assumptions** (independence, normality/large n)
+1.  **State hypotheses** ($H_0$ and $H_A$)
 
-2.  **Set significance level** (usually α = 0.05)
+2.  **Set significance level** (usually $\alpha$ = 0.05)
 
-3.  **State hypotheses** ($H_0$ and $H_A$)
+3.  **Check assumptions** (independence, normality/large n)
 
 4.  **Calculate test statistic** ($t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$)
 
@@ -1197,8 +1212,8 @@ CI's and hypothesis testing for different scenarios:
 
 | Day | Section |  Population parameter   |       Symbol        |       Point estimate       |            Symbol             |
 |:----:|:------:|:----------:|:--------:|:----------:|:-------:|
-| 10  |   5.1   |        Pop mean         |        $\mu$        |        Sample mean         |           $\bar{x}$           |
-| 10  |   5.2   | Pop mean of paired diff | $\mu_d$ or $\delta$ | Sample mean of paired diff |         $\bar{x}_{d}$         |
-| 11  |   5.3   |    Diff in pop means    |    $\mu_1-\mu_2$    |    Diff in sample means    |    $\bar{x}_1 - \bar{x}_2$    |
-| 12  |   8.1   |     Pop proportion      |         $p$         |        Sample prop         |         $\widehat{p}$         |
-| 12  |   8.2   |   Diff in pop prop's    |      $p_1-p_2$      |   Diff in sample prop's    | $\widehat{p}_1-\widehat{p}_2$ |
+| 9  |   5.1   |        Population mean         |        $\mu$        |        Sample mean         |           $\bar{x}$           |
+| 10  |   5.2   | Population mean of paired differences | $\mu_d$ or $\delta$ | Sample mean of paired differences |         $\bar{x}_{d}$         |
+| 10  |   5.3   |    Differences in population means    |    $\mu_1-\mu_2$    |    Differences in sample means    |    $\bar{x}_1 - \bar{x}_2$    |
+| 13  |   8.1   |     Population proportion      |         $p$         |        Sample proportions         |         $\widehat{p}$         |
+| 14  |   8.2   |   Differences in pop prop's    |      $p_1-p_2$      |   Differences in sample proportions    | $\widehat{p}_1-\widehat{p}_2$ |
