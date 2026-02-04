@@ -1216,4 +1216,4 @@ CI's and hypothesis testing for different scenarios:
 | 10  |   5.2   | Population mean of paired differences | $\mu_d$ or $\delta$ | Sample mean of paired differences |         $\bar{x}_{d}$         |
 | 10  |   5.3   |    Differences in population means    |    $\mu_1-\mu_2$    |    Differences in sample means    |    $\bar{x}_1 - \bar{x}_2$    |
 | 13  |   8.1   |     Population proportion      |         $p$         |        Sample proportions         |         $\widehat{p}$         |
-| 14  |   8.2   |   Differences in pop prop's    |      $p_1-p_2$      |   Differences in sample proportions    | $\widehat{p}_1-\widehat{p}_2$ |
+| 14  |   8.2   |   Differences in population proportions    |      $p_1-p_2$      |   Differences in sample proportions    | $\widehat{p}_1-\widehat{p}_2$ |
