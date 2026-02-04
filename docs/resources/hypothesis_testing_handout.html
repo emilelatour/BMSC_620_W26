@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Statistical Inference: Estimation and Hypothesis Testing">
 
-<title>Week 5 – BMSC 620: Introduction to Biostatistics</title>
+<title>Hypothesis Testing: One-Page Reference – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,6 +102,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
@@ -121,7 +183,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_05.html">Week 5</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Hypothesis Testing: One-Page Reference</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -196,13 +258,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Weekly materials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../weeks/week_01.html" class="sidebar-item-text sidebar-link">
@@ -229,7 +291,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week_05.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week_05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
@@ -241,37 +303,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
-  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
-  <ul class="collapse">
-  <li><a href="#monday-estimation-and-confidence-intervals" id="toc-monday-estimation-and-confidence-intervals" class="nav-link" data-scroll-target="#monday-estimation-and-confidence-intervals">Monday — Estimation and Confidence Intervals</a></li>
-  <li><a href="#wednesday-hypothesis-testing-and-one-sample-t-tests" id="toc-wednesday-hypothesis-testing-and-one-sample-t-tests" class="nav-link" data-scroll-target="#wednesday-hypothesis-testing-and-one-sample-t-tests">Wednesday — Hypothesis Testing and One-Sample t-Tests</a></li>
-  </ul></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
-  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
-  </ul>
-</nav>
-    </div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="hypothesis_testing_handout.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_05.html">Week 5</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 5</h1>
+<h1 class="title">Hypothesis Testing: One-Page Reference</h1>
+<p class="subtitle lead">BMSC 620</p>
 </div>
 
-<div>
-  <div class="description">
-    Statistical Inference: Estimation and Hypothesis Testing
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -286,145 +327,142 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!--
-Think of the weekly page as answering just five student questions:
-    1.  What are we doing this week?
-    2.  What do I need to read/watch before class?
-    3.  What materials should I have open during class?
-    4.  What is due (and when)?
-    5.  Where do I go if I want to review later?
-    -->
-<section id="announcements" class="level2">
-<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<section id="what-is-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-hypothesis-testing">What is hypothesis testing?</h2>
+<p><strong>Goal:</strong> Use sample data to evaluate evidence against a specific claim about a population parameter.</p>
 <ul>
-<li>HW 4 released <strong>Monday, February 2</strong></li>
-</ul>
-</section>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This week focuses on <strong>statistical inference</strong>: making conclusions about populations based on sample data.</p>
-<p>We will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.</p>
-<p>By the end of the week, you should be able to:</p>
-<ul>
-<li>understand the concept of a sampling distribution and standard error,</li>
-<li>construct and interpret confidence intervals for a population mean,</li>
-<li>explain what a confidence level means,</li>
-<li>state null and alternative hypotheses,</li>
-<li>conduct and interpret one-sample t-tests,</li>
-<li>understand p-values and statistical significance,</li>
-<li>recognize the connection between confidence intervals and hypothesis tests.</li>
-</ul>
-</section>
-<section id="readings-before-class" class="level2">
-<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
-<ul>
-<li>Textbook section 4.1 (Variability in estimates)</li>
-<li>Textbook section 4.2 (Confidence intervals)</li>
-<li>Textbook section 4.3 (Hypothesis testing)</li>
-<li>Textbook section 5.1 (Single-sample inference with the t-distribution)</li>
-</ul>
-<p>(Additional resources will be posted if helpful.)</p>
-</section>
-<section id="materials" class="level2">
-<h2 class="anchored" data-anchor-id="materials">Materials</h2>
-<section id="monday-estimation-and-confidence-intervals" class="level3">
-<h3 class="anchored" data-anchor-id="monday-estimation-and-confidence-intervals">Monday — Estimation and Confidence Intervals</h3>
-<ul>
-<li><p><strong>Topics</strong></p>
-<ul>
-<li>Sampling distributions and standard error</li>
-<li>Point estimates vs.&nbsp;interval estimates</li>
-<li>Confidence intervals for population means</li>
-<li>Interpreting confidence levels (e.g., 95% CI)</li>
-<li>Using the t-distribution when σ is unknown</li>
-<li>Calculating confidence intervals in R</li>
-</ul></li>
-<li><p><strong>Slides</strong></p>
-<ul>
-<li>Estimation and Confidence Intervals (<a href="../lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.html">HTML</a> | <a href="../lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-</ul></li>
-<li><p><strong>Recording</strong></p>
-<ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:v:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/recordings/Lecture%2009%20-%20Estimation%20and%20confidence%20intervals.mp4?csf=1&amp;web=1&amp;nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=YG7Q56">Estimation and Confidence Intervals</a></li>
-</ul></li>
-<li><p><strong>Muddy points</strong></p>
-<p>I reviewed your post-class feedback and wrote clarifications here:</p>
-<ul>
-<li><a href="../lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html">Muddy Points - Lesson 8</a></li>
-</ul></li>
+<li>The claim we test is the <strong>null hypothesis</strong></li>
+<li>We assume the null is true and ask: <em>How surprising is our data under that assumption?</em></li>
 </ul>
 <hr>
 </section>
-<section id="wednesday-hypothesis-testing-and-one-sample-t-tests" class="level3">
-<h3 class="anchored" data-anchor-id="wednesday-hypothesis-testing-and-one-sample-t-tests">Wednesday — Hypothesis Testing and One-Sample t-Tests</h3>
+<section id="key-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="key-hypotheses">Key hypotheses</h2>
+<p><strong>Null hypothesis (<span class="math inline">\(H_0\)</span>)</strong></p>
 <ul>
-<li><strong>Topics</strong>
+<li>Represents the status quo or specific claim</li>
+<li>Uses an equals sign</li>
+</ul>
+<p><span class="math display">\[H_0: \mu = \mu_0\]</span></p>
+<p><strong>Alternative hypothesis (<span class="math inline">\(H_A\)</span>)</strong></p>
 <ul>
-<li>The logic of hypothesis testing</li>
-<li>Null and alternative hypotheses</li>
-<li>Test statistics and p-values</li>
-<li>Statistical significance and decision rules</li>
-<li>One-sample t-tests</li>
-<li>Conducting t-tests in R</li>
-<li>Connection between confidence intervals and hypothesis tests</li>
-</ul></li>
-<li><strong>Slides</strong>
+<li>Represents what we’re looking for evidence in favor of</li>
+<li>Uses <span class="math inline">\(\neq\)</span>, <span class="math inline">\(&lt;\)</span>, or <span class="math inline">\(&gt;\)</span></li>
+</ul>
+<p><span class="math display">\[H_A: \mu \neq \mu_0 \quad \text{(two-sided)}\]</span> <span class="math display">\[H_A: \mu &lt; \mu_0 \quad \text{or} \quad H_A: \mu &gt; \mu_0 \quad \text{(one-sided)}\]</span></p>
+<hr>
+</section>
+<section id="significance-level-alpha" class="level2">
+<h2 class="anchored" data-anchor-id="significance-level-alpha">Significance level (<span class="math inline">\(\alpha\)</span>)</h2>
 <ul>
-<li>Hypothesis Testing and One-Sample t-Tests (<a href="../lessons/12_hypothesis_testing/12_hypothesis_testing.html">HTML</a> | <a href="../lessons/12_hypothesis_testing/12_hypothesis_testing.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-<li>R Workflow: Projects, File Paths, and Reading Data (<a href="../lessons/12_hypothesis_testing/12_r_workflow_slides.html">HTML</a> | <a href="../lessons/12_hypothesis_testing/12_r_workflow_slides.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-</ul></li>
-<li><strong>Resource</strong>
+<li><span class="math inline">\(\alpha\)</span> is the threshold for “strong evidence”</li>
+<li>Chosen <strong>before</strong> seeing the data</li>
+<li>Most common: <span class="math inline">\(\alpha = 0.05\)</span></li>
+</ul>
+<p><strong>Interpretation:</strong> If <span class="math inline">\(H_0\)</span> is true, we are willing to reject it incorrectly at most <span class="math inline">\(\alpha \times 100\)</span>% of the time.</p>
+<hr>
+</section>
+<section id="assumptions-for-a-one-sample-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions-for-a-one-sample-t-test">Assumptions for a one-sample t-test</h2>
+<ol type="1">
+<li>Observations are <strong>independent</strong></li>
+<li>Data are approximately <strong>normal</strong> OR sample size is large (<span class="math inline">\(n \geq 30\)</span>, CLT applies)</li>
+</ol>
+<hr>
+</section>
+<section id="test-statistic-what-comes-from-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="test-statistic-what-comes-from-the-data">Test statistic (what comes from the data)</h2>
+<p>The t-statistic measures how far the sample mean is from the null value, in standard error units:</p>
+<p><span class="math display">\[t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\]</span></p>
 <ul>
-<li><a href="../resources/hypothesis_testing_handout.html">Hypothesis Testing: One-Page Reference</a></li>
-</ul></li>
-<li><strong>Recording</strong>
-<ul>
-<li>Coming soon</li>
-</ul></li>
-<li><strong>Muddy points</strong>
-<ul>
-<li>Coming soon.</li>
-</ul></li>
+<li>Comes from the <strong>sample</strong></li>
+<li><strong>Random</strong> (varies from study to study)</li>
+<li>Under <span class="math inline">\(H_0\)</span>, follows a t-distribution with <span class="math inline">\(df = n - 1\)</span></li>
 </ul>
 <hr>
 </section>
-</section>
-<section id="homework" class="level2">
-<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<section id="critical-value-what-defines-too-extreme" class="level2">
+<h2 class="anchored" data-anchor-id="critical-value-what-defines-too-extreme">Critical value (what defines “too extreme”)</h2>
 <ul>
-<li><strong>HW 4</strong>
-<ul>
-<li>Released <strong>Monday, February 2</strong></li>
-<li>Due <strong>Sunday, February 8 at 11:00 pm</strong></li>
-<li>Covers:
-<ul>
-<li>Normal distribution and properties</li>
-<li>Z-scores and standardization</li>
-<li>Calculating probabilities with <code>pnorm()</code> and <code>qnorm()</code></li>
-<li>Normal approximation to the Binomial</li>
-<li>Poisson distribution</li>
-</ul></li>
-<li><a href="../homework/HW04/HW04.html">View HW 4 instructions</a></li>
-</ul></li>
-<li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
+<li>Comes from the <strong>t-distribution</strong></li>
+<li>Depends on <span class="math inline">\(\alpha\)</span> and degrees of freedom</li>
+<li><strong>Fixed</strong> before seeing the data</li>
 </ul>
+<p><span class="math display">\[t^* = t_{1-\alpha/2,\; df} \quad \text{(two-sided)}\]</span></p>
+<hr>
 </section>
-<section id="post-class-check-in-attendance" class="level2">
-<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
-<ul>
-<li>Please complete the post-class check-in after each class meeting.</li>
-<li>Used for attendance credit and to identify topics that need clarification.</li>
-<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
-</ul>
+<section id="decision-rules-three-equivalent-ways" class="level2">
+<h2 class="anchored" data-anchor-id="decision-rules-three-equivalent-ways">Decision rules (three equivalent ways)</h2>
+<section id="test-statistic-approach" class="level3">
+<h3 class="anchored" data-anchor-id="test-statistic-approach">1. Test-statistic approach</h3>
+<p><strong>Reject <span class="math inline">\(H_0\)</span> if:</strong> <span class="math inline">\(|t_{\text{obs}}| &gt; t^*\)</span></p>
 </section>
-<section id="looking-ahead" class="level2">
-<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>Next week we will continue with <strong>statistical inference</strong>:</p>
+<section id="p-value-approach" class="level3">
+<h3 class="anchored" data-anchor-id="p-value-approach">2. P-value approach</h3>
+<p><strong>P-value:</strong> Probability of observing a test statistic as extreme as (or more extreme than) what we saw, assuming <span class="math inline">\(H_0\)</span> is true.</p>
+<p><strong>Reject <span class="math inline">\(H_0\)</span> if:</strong> <span class="math inline">\(\text{p-value} &lt; \alpha\)</span></p>
+</section>
+<section id="confidence-interval-approach-two-sided-tests" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval-approach-two-sided-tests">3. Confidence interval approach (two-sided tests)</h3>
+<p><strong>Reject <span class="math inline">\(H_0\)</span> if:</strong> the <span class="math inline">\((1 - \alpha) \times 100\)</span>% confidence interval does <strong>not</strong> contain <span class="math inline">\(\mu_0\)</span></p>
+<hr>
+</section>
+</section>
+<section id="what-p-values-mean-and-dont-mean" class="level2">
+<h2 class="anchored" data-anchor-id="what-p-values-mean-and-dont-mean">What p-values mean (and don’t mean)</h2>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>P-value IS:</strong></p>
 <ul>
-<li><strong>Monday</strong>: Paired data and paired t-tests; Two-sample independent t-tests</li>
-<li><strong>Wednesday</strong>: Midterm review</li>
+<li>A measure of how surprising the data are if <span class="math inline">\(H_0\)</span> were true</li>
 </ul>
-<p>These concepts extend our hypothesis testing framework to compare two groups and handle related measurements.</p>
+</div><div class="column" style="width:48%;">
+<p><strong>P-value is NOT:</strong></p>
+<ul>
+<li>The probability that <span class="math inline">\(H_0\)</span> is true</li>
+<li>The probability you made a mistake</li>
+<li>A measure of effect size or importance</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="common-language-to-use" class="level2">
+<h2 class="anchored" data-anchor-id="common-language-to-use">Common language to use</h2>
+<p>✔️ “We reject the null hypothesis”<br>
+✔️ “We fail to reject the null hypothesis”</p>
+<p>❌ “We accept the null hypothesis”</p>
+<hr>
+</section>
+<section id="one-sample-t-test-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="one-sample-t-test-in-r">One-sample t-test in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">mu =</span> mu0, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Key output:</strong></p>
+<ul>
+<li>t-statistic</li>
+<li>degrees of freedom</li>
+<li>p-value</li>
+<li>confidence interval</li>
+<li>sample mean</li>
+</ul>
+<hr>
+</section>
+<section id="reporting-results-example" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-results-example">Reporting results (example)</h2>
+<blockquote class="blockquote">
+<p>A one-sample t-test was conducted to assess whether mean body temperature differs from 98.6°F. The sample (<span class="math inline">\(n = 130\)</span>) had a mean of 98.25°F (SD = 0.733). The test was statistically significant, <span class="math inline">\(t(129) = -5.45\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>, with a 95% confidence interval of [98.12, 98.38], indicating that the population mean body temperature is lower than 98.6°F.</p>
+</blockquote>
+<hr>
+</section>
+<section id="big-picture-reminder" class="level2">
+<h2 class="anchored" data-anchor-id="big-picture-reminder">Big picture reminder</h2>
+<ul>
+<li>Hypothesis tests and confidence intervals use the <strong>same information</strong></li>
+<li>A small p-value does <strong>not</strong> imply practical importance</li>
+<li>Always <strong>interpret results in context</strong> ```</li>
+</ul>
 
 
 </section>
