@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="BMSC 620">
+
+<title>Muddy Points Responses: Sampling Distributions &amp; Confidence Intervals – BMSC 620: Introduction to Biostatistics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../homework.html"> 
+<span class="menu-text">Homework</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../exams.html"> 
+<span class="menu-text">Exams</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Muddy Points Responses: Sampling Distributions &amp; Confidence Intervals</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../homework.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Homework</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exams.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Course info</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week_05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#critical-values-and-margin-of-error" id="toc-critical-values-and-margin-of-error" class="nav-link active" data-scroll-target="#critical-values-and-margin-of-error">Critical Values and Margin of Error</a></li>
+  <li><a href="#confidence-interval-interpretation" id="toc-confidence-interval-interpretation" class="nav-link" data-scroll-target="#confidence-interval-interpretation">Confidence Interval Interpretation</a></li>
+  <li><a href="#sample-distribution-vs.-sampling-distribution" id="toc-sample-distribution-vs.-sampling-distribution" class="nav-link" data-scroll-target="#sample-distribution-vs.-sampling-distribution">Sample Distribution vs.&nbsp;Sampling Distribution</a></li>
+  <li><a href="#degrees-of-freedom" id="toc-degrees-of-freedom" class="nav-link" data-scroll-target="#degrees-of-freedom">Degrees of Freedom</a></li>
+  <li><a href="#why-95-for-confidence-intervals" id="toc-why-95-for-confidence-intervals" class="nav-link" data-scroll-target="#why-95-for-confidence-intervals">Why 95% for Confidence Intervals?</a></li>
+  <li><a href="#three-distributions-keeping-them-straight" id="toc-three-distributions-keeping-them-straight" class="nav-link" data-scroll-target="#three-distributions-keeping-them-straight">Three Distributions: Keeping Them Straight</a></li>
+  <li><a href="#when-to-use-z-vs.-t-in-practice" id="toc-when-to-use-z-vs.-t-in-practice" class="nav-link" data-scroll-target="#when-to-use-z-vs.-t-in-practice">When to Use Z vs.&nbsp;T in Practice</a></li>
+  <li><a href="#population-parameters-in-labbasic-science-research" id="toc-population-parameters-in-labbasic-science-research" class="nav-link" data-scroll-target="#population-parameters-in-labbasic-science-research">Population Parameters in Lab/Basic Science Research</a></li>
+  <li><a href="#when-to-report-se-vs.-sd-in-your-work" id="toc-when-to-report-se-vs.-sd-in-your-work" class="nav-link" data-scroll-target="#when-to-report-se-vs.-sd-in-your-work">When to Report SE vs.&nbsp;SD in Your Work</a></li>
+  <li><a href="#when-and-why-to-use-clt" id="toc-when-and-why-to-use-clt" class="nav-link" data-scroll-target="#when-and-why-to-use-clt">When and Why to Use CLT</a></li>
+  <li><a href="#understanding-t-beyond-the-r-code" id="toc-understanding-t-beyond-the-r-code" class="nav-link" data-scroll-target="#understanding-t-beyond-the-r-code">Understanding t* Beyond the R Code</a></li>
+  <li><a href="#homework-and-exam-preparation" id="toc-homework-and-exam-preparation" class="nav-link" data-scroll-target="#homework-and-exam-preparation">Homework and Exam Preparation</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Muddy Points Responses: Sampling Distributions &amp; Confidence Intervals</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>BMSC 620 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.</p>
+</div>
+</div>
+<p>Thank you for the thoughtful feedback. Most of you found the pace about right, and I’m glad the Z vs T distinction, distribution visualizations, and common-mistake callouts were helpful. Below I address the most common muddy points.</p>
+<section id="critical-values-and-margin-of-error" class="level2">
+<h2 class="anchored" data-anchor-id="critical-values-and-margin-of-error">Critical Values and Margin of Error</h2>
+<p><strong>Q: “I still don’t understand what a critical value is”</strong></p>
+<p><strong>Q: “When we got to confidence intervals, especially when critical values were introduced I got lost. Specifically I’m having a hard time understanding logically how the margin of error contributes to confidence intervals.”</strong></p>
+<p>A <strong>critical value</strong> (like <span class="math inline">\(z^*\)</span> or <span class="math inline">\(t^*\)</span>) is just a multiplier that determines how wide your confidence interval needs to be to achieve your desired confidence level.</p>
+<p>It comes from the <em>sampling distribution</em>, not from your raw data.</p>
+<p>Think of it this way:</p>
+<ul>
+<li>We start with a point estimate: <span class="math inline">\(\bar{x}\)</span> = 65 inches (our best guess for average height)</li>
+<li>We know there’s uncertainty: SE = 0.5 inches</li>
+<li><strong>Question:</strong> How many SEs should we go above and below our estimate to be 95% confident we’ve captured the true mean?</li>
+<li><strong>Answer:</strong> About 2 SEs (more precisely, 1.96 or ~2 for large samples)</li>
+</ul>
+<p>That multiplier (1.96) is the <strong>critical value</strong> - it tells you “go this many standard errors in each direction.”</p>
+<p><strong>The margin of error</strong> is: critical value × SE</p>
+<p>So if <span class="math inline">\(t^* = 2.0\)</span> and <span class="math inline">\(SE = 0.5\)</span>, then <span class="math inline">\(\text{margin of error} = 2.0 × 0.5 = 1.0 inch\)</span>.</p>
+<p><strong>Why does this work?</strong> Because of how the normal/t-distribution works:</p>
+<ul>
+<li>95% of the probability sits within ±1.96 standard deviations of the mean</li>
+<li>So if we go ±1.96 SEs from our sample mean, we’ll capture μ about 95% of the time <em>across repeated samples</em></li>
+</ul>
+<p><strong>In R:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a 95% CI with df = 30</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">30</span>)  <span class="co"># Returns ~2.04 (the critical value)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.042272</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use 0.975 because we want 2.5% in each tail (95% in middle)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The critical value gets smaller as your sample size increases (because you have more certainty).</p>
+<hr>
+</section>
+<section id="confidence-interval-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-interval-interpretation">Confidence Interval Interpretation</h2>
+<p><strong>Q: “Interpreting CI was not too clear to me”</strong></p>
+<p>The key insight: <strong>The parameter is fixed, the interval is random.</strong></p>
+<p><strong>CORRECT interpretation:</strong> “We are 95% confident that the true population mean μ is between 64.5 and 65.5 inches.”</p>
+<p>What this really means: If we repeated this study 100 times and calculated 100 different CIs, about 95 of them would contain the true μ.</p>
+<p><strong>INCORRECT interpretation:</strong> “There’s a 95% probability that μ is in this interval.”</p>
+<p>Why this is wrong: μ is a fixed (but unknown) value. Once you’ve calculated your CI, it either contains μ or it doesn’t - there’s no probability about it. The randomness is in the sampling process, not in μ.</p>
+<p><strong>Helpful analogy:</strong> Imagine μ is a bullseye on a target that’s hidden behind a curtain. Each sample is like throwing a net at the target. The net has a specific size (your CI). If you throw 100 nets, about 95 of them will catch the bullseye. But once you’ve thrown your net, it either caught the target or it didn’t - you just don’t know which.</p>
+<p>The “95% confidence” refers to the long-run success rate of the procedure, not the probability for one specific interval.</p>
+<hr>
+</section>
+<section id="sample-distribution-vs.-sampling-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="sample-distribution-vs.-sampling-distribution">Sample Distribution vs.&nbsp;Sampling Distribution</h2>
+<p><strong>Q: “I’m still a little confused about the difference between the sample and sampling distribution. Which one comes up more often/is more relevant?”</strong></p>
+<p>Great question! The <strong>sampling distribution</strong> is way more important and comes up constantly.</p>
+<p><strong>Sample distribution:</strong></p>
+<ul>
+<li>The distribution of values in YOUR specific sample</li>
+<li>Example: Heights of the 50 people you actually measured</li>
+<li>What you see when you do <code>hist(sample_data$height)</code></li>
+<li>You see this once per study</li>
+</ul>
+<p><strong>Sampling distribution:</strong></p>
+<ul>
+<li>The distribution of sample means if you repeated the study infinitely</li>
+<li>This is theoretical - you never actually see it</li>
+<li>But it’s what lets you do inference!</li>
+<li>The CLT tells you its shape (approximately normal for large n)</li>
+</ul>
+<p><strong>Which is more relevant?</strong> The <strong>sampling distribution</strong>!</p>
+<p>Why? Because when you calculate a CI or do a hypothesis test, you’re asking: “If I repeated this study many times, how much would my sample mean vary?” That’s the sampling distribution.</p>
+<p>You use your one sample to estimate properties of the sampling distribution:</p>
+<ul>
+<li><span class="math inline">\(SE = \frac{s}{\sqrt{n}}\)</span> estimates the standard deviation of the sampling distribution</li>
+<li>Then you use that to build your CI</li>
+</ul>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>You collect one sample → calculate one <span class="math inline">\(\bar{x}\)</span> and one <span class="math inline">\(s\)</span></li>
+<li>You use those to estimate properties of the sampling distribution (via SE)</li>
+<li>You use the sampling distribution to make inferences about <span class="math inline">\(\mu\)</span></li>
+</ul>
+<p>The sample distribution tells you about your sample. The sampling distribution tells you how reliable your estimate is.</p>
+<p>If you remember only one thing for this course: <strong>all confidence intervals and hypothesis tests live on the sampling distribution.</strong></p>
+<hr>
+</section>
+<section id="degrees-of-freedom" class="level2">
+<h2 class="anchored" data-anchor-id="degrees-of-freedom">Degrees of Freedom</h2>
+<p><strong>Q: “I am slightly unclear on degrees of freedom. If you start with sample # -1 how would you run out of degrees of freedom especially if it is a large dataset”</strong></p>
+<p><strong>Q: “I’m still a bit confused what you mean that the mean uses up a degree of freedom. I don’t really understand what degrees of freedom are.”</strong></p>
+<p><strong>Degrees of freedom (df)</strong> = the number of independent pieces of information you have left after estimating something.</p>
+<p><strong>Why n-1 instead of n?</strong></p>
+<p>Imagine you have 3 numbers and I tell you:</p>
+<ul>
+<li>Their mean is 10</li>
+<li>Two of the numbers are 8 and 12</li>
+<li>What’s the third number?</li>
+</ul>
+<p>You can figure it out! It MUST be 10 (because (8 + 12 + 10)/3 = 10).</p>
+<p>Once you know the mean and n-1 values, the last value is completely determined. So you only have n-1 “free” values that contain independent information.</p>
+<p><strong>How does the mean “use up” a degree of freedom?</strong></p>
+<p>When you calculate the sample standard deviation (s), you use the formula:</p>
+<p><span class="math display">\[s = \sqrt{\frac{\sum(x_i - \bar{x})^2}{n-1}}\]</span></p>
+<p>You’re calculating deviations from <span class="math inline">\(\bar{x}\)</span> (not from μ). Since you had to estimate <span class="math inline">\(\bar{x}\)</span> from the same data, you “used up” one piece of information. That leaves you with n-1 independent deviations. That’s why the t-distribution depends on df — it reflects how much uncertainty remains.</p>
+<p><strong>Large datasets:</strong> You never “run out” of df. Larger samples simply have larger df. As n gets large, df gets large too, and the t-distribution looks almost identical to the normal distribution.</p>
+<p><strong>Practical impact:</strong></p>
+<ul>
+<li>Small samples (n = 5, df = 4): t-distribution has heavy tails, wider CIs</li>
+<li>Large samples (n = 100, df = 99): t-distribution ≈ normal distribution, narrower CIs</li>
+</ul>
+<p><strong>In R:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-distribution with df = 4 (small sample)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">4</span>)  <span class="co"># Returns ~2.78</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.776445</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-distribution with df = 99 (large sample)  </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">99</span>)  <span class="co"># Returns ~1.98 (very close to z* = 1.96)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.984217</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="why-95-for-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="why-95-for-confidence-intervals">Why 95% for Confidence Intervals?</h2>
+<p><strong>Q: “Why is 95% the most commonly used for confidence interval for biomedical research? Does it have to do with balancing size of the interval with confidence level? Am I thinking correctly that the intervals will be bigger at 99% than at 95%?”</strong></p>
+<p><strong>Yes, you’re thinking correctly!</strong> 99% CIs are wider than 95% CIs.</p>
+<p><strong>The tradeoff:</strong></p>
+<ul>
+<li>Higher confidence (99%) → wider interval (less precise)</li>
+<li>Lower confidence (90%) → narrower interval (more precise)</li>
+</ul>
+<p><strong>Why 95%?</strong> It’s mostly <strong>convention</strong>, established early in the history of statistics:</p>
+<ol type="1">
+<li><strong>Historical precedent:</strong> R.A. Fisher and other early statisticians popularized 0.05 as the significance level, which corresponds to 95% confidence</li>
+<li><strong>Reasonable balance:</strong> 95% gives you high confidence without making intervals so wide they’re useless</li>
+<li><strong>Field standard:</strong> Everyone uses it, so it’s easier to compare across studies</li>
+</ol>
+<p><strong>Is 95% “special”?</strong> Not really. In some fields:</p>
+<ul>
+<li>Particle physics uses 99.9999% (5-sigma rule) because errors are very costly</li>
+<li>Some exploratory research uses 90% to be less conservative</li>
+<li>Clinical trials might use 99% for safety endpoints</li>
+</ul>
+<p><strong>Your intuition is correct:</strong> There’s a balance between confidence and precision.</p>
+<p>Example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For the same data (x̄ = 65, s = 3, n = 50)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 90% CI</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>), <span class="at">df =</span> <span class="dv">49</span>) <span class="sc">*</span> (<span class="dv">3</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64.2887 65.7113</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Narrower interval</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI  </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">df =</span> <span class="dv">49</span>) <span class="sc">*</span> (<span class="dv">3</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64.14741 65.85259</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Medium interval</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 99% CI</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dv">65</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="fu">c</span>(<span class="fl">0.005</span>, <span class="fl">0.995</span>), <span class="at">df =</span> <span class="dv">49</span>) <span class="sc">*</span> (<span class="dv">3</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 63.86299 66.13701</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wider interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>In biomedical research:</strong> 95% is standard, but you might see 99% for safety-critical decisions or 90% for preliminary/exploratory analyses.</p>
+<hr>
+</section>
+<section id="three-distributions-keeping-them-straight" class="level2">
+<h2 class="anchored" data-anchor-id="three-distributions-keeping-them-straight">Three Distributions: Keeping Them Straight</h2>
+<p><strong>Q: “The 3 distributions were the least clear and when to use what”</strong></p>
+<p>Here’s a comparison table to keep them straight:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 27%">
+<col style="width: 30%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>What it shows</th>
+<th>When you see it</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Population distribution</strong></td>
+<td>All values in the entire population</td>
+<td>Almost never (you don’t measure everyone!)</td>
+<td>Heights of ALL adults in the US: μ = 65”, σ = 3”</td>
+</tr>
+<tr class="even">
+<td><strong>Sample distribution</strong></td>
+<td>Values in your specific sample</td>
+<td>Every time you collect data</td>
+<td>Heights of the 50 people YOU measured: <span class="math inline">\(\bar{x}\)</span> = 64.8”, s = 2.9”</td>
+</tr>
+<tr class="odd">
+<td><strong>Sampling distribution</strong></td>
+<td>What sample means would look like if you repeated the study infinitely</td>
+<td>Theoretical (you never actually see this)</td>
+<td>Distribution of all possible <span class="math inline">\(\bar{x}\)</span> values from samples of size 50: mean = μ, SD = σ/√n</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Which one do you USE for inference?</strong> The <strong>sampling distribution</strong>!</p>
+<p><strong>Key insight:</strong></p>
+<ul>
+<li>You have ONE sample (sample distribution)</li>
+<li>You want to learn about the population (population distribution)<br>
+</li>
+<li>You use the sampling distribution to connect them (via CLT and CIs)</li>
+</ul>
+<p><strong>In practice:</strong></p>
+<ol type="1">
+<li>Collect your sample → look at sample distribution (histogram of your data)</li>
+<li>Calculate <span class="math inline">\(\bar{x}\)</span> and s from your sample</li>
+<li>Use CLT to know the sampling distribution is approximately normal with mean <span class="math inline">\(\mu\)</span> and <span class="math inline">\(SE = \frac{s}{\sqrt{n}}\)</span></li>
+<li>Use the sampling distribution to build your CI</li>
+</ol>
+<p><strong>Common mistake to avoid:</strong> Don’t confuse the sample distribution (spread of your data) with the sampling distribution (spread of possible sample means). The sampling distribution is MUCH narrower because means are less variable than individual values.</p>
+<hr>
+</section>
+<section id="when-to-use-z-vs.-t-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-z-vs.-t-in-practice">When to Use Z vs.&nbsp;T in Practice</h2>
+<p><strong>Q: “z and t distributions”</strong></p>
+<p><strong>Q: “I am unclear when z values are actually used with real life data.”</strong></p>
+<p><strong>Simple rule: In real research, you almost always use t.</strong></p>
+<p><strong>Why?</strong> Because you almost never know σ (the true population standard deviation). If you truly knew σ exactly for your population, inference would be much less common, which is why this situation is rare in practice.</p>
+<p><strong>When to use Z (rare):</strong></p>
+<ul>
+<li>You know the population SD (<span class="math inline">\(\sigma\)</span>) from extensive prior research</li>
+<li>Example: IQ scores (<span class="math inline">\(\sigma\)</span> = 15 is well established)</li>
+<li>Example: Standardized test scores where <span class="math inline">\(\sigma\)</span> is published</li>
+</ul>
+<p><strong>When to use t (almost always):</strong></p>
+<ul>
+<li>You estimate the SD from your sample (use <span class="math inline">\(s\)</span> instead of <span class="math inline">\(\sigma\)</span>)</li>
+<li>This is the typical situation in biomedical research</li>
+</ul>
+<p><strong>Example scenarios:</strong></p>
+<p>✅ <strong>Use t:</strong> You measure blood pressure in 30 patients with a new treatment. You calculate <span class="math inline">\(\bar{x}\)</span> = 125 and s = 15 from your data.</p>
+<p>❌ <strong>Don’t use z:</strong> You don’t know σ for blood pressure in this population (you only have s from your sample)</p>
+<p>✅ <strong>Could use z (but probably still use t):</strong> You measure IQ in 30 patients. You know from decades of research that σ = 15 for IQ in the general population.</p>
+<p><strong>Practical advice:</strong> Just use t-based CIs for everything. As sample size increases, the t-distribution converges to the normal distribution anyway, so you’re not losing anything by using t.</p>
+<p>In R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-based CI (standard approach)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data<span class="sc">$</span>variable)<span class="sc">$</span>conf.int</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># You rarely need to manually use z</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="population-parameters-in-labbasic-science-research" class="level2">
+<h2 class="anchored" data-anchor-id="population-parameters-in-labbasic-science-research">Population Parameters in Lab/Basic Science Research</h2>
+<p><strong>Q: “T-distributions makes sense to me when you have a clearly defined population (like humans) that can be sampled (height of n=50). What about lab work? I run n = 5 experiments and looking at stimulation of cells (for example). Would you ever know the population parameters for something like this? Would you theoretically have to test ALL the cells to get this?”</strong></p>
+<p><strong>Q: “More of how this all applies to scenarios we may see in our work: I am unsure when the goal of a research question is to describe the data or estimate a population. I work in cell biology and do lots of quantitative microscopy, and when reporting results I am describing what I see in the sample of cells I imaged, is the goal then to extrapolate this to the general population of cells?”</strong></p>
+<p><strong>Excellent questions!</strong> The concept of “population” in lab research is more abstract but still applies.</p>
+<p><strong>For cell biology/microscopy:</strong></p>
+<p>Your <strong>population</strong> is not all cells that exist in the universe, but rather:</p>
+<ul>
+<li>All cells that COULD be generated under the same experimental conditions</li>
+<li>The “infinite hypothetical” cells you could culture/image under identical protocols</li>
+<li>All cells of this type under these specific conditions</li>
+</ul>
+<p><strong>Example:</strong></p>
+<ul>
+<li>You image 50 cells in a microscopy experiment</li>
+<li>Those 50 cells are a SAMPLE</li>
+<li>The POPULATION is “all cells of this type cultured under these conditions”</li>
+<li>μ = the true mean fluorescence intensity for this cell line under these conditions</li>
+<li>You’ll never measure ALL possible cells, but μ exists conceptually</li>
+</ul>
+<p><strong>Do you ever know μ?</strong> No, basically never. You always estimate it from your sample.</p>
+<p><strong>The statistical framework still applies:</strong></p>
+<ul>
+<li>You have 5 independent experimental replicates (n = 5)</li>
+<li>You calculate <span class="math inline">\(\bar{x}\)</span> (mean cell stimulation) and s (SD of your replicates)</li>
+<li>You use df = 4, and the t-distribution to build a CI for μ</li>
+<li>This tells you about the “true” mean response of cells under these conditions</li>
+</ul>
+<p><strong>When to use t-tests in lab work:</strong></p>
+<p>✅ Comparing treatment vs.&nbsp;control in cell stimulation (n = 5 replicates per group) ✅ Comparing fluorescence intensity across conditions (n = 50 cells imaged per condition) ✅ Any situation where you have a sample and want to infer about the broader biological phenomenon</p>
+<p><strong>Key insight:</strong> The “population” in basic science is often <strong>conceptual/theoretical</strong> rather than an actual enumerable group. But that’s okay! The statistics still work because you’re making inferences about what would happen if you repeated the experiment infinitely.</p>
+<hr>
+</section>
+<section id="when-to-report-se-vs.-sd-in-your-work" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-report-se-vs.-sd-in-your-work">When to Report SE vs.&nbsp;SD in Your Work</h2>
+<p><strong>Q: “Would it then be appropriate to report SE over SD or would I still report SD?”</strong></p>
+<p><strong>Q: “The semantics of standard error vs standard deviation have left me a little confused. The interpretation part for SE isn’t clicking to me for some reason.”</strong></p>
+<p><strong>Different purposes, both useful:</strong></p>
+<p><strong>Rule of thumb</strong>: Use SD to describe variability in your data and SE (or a CI) to describe uncertainty in the mean.</p>
+<p><strong>Report SD when:</strong></p>
+<ul>
+<li>Describing the variability in your sample/population</li>
+<li>Showing “how spread out are the individual values?”</li>
+<li>Example: “Cell diameter was 12.3 μm (SD = 2.1 μm)” → tells reader that individual cells vary by ~2 μm</li>
+</ul>
+<p><strong>Report SE when:</strong></p>
+<ul>
+<li>Describing uncertainty in your ESTIMATE of the mean</li>
+<li>Showing “how confident are we in our estimate of the population mean?”</li>
+<li>Example: “Mean cell diameter was 12.3 μm (SE = 0.3 μm)” → tells reader that the true mean is probably very close to 12.3</li>
+</ul>
+<p><strong>In practice for cell biology/microscopy:</strong></p>
+<p>You often report <strong>both</strong> or use <strong>error bars</strong> to show uncertainty:</p>
+<ul>
+<li><strong>Bar plots with error bars = SE</strong> (shows precision of your mean estimate)</li>
+<li><strong>Text description = SD</strong> (shows biological variability)</li>
+</ul>
+<p>Example reporting:</p>
+<blockquote class="blockquote">
+<p>“Mean fluorescence intensity was 1250 AU (SD = 300 AU, n = 50 cells). This represents a statistically significant increase compared to control (mean = 900 AU, SE = 45 AU, p &lt; 0.001).”</p>
+</blockquote>
+<p><strong>Why both?</strong></p>
+<ul>
+<li>SD (300) tells you: individual cells vary quite a bit</li>
+<li>SE (45) tells you: but we’re quite confident in the mean difference</li>
+</ul>
+<p><strong>Remember:</strong></p>
+<ul>
+<li>SD describes your data (larger is more variable)</li>
+<li>SE describes your uncertainty (larger is less certain)</li>
+<li>SE = SD/√n (so SE is always smaller than SD)</li>
+</ul>
+<p><strong>Common in papers:</strong></p>
+<ul>
+<li>Error bars in figures are often SEM or CIs (check journal conventions)</li>
+<li>Text descriptions include both SD and n</li>
+</ul>
+<p><strong>Goal:</strong></p>
+<ul>
+<li>Are you describing the phenomenon? → SD</li>
+<li>Are you making an inference about the population mean? → SE</li>
+</ul>
+<p>For your microscopy work: you’re doing both! You’re describing what you see (SD) AND extrapolating to the general population of cells (SE for uncertainty in your mean estimate).</p>
+<hr>
+</section>
+<section id="when-and-why-to-use-clt" class="level2">
+<h2 class="anchored" data-anchor-id="when-and-why-to-use-clt">When and Why to Use CLT</h2>
+<p><strong>Q: “Still a little unclear on why you would want to use CLT and in what context it would be useful by itself? Also, how do you determine the degree of skew is too much skew and you need to increase n? How is that defined, other than eye-balling a histogram?”</strong></p>
+<p><strong>Why CLT is useful:</strong></p>
+<p>The CLT allows you to do statistical inference even when your data are NOT normally distributed!</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li>You measure hospital length of stay (very right-skewed: most stays are short, few are very long)</li>
+<li>Your sample distribution looks nothing like a normal distribution</li>
+<li><strong>But:</strong> Because of CLT, you know that the sampling distribution of <span class="math inline">\(\bar{x}\)</span> IS approximately normal (if n is large enough)</li>
+<li>This lets you use t-tests and CIs even though your raw data are skewed</li>
+</ul>
+<p><strong>When is n “large enough”?</strong></p>
+<p><strong>Rules of thumb</strong>: These are heuristics, not strict rules. They’re meant to guide judgment, not replace it.</p>
+<ul>
+<li><strong>n ≥ 30</strong> is the classic rule (works for most distributions)</li>
+<li><strong>n &lt; 30</strong> can still work if your data are not too skewed</li>
+<li><strong>n &gt; 15</strong> usually fine for symmetric distributions</li>
+<li><strong>Highly skewed data</strong> might need n &gt; 50</li>
+</ul>
+<p><strong>How to assess skewness:</strong></p>
+<p>Beyond eyeballing histograms…</p>
+<ul>
+<li>Skewness &lt; 1 and n ≥ 15: probably fine</li>
+<li>Skewness between 1-2 and n ≥ 30: should be okay</li>
+<li>Skewness &gt; 2: might need n &gt; 50, or consider transformations/non-parametric methods</li>
+</ul>
+<p><strong>When CLT “by itself” is useful:</strong></p>
+<p>You use CLT implicitly every time you:</p>
+<ol type="1">
+<li>Calculate a CI for a mean (you assume the sampling distribution is normal)</li>
+<li>Do a t-test (same assumption)</li>
+<li>Make probability statements about sample means</li>
+</ol>
+<p>Example: “If we sample 50 patients, what’s the probability our sample mean is within 2 units of the true mean?” CLT lets you answer this even if individual patient values are skewed.</p>
+<hr>
+</section>
+<section id="understanding-t-beyond-the-r-code" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-t-beyond-the-r-code">Understanding t* Beyond the R Code</h2>
+<p><strong>Q: “I’m also kind of confused on what the calculations for t* actually is beyond plugging it into the R code.”</strong></p>
+<p><strong>What t* actually represents:</strong></p>
+<p>The t* value tells you: “How many standard errors away from the mean do I need to go to capture the middle X% of the t-distribution?”</p>
+<p><strong>Example with 95% CI:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">20</span>)  <span class="co"># Returns ~2.086</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.085963</code></pre>
+</div>
+</div>
+<p>This means: “In a t-distribution with 20 degrees of freedom, if I go ±2.086 standard errors from the mean, I’ll capture 95% of the distribution.”</p>
+<p><strong>Why 0.975 instead of 0.95?</strong></p>
+<p>The t-distribution (like the normal distribution) is symmetric. For a 95% CI:</p>
+<ul>
+<li>You want 95% in the middle</li>
+<li>That leaves 5% in the tails</li>
+<li>Split evenly: 2.5% in each tail</li>
+<li>So you want the value that has 2.5% to its right (97.5% to its left)</li>
+<li>That’s why we use <code>qt(0.975, df)</code> not <code>qt(0.95, df)</code></li>
+</ul>
+<p><strong>What’s happening inside qt()?</strong></p>
+<p>Without going into the math details:</p>
+<ul>
+<li>R has the mathematical formula for the t-distribution</li>
+<li>It’s solving: “What value of t has exactly 97.5% of the distribution to its left?”</li>
+<li>It uses numerical methods to find this value</li>
+</ul>
+<p><strong>Visual intuition:</strong></p>
+<p>Imagine the t-distribution as a hill:</p>
+<ul>
+<li>The peak is at 0</li>
+<li><code>qt(0.975, df)</code> finds the point where 97.5% of the area under the curve is to the left</li>
+<li>This point gets closer to 1.96 (the z value) as df increases</li>
+</ul>
+<p><strong>You don’t need to calculate it by hand</strong> - that’s why we use R! But understanding that it’s a percentile of the t-distribution (like how 1.96 is the 97.5th percentile of the normal distribution) helps build intuition.</p>
+<p><strong>Practical use:</strong></p>
+<ul>
+<li>Small df (5) → t* is large (2.57) → wider CIs (less certainty)</li>
+<li>Large df (100) → t* is small (1.98) → narrower CIs (more certainty)</li>
+<li>Infinite df → t* = z* (1.96) → t-distribution becomes normal</li>
+</ul>
+<hr>
+</section>
+<section id="homework-and-exam-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="homework-and-exam-preparation">Homework and Exam Preparation</h2>
+<p><strong>Q: “Not for class, but on the homework, sometimes the wording is confusing and it is unclear what we need to do. This is true when there is some of the code already given, just adding a ‘given’ comment and then saying more explicitly what is needed would be helpful. Also the homework is taking me approximately 3-4 hours to complete, I am concerned with how long this is that the exam will be extremely long. Also, I know we will have an exam review, but maybe letting us know what kind of tasks we will need to be able to perform would help direct us.”</strong></p>
+<p>Thank you - this is helpful feedback.</p>
+<p><strong>Homework clarity:</strong></p>
+<ul>
+<li>I will add clearer labels in the homework templates (e.g., GIVEN vs YOUR TASK) and make the prompt for each part more explicit.</li>
+<li>If something feels ambiguous while you are working, please reach out right away (office hours or email). Often a 2-minute clarification can save you a lot of time.</li>
+</ul>
+<p><strong>Homework time:</strong></p>
+<p>Homework is meant to be the main place you practice and build fluency, so it may take a few hours. If you find that a particular question is confusing or taking disproportionately long, let us know - that is useful information for improving the assignment.</p>
+<p><strong>Midterm expectations:</strong></p>
+<p>The midterm is not designed to be a short, in-class exam. It will be a longer, take-home style assessment that is intended to take roughly 3–5 hours.</p>
+<ul>
+<li>You will not need to memorize formulas.</li>
+<li>The focus will be on applying ideas correctly and communicating your reasoning.</li>
+<li>You should expect tasks similar in style to the homework, but more focused.</li>
+</ul>
+<p>Before the midterm, I will provide guidance on:</p>
+<ul>
+<li>the core concepts to prioritize,</li>
+<li>the types of questions to expect,</li>
+<li>and a small set of practice problems.</li>
+</ul>
+<hr>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p><strong>Key takeaways:</strong></p>
+<ol type="1">
+<li><strong>Critical values</strong> are just multipliers that tell you how wide your CI needs to be</li>
+<li><strong>CI interpretation:</strong> “95% confident” means the procedure works 95% of the time, not that there’s a 95% probability for this specific interval</li>
+<li><strong>Sampling distribution</strong> is more important than sample distribution - it’s what lets you do inference</li>
+<li><strong>Degrees of freedom</strong> = independent pieces of information left after estimation</li>
+<li><strong>95% CIs</strong> are convention, not magic - balance confidence with precision</li>
+<li><strong>Use t almost always</strong> in real research (you rarely know σ)</li>
+<li><strong>Population in lab work</strong> is conceptual - “all cells under these conditions”</li>
+<li><strong>Report SD for variability, SE for uncertainty</strong> in your estimate</li>
+<li><strong>CLT lets you use normal theory</strong> even when data aren’t normal</li>
+<li><strong>t* is a percentile</strong> of the t-distribution - R finds it for you</li>
+</ol>
+<p><strong>Keep the questions coming!</strong> This is complex material and it’s normal to need multiple exposures to fully understand it.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

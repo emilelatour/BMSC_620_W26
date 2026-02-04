@@ -1436,577 +1436,394 @@
     "text": "That’s it for logistics\n\nThe course website is your home base\nHomework 0 is due Sunday at 11:00 pm\nReach out early if something is confusing\n\nLet’s shift gears and start the course.\n\n\n\nBMSC 620"
   },
   {
-    "objectID": "homework/HW02/HW02.html",
-    "href": "homework/HW02/HW02.html",
-    "title": "BMSC 620 — Homework 2",
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
     "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW02.qmd\nSmith_J_HW02.html\n\nWhen submitting Homework 2, upload both:\n\nthe .qmd file\nthe rendered .html file"
+    "text": "Note\n\n\n\nYou do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.\nThank you for the thoughtful feedback. Most of you found the pace about right, and I’m glad the Z vs T distinction, distribution visualizations, and common-mistake callouts were helpful. Below I address the most common muddy points."
   },
   {
-    "objectID": "homework/HW02/HW02.html#homework-2",
-    "href": "homework/HW02/HW02.html#homework-2",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Homework 2",
-    "text": "Homework 2\nThis assignment reviews:\n\ndata wrangling with dplyr\nsummary tables with janitor and rstatix\ndata visualization with ggplot2\nprobability concepts: marginal, joint, and conditional probabilities\n\nUnless stated otherwise, show your work using R code chunks."
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#critical-values-and-margin-of-error",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#critical-values-and-margin-of-error",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Critical Values and Margin of Error",
+    "text": "Critical Values and Margin of Error\nQ: “I still don’t understand what a critical value is”\nQ: “When we got to confidence intervals, especially when critical values were introduced I got lost. Specifically I’m having a hard time understanding logically how the margin of error contributes to confidence intervals.”\nA critical value (like \\(z^*\\) or \\(t^*\\)) is just a multiplier that determines how wide your confidence interval needs to be to achieve your desired confidence level.\nIt comes from the sampling distribution, not from your raw data.\nThink of it this way:\n\nWe start with a point estimate: \\(\\bar{x}\\) = 65 inches (our best guess for average height)\nWe know there’s uncertainty: SE = 0.5 inches\nQuestion: How many SEs should we go above and below our estimate to be 95% confident we’ve captured the true mean?\nAnswer: About 2 SEs (more precisely, 1.96 or ~2 for large samples)\n\nThat multiplier (1.96) is the critical value - it tells you “go this many standard errors in each direction.”\nThe margin of error is: critical value × SE\nSo if \\(t^* = 2.0\\) and \\(SE = 0.5\\), then \\(\\text{margin of error} = 2.0 × 0.5 = 1.0 inch\\).\nWhy does this work? Because of how the normal/t-distribution works:\n\n95% of the probability sits within ±1.96 standard deviations of the mean\nSo if we go ±1.96 SEs from our sample mean, we’ll capture μ about 95% of the time across repeated samples\n\nIn R:\n\n# For a 95% CI with df = 30\nqt(0.975, df = 30)  # Returns ~2.04 (the critical value)\n\n[1] 2.042272\n\n# We use 0.975 because we want 2.5% in each tail (95% in middle)\n\nThe critical value gets smaller as your sample size increases (because you have more certainty)."
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-0-setup",
-    "href": "homework/HW02/HW02.html#part-0-setup",
-    "title": "BMSC 620 — Homework 2",
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#confidence-interval-interpretation",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#confidence-interval-interpretation",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Confidence Interval Interpretation",
+    "text": "Confidence Interval Interpretation\nQ: “Interpreting CI was not too clear to me”\nThe key insight: The parameter is fixed, the interval is random.\nCORRECT interpretation: “We are 95% confident that the true population mean μ is between 64.5 and 65.5 inches.”\nWhat this really means: If we repeated this study 100 times and calculated 100 different CIs, about 95 of them would contain the true μ.\nINCORRECT interpretation: “There’s a 95% probability that μ is in this interval.”\nWhy this is wrong: μ is a fixed (but unknown) value. Once you’ve calculated your CI, it either contains μ or it doesn’t - there’s no probability about it. The randomness is in the sampling process, not in μ.\nHelpful analogy: Imagine μ is a bullseye on a target that’s hidden behind a curtain. Each sample is like throwing a net at the target. The net has a specific size (your CI). If you throw 100 nets, about 95 of them will catch the bullseye. But once you’ve thrown your net, it either caught the target or it didn’t - you just don’t know which.\nThe “95% confidence” refers to the long-run success rate of the procedure, not the probability for one specific interval."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#sample-distribution-vs.-sampling-distribution",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#sample-distribution-vs.-sampling-distribution",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Sample Distribution vs. Sampling Distribution",
+    "text": "Sample Distribution vs. Sampling Distribution\nQ: “I’m still a little confused about the difference between the sample and sampling distribution. Which one comes up more often/is more relevant?”\nGreat question! The sampling distribution is way more important and comes up constantly.\nSample distribution:\n\nThe distribution of values in YOUR specific sample\nExample: Heights of the 50 people you actually measured\nWhat you see when you do hist(sample_data$height)\nYou see this once per study\n\nSampling distribution:\n\nThe distribution of sample means if you repeated the study infinitely\nThis is theoretical - you never actually see it\nBut it’s what lets you do inference!\nThe CLT tells you its shape (approximately normal for large n)\n\nWhich is more relevant? The sampling distribution!\nWhy? Because when you calculate a CI or do a hypothesis test, you’re asking: “If I repeated this study many times, how much would my sample mean vary?” That’s the sampling distribution.\nYou use your one sample to estimate properties of the sampling distribution:\n\n\\(SE = \\frac{s}{\\sqrt{n}}\\) estimates the standard deviation of the sampling distribution\nThen you use that to build your CI\n\nIn practice:\n\nYou collect one sample → calculate one \\(\\bar{x}\\) and one \\(s\\)\nYou use those to estimate properties of the sampling distribution (via SE)\nYou use the sampling distribution to make inferences about \\(\\mu\\)\n\nThe sample distribution tells you about your sample. The sampling distribution tells you how reliable your estimate is.\nIf you remember only one thing for this course: all confidence intervals and hypothesis tests live on the sampling distribution."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#degrees-of-freedom",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#degrees-of-freedom",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Degrees of Freedom",
+    "text": "Degrees of Freedom\nQ: “I am slightly unclear on degrees of freedom. If you start with sample # -1 how would you run out of degrees of freedom especially if it is a large dataset”\nQ: “I’m still a bit confused what you mean that the mean uses up a degree of freedom. I don’t really understand what degrees of freedom are.”\nDegrees of freedom (df) = the number of independent pieces of information you have left after estimating something.\nWhy n-1 instead of n?\nImagine you have 3 numbers and I tell you:\n\nTheir mean is 10\nTwo of the numbers are 8 and 12\nWhat’s the third number?\n\nYou can figure it out! It MUST be 10 (because (8 + 12 + 10)/3 = 10).\nOnce you know the mean and n-1 values, the last value is completely determined. So you only have n-1 “free” values that contain independent information.\nHow does the mean “use up” a degree of freedom?\nWhen you calculate the sample standard deviation (s), you use the formula:\n\\[s = \\sqrt{\\frac{\\sum(x_i - \\bar{x})^2}{n-1}}\\]\nYou’re calculating deviations from \\(\\bar{x}\\) (not from μ). Since you had to estimate \\(\\bar{x}\\) from the same data, you “used up” one piece of information. That leaves you with n-1 independent deviations. That’s why the t-distribution depends on df — it reflects how much uncertainty remains.\nLarge datasets: You never “run out” of df. Larger samples simply have larger df. As n gets large, df gets large too, and the t-distribution looks almost identical to the normal distribution.\nPractical impact:\n\nSmall samples (n = 5, df = 4): t-distribution has heavy tails, wider CIs\nLarge samples (n = 100, df = 99): t-distribution ≈ normal distribution, narrower CIs\n\nIn R:\n\n# t-distribution with df = 4 (small sample)\nqt(0.975, df = 4)  # Returns ~2.78\n\n[1] 2.776445\n\n# t-distribution with df = 99 (large sample)  \nqt(0.975, df = 99)  # Returns ~1.98 (very close to z* = 1.96)\n\n[1] 1.984217"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#why-95-for-confidence-intervals",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#why-95-for-confidence-intervals",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Why 95% for Confidence Intervals?",
+    "text": "Why 95% for Confidence Intervals?\nQ: “Why is 95% the most commonly used for confidence interval for biomedical research? Does it have to do with balancing size of the interval with confidence level? Am I thinking correctly that the intervals will be bigger at 99% than at 95%?”\nYes, you’re thinking correctly! 99% CIs are wider than 95% CIs.\nThe tradeoff:\n\nHigher confidence (99%) → wider interval (less precise)\nLower confidence (90%) → narrower interval (more precise)\n\nWhy 95%? It’s mostly convention, established early in the history of statistics:\n\nHistorical precedent: R.A. Fisher and other early statisticians popularized 0.05 as the significance level, which corresponds to 95% confidence\nReasonable balance: 95% gives you high confidence without making intervals so wide they’re useless\nField standard: Everyone uses it, so it’s easier to compare across studies\n\nIs 95% “special”? Not really. In some fields:\n\nParticle physics uses 99.9999% (5-sigma rule) because errors are very costly\nSome exploratory research uses 90% to be less conservative\nClinical trials might use 99% for safety endpoints\n\nYour intuition is correct: There’s a balance between confidence and precision.\nExample:\n\n# For the same data (x̄ = 65, s = 3, n = 50)\n# 90% CI\n65 + qt(c(0.05, 0.95), df = 49) * (3/sqrt(50))\n\n[1] 64.2887 65.7113\n\n# Narrower interval\n\n# 95% CI  \n65 + qt(c(0.025, 0.975), df = 49) * (3/sqrt(50))\n\n[1] 64.14741 65.85259\n\n# Medium interval\n\n# 99% CI\n65 + qt(c(0.005, 0.995), df = 49) * (3/sqrt(50))\n\n[1] 63.86299 66.13701\n\n# Wider interval\n\nIn biomedical research: 95% is standard, but you might see 99% for safety-critical decisions or 90% for preliminary/exploratory analyses."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#three-distributions-keeping-them-straight",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#three-distributions-keeping-them-straight",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Three Distributions: Keeping Them Straight",
+    "text": "Three Distributions: Keeping Them Straight\nQ: “The 3 distributions were the least clear and when to use what”\nHere’s a comparison table to keep them straight:\n\n\n\n\n\n\n\n\n\nDistribution\nWhat it shows\nWhen you see it\nExample\n\n\n\n\nPopulation distribution\nAll values in the entire population\nAlmost never (you don’t measure everyone!)\nHeights of ALL adults in the US: μ = 65”, σ = 3”\n\n\nSample distribution\nValues in your specific sample\nEvery time you collect data\nHeights of the 50 people YOU measured: \\(\\bar{x}\\) = 64.8”, s = 2.9”\n\n\nSampling distribution\nWhat sample means would look like if you repeated the study infinitely\nTheoretical (you never actually see this)\nDistribution of all possible \\(\\bar{x}\\) values from samples of size 50: mean = μ, SD = σ/√n\n\n\n\nWhich one do you USE for inference? The sampling distribution!\nKey insight:\n\nYou have ONE sample (sample distribution)\nYou want to learn about the population (population distribution)\n\nYou use the sampling distribution to connect them (via CLT and CIs)\n\nIn practice:\n\nCollect your sample → look at sample distribution (histogram of your data)\nCalculate \\(\\bar{x}\\) and s from your sample\nUse CLT to know the sampling distribution is approximately normal with mean \\(\\mu\\) and \\(SE = \\frac{s}{\\sqrt{n}}\\)\nUse the sampling distribution to build your CI\n\nCommon mistake to avoid: Don’t confuse the sample distribution (spread of your data) with the sampling distribution (spread of possible sample means). The sampling distribution is MUCH narrower because means are less variable than individual values."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-to-use-z-vs.-t-in-practice",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-to-use-z-vs.-t-in-practice",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "When to Use Z vs. T in Practice",
+    "text": "When to Use Z vs. T in Practice\nQ: “z and t distributions”\nQ: “I am unclear when z values are actually used with real life data.”\nSimple rule: In real research, you almost always use t.\nWhy? Because you almost never know σ (the true population standard deviation). If you truly knew σ exactly for your population, inference would be much less common, which is why this situation is rare in practice.\nWhen to use Z (rare):\n\nYou know the population SD (\\(\\sigma\\)) from extensive prior research\nExample: IQ scores (\\(\\sigma\\) = 15 is well established)\nExample: Standardized test scores where \\(\\sigma\\) is published\n\nWhen to use t (almost always):\n\nYou estimate the SD from your sample (use \\(s\\) instead of \\(\\sigma\\))\nThis is the typical situation in biomedical research\n\nExample scenarios:\n✅ Use t: You measure blood pressure in 30 patients with a new treatment. You calculate \\(\\bar{x}\\) = 125 and s = 15 from your data.\n❌ Don’t use z: You don’t know σ for blood pressure in this population (you only have s from your sample)\n✅ Could use z (but probably still use t): You measure IQ in 30 patients. You know from decades of research that σ = 15 for IQ in the general population.\nPractical advice: Just use t-based CIs for everything. As sample size increases, the t-distribution converges to the normal distribution anyway, so you’re not losing anything by using t.\nIn R:\n\n# t-based CI (standard approach)\nt.test(data$variable)$conf.int\n\n# You rarely need to manually use z"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#population-parameters-in-labbasic-science-research",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#population-parameters-in-labbasic-science-research",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Population Parameters in Lab/Basic Science Research",
+    "text": "Population Parameters in Lab/Basic Science Research\nQ: “T-distributions makes sense to me when you have a clearly defined population (like humans) that can be sampled (height of n=50). What about lab work? I run n = 5 experiments and looking at stimulation of cells (for example). Would you ever know the population parameters for something like this? Would you theoretically have to test ALL the cells to get this?”\nQ: “More of how this all applies to scenarios we may see in our work: I am unsure when the goal of a research question is to describe the data or estimate a population. I work in cell biology and do lots of quantitative microscopy, and when reporting results I am describing what I see in the sample of cells I imaged, is the goal then to extrapolate this to the general population of cells?”\nExcellent questions! The concept of “population” in lab research is more abstract but still applies.\nFor cell biology/microscopy:\nYour population is not all cells that exist in the universe, but rather:\n\nAll cells that COULD be generated under the same experimental conditions\nThe “infinite hypothetical” cells you could culture/image under identical protocols\nAll cells of this type under these specific conditions\n\nExample:\n\nYou image 50 cells in a microscopy experiment\nThose 50 cells are a SAMPLE\nThe POPULATION is “all cells of this type cultured under these conditions”\nμ = the true mean fluorescence intensity for this cell line under these conditions\nYou’ll never measure ALL possible cells, but μ exists conceptually\n\nDo you ever know μ? No, basically never. You always estimate it from your sample.\nThe statistical framework still applies:\n\nYou have 5 independent experimental replicates (n = 5)\nYou calculate \\(\\bar{x}\\) (mean cell stimulation) and s (SD of your replicates)\nYou use df = 4, and the t-distribution to build a CI for μ\nThis tells you about the “true” mean response of cells under these conditions\n\nWhen to use t-tests in lab work:\n✅ Comparing treatment vs. control in cell stimulation (n = 5 replicates per group) ✅ Comparing fluorescence intensity across conditions (n = 50 cells imaged per condition) ✅ Any situation where you have a sample and want to infer about the broader biological phenomenon\nKey insight: The “population” in basic science is often conceptual/theoretical rather than an actual enumerable group. But that’s okay! The statistics still work because you’re making inferences about what would happen if you repeated the experiment infinitely."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-to-report-se-vs.-sd-in-your-work",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-to-report-se-vs.-sd-in-your-work",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "When to Report SE vs. SD in Your Work",
+    "text": "When to Report SE vs. SD in Your Work\nQ: “Would it then be appropriate to report SE over SD or would I still report SD?”\nQ: “The semantics of standard error vs standard deviation have left me a little confused. The interpretation part for SE isn’t clicking to me for some reason.”\nDifferent purposes, both useful:\nRule of thumb: Use SD to describe variability in your data and SE (or a CI) to describe uncertainty in the mean.\nReport SD when:\n\nDescribing the variability in your sample/population\nShowing “how spread out are the individual values?”\nExample: “Cell diameter was 12.3 μm (SD = 2.1 μm)” → tells reader that individual cells vary by ~2 μm\n\nReport SE when:\n\nDescribing uncertainty in your ESTIMATE of the mean\nShowing “how confident are we in our estimate of the population mean?”\nExample: “Mean cell diameter was 12.3 μm (SE = 0.3 μm)” → tells reader that the true mean is probably very close to 12.3\n\nIn practice for cell biology/microscopy:\nYou often report both or use error bars to show uncertainty:\n\nBar plots with error bars = SE (shows precision of your mean estimate)\nText description = SD (shows biological variability)\n\nExample reporting:\n\n“Mean fluorescence intensity was 1250 AU (SD = 300 AU, n = 50 cells). This represents a statistically significant increase compared to control (mean = 900 AU, SE = 45 AU, p &lt; 0.001).”\n\nWhy both?\n\nSD (300) tells you: individual cells vary quite a bit\nSE (45) tells you: but we’re quite confident in the mean difference\n\nRemember:\n\nSD describes your data (larger is more variable)\nSE describes your uncertainty (larger is less certain)\nSE = SD/√n (so SE is always smaller than SD)\n\nCommon in papers:\n\nError bars in figures are often SEM or CIs (check journal conventions)\nText descriptions include both SD and n\n\nGoal:\n\nAre you describing the phenomenon? → SD\nAre you making an inference about the population mean? → SE\n\nFor your microscopy work: you’re doing both! You’re describing what you see (SD) AND extrapolating to the general population of cells (SE for uncertainty in your mean estimate)."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-and-why-to-use-clt",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#when-and-why-to-use-clt",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "When and Why to Use CLT",
+    "text": "When and Why to Use CLT\nQ: “Still a little unclear on why you would want to use CLT and in what context it would be useful by itself? Also, how do you determine the degree of skew is too much skew and you need to increase n? How is that defined, other than eye-balling a histogram?”\nWhy CLT is useful:\nThe CLT allows you to do statistical inference even when your data are NOT normally distributed!\nExample:\n\nYou measure hospital length of stay (very right-skewed: most stays are short, few are very long)\nYour sample distribution looks nothing like a normal distribution\nBut: Because of CLT, you know that the sampling distribution of \\(\\bar{x}\\) IS approximately normal (if n is large enough)\nThis lets you use t-tests and CIs even though your raw data are skewed\n\nWhen is n “large enough”?\nRules of thumb: These are heuristics, not strict rules. They’re meant to guide judgment, not replace it.\n\nn ≥ 30 is the classic rule (works for most distributions)\nn &lt; 30 can still work if your data are not too skewed\nn &gt; 15 usually fine for symmetric distributions\nHighly skewed data might need n &gt; 50\n\nHow to assess skewness:\nBeyond eyeballing histograms…\n\nSkewness &lt; 1 and n ≥ 15: probably fine\nSkewness between 1-2 and n ≥ 30: should be okay\nSkewness &gt; 2: might need n &gt; 50, or consider transformations/non-parametric methods\n\nWhen CLT “by itself” is useful:\nYou use CLT implicitly every time you:\n\nCalculate a CI for a mean (you assume the sampling distribution is normal)\nDo a t-test (same assumption)\nMake probability statements about sample means\n\nExample: “If we sample 50 patients, what’s the probability our sample mean is within 2 units of the true mean?” CLT lets you answer this even if individual patient values are skewed."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#understanding-t-beyond-the-r-code",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#understanding-t-beyond-the-r-code",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Understanding t* Beyond the R Code",
+    "text": "Understanding t* Beyond the R Code\nQ: “I’m also kind of confused on what the calculations for t* actually is beyond plugging it into the R code.”\nWhat t* actually represents:\nThe t* value tells you: “How many standard errors away from the mean do I need to go to capture the middle X% of the t-distribution?”\nExample with 95% CI:\n\nqt(0.975, df = 20)  # Returns ~2.086\n\n[1] 2.085963\n\n\nThis means: “In a t-distribution with 20 degrees of freedom, if I go ±2.086 standard errors from the mean, I’ll capture 95% of the distribution.”\nWhy 0.975 instead of 0.95?\nThe t-distribution (like the normal distribution) is symmetric. For a 95% CI:\n\nYou want 95% in the middle\nThat leaves 5% in the tails\nSplit evenly: 2.5% in each tail\nSo you want the value that has 2.5% to its right (97.5% to its left)\nThat’s why we use qt(0.975, df) not qt(0.95, df)\n\nWhat’s happening inside qt()?\nWithout going into the math details:\n\nR has the mathematical formula for the t-distribution\nIt’s solving: “What value of t has exactly 97.5% of the distribution to its left?”\nIt uses numerical methods to find this value\n\nVisual intuition:\nImagine the t-distribution as a hill:\n\nThe peak is at 0\nqt(0.975, df) finds the point where 97.5% of the area under the curve is to the left\nThis point gets closer to 1.96 (the z value) as df increases\n\nYou don’t need to calculate it by hand - that’s why we use R! But understanding that it’s a percentile of the t-distribution (like how 1.96 is the 97.5th percentile of the normal distribution) helps build intuition.\nPractical use:\n\nSmall df (5) → t* is large (2.57) → wider CIs (less certainty)\nLarge df (100) → t* is small (1.98) → narrower CIs (more certainty)\nInfinite df → t* = z* (1.96) → t-distribution becomes normal"
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#homework-and-exam-preparation",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#homework-and-exam-preparation",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Homework and Exam Preparation",
+    "text": "Homework and Exam Preparation\nQ: “Not for class, but on the homework, sometimes the wording is confusing and it is unclear what we need to do. This is true when there is some of the code already given, just adding a ‘given’ comment and then saying more explicitly what is needed would be helpful. Also the homework is taking me approximately 3-4 hours to complete, I am concerned with how long this is that the exam will be extremely long. Also, I know we will have an exam review, but maybe letting us know what kind of tasks we will need to be able to perform would help direct us.”\nThank you - this is helpful feedback.\nHomework clarity:\n\nI will add clearer labels in the homework templates (e.g., GIVEN vs YOUR TASK) and make the prompt for each part more explicit.\nIf something feels ambiguous while you are working, please reach out right away (office hours or email). Often a 2-minute clarification can save you a lot of time.\n\nHomework time:\nHomework is meant to be the main place you practice and build fluency, so it may take a few hours. If you find that a particular question is confusing or taking disproportionately long, let us know - that is useful information for improving the assignment.\nMidterm expectations:\nThe midterm is not designed to be a short, in-class exam. It will be a longer, take-home style assessment that is intended to take roughly 3–5 hours.\n\nYou will not need to memorize formulas.\nThe focus will be on applying ideas correctly and communicating your reasoning.\nYou should expect tasks similar in style to the homework, but more focused.\n\nBefore the midterm, I will provide guidance on:\n\nthe core concepts to prioritize,\nthe types of questions to expect,\nand a small set of practice problems."
+  },
+  {
+    "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#summary",
+    "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals_muddy_points.html#summary",
+    "title": "Muddy Points Responses: Sampling Distributions & Confidence Intervals",
+    "section": "Summary",
+    "text": "Summary\nKey takeaways:\n\nCritical values are just multipliers that tell you how wide your CI needs to be\nCI interpretation: “95% confident” means the procedure works 95% of the time, not that there’s a 95% probability for this specific interval\nSampling distribution is more important than sample distribution - it’s what lets you do inference\nDegrees of freedom = independent pieces of information left after estimation\n95% CIs are convention, not magic - balance confidence with precision\nUse t almost always in real research (you rarely know σ)\nPopulation in lab work is conceptual - “all cells under these conditions”\nReport SD for variability, SE for uncertainty in your estimate\nCLT lets you use normal theory even when data aren’t normal\nt* is a percentile of the t-distribution - R finds it for you\n\nKeep the questions coming! This is complex material and it’s normal to need multiple exposures to fully understand it."
+  },
+  {
+    "objectID": "homework/HW03/HW03.html",
+    "href": "homework/HW03/HW03.html",
+    "title": "BMSC 620 — Homework 3",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW03.qmd\nSmith_J_HW03.html\n\nWhen submitting Homework 3, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW03/HW03.html#homework-3",
+    "href": "homework/HW03/HW03.html#homework-3",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Homework 3",
+    "text": "Homework 3\nThis assignment reviews:\n\nBayes’ Theorem and medical testing\nRandom variables: expected value and variance\nBinomial distribution and probability calculations\nContinued practice with dplyr, janitor, rstatix, and ggplot2\n\nUnless stated otherwise, show your work using R code chunks."
+  },
+  {
+    "objectID": "homework/HW03/HW03.html#part-0-setup",
+    "href": "homework/HW03/HW03.html#part-0-setup",
+    "title": "BMSC 620 — Homework 3",
     "section": "Part 0: Setup",
-    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(janitor)\nlibrary(rstatix)"
+    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\nlibrary(oibiostat)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(janitor)\nlibrary(rstatix)"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-1-exploring-data-with-tidyverse-tools",
-    "href": "homework/HW02/HW02.html#part-1-exploring-data-with-tidyverse-tools",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 1: Exploring data with tidyverse tools",
-    "text": "Part 1: Exploring data with tidyverse tools\nIn this homework, you will work with the nhanes.samp dataset (the same dataset from HW1, but now using tidyverse tools!).\nLoad the dataset:\n\ndata(\"nhanes.samp\")\n\n\n1A. Initial data inspection\nUse the following tidyverse functions to explore the data:\n\nglimpse() to see the structure\nUse the pipe %&gt;% with head() to see first 5 rows (e.g., nhanes.samp %&gt;% head(5))\ndim() to get dimensions\n\nAnswer in plain text:\n\nHow many rows and columns does nhanes.samp have?\nWhat type of variable is Race1? What about Age?\nHow is this different from using str() in HW1?\n\nAnswers: 1. 2. 3.\n\n\n1B. Using filter() and select()\n\nUse filter() to keep only people with PhysActive == \"Yes\" (physically active)\nThen use select() to keep only the columns: Age, Gender, Race1, PhysActive, Pulse\nAssign this filtered/selected data to a new object called active_people\n\nHow many physically active people are in the dataset? (Use nrow() on your new object)\nAnswer:\n\n\n1C. Creating new variables with mutate()\nUsing the full nhanes.samp dataset:\n\nUse mutate() to create a new variable called age_group that categorizes age:\n\n“Child” if Age &lt; 18\n“Adult” if Age &lt; 65\n“Senior” if Age &gt;= 65\n\nUse select() to show just ID, Age, and age_group\nUse head() to show the first 10 rows\n\nHint: Use case_when() inside mutate()."
+    "objectID": "homework/HW03/HW03.html#part-1-bayes-theorem",
+    "href": "homework/HW03/HW03.html#part-1-bayes-theorem",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 1: Bayes’ Theorem",
+    "text": "Part 1: Bayes’ Theorem\n\nBackground\nA new rapid test for influenza has been developed. Clinical trials show:\n\nSensitivity: 85% (probability of testing positive given you have flu)\nSpecificity: 92% (probability of testing negative given you don’t have flu)\n\nDuring flu season, approximately 5% of people who visit their doctor with flu-like symptoms actually have influenza.\n\n\n1A. Set up the problem\nWrite out the given information using probability notation:\n\n\\(P(\\text{Test +} \\mid \\text{Flu}) =\\) ___________\n\\(P(\\text{Test -} \\mid \\text{No Flu}) =\\) ___________\n\\(P(\\text{Test +} \\mid \\text{No Flu}) =\\) ___________ (Calculate this from specificity)\n\\(P(\\text{Flu}) =\\) ___________\n\\(P(\\text{No Flu}) =\\) ___________\n\nFill in your answers above, then verify them in the code chunk below:\n\n# Given information\nsensitivity &lt;- \nspecificity &lt;- \nprevalence &lt;- \n\n# Calculate derived values\np_test_pos_given_no_flu &lt;- \np_no_flu &lt;- \n\n# Display\nsensitivity\np_test_pos_given_no_flu\nprevalence\np_no_flu\n\n\n\n1B. Calculate PPV using Bayes’ Theorem\nUse Bayes’ Theorem to calculate the Positive Predictive Value (PPV): What is the probability someone has flu given they tested positive?\n\\[\nP(\\text{Flu} \\mid \\text{Test +}) = \\frac{P(\\text{Test +} \\mid \\text{Flu}) \\times P(\\text{Flu})}{P(\\text{Test +} \\mid \\text{Flu}) \\times P(\\text{Flu}) + P(\\text{Test +} \\mid \\text{No Flu}) \\times P(\\text{No Flu})}\n\\]\nStep 1: Calculate the numerator (true positives)\n\nnumerator &lt;- \n\nnumerator\n\nStep 2: Calculate the denominator (all positive tests)\n\ndenominator &lt;- \n\ndenominator\n\nStep 3: Calculate PPV\n\nppv &lt;- \n\nppv\n\n# As a percentage\nppv * 100\n\n\n\n1C. Interpretation\nAnswer in 2-3 sentences:\n\nIf someone tests positive, what is the probability they actually have the flu?\nWhy is the PPV lower than the sensitivity (85%)?\n\nAnswers:\n\n\n\n\n\n\n1D. Calculate NPV\nNow calculate the Negative Predictive Value (NPV): What is the probability someone does NOT have flu given they tested negative?\n\\[\nP(\\text{No Flu} \\mid \\text{Test -}) = \\frac{P(\\text{Test -} \\mid \\text{No Flu}) \\times P(\\text{No Flu})}{P(\\text{Test -} \\mid \\text{No Flu}) \\times P(\\text{No Flu}) + P(\\text{Test -} \\mid \\text{Flu}) \\times P(\\text{Flu})}\n\\]\nHint: \\(P(\\text{Test -} \\mid \\text{Flu}) = 1 - \\text{sensitivity}\\)\n\n# Calculate NPV\n\nWhat is the NPV? Is it higher or lower than the PPV? Why?\nAnswer:"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-2-summary-statistics-with-rstatix",
-    "href": "homework/HW02/HW02.html#part-2-summary-statistics-with-rstatix",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 2: Summary statistics with rstatix",
-    "text": "Part 2: Summary statistics with rstatix\n\n2A. Summary for one variable\nUse get_summary_stats() from the rstatix package to calculate the mean and standard deviation of Pulse. Use type = \"mean_sd\".\n\n\n2B. Summary by groups\nUse group_by() and get_summary_stats() to calculate the mean and standard deviation of Pulse by PhysActive (physically active yes/no).\nDo physically active people have a higher or lower mean pulse rate? What might explain this?\nAnswer:\n\n\n2C. Multiple variables and groups\nCalculate summary statistics for Age, Pulse, and Weight grouped by both Gender AND PhysActive status. Use type = \"mean_sd\"."
+    "objectID": "homework/HW03/HW03.html#part-2-random-variables",
+    "href": "homework/HW03/HW03.html#part-2-random-variables",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 2: Random Variables",
+    "text": "Part 2: Random Variables\n\n2A. Discrete probability distribution\nA hospital emergency department tracks the number of patients arriving per hour during overnight shifts. The probability distribution is:\n\n\n\nNumber of patients (\\(x\\))\n0\n1\n2\n3\n4\n5\n\n\n\n\n\\(P(X = x)\\)\n0.05\n0.15\n0.30\n0.25\n0.15\n0.10\n\n\n\nQuestion 1: Verify this is a valid probability distribution. What must be true?\n\n# Create the probability distribution\nx &lt;- c(0, 1, 2, 3, 4, 5)\nprob &lt;- c(0.05, 0.15, 0.30, 0.25, 0.15, 0.10)\n\n# Check if probabilities sum to 1\nsum(prob)\n\n# Hint: probabilities in a valid distribution must sum to 1\n# You may find sum() helpful here (see ?sum)\n\nAnswer:\nQuestion 2: Calculate the expected value (mean). On average, how many patients arrive per hour?\n\\[E(X) = \\sum x_i \\cdot P(X = x_i)\\]\n\n# Calculate expected value\n# Hint: expected value is a weighted average\n# In R, this can be computed as sum(x * prob)\n\nAnswer: The expected number of patients per hour is ________.\nQuestion 3: Calculate the variance and standard deviation.\n\\[\\text{Var}(X) = \\sum (x_i - \\mu)^2 \\cdot P(X = x_i)\\]\n\n# Calculate variance\n# Hint: first compute the mean (mu), then use\n# sum((x - mu)^2 * prob)\n\n\n\n# Calculate standard deviation\n# Hint: SD is the square root of the variance (see sqrt())\n\nAnswer:\n\nVariance = ________\nStandard deviation = ________\n\n\n\n2B. Linear combinations\nSuppose the hospital emergency department operates for 3 hours during an overnight shift. Let \\(X_1\\), \\(X_2\\), and \\(X_3\\) be the number of patients arriving in hours 1, 2, and 3, respectively. Assume each has the same distribution as above and arrivals are independent across hours.\nQuestion 1: What is the expected total number of patients arriving during the 3-hour shift?\nUse: \\(E(X_1 + X_2 + X_3) = E(X_1) + E(X_2) + E(X_3)\\)\n\n# Calculate expected total\n\nAnswer:\nQuestion 2: What is the variance and standard deviation of the total number of patients?\nUse: \\(\\text{Var}(X_1 + X_2 + X_3) = \\text{Var}(X_1) + \\text{Var}(X_2) + \\text{Var}(X_3)\\) (for independent random variables)\n\n# Calculate variance of total\n\n\n# Calculate standard deviation of total\n\nAnswer:\n\nVariance = ________\nStandard deviation = ________"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-3-frequency-tables-with-janitor",
-    "href": "homework/HW02/HW02.html#part-3-frequency-tables-with-janitor",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 3: Frequency tables with janitor",
-    "text": "Part 3: Frequency tables with janitor\n\n3A. One-way frequency table\nUse tabyl() to create a frequency table for the Race1 variable.\nWhich racial/ethnic group has the highest percentage in this sample?\nAnswer:\n\n\n3B. Two-way table\nCreate a two-way table showing the relationship between Gender and PhysActive using tabyl().\n\n\n3C. Adorned tables\n\nCreate the same Gender × PhysActive table\nAdd row percentages using adorn_percentages(\"row\")\nFormat percentages with one decimal place using adorn_pct_formatting(digits = 1)\nAdd totals for rows and columns using adorn_totals(c(\"row\", \"col\"))\n\nAmong females, what percentage are physically active? Among males? (Look at the row percentages)\nAnswer:"
+    "objectID": "homework/HW03/HW03.html#part-3-binomial-distribution",
+    "href": "homework/HW03/HW03.html#part-3-binomial-distribution",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 3: Binomial Distribution",
+    "text": "Part 3: Binomial Distribution\n\n3A. Identifying binomial scenarios\nFor each scenario below, state whether it follows a binomial distribution. If yes, identify \\(n\\) (number of trials) and \\(p\\) (probability of success). If no, explain why not.\nScenario 1: A researcher tests 20 patients for a genetic mutation. Each patient has a 15% chance of having the mutation. We count how many patients have the mutation.\nAnswer:\nScenario 2: A doctor sees patients until they find 5 patients with high blood pressure. We count how many patients the doctor had to see.\nAnswer:\nScenario 3: A clinical trial enrolls 50 patients. Each patient is randomly assigned to treatment (probability 0.5) or control (probability 0.5). We count how many patients receive treatment.\nAnswer:\n\n\n3B. Binomial calculations\nAccording to recent data, approximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly sample 15 adults from this age group.\nLet \\(X\\) = the number of adults with diabetes in our sample.\nQuestion 1: What distribution does \\(X\\) follow? Write this using notation.\nAnswer: \\(X \\sim\\) ________________\nQuestion 2: What is the expected number of adults with diabetes in the sample?\n\\[E(X) = np\\]\n\n# Calculate expected value\nn &lt;- \np &lt;- \n\nexpected_value &lt;- \n\nexpected_value\n\nAnswer:\nQuestion 3: What is the standard deviation?\n\\[SD(X) = \\sqrt{np(1-p)}\\]\n\n# Calculate standard deviation\n\nAnswer:\nQuestion 4: What is the probability that exactly 4 adults have diabetes?\nUse the formula: \\(P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\)\nOr use R: dbinom(x = k, size = n, prob = p)\n\n# Calculate P(X = 4)\n\nAnswer:\nQuestion 5: What is the probability that at most 2 adults have diabetes?\n\\[P(X \\leq 2) = P(X=0) + P(X=1) + P(X=2)\\]\nUse R: pbinom(q = k, size = n, prob = p)\n\n# Calculate P(X &lt;= 2)\n\nAnswer:\nQuestion 6: What is the probability that at least 5 adults have diabetes?\n\\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\nOr use: pbinom(q = 4, size = n, prob = p, lower.tail = FALSE)\n\n# Calculate P(X &gt;= 5) using both methods\n\n# Method 1: complement rule\n\n\n# Method 2: lower.tail = FALSE\n\nAnswer:\n\n\n3C. Visualizing the binomial distribution\nCreate a bar plot showing the binomial probability distribution for \\(n = 15\\) and \\(p = 0.203\\).\n\n# Create probability distribution data\nx_values &lt;- 0:15\nprobabilities &lt;- dbinom(x_values, size = 15, prob = 0.203)\n\n# Create a data frame\nbinom_data &lt;- data.frame(\n  x = x_values,\n  probability = probabilities\n)\n\n# Create bar plot\nggplot(binom_data, aes(x = x, y = probability)) +\n  geom_col(fill = \"steelblue\", color = \"black\") +\n  labs(\n    title = \"Binomial Distribution: n = 15, p = 0.203\",\n    x = \"Number of Adults with Diabetes\",\n    y = \"Probability\"\n  ) +\n  scale_x_continuous(breaks = 0:15) # controls x-axis tick marks (we'll learn more about scale_* later; see ?scale_x_continuous)\n\nLooking at the plot, what is the most likely number of adults with diabetes in a sample of 15? Does this match the expected value you calculated?\nAnswer:"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-4-data-visualization-with-ggplot2",
-    "href": "homework/HW02/HW02.html#part-4-data-visualization-with-ggplot2",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 4: Data visualization with ggplot2",
-    "text": "Part 4: Data visualization with ggplot2\n\n4A. Histogram\nCreate a histogram of Age using ggplot2. Include:\n\nbins = 20\nA title: “Distribution of Age in NHANES Sample”\nAn x-axis label: “Age (years)”\n\nDescribe the distribution in 1-2 sentences (shape, center, spread, any interesting features).\nAnswer:\n\n\n4B. Boxplot by group\nCreate a boxplot comparing Pulse across PhysActive groups. Include:\n\nAppropriate axis labels\nA title\nTry adding fill = PhysActive inside aes() for color\n\nDo physically active people appear to have different pulse rates? Are there any outliers?\nAnswer:\n\n\n4C. Scatterplot\nCreate a scatterplot of Age (x-axis) vs Pulse (y-axis).\n\nColor the points by Gender\nSet alpha = 0.5 for transparency\nAdd appropriate labels and a title\n\nDescribe any relationship between age and pulse rate in 1-2 sentences.\nAnswer:\n\n\n4D. Bar chart\nCreate a bar chart showing counts of the Race1 variable.\n\nAdd a title and axis labels\nUse coord_flip() at the end to make horizontal bars (easier to read the labels)"
+    "objectID": "homework/HW03/HW03.html#part-4-data-analysis-with-tidyverse-continued-practice",
+    "href": "homework/HW03/HW03.html#part-4-data-analysis-with-tidyverse-continued-practice",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 4: Data analysis with tidyverse (continued practice)",
+    "text": "Part 4: Data analysis with tidyverse (continued practice)\nFor this section, we’ll continue working with the nhanes.samp dataset. You may use either the formula or R, but show the code you use.\n\ndata(\"nhanes.samp\")\n\n\n4A. Data wrangling\nCreate a new dataset called diabetes_subset that:\n\nFilters to people aged 40 or older\nRemoves rows with missing Diabetes values (use filter(!is.na(Diabetes)))\nSelects the columns: ID, Age, Gender, Race1, BMI, Diabetes\n\nHow many people are in this subset? (Use nrow())\nAnswer:\n\n\n4B. Summary statistics by group\nUsing your diabetes_subset, calculate the mean and standard deviation of BMI grouped by Diabetes status. [Hint: use group_by and get_summary_stats from the rstatix pacakge]\nDo people with diabetes have higher or lower BMI on average? Does this match what you’d expect?\nAnswer:\n\n\n4C. Two-way frequency table\nCreate a two-way table showing the relationship between Diabetes and Gender using tabyl(). Add row percentages.\nAmong people aged 40+, what percentage of females have diabetes? What about males?\nAnswer:\n\n\n4D. Visualization\nCreate a boxplot comparing BMI across Diabetes groups. Color the boxes by Diabetes status.\nDescribe what you see in 1-2 sentences.\nAnswer:"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-5-combining-dplyr-and-ggplot2-bonus---optional",
-    "href": "homework/HW02/HW02.html#part-5-combining-dplyr-and-ggplot2-bonus---optional",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 5: Combining dplyr and ggplot2 (BONUS - Optional)",
-    "text": "Part 5: Combining dplyr and ggplot2 (BONUS - Optional)\nThis section is optional but recommended for extra practice combining dplyr and ggplot2.\n\n5A. Filter then visualize\n\nUse pipes to filter to people under age 20 (children/adolescents)\nCreate a histogram of their Pulse\nUse facet_wrap(~Gender) to create separate panels by gender\n\nDo the pulse rate distributions look similar between males and females in this age group?\nAnswer:\n\n\n5B. Complex workflow\nCreate a workflow that:\n\nFilters to people who are physically active (PhysActive == \"Yes\")\nCreates a new variable age_category:\n\n“Under 30” if Age &lt; 30\n“30-50” if Age &lt; 50\n“50+” if Age &gt;= 50\n\nCreates a boxplot of Pulse by age_category\nColors the boxes by age_category using fill = age_category in aes()\nFacets by Gender"
+    "objectID": "homework/HW03/HW03.html#part-5-connecting-concepts-integration",
+    "href": "homework/HW03/HW03.html#part-5-connecting-concepts-integration",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 5: Connecting concepts (Integration)",
+    "text": "Part 5: Connecting concepts (Integration)\n\n5A. Binomial to data\nIn Part 3, we calculated that with \\(n=15\\) and \\(p=0.203\\), the expected number of adults with diabetes is approximately 3.\nNow let’s check this against real data. Using the full nhanes.samp dataset:\n\nFilter to adults aged 65-74 (use filter(Age &gt;= 65 & Age &lt;= 74))\nCalculate the proportion who have diabetes (use tabyl(Diabetes))\n\nQuestions:\n\nWhat proportion of adults aged 65-74 in this sample have diabetes?\nHow does this compare to the 20.3% we used in our binomial calculations?\nIf you randomly selected 15 people from this sample, would you expect about 3 to have diabetes?\n\nAnswers:\n\n\n\n\n\n\n\n5B. Bayes’ Theorem with data\nSuppose we use BMI &gt;= 30 as a “test” for diabetes (obese BMI as a predictor).\nCalculate the following using the diabetes_subset you created in Part 4A:\n\n# Create BMI test variable\ndiabetes_subset &lt;- diabetes_subset %&gt;%\n  mutate(BMI_test = if_else(BMI &gt;= 30, \"Positive\", \"Negative\"))\n\n# Create contingency table\ntable_diabetes_bmi &lt;- diabetes_subset %&gt;%\n  tabyl(Diabetes, BMI_test)\n\ntable_diabetes_bmi\n\nTreat BMI_test as the test result and Diabetes as the true condition.\n\n“Positive” = BMI ≥ 30\n“Negative” = BMI &lt; 30\n\nQuestion 1: What is the sensitivity? (Among people with diabetes, what proportion have BMI &gt;= 30?)\nHint: Look at the “Yes” row of the Diabetes column\nAnswer:\nQuestion 2: What is the specificity? (Among people without diabetes, what proportion have BMI &lt; 30?)\nAnswer:\nQuestion 3: Using the table, calculate the PPV: Among people with BMI &gt;= 30, what proportion have diabetes?\nAnswer:"
   },
   {
-    "objectID": "homework/HW02/HW02.html#part-6-probability-concepts",
-    "href": "homework/HW02/HW02.html#part-6-probability-concepts",
-    "title": "BMSC 620 — Homework 2",
-    "section": "Part 6: Probability concepts",
-    "text": "Part 6: Probability concepts\nFor this section, we’ll work with a medical testing scenario.\nConsider the following contingency table showing disease status and test results for 1,000 patients:\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1,000\n\n\n\n\n6A. Marginal probabilities\nCalculate the following marginal probabilities:\n\n\\(P(\\text{Disease})\\)\n\\(P(\\text{Test +})\\)\n\\(P(\\text{No Disease})\\)\n\nShow your calculations below (you can do this by hand or in R):\nAnswers: 1. P(Disease) = 2. P(Test +) = 3. P(No Disease) =\n\n\n6B. Joint probabilities\nCalculate the following joint probabilities:\n\n\\(P(\\text{Disease and Test +})\\)\n\\(P(\\text{No Disease and Test -})\\)\n\\(P(\\text{Disease and Test -})\\)\n\nAnswers: 1. P(Disease and Test +) = 2. P(No Disease and Test -) = 3. P(Disease and Test -) =\n\n\n6C. Conditional probabilities\nCalculate the following conditional probabilities. Remember:\n\\[P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\]\n\n\\(P(\\text{Disease} \\mid \\text{Test +})\\) - This is the Positive Predictive Value (PPV)\n\\(P(\\text{No Disease} \\mid \\text{Test -})\\) - This is the Negative Predictive Value (NPV)\n\\(P(\\text{Test +} \\mid \\text{Disease})\\) - This is the sensitivity\n\nShow your work:\nAnswers: 1. P(Disease | Test +) = 2. P(No Disease | Test -) = 3. P(Test + | Disease) =\n\n\n6D. Interpretation\nIn 2-3 sentences, explain what the Positive Predictive Value (PPV) from 6C.1 tells us. Why might this value be lower than the sensitivity?\nAnswer:"
+    "objectID": "homework/HW03/HW03.html#part-6-reflection-optional-but-encouraged",
+    "href": "homework/HW03/HW03.html#part-6-reflection-optional-but-encouraged",
+    "title": "BMSC 620 — Homework 3",
+    "section": "Part 6: Reflection (Optional but encouraged)",
+    "text": "Part 6: Reflection (Optional but encouraged)\nIn 3-4 sentences, reflect on the connection between:\n\nBayes’ Theorem (flipping conditional probabilities)\nBinomial distribution (modeling repeated trials)\nReal data analysis (testing these concepts)\n\nHow do these topics relate to biomedical research?\nAnswer:"
   },
   {
-    "objectID": "homework/HW02/HW02.html#final-check",
-    "href": "homework/HW02/HW02.html#final-check",
-    "title": "BMSC 620 — Homework 2",
+    "objectID": "homework/HW03/HW03.html#final-check",
+    "href": "homework/HW03/HW03.html#final-check",
+    "title": "BMSC 620 — Homework 3",
     "section": "Final check",
-    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou’ve answered all text questions in Parts 1-6\nYou uploaded both the .qmd and .html files\n(Optional) If you completed Part 5, make sure those chunks run too!"
+    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou’ve answered all required questions\nYou uploaded both the .qmd and .html files"
   },
   {
-    "objectID": "homework/HW04/HW04.html",
-    "href": "homework/HW04/HW04.html",
-    "title": "BMSC 620 — Homework 4",
+    "objectID": "homework/HW01/HW01.html",
+    "href": "homework/HW01/HW01.html",
+    "title": "BMSC 620 — Homework 1",
     "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW04.qmd\nSmith_J_HW04.html\n\nWhen submitting Homework 4, upload both:\n\nthe .qmd file\nthe rendered .html file"
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 1, upload both:\n\nthe .qmd file\nthe rendered .html file"
   },
   {
-    "objectID": "homework/HW04/HW04.html#instructions",
-    "href": "homework/HW04/HW04.html#instructions",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Instructions",
-    "text": "Instructions\n\nAnswer each question clearly and concisely.\nShow your work when calculations are involved.\nUse R to compute probabilities and quantiles when requested.\nYou may round final answers to 3 decimal places unless otherwise noted.\nDo not use continuity correction for Normal approximations in this assignment.\n\n\n\n\n\n\n\nTip\n\n\n\nSome code chunks are intentionally incomplete. Fill in the missing values so the code runs correctly."
+    "objectID": "homework/HW01/HW01.html#homework-1",
+    "href": "homework/HW01/HW01.html#homework-1",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Homework 1",
+    "text": "Homework 1\nThis assignment reviews:\n\nwriting and running code in Quarto\nsummarizing numeric and categorical variables\nfrequency tables and contingency tables\nbar plots, histograms, and box plots\n\nUnless stated otherwise, show your work using R code chunks."
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-1-the-normal-distribution",
-    "href": "homework/HW04/HW04.html#part-1-the-normal-distribution",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 1: The Normal Distribution",
-    "text": "Part 1: The Normal Distribution\n\n1A. Properties of the Normal distribution\nAnswer briefly (1–2 sentences each).\n\nWhat does it mean for a distribution to be symmetric?\nWhat parameters define a Normal distribution?\nWhy is the Normal distribution important in statistics?\n\nAnswers:"
+    "objectID": "homework/HW01/HW01.html#part-0-setup",
+    "href": "homework/HW01/HW01.html#part-0-setup",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 0: Setup",
+    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)"
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-2-z-scores-and-standardization",
-    "href": "homework/HW04/HW04.html#part-2-z-scores-and-standardization",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 2: Z-scores and Standardization",
-    "text": "Part 2: Z-scores and Standardization\nSuppose adult systolic blood pressure (SBP) is Normally distributed with:\n\nMean = 120 mmHg\nStandard deviation = 15 mmHg\n\n\n2A. Calculating z-scores\n\nCompute the z-score for an individual with SBP = 135 mmHg.\nInterpret this z-score in words.\n\n\n# Define parameters\nmu &lt;- 120\nsigma &lt;- 15\nx &lt;- 135\n\n# Compute z-score: z = (x - mu) / sigma\nz &lt;- \n\nz\n\nAnswers:"
+    "objectID": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "href": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 1: R objects and vectors",
+    "text": "Part 1: R objects and vectors\n\n1A. Calculator practice\nCreate code that computes each of the following (one line each):\n\n12 / 5\n3^4\nsqrt(81)\n4^3 - 2 * 7 + 9 / 2\n\n\n# Your code here\n\n\n\n1B. Create vectors and summarize\n\nCreate a vector named x containing the numbers: 4, 9, 2, 10, 7, 7\nCompute the mean and standard deviation of x\nCompute the median and IQR of x\n\n\n\n1C. Missing values\n\nCreate a vector named y containing: 2, 5, NA, 7, 9\nCompute mean(y). What happens?\nCompute the mean again ignoring missing values\n\nWrite 1 to 2 sentences explaining what na.rm = TRUE does.\nYour explanation:"
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-3-probabilities-from-the-normal-distribution",
-    "href": "homework/HW04/HW04.html#part-3-probabilities-from-the-normal-distribution",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 3: Probabilities from the Normal Distribution",
-    "text": "Part 3: Probabilities from the Normal Distribution\nUsing the same SBP distribution:\n\n3A. Probabilities\n\nWhat proportion of adults have SBP above 140 mmHg?\nWhat proportion have SBP between 110 and 130 mmHg?\n\n\n# Proportion above 140\npnorm(\n  q = ,\n  mean = ,\n  sd = ,\n  lower.tail = \n)\n\n# Proportion between 110 and 130\n# P(110 &lt; X &lt; 130) = P(X &lt; 130) - P(X &lt; 110)\n\nAnswers:"
+    "objectID": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "href": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 2: Inspecting a dataset (nhanes.samp)",
+    "text": "Part 2: Inspecting a dataset (nhanes.samp)\nIn this homework, you will work with the dataset nhanes.samp, which is included in the oibiostat package.\nThe National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a sample of 200 individuals from NHANES, provided for instructional purposes.\nTo load the dataset, run:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n\n2A. Basic inspection\nRun the following functions:\n\ndim(nhanes.samp)\nnames(nhanes.samp)\nstr(nhanes.samp)\nhead(nhanes.samp)\n\nAnswer the questions below in plain text.\n\nHow many rows and columns does nhanes.samp have?\nName two categorical variables? (i.e. Factor variable type)\nGive one example of a numeric variable. (int or num)\n\nAnswers: 1. 2. 3.\n\n\n2B. Accessing a single variable with $\n\nUse $ to pull out Age\nCompute the mean, sd, median, and IQR of Age\n\n\n\n2C. Working with NA values.\nWe can see that some variables in the dataset have missing values (NA) like the variable Height.\n\nsummary(nhanes.samp$Height)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   90.6   156.6   166.2   162.6   175.7   191.3      10 \n\n\n\nUse $ to pull out Height\nCompute the mean, sd, median, and IQR of Height. Hint: you will need to remove the NA values by adding the argument na.rm = TRUE to the function calls."
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-4-quantiles-and-cutoffs",
-    "href": "homework/HW04/HW04.html#part-4-quantiles-and-cutoffs",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 4: Quantiles and Cutoffs",
-    "text": "Part 4: Quantiles and Cutoffs\n\n4A. Percentiles\n\nWhat SBP value corresponds to the 90th percentile?\nHypertension screening flags the top 10% of SBP values. What is the cutoff?\n\n\n# 90th percentile\nqnorm(\n  p = ,\n  mean = ,\n  sd = \n)\n\nAnswers:\n\n\n\n\nInterpret the cutoff in one sentence:"
+    "objectID": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "href": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 3: Summarizing one categorical variable",
+    "text": "Part 3: Summarizing one categorical variable\nWe will summarize Gender\n\n3A. Counts and proportions\n\nUse table() to get counts of Gender\nUse prop.table() to get proportions of Gender\nConvert proportions to percentages\n\nHint: table(nhanes.samp$Gender) and prop.table(...)\n\n\n3B. Bar plot\nMake a bar plot of Gender using the barplot function."
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-5-binomial-distribution",
-    "href": "homework/HW04/HW04.html#part-5-binomial-distribution",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 5: Binomial Distribution",
-    "text": "Part 5: Binomial Distribution\nA new medication has a 30% chance of success for each patient. Suppose 20 patients are treated.\n\n5A. Exact Binomial probabilities\n\nWhat is the probability that exactly 8 patients respond?\nWhat is the probability that at least 5 patients respond?\n\n\n# Exactly 8 successes\ndbinom(\n  x = ,\n  size = ,\n  prob = \n)\n\n# At least 5 successes\n# P(X &gt;= 5) = P(X &gt; 4) = 1 - P(X &lt;= 4)\npbinom(\n  q = ,\n  size = ,\n  prob = ,\n  lower.tail = \n)\n\nAnswers:"
+    "objectID": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "href": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 4: Two categorical variables (contingency tables)",
+    "text": "Part 4: Two categorical variables (contingency tables)\nWe can use the table() function to examine the relationships between two categorical variables. Here is an example using Gender and Race1:\n\ntable(nhanes.samp$Gender, nhanes.samp$Race1)   # counts\n\n        \n         Black Hispanic Mexican White Other\n  female     7        8       9    65    13\n  male      16        6      13    57     6\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions\n\n        \n              Black   Hispanic    Mexican      White      Other\n  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098\n  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions\n\n        \n             Black  Hispanic   Mexican     White     Other\n  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105\n  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895\n\n\nUsing row percentages (margin = 1), where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.\nUsing column percentages (margin = 2), where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.\n\n4A. Contingency table (counts)\nChoose either the Diabetes or SmokeNow variable in the data set. Create a contingency table similar to above with Gender and the variable that you choose.\n\n\n4B. Row proportions vs column proportions\n\nCreate a row proportion table (each row sums to 1)\nCreate a column proportion table (each column sums to 1)\n\nHint:\n\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)\n\n\n\n4C. Interpretation\nAnswer each question in 1 to 2 sentences.\n\nProvide 1 or 2 short sentences describing the row percentages.\nProvide 1 or 2 short sentences describing the column percentages.\n\nAnswers: 1. 2."
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-6-normal-approximation-to-the-binomial",
-    "href": "homework/HW04/HW04.html#part-6-normal-approximation-to-the-binomial",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 6: Normal Approximation to the Binomial",
-    "text": "Part 6: Normal Approximation to the Binomial\nSuppose a manufacturing process has a defect rate of 10%. Out of 200 items produced:\n\n6A. Check conditions\n\nState the mean and standard deviation of the Binomial distribution.\nVerify whether a Normal approximation is reasonable.\n\n\nn &lt;- 200\np &lt;- 0.10\n\n# Mean of binomial: mu = n * p\nmu_b &lt;- \n\n# SD of binomial: sd = sqrt(n * p * (1 - p))\nsd_b &lt;- \n\nmu_b\nsd_b\n\n# Check conditions: np &gt;= 10 and n(1-p) &gt;= 10\n\nAnswers:\n\n\n\n\n\n\n6B. Approximate probability\nUse a Normal approximation without continuity correction.\nWhat is the approximate probability that more than 30 items are defective?\n\n# P(X &gt; 30) using Normal approximation\npnorm(\n  q = ,\n  mean = ,\n  sd = ,\n  lower.tail = \n)\n\nAnswer:\nBriefly comment on whether this approximation seems reasonable:"
+    "objectID": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "href": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Part 5: Visual summaries for numeric variables",
+    "text": "Part 5: Visual summaries for numeric variables\n\n5A. Histogram\nMake a histogram of BMI.\nUsing the hist() function, you can add:\n\na title by adding an argument main = \"Histogram of BMI\"\nand a label for the x-axis using xlab = \"BMI\"\nWhen in doubt about arguments to functions, use the ? then the function name to get help. i.e. type in the console ?hist to get help for the hist() function.\n\nIf you get an error due to missing values, use na.omit() or remove NA values before calling hist().\n\n\n5B. Box plot (overall)\nMake a single box plot of Height using boxplot(). Include a title “Box plot of Height” and a label for the y-axis (ylab = \"Height\"). Get help using ?boxplot if you need it.\nNOTE: We saw earlier that Height contained NA values. boxplot() will ignore NA values automatically.\n\n\n5C. Box plot by group\nMake a box plot of Height by Gender.\nIf you look at the first example in the help for the boxplot function ?boxplot, they give an example of a box plot of count by spray using the InsectSprays dataset.\n\nboxplot(count ~ spray, data = InsectSprays, col = \"lightgray\")\n\nFollow their example to make your Height by Gender box plot with the nhanes.samp data.\nWhich group has a higher median height? How can you tell from the figure? Are there any outliers?\nAnswer:"
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-7-poisson-distribution",
-    "href": "homework/HW04/HW04.html#part-7-poisson-distribution",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 7: Poisson Distribution",
-    "text": "Part 7: Poisson Distribution\nEmergency room arrivals follow a Poisson distribution with an average rate of 3 arrivals per hour.\n\n7A. Probabilities\n\nWhat is the probability of exactly 2 arrivals in an hour?\nWhat is the probability of at least 5 arrivals in an hour?\n\n\n# Exactly 2 arrivals\ndpois(\n  x = ,\n  lambda = \n)\n\n# At least 5 arrivals: P(X &gt;= 5) = 1 - P(X &lt;= 4)\nppois(\n  q = ,\n  lambda = ,\n  lower.tail = \n)\n\nAnswers:"
+    "objectID": "homework/HW01/HW01.html#final-check",
+    "href": "homework/HW01/HW01.html#final-check",
+    "title": "BMSC 620 — Homework 1",
+    "section": "Final check",
+    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou uploaded both the .qmd and .html files"
   },
   {
-    "objectID": "homework/HW04/HW04.html#part-8-choosing-the-right-distribution",
-    "href": "homework/HW04/HW04.html#part-8-choosing-the-right-distribution",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Part 8: Choosing the Right Distribution",
-    "text": "Part 8: Choosing the Right Distribution\nFor each scenario, state which distribution (Normal, Binomial, or Poisson) is most appropriate and briefly explain why.\n\nNumber of typos on a randomly selected manuscript page\nProportion of voters in a sample who support a candidate\nAdult heights in a large population\n\nAnswers:"
-  },
-  {
-    "objectID": "homework/HW04/HW04.html#optional-not-graded-reflection",
-    "href": "homework/HW04/HW04.html#optional-not-graded-reflection",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Optional (Not Graded): Reflection",
-    "text": "Optional (Not Graded): Reflection\nIn 2–3 sentences, describe one situation where using the wrong distribution could lead to misleading conclusions.\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW04/HW04.html#submission-checklist",
-    "href": "homework/HW04/HW04.html#submission-checklist",
-    "title": "BMSC 620 — Homework 4",
-    "section": "Submission checklist",
-    "text": "Submission checklist\nBefore submitting, make sure you have:\n\nAnswered all required questions\nIncluded R output where requested\nWritten brief interpretations in words when asked\nRendered your HTML successfully\nUploaded both .qmd and .html files"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html",
-    "href": "homework/HW00/HW00.html",
-    "title": "BMSC 620 — Homework 0",
+    "objectID": "exams.html",
+    "href": "exams.html",
+    "title": "Exams",
     "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#homework-0",
-    "href": "homework/HW00/HW00.html#homework-0",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Homework 0",
-    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 1: Markdown practice",
-    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 2: R code chunks",
-    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
-  },
-  {
-    "objectID": "homework/HW00/HW00.html#part-3-final-check",
-    "href": "homework/HW00/HW00.html#part-3-final-check",
-    "title": "BMSC 620 — Homework 0",
-    "section": "Part 3: Final check",
-    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html",
-    "href": "resources/keyboard_shortcuts.html",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "",
-    "text": "These are the keyboard shortcuts you’ll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Most Essential Shortcuts",
-    "text": "Most Essential Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nInsert pipe %&gt;%\nCmd + Shift + M\nCtrl + Shift + M\n\n\nInsert code chunk\nCmd + Option + I\nCtrl + Alt + I\n\n\nRun current line/selection\nCmd + Enter\nCtrl + Enter\n\n\nRun current chunk\nCmd + Shift + Enter\nCtrl + Shift + Enter\n\n\nRun all chunks above\nCmd + Option + P\nCtrl + Alt + P\n\n\nComment/uncomment line(s)\nCmd + Shift + C\nCtrl + Shift + C\n\n\nInsert assignment &lt;-\nOption + - (minus)\nAlt + - (minus)"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Additional Helpful Shortcuts",
-    "text": "Additional Helpful Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nMove cursor to source editor\nCtrl + 1\nCtrl + 1\n\n\nMove cursor to console\nCtrl + 2\nCtrl + 2\n\n\nClear console\nCtrl + L\nCtrl + L\n\n\nRestart R session\nCmd + Shift + 0\nCtrl + Shift + F10\n\n\nShow keyboard shortcut reference\nOption + Shift + K\nAlt + Shift + K\n\n\nFind in files\nCmd + Shift + F\nCtrl + Shift + F\n\n\nAuto-complete\nTab\nTab\n\n\nGet help for function\nF1 (cursor on function)\nF1 (cursor on function)"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
-    "href": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "Tips for Learning Shortcuts",
-    "text": "Tips for Learning Shortcuts\n\nStart with 2-3: Don’t try to memorize all of these at once. Start with the pipe operator and running code.\nUse them consistently: The more you use a shortcut, the more automatic it becomes.\nView all shortcuts: In RStudio, go to Tools → Keyboard Shortcuts Help or press Option/Alt + Shift + K to see the complete list.\nCustomize shortcuts: You can customize shortcuts in Tools → Modify Keyboard Shortcuts."
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
-    "href": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "The Shortcuts You’ll Use Every Class",
-    "text": "The Shortcuts You’ll Use Every Class\nIf you only remember three shortcuts, make them these:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line\nCmd/Ctrl + Shift + C - Comment/uncomment\n\nThese three will save you countless hours of typing!"
-  },
-  {
-    "objectID": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
-    "href": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
-    "title": "Essential RStudio Keyboard Shortcuts",
-    "section": "RStudio Cheatsheets",
-    "text": "RStudio Cheatsheets\nRStudio provides official cheatsheets for many packages and topics. Access them in RStudio:\nHelp → Cheatsheets\nOr download them directly from: https://posit.co/resources/cheatsheets/\n\nMost relevant cheatsheets for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and shortcuts\nData Transformation with dplyr - The dplyr verbs we use constantly\nData Visualization with ggplot2 - Creating plots\nR Markdown - Works for Quarto documents too\n\n\nTip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!"
-  },
-  {
-    "objectID": "instructors.html",
-    "href": "instructors.html",
-    "title": "Instructors",
-    "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "See Sakai",
     "crumbs": [
       "Home",
-      "Course info",
-      "Instructors"
+      "Exams"
     ]
   },
   {
-    "objectID": "instructors.html#teaching-team",
-    "href": "instructors.html#teaching-team",
-    "title": "Instructors",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
     "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
+      "Home"
     ]
   },
   {
-    "objectID": "instructors.html#office-hours",
-    "href": "instructors.html#office-hours",
-    "title": "Instructors",
-    "section": "Office hours",
-    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "instructors.html#what-to-contact-us-about",
-    "href": "instructors.html#what-to-contact-us-about",
-    "title": "Instructors",
-    "section": "What to contact us about",
-    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Instructors"
-    ]
-  },
-  {
-    "objectID": "weeks/week_04.html",
-    "href": "weeks/week_04.html",
-    "title": "Week 4",
+    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
+    "href": "index.html#bmsc-620-introduction-to-biostatistics",
+    "title": "BMSC 620: Introduction to Biostatistics",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#homework-schedule",
+    "href": "homework.html#homework-schedule",
+    "title": "Homework",
+    "section": "Homework schedule",
+    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/27\nHW 02 files (OneDrive)\nView HW 02\n\n\n3\n02/01\nHW 03 files (OneDrive)\nView HW 03\n\n\n4\n02/08\nHW 04 files (OneDrive)\nView HW 04\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "homework.html#grading-rubric-10-points",
+    "href": "homework.html#grading-rubric-10-points",
+    "title": "Homework",
+    "section": "Grading rubric (10 points)",
+    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "crumbs": [
+      "Home",
+      "Homework"
+    ]
+  },
+  {
+    "objectID": "weeks/week_05.html",
+    "href": "weeks/week_05.html",
+    "title": "Week 5",
+    "section": "",
+    "text": "HW 4 released Monday, February 2",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#announcements",
-    "href": "weeks/week_04.html#announcements",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#announcements",
+    "href": "weeks/week_05.html#announcements",
+    "title": "Week 5",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "text": "HW 4 released Monday, February 2",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#overview",
-    "href": "weeks/week_04.html#overview",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#overview",
+    "href": "weeks/week_05.html#overview",
+    "title": "Week 5",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution and calculate probabilities using R,\nidentify when the Poisson distribution applies and calculate probabilities using R.",
+    "text": "Overview\nThis week focuses on statistical inference: making conclusions about populations based on sample data.\nWe will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.\nBy the end of the week, you should be able to:\n\nunderstand the concept of a sampling distribution and standard error,\nconstruct and interpret confidence intervals for a population mean,\nexplain what a confidence level means,\nstate null and alternative hypotheses,\nconduct and interpret one-sample t-tests,\nunderstand p-values and statistical significance,\nrecognize the connection between confidence intervals and hypothesis tests.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#readings-before-class",
-    "href": "weeks/week_04.html#readings-before-class",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#readings-before-class",
+    "href": "weeks/week_05.html#readings-before-class",
+    "title": "Week 5",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Poisson distribution)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook section 4.1 (Variability in estimates)\nTextbook section 4.2 (Confidence intervals)\nTextbook section 4.3 (Hypothesis testing)\nTextbook section 5.1 (Single-sample inference with the t-distribution)\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#materials",
-    "href": "weeks/week_04.html#materials",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#materials",
+    "href": "weeks/week_05.html#materials",
+    "title": "Week 5",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\nNormal and Poisson Distributions\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 7",
+    "text": "Materials\n\nMonday — Estimation and Confidence Intervals\n\nTopics\n\nSampling distributions and standard error\nPoint estimates vs. interval estimates\nConfidence intervals for population means\nInterpreting confidence levels (e.g., 95% CI)\nUsing the t-distribution when σ is unknown\nCalculating confidence intervals in R\n\nSlides\n\nEstimation and Confidence Intervals (HTML | PDF | OneDrive)\n\nRecording\n\nEstimation and Confidence Intervals\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 8\n\n\n\n\n\nWednesday — Hypothesis Testing and One-Sample t-Tests\n\nTopics\n\nThe logic of hypothesis testing\nNull and alternative hypotheses\nTest statistics and p-values\nStatistical significance and decision rules\nOne-sample t-tests\nConducting t-tests in R\nConnection between confidence intervals and hypothesis tests\n\nSlides\n\nHypothesis Testing and One-Sample t-Tests (HTML | PDF | OneDrive)\n\nRecording\n\nComing soon\n\nMuddy points\nComing soon.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#homework",
-    "href": "weeks/week_04.html#homework",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#homework",
+    "href": "weeks/week_05.html#homework",
+    "title": "Week 5",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Sunday, February 1 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 4\n\nReleased Monday, February 2\nDue Sunday, February 8 at 11:00 pm\nCovers:\n\nNormal distribution and properties\nZ-scores and standardization\nCalculating probabilities with pnorm() and qnorm()\nNormal approximation to the Binomial\nPoisson distribution\n\nView HW 4 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#post-class-check-in-attendance",
-    "href": "weeks/week_04.html#post-class-check-in-attendance",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#post-class-check-in-attendance",
+    "href": "weeks/week_05.html#post-class-check-in-attendance",
+    "title": "Week 5",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#looking-ahead",
-    "href": "weeks/week_04.html#looking-ahead",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#looking-ahead",
+    "href": "weeks/week_05.html#looking-ahead",
+    "title": "Week 5",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence.",
+    "text": "Looking ahead\nNext week we will continue with statistical inference:\n\nMonday: Paired data and paired t-tests; Two-sample independent t-tests\nWednesday: Midterm review\n\nThese concepts extend our hypothesis testing framework to compare two groups and handle related measurements.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html",
-    "href": "weeks/week_02.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#announcements",
-    "href": "weeks/week_02.html#announcements",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#overview",
-    "href": "weeks/week_02.html#overview",
-    "title": "Week 2",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#readings-before-class",
-    "href": "weeks/week_02.html#readings-before-class",
-    "title": "Week 2",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#materials",
-    "href": "weeks/week_02.html#materials",
-    "title": "Week 2",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#homework",
-    "href": "weeks/week_02.html#homework",
-    "title": "Week 2",
-    "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
-    "href": "weeks/week_02.html#post-class-check-in-attendance",
-    "title": "Week 2",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#looking-ahead",
-    "href": "weeks/week_02.html#looking-ahead",
-    "title": "Week 2",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html",
-    "href": "weeks/week_01.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#overview",
-    "href": "weeks/week_01.html#overview",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#readings-before-class",
-    "href": "weeks/week_01.html#readings-before-class",
-    "title": "Week 1",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#materials",
-    "href": "weeks/week_01.html#materials",
-    "title": "Week 1",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#day-1-course-background-survey",
-    "href": "weeks/week_01.html#day-1-course-background-survey",
-    "title": "Week 1",
-    "section": "Day 1 course background survey",
-    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
-    "href": "weeks/week_01.html#post-class-check-in-attendance",
-    "title": "Week 1",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#homework",
-    "href": "weeks/week_01.html#homework",
-    "title": "Week 1",
-    "section": "Homework",
-    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#looking-ahead",
-    "href": "weeks/week_01.html#looking-ahead",
-    "title": "Week 1",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
+      "Week 5"
     ]
   },
   {
@@ -2106,297 +1923,578 @@
     ]
   },
   {
-    "objectID": "weeks/week_05.html",
-    "href": "weeks/week_05.html",
-    "title": "Week 5",
+    "objectID": "weeks/week_01.html",
+    "href": "weeks/week_01.html",
+    "title": "Week 1",
     "section": "",
-    "text": "HW 4 released Monday, February 2",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#announcements",
-    "href": "weeks/week_05.html#announcements",
-    "title": "Week 5",
+    "objectID": "weeks/week_01.html#overview",
+    "href": "weeks/week_01.html#overview",
+    "title": "Week 1",
     "section": "",
-    "text": "HW 4 released Monday, February 2",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#overview",
-    "href": "weeks/week_05.html#overview",
-    "title": "Week 5",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on statistical inference: making conclusions about populations based on sample data.\nWe will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.\nBy the end of the week, you should be able to:\n\nunderstand the concept of a sampling distribution and standard error,\nconstruct and interpret confidence intervals for a population mean,\nexplain what a confidence level means,\nstate null and alternative hypotheses,\nconduct and interpret one-sample t-tests,\nunderstand p-values and statistical significance,\nrecognize the connection between confidence intervals and hypothesis tests.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 5"
-    ]
-  },
-  {
-    "objectID": "weeks/week_05.html#readings-before-class",
-    "href": "weeks/week_05.html#readings-before-class",
-    "title": "Week 5",
+    "objectID": "weeks/week_01.html#readings-before-class",
+    "href": "weeks/week_01.html#readings-before-class",
+    "title": "Week 1",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 4.1 (Variability in estimates)\nTextbook section 4.2 (Confidence intervals)\nTextbook section 4.3 (Hypothesis testing)\nTextbook section 5.1 (Single-sample inference with the t-distribution)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#materials",
-    "href": "weeks/week_05.html#materials",
-    "title": "Week 5",
+    "objectID": "weeks/week_01.html#materials",
+    "href": "weeks/week_01.html#materials",
+    "title": "Week 1",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Estimation and Confidence Intervals\n\nTopics\n\nSampling distributions and standard error\nPoint estimates vs. interval estimates\nConfidence intervals for population means\nInterpreting confidence levels (e.g., 95% CI)\nUsing the t-distribution when σ is unknown\nCalculating confidence intervals in R\n\nSlides\n\nEstimation and Confidence Intervals (HTML | PDF | OneDrive)\n\nRecording\n\nEstimation and Confidence Intervals\n\nMuddy points\nComing soon.\n\n\n\n\nWednesday — Hypothesis Testing and One-Sample t-Tests\n\nTopics\n\nThe logic of hypothesis testing\nNull and alternative hypotheses\nTest statistics and p-values\nStatistical significance and decision rules\nOne-sample t-tests\nConducting t-tests in R\nConnection between confidence intervals and hypothesis tests\n\nSlides\n\nHypothesis Testing and One-Sample t-Tests (HTML | PDF | OneDrive)\n\nRecording\n\nComing soon\n\nMuddy points\nComing soon.",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#homework",
-    "href": "weeks/week_05.html#homework",
-    "title": "Week 5",
-    "section": "Homework",
-    "text": "Homework\n\nHW 4\n\nReleased Monday, February 2\nDue Sunday, February 8 at 11:00 pm\nCovers:\n\nNormal distribution and properties\nZ-scores and standardization\nCalculating probabilities with pnorm() and qnorm()\nNormal approximation to the Binomial\nPoisson distribution\n\nView HW 4 instructions\n\nSee the full list of assignments on the Homework page.",
+    "objectID": "weeks/week_01.html#day-1-course-background-survey",
+    "href": "weeks/week_01.html#day-1-course-background-survey",
+    "title": "Week 1",
+    "section": "Day 1 course background survey",
+    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#post-class-check-in-attendance",
-    "href": "weeks/week_05.html#post-class-check-in-attendance",
-    "title": "Week 5",
+    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
+    "href": "weeks/week_01.html#post-class-check-in-attendance",
+    "title": "Week 1",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#looking-ahead",
-    "href": "weeks/week_05.html#looking-ahead",
-    "title": "Week 5",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will continue with statistical inference:\n\nMonday: Paired data and paired t-tests; Two-sample independent t-tests\nWednesday: Midterm review\n\nThese concepts extend our hypothesis testing framework to compare two groups and handle related measurements.",
+    "objectID": "weeks/week_01.html#homework",
+    "href": "weeks/week_01.html#homework",
+    "title": "Week 1",
+    "section": "Homework",
+    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 1"
     ]
   },
   {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "File naming and submission\n\n\n\nFile naming: Lastname_FirstInitial_HW## (example: Latour_E_HW01)\nSubmit both files on Sakai:\n\nLastname_FirstInitial_HW##.qmd\nLastname_FirstInitial_HW##.html\nHomework assignments are due on Sundays at 11:00 pm unless otherwise noted.\nStart from the provided .qmd template for each assignment.",
+    "objectID": "weeks/week_01.html#looking-ahead",
+    "href": "weeks/week_01.html#looking-ahead",
+    "title": "Week 1",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
     "crumbs": [
       "Home",
-      "Homework"
+      "Weekly materials",
+      "Week 1"
     ]
   },
   {
-    "objectID": "homework.html#homework-schedule",
-    "href": "homework.html#homework-schedule",
-    "title": "Homework",
-    "section": "Homework schedule",
-    "text": "Homework schedule\nAll homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.\nHomework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.\n\n\n\nHW\nDue (@11pm)\nFiles\nPreview\n\n\n\n\n0\n01/11\nHW 00 files (OneDrive)\nView HW 00\n\n\n1\n01/18\nHW 01 files (OneDrive)\nView HW 01\n\n\n2\n01/27\nHW 02 files (OneDrive)\nView HW 02\n\n\n3\n02/01\nHW 03 files (OneDrive)\nView HW 03\n\n\n4\n02/08\nHW 04 files (OneDrive)\nView HW 04\n\n\n5\n02/22\n(to be posted)\n(to be posted)\n\n\n6\n03/01\n(to be posted)\n(to be posted)\n\n\n7\n03/08\n(to be posted)\n(to be posted)\n\n\n8\n03/15\n(to be posted)\n(to be posted)",
+    "objectID": "weeks/week_02.html",
+    "href": "weeks/week_02.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
-      "Homework"
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
-    "objectID": "homework.html#grading-rubric-10-points",
-    "href": "homework.html#grading-rubric-10-points",
-    "title": "Homework",
-    "section": "Grading rubric (10 points)",
-    "text": "Grading rubric (10 points)\nEach homework is graded on a 10-point scale:\n\nSubstantial completion (6 points): ~75-80% of parts attempted with a genuine effort\nDemonstrated process (2 points): relevant work shown; R code included when used\nInterpretation and communication (2 points): brief written interpretation in context when appropriate\n\nHomework is graded primarily for effort, reasoning, and clarity, not strict correctness.\n\nLate homework\nLate homework is accepted for partial credit (up to 80% of total points).\nFeedback is provided only for homework submitted on time.",
+    "objectID": "weeks/week_02.html#announcements",
+    "href": "weeks/week_02.html#announcements",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
     "crumbs": [
       "Home",
-      "Homework"
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#bmsc-620-introduction-to-biostatistics",
-    "href": "index.html#bmsc-620-introduction-to-biostatistics",
-    "title": "BMSC 620: Introduction to Biostatistics",
-    "section": "",
-    "text": "Welcome to BMSC 620: Introduction to Biostatistics. This course introduces fundamental statistical methods commonly used in the biomedical and health sciences, with an emphasis on understanding, interpretation, and clear communication rather than mathematical derivations.\nWe will begin with descriptive statistics and graphical methods for summarizing data, followed by an introduction to basic probability concepts that motivate statistical inference. Key probability and sampling distributions, including the binomial, Poisson, and normal distributions, will be introduced as tools for understanding variability and uncertainty in data.\nThe course will then cover confidence intervals and hypothesis testing for one- and two-sample problems, using both parametric and nonparametric approaches. Additional topics include inference for proportions, analysis of two-way tables, one-way analysis of variance (ANOVA), correlation, and simple linear regression.\nThroughout the course, emphasis will be placed on selecting appropriate statistical methods, interpreting results, and communicating conclusions in a way that is accessible to audiences without formal statistical training. Students will gain hands-on experience using statistical software (R) for basic data management, visualization, and interpretation of output generated by statistical analyses, as well as for building reproducible analytical workflows.\nCourse materials and structure for BMSC 620 were developed by Emile Latour and informed by prior offerings taught by Meike Niederhausen and Nicky Wakim. Portions of the syllabus, resources, and instructional approach were adapted from their courses, with permission, and modified for this offering.\n\n\n\n\n Emile Latour, MS\n\n KCRB\n latour@ohsu.edu\n\n\n\nEmile  Thursday, 1:00–2:00 PM\nJoseph  Friday, 10:00-11:00 AM\nNick  Wednesday, 1:00–2:00 PM\n\n\n\n Mondays, Wednesdays\n January 5–March 20\n 9:00 AM–10:30 AM\n In-person, RJH 4320\nNote: Class will meet in MAC 3198 on January 21 only.\n\n\n\nE-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 24 hours Monday-Friday.\n\n\n\n\n\n\n\n\n View the source on GitHub",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "exams.html",
-    "href": "exams.html",
-    "title": "Exams",
-    "section": "",
-    "text": "See Sakai",
+    "objectID": "weeks/week_02.html#overview",
+    "href": "weeks/week_02.html#overview",
+    "title": "Week 2",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
     "crumbs": [
       "Home",
-      "Exams"
+      "Weekly materials",
+      "Week 2"
     ]
   },
   {
-    "objectID": "homework/HW01/HW01.html",
-    "href": "homework/HW01/HW01.html",
-    "title": "BMSC 620 — Homework 1",
+    "objectID": "weeks/week_02.html#readings-before-class",
+    "href": "weeks/week_02.html#readings-before-class",
+    "title": "Week 2",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#materials",
+    "href": "weeks/week_02.html#materials",
+    "title": "Week 2",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#homework",
+    "href": "weeks/week_02.html#homework",
+    "title": "Week 2",
+    "section": "Homework",
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
+    "href": "weeks/week_02.html#post-class-check-in-attendance",
+    "title": "Week 2",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#looking-ahead",
+    "href": "weeks/week_02.html#looking-ahead",
+    "title": "Week 2",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html",
+    "href": "weeks/week_04.html",
+    "title": "Week 4",
     "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 1, upload both:\n\nthe .qmd file\nthe rendered .html file"
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
-    "objectID": "homework/HW01/HW01.html#homework-1",
-    "href": "homework/HW01/HW01.html#homework-1",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Homework 1",
-    "text": "Homework 1\nThis assignment reviews:\n\nwriting and running code in Quarto\nsummarizing numeric and categorical variables\nfrequency tables and contingency tables\nbar plots, histograms, and box plots\n\nUnless stated otherwise, show your work using R code chunks."
+    "objectID": "weeks/week_04.html#announcements",
+    "href": "weeks/week_04.html#announcements",
+    "title": "Week 4",
+    "section": "",
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-0-setup",
-    "href": "homework/HW01/HW01.html#part-0-setup",
-    "title": "BMSC 620 — Homework 1",
+    "objectID": "weeks/week_04.html#overview",
+    "href": "weeks/week_04.html#overview",
+    "title": "Week 4",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution and calculate probabilities using R,\nidentify when the Poisson distribution applies and calculate probabilities using R.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#readings-before-class",
+    "href": "weeks/week_04.html#readings-before-class",
+    "title": "Week 4",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Poisson distribution)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#materials",
+    "href": "weeks/week_04.html#materials",
+    "title": "Week 4",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\nNormal and Poisson Distributions\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 7",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#homework",
+    "href": "weeks/week_04.html#homework",
+    "title": "Week 4",
+    "section": "Homework",
+    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Sunday, February 1 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#post-class-check-in-attendance",
+    "href": "weeks/week_04.html#post-class-check-in-attendance",
+    "title": "Week 4",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#looking-ahead",
+    "href": "weeks/week_04.html#looking-ahead",
+    "title": "Week 4",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "instructors.html",
+    "href": "instructors.html",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#teaching-team",
+    "href": "instructors.html#teaching-team",
+    "title": "Instructors",
+    "section": "",
+    "text": "Email: latour@ohsu.edu\nCampus location: KCRB\nPronouns: he/him/his\nName: Please feel free to call me Emile (pronounced “eh-MEEL” or “ah-MEEL”).\nLast name: Latour (pronounced “luh-TOOR”).\nBest way to contact me: Email is best for course logistics. Office hours are best for homework, R help, and concepts.\n\n\n\n\n\n\n\n\nEmail: hwangjo@ohsu.edu\n\n\n\n\n\nEmail: chaiyach@ohsu.edu\n\n\nNote: If you are unsure who to contact, email Emile and I will route your question.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#office-hours",
+    "href": "instructors.html#office-hours",
+    "title": "Instructors",
+    "section": "Office hours",
+    "text": "Office hours\nAll office hours will be held via Webex unless otherwise noted.\n\nEmile (Instructor)\n\nTime: Thursday, 1:00-2:00 PM\nWebex: https://ohsu.webex.com/meet/latour\n\n\n\nTeaching assistant(s)\n\n\nJoseph (TA)\n\nTime: Friday, 10:00-11:00 AM\nWebex: https://ohsu.webex.com/meet/hwangjo\n\n\n\nNick (TA)\n\nTime: Wednesday, 1:00–2:00 PM\nWebex: https://ohsu.webex.com/meet/chaiyach",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "instructors.html#what-to-contact-us-about",
+    "href": "instructors.html#what-to-contact-us-about",
+    "title": "Instructors",
+    "section": "What to contact us about",
+    "text": "What to contact us about\n\nEmile (Instructor): course policies, grading questions, accommodations, schedule issues, and anything sensitive or private.\nTAs: homework questions, practice problems, and R troubleshooting.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Instructors"
+    ]
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html",
+    "href": "resources/keyboard_shortcuts.html",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "",
+    "text": "These are the keyboard shortcuts you’ll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#most-essential-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Most Essential Shortcuts",
+    "text": "Most Essential Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nInsert pipe %&gt;%\nCmd + Shift + M\nCtrl + Shift + M\n\n\nInsert code chunk\nCmd + Option + I\nCtrl + Alt + I\n\n\nRun current line/selection\nCmd + Enter\nCtrl + Enter\n\n\nRun current chunk\nCmd + Shift + Enter\nCtrl + Shift + Enter\n\n\nRun all chunks above\nCmd + Option + P\nCtrl + Alt + P\n\n\nComment/uncomment line(s)\nCmd + Shift + C\nCtrl + Shift + C\n\n\nInsert assignment &lt;-\nOption + - (minus)\nAlt + - (minus)"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#additional-helpful-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Additional Helpful Shortcuts",
+    "text": "Additional Helpful Shortcuts\n\n\n\n\n\n\n\n\nAction\nMac\nWindows/Linux\n\n\n\n\nMove cursor to source editor\nCtrl + 1\nCtrl + 1\n\n\nMove cursor to console\nCtrl + 2\nCtrl + 2\n\n\nClear console\nCtrl + L\nCtrl + L\n\n\nRestart R session\nCmd + Shift + 0\nCtrl + Shift + F10\n\n\nShow keyboard shortcut reference\nOption + Shift + K\nAlt + Shift + K\n\n\nFind in files\nCmd + Shift + F\nCtrl + Shift + F\n\n\nAuto-complete\nTab\nTab\n\n\nGet help for function\nF1 (cursor on function)\nF1 (cursor on function)"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
+    "href": "resources/keyboard_shortcuts.html#tips-for-learning-shortcuts",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "Tips for Learning Shortcuts",
+    "text": "Tips for Learning Shortcuts\n\nStart with 2-3: Don’t try to memorize all of these at once. Start with the pipe operator and running code.\nUse them consistently: The more you use a shortcut, the more automatic it becomes.\nView all shortcuts: In RStudio, go to Tools → Keyboard Shortcuts Help or press Option/Alt + Shift + K to see the complete list.\nCustomize shortcuts: You can customize shortcuts in Tools → Modify Keyboard Shortcuts."
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
+    "href": "resources/keyboard_shortcuts.html#the-shortcuts-youll-use-every-class",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "The Shortcuts You’ll Use Every Class",
+    "text": "The Shortcuts You’ll Use Every Class\nIf you only remember three shortcuts, make them these:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line\nCmd/Ctrl + Shift + C - Comment/uncomment\n\nThese three will save you countless hours of typing!"
+  },
+  {
+    "objectID": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
+    "href": "resources/keyboard_shortcuts.html#rstudio-cheatsheets",
+    "title": "Essential RStudio Keyboard Shortcuts",
+    "section": "RStudio Cheatsheets",
+    "text": "RStudio Cheatsheets\nRStudio provides official cheatsheets for many packages and topics. Access them in RStudio:\nHelp → Cheatsheets\nOr download them directly from: https://posit.co/resources/cheatsheets/\n\nMost relevant cheatsheets for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and shortcuts\nData Transformation with dplyr - The dplyr verbs we use constantly\nData Visualization with ggplot2 - Creating plots\nR Markdown - Works for Quarto documents too\n\n\nTip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html",
+    "href": "homework/HW00/HW00.html",
+    "title": "BMSC 620 — Homework 0",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW01.qmd\nSmith_J_HW01.html\n\nWhen submitting Homework 0, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#homework-0",
+    "href": "homework/HW00/HW00.html#homework-0",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Homework 0",
+    "text": "Homework 0\nThis assignment is intended to help you get comfortable working in RStudio and using Quarto documents.\nThis assignment is graded for completion and effort, not correctness."
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "href": "homework/HW00/HW00.html#part-1-markdown-practice",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 1: Markdown practice",
+    "text": "Part 1: Markdown practice\nEdit this section to demonstrate the following:\n\nBold text\nItalic text\nA bulleted list\nA numbered list\n\nYou may replace the text below with your own examples.\n\nExample bullet\nAnother bullet\n\n\nExample item\nAnother item"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "href": "homework/HW00/HW00.html#part-2-r-code-chunks",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 2: R code chunks",
+    "text": "Part 2: R code chunks\nBelow is an example R code chunk.\n\n# This is a comment\n\n2 + 2\n\n[1] 4\n\n\n\nTasks\n\nModify the code chunk above so that it:\n\n\nIncludes at least one additional comment\nRuns without errors\n\n\nAdd a second R code chunk below that:\n\n\nCreates a numeric vector with at least 5 numbers\nComputes the mean of that vector using mean()\nI’ve included an example below as one possible solution for reference. The submitted code should be your own.\n\n\n\nExample (for reference only)\n\n# Example\n\n# Create a numeric vector\nx &lt;- c(3, 7, 10, 4, 6)\n\n# Compute the mean\nmean(x)\n\n[1] 6\n\n\n\n# Your code here"
+  },
+  {
+    "objectID": "homework/HW00/HW00.html#part-3-final-check",
+    "href": "homework/HW00/HW00.html#part-3-final-check",
+    "title": "BMSC 620 — Homework 0",
+    "section": "Part 3: Final check",
+    "text": "Part 3: Final check\nBefore you are finished, confirm that:\n\nThe document renders to HTML without errors\nAll R code chunks run successfully\nYour name appears at the top of the document"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html",
+    "href": "homework/HW04/HW04.html",
+    "title": "BMSC 620 — Homework 4",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW04.qmd\nSmith_J_HW04.html\n\nWhen submitting Homework 4, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#instructions",
+    "href": "homework/HW04/HW04.html#instructions",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Instructions",
+    "text": "Instructions\n\nAnswer each question clearly and concisely.\nShow your work when calculations are involved.\nUse R to compute probabilities and quantiles when requested.\nYou may round final answers to 3 decimal places unless otherwise noted.\nDo not use continuity correction for Normal approximations in this assignment.\n\n\n\n\n\n\n\nTip\n\n\n\nSome code chunks are intentionally incomplete. Fill in the missing values so the code runs correctly."
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-1-the-normal-distribution",
+    "href": "homework/HW04/HW04.html#part-1-the-normal-distribution",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 1: The Normal Distribution",
+    "text": "Part 1: The Normal Distribution\n\n1A. Properties of the Normal distribution\nAnswer briefly (1–2 sentences each).\n\nWhat does it mean for a distribution to be symmetric?\nWhat parameters define a Normal distribution?\nWhy is the Normal distribution important in statistics?\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-2-z-scores-and-standardization",
+    "href": "homework/HW04/HW04.html#part-2-z-scores-and-standardization",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 2: Z-scores and Standardization",
+    "text": "Part 2: Z-scores and Standardization\nSuppose adult systolic blood pressure (SBP) is Normally distributed with:\n\nMean = 120 mmHg\nStandard deviation = 15 mmHg\n\n\n2A. Calculating z-scores\n\nCompute the z-score for an individual with SBP = 135 mmHg.\nInterpret this z-score in words.\n\n\n# Define parameters\nmu &lt;- 120\nsigma &lt;- 15\nx &lt;- 135\n\n# Compute z-score: z = (x - mu) / sigma\nz &lt;- \n\nz\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-3-probabilities-from-the-normal-distribution",
+    "href": "homework/HW04/HW04.html#part-3-probabilities-from-the-normal-distribution",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 3: Probabilities from the Normal Distribution",
+    "text": "Part 3: Probabilities from the Normal Distribution\nUsing the same SBP distribution:\n\n3A. Probabilities\n\nWhat proportion of adults have SBP above 140 mmHg?\nWhat proportion have SBP between 110 and 130 mmHg?\n\n\n# Proportion above 140\npnorm(\n  q = ,\n  mean = ,\n  sd = ,\n  lower.tail = \n)\n\n# Proportion between 110 and 130\n# P(110 &lt; X &lt; 130) = P(X &lt; 130) - P(X &lt; 110)\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-4-quantiles-and-cutoffs",
+    "href": "homework/HW04/HW04.html#part-4-quantiles-and-cutoffs",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 4: Quantiles and Cutoffs",
+    "text": "Part 4: Quantiles and Cutoffs\n\n4A. Percentiles\n\nWhat SBP value corresponds to the 90th percentile?\nHypertension screening flags the top 10% of SBP values. What is the cutoff?\n\n\n# 90th percentile\nqnorm(\n  p = ,\n  mean = ,\n  sd = \n)\n\nAnswers:\n\n\n\n\nInterpret the cutoff in one sentence:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-5-binomial-distribution",
+    "href": "homework/HW04/HW04.html#part-5-binomial-distribution",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 5: Binomial Distribution",
+    "text": "Part 5: Binomial Distribution\nA new medication has a 30% chance of success for each patient. Suppose 20 patients are treated.\n\n5A. Exact Binomial probabilities\n\nWhat is the probability that exactly 8 patients respond?\nWhat is the probability that at least 5 patients respond?\n\n\n# Exactly 8 successes\ndbinom(\n  x = ,\n  size = ,\n  prob = \n)\n\n# At least 5 successes\n# P(X &gt;= 5) = P(X &gt; 4) = 1 - P(X &lt;= 4)\npbinom(\n  q = ,\n  size = ,\n  prob = ,\n  lower.tail = \n)\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-6-normal-approximation-to-the-binomial",
+    "href": "homework/HW04/HW04.html#part-6-normal-approximation-to-the-binomial",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 6: Normal Approximation to the Binomial",
+    "text": "Part 6: Normal Approximation to the Binomial\nSuppose a manufacturing process has a defect rate of 10%. Out of 200 items produced:\n\n6A. Check conditions\n\nState the mean and standard deviation of the Binomial distribution.\nVerify whether a Normal approximation is reasonable.\n\n\nn &lt;- 200\np &lt;- 0.10\n\n# Mean of binomial: mu = n * p\nmu_b &lt;- \n\n# SD of binomial: sd = sqrt(n * p * (1 - p))\nsd_b &lt;- \n\nmu_b\nsd_b\n\n# Check conditions: np &gt;= 10 and n(1-p) &gt;= 10\n\nAnswers:\n\n\n\n\n\n\n6B. Approximate probability\nUse a Normal approximation without continuity correction.\nWhat is the approximate probability that more than 30 items are defective?\n\n# P(X &gt; 30) using Normal approximation\npnorm(\n  q = ,\n  mean = ,\n  sd = ,\n  lower.tail = \n)\n\nAnswer:\nBriefly comment on whether this approximation seems reasonable:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-7-poisson-distribution",
+    "href": "homework/HW04/HW04.html#part-7-poisson-distribution",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 7: Poisson Distribution",
+    "text": "Part 7: Poisson Distribution\nEmergency room arrivals follow a Poisson distribution with an average rate of 3 arrivals per hour.\n\n7A. Probabilities\n\nWhat is the probability of exactly 2 arrivals in an hour?\nWhat is the probability of at least 5 arrivals in an hour?\n\n\n# Exactly 2 arrivals\ndpois(\n  x = ,\n  lambda = \n)\n\n# At least 5 arrivals: P(X &gt;= 5) = 1 - P(X &lt;= 4)\nppois(\n  q = ,\n  lambda = ,\n  lower.tail = \n)\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#part-8-choosing-the-right-distribution",
+    "href": "homework/HW04/HW04.html#part-8-choosing-the-right-distribution",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Part 8: Choosing the Right Distribution",
+    "text": "Part 8: Choosing the Right Distribution\nFor each scenario, state which distribution (Normal, Binomial, or Poisson) is most appropriate and briefly explain why.\n\nNumber of typos on a randomly selected manuscript page\nProportion of voters in a sample who support a candidate\nAdult heights in a large population\n\nAnswers:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#optional-not-graded-reflection",
+    "href": "homework/HW04/HW04.html#optional-not-graded-reflection",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Optional (Not Graded): Reflection",
+    "text": "Optional (Not Graded): Reflection\nIn 2–3 sentences, describe one situation where using the wrong distribution could lead to misleading conclusions.\nAnswer:"
+  },
+  {
+    "objectID": "homework/HW04/HW04.html#submission-checklist",
+    "href": "homework/HW04/HW04.html#submission-checklist",
+    "title": "BMSC 620 — Homework 4",
+    "section": "Submission checklist",
+    "text": "Submission checklist\nBefore submitting, make sure you have:\n\nAnswered all required questions\nIncluded R output where requested\nWritten brief interpretations in words when asked\nRendered your HTML successfully\nUploaded both .qmd and .html files"
+  },
+  {
+    "objectID": "homework/HW02/HW02.html",
+    "href": "homework/HW02/HW02.html",
+    "title": "BMSC 620 — Homework 2",
+    "section": "",
+    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW02.qmd\nSmith_J_HW02.html\n\nWhen submitting Homework 2, upload both:\n\nthe .qmd file\nthe rendered .html file"
+  },
+  {
+    "objectID": "homework/HW02/HW02.html#homework-2",
+    "href": "homework/HW02/HW02.html#homework-2",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Homework 2",
+    "text": "Homework 2\nThis assignment reviews:\n\ndata wrangling with dplyr\nsummary tables with janitor and rstatix\ndata visualization with ggplot2\nprobability concepts: marginal, joint, and conditional probabilities\n\nUnless stated otherwise, show your work using R code chunks."
+  },
+  {
+    "objectID": "homework/HW02/HW02.html#part-0-setup",
+    "href": "homework/HW02/HW02.html#part-0-setup",
+    "title": "BMSC 620 — Homework 2",
     "section": "Part 0: Setup",
-    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)"
+    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\n# NOTE: If you don't already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.\n# install.packages(\"devtools\")\n# devtools::install_github(\"OI-Biostat/oi_biostat_data\", force = TRUE)\n\nlibrary(oibiostat)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(janitor)\nlibrary(rstatix)"
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
-    "href": "homework/HW01/HW01.html#part-1-r-objects-and-vectors",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 1: R objects and vectors",
-    "text": "Part 1: R objects and vectors\n\n1A. Calculator practice\nCreate code that computes each of the following (one line each):\n\n12 / 5\n3^4\nsqrt(81)\n4^3 - 2 * 7 + 9 / 2\n\n\n# Your code here\n\n\n\n1B. Create vectors and summarize\n\nCreate a vector named x containing the numbers: 4, 9, 2, 10, 7, 7\nCompute the mean and standard deviation of x\nCompute the median and IQR of x\n\n\n\n1C. Missing values\n\nCreate a vector named y containing: 2, 5, NA, 7, 9\nCompute mean(y). What happens?\nCompute the mean again ignoring missing values\n\nWrite 1 to 2 sentences explaining what na.rm = TRUE does.\nYour explanation:"
+    "objectID": "homework/HW02/HW02.html#part-1-exploring-data-with-tidyverse-tools",
+    "href": "homework/HW02/HW02.html#part-1-exploring-data-with-tidyverse-tools",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 1: Exploring data with tidyverse tools",
+    "text": "Part 1: Exploring data with tidyverse tools\nIn this homework, you will work with the nhanes.samp dataset (the same dataset from HW1, but now using tidyverse tools!).\nLoad the dataset:\n\ndata(\"nhanes.samp\")\n\n\n1A. Initial data inspection\nUse the following tidyverse functions to explore the data:\n\nglimpse() to see the structure\nUse the pipe %&gt;% with head() to see first 5 rows (e.g., nhanes.samp %&gt;% head(5))\ndim() to get dimensions\n\nAnswer in plain text:\n\nHow many rows and columns does nhanes.samp have?\nWhat type of variable is Race1? What about Age?\nHow is this different from using str() in HW1?\n\nAnswers: 1. 2. 3.\n\n\n1B. Using filter() and select()\n\nUse filter() to keep only people with PhysActive == \"Yes\" (physically active)\nThen use select() to keep only the columns: Age, Gender, Race1, PhysActive, Pulse\nAssign this filtered/selected data to a new object called active_people\n\nHow many physically active people are in the dataset? (Use nrow() on your new object)\nAnswer:\n\n\n1C. Creating new variables with mutate()\nUsing the full nhanes.samp dataset:\n\nUse mutate() to create a new variable called age_group that categorizes age:\n\n“Child” if Age &lt; 18\n“Adult” if Age &lt; 65\n“Senior” if Age &gt;= 65\n\nUse select() to show just ID, Age, and age_group\nUse head() to show the first 10 rows\n\nHint: Use case_when() inside mutate()."
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
-    "href": "homework/HW01/HW01.html#part-2-inspecting-a-dataset-nhanes.samp",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 2: Inspecting a dataset (nhanes.samp)",
-    "text": "Part 2: Inspecting a dataset (nhanes.samp)\nIn this homework, you will work with the dataset nhanes.samp, which is included in the oibiostat package.\nThe National Health and Nutrition Examination Survey (NHANES) is a large, ongoing study conducted in the United States to assess the health and nutritional status of adults and children. The dataset used here is a sample of 200 individuals from NHANES, provided for instructional purposes.\nTo load the dataset, run:\n\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n\n2A. Basic inspection\nRun the following functions:\n\ndim(nhanes.samp)\nnames(nhanes.samp)\nstr(nhanes.samp)\nhead(nhanes.samp)\n\nAnswer the questions below in plain text.\n\nHow many rows and columns does nhanes.samp have?\nName two categorical variables? (i.e. Factor variable type)\nGive one example of a numeric variable. (int or num)\n\nAnswers: 1. 2. 3.\n\n\n2B. Accessing a single variable with $\n\nUse $ to pull out Age\nCompute the mean, sd, median, and IQR of Age\n\n\n\n2C. Working with NA values.\nWe can see that some variables in the dataset have missing values (NA) like the variable Height.\n\nsummary(nhanes.samp$Height)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   90.6   156.6   166.2   162.6   175.7   191.3      10 \n\n\n\nUse $ to pull out Height\nCompute the mean, sd, median, and IQR of Height. Hint: you will need to remove the NA values by adding the argument na.rm = TRUE to the function calls."
+    "objectID": "homework/HW02/HW02.html#part-2-summary-statistics-with-rstatix",
+    "href": "homework/HW02/HW02.html#part-2-summary-statistics-with-rstatix",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 2: Summary statistics with rstatix",
+    "text": "Part 2: Summary statistics with rstatix\n\n2A. Summary for one variable\nUse get_summary_stats() from the rstatix package to calculate the mean and standard deviation of Pulse. Use type = \"mean_sd\".\n\n\n2B. Summary by groups\nUse group_by() and get_summary_stats() to calculate the mean and standard deviation of Pulse by PhysActive (physically active yes/no).\nDo physically active people have a higher or lower mean pulse rate? What might explain this?\nAnswer:\n\n\n2C. Multiple variables and groups\nCalculate summary statistics for Age, Pulse, and Weight grouped by both Gender AND PhysActive status. Use type = \"mean_sd\"."
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
-    "href": "homework/HW01/HW01.html#part-3-summarizing-one-categorical-variable",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 3: Summarizing one categorical variable",
-    "text": "Part 3: Summarizing one categorical variable\nWe will summarize Gender\n\n3A. Counts and proportions\n\nUse table() to get counts of Gender\nUse prop.table() to get proportions of Gender\nConvert proportions to percentages\n\nHint: table(nhanes.samp$Gender) and prop.table(...)\n\n\n3B. Bar plot\nMake a bar plot of Gender using the barplot function."
+    "objectID": "homework/HW02/HW02.html#part-3-frequency-tables-with-janitor",
+    "href": "homework/HW02/HW02.html#part-3-frequency-tables-with-janitor",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 3: Frequency tables with janitor",
+    "text": "Part 3: Frequency tables with janitor\n\n3A. One-way frequency table\nUse tabyl() to create a frequency table for the Race1 variable.\nWhich racial/ethnic group has the highest percentage in this sample?\nAnswer:\n\n\n3B. Two-way table\nCreate a two-way table showing the relationship between Gender and PhysActive using tabyl().\n\n\n3C. Adorned tables\n\nCreate the same Gender × PhysActive table\nAdd row percentages using adorn_percentages(\"row\")\nFormat percentages with one decimal place using adorn_pct_formatting(digits = 1)\nAdd totals for rows and columns using adorn_totals(c(\"row\", \"col\"))\n\nAmong females, what percentage are physically active? Among males? (Look at the row percentages)\nAnswer:"
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
-    "href": "homework/HW01/HW01.html#part-4-two-categorical-variables-contingency-tables",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 4: Two categorical variables (contingency tables)",
-    "text": "Part 4: Two categorical variables (contingency tables)\nWe can use the table() function to examine the relationships between two categorical variables. Here is an example using Gender and Race1:\n\ntable(nhanes.samp$Gender, nhanes.samp$Race1)   # counts\n\n        \n         Black Hispanic Mexican White Other\n  female     7        8       9    65    13\n  male      16        6      13    57     6\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 1)  # row proportions\n\n        \n              Black   Hispanic    Mexican      White      Other\n  female 0.06862745 0.07843137 0.08823529 0.63725490 0.12745098\n  male   0.16326531 0.06122449 0.13265306 0.58163265 0.06122449\n\nprop.table(table(nhanes.samp$Gender, nhanes.samp$Race1), margin = 2)  # column proportions\n\n        \n             Black  Hispanic   Mexican     White     Other\n  female 0.3043478 0.5714286 0.4090909 0.5327869 0.6842105\n  male   0.6956522 0.4285714 0.5909091 0.4672131 0.3157895\n\n\nUsing row percentages (margin = 1), where each row sums to 100% and Gender is held fixed, we see that among females in the data set, 7 (6.8%) are Black, 8 (7.8%) Hispanic, 9 (8.8%) Mexican, 65 (63.7%) White, and 13 (12.7%) Other.\nUsing column percentages (margin = 2), where each column sums to 100% and Race is held fixed, we see that among the largest racial group, White, 53.3% are female and 46.7% are male.\n\n4A. Contingency table (counts)\nChoose either the Diabetes or SmokeNow variable in the data set. Create a contingency table similar to above with Gender and the variable that you choose.\n\n\n4B. Row proportions vs column proportions\n\nCreate a row proportion table (each row sums to 1)\nCreate a column proportion table (each column sums to 1)\n\nHint:\n\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 1)\nprop.table(table(nhanes.samp$Gender, YOUR VARIABLE), margin = 2)\n\n\n\n4C. Interpretation\nAnswer each question in 1 to 2 sentences.\n\nProvide 1 or 2 short sentences describing the row percentages.\nProvide 1 or 2 short sentences describing the column percentages.\n\nAnswers: 1. 2."
+    "objectID": "homework/HW02/HW02.html#part-4-data-visualization-with-ggplot2",
+    "href": "homework/HW02/HW02.html#part-4-data-visualization-with-ggplot2",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 4: Data visualization with ggplot2",
+    "text": "Part 4: Data visualization with ggplot2\n\n4A. Histogram\nCreate a histogram of Age using ggplot2. Include:\n\nbins = 20\nA title: “Distribution of Age in NHANES Sample”\nAn x-axis label: “Age (years)”\n\nDescribe the distribution in 1-2 sentences (shape, center, spread, any interesting features).\nAnswer:\n\n\n4B. Boxplot by group\nCreate a boxplot comparing Pulse across PhysActive groups. Include:\n\nAppropriate axis labels\nA title\nTry adding fill = PhysActive inside aes() for color\n\nDo physically active people appear to have different pulse rates? Are there any outliers?\nAnswer:\n\n\n4C. Scatterplot\nCreate a scatterplot of Age (x-axis) vs Pulse (y-axis).\n\nColor the points by Gender\nSet alpha = 0.5 for transparency\nAdd appropriate labels and a title\n\nDescribe any relationship between age and pulse rate in 1-2 sentences.\nAnswer:\n\n\n4D. Bar chart\nCreate a bar chart showing counts of the Race1 variable.\n\nAdd a title and axis labels\nUse coord_flip() at the end to make horizontal bars (easier to read the labels)"
   },
   {
-    "objectID": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
-    "href": "homework/HW01/HW01.html#part-5-visual-summaries-for-numeric-variables",
-    "title": "BMSC 620 — Homework 1",
-    "section": "Part 5: Visual summaries for numeric variables",
-    "text": "Part 5: Visual summaries for numeric variables\n\n5A. Histogram\nMake a histogram of BMI.\nUsing the hist() function, you can add:\n\na title by adding an argument main = \"Histogram of BMI\"\nand a label for the x-axis using xlab = \"BMI\"\nWhen in doubt about arguments to functions, use the ? then the function name to get help. i.e. type in the console ?hist to get help for the hist() function.\n\nIf you get an error due to missing values, use na.omit() or remove NA values before calling hist().\n\n\n5B. Box plot (overall)\nMake a single box plot of Height using boxplot(). Include a title “Box plot of Height” and a label for the y-axis (ylab = \"Height\"). Get help using ?boxplot if you need it.\nNOTE: We saw earlier that Height contained NA values. boxplot() will ignore NA values automatically.\n\n\n5C. Box plot by group\nMake a box plot of Height by Gender.\nIf you look at the first example in the help for the boxplot function ?boxplot, they give an example of a box plot of count by spray using the InsectSprays dataset.\n\nboxplot(count ~ spray, data = InsectSprays, col = \"lightgray\")\n\nFollow their example to make your Height by Gender box plot with the nhanes.samp data.\nWhich group has a higher median height? How can you tell from the figure? Are there any outliers?\nAnswer:"
+    "objectID": "homework/HW02/HW02.html#part-5-combining-dplyr-and-ggplot2-bonus---optional",
+    "href": "homework/HW02/HW02.html#part-5-combining-dplyr-and-ggplot2-bonus---optional",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 5: Combining dplyr and ggplot2 (BONUS - Optional)",
+    "text": "Part 5: Combining dplyr and ggplot2 (BONUS - Optional)\nThis section is optional but recommended for extra practice combining dplyr and ggplot2.\n\n5A. Filter then visualize\n\nUse pipes to filter to people under age 20 (children/adolescents)\nCreate a histogram of their Pulse\nUse facet_wrap(~Gender) to create separate panels by gender\n\nDo the pulse rate distributions look similar between males and females in this age group?\nAnswer:\n\n\n5B. Complex workflow\nCreate a workflow that:\n\nFilters to people who are physically active (PhysActive == \"Yes\")\nCreates a new variable age_category:\n\n“Under 30” if Age &lt; 30\n“30-50” if Age &lt; 50\n“50+” if Age &gt;= 50\n\nCreates a boxplot of Pulse by age_category\nColors the boxes by age_category using fill = age_category in aes()\nFacets by Gender"
   },
   {
-    "objectID": "homework/HW01/HW01.html#final-check",
-    "href": "homework/HW01/HW01.html#final-check",
-    "title": "BMSC 620 — Homework 1",
+    "objectID": "homework/HW02/HW02.html#part-6-probability-concepts",
+    "href": "homework/HW02/HW02.html#part-6-probability-concepts",
+    "title": "BMSC 620 — Homework 2",
+    "section": "Part 6: Probability concepts",
+    "text": "Part 6: Probability concepts\nFor this section, we’ll work with a medical testing scenario.\nConsider the following contingency table showing disease status and test results for 1,000 patients:\n\n\n\n\nDisease\nNo Disease\nTotal\n\n\n\n\nTest +\n90\n180\n270\n\n\nTest -\n10\n720\n730\n\n\nTotal\n100\n900\n1,000\n\n\n\n\n6A. Marginal probabilities\nCalculate the following marginal probabilities:\n\n\\(P(\\text{Disease})\\)\n\\(P(\\text{Test +})\\)\n\\(P(\\text{No Disease})\\)\n\nShow your calculations below (you can do this by hand or in R):\nAnswers: 1. P(Disease) = 2. P(Test +) = 3. P(No Disease) =\n\n\n6B. Joint probabilities\nCalculate the following joint probabilities:\n\n\\(P(\\text{Disease and Test +})\\)\n\\(P(\\text{No Disease and Test -})\\)\n\\(P(\\text{Disease and Test -})\\)\n\nAnswers: 1. P(Disease and Test +) = 2. P(No Disease and Test -) = 3. P(Disease and Test -) =\n\n\n6C. Conditional probabilities\nCalculate the following conditional probabilities. Remember:\n\\[P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\]\n\n\\(P(\\text{Disease} \\mid \\text{Test +})\\) - This is the Positive Predictive Value (PPV)\n\\(P(\\text{No Disease} \\mid \\text{Test -})\\) - This is the Negative Predictive Value (NPV)\n\\(P(\\text{Test +} \\mid \\text{Disease})\\) - This is the sensitivity\n\nShow your work:\nAnswers: 1. P(Disease | Test +) = 2. P(No Disease | Test -) = 3. P(Test + | Disease) =\n\n\n6D. Interpretation\nIn 2-3 sentences, explain what the Positive Predictive Value (PPV) from 6C.1 tells us. Why might this value be lower than the sensitivity?\nAnswer:"
+  },
+  {
+    "objectID": "homework/HW02/HW02.html#final-check",
+    "href": "homework/HW02/HW02.html#final-check",
+    "title": "BMSC 620 — Homework 2",
     "section": "Final check",
-    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou uploaded both the .qmd and .html files"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html",
-    "href": "homework/HW03/HW03.html",
-    "title": "BMSC 620 — Homework 3",
-    "section": "",
-    "text": "Note\n\n\n\nFile naming and submission\nPlease use the following file naming convention:\nLastname_FirstInitial_HW##\nExamples:\n\nSmith_J_HW03.qmd\nSmith_J_HW03.html\n\nWhen submitting Homework 3, upload both:\n\nthe .qmd file\nthe rendered .html file"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#homework-3",
-    "href": "homework/HW03/HW03.html#homework-3",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Homework 3",
-    "text": "Homework 3\nThis assignment reviews:\n\nBayes’ Theorem and medical testing\nRandom variables: expected value and variance\nBinomial distribution and probability calculations\nContinued practice with dplyr, janitor, rstatix, and ggplot2\n\nUnless stated otherwise, show your work using R code chunks."
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-0-setup",
-    "href": "homework/HW03/HW03.html#part-0-setup",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 0: Setup",
-    "text": "Part 0: Setup\n\nIn the chunk below, load the packages you need for this homework.\nRun the chunk to confirm there are no errors.\n\n\nlibrary(oibiostat)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(janitor)\nlibrary(rstatix)"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-1-bayes-theorem",
-    "href": "homework/HW03/HW03.html#part-1-bayes-theorem",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 1: Bayes’ Theorem",
-    "text": "Part 1: Bayes’ Theorem\n\nBackground\nA new rapid test for influenza has been developed. Clinical trials show:\n\nSensitivity: 85% (probability of testing positive given you have flu)\nSpecificity: 92% (probability of testing negative given you don’t have flu)\n\nDuring flu season, approximately 5% of people who visit their doctor with flu-like symptoms actually have influenza.\n\n\n1A. Set up the problem\nWrite out the given information using probability notation:\n\n\\(P(\\text{Test +} \\mid \\text{Flu}) =\\) ___________\n\\(P(\\text{Test -} \\mid \\text{No Flu}) =\\) ___________\n\\(P(\\text{Test +} \\mid \\text{No Flu}) =\\) ___________ (Calculate this from specificity)\n\\(P(\\text{Flu}) =\\) ___________\n\\(P(\\text{No Flu}) =\\) ___________\n\nFill in your answers above, then verify them in the code chunk below:\n\n# Given information\nsensitivity &lt;- \nspecificity &lt;- \nprevalence &lt;- \n\n# Calculate derived values\np_test_pos_given_no_flu &lt;- \np_no_flu &lt;- \n\n# Display\nsensitivity\np_test_pos_given_no_flu\nprevalence\np_no_flu\n\n\n\n1B. Calculate PPV using Bayes’ Theorem\nUse Bayes’ Theorem to calculate the Positive Predictive Value (PPV): What is the probability someone has flu given they tested positive?\n\\[\nP(\\text{Flu} \\mid \\text{Test +}) = \\frac{P(\\text{Test +} \\mid \\text{Flu}) \\times P(\\text{Flu})}{P(\\text{Test +} \\mid \\text{Flu}) \\times P(\\text{Flu}) + P(\\text{Test +} \\mid \\text{No Flu}) \\times P(\\text{No Flu})}\n\\]\nStep 1: Calculate the numerator (true positives)\n\nnumerator &lt;- \n\nnumerator\n\nStep 2: Calculate the denominator (all positive tests)\n\ndenominator &lt;- \n\ndenominator\n\nStep 3: Calculate PPV\n\nppv &lt;- \n\nppv\n\n# As a percentage\nppv * 100\n\n\n\n1C. Interpretation\nAnswer in 2-3 sentences:\n\nIf someone tests positive, what is the probability they actually have the flu?\nWhy is the PPV lower than the sensitivity (85%)?\n\nAnswers:\n\n\n\n\n\n\n1D. Calculate NPV\nNow calculate the Negative Predictive Value (NPV): What is the probability someone does NOT have flu given they tested negative?\n\\[\nP(\\text{No Flu} \\mid \\text{Test -}) = \\frac{P(\\text{Test -} \\mid \\text{No Flu}) \\times P(\\text{No Flu})}{P(\\text{Test -} \\mid \\text{No Flu}) \\times P(\\text{No Flu}) + P(\\text{Test -} \\mid \\text{Flu}) \\times P(\\text{Flu})}\n\\]\nHint: \\(P(\\text{Test -} \\mid \\text{Flu}) = 1 - \\text{sensitivity}\\)\n\n# Calculate NPV\n\nWhat is the NPV? Is it higher or lower than the PPV? Why?\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-2-random-variables",
-    "href": "homework/HW03/HW03.html#part-2-random-variables",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 2: Random Variables",
-    "text": "Part 2: Random Variables\n\n2A. Discrete probability distribution\nA hospital emergency department tracks the number of patients arriving per hour during overnight shifts. The probability distribution is:\n\n\n\nNumber of patients (\\(x\\))\n0\n1\n2\n3\n4\n5\n\n\n\n\n\\(P(X = x)\\)\n0.05\n0.15\n0.30\n0.25\n0.15\n0.10\n\n\n\nQuestion 1: Verify this is a valid probability distribution. What must be true?\n\n# Create the probability distribution\nx &lt;- c(0, 1, 2, 3, 4, 5)\nprob &lt;- c(0.05, 0.15, 0.30, 0.25, 0.15, 0.10)\n\n# Check if probabilities sum to 1\nsum(prob)\n\n# Hint: probabilities in a valid distribution must sum to 1\n# You may find sum() helpful here (see ?sum)\n\nAnswer:\nQuestion 2: Calculate the expected value (mean). On average, how many patients arrive per hour?\n\\[E(X) = \\sum x_i \\cdot P(X = x_i)\\]\n\n# Calculate expected value\n# Hint: expected value is a weighted average\n# In R, this can be computed as sum(x * prob)\n\nAnswer: The expected number of patients per hour is ________.\nQuestion 3: Calculate the variance and standard deviation.\n\\[\\text{Var}(X) = \\sum (x_i - \\mu)^2 \\cdot P(X = x_i)\\]\n\n# Calculate variance\n# Hint: first compute the mean (mu), then use\n# sum((x - mu)^2 * prob)\n\n\n\n# Calculate standard deviation\n# Hint: SD is the square root of the variance (see sqrt())\n\nAnswer:\n\nVariance = ________\nStandard deviation = ________\n\n\n\n2B. Linear combinations\nSuppose the hospital emergency department operates for 3 hours during an overnight shift. Let \\(X_1\\), \\(X_2\\), and \\(X_3\\) be the number of patients arriving in hours 1, 2, and 3, respectively. Assume each has the same distribution as above and arrivals are independent across hours.\nQuestion 1: What is the expected total number of patients arriving during the 3-hour shift?\nUse: \\(E(X_1 + X_2 + X_3) = E(X_1) + E(X_2) + E(X_3)\\)\n\n# Calculate expected total\n\nAnswer:\nQuestion 2: What is the variance and standard deviation of the total number of patients?\nUse: \\(\\text{Var}(X_1 + X_2 + X_3) = \\text{Var}(X_1) + \\text{Var}(X_2) + \\text{Var}(X_3)\\) (for independent random variables)\n\n# Calculate variance of total\n\n\n# Calculate standard deviation of total\n\nAnswer:\n\nVariance = ________\nStandard deviation = ________"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-3-binomial-distribution",
-    "href": "homework/HW03/HW03.html#part-3-binomial-distribution",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 3: Binomial Distribution",
-    "text": "Part 3: Binomial Distribution\n\n3A. Identifying binomial scenarios\nFor each scenario below, state whether it follows a binomial distribution. If yes, identify \\(n\\) (number of trials) and \\(p\\) (probability of success). If no, explain why not.\nScenario 1: A researcher tests 20 patients for a genetic mutation. Each patient has a 15% chance of having the mutation. We count how many patients have the mutation.\nAnswer:\nScenario 2: A doctor sees patients until they find 5 patients with high blood pressure. We count how many patients the doctor had to see.\nAnswer:\nScenario 3: A clinical trial enrolls 50 patients. Each patient is randomly assigned to treatment (probability 0.5) or control (probability 0.5). We count how many patients receive treatment.\nAnswer:\n\n\n3B. Binomial calculations\nAccording to recent data, approximately 20.3% of US adults aged 65-74 have diabetes. Suppose we randomly sample 15 adults from this age group.\nLet \\(X\\) = the number of adults with diabetes in our sample.\nQuestion 1: What distribution does \\(X\\) follow? Write this using notation.\nAnswer: \\(X \\sim\\) ________________\nQuestion 2: What is the expected number of adults with diabetes in the sample?\n\\[E(X) = np\\]\n\n# Calculate expected value\nn &lt;- \np &lt;- \n\nexpected_value &lt;- \n\nexpected_value\n\nAnswer:\nQuestion 3: What is the standard deviation?\n\\[SD(X) = \\sqrt{np(1-p)}\\]\n\n# Calculate standard deviation\n\nAnswer:\nQuestion 4: What is the probability that exactly 4 adults have diabetes?\nUse the formula: \\(P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}\\)\nOr use R: dbinom(x = k, size = n, prob = p)\n\n# Calculate P(X = 4)\n\nAnswer:\nQuestion 5: What is the probability that at most 2 adults have diabetes?\n\\[P(X \\leq 2) = P(X=0) + P(X=1) + P(X=2)\\]\nUse R: pbinom(q = k, size = n, prob = p)\n\n# Calculate P(X &lt;= 2)\n\nAnswer:\nQuestion 6: What is the probability that at least 5 adults have diabetes?\n\\[P(X \\geq 5) = 1 - P(X \\leq 4)\\]\nOr use: pbinom(q = 4, size = n, prob = p, lower.tail = FALSE)\n\n# Calculate P(X &gt;= 5) using both methods\n\n# Method 1: complement rule\n\n\n# Method 2: lower.tail = FALSE\n\nAnswer:\n\n\n3C. Visualizing the binomial distribution\nCreate a bar plot showing the binomial probability distribution for \\(n = 15\\) and \\(p = 0.203\\).\n\n# Create probability distribution data\nx_values &lt;- 0:15\nprobabilities &lt;- dbinom(x_values, size = 15, prob = 0.203)\n\n# Create a data frame\nbinom_data &lt;- data.frame(\n  x = x_values,\n  probability = probabilities\n)\n\n# Create bar plot\nggplot(binom_data, aes(x = x, y = probability)) +\n  geom_col(fill = \"steelblue\", color = \"black\") +\n  labs(\n    title = \"Binomial Distribution: n = 15, p = 0.203\",\n    x = \"Number of Adults with Diabetes\",\n    y = \"Probability\"\n  ) +\n  scale_x_continuous(breaks = 0:15) # controls x-axis tick marks (we'll learn more about scale_* later; see ?scale_x_continuous)\n\nLooking at the plot, what is the most likely number of adults with diabetes in a sample of 15? Does this match the expected value you calculated?\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-4-data-analysis-with-tidyverse-continued-practice",
-    "href": "homework/HW03/HW03.html#part-4-data-analysis-with-tidyverse-continued-practice",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 4: Data analysis with tidyverse (continued practice)",
-    "text": "Part 4: Data analysis with tidyverse (continued practice)\nFor this section, we’ll continue working with the nhanes.samp dataset. You may use either the formula or R, but show the code you use.\n\ndata(\"nhanes.samp\")\n\n\n4A. Data wrangling\nCreate a new dataset called diabetes_subset that:\n\nFilters to people aged 40 or older\nRemoves rows with missing Diabetes values (use filter(!is.na(Diabetes)))\nSelects the columns: ID, Age, Gender, Race1, BMI, Diabetes\n\nHow many people are in this subset? (Use nrow())\nAnswer:\n\n\n4B. Summary statistics by group\nUsing your diabetes_subset, calculate the mean and standard deviation of BMI grouped by Diabetes status. [Hint: use group_by and get_summary_stats from the rstatix pacakge]\nDo people with diabetes have higher or lower BMI on average? Does this match what you’d expect?\nAnswer:\n\n\n4C. Two-way frequency table\nCreate a two-way table showing the relationship between Diabetes and Gender using tabyl(). Add row percentages.\nAmong people aged 40+, what percentage of females have diabetes? What about males?\nAnswer:\n\n\n4D. Visualization\nCreate a boxplot comparing BMI across Diabetes groups. Color the boxes by Diabetes status.\nDescribe what you see in 1-2 sentences.\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-5-connecting-concepts-integration",
-    "href": "homework/HW03/HW03.html#part-5-connecting-concepts-integration",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 5: Connecting concepts (Integration)",
-    "text": "Part 5: Connecting concepts (Integration)\n\n5A. Binomial to data\nIn Part 3, we calculated that with \\(n=15\\) and \\(p=0.203\\), the expected number of adults with diabetes is approximately 3.\nNow let’s check this against real data. Using the full nhanes.samp dataset:\n\nFilter to adults aged 65-74 (use filter(Age &gt;= 65 & Age &lt;= 74))\nCalculate the proportion who have diabetes (use tabyl(Diabetes))\n\nQuestions:\n\nWhat proportion of adults aged 65-74 in this sample have diabetes?\nHow does this compare to the 20.3% we used in our binomial calculations?\nIf you randomly selected 15 people from this sample, would you expect about 3 to have diabetes?\n\nAnswers:\n\n\n\n\n\n\n\n5B. Bayes’ Theorem with data\nSuppose we use BMI &gt;= 30 as a “test” for diabetes (obese BMI as a predictor).\nCalculate the following using the diabetes_subset you created in Part 4A:\n\n# Create BMI test variable\ndiabetes_subset &lt;- diabetes_subset %&gt;%\n  mutate(BMI_test = if_else(BMI &gt;= 30, \"Positive\", \"Negative\"))\n\n# Create contingency table\ntable_diabetes_bmi &lt;- diabetes_subset %&gt;%\n  tabyl(Diabetes, BMI_test)\n\ntable_diabetes_bmi\n\nTreat BMI_test as the test result and Diabetes as the true condition.\n\n“Positive” = BMI ≥ 30\n“Negative” = BMI &lt; 30\n\nQuestion 1: What is the sensitivity? (Among people with diabetes, what proportion have BMI &gt;= 30?)\nHint: Look at the “Yes” row of the Diabetes column\nAnswer:\nQuestion 2: What is the specificity? (Among people without diabetes, what proportion have BMI &lt; 30?)\nAnswer:\nQuestion 3: Using the table, calculate the PPV: Among people with BMI &gt;= 30, what proportion have diabetes?\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#part-6-reflection-optional-but-encouraged",
-    "href": "homework/HW03/HW03.html#part-6-reflection-optional-but-encouraged",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Part 6: Reflection (Optional but encouraged)",
-    "text": "Part 6: Reflection (Optional but encouraged)\nIn 3-4 sentences, reflect on the connection between:\n\nBayes’ Theorem (flipping conditional probabilities)\nBinomial distribution (modeling repeated trials)\nReal data analysis (testing these concepts)\n\nHow do these topics relate to biomedical research?\nAnswer:"
-  },
-  {
-    "objectID": "homework/HW03/HW03.html#final-check",
-    "href": "homework/HW03/HW03.html#final-check",
-    "title": "BMSC 620 — Homework 3",
-    "section": "Final check",
-    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou’ve answered all required questions\nYou uploaded both the .qmd and .html files"
+    "text": "Final check\nBefore submitting, confirm that:\n\nThe document renders to HTML without errors\nAll code chunks run successfully\nYour name appears at the top\nYou’ve answered all text questions in Parts 1-6\nYou uploaded both the .qmd and .html files\n(Optional) If you completed Part 5, make sure those chunks run too!"
   },
   {
     "objectID": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.html#section",
@@ -2816,7 +2914,7 @@
     "href": "lessons/11_estimation_and_confidence_intervals/11_estimation_and_confidence_intervals.html#looking-ahead-1",
     "title": "Sampling Distributions and Confidence Intervals",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext time:\n\nMore practice with confidence intervals\nIntroduction to hypothesis testing\nThe logic of statistical inference\n\n\n\nFor now:\n\nPractice calculating CIs with different confidence levels\nGet comfortable with the t-distribution in R\nWork on understanding (not just calculating) what CIs mean\n\n\n\n\n\n\nRemember\n\n\nStatistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say “we don’t know exactly, but here’s a plausible range.”\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n–&gt;\n\n–&gt;\n\n–&gt;\n\n–&gt; \n\n\n\n\nBMSC 620 | Sampling & Confidence Intervals"
+    "text": "Looking ahead\nNext time:\n\nMore practice with confidence intervals\nIntroduction to hypothesis testing\nThe logic of statistical inference\n\n\n\nFor now:\n\nPractice calculating CIs with different confidence levels\nGet comfortable with the t-distribution in R\nWork on understanding (not just calculating) what CIs mean\n\n\n\n\n\n\nRemember\n\n\nStatistical inference is about quantifying uncertainty. Confidence intervals give us a principled way to say “we don’t know exactly, but here’s a plausible range.”\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n–&gt;\n\n–&gt;\n\n–&gt;\n\n–&gt;\n\n–&gt; \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBMSC 620 | Sampling & Confidence Intervals"
   },
   {
     "objectID": "lessons/06_probability_and_conditional_probability/06_probability_muddy_points.html",
