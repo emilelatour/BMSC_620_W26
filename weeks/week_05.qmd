@@ -83,6 +83,10 @@ By the end of the week, you should be able to:
 
 - **Slides**
   - Hypothesis Testing and One-Sample t-Tests ([HTML](/lessons/12_hypothesis_testing/12_hypothesis_testing.qmd) | [PDF](/lessons/12_hypothesis_testing/12_hypothesis_testing.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  - R Workflow: Projects, File Paths, and Reading Data ([HTML](/lessons/12_hypothesis_testing/12_r_workflow_slides.qmd) | [PDF](/lessons/12_hypothesis_testing/12_r_workflow_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+  
+- **Resource**
+  - [Hypothesis Testing: One-Page Reference](/resources/hypothesis_testing_handout.qmd)
 
 - **Recording**
   - Coming soon

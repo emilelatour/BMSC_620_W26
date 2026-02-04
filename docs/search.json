@@ -929,7 +929,7 @@
     "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#looking-ahead",
     "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext time:\n\nPaired t-tests (dependent samples)\nTwo-sample t-tests (independent samples)\nMore hypothesis testing practice\n\n\n\nFor now:\n\nPractice stating hypotheses correctly\nGet comfortable with p-value interpretation\nWork on connecting CIs and hypothesis tests\nUse R to conduct tests\n\n\n\n\n\n\nRemember\n\n\nStatistical significance (p &lt; 0.05) doesn’t automatically mean practical importance. Always think about the context and effect size!\n\n\n\n\n\n\nBMSC 620 | Hypothesis Testing"
+    "text": "Looking ahead\nNext time:\n\nPaired t-tests (dependent samples)\nTwo-sample t-tests (independent samples)\nMore hypothesis testing practice\n\n\n\nFor now:\n\nPractice stating hypotheses correctly\nGet comfortable with p-value interpretation\nWork on connecting CIs and hypothesis tests\nUse R to conduct tests\n\n\n\n\n\n\nRemember\n\n\nStatistical significance (p &lt; 0.05) doesn’t automatically mean practical importance. Always think about the context and effect size!"
   },
   {
     "objectID": "lessons/04_categorical_data_and_tables/04_categorical_data_and_tables.html#todays-plan",
@@ -5348,5 +5348,12 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#whats-next",
+    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#whats-next",
+    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
+    "section": "What’s next?",
+    "text": "What’s next?\nCI’s and hypothesis testing for different scenarios:\n\n\n\n\n\n\n\n\n\n\n\nDay\nSection\nPopulation parameter\nSymbol\nPoint estimate\nSymbol\n\n\n\n\n10\n5.1\nPop mean\n\\(\\mu\\)\nSample mean\n\\(\\bar{x}\\)\n\n\n10\n5.2\nPop mean of paired diff\n\\(\\mu_d\\) or \\(\\delta\\)\nSample mean of paired diff\n\\(\\bar{x}_{d}\\)\n\n\n11\n5.3\nDiff in pop means\n\\(\\mu_1-\\mu_2\\)\nDiff in sample means\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\n\n12\n8.1\nPop proportion\n\\(p\\)\nSample prop\n\\(\\widehat{p}\\)\n\n\n12\n8.2\nDiff in pop prop’s\n\\(p_1-p_2\\)\nDiff in sample prop’s\n\\(\\widehat{p}_1-\\widehat{p}_2\\)\n\n\n\n\n\n\nBMSC 620 | Hypothesis Testing"
   }
 ]
