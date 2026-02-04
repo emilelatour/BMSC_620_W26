@@ -685,8 +685,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="step-1-state-the-hypotheses" class="slide level2">
 <h2>Step 1: State the hypotheses</h2>
 <p>Every hypothesis test has two competing hypotheses:</p>
-<p><br>
-</p>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -895,6 +893,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="calculating-the-t-statistic-example" class="slide level2">
 <h2>Calculating the t-statistic: Example</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>For our body temperature data:</p>
 <ul>
 <li><span class="math inline">\(\bar{x} = 98.25\)</span></li>
@@ -902,8 +902,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li><span class="math inline">\(s = 0.733\)</span></li>
 <li><span class="math inline">\(n = 130\)</span></li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Calculate t-statistic</span></span>
 <span id="cb3-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
@@ -923,41 +922,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <pre><code>[1] -5.444221</code></pre>
 </div>
 </div>
-<p><br>
-</p>
-<p><strong>Interpretation:</strong> Our sample mean is about 5.45 standard errors below the null value. This seems pretty far!</p>
-</section>
-<section id="calculating-the-t-statistic-example-1" class="slide level2">
-<h2>Calculating the t-statistic: Example</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>For our body temperature data:</p>
-<ul>
-<li><span class="math inline">\(\bar{x} = 98.25\)</span></li>
-<li><span class="math inline">\(\mu_0 = 98.6\)</span> (from <span class="math inline">\(H_0\)</span>)</li>
-<li><span class="math inline">\(s = 0.733\)</span></li>
-<li><span class="math inline">\(n = 130\)</span></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Calculate t-statistic</span></span>
-<span id="cb7-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
-<span id="cb7-3"><a></a>mu_0 <span class="ot">&lt;-</span> <span class="fl">98.6</span></span>
-<span id="cb7-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.733</span></span>
-<span id="cb7-5"><a></a>n <span class="ot">&lt;-</span> <span class="dv">130</span></span>
-<span id="cb7-6"><a></a></span>
-<span id="cb7-7"><a></a>SE <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb7-8"><a></a>t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu_0) <span class="sc">/</span> SE</span>
-<span id="cb7-9"><a></a></span>
-<span id="cb7-10"><a></a>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06428835</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>t_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -5.444221</code></pre>
-</div>
-</div>
 </div></div>
 <p><br>
 </p>
@@ -966,7 +930,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="visualizing-the-test-statistic" class="slide level2">
 <h2>Visualizing the test statistic</h2>
 
-<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-5-1.png" width="1152" class="r-stretch"><p>Our observed t-statistic is way out in the tail - this will lead to a small p-value!</p>
+<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-4-1.png" width="1152" class="r-stretch"><p>Our observed t-statistic is way out in the tail - this will lead to a small p-value!</p>
 </section>
 <section id="step-5-calculate-the-p-value-12" class="slide level2">
 <h2>Step 5: Calculate the p-value (1/2)</h2>
@@ -1000,18 +964,18 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li>Multiply by 2 to account for both tails.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Calculate t-statistic</span></span>
-<span id="cb11-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
-<span id="cb11-3"><a></a>mu_0 <span class="ot">&lt;-</span> <span class="fl">98.6</span></span>
-<span id="cb11-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.733</span></span>
-<span id="cb11-5"><a></a>n <span class="ot">&lt;-</span> <span class="dv">130</span></span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a>SE <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb11-8"><a></a>t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu_0) <span class="sc">/</span> SE</span>
-<span id="cb11-9"><a></a></span>
-<span id="cb11-10"><a></a><span class="co"># Calculate p-value (two-sided)</span></span>
-<span id="cb11-11"><a></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-12"><a></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Calculate t-statistic</span></span>
+<span id="cb7-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
+<span id="cb7-3"><a></a>mu_0 <span class="ot">&lt;-</span> <span class="fl">98.6</span></span>
+<span id="cb7-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.733</span></span>
+<span id="cb7-5"><a></a>n <span class="ot">&lt;-</span> <span class="dv">130</span></span>
+<span id="cb7-6"><a></a></span>
+<span id="cb7-7"><a></a>SE <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb7-8"><a></a>t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu_0) <span class="sc">/</span> SE</span>
+<span id="cb7-9"><a></a></span>
+<span id="cb7-10"><a></a><span class="co"># Calculate p-value (two-sided)</span></span>
+<span id="cb7-11"><a></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-12"><a></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.530265e-07</code></pre>
 </div>
@@ -1114,7 +1078,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -1155,29 +1119,29 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <!-- ) -->
 <!-- ``` -->
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Our summary statistics</span></span>
-<span id="cb14-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
-<span id="cb14-3"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.733</span></span>
-<span id="cb14-4"><a></a>n <span class="ot">&lt;-</span> <span class="dv">130</span></span>
-<span id="cb14-5"><a></a>mu_0 <span class="ot">&lt;-</span> <span class="fl">98.6</span></span>
-<span id="cb14-6"><a></a></span>
-<span id="cb14-7"><a></a><span class="co"># Calculate t-statistic</span></span>
-<span id="cb14-8"><a></a>t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu_0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb14-9"><a></a>t_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Our summary statistics</span></span>
+<span id="cb10-2"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">98.25</span></span>
+<span id="cb10-3"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.733</span></span>
+<span id="cb10-4"><a></a>n <span class="ot">&lt;-</span> <span class="dv">130</span></span>
+<span id="cb10-5"><a></a>mu_0 <span class="ot">&lt;-</span> <span class="fl">98.6</span></span>
+<span id="cb10-6"><a></a></span>
+<span id="cb10-7"><a></a><span class="co"># Calculate t-statistic</span></span>
+<span id="cb10-8"><a></a>t_stat <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu_0) <span class="sc">/</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb10-9"><a></a>t_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -5.444221</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Calculate p-value (two-sided)</span></span>
-<span id="cb16-2"><a></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-3"><a></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Calculate p-value (two-sided)</span></span>
+<span id="cb12-2"><a></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t_stat), <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-3"><a></a>p_value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.530265e-07</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># Calculate 95% CI</span></span>
-<span id="cb18-2"><a></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb18-3"><a></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(xbar <span class="sc">-</span> t_crit <span class="sc">*</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n)),</span>
-<span id="cb18-4"><a></a>        xbar <span class="sc">+</span> t_crit <span class="sc">*</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
-<span id="cb18-5"><a></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Calculate 95% CI</span></span>
+<span id="cb14-2"><a></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb14-3"><a></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(xbar <span class="sc">-</span> t_crit <span class="sc">*</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n)),</span>
+<span id="cb14-4"><a></a>        xbar <span class="sc">+</span> t_crit <span class="sc">*</span> (s <span class="sc">/</span> <span class="fu">sqrt</span>(n)))</span>
+<span id="cb14-5"><a></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 98.1228 98.3772</code></pre>
 </div>
@@ -1187,17 +1151,17 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Example with raw data</h2>
 <p>Let’s use the full body temperature dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Load the data</span></span>
-<span id="cb20-2"><a></a><span class="co"># See ?readr::read_csv</span></span>
-<span id="cb20-3"><a></a>bodytemp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, </span>
-<span id="cb20-4"><a></a>                                       <span class="st">"BodyTemperatures.csv"</span>))</span>
-<span id="cb20-5"><a></a></span>
-<span id="cb20-6"><a></a><span class="co"># See ?janitor::clean_names</span></span>
-<span id="cb20-7"><a></a>bodytemp <span class="ot">&lt;-</span> bodytemp <span class="sc">|&gt;</span> </span>
-<span id="cb20-8"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb20-9"><a></a></span>
-<span id="cb20-10"><a></a><span class="co"># Look at the data</span></span>
-<span id="cb20-11"><a></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(bodytemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Load the data</span></span>
+<span id="cb16-2"><a></a><span class="co"># See ?readr::read_csv</span></span>
+<span id="cb16-3"><a></a>bodytemp <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, </span>
+<span id="cb16-4"><a></a>                                       <span class="st">"BodyTemperatures.csv"</span>))</span>
+<span id="cb16-5"><a></a></span>
+<span id="cb16-6"><a></a><span class="co"># See ?janitor::clean_names</span></span>
+<span id="cb16-7"><a></a>bodytemp <span class="ot">&lt;-</span> bodytemp <span class="sc">|&gt;</span> </span>
+<span id="cb16-8"><a></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb16-9"><a></a></span>
+<span id="cb16-10"><a></a><span class="co"># Look at the data</span></span>
+<span id="cb16-11"><a></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(bodytemp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 130
 Columns: 3
@@ -1210,14 +1174,14 @@ $ heart_rate  &lt;dbl&gt; 70, 71, 74, 80, 73, 75, 82, 64, 69, 70, 68, 72, 78, 70
 <section id="conducting-the-t-test-in-r" class="slide level2">
 <h2>Conducting the t-test in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Perform one-sample t-test</span></span>
-<span id="cb22-2"><a></a><span class="co"># H0: mu = 98.6 vs HA: mu != 98.6</span></span>
-<span id="cb22-3"><a></a>test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bodytemp<span class="sc">$</span>temperature, </span>
-<span id="cb22-4"><a></a>                      <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
-<span id="cb22-5"><a></a>                      <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a><span class="co"># Display results</span></span>
-<span id="cb22-8"><a></a>test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># Perform one-sample t-test</span></span>
+<span id="cb18-2"><a></a><span class="co"># H0: mu = 98.6 vs HA: mu != 98.6</span></span>
+<span id="cb18-3"><a></a>test_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(bodytemp<span class="sc">$</span>temperature, </span>
+<span id="cb18-4"><a></a>                      <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
+<span id="cb18-5"><a></a>                      <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a><span class="co"># Display results</span></span>
+<span id="cb18-8"><a></a>test_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -1270,20 +1234,20 @@ mean of x
 <h2>Using the broom package for tidy output</h2>
 <p>The <code>broom</code> package makes output easier to work with:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(broom)</span>
-<span id="cb24-2"><a></a></span>
-<span id="cb24-3"><a></a><span class="co"># Tidy the output</span></span>
-<span id="cb24-4"><a></a>tidy_result <span class="ot">&lt;-</span> <span class="fu">tidy</span>(test_result)</span>
-<span id="cb24-5"><a></a>tidy_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">library</span>(broom)</span>
+<span id="cb20-2"><a></a></span>
+<span id="cb20-3"><a></a><span class="co"># Tidy the output</span></span>
+<span id="cb20-4"><a></a>tidy_result <span class="ot">&lt;-</span> <span class="fu">tidy</span>(test_result)</span>
+<span id="cb20-5"><a></a>tidy_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
   estimate statistic     p.value parameter conf.low conf.high method alternative
      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      
 1     98.2     -5.45 0.000000241       129     98.1      98.4 One S… two.sided  </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Now it's a nice tibble we can manipulate</span></span>
-<span id="cb26-2"><a></a>tidy_result <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a></a>  <span class="fu">select</span>(estimate, statistic, p.value, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Now it's a nice tibble we can manipulate</span></span>
+<span id="cb22-2"><a></a>tidy_result <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a></a>  <span class="fu">select</span>(estimate, statistic, p.value, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 5
   estimate statistic     p.value conf.low conf.high
@@ -1298,13 +1262,13 @@ mean of x
 <section id="using-rstatix" class="slide level2">
 <h2>Using rstatix</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(rstatix)</span>
-<span id="cb28-2"><a></a></span>
-<span id="cb28-3"><a></a><span class="fu">t_test</span>(<span class="at">data =</span> bodytemp, </span>
-<span id="cb28-4"><a></a>       temperature <span class="sc">~</span> <span class="dv">1</span>, </span>
-<span id="cb28-5"><a></a>       <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
-<span id="cb28-6"><a></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>, </span>
-<span id="cb28-7"><a></a>       <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb24-2"><a></a></span>
+<span id="cb24-3"><a></a><span class="fu">t_test</span>(<span class="at">data =</span> bodytemp, </span>
+<span id="cb24-4"><a></a>       temperature <span class="sc">~</span> <span class="dv">1</span>, </span>
+<span id="cb24-5"><a></a>       <span class="at">mu =</span> <span class="fl">98.6</span>, </span>
+<span id="cb24-6"><a></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>, </span>
+<span id="cb24-7"><a></a>       <span class="at">detailed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 12
   estimate .y.    group1 group2     n statistic       p    df conf.low conf.high
@@ -1318,7 +1282,7 @@ mean of x
 <h2>Visualizing our test</h2>
 <p>This plot is descriptive — the hypothesis test is not based on the histogram, but on the sampling distribution of the mean</p>
 
-<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-13-1.png" width="1152" class="r-stretch"></section>
+<img data-src="12_hypothesis_testing_files/figure-revealjs/unnamed-chunk-12-1.png" width="1152" class="r-stretch"></section>
 <section id="connection-between-cis-and-hypothesis-tests" class="slide level2">
 <h2>Connection between CIs and hypothesis tests</h2>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -1466,9 +1430,9 @@ mean of x
 <p><br>
 </p>
 <p><strong>Example:</strong></p>
-<p>“A one-sample t-test was conducted to determine if mean body temperature differs from 98.6°F. The sample (n = 130) had a mean of 98.25°F (SD = 0.733). The test was statistically significant (t(129) = -5.45, p &lt; 0.001, 95% CI: [98.12, 98.38]), indicating that population mean body temperature is likely lower than the traditional 98.6°F value.”</p>
-<p>Or</p>
-<p>“There is strong evidence (p &lt; 0.001) suggesting the population mean body temperature is no longer 98.6°F (one-sample t-test).</p>
+<p>“A one-sample t-test was conducted to determine if mean body temperature differs from 98.6°F. The sample (n = 130) had a mean of 98.25°F (SD = 0.733). The test was statistically significant (t(129) = -5.45, p &lt; 0.001, 95% CI: [98.12 to 98.38]), indicating that population mean body temperature is likely lower than the traditional 98.6°F value.”</p>
+<p><strong>Or</strong></p>
+<p>“There is strong evidence (p &lt; 0.001) suggesting the population mean body temperature is no longer 98.6°F (one-sample t-test). The recent data estimate mean body temperature to be 98.25°F (95% CI: 98.12 to 98.38).”</p>
 </section></section>
 <section>
 <section id="summary" class="title-slide slide level1 center">

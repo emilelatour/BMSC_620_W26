@@ -3971,7 +3971,7 @@
     "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#step-1-state-the-hypotheses",
     "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
     "section": "Step 1: State the hypotheses",
-    "text": "Step 1: State the hypotheses\nEvery hypothesis test has two competing hypotheses:\n\n\n\n\n\nNull Hypothesis (\\(H_0\\))\n\n\nThe null hypothesis is the status quo or claim of “no effect/no difference”\n\nUsually states that a parameter equals a specific value\nWhat we assume is true unless we have strong evidence against it\nFor our example: \\(H_0: \\mu = 98.6\\)\n\n\n\n\n\n\n\n\n\nAlternative Hypothesis (\\(H_A\\))\n\n\nThe alternative hypothesis is what the researcher wants to show\n\nClaims the parameter is different from (or greater/less than) the null value\nWhat we conclude if we have sufficient evidence\nFor our example: \\(H_A: \\mu \\neq 98.6\\)"
+    "text": "Step 1: State the hypotheses\nEvery hypothesis test has two competing hypotheses:\n\n\n\nNull Hypothesis (\\(H_0\\))\n\n\nThe null hypothesis is the status quo or claim of “no effect/no difference”\n\nUsually states that a parameter equals a specific value\nWhat we assume is true unless we have strong evidence against it\nFor our example: \\(H_0: \\mu = 98.6\\)\n\n\n\n\n\n\n\n\n\nAlternative Hypothesis (\\(H_A\\))\n\n\nThe alternative hypothesis is what the researcher wants to show\n\nClaims the parameter is different from (or greater/less than) the null value\nWhat we conclude if we have sufficient evidence\nFor our example: \\(H_A: \\mu \\neq 98.6\\)"
   },
   {
     "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#writing-hypotheses-symbols-and-words",
@@ -4011,13 +4011,6 @@
   {
     "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example",
     "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example",
-    "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
-    "section": "Calculating the t-statistic: Example",
-    "text": "Calculating the t-statistic: Example\nFor our body temperature data:\n\n\\(\\bar{x} = 98.25\\)\n\\(\\mu_0 = 98.6\\) (from \\(H_0\\))\n\\(s = 0.733\\)\n\\(n = 130\\)\n\n\n\n\n# Calculate t-statistic\nxbar &lt;- 98.25\nmu_0 &lt;- 98.6\ns &lt;- 0.733\nn &lt;- 130\n\nSE &lt;- s / sqrt(n)\nt_stat &lt;- (xbar - mu_0) / SE\n\nSE\n\n[1] 0.06428835\n\nt_stat\n\n[1] -5.444221\n\n\n\n\nInterpretation: Our sample mean is about 5.45 standard errors below the null value. This seems pretty far!"
-  },
-  {
-    "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example-1",
-    "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#calculating-the-t-statistic-example-1",
     "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
     "section": "Calculating the t-statistic: Example",
     "text": "Calculating the t-statistic: Example\n\n\nFor our body temperature data:\n\n\\(\\bar{x} = 98.25\\)\n\\(\\mu_0 = 98.6\\) (from \\(H_0\\))\n\\(s = 0.733\\)\n\\(n = 130\\)\n\n\n\n# Calculate t-statistic\nxbar &lt;- 98.25\nmu_0 &lt;- 98.6\ns &lt;- 0.733\nn &lt;- 130\n\nSE &lt;- s / sqrt(n)\nt_stat &lt;- (xbar - mu_0) / SE\n\nSE\n\n[1] 0.06428835\n\nt_stat\n\n[1] -5.444221\n\n\n\n\n\nInterpretation: Our sample mean is about 5.45 standard errors below the null value. This seems pretty far!"
@@ -4153,7 +4146,7 @@
     "href": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#reporting-your-results",
     "title": "Hypothesis Testing: Concepts and One-Sample t-Tests",
     "section": "Reporting your results",
-    "text": "Reporting your results\nGood statistical reporting includes:\n\nDescriptive statistics: \\(\\bar{x}\\), \\(s\\), \\(n\\)\nTest details: Which test, hypotheses, α level\nResults: Test statistic, df, p-value\nConfidence interval: Gives effect size estimate\nConclusion in context: What does it mean?\n\n\n\nExample:\n“A one-sample t-test was conducted to determine if mean body temperature differs from 98.6°F. The sample (n = 130) had a mean of 98.25°F (SD = 0.733). The test was statistically significant (t(129) = -5.45, p &lt; 0.001, 95% CI: [98.12, 98.38]), indicating that population mean body temperature is likely lower than the traditional 98.6°F value.”\nOr\n“There is strong evidence (p &lt; 0.001) suggesting the population mean body temperature is no longer 98.6°F (one-sample t-test)."
+    "text": "Reporting your results\nGood statistical reporting includes:\n\nDescriptive statistics: \\(\\bar{x}\\), \\(s\\), \\(n\\)\nTest details: Which test, hypotheses, α level\nResults: Test statistic, df, p-value\nConfidence interval: Gives effect size estimate\nConclusion in context: What does it mean?\n\n\n\nExample:\n“A one-sample t-test was conducted to determine if mean body temperature differs from 98.6°F. The sample (n = 130) had a mean of 98.25°F (SD = 0.733). The test was statistically significant (t(129) = -5.45, p &lt; 0.001, 95% CI: [98.12 to 98.38]), indicating that population mean body temperature is likely lower than the traditional 98.6°F value.”\nOr\n“There is strong evidence (p &lt; 0.001) suggesting the population mean body temperature is no longer 98.6°F (one-sample t-test). The recent data estimate mean body temperature to be 98.25°F (95% CI: 98.12 to 98.38).”"
   },
   {
     "objectID": "lessons/12_hypothesis_testing/12_hypothesis_testing.html#what-we-learned-today",
