@@ -1,0 +1,128 @@
+---
+title: "Response to Muddy Points"
+subtitle: "Lecture: Hypothesis Testing and t-tests"
+author: "Emile"
+date: "Week 5, Day 2"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+---
+
+## Administrative Note
+
+**Code chunk options:** You're right to notice this - in the homework file I distributed, the global chunk options were set to `eval = FALSE`. For your own work, you should change this to `eval = TRUE` so that your code runs and produces output in the rendered HTML. I'll make sure this is set correctly in future homework files. Thanks for catching this.
+
+---
+
+## Conceptual Clarifications
+
+### Alternative vs "True" Hypothesis
+
+The **alternative hypothesis** ($H_0$ or $H_A$) is what we specify before collecting data. It's our research hypothesis stating what we think might be true. There isn’t really a separate "true hypothesis" in the formal testing framework. In reality, either the null hypothesis is true or it isn’t, but we never observe that directly. We use our data to decide whether we have enough evidence to reject $H_0$ in favor of $H_A$.
+
+### One-Sample vs Two-Sample t-tests
+
+**"Is a one-variable t-test comparing a sample mean?"** - Yes! A one-sample t-test compares one sample mean to a hypothesized population value (often $\mu_0 = 0$). It's "one variable" because you have one group of measurements.
+
+**"Are t-tests always comparing a mean to a mean?"** - Almost, but not quite:
+
+- **One-sample t-test**: Compares a sample mean to a fixed value (like $\mu = 0$)
+- **Two-sample t-test**: Compares two sample means to each other (we'll cover this next week)
+
+### One-Sided vs Two-Sided Tests
+
+**When to use one-sided:** You need a **strong scientific reason** established *before* seeing your data. Examples where one-sided might be justified:
+
+- Testing whether a new drug *lowers* blood pressure (can't raise it by mechanism)
+- Testing whether an educational intervention *improves* test scores (ethically, we wouldn't use an intervention we think makes things worse)
+- Testing whether a treatment is *non-inferior* to standard care
+
+**Default should be two-sided** because:
+
+- We're usually genuinely unsure which direction an effect might go
+- Two-sided tests are more conservative
+- Journal reviewers/regulatory agencies often require two-sided tests
+
+If you're asking yourself "should I use one-sided?", the answer is probably no.
+
+### P-values and Confidence Intervals
+
+**"Is $p \gt \alpha$ inside the CI or not?"** - Let me clarify this relationship:
+
+- If **$p \lt \alpha$**: The null hypothesis value (like $\mu = 0$ is *outside* the confidence interval → we reject H₀
+- If **$p \ge \alpha$**: The null hypothesis value is *inside* the confidence interval → we fail to reject $H_0$
+
+So **$p \ge \alpha$ means the hypothesized value IS inside the CI** (not outside). This relationship holds when the confidence level matches $\alpha$ (e.g., a 95% CI and $\alpha = 0.05$)
+
+### "Low p-value was worse"
+
+<!-- I'm not sure what was referred to here... In hypothesis testing, a **low p-value** ($p \lt \alpha$) means we have strong evidence against $H_0$, which is generally what we're looking for if we expect an effect. A **high p-value** means our data are consistent with $H_0$. Neither is inherently "better" or "worse" - it depends on what question we're asking. -->
+
+Some of you may be thinking of situations where a "low score is bad" (e.g., exam scores, health indices). A p-value isn't a score in that sense.
+
+A low p-value means the observed data would be unlikely if the null hypothesis were true. That’s all it measures. Not goodness, quality, or success.
+
+### Statistical vs Practical Significance
+
+**"How you can tell if p is actually relevant to real world data"** - Great question! This is the difference between statistical and practical significance:
+
+- **Statistical significance** ($p \lt 0.05$): We have evidence of a difference
+- **Practical significance**: The difference is large enough to matter
+
+Example: In a study of 10,000 people, we might find that a drug lowers blood pressure by 0.5 mmHg ($p = 0.001$). This is statistically significant but clinically meaningless. That small a change doesn't affect patient outcomes.
+
+Always interpret results in context: What is the *effect size*? Does the confidence interval include clinically important values?
+
+---
+
+## Practical Questions
+
+### Random Sampling in Clinical Trials
+
+**"Does random sampling correspond to treatment group assignment or enrollment?"**
+
+These are two different types of randomization:
+
+1. **Random sampling** refers to how we *select* participants from the population
+2. **Random assignment** refers to how we *assign* participants to treatment groups
+
+In clinical trials:
+
+- Enrollment is usually *not* random (we recruit volunteers who meet criteria)
+- Treatment assignment *is* randomized (patients randomly assigned to treatment vs control)
+
+This is why clinical trials can establish causation (through random assignment) but may have limited generalizability (because enrollment isn't a random sample of the population).
+
+### Degrees of Freedom
+
+**"Why is it n-1?"** - Here's the intuition: If you know the sample mean and $n-1$ of the data points, the last data point is *determined*. It's no longer "free" to vary. 
+
+Example: If mean = 5 from 3 numbers, and you know two are 4 and 5, the third *must* be 6.
+
+The $n-1$ degrees of freedom accounts for this loss of freedom when we estimate the mean from the data. You're right that you don't *need* to fully understand this to use it correctly. Just know that df = $n-1$ for one-sample tests.
+
+### Working Across Multiple Computers
+
+**"I work on laptop at work and desktop at home - does this create problems?"**
+
+This is exactly why R Projects and the `here` package are so valuable! As long as you:
+
+1. Store your project folder in Dropbox/OneDrive
+2. Open the `.Rproj` file on each computer
+3. Use `here()` for file paths
+
+...everything will work seamlessly. The `here()` function builds paths *relative to your project root*, so it doesn't matter what your username is or whether you're on Mac/PC. Your file structure within the project stays the same.
+
+Just make sure cloud sync completes before switching computers!
+
+---
+
+## R Project Setup
+
+Several of you mentioned finding the R project and `here()` discussion helpful. Going forward, all homework and activities should be organized within R projects using relative paths. This will save you headaches and make your work more reproducible.
+
+---
+
+We’ll revisit several of these ideas as we move forward, especially when we look at two-sample tests and confidence intervals in more detail.

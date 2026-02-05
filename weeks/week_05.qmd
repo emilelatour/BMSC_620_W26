@@ -93,7 +93,9 @@ By the end of the week, you should be able to:
   - [Hypothesis testing, one-sample t-tests, and R workflow](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBwDzGcGKt_RrGlFN7vvlUYAdQbUW8neMIEP4_JU0Oc4wo?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=bahYWV)
   
 - **Muddy points**
-  - Coming soon.
+  
+  I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 9](/lessons/12_hypothesis_testing/12_hypothesis_testing_and_r_worflow_muddy_points.qmd)
 
 ---
 
