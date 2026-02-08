@@ -40,7 +40,7 @@ hw4 = cal_dates[35]
 w6d1 = cal_dates[36]
 w6d2 = cal_dates[38]
 mid_opens = cal_dates[38]
-mid_closes = cal_dates[42]
+mid_closes = cal_dates[43]
 
 ## Week 7 dates
 w7d1 = cal_dates[43] # No class

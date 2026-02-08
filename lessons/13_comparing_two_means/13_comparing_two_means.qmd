@@ -1,0 +1,1498 @@
+---
+title: "Comparing Two Means: Paired and Independent Samples"
+subtitle: "Textbook Sections 5.2, 5.3"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w8d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Comparing Two Means"
+    html-math-method: mathjax
+    chalkboard: true
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(gt)
+library(janitor)
+
+library(lamisc)
+library(laviz)     
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none", 
+                                     axis = "xy", 
+                                     base_size = 16))
+
+set.seed(456)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Distinguish between paired and independent samples
+2. Perform paired t-tests for dependent data in R
+3. Construct and interpret confidence intervals for paired differences
+4. Conduct two-sample t-tests for independent groups
+5. Choose the appropriate test based on study design
+
+## Roadmap for Today
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: Paired Data**
+
+- What makes data "paired"?
+- Examples and study designs
+- The vegetarian diet example
+- Paired t-tests in R
+
+**Part 2: The Math Behind Paired Tests**
+
+- Population parameters vs. sample statistics
+- Test statistics and p-values
+- Confidence intervals for differences
+:::
+
+::: {.column width="50%"}
+**Part 3: Independent Samples**
+
+- What makes samples "independent"?
+- The caffeine and finger tapping example
+- Two-sample t-tests in R
+
+**Part 4: Choosing the Right Test**
+
+- Paired vs. independent: key differences
+- Study design implications
+- Common mistakes to avoid
+:::
+:::::
+
+## CI's and hypothesis testing for different scenarios:
+
+
+| Day | Section |  Population parameter   |       Symbol        |       Point estimate       |            Symbol             |
+|:----:|:------:|:----------:|:--------:|:----------:|:-------:|
+| 9  |   5.1   |        Population mean         |        $\mu$        |        Sample mean         |           $\bar{x}$           |
+| 10  |   5.2   | Population mean of paired differences | $\mu_d$ or $\delta$ | Sample mean of paired differences |         $\bar{x}_{d}$         |
+| 10  |   5.3   |    Differences in population means    |    $\mu_1-\mu_2$    |    Differences in sample means    |    $\bar{x}_1 - \bar{x}_2$    |
+| 13  |   8.1   |     Population proportion      |         $p$         |        Sample proportions         |         $\widehat{p}$         |
+| 14  |   8.2   |   Differences in population proportions    |      $p_1-p_2$      |   Differences in sample proportions    | $\widehat{p}_1-\widehat{p}_2$ |
+
+# Paired Data
+
+## Where are we in the course?
+
+We've been building up our inference toolkit:
+
+\
+
+**So far:**
+
+- Single-sample mean: $\mu$ 
+  - CI: $\bar{x} \pm t^* \times \frac{s}{\sqrt{n}}$
+  - Test: Compare $\bar{x}$ to hypothesized $\mu_0$
+
+\
+
+**Today:**
+
+- Mean difference from **paired** samples: $\mu_d$ or $\delta$
+- Difference in means from **independent** samples: $\mu_1 - \mu_2$
+
+\
+
+**Why this matters:** The study design determines which test we use!
+
+## Reminder: The six steps of hypothesis testing
+
+Before we dive into examples, let's review our standard framework:
+
+1.  **State hypotheses** ($H_0$ and $H_A$)
+2.  **Set significance level** (usually $\alpha$ = 0.05)
+3.  **Check assumptions** (independence, normality/large n)
+4.  **Calculate test statistic** 
+    - Paired: $t = \frac{\bar{x}_d - 0}{s_d/\sqrt{n}}$
+    - Independent: $t = \frac{(\bar{x}_1 - \bar{x}_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
+5.  **Find p-value** (probability of seeing this or more extreme)
+6.  **Make conclusion** (reject or fail to reject $H_0$, with context)
+
+\
+
+**Today we'll apply this framework to both paired and independent samples!**
+
+## What are paired data?
+
+::: {.callout-important icon="false"}
+## Definition: Paired Data
+
+**Paired data** occur when two sets of observations are uniquely matched so that an observation in one set corresponds to exactly one observation in the other.
+:::
+
+\
+
+**Common scenarios:**
+
+1. **Before-and-after studies** (longitudinal data)
+   - Measure the same people at two time points
+   - Example: Blood pressure before and after medication
+
+2. **Matched pairs**
+   - Twin studies: One twin gets treatment, other gets control
+   - Matched controls: Pair people based on age, sex, etc.
+
+3. **Natural pairs**
+   - Left eye vs. right eye
+   - Parent-child pairs
+
+## Examples of paired designs
+
+::::: columns
+::: {.column width="48%"}
+**Example 1: Swimmer performance**
+
+- Competitive swimmers tested twice
+- Once wearing wetsuit
+- Once wearing regular swimsuit
+- Compare maximum speed
+
+\
+
+**Why paired?**
+
+- Same swimmer in both conditions
+- Controls for individual differences in ability
+:::
+
+::: {.column width="48%"}
+**Example 2: Drug effectiveness**
+
+- Patients tested before treatment
+- Same patients tested after treatment
+- Compare blood glucose levels
+
+\
+
+**Why paired?**
+
+- Same patient at two time points
+- Natural "before vs. after" comparison
+:::
+:::::
+
+\
+
+**Key insight:** Pairing reduces variability because we're comparing each person to themselves!
+
+## Today's example: Vegetarian diet and cholesterol
+
+::: {.callout-note icon="false"}
+## Research Question
+
+Can a vegetarian diet reduce cholesterol levels?
+:::
+
+\
+
+**Study design:**
+
+- 43 non-vegetarian adults enrolled
+- Instructed to adopt a vegetarian diet
+- Cholesterol measured **before** and **after** diet
+- Follow-up period: 3 months
+
+\
+
+**Why is this paired data?**
+
+- Same individuals measured twice
+- Each person serves as their own control
+- We can calculate: $\text{After - Before}$ for each person
+
+## Loading and exploring the cholesterol data
+
+```{r}
+
+library(dplyr)
+library(here)
+library(readr)
+
+# Load the data
+chol <- read_csv(here("data", 
+                      "chol213_n40.csv"))
+
+# Take a look at the structure
+glimpse(chol)
+```
+
+\
+
+**What do we have?**
+
+- `Before`: Cholesterol level before diet (mg/dL)
+- `After`: Cholesterol level after diet (mg/dL)
+- Each row is one person
+
+## Calculate the paired differences
+
+\
+
+::: columns
+::: {.column width="50%"}
+For paired data, we create a new variable: the difference
+
+```{r}
+# Calculate difference: After - Before
+chol <- chol %>%
+  mutate(DiffChol = After - Before)
+
+# Look at first few differences
+chol
+```
+:::
+
+::: {.column width="50%"}
+
+\
+
+\
+
+\
+
+\
+
+\
+
+\
+
+\
+
+\
+
+
+**Interpretation of differences:**
+
+- Negative values: cholesterol decreased
+- Positive values: cholesterol increased
+- Zero: no change
+:::
+:::
+
+
+
+## Visualizing the paired differences
+
+::::: columns
+::: {.column width="48%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+# Create spaghetti plot showing individual changes
+chol_long <- chol %>%
+  mutate(ID = factor(1:n())) %>%
+  pivot_longer(cols = c(Before, After),
+               names_to = "Time",
+               values_to = "Cholesterol") %>% 
+  mutate(Time = factor(Time, 
+                       levels = c("Before", 
+                                  "After")))
+
+ggplot(chol_long, aes(x = Time, y = Cholesterol, group = ID)) +
+  geom_line(alpha = 0.3, linewidth = 1) +
+  geom_point(size = 2) +
+  labs(title = "Individual cholesterol changes",
+       y = "Cholesterol (mg/dL)",
+       x = "Time point") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 16)
+```
+
+Each line represents one person's change
+:::
+
+::: {.column width="48%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+# laviz::calc_all_bin_width(x = chol$DiffChol)
+# # A tibble: 7 × 2
+#   bw_type        bw
+#   <chr>       <dbl>
+# 1 FD           10  
+# 2 Sturges      10  
+# 3 Scott        10  
+# 4 Square-root  10  
+# 5 Rice         20  
+# 6 Shimazaki    12.4
+# 7 Juran        10  
+
+
+# Histogram of differences
+ggplot(chol, aes(x = DiffChol)) +
+  geom_histogram(binwidth = 10, 
+                 fill = "#0072B2", 
+                 alpha = 0.8, 
+                 col = "white", 
+                 boundary = 0) +
+  geom_vline(xintercept = 0, linetype = "dashed", 
+             linewidth = 1.5, color = "#D55E00") +
+  scale_x_continuous(breaks = pretty(chol$DiffChol)) + 
+  labs(title = "Distribution of cholesterol changes",
+       x = "Change in cholesterol (After - Before, mg/dL)",
+       y = "Number of people") +
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 16)
+```
+
+Most people decreased (negative values)
+:::
+:::::
+
+## Summary statistics for paired data
+
+```{r}
+# Summary statistics for differences
+chol %>%
+  get_summary_stats(DiffChol, type = "common") %>%
+  gt() %>% 
+  tab_options(table.font.size = 40)
+```
+
+\
+
+**What we see:**
+
+```{r}
+#| echo: false
+
+diff_mean <- mean(chol$DiffChol)
+diff_dir <- dplyr::if_else(diff_mean >= 0, "increased", "decreased")
+diff_mean_pretty <- lamisc::fmt_num(abs(diff_mean), accuracy = 1.0)
+diff_mean <- lamisc::fmt_num(abs(diff_mean), accuracy = 0.001)
+
+```
+
+
+- Mean difference: $\bar{x}_d =$ `r diff_mean` mg/dL
+- On average, cholesterol `r diff_dir` by about `r diff_mean_pretty` mg/dL
+- But is this difference statistically significant?
+
+\
+
+**To answer this, we need a hypothesis test!**
+
+## Notation for paired data
+
+::: {.callout-important icon="false"}
+## Population Parameters vs. Sample Statistics
+
+::::: columns
+::: {.column width="48%"}
+**Population (what we want to know)**
+
+- Mean difference: $\delta$ (delta) or $\mu_d$
+- Standard deviation: $\sigma_d$
+- Sample size: $N$
+:::
+
+::: {.column width="48%"}
+**Sample (what we observe)**
+
+- Sample mean difference: $\bar{x}_d$
+- Sample standard deviation: $s_d$
+- Sample size: $n$
+:::
+:::::
+:::
+
+\
+
+**Key insight:** Once we calculate the differences, this becomes a one-sample problem!
+
+- We have one number per person (the difference)
+- We test if $\bar{x}_d$ is significantly different from 0
+
+## Hypothesis test for paired data
+
+**Research question:** Is there evidence that cholesterol changed after the vegetarian diet?
+
+\
+
+**Step 1: State hypotheses**
+
+$$H_0: \delta = 0$$ $$H_A: \delta \neq 0$$
+
+In words:
+
+- $H_0$: The population mean difference in cholesterol is zero (no change)
+- $H_A$: The population mean difference in cholesterol is not zero (there is a change)
+
+\
+
+**Step 2: Set significance level**
+
+- Use $\alpha = 0.05$
+
+## Check the assumptions
+
+**Step 3: Step 1: Check the assumptions**
+
+-   The assumptions to run a hypothesis test on a sample are:
+
+    -   **Independent pairs**: Each pair is independent from all other pairs,
+    -   **Approximately normal sample or big n**: the distribution of the sample should be approximately normal, *or* the sample size should be at least 30
+
+\
+
+-   In our example, we would check the assumptions with a statement:
+
+    -   The pairs of observations are independent from each other and the number of pairs in our sample is 43. Thus, we can use CLT to approximate the sampling distribution.
+
+## The test statistic for paired data
+
+**Step 4: Calculate test statistic**
+
+The test statistic for paired data is:
+
+$$t = \frac{\bar{x}_d - 0}{\frac{s_d}{\sqrt{n}}}$$
+
+\
+
+This looks familiar! It's the same formula as for a one-sample t-test.
+
+\
+
+::: columns
+::: {.column width="40%"}
+```{r}
+# Calculate components
+n <- nrow(chol)
+xbar_d <- mean(chol$DiffChol)
+s_d <- sd(chol$DiffChol)
+SE <- s_d / sqrt(n)
+
+# Calculate t-statistic
+t_stat <- (xbar_d - 0) / SE
+t_stat
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+# Calculate the p-value
+2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)
+```
+
+:::
+:::
+
+
+## Running a paired t-test in R (1/5)
+
+**Step 5: Find a p-value**
+
+\
+
+**Option 1: Use the difference variable**
+
+```{r}
+# Test the differences directly
+t.test(x = chol$DiffChol, mu = 0)
+```
+
+## Running a paired t-test in R (2/5)
+
+\
+
+**Option 2: Use the `paired = TRUE` argument**
+
+```{r}
+# Let R calculate differences for us
+t.test(x = chol$After, y = chol$Before, paired = TRUE)
+```
+
+## Running a paired t-test in R (3/5)
+
+\
+
+**`broom::tidy()`**: Use the `tidy()` function in the `broom` package with either Option 1 or Option 2
+
+```{r}
+# The argument conf.int = TRUE gives a confidence interval (default is 95%)
+
+t.test(x = chol$After, y = chol$Before, paired = TRUE) %>% 
+  broom::tidy(conf.int = TRUE)     
+
+```
+
+## Running a paired t-test in R (4/5)
+
+**Option 3: Use `rstatix` package`**
+
+- Requires that the data are in *long* format which means that
+    -   all of the outcome values are in one column and
+    -   another column indicates which group the values are from
+
+```{r}
+chol_long
+```
+
+## Running a paired t-test in R (5/5)
+
+**Option 3: Use `rstatix` package**
+
+```{r}
+library(rstatix)
+
+t_test(data = chol_long, 
+       Cholesterol ~ Time, 
+       paired = TRUE, 
+       detailed = TRUE)
+
+```
+
+## Interpreting the paired t-test output
+
+
+```{r}
+# Save and tidy the results
+chol_test <- t.test(x = chol$DiffChol, 
+                    mu = 0)
+
+chol_test %>% 
+  tidy(conf.int = TRUE) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 40)
+```
+
+
+
+**What we see:**
+
+- t-statistic = `r lamisc::fmt_num(chol_test$statistic, accuracy = 0.01)`
+- p-value `r lamisc::fmt_pvl(chol_test$p.value)` (very small!)
+- 95% CI for $\delta$: (`r lamisc::fmt_num(chol_test$conf.int[1], accuracy = 0.01)`, `r lamisc::fmt_num(chol_test$conf.int[2], accuracy = 0.01)`)
+
+
+**Step 6: Make a conclusion**
+
+- Since p-value < $\alpha = 0.05$, we reject $H_0$.
+- **Conclusion:** There is sufficient evidence that cholesterol levels changed after the vegetarian diet (p `r lamisc::fmt_pvl(chol_test$p.value)`).
+
+## Writing a complete conclusion
+
+::: {.callout-important icon="false"}
+## Best Practice: Include Key Numbers
+
+A good conclusion includes:
+
+1. Decision about $H_0$ (reject or fail to reject)
+2. Context (what was measured)
+3. Effect size (mean difference)
+4. Confidence interval
+5. P-value
+:::
+
+\
+
+**Our conclusion:**
+
+```{r}
+#| echo: false
+
+res_tidy <- chol_test %>% 
+  tidy(conf.int = TRUE) %>% 
+  janitor::clean_names() %>% 
+  mutate(dplyr::across(.cols = c(estimate, 
+                       conf_low, 
+                       conf_high), 
+         .fns = ~ abs(.)), 
+         dplyr::across(.cols = c(estimate, 
+                       conf_low, 
+                       conf_high, 
+                       statistic), 
+         .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.01)), 
+         parameter = lamisc::fmt_num(parameter, accuracy = 1.0), 
+         p_value = lamisc::fmt_pvl(p_value)) %>% 
+  dplyr::rename(conf_high = conf_low, 
+                conf_low = conf_high)
+```
+
+
+After adopting a vegetarian diet, cholesterol levels decreased by an average of `r dplyr::pull(res_tidy, "estimate")` mg/dL (95% CI: `r dplyr::pull(res_tidy, "conf_low")` to `r dplyr::pull(res_tidy, "conf_high")` mg/dL lower), which is significantly different from zero (t = `r dplyr::pull(res_tidy, "statistic")`, df = `r dplyr::pull(res_tidy, "parameter")`, p `r dplyr::pull(res_tidy, "p_value")`, Paired t-test).
+
+## One-sided vs. two-sided tests
+
+**Two-sided test** (what we just did):
+
+- $H_A: \delta \neq 0$ (different from zero)
+- Appropriate when we don't know direction
+
+\
+
+**One-sided test** (if we have directional prediction):
+
+- $H_A: \delta < 0$ (decrease)
+- $H_A: \delta > 0$ (increase)
+
+\
+
+## Visual: One-sided vs. two-sided
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+
+# Hypothesis Testing Visualization
+# Recreates the two-tailed, left-tailed, and right-tailed test diagram
+
+library(tidyverse)
+library(patchwork)
+
+# Function to create hypothesis test plot
+make_hyp_test_plot <- function(test_type = "two-tailed", alpha = 0.05) {
+  
+  # Calculate critical values
+  if (test_type == "two-tailed") {
+    z_crit_lower <- qnorm(alpha/2)
+    z_crit_upper <- qnorm(1 - alpha/2)
+    title_text <- "Two-tailed"
+    h0_text <- "H[0]: mu == delta"
+    ha_text <- "H[A]: mu != delta"
+  } else if (test_type == "left-tailed") {
+    z_crit_lower <- qnorm(alpha)
+    z_crit_upper <- Inf
+    title_text <- "Left-tailed"
+    h0_text <- "H[0]: mu >= delta"
+    ha_text <- "H[A]: mu < delta"
+  } else if (test_type == "right-tailed") {
+    z_crit_lower <- -Inf
+    z_crit_upper <- qnorm(1 - alpha)
+    title_text <- "Right-tailed"
+    h0_text <- "H[0]: mu <= delta"
+    ha_text <- "H[A]: mu > delta"
+  }
+  
+  # Create base plot with normal distribution
+  p <- ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+    stat_function(
+      fun = dnorm, 
+      args = list(mean = 0, sd = 1),
+      linewidth = 1.2, 
+      color = "#2C5F9E"
+    ) +
+    # scale_y_continuous(breaks = NULL, 
+    #                expand = expansion(mult = c(0.05, 0), add = c(0, 0)), 
+    #                limits = c(-0.12, 0.42)) + 
+    scale_y_continuous(breaks = NULL, 
+                       limits = c(-0.12, 0.42),  # Space below for text
+                       expand = c(0, 0)) +        # No extra expansion
+    scale_x_continuous(breaks = NULL) +
+    labs(x = NULL, y = NULL, title = title_text) +
+    theme_minimal(base_size = 14) +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+      panel.grid = element_blank(),
+      # axis.line.x = element_line(color = "black", linewidth = 0.5),
+      plot.margin = margin(t = 10, r = 10, b = 10, l = 10)
+    )
+  
+  # Add shaded rejection regions and labels based on test type
+  if (test_type == "two-tailed") {
+    # Both tails shaded
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(-4, z_crit_lower),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(z_crit_upper, 4),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha labels
+      annotate("text", x = -3, y = 0.05, 
+               label = "alpha/2", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      annotate("text", x = 3, y = 0.05, 
+               label = "alpha/2", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = -2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE) +
+      annotate("text", x = 2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+    
+  } else if (test_type == "left-tailed") {
+    # Left tail only
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(-4, z_crit_lower),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha label
+      annotate("text", x = -2.5, y = 0.05, 
+               label = "alpha", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = -2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+    
+  } else if (test_type == "right-tailed") {
+    # Right tail only
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(z_crit_upper, 4),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha label
+      annotate("text", x = 2.5, y = 0.05, 
+               label = "alpha", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = 2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+  }
+  
+  # Add hypothesis labels in top left
+  p <- p +
+    annotate("text", x = -3.7, y = 0.40, 
+             label = h0_text, 
+             size = 4.5, hjust = 0, parse = TRUE) +
+    annotate("text", x = -3.7, y = 0.36, 
+             label = ha_text, 
+             size = 4.5, hjust = 0, parse = TRUE)
+  
+  return(p)
+}
+
+# Create the three plots
+p1 <- make_hyp_test_plot("two-tailed")
+p2 <- make_hyp_test_plot("left-tailed")
+p3 <- make_hyp_test_plot("right-tailed")
+
+# Combine using patchwork
+combined_plot <- p1 + p2 + p3 +
+  plot_annotation(
+    title = "Hypothesis Testing",
+    theme = theme(
+      plot.title = element_text(
+        size = 22, 
+        face = "bold", 
+        hjust = 0.5,
+        margin = margin(t = 10, b = 15),
+        color = "white"
+      ),
+      plot.background = element_rect(fill = "#E67C3A", color = NA),
+      plot.margin = margin(t = 15, r = 10, b = 10, l = 10)
+    )
+  ) &
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+# Display the plot
+print(combined_plot)
+```
+
+
+## One-sided example
+
+**Example:** If we specifically want to test if diet *decreased* cholesterol:
+
+$$H_0: \delta \ge 0$$ $$H_A: \delta \lt 0$$
+
+In words:
+
+- $H_0$: The population mean difference in cholesterol greater than or equal to zero
+- $H_A$: The population mean difference in cholesterol is less zero (there is a change)
+
+\
+
+
+```{r}
+t.test(x = chol$DiffChol, mu = 0, alternative = "less") %>% 
+  broom::tidy(conf.int = TRUE) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 40)
+```
+
+Notice: For a one-sided test, the p-value changes and the confidence interval is one-sided.
+
+# Independent Samples
+
+## What are independent samples?
+
+::: {.callout-important icon="false"}
+## Definition: Independent Samples
+
+**Independent samples** occur when individuals in one group are completely unrelated to individuals in the other group. There is no natural pairing or matching.
+:::
+
+\
+
+**Key characteristics:**
+
+- Different people in each group
+- No before/after measurements
+- No natural matching
+- Typically: different sample sizes are possible
+
+\
+
+**Common scenarios:**
+
+- Treatment vs. control groups (randomized trials)
+- Case vs. control studies
+- Men vs. women
+- Exposed vs. unexposed
+
+## Paired vs. Independent: The key difference
+
+::::: columns
+::: {.column width="48%"}
+::: {.callout-tip icon="false"}
+## Paired Data
+
+**Structure:**
+
+- Same people measured twice
+- OR matched pairs
+- Same sample size for both conditions
+
+\
+
+**Analysis:**
+
+- Calculate differences
+- One number per person/pair
+- One-sample t-test on differences
+
+\
+
+**Example:**
+
+Weight before and after diet program (same 50 people)
+:::
+:::
+
+::: {.column width="48%"}
+::: {.callout-note icon="false"}
+## Independent Samples
+
+**Structure:**
+
+- Different people in each group
+- No natural pairing
+- Can have different sample sizes
+
+\
+
+**Analysis:**
+
+- Compare two separate means
+- Two numbers: $\bar{x}_1$ and $\bar{x}_2$
+- Two-sample t-test
+
+\
+
+**Example:**
+
+Weight of 50 men vs. 50 women (different people)
+:::
+:::
+:::::
+
+## Today's example: Caffeine and finger tapping
+
+::: {.callout-note icon="false"}
+## Research Question
+
+Does caffeine increase finger tapping speed?
+:::
+
+\
+
+**Study design:**
+
+- 70 college students trained to tap fingers rapidly
+- Randomly assigned to two groups:
+  - **Control**: Decaffeinated coffee
+  - **Caffeine**: Coffee with ~200mg caffeine
+- Double-blind design
+- After 2 hours, tested finger taps per minute
+
+\
+
+**Why independent samples?**
+
+- Different students in each group
+- Each person tested only once
+- No pairing or matching
+
+## Loading the caffeine data
+
+```{r}
+# Load the data
+CaffTaps <- read_csv(here("data", 
+                          "CaffeineTaps_n35.csv"))
+
+# Check structure
+glimpse(CaffTaps)
+```
+
+\
+
+**What we have:**
+
+- `Taps`: Finger taps per minute
+- `Group`: Caffeine or NoCaffeine
+- Each row is one person
+- 35 people per group
+
+## Exploring the data by group
+
+```{r}
+# Summary statistics by group
+CaffTaps %>%
+  group_by(Group) %>%
+  get_summary_stats(Taps, type = "mean_sd") %>%
+  gt() %>% 
+  tab_options(table.font.size = 40)
+```
+
+\
+
+**What we see:**
+
+- Caffeine group: mean = `r round(mean(CaffTaps$Taps[CaffTaps$Group == "Caffeine"]), 1)` taps/min
+- Control group: mean = `r round(mean(CaffTaps$Taps[CaffTaps$Group == "NoCaffeine"]), 1)` taps/min
+- Difference = `r round(mean(CaffTaps$Taps[CaffTaps$Group == "Caffeine"]) - mean(CaffTaps$Taps[CaffTaps$Group == "NoCaffeine"]), 1)` taps/min
+
+\
+
+**Question:** Is this difference statistically significant?
+
+## Visualizing independent samples
+
+::::: columns
+::: {.column width="48%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+ggplot(CaffTaps, aes(x = Group, 
+                     y = Taps, 
+                     fill = Group)) +
+  geom_boxplot(alpha = 0.7, 
+               width = 0.5, 
+               show.legend = FALSE) +
+  geom_jitter(width = 0.10, 
+              alpha = 0.4, 
+              show.legend = FALSE) +
+  labs(title = "Finger tapping by group",
+       x = "Group",
+       y = "Taps per minute") +
+  scale_fill_manual(values = c("#D55E00", "#0072B2")) + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 16)
+```
+
+Box plots with individual points
+:::
+
+::: {.column width="48%"}
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+
+# laviz::calc_all_bin_width(CaffTaps$Taps)
+# # A tibble: 7 × 2
+#   bw_type         bw
+#   <chr>        <dbl>
+# 1 FD           2    
+# 2 Sturges      2    
+# 3 Scott        2    
+# 4 Square-root  1    
+# 5 Rice        10    
+# 6 Shimazaki    0.141
+# 7 Juran        2 
+
+ggplot(CaffTaps, 
+       aes(x = Taps, 
+           fill = Group)) +
+  geom_histogram(binwidth = 2, 
+                 alpha = 0.6, 
+                 position = "identity", 
+                 color = "white", 
+                 boundary = 0) +
+  scale_fill_manual(values = c("#D55E00", "#0072B2")) +
+  labs(title = "Distribution of taps by group",
+       x = "Taps per minute",
+       y = "Number of students") + 
+  laviz::theme_minimal_white(grid = "Y", 
+                             base_size = 16)
+```
+
+Overlapping histograms
+:::
+:::::
+
+\
+
+**Note:** We cannot calculate 35 paired differences - these are different people!
+
+## Notation for two independent samples
+
+::: {.callout-important icon="false"}
+## Population Parameters vs. Sample Statistics
+
+::::: columns
+::: {.column width="48%"}
+**Population**
+
+- Group 1 mean: $\mu_1$
+- Group 2 mean: $\mu_2$
+- Difference: $\mu_1 - \mu_2$
+- Group 1 SD: $\sigma_1$
+- Group 2 SD: $\sigma_2$
+:::
+
+::: {.column width="48%"}
+**Sample**
+
+- Group 1 mean: $\bar{x}_1$
+- Group 2 mean: $\bar{x}_2$
+- Difference: $\bar{x}_1 - \bar{x}_2$
+- Group 1 SD: $s_1$
+- Group 2 SD: $s_2$
+:::
+:::::
+:::
+
+\
+
+**Key difference from paired data:**
+
+- Two separate groups with potentially different SDs
+- Cannot reduce to a single set of differences
+- Need a different standard error formula!
+
+## Hypothesis test for two independent samples (1/2)
+
+\
+
+**Caffeine example:** Does caffeine increase finger tapping speed?
+
+\
+
+**Null hypothesis** (no effect):
+$$H_0: \mu_{caffeine} = \mu_{control} \quad \Longleftrightarrow \quad \mu_{caffeine} - \mu_{control} = 0$$
+
+\
+
+**Alternative hypothesis** (caffeine increases tapping):
+$$H_A: \mu_{caffeine} > \mu_{control} \quad \Longleftrightarrow \quad \mu_{caffeine} - \mu_{control} > 0$$
+
+\
+
+**Why one-sided?** We specifically predicted caffeine would *increase* tapping, not just "make it different"
+
+
+## Hypothesis test for two independent samples (2/2)
+
+\
+
+::: {.callout-note icon="false"}
+## General form
+
+For two independent samples, we always test $H_0: \mu_1 - \mu_2 = 0$ against ONE of:
+
+- $H_A: \mu_1 - \mu_2 \neq 0$ (two-sided)
+- $H_A: \mu_1 - \mu_2 > 0$ (one-sided upper)  
+- $H_A: \mu_1 - \mu_2 < 0$ (one-sided lower)
+:::
+
+## Example: Does caffeine increase finger tapping speed?
+
+\
+
+**Step 1: State hypotheses**
+
+
+$$H_0: \mu_1 - \mu_2 = 0$$ $$H_A: \mu_1 - \mu_2 > 0$$
+
+Where: $\mu_1$ = mean for Caffeine group, $\mu_2$ = mean for Control group
+
+\
+
+**Step 2: Set significance level**
+
+- Use $\alpha = 0.05$
+
+## Example: Does caffeine increase finger tapping speed?
+
+\
+
+**Step 3: Calculate test statistic**
+
+The test statistic for two independent samples:
+
+$$t = \frac{(\bar{x}_1 - \bar{x}_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+\
+
+**Notice the different SE formula!**
+
+- For paired: $SE = \frac{s_d}{\sqrt{n}}$
+- For independent: $SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+
+\
+
+**Degrees of freedom:** By default, `t.test()` uses the Welch two-sample t-test (does not assume equal variances), so df is computed with the Welch–Satterthwaite formula and can be non-integer.
+
+## Check the assumptions
+
+**Step 3: Check the assumptions**
+
+-   The assumptions to run a hypothesis test on a sample are:
+
+    -   **Independent observations**: Each observation from both samples is independent from all other observations
+    -   **Approximately normal sample or big n**: the distribution of *each sample* should be approximately normal, *or* the sample size of *each sample* should be at least 30
+
+\
+
+-   In our example, we would check the assumptions with a statement:
+
+    -   The observations are independent from each other. Each caffeine group (aka sample) has 35 individuals. Thus, we can use CLT to approximate the sampling distribution for each sample.
+
+## Running a two-sample t-test in R
+
+**Steps 4 and 5: Calculate test statistic and p-value**
+
+\ 
+
+**Using formula notation:**
+
+```{r}
+# Test using formula: outcome ~ group
+t.test(Taps ~ Group, 
+       data = CaffTaps, 
+       alternative = "greater")
+```
+
+\
+
+**Note:** R automatically determines which group is "group 1" alphabetically (Caffeine comes before NoCaffeine)
+
+## Using `rstatix`
+
+```{r}
+library(rstatix) 
+
+t_test(data = CaffTaps, 
+       Taps ~ Group, 
+       detailed = TRUE)
+```
+
+
+## Interpreting the two-sample t-test
+
+**Steps 6: make a conclusion**
+
+```{r}
+# Save and tidy results
+caff_test <- t.test(Taps ~ Group, 
+                    data = CaffTaps, 
+                    alternative = "greater")
+
+tidy(caff_test, 
+     conf.int = TRUE) %>% 
+  gt() %>% 
+  tab_options(table.font.size = 30)
+```
+
+**What we see:**
+
+```{r}
+#| echo: false
+
+res_tidy <- caff_test %>% 
+  broom::tidy(conf.int = TRUE) %>% 
+  janitor::clean_names() %>% 
+  mutate(dplyr::across(.cols = c(estimate, 
+                                 estimate1, 
+                                 estimate2, 
+                                 conf_low, 
+                                 conf_high), 
+                       .fns = ~ lamisc::fmt_num(x = ., 
+                                                accuracy = 0.1)), 
+         p_value = lamisc::fmt_pvl(p_value), 
+         statistic = lamisc::fmt_num(statistic, accuracy = 0.01), 
+         parameter = lamisc::fmt_num(parameter, accuracy = 0.01))
+
+
+res_stats <- CaffTaps %>% 
+  group_by(Group) %>% 
+  rstatix::get_summary_stats(Taps) %>% 
+  mutate(mean = lamisc::fmt_num(mean, accuracy = 0.1), 
+         sd = lamisc::fmt_num(sd, accuracy = 0.1))
+```
+
+
+- Mean difference: $\bar{x}_1 - \bar{x}_2 =$ `r res_tidy$estimate` taps/min
+- t-statistic = `r res_tidy$statistic`
+- p-value = `r res_tidy$p_value`
+- One-sided 95% CI: (`r res_tidy$conf_low`, `r res_tidy$conf_high`)
+
+**Conclusion:** There is strong evidence that caffeine increases finger tapping speed (p `r res_tidy$p_value`).
+
+## Complete conclusion for two-sample test
+
+::: {.callout-important icon="false"}
+## Best Practice: Report Both Groups
+
+For two-sample tests, report:
+
+1. Means and SDs for both groups
+2. Difference in means
+3. Test statistic and df
+4. P-value
+5. Confidence interval for difference
+:::
+
+\
+
+**Our conclusion:**
+
+Mean (SD) tapping speed among students who consumed caffeine was `r res_stats[1, "mean"]` taps/min compared to `r res_stats[2, "mean"]` taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = `r res_tidy$statistic`, df = `r res_tidy$parameter`, p `r res_tidy$p_value`, one-sided test). On average, students who consumed caffeine tapped `r res_tidy$estimate` taps/min faster than those in the control group (95% CI: at least `r res_tidy$conf_low` taps/min faster)
+
+
+# Choosing the Right Test
+
+## One rule to remember
+
+::: {.callout-important icon="false"}
+## The decision rule
+
+**Ask one question:**
+
+> Can I calculate a meaningful difference for each individual (or pair)?
+
+- **Yes** → **Paired t-test**
+- **No** → **Two-sample t-test**
+
+This is determined by **study design**, not by the values in the data.
+:::
+
+\
+
+**Key idea:**  
+Pairing is about how the data were collected, not how they are stored or analyzed.
+
+---
+
+## Examples: Paired vs. Independent
+
+| Scenario | Data Structure | Test |
+|:---------|:---------------|:-----|
+| Blood pressure before and after medication | Same people, two measurements | Paired t-test |
+| Weight loss: Diet A vs. Diet B | Different people in each group | Two-sample t-test |
+| Left eye vs. right eye vision | Same people | Paired t-test |
+| Test scores: Men vs. Women | Different people | Two-sample t-test |
+| Cholesterol: Twin 1 vs. Twin 2 | Matched pairs | Paired t-test |
+| Pain score: Treatment vs. Placebo (RCT) | Different people | Two-sample t-test |
+
+\
+
+**Shortcut:**  
+If you can draw a line connecting two measurements, it’s paired.
+
+---
+
+## Common mistakes to avoid
+
+::: {.callout-warning icon="false"}
+## Mistakes we see all the time
+
+**1. Using a paired test for independent data**
+
+- Example: Testing men vs. women with `paired = TRUE`
+- Why it’s wrong: R pairs observations by row order, not by any real relationship
+- Result: Meaningless inference
+
+\
+
+**2. Treating paired data as independent**
+
+- Example: Analyzing before/after as two separate groups
+- Why it’s wrong: Ignores within-person comparison
+- Result: Larger SE and reduced power
+:::
+
+\
+
+**Bottom line:**  
+You don’t get to choose the test based on convenience — the design chooses it for you.
+
+## Checking your work: Does it make sense?
+
+**After running your test, ask:**
+
+\
+
+1. **Does the sample size match my study design?**
+   - Paired: Should see n = number of pairs
+   - Independent: Should see n1 + n2 = total people
+
+2. **Do the means make sense?**
+   - Check that group means match your data summaries
+
+3. **Is the SE reasonable?**
+   - Paired tests usually have smaller SE (less variability)
+   - Independent tests have larger SE (more variability)
+
+4. **Does the conclusion answer the research question?**
+   - Make sure you're interpreting the right comparison
+
+## Summary: Paired vs. Independent
+
+**Paired Data:**
+
+- Same people or matched pairs
+- Calculate differences first
+- Use: `t.test(differences, mu = 0)` or `t.test(x, y, paired = TRUE)`
+- SE: $\frac{s_d}{\sqrt{n}}$
+- df: $n - 1$
+
+\
+
+**Independent Samples:**
+
+- Different people in each group
+- Compare two means directly
+- Use: `t.test(outcome ~ group, data = ...)`
+- SE: $\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+- df: $n_1 + n_2 - 2$ (approximately)
+
+## Key takeaways
+
+1. **Study design determines analysis**
+   - Paired or independent is about how data were collected
+   - Cannot change after the fact!
+
+2. **Paired tests are more powerful**
+   - When appropriate, pairing reduces variability
+   - Smaller SE → easier to detect true effects
+
+3. **Both tests follow same logic**
+   - State hypotheses
+   - Calculate test statistic
+   - Find p-value
+   - Make conclusion
+
+4. **Always check assumptions**
+   - Independence (within or between pairs)
+   - Approximate normality (or large n)
+
+## Looking ahead
+
+\
+
+**Next time:**
+
+- Midterm review
+

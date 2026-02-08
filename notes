@@ -28,6 +28,25 @@ Vermilion: #D55E00
 Reddish Purple: #CC79A7
 Grey: #999999 (or sometimes black is replaced with grey in 8-color sets) 
 
+# https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
+palette.colors(palette = "Okabe-Ito")
+palette.colors(palette = "R4")
+
+library(see)
+
+see::palette_okabeito(palette = "full")
+see::okabeito_colors()
+ #    orange light blue      green      amber       blue        red     purple       grey      black 
+ # "#E69F00"  "#56B4E9"  "#009E73"  "#F5C710"  "#0072B2"  "#D55E00"  "#CC79A7"  "#999999"  "#000000" 
+
+# Blue (#0072B2) + Orange (#E69F00)
+# Green (#009E73) + Purple (#CC79A7)  # Good gender-neutral alternative (avoids pink/blue stereotypes)
+# Green (#009E73) + Orange (#E69F00)
+
+# Green (#009E73) + Red (#D55E00)   # Success/failure
+# Light Blue (#56B4E9) + Purple (#CC79A7)  # softer
+
+
 
 Then:
 	•	use &nbsp; inside slides to separate sections
@@ -107,3 +126,45 @@ c("\u2264", "\u2265")
 For later
 
 https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Hypothesis-Tests/Introduction-to-Hypothesis-Testing/Critical-Value-and-the-p-Value-Approach/index.html
+
+
+
+
+
+
+LATEX
+
+$p \lt \alpha$
+$p \gt \alpha$
+$\mu_0 = 0$
+$H_0$ or $H_A$
+
+
+$$
+\begin{aligned}
+\text{Numerator} &= P(\text{Test +} \mid \text{Disease}) \times P(\text{Disease}) \\
+&= 0.90 \times 0.01 \\
+&= 0.009
+\end{aligned}
+$$
+
+
+
+I still have to write things out or draw pictures to help me keep this straight. And this is the right approach. Here's a simple way to think about it:
+
+The key question: Which tail do you want?
+
+         |-------------X------------|
+         lower tail    4    upper tail
+         (left)             (right)
+
+lower.tail = TRUE → gives you P(X ≤ 4) — everything to the LEFT of (and including) 4
+lower.tail = FALSE → gives you P(X > 4) — everything to the RIGHT of 4
+
+Quick rule:
+
+If your question has "less than" or "at most" → lower.tail = TRUE
+If your question has "greater than" or "at least" → lower.tail = FALSE
+
+For "at least 5" = "X ≥ 5" = "X > 4" → we want the upper (right) tail → lower.tail = FALSE
+So: ppois(q = 4, lambda = 3, lower.tail = FALSE) gives P(X > 4) which equals P(X ≥ 5).
