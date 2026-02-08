@@ -57,7 +57,7 @@ source(here("class_dates.R"))
 [🎥 Lecture Recordings (loom.com)](https://loom.com/share/folder/1ccd8ec81f1b4d53a92361ea5f8e2db4) – Part 2 of Lecture 3
 
 | Week | Dates | Lesson | Topics | Chapter sections |
-|:--:|:--:|:--:|----|:--:|
+|:-------------:|:-------------:|:-------------:|---------------|:-------------:|
 | [1](/weeks/week_01.qmd) | `{r} format(w1d1, '%a, %m/%d')` | 0 | Welcome |  |
 |  |  | 1 | Intro to Data, Summarizing numerical data | 1.1-1.4 |
 |  | `{r} format(w1d2, '%a, %m/%d')` | 2 | Introduction to R & RStudio |  |
@@ -79,14 +79,14 @@ source(here("class_dates.R"))
 |  | `{r} format(w5d2, '%a, %m/%d')` | 9 | Hypothesis testing concepts; One-sample t-tests | 4.3, 5.1 |
 |  | [**`{r} format(hw4, '%a, %m/%d')`**]{.hw-row} |  | [**HW 4 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 6 | `{r} format(w6d1, '%a, %m/%d')` | 10 | Paired data and paired t-tests; Two-sample independent t-tests | 5.2-5.3 |
-|  | `{r} format(w6d2, '%a, %m/%d')` | 11 | Power; Midterm review | 5.4 |
+| [6](/weeks/week_06.qmd) | `{r} format(w6d1, '%a, %m/%d')` | 10 | Paired data and paired t-tests; Two-sample independent t-tests | 5.2-5.3 |
+|  | `{r} format(w6d2, '%a, %m/%d')` | 11 | Midterm review | 5.4 |
 |  | [**`{r} format(mid_opens, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM opens at 3pm**]{.hw-row} |  |
 |  |  |  | Midterm will cover Lessons 1–9 |  |
 |  |  |  |  |  |
 | 7 | **`{r} format(w7d1, '%a, %m/%d')`** |  | **No class, Presidents Day** |  |
 |  | [**`{r} format(mid_closes, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM closes at 11pm**]{.hw-row} |  |
-|  | `{r} format(w7d2, '%a, %m/%d')` | 12 | Power (continued) | 5.4, extra |
+|  | `{r} format(w7d2, '%a, %m/%d')` | 12 | Power | 5.4, extra |
 |  | [**`{r} format(hw5, '%a, %m/%d')`**]{.hw-row} |  | [**HW 5 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
 | 8 | `{r} format(w8d1, '%a, %m/%d')` | 13 | Inference for proportions and 2x2 tables | 8.1-8.2 |

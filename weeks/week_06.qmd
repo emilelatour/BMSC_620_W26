@@ -118,7 +118,10 @@ By the end of the week, you should be able to:
 
 After the midterm, we will continue building our statistical inference toolkit:
 
-- **Week 7**: Inference for proportions (single and two-sample)
-- **Week 8**: Chi-squared tests and categorical data analysis
+- **Week 7**: 
+  - Power
+- **Week 8**: 
+  - Inference for proportions (single and two-sample)
+  - Chi-squared tests and categorical data analysis
 
 These concepts extend our hypothesis testing framework to categorical outcomes and proportions.
