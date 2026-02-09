@@ -2676,7 +2676,7 @@
     "href": "weeks/week_06.html#overview",
     "title": "Week 6",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on comparing two groups and preparing for the midterm.\nOn Monday, we will extend our hypothesis testing framework to scenarios with two groups, distinguishing between paired (dependent) data and independent samples. On Wednesday, we will review all material covered so far and prepare for the midterm exam.\nBy the end of the week, you should be able to:\n\ndistinguish between paired and independent samples based on study design,\nperform paired t-tests for dependent data,\nconduct two-sample t-tests for independent groups,\nchoose the appropriate test based on how data were collected,\nsynthesize and apply all concepts from Weeks 1-5.",
+    "text": "Overview\nThis week focuses on comparing two groups and preparing for the midterm.\nOn Monday, we will extend our hypothesis testing framework to scenarios with two groups, distinguishing between paired (dependent) data and independent samples. On Wednesday, we will review all material covered so far and prepare for the midterm exam.\nBy the end of the week, you should be able to:\n\ndistinguish between paired and independent samples based on study design,\nperform paired t-tests for dependent data,\nconduct two-sample t-tests for independent groups,\nchoose the appropriate test based on how data were collected,\nsynthesize and apply all concepts from Weeks 1-5 (Lessons 1-9).",
     "crumbs": [
       "Home",
       "Weekly materials",

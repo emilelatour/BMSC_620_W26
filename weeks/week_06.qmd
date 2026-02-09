@@ -1,6 +1,6 @@
 ---
 title: "Week 6"
-description: "Statistical Inference: Estimation and Hypothesis Testing"
+description: "Comparing Two Means and Midterm Review"
 format:
   html:
     toc: true
@@ -33,7 +33,7 @@ By the end of the week, you should be able to:
 -   perform paired t-tests for dependent data,
 -   conduct two-sample t-tests for independent groups,
 -   choose the appropriate test based on how data were collected,
--   synthesize and apply all concepts from Weeks 1-5.
+-   synthesize and apply all concepts from Weeks 1-5 (Lessons 1-9).
 
 ## Readings (before class)
 
