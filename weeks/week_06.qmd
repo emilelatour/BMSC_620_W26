@@ -6,19 +6,20 @@ format:
     toc: true
 ---
 
+```{=html}
 <!--
 Think of the weekly page as answering just five student questions:
-	1.	What are we doing this week?
-	2.	What do I need to read/watch before class?
-	3.	What materials should I have open during class?
-	4.	What is due (and when)?
-	5.	Where do I go if I want to review later?
-	-->
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+```
 
 ## Announcements
 
-- **Midterm Exam** opens **Wednesday, February 11 at 3:00 PM** and closes **Monday, February 16 at 11:00 PM**
-
+-   **Midterm Exam** opens **Wednesday, February 11 at 3:00 PM** and closes **Monday, February 16 at 11:00 PM**
 
 ## Overview
 
@@ -28,16 +29,16 @@ On Monday, we will extend our hypothesis testing framework to scenarios with two
 
 By the end of the week, you should be able to:
 
-- distinguish between paired and independent samples based on study design,
-- perform paired t-tests for dependent data,
-- conduct two-sample t-tests for independent groups,
-- choose the appropriate test based on how data were collected,
-- synthesize and apply all concepts from Weeks 1-5.
+-   distinguish between paired and independent samples based on study design,
+-   perform paired t-tests for dependent data,
+-   conduct two-sample t-tests for independent groups,
+-   choose the appropriate test based on how data were collected,
+-   synthesize and apply all concepts from Weeks 1-5.
 
 ## Readings (before class)
 
-- Textbook section 5.2 (Paired data)
-- Textbook section 5.3 (Difference of two means)
+-   Textbook section 5.2 (Paired data)
+-   Textbook section 5.3 (Difference of two means)
 
 (Additional resources will be posted if helpful.)
 
@@ -45,83 +46,77 @@ By the end of the week, you should be able to:
 
 ### Monday — Comparing Two Means: Paired and Independent Samples
 
-- **Topics**
-  - Finish up R topics from last week. 
-  - Distinguishing paired vs. independent samples
-  - Study design implications
-  - Paired t-tests: before-and-after studies
-  - Two-sample t-tests: comparing independent groups
-  - Confidence intervals for paired differences
-  - Confidence intervals for differences in means
-  - Conducting paired and two-sample tests in R
-  - Choosing the right test
+-   **Topics**
+    -   Finish up R topics from last week.
+    -   Distinguishing paired vs. independent samples
+    -   Study design implications
+    -   Paired t-tests: before-and-after studies
+    -   Two-sample t-tests: comparing independent groups
+    -   Confidence intervals for paired differences
+    -   Confidence intervals for differences in means
+    -   Conducting paired and two-sample tests in R
+    -   Choosing the right test
+-   **Slides**
+    -   R Workflow: Projects, File Paths, and Reading Data (start with slide 16) ([HTML](/lessons/12_hypothesis_testing/12_r_workflow_slides.qmd) \| [PDF](/lessons/12_hypothesis_testing/12_r_workflow_slides.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   Comparing Two Means ([HTML](/lessons/13_comparing_two_means/13_comparing_two_means.qmd) \| [PDF](/lessons/13_comparing_two_means/13_comparing_two_means.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
 
-- **Slides**
-  - R Workflow: Projects, File Paths, and Reading Data (start with slide 16) ([HTML](/lessons/12_hypothesis_testing/12_r_workflow_slides.qmd) | [PDF](/lessons/12_hypothesis_testing/12_r_workflow_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
-  - Comparing Two Means ([HTML](/lessons/13_comparing_two_means/13_comparing_two_means.qmd) | [PDF](/lessons/13_comparing_two_means/13_comparing_two_means.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
-
-- **Recording**
-  - Coming soon
-  
-- **Muddy points**
-  - Coming soon
-
----
+------------------------------------------------------------------------
 
 ### Wednesday — Midterm Review
 
-- **Topics**
-  - Exam logistics and format
-  - Study design fundamentals
-  - Probability and Bayes' Theorem
-  - Probability distributions (Binomial, Poisson, Normal)
-  - R functions for distributions
-  - Sampling distributions and Central Limit Theorem
-  - Confidence intervals
-  - Hypothesis testing framework
-  - Common pitfalls and tips
+-   **Topics**
+    -   Exam logistics and format
+    -   Study design fundamentals
+    -   Probability and Bayes' Theorem
+    -   Probability distributions (Binomial, Poisson, Normal)
+    -   R functions for distributions
+    -   Sampling distributions and Central Limit Theorem
+    -   Confidence intervals
+    -   Hypothesis testing framework
+    -   Common pitfalls and tips
+-   **Slides**
+    -   Midterm Review - coming soon
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
 
-- **Slides**
-  - Midterm Review - coming soon
-
-- **Recording**
-  - Coming soon
-  
-- **Muddy points**
-  - Coming soon
-
----
+------------------------------------------------------------------------
 
 ## Homework
 
-- None this week. See Midterm Exam details below
+-   None this week. See Midterm Exam details below
 
-- See the full list of assignments on the [Homework](/homework.qmd) page.
+-   See the full list of assignments on the [Homework](/homework.qmd) page.
 
 ## Midterm Exam
 
-- **Opens:** Wednesday, February 11 at 3:00 PM
-- **Closes:** Monday, February 16 at 11:00 PM
-- **Format:** 8 parts, 120 points total, designed for 3-5 hours completion
-- **Coverage:** Lessons 1-9 (through hypothesis testing and one-sample t-tests)
-- **Resources allowed:** Course materials, R documentation, your notes
-- **NOT allowed:** Collaboration with others, AI assistants, online help forums
-- **Submit:** Both `.qmd` and `.html` files
+-   **Opens:** Wednesday, February 11 at 3:00 PM
+-   **Closes:** Monday, February 16 at 11:00 PM
+-   **Format:** 8 parts, 120 points total, designed for 3-5 hours completion
+-   **Coverage:** Lessons 1-9 (through hypothesis testing and one-sample t-tests)
+-   **Resources allowed:** Course materials, R documentation, your notes
+-   **NOT allowed:** Collaboration with others, AI assistants, online help forums
+-   **Submit:** Both `.qmd` and `.html` files
 
 ## Post-class check-in (attendance)
 
-- Please complete the post-class check-in after each class meeting.
-- Used for attendance credit and to identify topics that need clarification.
-- Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+-   Please complete the post-class check-in after each class meeting.
+-   Used for attendance credit and to identify topics that need clarification.
+-   Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
 
 ## Looking ahead
 
 After the midterm, we will continue building our statistical inference toolkit:
 
-- **Week 7**: 
-  - Power
-- **Week 8**: 
-  - Inference for proportions (single and two-sample)
-  - Chi-squared tests and categorical data analysis
+-   **Week 7**:
+    -   Power
+-   **Week 8**:
+    -   Inference for proportions (single and two-sample)
+    -   Chi-squared tests and categorical data analysis
 
 These concepts extend our hypothesis testing framework to categorical outcomes and proportions.
