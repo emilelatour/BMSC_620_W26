@@ -466,7 +466,7 @@ Your future self (and collaborators) will thank you!
 **Your task:**
 
 1. Make sure your R Project is open
-2. Download `BodyTemperatures.csv` from Canvas
+2. Download `BodyTemperatures.csv` from OneDrive
 3. Save it in your `data` folder
 4. Create a new `.qmd` file
 5. Load the data using `here()`

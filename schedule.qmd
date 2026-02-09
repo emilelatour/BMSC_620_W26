@@ -80,7 +80,7 @@ source(here("class_dates.R"))
 |  | [**`{r} format(hw4, '%a, %m/%d')`**]{.hw-row} |  | [**HW 4 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
 | [6](/weeks/week_06.qmd) | `{r} format(w6d1, '%a, %m/%d')` | 10 | Paired data and paired t-tests; Two-sample independent t-tests | 5.2-5.3 |
-|  | `{r} format(w6d2, '%a, %m/%d')` | 11 | Midterm review | 5.4 |
+|  | `{r} format(w6d2, '%a, %m/%d')` | 11 | Midterm review |  |
 |  | [**`{r} format(mid_opens, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM opens at 3pm**]{.hw-row} |  |
 |  |  |  | Midterm will cover Lessons 1–9 |  |
 |  |  |  |  |  |

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Emile Latour, Nicky Wakim, Meike Niederhausen">
-  <meta name="dcterms.date" content="2026-02-23">
+  <meta name="dcterms.date" content="2026-02-09">
   <title>BMSC 620: Introduction to Biostatistics – Comparing Two Means: Paired and Independent Samples</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -443,7 +443,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 
-  <p class="date">February 23, 2026</p>
+  <p class="date">February 9, 2026</p>
 </section>
 <section>
 <section id="learning-objectives" class="title-slide slide level1 center">
@@ -817,11 +817,16 @@ $ After  &lt;dbl&gt; 146, 155, 178, 146, 208, 147, 202, 215, 184, 208, 206, 169,
 <section id="summary-statistics-for-paired-data" class="slide level2">
 <h2>Summary statistics for paired data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Summary statistics for differences</span></span>
-<span id="cb5-2"><a></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">get_summary_stats</span>(DiffChol, <span class="at">type =</span> <span class="st">"common"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb5-3"><a></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a><span class="co"># Summary statistics for differences</span></span>
+<span id="cb5-7"><a></a>chol <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a></a>  <span class="fu">get_summary_stats</span>(DiffChol, <span class="at">type =</span> <span class="st">"common"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a></a>  <span class="fu">tab_options</span>(<span class="at">table.font.size =</span> <span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="mecfuynzio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#mecfuynzio table {
@@ -1375,7 +1380,7 @@ $ After  &lt;dbl&gt; 146, 155, 178, 146, 208, 147, 202, 215, 184, 208, 206, 169,
 </section>
 <section id="check-the-assumptions" class="slide level2">
 <h2>Check the assumptions</h2>
-<p><strong>Step 3: Step 1: Check the assumptions</strong></p>
+<p><strong>Step 3: Check the assumptions</strong></p>
 <ul>
 <li><p>The assumptions to run a hypothesis test on a sample are:</p>
 <ul>
@@ -1481,10 +1486,12 @@ mean difference
 </p>
 <p><strong><code>broom::tidy()</code></strong>: Use the <code>tidy()</code> function in the <code>broom</code> package with either Option 1 or Option 2</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># The argument conf.int = TRUE gives a confidence interval (default is 95%)</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">library</span>(broom)</span>
 <span id="cb14-2"><a></a></span>
-<span id="cb14-3"><a></a><span class="fu">t.test</span>(<span class="at">x =</span> chol<span class="sc">$</span>After, <span class="at">y =</span> chol<span class="sc">$</span>Before, <span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-4"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a></a><span class="co"># The argument conf.int = TRUE gives a confidence interval (default is 95%)</span></span>
+<span id="cb14-4"><a></a></span>
+<span id="cb14-5"><a></a><span class="fu">t.test</span>(<span class="at">x =</span> chol<span class="sc">$</span>After, <span class="at">y =</span> chol<span class="sc">$</span>Before, <span class="at">paired =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 8
   estimate statistic  p.value parameter conf.low conf.high method    alternative
@@ -1495,7 +1502,7 @@ mean difference
 </section>
 <section id="running-a-paired-t-test-in-r-45" class="slide level2">
 <h2>Running a paired t-test in R (4/5)</h2>
-<p><strong>Option 3: Use <code>rstatix</code> package`</strong></p>
+<p><strong>Option 3: Use <code>rstatix</code> package</strong></p>
 <ul>
 <li>Requires that the data are in <em>long</em> format which means that
 <ul>
@@ -2589,6 +2596,19 @@ mean difference
 </div>
 </div>
 <p>Notice: For a one-sided test, the p-value changes and the confidence interval is one-sided.</p>
+<!-- Great question! This is some subtle but important statistical theory. -->
+<!-- ## The intuition: -->
+<!-- When you have a **composite null hypothesis** like $H_0: \delta \ge 0$, the null hypothesis includes many possible values (δ = 0, δ = 0.5, δ = 10, etc.). -->
+<!-- The **Type I error rate can be different** for each of these values. -->
+<!-- ## Why it's maximized at the boundary (δ = 0): -->
+<!-- For your example with $H_0: \delta \ge 0$ and $H_A: \delta < 0$: -->
+<!-- - **If true δ = 0** (at the boundary): Sample means will be roughly centered at 0, so due to random sampling variability, you'll sometimes get negative sample means → relatively easy to accidentally reject $H_0$ → **higher Type I error** -->
+<!-- - **If true δ = 10** (well inside $H_0$): Sample means will be centered at 10, so it's *very unlikely* you'd get a sample mean negative enough to reject $H_0$ → **lower Type I error** -->
+<!-- ## The key principle: -->
+<!-- The farther the true parameter is from the alternative hypothesis region, the **harder** it is to mistakenly reject $H_0$. -->
+<!-- By testing at the boundary (δ = 0), we're being **conservative** - we're controlling the Type I error at its worst-case scenario. If we keep α ≤ 0.05 at δ = 0, it will automatically be < 0.05 for all other values in $H_0$. -->
+<!-- ## The practical takeaway: -->
+<!-- This is why we can write $H_0: \delta \ge 0$ but only test at δ = 0 - we're protecting against the maximum possible Type I error! -->
 </section></section>
 <section>
 <section id="independent-samples" class="title-slide slide level1 center">
@@ -2609,6 +2629,8 @@ mean difference
 </div>
 <p><br>
 </p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li>Different people in each group</li>
@@ -2616,8 +2638,7 @@ mean difference
 <li>No natural matching</li>
 <li>Typically: different sample sizes are possible</li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <p><strong>Common scenarios:</strong></p>
 <ul>
 <li>Treatment vs.&nbsp;control groups (randomized trials)</li>
@@ -2625,6 +2646,7 @@ mean difference
 <li>Men vs.&nbsp;women</li>
 <li>Exposed vs.&nbsp;unexposed</li>
 </ul>
+</div></div>
 </section>
 <section id="paired-vs.-independent-the-key-difference" class="slide level2">
 <h2>Paired vs.&nbsp;Independent: The key difference</h2>
@@ -2701,7 +2723,7 @@ mean difference
 </div>
 <p><br>
 </p>
-<p><strong>Study design:</strong></p>
+<p>:: columns ::: {.column width=“50%”} <strong>Study design:</strong></p>
 <ul>
 <li>70 college students trained to tap fingers rapidly</li>
 <li>Randomly assigned to two groups:
@@ -2710,16 +2732,16 @@ mean difference
 <li><strong>Caffeine</strong>: Coffee with ~200mg caffeine</li>
 </ul></li>
 <li>Double-blind design</li>
-<li>After 2 hours, tested finger taps per minute</li>
+<li>After 2 hours, tested finger taps per minute :::</li>
 </ul>
-<p><br>
-</p>
+<div class="column" style="width:50%;">
 <p><strong>Why independent samples?</strong></p>
 <ul>
 <li>Different students in each group</li>
 <li>Each person tested only once</li>
 <li>No pairing or matching</li>
 </ul>
+</div><p>:::</p>
 </section>
 <section id="loading-the-caffeine-data" class="slide level2">
 <h2>Loading the caffeine data</h2>
@@ -3982,7 +4004,7 @@ sample estimates:
 <p><br>
 </p>
 <p><strong>Our conclusion:</strong></p>
-<p>Mean (SD) tapping speed among students who consumed caffeine was 248.1 taps/min compared to 244.5 taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = 6.09, df = 67.00, p &lt; 0.001, one-sided test). On average, students who consumed caffeine tapped 3.6 taps/min faster than those in the control group (95% CI: at least 2.6 taps/min faster)</p>
+<p>Mean (SD) tapping speed among students who consumed caffeine was 248.1 taps/min compared to 244.5 taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = 6.09, df = 67.00, p &lt; 0.001, one-sided two-sample t-test). On average, students who consumed caffeine tapped 3.6 taps/min faster than those in the control group (95% CI: at least 2.6 taps/min faster)</p>
 </section></section>
 <section>
 <section id="choosing-the-right-test" class="title-slide slide level1 center">
@@ -4141,7 +4163,7 @@ You don’t get to choose the test based on convenience — the design chooses i
 <li>Compare two means directly</li>
 <li>Use: <code>t.test(outcome ~ group, data = ...)</code></li>
 <li>SE: <span class="math inline">\(\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}\)</span></li>
-<li>df: <span class="math inline">\(n_1 + n_2 - 2\)</span> (approximately)</li>
+<li>df: varies (Welch formula; see R output)</li>
 </ul>
 </section>
 <section id="key-takeaways" class="slide level2">

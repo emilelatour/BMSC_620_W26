@@ -2,7 +2,7 @@
 title: "Comparing Two Means: Paired and Independent Samples"
 subtitle: "Textbook Sections 5.2, 5.3"
 author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
-date: "`r library(here); source(here('class_dates.R')); w8d1`"
+date: "`r library(here); source(here('class_dates.R')); w6d1`"
 date-format: long
 format:
   revealjs:
@@ -415,6 +415,11 @@ Most people decreased (negative values)
 ## Summary statistics for paired data
 
 ```{r}
+library(dplyr)
+library(gt)
+library(rstatix)
+
+
 # Summary statistics for differences
 chol %>%
   get_summary_stats(DiffChol, type = "common") %>%
@@ -499,7 +504,7 @@ In words:
 
 ## Check the assumptions
 
-**Step 3: Step 1: Check the assumptions**
+**Step 3: Check the assumptions**
 
 -   The assumptions to run a hypothesis test on a sample are:
 
@@ -582,6 +587,8 @@ t.test(x = chol$After, y = chol$Before, paired = TRUE)
 **`broom::tidy()`**: Use the `tidy()` function in the `broom` package with either Option 1 or Option 2
 
 ```{r}
+library(broom)
+
 # The argument conf.int = TRUE gives a confidence interval (default is 95%)
 
 t.test(x = chol$After, y = chol$Before, paired = TRUE) %>% 
@@ -591,7 +598,7 @@ t.test(x = chol$After, y = chol$Before, paired = TRUE) %>%
 
 ## Running a paired t-test in R (4/5)
 
-**Option 3: Use `rstatix` package`**
+**Option 3: Use `rstatix` package**
 
 - Requires that the data are in *long* format which means that
     -   all of the outcome values are in one column and
@@ -910,6 +917,32 @@ t.test(x = chol$DiffChol, mu = 0, alternative = "less") %>%
 
 Notice: For a one-sided test, the p-value changes and the confidence interval is one-sided.
 
+<!-- Great question! This is some subtle but important statistical theory. -->
+
+<!-- ## The intuition: -->
+
+<!-- When you have a **composite null hypothesis** like $H_0: \delta \ge 0$, the null hypothesis includes many possible values (δ = 0, δ = 0.5, δ = 10, etc.). -->
+
+<!-- The **Type I error rate can be different** for each of these values. -->
+
+<!-- ## Why it's maximized at the boundary (δ = 0): -->
+
+<!-- For your example with $H_0: \delta \ge 0$ and $H_A: \delta < 0$: -->
+
+<!-- - **If true δ = 0** (at the boundary): Sample means will be roughly centered at 0, so due to random sampling variability, you'll sometimes get negative sample means → relatively easy to accidentally reject $H_0$ → **higher Type I error** -->
+
+<!-- - **If true δ = 10** (well inside $H_0$): Sample means will be centered at 10, so it's *very unlikely* you'd get a sample mean negative enough to reject $H_0$ → **lower Type I error** -->
+
+<!-- ## The key principle: -->
+
+<!-- The farther the true parameter is from the alternative hypothesis region, the **harder** it is to mistakenly reject $H_0$. -->
+
+<!-- By testing at the boundary (δ = 0), we're being **conservative** - we're controlling the Type I error at its worst-case scenario. If we keep α ≤ 0.05 at δ = 0, it will automatically be < 0.05 for all other values in $H_0$. -->
+
+<!-- ## The practical takeaway: -->
+
+<!-- This is why we can write $H_0: \delta \ge 0$ but only test at δ = 0 - we're protecting against the maximum possible Type I error! -->
+
 # Independent Samples
 
 ## What are independent samples?
@@ -922,21 +955,26 @@ Notice: For a one-sided test, the p-value changes and the confidence interval is
 
 \
 
+::: columns
+::: {.column width="50%"}
 **Key characteristics:**
 
 - Different people in each group
 - No before/after measurements
 - No natural matching
 - Typically: different sample sizes are possible
+:::
 
-\
-
+::: {.column width="50%"}
 **Common scenarios:**
 
 - Treatment vs. control groups (randomized trials)
 - Case vs. control studies
 - Men vs. women
 - Exposed vs. unexposed
+:::
+:::
+
 
 ## Paired vs. Independent: The key difference
 
@@ -1004,6 +1042,8 @@ Does caffeine increase finger tapping speed?
 
 \
 
+:: columns
+::: {.column width="50%"}
 **Study design:**
 
 - 70 college students trained to tap fingers rapidly
@@ -1012,14 +1052,17 @@ Does caffeine increase finger tapping speed?
   - **Caffeine**: Coffee with ~200mg caffeine
 - Double-blind design
 - After 2 hours, tested finger taps per minute
+:::
 
-\
-
+::: {.column width="50%"}
 **Why independent samples?**
 
 - Different students in each group
 - Each person tested only once
 - No pairing or matching
+:::
+:::
+
 
 ## Loading the caffeine data
 
@@ -1077,7 +1120,7 @@ ggplot(CaffTaps, aes(x = Group,
                      y = Taps, 
                      fill = Group)) +
   geom_boxplot(alpha = 0.7, 
-               width = 0.5, 
+               width = 0.4, 
                show.legend = FALSE) +
   geom_jitter(width = 0.10, 
               alpha = 0.4, 
@@ -1358,7 +1401,7 @@ For two-sample tests, report:
 
 **Our conclusion:**
 
-Mean (SD) tapping speed among students who consumed caffeine was `r res_stats[1, "mean"]` taps/min compared to `r res_stats[2, "mean"]` taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = `r res_tidy$statistic`, df = `r res_tidy$parameter`, p `r res_tidy$p_value`, one-sided test). On average, students who consumed caffeine tapped `r res_tidy$estimate` taps/min faster than those in the control group (95% CI: at least `r res_tidy$conf_low` taps/min faster)
+Mean (SD) tapping speed among students who consumed caffeine was `r res_stats[1, "mean"]` taps/min compared to `r res_stats[2, "mean"]` taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = `r res_tidy$statistic`, df = `r res_tidy$parameter`, p `r res_tidy$p_value`, one-sided two-sample t-test). On average, students who consumed caffeine tapped `r res_tidy$estimate` taps/min faster than those in the control group (95% CI: at least `r res_tidy$conf_low` taps/min faster)
 
 
 # Choosing the Right Test
@@ -1466,7 +1509,7 @@ You don’t get to choose the test based on convenience — the design chooses i
 - Compare two means directly
 - Use: `t.test(outcome ~ group, data = ...)`
 - SE: $\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
-- df: $n_1 + n_2 - 2$ (approximately)
+- df: varies (Welch formula; see R output)
 
 ## Key takeaways
 
