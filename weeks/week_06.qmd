@@ -60,7 +60,7 @@ By the end of the week, you should be able to:
     -   R Workflow: Projects, File Paths, and Reading Data (start with slide 16) ([HTML](/lessons/12_hypothesis_testing/12_r_workflow_slides.qmd) \| [PDF](/lessons/12_hypothesis_testing/12_r_workflow_slides.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
     -   Comparing Two Means ([HTML](/lessons/13_comparing_two_means/13_comparing_two_means.qmd) \| [PDF](/lessons/13_comparing_two_means/13_comparing_two_means.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
-    -   Coming soon
+    -   [Comparing two means](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQAi_TQVampsSqo1UusZkHGnAXkcYyQa9hs5ks5zKDDly8s?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=MTReR7)
 -   **Muddy points**
     -   Coming soon
 
