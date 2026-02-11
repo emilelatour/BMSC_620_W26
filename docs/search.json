@@ -6086,5 +6086,54 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
+    "title": "Response to Muddy Points",
+    "section": "",
+    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
+    "title": "Response to Muddy Points",
+    "section": "",
+    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
+    "title": "Response to Muddy Points",
+    "section": "Conceptual Clarifications",
+    "text": "Conceptual Clarifications\n\nHypothesis Testing Ethics: Can You Change Your Hypothesis After Seeing Data?\n“What if we failed to reject the null, then tested the opposite direction?”\nThis is an excellent ethical question that gets at the heart of hypothesis testing. You should not reframe a confirmatory hypothesis after looking at the data. Here’s why:\nThe entire hypothesis testing framework is built on specifying your hypothesis before collecting data. When you set \\(\\alpha = 0.05\\), you’re accepting a 5% chance of a false positive. But if you:\n\nTest one direction (e.g., caffeine increases tapping) → get \\(p = 0.10\\)\nThen test the other direction (caffeine decreases tapping) → get \\(p = 0.03\\)\n\nYou’ve now done two tests, each with a 5% false positive rate. Your actual false positive rate is higher than 5% (this is the multiple testing problem we’ll discuss later in the course). Conceptually, you are giving yourself multiple chances to find significance after seeing the data.\nWhat you CAN do:\n\nReport the result as exploratory: “We found a non-significant trend toward increased tapping. Interestingly, there was a significant decrease…”\nUse the finding to design a new study with an a priori hypothesis\nBe transparent in publications: “This was a post-hoc analysis”\n\nThe key is transparency about what was pre-specified vs discovered during analysis.\n\n\nToo Many Options: What Should I Actually Use?\n“Giving all the options confuses me - what do you mainly use?”\nFair feedback! I show you multiple approaches so you can understand different code you might encounter, but here’s what I recommend you actually use:\nFor t-tests, use this approach:\n# Two independent samples\nt.test(outcome ~ group, data = mydata)\n\n# Two independent samples (long format)\nt.test(outcome ~ group, data = mydata) \n\n# Paired samples (long format - one outcome column, one time/condition column)\nt.test(outcome ~ group, data = mydata, paired = TRUE)\n\n# Paired samples (wide format - separate before/after columns)\nt.test(x = mydata$after, y = mydata$before, paired = TRUE)\n\n# One sample\nt.test(mydata$variable, mu = 0)\nIf you remember only one thing: use the formula interface for two-sample tests, and add paired = TRUE only when the same units are measured twice.\nWhy this approach?\n\nWorks with tidyverse piping\nClear syntax showing what you’re comparing\nEasy to modify (just add paired = TRUE or change mu)\nYou’ll see this format in most modern R code\n\nYou can ignore the rstatix package methods for now unless you’re specifically doing grouped analyses. I mention them so you’ll recognize them if you see them in other people’s code or Stack Overflow."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
+    "title": "Response to Muddy Points",
+    "section": "The here Package",
+    "text": "The here Package\n“I think Here is confusing still”\nLet me break this down with a concrete example. Say your project structure looks like this:\nmy_project/\n├── my_project.Rproj\n├── code/\n│   └── analysis.R\n└── data/\n    └── nhanes.csv\nWithout here: If you’re working in analysis.R, you might write:\ndata &lt;- read_csv(\"../data/nhanes.csv\")  # Fragile! Depends on where you run code\nWith here:\nlibrary(here)\ndata &lt;- read_csv(here(\"data\", \"nhanes.csv\"))  # Always works!\nThe magic: here() always builds paths from your project root (where the .Rproj file lives), regardless of:\n\nWhat folder your script is in\nWhether you run code line-by-line or knit the whole document\n\nWhether you’re on Mac, PC, or different computers\n\nThink of it as: here() says “start at my project folder, then go into data folder, then grab nhanes.csv”\nWhen to use it: Anytime you’re reading or writing files in your project. You’ll get practice with this in upcoming homework.\nIf this still feels abstract right now, that’s normal. It usually “clicks” the first time a project breaks without here()."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
+    "title": "Response to Muddy Points",
+    "section": "Understanding t.test() Arguments",
+    "text": "Understanding t.test() Arguments\n\nWhy mu = 0 Sometimes But Not Always?\n“Why set mu = 0 for DiffChol but not when comparing two columns?”\nGreat observation! The key thing to understand: mu = 0 is the default for ALL t-tests - I just chose when to write it explicitly.\nOne-sample t-test:\nt.test(chol$DiffChol, mu = 0)  # Explicit\nt.test(chol$DiffChol)           # Same thing - mu = 0 is default\nTwo-sample t-test (paired):\nt.test(x = chol$After, y = chol$Before, paired = TRUE)           # mu = 0 by default\nt.test(x = chol$After, y = chol$Before, paired = TRUE, mu = 0)   # Could write this too\nWhy I sometimes write it explicitly:\nIn the one-sample example with DiffChol, I wrote mu = 0 to emphasize what we’re testing: “Is the mean difference equal to zero?” It makes the null hypothesis more visible in the code.\nIn the two-sample paired example, I left it off because it’s the default and the syntax already makes it clear we’re comparing before and after values.\nBoth are testing difference = 0 - I just chose to be explicit about it in the one-sample case for teaching purposes. You could write mu = 0 in every t-test call, or leave it off in all of them. The code does the same thing either way. The definition of the difference depends on the test (one-sample, paired, or two-sample), but the default null value does not.\n\n\nPaired vs Independent: The Resistance Model Question\n“Would a resistance model be paired or independent?”\nThis is a nuanced question! Let’s think through it:\nPaired data requires: The same biological unit measured twice, or closely matched units.\nYour scenario: Resistant cells vs naive cells from the same original culture.\nThis is independent samples because:\n\nThey’re different cells (not the same cells measured twice)\nEven though they share an ancestor, they’ve undergone different selection pressures\nYou’re comparing two distinct populations that have diverged\n\nWhen it WOULD be paired:\n\nIf you measured gene expression in cells, then treated them, then measured again (same cells, before/after)\nIf you had matched tumor samples from the same patient (primary vs metastatic site)\n\nThe key question: “Am I measuring the exact same thing twice, or two related but distinct things?” In your case, it’s the latter. Shared origin does not automatically imply pairing — pairing requires a one-to-one linkage between measurements.\nIn practice, shared background like this is better handled with blocking or mixed models, which is out of scope for this course. But for t-test decision rules, this is not paired data.\nI think about this example like: “If I accidentally swapped the labels on three of my ‘resistant’ wells, could I still reconstruct exactly which ‘naive’ wells they were supposed to be paired with?” In a true paired design (like a patient’s left and right eye), the answer is yes. In a lineage model, the answer is no — the pairing is not intrinsic.\nLeft and right eyes are paired because they are two measurements on the same indivisible experimental unit; resistant and naive lineages are not, because they are separate populations whose relationship exists only through experimental history, not identity."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
+    "title": "Response to Muddy Points",
+    "section": "R Packages and Installation",
+    "text": "R Packages and Installation\n“I think it will be clearer once I start working with it”\nYou’re right - this becomes much more intuitive with practice! Just remember:\nOne-time setup (per computer):\ninstall.packages(\"packagename\")  # Downloads from internet\nEvery R session:\nlibrary(packagename)  # Loads into your current session\nCommon confusion: You only need to install once, but you need to library() in every script/document that uses it.\nIf you get stuck: The error message “there is no package called ‘X’” means you need to install it. The error “could not find function ‘Y’” often means you forgot to load the library."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
+    "title": "Response to Muddy Points",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWe’ll continue practicing these concepts, and you’ll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with: - Choosing appropriate t-tests - Using R projects and here() - Interpreting results in context\nDon’t hesitate to come to office hours if anything remains unclear!"
   }
 ]

@@ -62,7 +62,7 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Comparing two means](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQAi_TQVampsSqo1UusZkHGnAXkcYyQa9hs5ks5zKDDly8s?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=MTReR7)
 -   **Muddy points**
-    -   Coming soon
+    -   [Muddy Points - Lesson 10](/lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.qmd)
 
 ------------------------------------------------------------------------
 

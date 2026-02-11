@@ -1,0 +1,210 @@
+---
+title: "Response to Muddy Points"
+subtitle: "Lecture: Two Sample Tests and R Project Workflow"
+author: "Emile"
+date: "Week 6, Day 1"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+---
+
+## Pacing and What Worked
+
+Great news on pacing - 100% of you who responded found the pace "about right"! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I'm glad the distinction between test types and the code walkthroughs are landing well.
+
+---
+
+## Conceptual Clarifications
+
+### Hypothesis Testing Ethics: Can You Change Your Hypothesis After Seeing Data?
+
+**"What if we failed to reject the null, then tested the opposite direction?"**
+
+This is an excellent ethical question that gets at the heart of hypothesis testing. **You should not reframe a confirmatory hypothesis after looking at the data.** Here's why:
+
+The entire hypothesis testing framework is built on specifying your hypothesis *before* collecting data. When you set $\alpha = 0.05$, you're accepting a 5% chance of a false positive. But if you:
+
+1. Test one direction (e.g., caffeine increases tapping) → get $p = 0.10$
+2. Then test the other direction (caffeine decreases tapping) → get $p = 0.03$
+
+You've now done **two** tests, each with a 5% false positive rate. Your actual false positive rate is higher than 5% (this is the multiple testing problem we'll discuss later in the course). Conceptually, you are giving yourself multiple chances to find significance after seeing the data.
+
+**What you CAN do:**
+
+- Report the result as exploratory: "We found a non-significant trend toward increased tapping. Interestingly, there was a significant decrease..."
+- Use the finding to design a *new* study with an *a priori* hypothesis
+- Be transparent in publications: "This was a post-hoc analysis"
+
+The key is **transparency** about what was pre-specified vs discovered during analysis.
+
+### Too Many Options: What Should I Actually Use?
+
+**"Giving all the options confuses me - what do you mainly use?"**
+
+Fair feedback! I show you multiple approaches so you can understand different code you might encounter, but here's what I recommend you actually use:
+
+**For t-tests, use this approach:**
+
+```r
+# Two independent samples
+t.test(outcome ~ group, data = mydata)
+
+# Two independent samples (long format)
+t.test(outcome ~ group, data = mydata) 
+
+# Paired samples (long format - one outcome column, one time/condition column)
+t.test(outcome ~ group, data = mydata, paired = TRUE)
+
+# Paired samples (wide format - separate before/after columns)
+t.test(x = mydata$after, y = mydata$before, paired = TRUE)
+
+# One sample
+t.test(mydata$variable, mu = 0)
+```
+
+**If you remember only one thing**: use the formula interface for two-sample tests, and add paired = TRUE only when the same units are measured twice.
+
+**Why this approach?**
+
+- Works with tidyverse piping
+- Clear syntax showing what you're comparing
+- Easy to modify (just add `paired = TRUE` or change `mu`)
+- You'll see this format in most modern R code
+
+You can ignore the `rstatix` package methods for now unless you're specifically doing grouped analyses. I mention them so you'll recognize them if you see them in other people's code or Stack Overflow.
+
+---
+
+## The `here` Package
+
+**"I think Here is confusing still"**
+
+Let me break this down with a concrete example. Say your project structure looks like this:
+
+```
+my_project/
+├── my_project.Rproj
+├── code/
+│   └── analysis.R
+└── data/
+    └── nhanes.csv
+```
+
+**Without `here`:** If you're working in `analysis.R`, you might write:
+```r
+data <- read_csv("../data/nhanes.csv")  # Fragile! Depends on where you run code
+```
+
+**With `here`:**
+```r
+library(here)
+data <- read_csv(here("data", "nhanes.csv"))  # Always works!
+```
+
+**The magic:** `here()` always builds paths from your project root (where the `.Rproj` file lives), regardless of:
+
+- What folder your script is in
+- Whether you run code line-by-line or knit the whole document  
+- Whether you're on Mac, PC, or different computers
+
+Think of it as: `here()` says "start at my project folder, then go into data folder, then grab nhanes.csv"
+
+**When to use it:** Anytime you're reading or writing files in your project. You'll get practice with this in upcoming homework.
+
+If this still feels abstract right now, that’s normal. It usually "clicks" the first time a project breaks *without* `here()`.
+
+---
+
+
+## Understanding t.test() Arguments
+
+### Why `mu = 0` Sometimes But Not Always?
+
+**"Why set mu = 0 for DiffChol but not when comparing two columns?"**
+
+Great observation! The key thing to understand: **`mu = 0` is the default for ALL t-tests** — I just chose when to write it explicitly.
+
+**One-sample t-test:**
+```r
+t.test(chol$DiffChol, mu = 0)  # Explicit
+t.test(chol$DiffChol)           # Same thing - mu = 0 is default
+```
+
+**Two-sample t-test (paired):**
+```r
+t.test(x = chol$After, y = chol$Before, paired = TRUE)           # mu = 0 by default
+t.test(x = chol$After, y = chol$Before, paired = TRUE, mu = 0)   # Could write this too
+```
+
+**Why I sometimes write it explicitly:**
+
+In the one-sample example with `DiffChol`, I wrote `mu = 0` to emphasize what we're testing: "Is the mean difference equal to zero?" It makes the null hypothesis more visible in the code.
+
+In the two-sample paired example, I left it off because it's the default and the syntax already makes it clear we're comparing before and after values.
+
+**Both are testing difference = 0** — I just chose to be explicit about it in the one-sample case for teaching purposes. You could write `mu = 0` in every t-test call, or leave it off in all of them. The code does the same thing either way. The *definition* of the difference depends on the test (one-sample, paired, or two-sample), but the default null value does not.
+
+
+### Paired vs Independent: The Resistance Model Question
+
+**"Would a resistance model be paired or independent?"**
+
+This is a nuanced question! Let's think through it:
+
+**Paired data requires:** The *same* biological unit measured twice, or closely matched units.
+
+**Your scenario:** Resistant cells vs naive cells from the same original culture.
+
+This is **independent samples** because:
+
+- They're different cells (not the same cells measured twice)
+- Even though they share an ancestor, they've undergone different selection pressures
+- You're comparing two distinct populations that have diverged
+
+**When it WOULD be paired:**
+
+- If you measured gene expression in cells, *then* treated them, *then* measured again (same cells, before/after)
+- If you had matched tumor samples from the same patient (primary vs metastatic site)
+
+The key question: "Am I measuring the exact same thing twice, or two related but distinct things?" In your case, it's the latter. Shared origin does not automatically imply pairing — pairing requires a one-to-one linkage between measurements.
+
+In practice, shared background like this is better handled with blocking or mixed models, which is out of scope for this course. But for t-test decision rules, this is not paired data.
+
+I think about this example like: "If I accidentally swapped the labels on three of my 'resistant' wells, could I still reconstruct exactly which 'naive' wells they were supposed to be paired with?" In a true paired design (like a patient’s left and right eye), the answer is yes. In a lineage model, the answer is no — the pairing is not intrinsic.
+
+Left and right eyes are paired because they are two measurements on the same indivisible experimental unit; resistant and naive lineages are not, because they are separate populations whose relationship exists only through experimental history, not identity.
+
+---
+
+## R Packages and Installation
+
+**"I think it will be clearer once I start working with it"**
+
+You're right - this becomes much more intuitive with practice! Just remember:
+
+**One-time setup (per computer):**
+```r
+install.packages("packagename")  # Downloads from internet
+```
+
+**Every R session:**
+```r
+library(packagename)  # Loads into your current session
+```
+
+**Common confusion:** You only need to install once, but you need to `library()` in every script/document that uses it.
+
+**If you get stuck:** The error message "there is no package called 'X'" means you need to install it. The error "could not find function 'Y'" often means you forgot to load the library.
+
+---
+
+## Looking Ahead
+
+We'll continue practicing these concepts, and you'll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with:
+- Choosing appropriate t-tests
+- Using R projects and `here()` 
+- Interpreting results in context
+
+Don't hesitate to come to office hours if anything remains unclear!
