@@ -12,7 +12,7 @@ format:
 
 ## Pacing and What Worked
 
-Great news on pacing - 100% of you who responded found the pace "about right"! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I'm glad the distinction between test types and the code walkthroughs are landing well.
+Most of you felt the pace of the lecture was about right. Several comments highlighted the distinction between paired and independent t-tests and the R project workflow as particularly clear. I’ll focus below on a few of the muddy points that came up.
 
 ---
 
@@ -202,9 +202,4 @@ library(packagename)  # Loads into your current session
 
 ## Looking Ahead
 
-We'll continue practicing these concepts, and you'll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with:
-- Choosing appropriate t-tests
-- Using R projects and `here()` 
-- Interpreting results in context
-
-Don't hesitate to come to office hours if anything remains unclear!
+We'll continue practicing these concepts, and you'll get more comfortable with the workflow as we go. Don't hesitate to come to office hours if anything remains unclear!

@@ -2,7 +2,7 @@
 title: "Midterm Review"
 subtitle: "Key Concepts from Lessons 1–9"
 author: "Emile Latour"
-date: "February 11, 2026"
+date: "`r library(here); source(here('class_dates.R')); w6d2`"
 format:
   revealjs:
     theme: "../../assets/css/reveal-bmsc620_v5.scss"
@@ -24,6 +24,7 @@ execute:
 #| label: setup
 #| include: false
 
+library(here)
 library(tidyverse)
 library(oibiostat)
 library(laviz)

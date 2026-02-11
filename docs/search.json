@@ -4380,14 +4380,14 @@
     "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
     "title": "Response to Muddy Points",
     "section": "",
-    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+    "text": "Most of you felt the pace of the lecture was about right. Several comments highlighted the distinction between paired and independent t-tests and the R project workflow as particularly clear. I’ll focus below on a few of the muddy points that came up."
   },
   {
     "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
     "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
     "title": "Response to Muddy Points",
     "section": "",
-    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+    "text": "Most of you felt the pace of the lecture was about right. Several comments highlighted the distinction between paired and independent t-tests and the R project workflow as particularly clear. I’ll focus below on a few of the muddy points that came up."
   },
   {
     "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
@@ -4422,7 +4422,7 @@
     "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
     "title": "Response to Muddy Points",
     "section": "Looking Ahead",
-    "text": "Looking Ahead\nWe’ll continue practicing these concepts, and you’ll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with: - Choosing appropriate t-tests - Using R projects and here() - Interpreting results in context\nDon’t hesitate to come to office hours if anything remains unclear!"
+    "text": "Looking Ahead\nWe’ll continue practicing these concepts, and you’ll get more comfortable with the workflow as we go. Don’t hesitate to come to office hours if anything remains unclear!"
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
