@@ -738,26 +738,6 @@ For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$ - no adjustment needed!
 :::
 
 
-## Common Confusion: "At least 5" (Discrete Distributions)
-
-::: {.callout-warning icon="false"}
-## DISCRETE distributions only!
-This applies to **binomial and Poisson** (discrete). For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$.
-:::
-
-**Question:** What is $P(X \ge 5)$ for a binomial distribution?
-
-**Translate to computer language:** "At least 5" = "5 or more" = "greater than 4"
-$$P(X \ge 5) = P(X \gt 4)$$
-
-**Code it:**
-```{r}
-#| eval: false
-pbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)  # Correct!
-1 - pbinom(q = 4, size = 10, prob = 0.5)                  # Also works
-```
-
-**Key point:** For discrete distributions, "$X \ge 5$" equals "$X \gt 4$" because we can't have 4.5 successes!
 
 ## Practice: Binomial Questions
 
@@ -909,7 +889,7 @@ low_lbl <- glue::glue("pnorm({lim}, {mu}, {sigma})\nP(X ≤ {lim}) = {low_lbl}")
 
 upp_lbl <- pnorm(lim, mu, sigma, lower.tail = FALSE)
 upp_lbl <- lamisc::fmt_num(upp_lbl, 0.001)
-upp_lbl <- glue::glue("pnorm({lim}, {mu}, {sigma})\nP(X > {lim}) = {upp_lbl}")
+upp_lbl <- glue::glue("pnorm({lim}, {mu}, {sigma}, lower.tail = FALSE)\nP(X > {lim}) = {upp_lbl}")
 
 
 
@@ -1251,7 +1231,7 @@ $H_A: \mu \neq \mu_0$ (two-sided) OR $\mu > \mu_0$ OR $\mu < \mu_0$ (one-sided)
 ::: {.callout-important icon="false"}
 ## Definition
 
-The p-value is the probability of observing data as extreme as (or more extreme than) what we observed, **assuming** $H_0$ is true.
+The p-value is the probability of observing data as extreme as (or more extreme than) what we observed, **assuming $H_0$ is true**.
 :::
 
 \
