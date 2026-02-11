@@ -2483,7 +2483,18 @@
     "href": "exams.html",
     "title": "Exams",
     "section": "",
-    "text": "See Sakai",
+    "text": "Available: Wednesday, February 11 at 3:00 PM through Monday, February 16 at 11:00 PM\nAccess: Sakai\nTime to budget: 3–5 hours (you don’t need to complete it in one sitting)\n\n\nUpload both files to Sakai:\n\nYour .qmd source file\nThe rendered .html file\n\nFile naming: Lastname_FirstInitial_Midterm (e.g., Smith_J_Midterm.qmd and Smith_J_Midterm.html)\n\n\n\n\nOpen book/notes: You may use course materials, R documentation, and your notes\nNo collaboration: Work independently—no help from other students, AI assistants, or online forums\nCheck before submitting: Make sure your document renders to HTML without errors\n\n\n\n\n\nMidterm Review (HTML | PDF | OneDrive)\nSee Schedule for all lecture materials and homework",
+    "crumbs": [
+      "Home",
+      "Exams"
+    ]
+  },
+  {
+    "objectID": "exams.html#midterm-exam",
+    "href": "exams.html#midterm-exam",
+    "title": "Exams",
+    "section": "",
+    "text": "Available: Wednesday, February 11 at 3:00 PM through Monday, February 16 at 11:00 PM\nAccess: Sakai\nTime to budget: 3–5 hours (you don’t need to complete it in one sitting)\n\n\nUpload both files to Sakai:\n\nYour .qmd source file\nThe rendered .html file\n\nFile naming: Lastname_FirstInitial_Midterm (e.g., Smith_J_Midterm.qmd and Smith_J_Midterm.html)\n\n\n\n\nOpen book/notes: You may use course materials, R documentation, and your notes\nNo collaboration: Work independently—no help from other students, AI assistants, or online forums\nCheck before submitting: Make sure your document renders to HTML without errors\n\n\n\n\n\nMidterm Review (HTML | PDF | OneDrive)\nSee Schedule for all lecture materials and homework",
     "crumbs": [
       "Home",
       "Exams"
@@ -3036,7 +3047,7 @@
     "href": "weeks/week_06.html#materials",
     "title": "Week 6",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Comparing Two Means: Paired and Independent Samples\n\nTopics\n\nFinish up R topics from last week.\nDistinguishing paired vs. independent samples\nStudy design implications\nPaired t-tests: before-and-after studies\nTwo-sample t-tests: comparing independent groups\nConfidence intervals for paired differences\nConfidence intervals for differences in means\nConducting paired and two-sample tests in R\nChoosing the right test\n\nSlides\n\nR Workflow: Projects, File Paths, and Reading Data (start with slide 16) (HTML | PDF | OneDrive)\nComparing Two Means (HTML | PDF | OneDrive)\n\nRecording\n\nComparing two means\n\nMuddy points\n\nMuddy Points - Lesson 10\n\n\n\n\n\nWednesday — Midterm Review\n\nTopics\n\nExam logistics and format\nStudy design fundamentals\nProbability and Bayes’ Theorem\nProbability distributions (Binomial, Poisson, Normal)\nR functions for distributions\nSampling distributions and Central Limit Theorem\nConfidence intervals\nHypothesis testing framework\nCommon pitfalls and tips\n\nSlides\n\nMidterm Review (HTML | PDF | OneDrive)\n\nRecording\n\nComing soon\n\nMuddy points\n\nComing soon",
+    "text": "Materials\n\nMonday — Comparing Two Means: Paired and Independent Samples\n\nTopics\n\nFinish up R topics from last week.\nDistinguishing paired vs. independent samples\nStudy design implications\nPaired t-tests: before-and-after studies\nTwo-sample t-tests: comparing independent groups\nConfidence intervals for paired differences\nConfidence intervals for differences in means\nConducting paired and two-sample tests in R\nChoosing the right test\n\nSlides\n\nR Workflow: Projects, File Paths, and Reading Data (start with slide 16) (HTML | PDF | OneDrive)\nComparing Two Means (HTML | PDF | OneDrive)\n\nRecording\n\nComparing two means\n\nMuddy points\n\nMuddy Points - Lesson 10\n\n\n\n\n\nWednesday — Midterm Review\n\nTopics\n\nExam logistics and format\nStudy design fundamentals\nProbability and Bayes’ Theorem\nProbability distributions (Binomial, Poisson, Normal)\nR functions for distributions\nSampling distributions and Central Limit Theorem\nConfidence intervals\nHypothesis testing framework\nCommon pitfalls and tips\n\nSlides\n\nMidterm Review (HTML | PDF | OneDrive)\n\nRecording\n\nMidterm review\n\nMuddy points\n\nComing soon",
     "crumbs": [
       "Home",
       "Weekly materials",
