@@ -272,8 +272,8 @@ ggplot(nhanes.samp,
        aes(x = Gender, y = Weight, fill = Gender)) +
   geom_boxplot() +
   labs(title = "Weight by Gender",
-       x = "Weight (kg)",
-       y = "Age (years)")
+       x = "Gender",
+       y = "Weight (kg)")
 ```
 
 \
