@@ -4180,6 +4180,13 @@
     "text": "Common Confusion: “At least 5” (Discrete Distributions)\n\n\nQuestion: What is \\(P(X \\ge 5)\\) for a binomial distribution?\n\n\nStep 1: Translate to something the computer understands\n\n“At least 5” = “5 or more” = “greater than 4”\nSo: \\(P(X \\ge 5)\\) = \\(P(X \\gt 4)\\)\n\nStep 2: Code it\n\n# Correct!\npbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)\n\n# Also correct (but slightly more work)\n1 - pbinom(q = 4, size = 10, prob = 0.5)\n\n\n\n\nKey Point\n\n\nFor discrete distributions: “\\(X \\ge 5\\)” is the same as “\\(X \\gt 4\\)” because we can’t have \\(4.5\\) successes!\nThis slide applies to binomial and Poisson (discrete). For Normal (continuous), \\(P(X \\ge 5) = P(X \\gt 5)\\) - no adjustment needed!"
   },
   {
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions-1",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions-1",
+    "title": "Midterm Review",
+    "section": "Common Confusion: “At least 5” (Discrete Distributions)",
+    "text": "Common Confusion: “At least 5” (Discrete Distributions)\n\n\n\nDISCRETE distributions only!\n\n\nThis applies to binomial and Poisson (discrete). For Normal (continuous), \\(P(X \\ge 5) = P(X \\gt 5)\\).\n\n\n\nQuestion: What is \\(P(X \\ge 5)\\) for a binomial distribution?\nTranslate to computer language: “At least 5” = “5 or more” = “greater than 4” \\[P(X \\ge 5) = P(X \\gt 4)\\]\nCode it:\n\npbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)  # Correct!\n1 - pbinom(q = 4, size = 10, prob = 0.5)                  # Also works\n\nKey point: For discrete distributions, “\\(X \\ge 5\\)” equals “\\(X \\gt 4\\)” because we can’t have 4.5 successes!"
+  },
+  {
     "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-questions",
     "href": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-questions",
     "title": "Midterm Review",
@@ -6492,12 +6499,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions-1",
-    "href": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions-1",
-    "title": "Midterm Review",
-    "section": "Common Confusion: “At least 5” (Discrete Distributions)",
-    "text": "Common Confusion: “At least 5” (Discrete Distributions)\n\n\n\nDISCRETE distributions only!\n\n\nThis applies to binomial and Poisson (discrete). For Normal (continuous), \\(P(X \\ge 5) = P(X \\gt 5)\\).\n\n\n\nQuestion: What is \\(P(X \\ge 5)\\) for a binomial distribution?\nTranslate to computer language: “At least 5” = “5 or more” = “greater than 4” \\[P(X \\ge 5) = P(X \\gt 4)\\]\nCode it:\n\npbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)  # Correct!\n1 - pbinom(q = 4, size = 10, prob = 0.5)                  # Also works\n\nKey point: For discrete distributions, “\\(X \\ge 5\\)” equals “\\(X \\gt 4\\)” because we can’t have 4.5 successes!"
   }
 ]
