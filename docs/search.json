@@ -4268,7 +4268,7 @@
     "href": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-12",
     "title": "Midterm Review",
     "section": "Calculating a 95% CI in R (1/2)",
-    "text": "Calculating a 95% CI in R (1/2)\n\n# Sample data\nn &lt;- 25\nxbar &lt;- 14.2\ns &lt;- 1.8\nconfidence_level &lt;- 0.95\n\n# Step 1: Find critical value\nt_star &lt;- qt((1 + confidence_level) / 2, df = n - 1)\n# OR: qt(0.975, df = 24)\nt_star\n\n[1] 2.063899\n\n# Step 2: Calculate standard error\nSE &lt;- s / sqrt(n)\nSE\n\n[1] 0.36"
+    "text": "Calculating a 95% CI in R (1/2)\n\n\n# Sample data\nn &lt;- 25\nxbar &lt;- 14.2\ns &lt;- 1.8\nconfidence_level &lt;- 0.95\n\nalpha &lt;- 1 - confidence_level\n\n# Step 1: Find critical value\nt_star &lt;- qt(1 - alpha / 2, df = n - 1)\n\n# OR: qt(0.975, df = 24)\nt_star\n\n[1] 2.063899\n\n# Step 2: Calculate standard error\nSE &lt;- s / sqrt(n)\nSE\n\n[1] 0.36"
   },
   {
     "objectID": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-22",

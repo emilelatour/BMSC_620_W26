@@ -1327,6 +1327,7 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </section>
 <section id="calculating-a-95-ci-in-r-12" class="slide level2">
 <h2>Calculating a 95% CI in R (1/2)</h2>
+<!-- t_star <- qt((1 + confidence_level) / 2, df = n - 1) -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="co"># Sample data</span></span>
 <span id="cb60-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">25</span></span>
@@ -1334,10 +1335,13 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <span id="cb60-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">1.8</span></span>
 <span id="cb60-5"><a></a>confidence_level <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
 <span id="cb60-6"><a></a></span>
-<span id="cb60-7"><a></a><span class="co"># Step 1: Find critical value</span></span>
-<span id="cb60-8"><a></a>t_star <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span> <span class="sc">+</span> confidence_level) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb60-9"><a></a><span class="co"># OR: qt(0.975, df = 24)</span></span>
-<span id="cb60-10"><a></a>t_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-7"><a></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> confidence_level</span>
+<span id="cb60-8"><a></a></span>
+<span id="cb60-9"><a></a><span class="co"># Step 1: Find critical value</span></span>
+<span id="cb60-10"><a></a>t_star <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb60-11"><a></a></span>
+<span id="cb60-12"><a></a><span class="co"># OR: qt(0.975, df = 24)</span></span>
+<span id="cb60-13"><a></a>t_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.063899</code></pre>
 </div>
