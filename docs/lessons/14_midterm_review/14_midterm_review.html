@@ -978,17 +978,8 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </section>
 <section id="common-confusion-at-least-5-discrete-distributions" class="slide level2">
 <h2>Common Confusion: “At least 5” (Discrete Distributions)</h2>
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>DISCRETE distributions only!</strong></p>
-</div>
-<div class="callout-content">
-<p>This slide applies to <strong>binomial and Poisson</strong> (discrete). For Normal (continuous), <span class="math inline">\(P(X \ge 5) = P(X \gt 5)\)</span> - no adjustment needed!</p>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
+<p><br>
+</p>
 <p><strong>Question:</strong> What is <span class="math inline">\(P(X \ge 5)\)</span> for a binomial distribution?</p>
 <p><br>
 </p>
@@ -997,8 +988,6 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <li>“At least 5” = “5 or more” = “greater than 4”</li>
 <li>So: <span class="math inline">\(P(X \ge 5)\)</span> = <span class="math inline">\(P(X \gt 4)\)</span></li>
 </ul>
-<p><br>
-</p>
 <p><strong>Step 2:</strong> Code it</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Correct!</span></span>
@@ -1007,8 +996,6 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <span id="cb20-4"><a></a><span class="co"># Also correct (but slightly more work)</span></span>
 <span id="cb20-5"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><br>
-</p>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1016,9 +1003,31 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </div>
 <div class="callout-content">
 <p>For discrete distributions: “<span class="math inline">\(X \ge 5\)</span>” is the same as “<span class="math inline">\(X \gt 4\)</span>” because we can’t have <span class="math inline">\(4.5\)</span> successes!</p>
+<p>This slide applies to <strong>binomial and Poisson</strong> (discrete). For Normal (continuous), <span class="math inline">\(P(X \ge 5) = P(X \gt 5)\)</span> - no adjustment needed!</p>
 </div>
 </div>
 </div>
+</section>
+<section id="common-confusion-at-least-5-discrete-distributions-1" class="slide level2">
+<h2>Common Confusion: “At least 5” (Discrete Distributions)</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>DISCRETE distributions only!</strong></p>
+</div>
+<div class="callout-content">
+<p>This applies to <strong>binomial and Poisson</strong> (discrete). For Normal (continuous), <span class="math inline">\(P(X \ge 5) = P(X \gt 5)\)</span>.</p>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> What is <span class="math inline">\(P(X \ge 5)\)</span> for a binomial distribution?</p>
+<p><strong>Translate to computer language:</strong> “At least 5” = “5 or more” = “greater than 4” <span class="math display">\[P(X \ge 5) = P(X \gt 4)\]</span></p>
+<p><strong>Code it:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)  <span class="co"># Correct!</span></span>
+<span id="cb21-2"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">4</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)                  <span class="co"># Also works</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Key point:</strong> For discrete distributions, “<span class="math inline">\(X \ge 5\)</span>” equals “<span class="math inline">\(X \gt 4\)</span>” because we can’t have 4.5 successes!</p>
 </section>
 <section id="practice-binomial-questions" class="slide level2">
 <h2>Practice: Binomial Questions</h2>
@@ -1028,24 +1037,24 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <div class="column" style="width:48%;">
 <p><strong>Question 1:</strong> What’s the probability that <em>exactly</em> 15 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Question 2:</strong> What’s the probability that <em>at most</em> 12 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:48%;">
 <p><strong>Question 3:</strong> What’s the probability that <em>at least</em> 18 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Question 4:</strong> What’s the expected number protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -1056,8 +1065,8 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </p>
 <p><strong>Question 1:</strong> What’s the probability that <em>exactly</em> 15 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Question 1: Exactly 15</span></span>
-<span id="cb25-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Question 1: Exactly 15</span></span>
+<span id="cb26-2"><a></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">15</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2023312</code></pre>
 </div>
@@ -1066,12 +1075,12 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </p>
 <p><strong>Question 2:</strong> What’s the probability that <em>at most</em> 12 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># Question 2: At most 12</span></span>
-<span id="cb27-2"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">12</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># Question 2: At most 12</span></span>
+<span id="cb28-2"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">12</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1018119</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># OR: pbinom(q = 12, size = 20, prob = 0.75, lower.tail = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># OR: pbinom(q = 12, size = 20, prob = 0.75, lower.tail = TRUE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="practice-binomial-answers-22" class="slide level2">
@@ -1080,29 +1089,29 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 </p>
 <p><strong>Question 3:</strong> What’s the probability that <em>at least</em> 18 are protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="co"># Question 3: At least 18 (same as &gt; 17)</span></span>
-<span id="cb30-2"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="co"># Question 3: At least 18 (same as &gt; 17)</span></span>
+<span id="cb31-2"><a></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">17</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.75</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09126043</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># OR: 1 - pbinom(q = 17, size = 20, prob = 0.75)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co"># OR: 1 - pbinom(q = 17, size = 20, prob = 0.75)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Question 4:</strong> What’s the expected number protected?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co"># Question 4: Expected value</span></span>
-<span id="cb33-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb33-3"><a></a>p <span class="ot">&lt;-</span> <span class="fl">0.75</span></span>
-<span id="cb33-4"><a></a>expected <span class="ot">&lt;-</span> n <span class="sc">*</span> p</span>
-<span id="cb33-5"><a></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="co"># Question 4: Expected value</span></span>
+<span id="cb34-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb34-3"><a></a>p <span class="ot">&lt;-</span> <span class="fl">0.75</span></span>
+<span id="cb34-4"><a></a>expected <span class="ot">&lt;-</span> n <span class="sc">*</span> p</span>
+<span id="cb34-5"><a></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># Bonus: standard deviation</span></span>
-<span id="cb35-2"><a></a>variance <span class="ot">&lt;-</span> n <span class="sc">*</span> p <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)</span>
-<span id="cb35-3"><a></a>st_dev <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(variance)</span>
-<span id="cb35-4"><a></a>st_dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="co"># Bonus: standard deviation</span></span>
+<span id="cb36-2"><a></a>variance <span class="ot">&lt;-</span> n <span class="sc">*</span> p <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)</span>
+<span id="cb36-3"><a></a>st_dev <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(variance)</span>
+<span id="cb36-4"><a></a>st_dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.936492</code></pre>
 </div>
@@ -1112,30 +1121,30 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <h2>Normal Distribution Functions</h2>
 <p><strong>The same pattern applies!</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co"># d = density (height of curve at x)</span></span>
-<span id="cb37-2"><a></a><span class="fu">dnorm</span>(<span class="at">x =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
-<span id="cb37-3"><a></a><span class="co"># Rarely used in practice</span></span>
-<span id="cb37-4"><a></a></span>
-<span id="cb37-5"><a></a><span class="co"># p = cumulative probability</span></span>
-<span id="cb37-6"><a></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
-<span id="cb37-7"><a></a><span class="co"># "What proportion have values ≤ 120?"</span></span>
-<span id="cb37-8"><a></a></span>
-<span id="cb37-9"><a></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-10"><a></a><span class="co"># "What proportion have values &gt; 120?"</span></span>
-<span id="cb37-11"><a></a></span>
-<span id="cb37-12"><a></a><span class="co"># q = quantile (most common!)</span></span>
-<span id="cb37-13"><a></a><span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.95</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
-<span id="cb37-14"><a></a><span class="co"># "What value has 95% below it?" (95th percentile)</span></span>
-<span id="cb37-15"><a></a></span>
-<span id="cb37-16"><a></a><span class="co"># r = random samples</span></span>
-<span id="cb37-17"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
-<span id="cb37-18"><a></a><span class="co"># "Give me 100 random values from this distribution"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># d = density (height of curve at x)</span></span>
+<span id="cb38-2"><a></a><span class="fu">dnorm</span>(<span class="at">x =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb38-3"><a></a><span class="co"># Rarely used in practice</span></span>
+<span id="cb38-4"><a></a></span>
+<span id="cb38-5"><a></a><span class="co"># p = cumulative probability</span></span>
+<span id="cb38-6"><a></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb38-7"><a></a><span class="co"># "What proportion have values ≤ 120?"</span></span>
+<span id="cb38-8"><a></a></span>
+<span id="cb38-9"><a></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">120</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-10"><a></a><span class="co"># "What proportion have values &gt; 120?"</span></span>
+<span id="cb38-11"><a></a></span>
+<span id="cb38-12"><a></a><span class="co"># q = quantile (most common!)</span></span>
+<span id="cb38-13"><a></a><span class="fu">qnorm</span>(<span class="at">p =</span> <span class="fl">0.95</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb38-14"><a></a><span class="co"># "What value has 95% below it?" (95th percentile)</span></span>
+<span id="cb38-15"><a></a></span>
+<span id="cb38-16"><a></a><span class="co"># r = random samples</span></span>
+<span id="cb38-17"><a></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb38-18"><a></a><span class="co"># "Give me 100 random values from this distribution"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visual-normal-distribution" class="slide level2">
 <h2>Visual: Normal Distribution</h2>
 
-<img data-src="14_midterm_review_files/figure-revealjs/unnamed-chunk-25-1.png" width="1152" class="r-stretch"></section>
+<img data-src="14_midterm_review_files/figure-revealjs/unnamed-chunk-26-1.png" width="1152" class="r-stretch"></section>
 <section id="practice-normal-distribution" class="slide level2">
 <h2>Practice: Normal Distribution</h2>
 <p>Blood pressure is Normal with mean = 120 mmHg, sd = 15 mmHg.</p>
@@ -1144,40 +1153,40 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <div class="column" style="width:48%;">
 <p><strong>Question 1:</strong> What proportion have BP above 135?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Question 2:</strong> What proportion have BP between 110 and 130?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:48%;">
 <p><strong>Question 3:</strong> What BP value is the 90th percentile?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Question 4:</strong> If we want the middle 95%, what are the cutoffs?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="co"># Your answer:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
 <section id="practice-normal-answers-12" class="slide level2">
 <h2>Practice: Normal Answers (1/2)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>mu <span class="ot">&lt;-</span> <span class="dv">120</span></span>
-<span id="cb42-2"><a></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb42-3"><a></a></span>
-<span id="cb42-4"><a></a><span class="co"># Question 1: Above 135</span></span>
-<span id="cb42-5"><a></a><span class="fu">pnorm</span>(<span class="dv">135</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>mu <span class="ot">&lt;-</span> <span class="dv">120</span></span>
+<span id="cb43-2"><a></a>sigma <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb43-3"><a></a></span>
+<span id="cb43-4"><a></a><span class="co"># Question 1: Above 135</span></span>
+<span id="cb43-5"><a></a><span class="fu">pnorm</span>(<span class="dv">135</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1586553</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="co"># OR</span></span>
-<span id="cb44-2"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">135</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="co"># OR</span></span>
+<span id="cb45-2"><a></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">135</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma, <span class="at">lower.tail =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.1586553</code></pre>
 </div>
@@ -1185,8 +1194,8 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="co"># Question 2: Between 110 and 130</span></span>
-<span id="cb46-2"><a></a><span class="fu">pnorm</span>(<span class="dv">130</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">110</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="co"># Question 2: Between 110 and 130</span></span>
+<span id="cb47-2"><a></a><span class="fu">pnorm</span>(<span class="dv">130</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">110</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4950149</code></pre>
 </div>
@@ -1195,8 +1204,8 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <section id="practice-normal-answers-22" class="slide level2">
 <h2>Practice: Normal Answers (2/2)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="co"># Question 3: 90th percentile</span></span>
-<span id="cb48-2"><a></a><span class="fu">qnorm</span>(<span class="fl">0.90</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="co"># Question 3: 90th percentile</span></span>
+<span id="cb49-2"><a></a><span class="fu">qnorm</span>(<span class="fl">0.90</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 139.2233</code></pre>
 </div>
@@ -1204,12 +1213,12 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="co"># Question 4: Middle 95% (2.5th to 97.5th percentiles)</span></span>
-<span id="cb50-2"><a></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)  <span class="co"># Lower</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="co"># Question 4: Middle 95% (2.5th to 97.5th percentiles)</span></span>
+<span id="cb51-2"><a></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)  <span class="co"># Lower</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 90.60054</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)  <span class="co"># Upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)  <span class="co"># Upper</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 149.3995</code></pre>
 </div>
@@ -1282,25 +1291,25 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <p>Sample: n = 40</p>
 <p><strong>What’s the sampling distribution of</strong> <span class="math inline">\(\bar{X}\)</span>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a><span class="co"># Parameters</span></span>
-<span id="cb54-2"><a></a>mu <span class="ot">&lt;-</span> <span class="fl">5.1</span></span>
-<span id="cb54-3"><a></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.9</span></span>
-<span id="cb54-4"><a></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
-<span id="cb54-5"><a></a></span>
-<span id="cb54-6"><a></a><span class="co"># Sampling distribution</span></span>
-<span id="cb54-7"><a></a>mean_xbar <span class="ot">&lt;-</span> mu</span>
-<span id="cb54-8"><a></a>se_xbar <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb54-9"><a></a></span>
-<span id="cb54-10"><a></a>mean_xbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="co"># Parameters</span></span>
+<span id="cb55-2"><a></a>mu <span class="ot">&lt;-</span> <span class="fl">5.1</span></span>
+<span id="cb55-3"><a></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.9</span></span>
+<span id="cb55-4"><a></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb55-5"><a></a></span>
+<span id="cb55-6"><a></a><span class="co"># Sampling distribution</span></span>
+<span id="cb55-7"><a></a>mean_xbar <span class="ot">&lt;-</span> mu</span>
+<span id="cb55-8"><a></a>se_xbar <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb55-9"><a></a></span>
+<span id="cb55-10"><a></a>mean_xbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>se_xbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>se_xbar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3004164</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="co"># Example probability about the sample mean, P(Xbar &gt; 5.6)</span></span>
-<span id="cb58-2"><a></a><span class="fu">pnorm</span>(<span class="fl">5.6</span>, <span class="at">mean =</span> mean_xbar, <span class="at">sd =</span> se_xbar, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a><span class="co"># Example probability about the sample mean, P(Xbar &gt; 5.6)</span></span>
+<span id="cb59-2"><a></a><span class="fu">pnorm</span>(<span class="fl">5.6</span>, <span class="at">mean =</span> mean_xbar, <span class="at">sd =</span> se_xbar, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04802059</code></pre>
 </div>
@@ -1340,22 +1349,22 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <section id="calculating-a-95-ci-in-r-12" class="slide level2">
 <h2>Calculating a 95% CI in R (1/2)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="co"># Sample data</span></span>
-<span id="cb60-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">25</span></span>
-<span id="cb60-3"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">14.2</span></span>
-<span id="cb60-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">1.8</span></span>
-<span id="cb60-5"><a></a>confidence_level <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
-<span id="cb60-6"><a></a></span>
-<span id="cb60-7"><a></a><span class="co"># Step 1: Find critical value</span></span>
-<span id="cb60-8"><a></a>t_star <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span> <span class="sc">+</span> confidence_level) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb60-9"><a></a><span class="co"># OR: qt(0.975, df = 24)</span></span>
-<span id="cb60-10"><a></a>t_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="co"># Sample data</span></span>
+<span id="cb61-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb61-3"><a></a>xbar <span class="ot">&lt;-</span> <span class="fl">14.2</span></span>
+<span id="cb61-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">1.8</span></span>
+<span id="cb61-5"><a></a>confidence_level <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb61-6"><a></a></span>
+<span id="cb61-7"><a></a><span class="co"># Step 1: Find critical value</span></span>
+<span id="cb61-8"><a></a>t_star <span class="ot">&lt;-</span> <span class="fu">qt</span>((<span class="dv">1</span> <span class="sc">+</span> confidence_level) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb61-9"><a></a><span class="co"># OR: qt(0.975, df = 24)</span></span>
+<span id="cb61-10"><a></a>t_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.063899</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a><span class="co"># Step 2: Calculate standard error</span></span>
-<span id="cb62-2"><a></a>SE <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb62-3"><a></a>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a></a><span class="co"># Step 2: Calculate standard error</span></span>
+<span id="cb63-2"><a></a>SE <span class="ot">&lt;-</span> s <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb63-3"><a></a>SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.36</code></pre>
 </div>
@@ -1364,17 +1373,17 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <section id="calculating-a-95-ci-in-r-22" class="slide level2">
 <h2>Calculating a 95% CI in R (2/2)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a></a><span class="co"># Step 3: Calculate margin of error</span></span>
-<span id="cb64-2"><a></a>margin_error <span class="ot">&lt;-</span> t_star <span class="sc">*</span> SE</span>
-<span id="cb64-3"><a></a>margin_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a></a><span class="co"># Step 3: Calculate margin of error</span></span>
+<span id="cb65-2"><a></a>margin_error <span class="ot">&lt;-</span> t_star <span class="sc">*</span> SE</span>
+<span id="cb65-3"><a></a>margin_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7430035</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a></a><span class="co"># Step 4: Build the interval</span></span>
-<span id="cb66-2"><a></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> margin_error</span>
-<span id="cb66-3"><a></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> margin_error</span>
-<span id="cb66-4"><a></a></span>
-<span id="cb66-5"><a></a><span class="fu">c</span>(lower, upper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a></a><span class="co"># Step 4: Build the interval</span></span>
+<span id="cb67-2"><a></a>lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> margin_error</span>
+<span id="cb67-3"><a></a>upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> margin_error</span>
+<span id="cb67-4"><a></a></span>
+<span id="cb67-5"><a></a><span class="fu">c</span>(lower, upper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 13.457 14.943</code></pre>
 </div>
@@ -1524,21 +1533,21 @@ P(A \mid B) &amp;= \frac{P(B \mid A) \times P(A)}{P(B)} \\
 <section id="one-sample-t-test-in-r" class="slide level2">
 <h2>One-Sample t-test in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a></a><span class="co"># Using raw data</span></span>
-<span id="cb68-2"><a></a><span class="fu">t.test</span>(data<span class="sc">$</span>variable, </span>
-<span id="cb68-3"><a></a>       <span class="at">mu =</span> null_value, </span>
-<span id="cb68-4"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)  <span class="co"># or "less" or "greater"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="co"># Using raw data</span></span>
+<span id="cb69-2"><a></a><span class="fu">t.test</span>(data<span class="sc">$</span>variable, </span>
+<span id="cb69-3"><a></a>       <span class="at">mu =</span> null_value, </span>
+<span id="cb69-4"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)  <span class="co"># or "less" or "greater"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Example:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a></a><span class="co"># Test if mean pulse rate is different from 72 bpm</span></span>
-<span id="cb69-2"><a></a><span class="fu">data</span>(<span class="st">"nhanes.samp"</span>)</span>
-<span id="cb69-3"><a></a></span>
-<span id="cb69-4"><a></a><span class="fu">t.test</span>(nhanes.samp<span class="sc">$</span>Pulse, </span>
-<span id="cb69-5"><a></a>       <span class="at">mu =</span> <span class="dv">72</span>, </span>
-<span id="cb69-6"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a></a><span class="co"># Test if mean pulse rate is different from 72 bpm</span></span>
+<span id="cb70-2"><a></a><span class="fu">data</span>(<span class="st">"nhanes.samp"</span>)</span>
+<span id="cb70-3"><a></a></span>
+<span id="cb70-4"><a></a><span class="fu">t.test</span>(nhanes.samp<span class="sc">$</span>Pulse, </span>
+<span id="cb70-5"><a></a>       <span class="at">mu =</span> <span class="dv">72</span>, </span>
+<span id="cb70-6"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="understanding-t.test-output" class="slide level2">

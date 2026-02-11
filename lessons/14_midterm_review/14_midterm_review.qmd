@@ -703,13 +703,7 @@ ggplot(df,
 
 ## Common Confusion: "At least 5" (Discrete Distributions)
 
-::: {.callout-warning icon="false"}
-## DISCRETE distributions only!
-This slide applies to **binomial and Poisson** (discrete).
-For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$ - no adjustment needed!
-:::
-
-\ 
+\
 
 **Question:** What is $P(X \ge 5)$ for a binomial distribution?
 
@@ -720,7 +714,6 @@ For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$ - no adjustment needed!
 - "At least 5" = "5 or more" = "greater than 4"
 - So: $P(X \ge 5)$ = $P(X \gt 4)$
 
-\
 
 **Step 2:** Code it
 
@@ -734,13 +727,37 @@ pbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)
 1 - pbinom(q = 4, size = 10, prob = 0.5)
 ```
 
-\
 
 ::: {.callout-important icon="false"}
 ## Key Point
 
 For discrete distributions: "$X \ge 5$" is the same as "$X \gt 4$" because we can't have $4.5$ successes!
+
+This slide applies to **binomial and Poisson** (discrete).
+For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$ - no adjustment needed!
 :::
+
+
+## Common Confusion: "At least 5" (Discrete Distributions)
+
+::: {.callout-warning icon="false"}
+## DISCRETE distributions only!
+This applies to **binomial and Poisson** (discrete). For Normal (continuous), $P(X \ge 5) = P(X \gt 5)$.
+:::
+
+**Question:** What is $P(X \ge 5)$ for a binomial distribution?
+
+**Translate to computer language:** "At least 5" = "5 or more" = "greater than 4"
+$$P(X \ge 5) = P(X \gt 4)$$
+
+**Code it:**
+```{r}
+#| eval: false
+pbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)  # Correct!
+1 - pbinom(q = 4, size = 10, prob = 0.5)                  # Also works
+```
+
+**Key point:** For discrete distributions, "$X \ge 5$" equals "$X \gt 4$" because we can't have 4.5 successes!
 
 ## Practice: Binomial Questions
 
