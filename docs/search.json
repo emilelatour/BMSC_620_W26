@@ -1492,6 +1492,342 @@
     "text": "Wrap-up\nToday you learned how to:\n\nRun basic R code\nInspect a dataset\nSummarize numeric and categorical variables\nMake simple plots\n\nWe’ll build on this foundation to:\n\nWork more efficiently with data\nStart using additional functions and packages\n\n\n\n\nBMSC 620 | R basics + summaries"
   },
   {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#roadmap-for-today",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#roadmap-for-today",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Paired Data\n\nWhat makes data “paired”?\nExamples and study designs\nThe vegetarian diet example\nPaired t-tests in R\n\nPart 2: The Math Behind Paired Tests\n\nPopulation parameters vs. sample statistics\nTest statistics and p-values\nConfidence intervals for differences\n\n\nPart 3: Independent Samples\n\nWhat makes samples “independent”?\nThe caffeine and finger tapping example\nTwo-sample t-tests in R\n\nPart 4: Choosing the Right Test\n\nPaired vs. independent: key differences\nStudy design implications\nCommon mistakes to avoid"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#cis-and-hypothesis-testing-for-different-scenarios",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#cis-and-hypothesis-testing-for-different-scenarios",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "CI’s and hypothesis testing for different scenarios:",
+    "text": "CI’s and hypothesis testing for different scenarios:\n\n\n\n\n\n\n\n\n\n\n\nDay\nSection\nPopulation parameter\nSymbol\nPoint estimate\nSymbol\n\n\n\n\n9\n5.1\nPopulation mean\n\\(\\mu\\)\nSample mean\n\\(\\bar{x}\\)\n\n\n10\n5.2\nPopulation mean of paired differences\n\\(\\mu_d\\) or \\(\\delta\\)\nSample mean of paired differences\n\\(\\bar{x}_{d}\\)\n\n\n10\n5.3\nDifferences in population means\n\\(\\mu_1-\\mu_2\\)\nDifferences in sample means\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\n\n13\n8.1\nPopulation proportion\n\\(p\\)\nSample proportions\n\\(\\widehat{p}\\)\n\n\n14\n8.2\nDifferences in population proportions\n\\(p_1-p_2\\)\nDifferences in sample proportions\n\\(\\widehat{p}_1-\\widehat{p}_2\\)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#where-are-we-in-the-course",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#where-are-we-in-the-course",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Where are we in the course?",
+    "text": "Where are we in the course?\nWe’ve been building up our inference toolkit:\n\n\nSo far:\n\nSingle-sample mean: \\(\\mu\\)\n\nCI: \\(\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\)\nTest: Compare \\(\\bar{x}\\) to hypothesized \\(\\mu_0\\)\n\n\n\n\nToday:\n\nMean difference from paired samples: \\(\\mu_d\\) or \\(\\delta\\)\nDifference in means from independent samples: \\(\\mu_1 - \\mu_2\\)\n\n\n\nWhy this matters: The study design determines which test we use!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#reminder-the-six-steps-of-hypothesis-testing",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#reminder-the-six-steps-of-hypothesis-testing",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Reminder: The six steps of hypothesis testing",
+    "text": "Reminder: The six steps of hypothesis testing\nBefore we dive into examples, let’s review our standard framework:\n\nState hypotheses (\\(H_0\\) and \\(H_A\\))\nSet significance level (usually \\(\\alpha\\) = 0.05)\nCheck assumptions (independence, normality/large n)\nCalculate test statistic\n\nPaired: \\(t = \\frac{\\bar{x}_d - 0}{s_d/\\sqrt{n}}\\)\nIndependent: \\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\)\n\nFind p-value (probability of seeing this or more extreme)\nMake conclusion (reject or fail to reject \\(H_0\\), with context)\n\n\n\nToday we’ll apply this framework to both paired and independent samples!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-paired-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-paired-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "What are paired data?",
+    "text": "What are paired data?\n\n\n\nDefinition: Paired Data\n\n\nPaired data occur when two sets of observations are uniquely matched so that an observation in one set corresponds to exactly one observation in the other.\n\n\n\n\n\nCommon scenarios:\n\nBefore-and-after studies (longitudinal data)\n\nMeasure the same people at two time points\nExample: Blood pressure before and after medication\n\nMatched pairs\n\nTwin studies: One twin gets treatment, other gets control\nMatched controls: Pair people based on age, sex, etc.\n\nNatural pairs\n\nLeft eye vs. right eye\nParent-child pairs"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-of-paired-designs",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-of-paired-designs",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Examples of paired designs",
+    "text": "Examples of paired designs\n\n\nExample 1: Swimmer performance\n\nCompetitive swimmers tested twice\nOnce wearing wetsuit\nOnce wearing regular swimsuit\nCompare maximum speed\n\n\n\nWhy paired?\n\nSame swimmer in both conditions\nControls for individual differences in ability\n\n\nExample 2: Drug effectiveness\n\nPatients tested before treatment\nSame patients tested after treatment\nCompare blood glucose levels\n\n\n\nWhy paired?\n\nSame patient at two time points\nNatural “before vs. after” comparison\n\n\n\n\nKey insight: Pairing reduces variability because we’re comparing each person to themselves!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-vegetarian-diet-and-cholesterol",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-vegetarian-diet-and-cholesterol",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Today’s example: Vegetarian diet and cholesterol",
+    "text": "Today’s example: Vegetarian diet and cholesterol\n\n\n\nResearch Question\n\n\nCan a vegetarian diet reduce cholesterol levels?\n\n\n\n\n\nStudy design:\n\n43 non-vegetarian adults enrolled\nInstructed to adopt a vegetarian diet\nCholesterol measured before and after diet\nFollow-up period: 3 months\n\n\n\nWhy is this paired data?\n\nSame individuals measured twice\nEach person serves as their own control\nWe can calculate: \\(\\text{After - Before}\\) for each person"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-and-exploring-the-cholesterol-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-and-exploring-the-cholesterol-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Loading and exploring the cholesterol data",
+    "text": "Loading and exploring the cholesterol data\n\nlibrary(dplyr)\nlibrary(here)\nlibrary(readr)\n\n# Load the data\nchol &lt;- read_csv(here(\"data\", \n                      \"chol213_n40.csv\"))\n\n# Take a look at the structure\nglimpse(chol)\n\nRows: 43\nColumns: 2\n$ Before &lt;dbl&gt; 195, 145, 205, 159, 244, 166, 250, 236, 192, 224, 238, 197, 169…\n$ After  &lt;dbl&gt; 146, 155, 178, 146, 208, 147, 202, 215, 184, 208, 206, 169, 182…\n\n\n\n\nWhat do we have?\n\nBefore: Cholesterol level before diet (mg/dL)\nAfter: Cholesterol level after diet (mg/dL)\nEach row is one person"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#calculate-the-paired-differences",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#calculate-the-paired-differences",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Calculate the paired differences",
+    "text": "Calculate the paired differences\n\n\n\n\nFor paired data, we create a new variable: the difference\n\n# Calculate difference: After - Before\nchol &lt;- chol %&gt;%\n  mutate(DiffChol = After - Before)\n\n# Look at first few differences\nchol\n\n# A tibble: 43 × 3\n   Before After DiffChol\n    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n 1    195   146      -49\n 2    145   155       10\n 3    205   178      -27\n 4    159   146      -13\n 5    244   208      -36\n 6    166   147      -19\n 7    250   202      -48\n 8    236   215      -21\n 9    192   184       -8\n10    224   208      -16\n# ℹ 33 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretation of differences:\n\nNegative values: cholesterol decreased\nPositive values: cholesterol increased\nZero: no change"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-the-paired-differences",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-the-paired-differences",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Visualizing the paired differences",
+    "text": "Visualizing the paired differences\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one person’s change\n\n\n\n\n\n\n\n\n\n\nMost people decreased (negative values)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-statistics-for-paired-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-statistics-for-paired-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Summary statistics for paired data",
+    "text": "Summary statistics for paired data\n\nlibrary(dplyr)\nlibrary(gt)\nlibrary(rstatix)\n\n\n# Summary statistics for differences\nchol %&gt;%\n  get_summary_stats(DiffChol, type = \"common\") %&gt;%\n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nvariable\nn\nmin\nmax\nmedian\niqr\nmean\nsd\nse\nci\n\n\n\n\nDiffChol\n43\n-49\n13\n-23\n16\n-21.767\n13.89\n2.118\n4.275\n\n\n\n\n\n\n\n\n\nWhat we see:\n\nMean difference: \\(\\bar{x}_d =\\) 21.767 mg/dL\nOn average, cholesterol decreased by about 22 mg/dL\nBut is this difference statistically significant?\n\n\n\nTo answer this, we need a hypothesis test!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-paired-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-paired-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Notation for paired data",
+    "text": "Notation for paired data\n\n\n\nPopulation Parameters vs. Sample Statistics\n\n\n\n\nPopulation (what we want to know)\n\nMean difference: \\(\\delta\\) (delta) or \\(\\mu_d\\)\nStandard deviation: \\(\\sigma_d\\)\nSample size: \\(N\\)\n\n\nSample (what we observe)\n\nSample mean difference: \\(\\bar{x}_d\\)\nSample standard deviation: \\(s_d\\)\nSample size: \\(n\\)\n\n\n\n\n\n\n\nKey insight: Once we calculate the differences, this becomes a one-sample problem!\n\nWe have one number per person (the difference)\nWe test if \\(\\bar{x}_d\\) is significantly different from 0"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-paired-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-paired-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Hypothesis test for paired data",
+    "text": "Hypothesis test for paired data\nResearch question: Is there evidence that cholesterol changed after the vegetarian diet?\n\n\nStep 1: State hypotheses\n\\[H_0: \\delta = 0\\] \\[H_A: \\delta \\neq 0\\]\nIn words:\n\n\\(H_0\\): The population mean difference in cholesterol is zero (no change)\n\\(H_A\\): The population mean difference in cholesterol is not zero (there is a change)\n\n\n\nStep 2: Set significance level\n\nUse \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Check the assumptions",
+    "text": "Check the assumptions\nStep 3: Check the assumptions\n\nThe assumptions to run a hypothesis test on a sample are:\n\nIndependent pairs: Each pair is independent from all other pairs,\nApproximately normal sample or big n: the distribution of the sample should be approximately normal, or the sample size should be at least 30\n\n\n\n\n\nIn our example, we would check the assumptions with a statement:\n\nThe pairs of observations are independent from each other and the number of pairs in our sample is 43. Thus, we can use CLT to approximate the sampling distribution."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#the-test-statistic-for-paired-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#the-test-statistic-for-paired-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "The test statistic for paired data",
+    "text": "The test statistic for paired data\nStep 4: Calculate test statistic\nThe test statistic for paired data is:\n\\[t = \\frac{\\bar{x}_d - 0}{\\frac{s_d}{\\sqrt{n}}}\\]\n\n\nThis looks familiar! It’s the same formula as for a one-sample t-test.\n\n\n\n\n\n# Calculate components\nn &lt;- nrow(chol)\nxbar_d &lt;- mean(chol$DiffChol)\ns_d &lt;- sd(chol$DiffChol)\nSE &lt;- s_d / sqrt(n)\n\n# Calculate t-statistic\nt_stat &lt;- (xbar_d - 0) / SE\nt_stat\n\n[1] -10.27603\n\n\n\n\n# Calculate the p-value\n2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)\n\n[1] 4.945625e-13"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-15",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-15",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a paired t-test in R (1/5)",
+    "text": "Running a paired t-test in R (1/5)\nStep 5: Find a p-value\n\n\nOption 1: Use the difference variable\n\n# Test the differences directly\nt.test(x = chol$DiffChol, mu = 0)\n\n\n    One Sample t-test\n\ndata:  chol$DiffChol\nt = -10.276, df = 42, p-value = 4.946e-13\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -26.04229 -17.49259\nsample estimates:\nmean of x \n-21.76744"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-25",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-25",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a paired t-test in R (2/5)",
+    "text": "Running a paired t-test in R (2/5)\n\n\nOption 2: Use the paired = TRUE argument\n\n# Let R calculate differences for us\nt.test(x = chol$After, y = chol$Before, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  chol$After and chol$Before\nt = -10.276, df = 42, p-value = 4.946e-13\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -26.04229 -17.49259\nsample estimates:\nmean difference \n      -21.76744"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-35",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-35",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a paired t-test in R (3/5)",
+    "text": "Running a paired t-test in R (3/5)\n\n\nbroom::tidy(): Use the tidy() function in the broom package with either Option 1 or Option 2\n\nlibrary(broom)\n\n# The argument conf.int = TRUE gives a confidence interval (default is 95%)\n\nt.test(x = chol$After, y = chol$Before, paired = TRUE) %&gt;% \n  broom::tidy(conf.int = TRUE)     \n\n# A tibble: 1 × 8\n  estimate statistic  p.value parameter conf.low conf.high method    alternative\n     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      \n1    -21.8     -10.3 4.95e-13        42    -26.0     -17.5 Paired t… two.sided"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-45",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-45",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a paired t-test in R (4/5)",
+    "text": "Running a paired t-test in R (4/5)\nOption 3: Use rstatix package\n\nRequires that the data are in long format which means that\n\nall of the outcome values are in one column and\nanother column indicates which group the values are from\n\n\n\nchol_long\n\n# A tibble: 86 × 4\n   DiffChol ID    Time   Cholesterol\n      &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;        &lt;dbl&gt;\n 1      -49 1     Before         195\n 2      -49 1     After          146\n 3       10 2     Before         145\n 4       10 2     After          155\n 5      -27 3     Before         205\n 6      -27 3     After          178\n 7      -13 4     Before         159\n 8      -13 4     After          146\n 9      -36 5     Before         244\n10      -36 5     After          208\n# ℹ 76 more rows"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-55",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-55",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a paired t-test in R (5/5)",
+    "text": "Running a paired t-test in R (5/5)\nOption 3: Use rstatix package\n\nlibrary(rstatix)\n\nt_test(data = chol_long, \n       Cholesterol ~ Time, \n       paired = TRUE, \n       detailed = TRUE)\n\n# A tibble: 1 × 13\n  estimate .y.       group1 group2    n1    n2 statistic        p    df conf.low\n*    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1     21.8 Choleste… Before After     43    43      10.3 4.95e-13    42     17.5\n# ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-paired-t-test-output",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-paired-t-test-output",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Interpreting the paired t-test output",
+    "text": "Interpreting the paired t-test output\n\n# Save and tidy the results\nchol_test &lt;- t.test(x = chol$DiffChol, \n                    mu = 0)\n\nchol_test %&gt;% \n  tidy(conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n-21.76744\n-10.27603\n4.945625e-13\n42\n-26.04229\n-17.49259\nOne Sample t-test\ntwo.sided\n\n\n\n\n\n\n\nWhat we see:\n\nt-statistic = -10.28\np-value &lt; 0.001 (very small!)\n95% CI for \\(\\delta\\): (-26.04, -17.49)\n\nStep 6: Make a conclusion\n\nSince p-value &lt; \\(\\alpha = 0.05\\), we reject \\(H_0\\).\nConclusion: There is sufficient evidence that cholesterol levels changed after the vegetarian diet (p &lt; 0.001)."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#writing-a-complete-conclusion",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#writing-a-complete-conclusion",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Writing a complete conclusion",
+    "text": "Writing a complete conclusion\n\n\n\nBest Practice: Include Key Numbers\n\n\nA good conclusion includes:\n\nDecision about \\(H_0\\) (reject or fail to reject)\nContext (what was measured)\nEffect size (mean difference)\nConfidence interval\nP-value\n\n\n\n\n\n\nOur conclusion:\nAfter adopting a vegetarian diet, cholesterol levels decreased by an average of 21.77 mg/dL (95% CI: 17.49 to 26.04 mg/dL lower), which is significantly different from zero (t = -10.28, df = 42, p &lt; 0.001, Paired t-test)."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-vs.-two-sided-tests",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-vs.-two-sided-tests",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "One-sided vs. two-sided tests",
+    "text": "One-sided vs. two-sided tests\nTwo-sided test (what we just did):\n\n\\(H_A: \\delta \\neq 0\\) (different from zero)\nAppropriate when we don’t know direction\n\n\n\nOne-sided test (if we have directional prediction):\n\n\\(H_A: \\delta &lt; 0\\) (decrease)\n\\(H_A: \\delta &gt; 0\\) (increase)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visual-one-sided-vs.-two-sided",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visual-one-sided-vs.-two-sided",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Visual: One-sided vs. two-sided",
+    "text": "Visual: One-sided vs. two-sided"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-example",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-example",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "One-sided example",
+    "text": "One-sided example\nExample: If we specifically want to test if diet decreased cholesterol:\n\\[H_0: \\delta \\ge 0\\] \\[H_A: \\delta \\lt 0\\]\nIn words:\n\n\\(H_0\\): The population mean difference in cholesterol greater than or equal to zero\n\\(H_A\\): The population mean difference in cholesterol is less zero (there is a change)\n\n\n\n\nt.test(x = chol$DiffChol, mu = 0, alternative = \"less\") %&gt;% \n  broom::tidy(conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n-21.76744\n-10.27603\n2.472813e-13\n42\n-Inf\n-18.20461\nOne Sample t-test\nless\n\n\n\n\n\n\n\nNotice: For a one-sided test, the p-value changes and the confidence interval is one-sided."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-independent-samples",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-independent-samples",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "What are independent samples?",
+    "text": "What are independent samples?\n\n\n\nDefinition: Independent Samples\n\n\nIndependent samples occur when individuals in one group are completely unrelated to individuals in the other group. There is no natural pairing or matching.\n\n\n\n\n\n\n\nKey characteristics:\n\nDifferent people in each group\nNo before/after measurements\nNo natural matching\nTypically: different sample sizes are possible\n\n\nCommon scenarios:\n\nTreatment vs. control groups (randomized trials)\nCase vs. control studies\nMen vs. women\nExposed vs. unexposed"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#paired-vs.-independent-the-key-difference",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#paired-vs.-independent-the-key-difference",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Paired vs. Independent: The key difference",
+    "text": "Paired vs. Independent: The key difference\n\n\n\n\n\nPaired Data\n\n\nStructure:\n\nSame people measured twice\nOR matched pairs\nSame sample size for both conditions\n\n\n\nAnalysis:\n\nCalculate differences\nOne number per person/pair\nOne-sample t-test on differences\n\n\n\nExample:\nWeight before and after diet program (same 50 people)\n\n\n\n\n\n\n\nIndependent Samples\n\n\nStructure:\n\nDifferent people in each group\nNo natural pairing\nCan have different sample sizes\n\n\n\nAnalysis:\n\nCompare two separate means\nTwo numbers: \\(\\bar{x}_1\\) and \\(\\bar{x}_2\\)\nTwo-sample t-test\n\n\n\nExample:\nWeight of 50 men vs. 50 women (different people)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-caffeine-and-finger-tapping",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-caffeine-and-finger-tapping",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Today’s example: Caffeine and finger tapping",
+    "text": "Today’s example: Caffeine and finger tapping\n\n\n\nResearch Question\n\n\nDoes caffeine increase finger tapping speed?\n\n\n\n\n\n:: columns ::: {.column width=“50%”} Study design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl: Decaffeinated coffee\nCaffeine: Coffee with ~200mg caffeine\n\nDouble-blind design\nAfter 2 hours, tested finger taps per minute :::\n\n\nWhy independent samples?\n\nDifferent students in each group\nEach person tested only once\nNo pairing or matching\n\n:::"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-the-caffeine-data",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-the-caffeine-data",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Loading the caffeine data",
+    "text": "Loading the caffeine data\n\n# Load the data\nCaffTaps &lt;- read_csv(here(\"data\", \n                          \"CaffeineTaps_n35.csv\"))\n\n# Check structure\nglimpse(CaffTaps)\n\nRows: 70\nColumns: 2\n$ Taps  &lt;dbl&gt; 246, 248, 250, 252, 248, 250, 246, 248, 245, 250, 242, 245, 244,…\n$ Group &lt;chr&gt; \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caf…\n\n\n\n\nWhat we have:\n\nTaps: Finger taps per minute\nGroup: Caffeine or NoCaffeine\nEach row is one person\n35 people per group"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#exploring-the-data-by-group",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#exploring-the-data-by-group",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Exploring the data by group",
+    "text": "Exploring the data by group\n\n# Summary statistics by group\nCaffTaps %&gt;%\n  group_by(Group) %&gt;%\n  get_summary_stats(Taps, type = \"mean_sd\") %&gt;%\n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nGroup\nvariable\nn\nmean\nsd\n\n\n\n\nCaffeine\nTaps\n35\n248.114\n2.621\n\n\nNoCaffeine\nTaps\n35\n244.514\n2.318\n\n\n\n\n\n\n\n\n\nWhat we see:\n\nCaffeine group: mean = 248.1 taps/min\nControl group: mean = 244.5 taps/min\nDifference = 3.6 taps/min\n\n\n\nQuestion: Is this difference statistically significant?"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-independent-samples",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-independent-samples",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Visualizing independent samples",
+    "text": "Visualizing independent samples\n\n\n\n\n\n\n\n\n\n\n\nBox plots with individual points\n\n\n\n\n\n\n\n\n\n\nOverlapping histograms\n\n\n\nNote: We cannot calculate 35 paired differences - these are different people!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-two-independent-samples",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-two-independent-samples",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Notation for two independent samples",
+    "text": "Notation for two independent samples\n\n\n\nPopulation Parameters vs. Sample Statistics\n\n\n\n\nPopulation\n\nGroup 1 mean: \\(\\mu_1\\)\nGroup 2 mean: \\(\\mu_2\\)\nDifference: \\(\\mu_1 - \\mu_2\\)\nGroup 1 SD: \\(\\sigma_1\\)\nGroup 2 SD: \\(\\sigma_2\\)\n\n\nSample\n\nGroup 1 mean: \\(\\bar{x}_1\\)\nGroup 2 mean: \\(\\bar{x}_2\\)\nDifference: \\(\\bar{x}_1 - \\bar{x}_2\\)\nGroup 1 SD: \\(s_1\\)\nGroup 2 SD: \\(s_2\\)\n\n\n\n\n\n\n\nKey difference from paired data:\n\nTwo separate groups with potentially different SDs\nCannot reduce to a single set of differences\nNeed a different standard error formula!"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-12",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-12",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Hypothesis test for two independent samples (1/2)",
+    "text": "Hypothesis test for two independent samples (1/2)\n\n\nCaffeine example: Does caffeine increase finger tapping speed?\n\n\nNull hypothesis (no effect): \\[H_0: \\mu_{caffeine} = \\mu_{control} \\quad \\Longleftrightarrow \\quad \\mu_{caffeine} - \\mu_{control} = 0\\]\n\n\nAlternative hypothesis (caffeine increases tapping): \\[H_A: \\mu_{caffeine} &gt; \\mu_{control} \\quad \\Longleftrightarrow \\quad \\mu_{caffeine} - \\mu_{control} &gt; 0\\]\n\n\nWhy one-sided? We specifically predicted caffeine would increase tapping, not just “make it different”"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-22",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-22",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Hypothesis test for two independent samples (2/2)",
+    "text": "Hypothesis test for two independent samples (2/2)\n\n\n\n\n\nGeneral form\n\n\nFor two independent samples, we always test \\(H_0: \\mu_1 - \\mu_2 = 0\\) against ONE of:\n\n\\(H_A: \\mu_1 - \\mu_2 \\neq 0\\) (two-sided)\n\\(H_A: \\mu_1 - \\mu_2 &gt; 0\\) (one-sided upper)\n\n\\(H_A: \\mu_1 - \\mu_2 &lt; 0\\) (one-sided lower)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Example: Does caffeine increase finger tapping speed?",
+    "text": "Example: Does caffeine increase finger tapping speed?\n\n\nStep 1: State hypotheses\n\\[H_0: \\mu_1 - \\mu_2 = 0\\] \\[H_A: \\mu_1 - \\mu_2 &gt; 0\\]\nWhere: \\(\\mu_1\\) = mean for Caffeine group, \\(\\mu_2\\) = mean for Control group\n\n\nStep 2: Set significance level\n\nUse \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed-1",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed-1",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Example: Does caffeine increase finger tapping speed?",
+    "text": "Example: Does caffeine increase finger tapping speed?\n\n\nStep 3: Calculate test statistic\nThe test statistic for two independent samples:\n\\[t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\n\n\nNotice the different SE formula!\n\nFor paired: \\(SE = \\frac{s_d}{\\sqrt{n}}\\)\nFor independent: \\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\n\nDegrees of freedom: By default, t.test() uses the Welch two-sample t-test (does not assume equal variances), so df is computed with the Welch–Satterthwaite formula and can be non-integer."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions-1",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions-1",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Check the assumptions",
+    "text": "Check the assumptions\nStep 3: Check the assumptions\n\nThe assumptions to run a hypothesis test on a sample are:\n\nIndependent observations: Each observation from both samples is independent from all other observations\nApproximately normal sample or big n: the distribution of each sample should be approximately normal, or the sample size of each sample should be at least 30\n\n\n\n\n\nIn our example, we would check the assumptions with a statement:\n\nThe observations are independent from each other. Each caffeine group (aka sample) has 35 individuals. Thus, we can use CLT to approximate the sampling distribution for each sample."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-two-sample-t-test-in-r",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-two-sample-t-test-in-r",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Running a two-sample t-test in R",
+    "text": "Running a two-sample t-test in R\nSteps 4 and 5: Calculate test statistic and p-value\n \nUsing formula notation:\n\n# Test using formula: outcome ~ group\nt.test(Taps ~ Group, \n       data = CaffTaps, \n       alternative = \"greater\")\n\n\n    Welch Two Sample t-test\n\ndata:  Taps by Group\nt = 6.0867, df = 67.002, p-value = 3.133e-08\nalternative hypothesis: true difference in means between group Caffeine and group NoCaffeine is greater than 0\n95 percent confidence interval:\n 2.613502      Inf\nsample estimates:\n  mean in group Caffeine mean in group NoCaffeine \n                248.1143                 244.5143 \n\n\n\n\nNote: R automatically determines which group is “group 1” alphabetically (Caffeine comes before NoCaffeine)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#using-rstatix",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#using-rstatix",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Using rstatix",
+    "text": "Using rstatix\n\nlibrary(rstatix) \n\nt_test(data = CaffTaps, \n       Taps ~ Group, \n       detailed = TRUE)\n\n# A tibble: 1 × 15\n  estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p\n*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1     3.60      248.      245. Taps  Caffe… NoCaf…    35    35      6.09 6.27e-8\n# ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,\n#   alternative &lt;chr&gt;"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-two-sample-t-test",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-two-sample-t-test",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Interpreting the two-sample t-test",
+    "text": "Interpreting the two-sample t-test\nSteps 6: make a conclusion\n\n# Save and tidy results\ncaff_test &lt;- t.test(Taps ~ Group, \n                    data = CaffTaps, \n                    alternative = \"greater\")\n\ntidy(caff_test, \n     conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30)\n\n\n\n\n\n\n\nestimate\nestimate1\nestimate2\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n3.6\n248.1143\n244.5143\n6.086677\n3.132816e-08\n67.00222\n2.613502\nInf\nWelch Two Sample t-test\ngreater\n\n\n\n\n\n\n\nWhat we see:\n\nMean difference: \\(\\bar{x}_1 - \\bar{x}_2 =\\) 3.6 taps/min\nt-statistic = 6.09\np-value = &lt; 0.001\nOne-sided 95% CI: (2.6, Inf)\n\nConclusion: There is strong evidence that caffeine increases finger tapping speed (p &lt; 0.001)."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#complete-conclusion-for-two-sample-test",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#complete-conclusion-for-two-sample-test",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Complete conclusion for two-sample test",
+    "text": "Complete conclusion for two-sample test\n\n\n\nBest Practice: Report Both Groups\n\n\nFor two-sample tests, report:\n\nMeans and SDs for both groups\nDifference in means\nTest statistic and df\nP-value\nConfidence interval for difference\n\n\n\n\n\n\nOur conclusion:\nMean (SD) tapping speed among students who consumed caffeine was 248.1 taps/min compared to 244.5 taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = 6.09, df = 67.00, p &lt; 0.001, one-sided two-sample t-test). On average, students who consumed caffeine tapped 3.6 taps/min faster than those in the control group (95% CI: at least 2.6 taps/min faster)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-rule-to-remember",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-rule-to-remember",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "One rule to remember",
+    "text": "One rule to remember\n\n\n\nThe decision rule\n\n\nAsk one question:\n\nCan I calculate a meaningful difference for each individual (or pair)?\n\n\nYes → Paired t-test\nNo → Two-sample t-test\n\nThis is determined by study design, not by the values in the data.\n\n\n\n\n\nKey idea:\nPairing is about how the data were collected, not how they are stored or analyzed."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-paired-vs.-independent",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-paired-vs.-independent",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Examples: Paired vs. Independent",
+    "text": "Examples: Paired vs. Independent\n\n\n\n\n\n\n\n\nScenario\nData Structure\nTest\n\n\n\n\nBlood pressure before and after medication\nSame people, two measurements\nPaired t-test\n\n\nWeight loss: Diet A vs. Diet B\nDifferent people in each group\nTwo-sample t-test\n\n\nLeft eye vs. right eye vision\nSame people\nPaired t-test\n\n\nTest scores: Men vs. Women\nDifferent people\nTwo-sample t-test\n\n\nCholesterol: Twin 1 vs. Twin 2\nMatched pairs\nPaired t-test\n\n\nPain score: Treatment vs. Placebo (RCT)\nDifferent people\nTwo-sample t-test\n\n\n\n\n\nShortcut:\nIf you can draw a line connecting two measurements, it’s paired."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#common-mistakes-to-avoid",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#common-mistakes-to-avoid",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\n\n\nMistakes we see all the time\n\n\n1. Using a paired test for independent data\n\nExample: Testing men vs. women with paired = TRUE\nWhy it’s wrong: R pairs observations by row order, not by any real relationship\nResult: Meaningless inference\n\n\n\n2. Treating paired data as independent\n\nExample: Analyzing before/after as two separate groups\nWhy it’s wrong: Ignores within-person comparison\nResult: Larger SE and reduced power\n\n\n\n\n\n\nBottom line:\nYou don’t get to choose the test based on convenience — the design chooses it for you."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#checking-your-work-does-it-make-sense",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#checking-your-work-does-it-make-sense",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Checking your work: Does it make sense?",
+    "text": "Checking your work: Does it make sense?\nAfter running your test, ask:\n\n\n\nDoes the sample size match my study design?\n\nPaired: Should see n = number of pairs\nIndependent: Should see n1 + n2 = total people\n\nDo the means make sense?\n\nCheck that group means match your data summaries\n\nIs the SE reasonable?\n\nPaired tests usually have smaller SE (less variability)\nIndependent tests have larger SE (more variability)\n\nDoes the conclusion answer the research question?\n\nMake sure you’re interpreting the right comparison"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-paired-vs.-independent",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-paired-vs.-independent",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Summary: Paired vs. Independent",
+    "text": "Summary: Paired vs. Independent\nPaired Data:\n\nSame people or matched pairs\nCalculate differences first\nUse: t.test(differences, mu = 0) or t.test(x, y, paired = TRUE)\nSE: \\(\\frac{s_d}{\\sqrt{n}}\\)\ndf: \\(n - 1\\)\n\n\n\nIndependent Samples:\n\nDifferent people in each group\nCompare two means directly\nUse: t.test(outcome ~ group, data = ...)\nSE: \\(\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\ndf: varies (Welch formula; see R output)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#key-takeaways",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#key-takeaways",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nStudy design determines analysis\n\nPaired or independent is about how data were collected\nCannot change after the fact!\n\nPaired tests are more powerful\n\nWhen appropriate, pairing reduces variability\nSmaller SE → easier to detect true effects\n\nBoth tests follow same logic\n\nState hypotheses\nCalculate test statistic\nFind p-value\nMake conclusion\n\nAlways check assumptions\n\nIndependence (within or between pairs)\nApproximate normality (or large n)"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#looking-ahead",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#looking-ahead",
+    "title": "Comparing Two Means: Paired and Independent Samples",
+    "section": "Looking ahead",
+    "text": "Looking ahead\n\n\nNext time:\n\nMidterm review\n\n\n\n\nBMSC 620 | Comparing Two Means"
+  },
+  {
     "objectID": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#where-we-are",
     "href": "lessons/06_probability_and_conditional_probability/06_probability_and_conditional_probability.html#where-we-are",
     "title": "Probability and Conditional Probability",
@@ -2700,7 +3036,7 @@
     "href": "weeks/week_06.html#materials",
     "title": "Week 6",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Comparing Two Means: Paired and Independent Samples\n\nTopics\n\nFinish up R topics from last week.\nDistinguishing paired vs. independent samples\nStudy design implications\nPaired t-tests: before-and-after studies\nTwo-sample t-tests: comparing independent groups\nConfidence intervals for paired differences\nConfidence intervals for differences in means\nConducting paired and two-sample tests in R\nChoosing the right test\n\nSlides\n\nR Workflow: Projects, File Paths, and Reading Data (start with slide 16) (HTML | PDF | OneDrive)\nComparing Two Means (HTML | PDF | OneDrive)\n\nRecording\n\nComparing two means\n\nMuddy points\n\nComing soon\n\n\n\n\n\nWednesday — Midterm Review\n\nTopics\n\nExam logistics and format\nStudy design fundamentals\nProbability and Bayes’ Theorem\nProbability distributions (Binomial, Poisson, Normal)\nR functions for distributions\nSampling distributions and Central Limit Theorem\nConfidence intervals\nHypothesis testing framework\nCommon pitfalls and tips\n\nSlides\n\nMidterm Review - coming soon\n\nRecording\n\nComing soon\n\nMuddy points\n\nComing soon",
+    "text": "Materials\n\nMonday — Comparing Two Means: Paired and Independent Samples\n\nTopics\n\nFinish up R topics from last week.\nDistinguishing paired vs. independent samples\nStudy design implications\nPaired t-tests: before-and-after studies\nTwo-sample t-tests: comparing independent groups\nConfidence intervals for paired differences\nConfidence intervals for differences in means\nConducting paired and two-sample tests in R\nChoosing the right test\n\nSlides\n\nR Workflow: Projects, File Paths, and Reading Data (start with slide 16) (HTML | PDF | OneDrive)\nComparing Two Means (HTML | PDF | OneDrive)\n\nRecording\n\nComparing two means\n\nMuddy points\n\nMuddy Points - Lesson 10\n\n\n\n\n\nWednesday — Midterm Review\n\nTopics\n\nExam logistics and format\nStudy design fundamentals\nProbability and Bayes’ Theorem\nProbability distributions (Binomial, Poisson, Normal)\nR functions for distributions\nSampling distributions and Central Limit Theorem\nConfidence intervals\nHypothesis testing framework\nCommon pitfalls and tips\n\nSlides\n\nMidterm Review (HTML | PDF | OneDrive)\n\nRecording\n\nComing soon\n\nMuddy points\n\nComing soon",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -3683,340 +4019,410 @@
     "text": "Working through code outside of class\nOne comment: “The lecture material is helpful but I have trouble following the in class coding examples. I have to work through the homework in order to fully grasp concepts.”\nThis is completely normal and actually a healthy learning process!\n\nLive coding is for exposure, not mastery\nThe purpose of live coding in class is to:\n\nShow you what’s possible\nDemonstrate the workflow\nGive you examples to refer back to\n\nIt’s not expected that you’ll fully understand everything the first time you see it.\n\n\nLearning happens through practice\nReal understanding comes from:\n\nWorking through homework problems\nExperimenting with the code on your own\nMaking mistakes and debugging them\nApplying the concepts to different datasets\n\nIf you find that you need to work through examples outside of class to really understand them, that’s exactly how it should work. The in-class demos are the starting point, not the finish line.\n\n\nHow to make the most of this\n\nWatch the recordings when working on homework\nTry modifying the in-class examples with different data\nCome to office hours to work through specific confusions\n\nYou’re learning in exactly the right way."
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#roadmap-for-today",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#roadmap-for-today",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Roadmap for Today",
-    "text": "Roadmap for Today\n\n\nPart 1: Paired Data\n\nWhat makes data “paired”?\nExamples and study designs\nThe vegetarian diet example\nPaired t-tests in R\n\nPart 2: The Math Behind Paired Tests\n\nPopulation parameters vs. sample statistics\nTest statistics and p-values\nConfidence intervals for differences\n\n\nPart 3: Independent Samples\n\nWhat makes samples “independent”?\nThe caffeine and finger tapping example\nTwo-sample t-tests in R\n\nPart 4: Choosing the Right Test\n\nPaired vs. independent: key differences\nStudy design implications\nCommon mistakes to avoid"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#todays-agenda",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#todays-agenda",
+    "title": "Midterm Review",
+    "section": "Today’s Agenda",
+    "text": "Today’s Agenda\n\nQuick overview of exam structure\nKey concepts review\n\nStudy design\nProbability and Bayes’ Theorem\nDistributions (focus on R functions!)\nSampling distributions and CLT\nConfidence intervals\nHypothesis testing\n\nYour questions\n\n\n\nThe midterm opens TODAY at 3:00 PM and closes Monday at 11:00 PM"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#cis-and-hypothesis-testing-for-different-scenarios",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#cis-and-hypothesis-testing-for-different-scenarios",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "CI’s and hypothesis testing for different scenarios:",
-    "text": "CI’s and hypothesis testing for different scenarios:\n\n\n\n\n\n\n\n\n\n\n\nDay\nSection\nPopulation parameter\nSymbol\nPoint estimate\nSymbol\n\n\n\n\n9\n5.1\nPopulation mean\n\\(\\mu\\)\nSample mean\n\\(\\bar{x}\\)\n\n\n10\n5.2\nPopulation mean of paired differences\n\\(\\mu_d\\) or \\(\\delta\\)\nSample mean of paired differences\n\\(\\bar{x}_{d}\\)\n\n\n10\n5.3\nDifferences in population means\n\\(\\mu_1-\\mu_2\\)\nDifferences in sample means\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\n\n13\n8.1\nPopulation proportion\n\\(p\\)\nSample proportions\n\\(\\widehat{p}\\)\n\n\n14\n8.2\nDifferences in population proportions\n\\(p_1-p_2\\)\nDifferences in sample proportions\n\\(\\widehat{p}_1-\\widehat{p}_2\\)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#exam-details",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#exam-details",
+    "title": "Midterm Review",
+    "section": "Exam Details",
+    "text": "Exam Details\nFormat:\n\n8 parts, 120 points total\nDesigned for 3-5 hours completion\nMix of conceptual questions, R code, and interpretation\n\n\n\nResources allowed:\n\n✅ Course materials (slides, homework, textbook)\n✅ R documentation\n✅ Your notes\n❌ Other students\n❌ AI assistants\n❌ Online help forums\n\n\n\nSubmit both .qmd and .html files!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#where-are-we-in-the-course",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#where-are-we-in-the-course",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Where are we in the course?",
-    "text": "Where are we in the course?\nWe’ve been building up our inference toolkit:\n\n\nSo far:\n\nSingle-sample mean: \\(\\mu\\)\n\nCI: \\(\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\)\nTest: Compare \\(\\bar{x}\\) to hypothesized \\(\\mu_0\\)\n\n\n\n\nToday:\n\nMean difference from paired samples: \\(\\mu_d\\) or \\(\\delta\\)\nDifference in means from independent samples: \\(\\mu_1 - \\mu_2\\)\n\n\n\nWhy this matters: The study design determines which test we use!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#whats-covered",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#whats-covered",
+    "title": "Midterm Review",
+    "section": "What’s Covered",
+    "text": "What’s Covered\n\n\nPart 1: Study design (10 pts)\nPart 2: Descriptive stats & viz (15 pts)\nPart 3: Probability (15 pts)\nPart 4: Distributions (20 pts)\n\nPart 5: Sampling distributions & CLT (15 pts)\nPart 6: Confidence intervals (15 pts)\nPart 7: Hypothesis testing (20 pts)\nPart 8: Integration (10 pts)\n\n\n\nKey datasets: nhanes.samp (you’ve used this in HW!)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#reminder-the-six-steps-of-hypothesis-testing",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#reminder-the-six-steps-of-hypothesis-testing",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Reminder: The six steps of hypothesis testing",
-    "text": "Reminder: The six steps of hypothesis testing\nBefore we dive into examples, let’s review our standard framework:\n\nState hypotheses (\\(H_0\\) and \\(H_A\\))\nSet significance level (usually \\(\\alpha\\) = 0.05)\nCheck assumptions (independence, normality/large n)\nCalculate test statistic\n\nPaired: \\(t = \\frac{\\bar{x}_d - 0}{s_d/\\sqrt{n}}\\)\nIndependent: \\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\)\n\nFind p-value (probability of seeing this or more extreme)\nMake conclusion (reject or fail to reject \\(H_0\\), with context)\n\n\n\nToday we’ll apply this framework to both paired and independent samples!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#general-tips",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#general-tips",
+    "title": "Midterm Review",
+    "section": "General Tips",
+    "text": "General Tips\n\n\n\n\nBefore you start:\n\nRead all instructions carefully\nSet up your workspace (load packages, data)\nCheck that code chunks run\n\n\n\nWhile working:\n\nShow your work and reasoning\nProvide interpretations in complete sentences\nUse comments in your R code\nCheck that your document renders frequently\nSave regularly\n\n\nBefore submitting:\n\nRender one final time\nCheck that all answers are complete\nVerify both files are being submitted"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-paired-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-paired-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "What are paired data?",
-    "text": "What are paired data?\n\n\n\nDefinition: Paired Data\n\n\nPaired data occur when two sets of observations are uniquely matched so that an observation in one set corresponds to exactly one observation in the other.\n\n\n\n\n\nCommon scenarios:\n\nBefore-and-after studies (longitudinal data)\n\nMeasure the same people at two time points\nExample: Blood pressure before and after medication\n\nMatched pairs\n\nTwin studies: One twin gets treatment, other gets control\nMatched controls: Pair people based on age, sex, etc.\n\nNatural pairs\n\nLeft eye vs. right eye\nParent-child pairs"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#study-design-the-basics",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#study-design-the-basics",
+    "title": "Midterm Review",
+    "section": "Study Design: The Basics",
+    "text": "Study Design: The Basics\n\n\nExperiments vs. Observational Studies\n\n\nExperiment:\n\nResearchers assign treatments\nRandom assignment\nCan establish causation\nExample: Drug trial with treatment vs. placebo\n\n\nObservational Study:\n\nResearchers observe without interfering\nNo random assignment\nCan only show association\nExample: Reviewing medical records\n\n\n\n\nWhy does this matter?\nOnly randomized experiments can establish causal relationships!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-of-paired-designs",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-of-paired-designs",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Examples of paired designs",
-    "text": "Examples of paired designs\n\n\nExample 1: Swimmer performance\n\nCompetitive swimmers tested twice\nOnce wearing wetsuit\nOnce wearing regular swimsuit\nCompare maximum speed\n\n\n\nWhy paired?\n\nSame swimmer in both conditions\nControls for individual differences in ability\n\n\nExample 2: Drug effectiveness\n\nPatients tested before treatment\nSame patients tested after treatment\nCompare blood glucose levels\n\n\n\nWhy paired?\n\nSame patient at two time points\nNatural “before vs. after” comparison\n\n\n\n\nKey insight: Pairing reduces variability because we’re comparing each person to themselves!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#sampling-concepts",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#sampling-concepts",
+    "title": "Midterm Review",
+    "section": "Sampling Concepts",
+    "text": "Sampling Concepts\n\n\nKey terms:\n\nPopulation vs. Sample\nSimple random sample (each individual has equal chance)\nConvenience sample (easily accessible - often biased)\n\n\n\nConfounding variables:\n\nAssociated with both explanatory and response variables\nCan make it look like there’s a causal relationship when there isn’t\nExample: Exercise and cardiovascular health might both be related to socioeconomic status"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-vegetarian-diet-and-cholesterol",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-vegetarian-diet-and-cholesterol",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Today’s example: Vegetarian diet and cholesterol",
-    "text": "Today’s example: Vegetarian diet and cholesterol\n\n\n\nResearch Question\n\n\nCan a vegetarian diet reduce cholesterol levels?\n\n\n\n\n\nStudy design:\n\n43 non-vegetarian adults enrolled\nInstructed to adopt a vegetarian diet\nCholesterol measured before and after diet\nFollow-up period: 3 months\n\n\n\nWhy is this paired data?\n\nSame individuals measured twice\nEach person serves as their own control\nWe can calculate: \\(\\text{After - Before}\\) for each person"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#dplyr-the-grammar-of-data-manipulation",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#dplyr-the-grammar-of-data-manipulation",
+    "title": "Midterm Review",
+    "section": "dplyr: The grammar of data manipulation",
+    "text": "dplyr: The grammar of data manipulation\ndplyr provides a consistent set of verbs for data manipulation:\n\n\n\n\n\nFunction\nWhat it does\n\n\n\n\nfilter()\nKeep rows that meet conditions\n\n\nselect()\nKeep or drop columns\n\n\nmutate()\nCreate or modify columns\n\n\narrange()\nSort rows\n\n\ngroup_by()\nGroup data for summaries\n\n\nsummarize()\nCalculate summary statistics\n\n\n\n\n\nThese verbs can be chained together with %&gt;% for powerful data transformations."
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-and-exploring-the-cholesterol-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-and-exploring-the-cholesterol-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Loading and exploring the cholesterol data",
-    "text": "Loading and exploring the cholesterol data\n\nlibrary(dplyr)\nlibrary(here)\nlibrary(readr)\n\n# Load the data\nchol &lt;- read_csv(here(\"data\", \n                      \"chol213_n40.csv\"))\n\n# Take a look at the structure\nglimpse(chol)\n\nRows: 43\nColumns: 2\n$ Before &lt;dbl&gt; 195, 145, 205, 159, 244, 166, 250, 236, 192, 224, 238, 197, 169…\n$ After  &lt;dbl&gt; 146, 155, 178, 146, 208, 147, 202, 215, 184, 208, 206, 169, 182…\n\n\n\n\nWhat do we have?\n\nBefore: Cholesterol level before diet (mg/dL)\nAfter: Cholesterol level after diet (mg/dL)\nEach row is one person"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#ggplot2-the-basic-template",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#ggplot2-the-basic-template",
+    "title": "Midterm Review",
+    "section": "ggplot2: The Basic Template",
+    "text": "ggplot2: The Basic Template\n\n\n\nThe ggplot2 pattern\n\n\n\nlibrary(ggplot2)\n\nggplot(data = dataset, \n       aes(x = variable, y = variable)) +\n  geom_*() +                    # Choose your geometry\n  labs(title = \"...\",           # Add labels\n       x = \"...\", \n       y = \"...\")\n\n\n\n\n\n\nKey geoms you need to know:\n\n# Histogram (one continuous variable)\ngeom_histogram(bins = 20)\n\n# Boxplot (continuous by categorical)\ngeom_boxplot()\n\n# Scatterplot (two continuous variables)\ngeom_point()"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#calculate-the-paired-differences",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#calculate-the-paired-differences",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Calculate the paired differences",
-    "text": "Calculate the paired differences\n\n\n\n\nFor paired data, we create a new variable: the difference\n\n# Calculate difference: After - Before\nchol &lt;- chol %&gt;%\n  mutate(DiffChol = After - Before)\n\n# Look at first few differences\nchol\n\n# A tibble: 43 × 3\n   Before After DiffChol\n    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n 1    195   146      -49\n 2    145   155       10\n 3    205   178      -27\n 4    159   146      -13\n 5    244   208      -36\n 6    166   147      -19\n 7    250   202      -48\n 8    236   215      -21\n 9    192   184       -8\n10    224   208      -16\n# ℹ 33 more rows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretation of differences:\n\nNegative values: cholesterol decreased\nPositive values: cholesterol increased\nZero: no change"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#ggplot2-example",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#ggplot2-example",
+    "title": "Midterm Review",
+    "section": "ggplot2: Example",
+    "text": "ggplot2: Example\n\nlibrary(ggplot2)\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n# Histogram\nggplot(nhanes.samp, aes(x = Height)) +\n  geom_histogram(bins = 20) +\n  labs(title = \"Distribution of Height\",\n       x = \"Height (cm)\",\n       y = \"Count\")\n\n# Boxplot by group\nggplot(nhanes.samp, \n       aes(x = Gender, y = Weight, fill = Gender)) +\n  geom_boxplot() +\n  labs(title = \"Weight by Gender\",\n       x = \"Weight (kg)\",\n       y = \"Age (years)\")\n\n\n\nRemember: Start with ggplot(), then add layers with +"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-the-paired-differences",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-the-paired-differences",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Visualizing the paired differences",
-    "text": "Visualizing the paired differences\n\n\n\n\n\n\n\n\n\n\n\nEach line represents one person’s change\n\n\n\n\n\n\n\n\n\n\nMost people decreased (negative values)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#dplyr-rstatix-summary-statistics",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#dplyr-rstatix-summary-statistics",
+    "title": "Midterm Review",
+    "section": "dplyr + rstatix: Summary Statistics",
+    "text": "dplyr + rstatix: Summary Statistics\n\n\n\nThe pattern: group_by() then summarize\n\n\n\nlibrary(dplyr)\nlibrary(rstatix)\n\ndataset %&gt;%\n  group_by(grouping_variable) %&gt;%\n  get_summary_stats(numeric_variable, type = \"mean_sd\")\n\n\n\n\n\n\nExample:\n\n# Summary stats by one group\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  get_summary_stats(Height, type = \"mean_sd\")\n\n# Summary stats by multiple groups\nnhanes.samp %&gt;%\n  group_by(Gender, SmokeNow) %&gt;%\n  get_summary_stats(Weight, type = \"mean_sd\")"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-statistics-for-paired-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-statistics-for-paired-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Summary statistics for paired data",
-    "text": "Summary statistics for paired data\n\nlibrary(dplyr)\nlibrary(gt)\nlibrary(rstatix)\n\n\n# Summary statistics for differences\nchol %&gt;%\n  get_summary_stats(DiffChol, type = \"common\") %&gt;%\n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nvariable\nn\nmin\nmax\nmedian\niqr\nmean\nsd\nse\nci\n\n\n\n\nDiffChol\n43\n-49\n13\n-23\n16\n-21.767\n13.89\n2.118\n4.275\n\n\n\n\n\n\n\n\n\nWhat we see:\n\nMean difference: \\(\\bar{x}_d =\\) 21.767 mg/dL\nOn average, cholesterol decreased by about 22 mg/dL\nBut is this difference statistically significant?\n\n\n\nTo answer this, we need a hypothesis test!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#dplyr-only-summary-statistics",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#dplyr-only-summary-statistics",
+    "title": "Midterm Review",
+    "section": "dplyr only: Summary Statistics",
+    "text": "dplyr only: Summary Statistics\n\n\n\nThe pattern: group_by() then summarize\n\n\n\nlibrary(dplyr)\n\ndataset %&gt;%\n  group_by(grouping_variable) %&gt;%\n  summarise(...)\n\n\n\n\nExample:\n\n# Summary stats by one group\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(n = sum(!is.na(Height)), \n            mean = mean(Height, na.rm = TRUE), \n            sd = sd(Height, na.rm = TRUE))\n\n# Summary stats by multiple groups\nnhanes.samp %&gt;%\n  group_by(Gender, SmokeNow) %&gt;%\n  summarise(n = sum(!is.na(Weight)), \n            mean = mean(Weight, na.rm = TRUE), \n            sd = sd(Weight, na.rm = TRUE))"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-paired-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-paired-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Notation for paired data",
-    "text": "Notation for paired data\n\n\n\nPopulation Parameters vs. Sample Statistics\n\n\n\n\nPopulation (what we want to know)\n\nMean difference: \\(\\delta\\) (delta) or \\(\\mu_d\\)\nStandard deviation: \\(\\sigma_d\\)\nSample size: \\(N\\)\n\n\nSample (what we observe)\n\nSample mean difference: \\(\\bar{x}_d\\)\nSample standard deviation: \\(s_d\\)\nSample size: \\(n\\)\n\n\n\n\n\n\n\nKey insight: Once we calculate the differences, this becomes a one-sample problem!\n\nWe have one number per person (the difference)\nWe test if \\(\\bar{x}_d\\) is significantly different from 0"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#categorical-data-janitortabyl",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#categorical-data-janitortabyl",
+    "title": "Midterm Review",
+    "section": "Categorical Data: janitor::tabyl()",
+    "text": "Categorical Data: janitor::tabyl()\n\n\n\nThe pattern for frequency tables\n\n\n\nlibrary(janitor)\n\n# One-way table\ndataset %&gt;%\n  tabyl(variable)\n\n# Two-way table with row percentages\ndataset %&gt;%\n  tabyl(row_variable, column_variable) %&gt;%\n  adorn_totals(where = \"row\") %&gt;% \n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1)\n\n\n\n\nExample:\n\n# Two-way table\nnhanes.samp %&gt;%\n  tabyl(Gender, SmokeNow) %&gt;%\n  adorn_totals(where = \"row\") %&gt;% \n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1) %&gt;%\n  adorn_ns()"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-paired-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-paired-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Hypothesis test for paired data",
-    "text": "Hypothesis test for paired data\nResearch question: Is there evidence that cholesterol changed after the vegetarian diet?\n\n\nStep 1: State hypotheses\n\\[H_0: \\delta = 0\\] \\[H_A: \\delta \\neq 0\\]\nIn words:\n\n\\(H_0\\): The population mean difference in cholesterol is zero (no change)\n\\(H_A\\): The population mean difference in cholesterol is not zero (there is a change)\n\n\n\nStep 2: Set significance level\n\nUse \\(\\alpha = 0.05\\)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#probability-notation-quick-reference",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#probability-notation-quick-reference",
+    "title": "Midterm Review",
+    "section": "Probability Notation Quick Reference",
+    "text": "Probability Notation Quick Reference\nBasic probabilities:\n\nMarginal: \\(P(A)\\) - probability of \\(A\\) alone\nJoint: \\(P(A \\text{ and } B)\\) - probability of both\nConditional: \\(P(A \\mid B)\\) - probability of \\(A\\) given \\(B\\)\n\n\n\nKey formula:\n\\[P(A \\mid B) = \\frac{P(A \\text{ and } B)}{P(B)}\\]\n\n\nIndependence:\nEvents \\(A\\) and \\(B\\) are independent if: \\(P(A \\text{ and } B) = P(A) \\times P(B)\\)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Check the assumptions",
-    "text": "Check the assumptions\nStep 3: Check the assumptions\n\nThe assumptions to run a hypothesis test on a sample are:\n\nIndependent pairs: Each pair is independent from all other pairs,\nApproximately normal sample or big n: the distribution of the sample should be approximately normal, or the sample size should be at least 30\n\n\n\n\n\nIn our example, we would check the assumptions with a statement:\n\nThe pairs of observations are independent from each other and the number of pairs in our sample is 43. Thus, we can use CLT to approximate the sampling distribution."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#probability-rules-to-remember",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#probability-rules-to-remember",
+    "title": "Midterm Review",
+    "section": "Probability Rules to Remember",
+    "text": "Probability Rules to Remember\nGeneral Addition Rule:\nIf \\(A\\) and \\(B\\) are any two events:\n\\[P(A \\text{ or } B) = P(A) + P(B) - P(A \\text{ and } B)\\]\nWe subtract \\(P(A \\text{ and } B)\\) because those outcomes were counted twice.\n\n\nGeneral Multiplication Rule:\n\\[P(A \\text{ and } B) = P(A \\mid B) \\times P(B)\\]\nThis connects joint and conditional probabilities, and leads directly to Bayes’ Theorem!\n\n\n\n\n\nSpecial case: Independent events\n\n\nIf \\(A\\) and \\(B\\) are independent: \\(P(A \\text{ and } B) = P(A) \\times P(B)\\)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#the-test-statistic-for-paired-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#the-test-statistic-for-paired-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "The test statistic for paired data",
-    "text": "The test statistic for paired data\nStep 4: Calculate test statistic\nThe test statistic for paired data is:\n\\[t = \\frac{\\bar{x}_d - 0}{\\frac{s_d}{\\sqrt{n}}}\\]\n\n\nThis looks familiar! It’s the same formula as for a one-sample t-test.\n\n\n\n\n\n# Calculate components\nn &lt;- nrow(chol)\nxbar_d &lt;- mean(chol$DiffChol)\ns_d &lt;- sd(chol$DiffChol)\nSE &lt;- s_d / sqrt(n)\n\n# Calculate t-statistic\nt_stat &lt;- (xbar_d - 0) / SE\nt_stat\n\n[1] -10.27603\n\n\n\n\n# Calculate the p-value\n2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)\n\n[1] 4.945625e-13"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#bayes-theorem-the-pattern",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#bayes-theorem-the-pattern",
+    "title": "Midterm Review",
+    "section": "Bayes’ Theorem: The Pattern",
+    "text": "Bayes’ Theorem: The Pattern\nYou’ll almost always use it in this form:\n\\[\n\\begin{aligned}\nP(A \\mid B) &= \\frac{P(B \\mid A) \\times P(A)}{P(B)} \\\\\n\\\\\n&= \\frac{P(B \\mid A) \\times P(A)}{P(B \\mid A) \\times P(A) + P(B \\mid A^c) \\times P(A^c)}\n\\end{aligned}\n\\]\n\n\n\nIn medical testing context:\n\\[P(\\text{Disease} \\mid \\text{Test+}) = \\frac{\\text{sensitivity} \\times \\text{prevalence}}{\\text{sensitivity} \\times \\text{prevalence} + (1-\\text{specificity}) \\times (1-\\text{prevalence})}\\]\n\n\nPro tip: Calculate numerator and denominator separately, then divide!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-15",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-15",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a paired t-test in R (1/5)",
-    "text": "Running a paired t-test in R (1/5)\nStep 5: Find a p-value\n\n\nOption 1: Use the difference variable\n\n# Test the differences directly\nt.test(x = chol$DiffChol, mu = 0)\n\n\n    One Sample t-test\n\ndata:  chol$DiffChol\nt = -10.276, df = 42, p-value = 4.946e-13\nalternative hypothesis: true mean is not equal to 0\n95 percent confidence interval:\n -26.04229 -17.49259\nsample estimates:\nmean of x \n-21.76744"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#bayes-theorem-step-by-step",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#bayes-theorem-step-by-step",
+    "title": "Midterm Review",
+    "section": "Bayes’ Theorem: Step-by-Step",
+    "text": "Bayes’ Theorem: Step-by-Step\n\n\nGiven: Sensitivity = 0.90, Specificity = 0.85, Prevalence = 0.02\n\n# Step 1: Set up\nsensitivity &lt;- 0.90     # P(Test + | Disease)\nspecificity &lt;- 0.85     # P(Test - | No Disease)\nprevalence &lt;- 0.02      # P(Disease)\n\n# Step 2: Calculate P(Test + | No Disease)\np_pos_given_healthy &lt;- 1 - specificity\np_pos_given_healthy\n\n[1] 0.15\n\n# Step 3: Numerator (true positives)\nnumerator &lt;- sensitivity * prevalence\nnumerator\n\n[1] 0.018\n\n# Step 4: Denominator (all positives)\ndenominator &lt;- sensitivity * prevalence + p_pos_given_healthy * (1 - prevalence)\ndenominator\n\n[1] 0.165\n\n# Step 5: PPV\nppv &lt;- numerator / denominator\nppv\n\n[1] 0.1090909"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-25",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-25",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a paired t-test in R (2/5)",
-    "text": "Running a paired t-test in R (2/5)\n\n\nOption 2: Use the paired = TRUE argument\n\n# Let R calculate differences for us\nt.test(x = chol$After, y = chol$Before, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  chol$After and chol$Before\nt = -10.276, df = 42, p-value = 4.946e-13\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -26.04229 -17.49259\nsample estimates:\nmean difference \n      -21.76744"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#the-four-functions-pattern",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#the-four-functions-pattern",
+    "title": "Midterm Review",
+    "section": "The Four Functions Pattern",
+    "text": "The Four Functions Pattern\nEvery distribution in R has 4 functions:\n\n\nd-functions: dbinom(), dnorm(), dpois()\n\n“density” or “probability mass”\nExactly x\nReturns: P(X = x)\n\n\n\np-functions: pbinom(), pnorm(), ppois()\n\n“cumulative probability”\nAt most x (or at least with lower.tail = FALSE)\nReturns: P(X ≤ x) or P(X &gt; x)\n\n\nq-functions: qbinom(), qnorm(), qpois()\n\n“quantile”\nWhat value gives this probability?\nReturns: value of x\n\n\n\nr-functions: rbinom(), rnorm(), rpois()\n\n“random”\nGenerate random samples\nReturns: random values"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-35",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-35",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a paired t-test in R (3/5)",
-    "text": "Running a paired t-test in R (3/5)\n\n\nbroom::tidy(): Use the tidy() function in the broom package with either Option 1 or Option 2\n\nlibrary(broom)\n\n# The argument conf.int = TRUE gives a confidence interval (default is 95%)\n\nt.test(x = chol$After, y = chol$Before, paired = TRUE) %&gt;% \n  broom::tidy(conf.int = TRUE)     \n\n# A tibble: 1 × 8\n  estimate statistic  p.value parameter conf.low conf.high method    alternative\n     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      \n1    -21.8     -10.3 4.95e-13        42    -26.0     -17.5 Paired t… two.sided"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#binomial-functions-in-r",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#binomial-functions-in-r",
+    "title": "Midterm Review",
+    "section": "Binomial Functions in R",
+    "text": "Binomial Functions in R\nThe four binomial functions:\n\n# d = probability of EXACTLY x successes\ndbinom(x = 3, size = 10, prob = 0.5)\n# \"What's P(X = 3)?\"\n\n# p = cumulative probability (at most x OR at least x)\npbinom(q = 3, size = 10, prob = 0.5)\n# \"What's P(X ≤ 3)?\" (default)\n\npbinom(q = 3, size = 10, prob = 0.5, lower.tail = FALSE)\n# \"What's P(X &gt; 3)?\"\n\n# q = quantile (what value gives this probability?)\nqbinom(p = 0.25, size = 10, prob = 0.5)\n# \"What value has 25% of the distribution below it?\"\n\n# r = random samples\nrbinom(n = 100, size = 10, prob = 0.5)\n# \"Give me 100 random draws\""
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-45",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-45",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a paired t-test in R (4/5)",
-    "text": "Running a paired t-test in R (4/5)\nOption 3: Use rstatix package\n\nRequires that the data are in long format which means that\n\nall of the outcome values are in one column and\nanother column indicates which group the values are from\n\n\n\nchol_long\n\n# A tibble: 86 × 4\n   DiffChol ID    Time   Cholesterol\n      &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;        &lt;dbl&gt;\n 1      -49 1     Before         195\n 2      -49 1     After          146\n 3       10 2     Before         145\n 4       10 2     After          155\n 5      -27 3     Before         205\n 6      -27 3     After          178\n 7      -13 4     Before         159\n 8      -13 4     After          146\n 9      -36 5     Before         244\n10      -36 5     After          208\n# ℹ 76 more rows"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#visual-dbinom---exactly",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#visual-dbinom---exactly",
+    "title": "Midterm Review",
+    "section": "Visual: dbinom() - EXACTLY",
+    "text": "Visual: dbinom() - EXACTLY"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-55",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-paired-t-test-in-r-55",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a paired t-test in R (5/5)",
-    "text": "Running a paired t-test in R (5/5)\nOption 3: Use rstatix package\n\nlibrary(rstatix)\n\nt_test(data = chol_long, \n       Cholesterol ~ Time, \n       paired = TRUE, \n       detailed = TRUE)\n\n# A tibble: 1 × 13\n  estimate .y.       group1 group2    n1    n2 statistic        p    df conf.low\n*    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1     21.8 Choleste… Before After     43    43      10.3 4.95e-13    42     17.5\n# ℹ 3 more variables: conf.high &lt;dbl&gt;, method &lt;chr&gt;, alternative &lt;chr&gt;"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#visual-pbinom---at-most-default",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#visual-pbinom---at-most-default",
+    "title": "Midterm Review",
+    "section": "Visual: pbinom() - AT MOST (default)",
+    "text": "Visual: pbinom() - AT MOST (default)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-paired-t-test-output",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-paired-t-test-output",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Interpreting the paired t-test output",
-    "text": "Interpreting the paired t-test output\n\n# Save and tidy the results\nchol_test &lt;- t.test(x = chol$DiffChol, \n                    mu = 0)\n\nchol_test %&gt;% \n  tidy(conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n-21.76744\n-10.27603\n4.945625e-13\n42\n-26.04229\n-17.49259\nOne Sample t-test\ntwo.sided\n\n\n\n\n\n\n\nWhat we see:\n\nt-statistic = -10.28\np-value &lt; 0.001 (very small!)\n95% CI for \\(\\delta\\): (-26.04, -17.49)\n\nStep 6: Make a conclusion\n\nSince p-value &lt; \\(\\alpha = 0.05\\), we reject \\(H_0\\).\nConclusion: There is sufficient evidence that cholesterol levels changed after the vegetarian diet (p &lt; 0.001)."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#visual-pbinom-lower.tail-false---more-than",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#visual-pbinom-lower.tail-false---more-than",
+    "title": "Midterm Review",
+    "section": "Visual: pbinom(…, lower.tail = FALSE) - MORE THAN",
+    "text": "Visual: pbinom(…, lower.tail = FALSE) - MORE THAN"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#writing-a-complete-conclusion",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#writing-a-complete-conclusion",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Writing a complete conclusion",
-    "text": "Writing a complete conclusion\n\n\n\nBest Practice: Include Key Numbers\n\n\nA good conclusion includes:\n\nDecision about \\(H_0\\) (reject or fail to reject)\nContext (what was measured)\nEffect size (mean difference)\nConfidence interval\nP-value\n\n\n\n\n\n\nOur conclusion:\nAfter adopting a vegetarian diet, cholesterol levels decreased by an average of 21.77 mg/dL (95% CI: 17.49 to 26.04 mg/dL lower), which is significantly different from zero (t = -10.28, df = 42, p &lt; 0.001, Paired t-test)."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#the-lower.tail-truefalse-concept",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#the-lower.tail-truefalse-concept",
+    "title": "Midterm Review",
+    "section": "The lower.tail = TRUE/FALSE Concept",
+    "text": "The lower.tail = TRUE/FALSE Concept\n\n\n\nVisual Guide\n\n\n\n\n       |--------------●-------------|\n       lower tail     x    upper tail\n       (left)                 (right)\n\n\nlower.tail = TRUE → gives you \\(P(X \\le x)\\) — everything to the LEFT of (and including) x\nlower.tail = FALSE → gives you \\(P(X \\gt x)\\) — everything to the RIGHT of x\n\n\n\n\n\nQuick decision rule:\n\nQuestion has “less than” or “at most” → lower.tail = TRUE (default)\nQuestion has “greater than” or “at least” → lower.tail = FALSE"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-vs.-two-sided-tests",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-vs.-two-sided-tests",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "One-sided vs. two-sided tests",
-    "text": "One-sided vs. two-sided tests\nTwo-sided test (what we just did):\n\n\\(H_A: \\delta \\neq 0\\) (different from zero)\nAppropriate when we don’t know direction\n\n\n\nOne-sided test (if we have directional prediction):\n\n\\(H_A: \\delta &lt; 0\\) (decrease)\n\\(H_A: \\delta &gt; 0\\) (increase)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#common-confusion-at-least-5-discrete-distributions",
+    "title": "Midterm Review",
+    "section": "Common Confusion: “At least 5” (Discrete Distributions)",
+    "text": "Common Confusion: “At least 5” (Discrete Distributions)\n\n\n\nDISCRETE distributions only!\n\n\nThis slide applies to binomial and Poisson (discrete). For Normal (continuous), \\(P(X \\ge 5) = P(X \\gt 5)\\) - no adjustment needed!\n\n\n\n \nQuestion: What is \\(P(X \\ge 5)\\) for a binomial distribution?\n\n\nStep 1: Translate to something the computer understands\n\n“At least 5” = “5 or more” = “greater than 4”\nSo: \\(P(X \\ge 5)\\) = \\(P(X \\gt 4)\\)\n\n\n\nStep 2: Code it\n\n# Correct!\npbinom(q = 4, size = 10, prob = 0.5, lower.tail = FALSE)\n\n# Also correct (but slightly more work)\n1 - pbinom(q = 4, size = 10, prob = 0.5)\n\n\n\n\n\n\nKey Point\n\n\nFor discrete distributions: “\\(X \\ge 5\\)” is the same as “\\(X \\gt 4\\)” because we can’t have \\(4.5\\) successes!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visual-one-sided-vs.-two-sided",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visual-one-sided-vs.-two-sided",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Visual: One-sided vs. two-sided",
-    "text": "Visual: One-sided vs. two-sided"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-questions",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-questions",
+    "title": "Midterm Review",
+    "section": "Practice: Binomial Questions",
+    "text": "Practice: Binomial Questions\nA vaccine is 75% effective. You vaccinate 20 people.\nWhich R function do you use?\n\n\nQuestion 1: What’s the probability that exactly 15 are protected?\n\n# Your answer:\n\n\n\nQuestion 2: What’s the probability that at most 12 are protected?\n\n# Your answer:\n\n\nQuestion 3: What’s the probability that at least 18 are protected?\n\n# Your answer:\n\n\n\nQuestion 4: What’s the expected number protected?\n\n# Your answer:"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-example",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-sided-example",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "One-sided example",
-    "text": "One-sided example\nExample: If we specifically want to test if diet decreased cholesterol:\n\\[H_0: \\delta \\ge 0\\] \\[H_A: \\delta \\lt 0\\]\nIn words:\n\n\\(H_0\\): The population mean difference in cholesterol greater than or equal to zero\n\\(H_A\\): The population mean difference in cholesterol is less zero (there is a change)\n\n\n\n\nt.test(x = chol$DiffChol, mu = 0, alternative = \"less\") %&gt;% \n  broom::tidy(conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nestimate\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n-21.76744\n-10.27603\n2.472813e-13\n42\n-Inf\n-18.20461\nOne Sample t-test\nless\n\n\n\n\n\n\n\nNotice: For a one-sided test, the p-value changes and the confidence interval is one-sided."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-answers-12",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-answers-12",
+    "title": "Midterm Review",
+    "section": "Practice: Binomial Answers (1/2)",
+    "text": "Practice: Binomial Answers (1/2)\nA vaccine is 75% effective. You vaccinate 20 people.\n\n\nQuestion 1: What’s the probability that exactly 15 are protected?\n\n# Question 1: Exactly 15\ndbinom(x = 15, size = 20, prob = 0.75)\n\n[1] 0.2023312\n\n\n\n\nQuestion 2: What’s the probability that at most 12 are protected?\n\n# Question 2: At most 12\npbinom(q = 12, size = 20, prob = 0.75)\n\n[1] 0.1018119\n\n# OR: pbinom(q = 12, size = 20, prob = 0.75, lower.tail = TRUE)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-independent-samples",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#what-are-independent-samples",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "What are independent samples?",
-    "text": "What are independent samples?\n\n\n\nDefinition: Independent Samples\n\n\nIndependent samples occur when individuals in one group are completely unrelated to individuals in the other group. There is no natural pairing or matching.\n\n\n\n\n\n\n\nKey characteristics:\n\nDifferent people in each group\nNo before/after measurements\nNo natural matching\nTypically: different sample sizes are possible\n\n\nCommon scenarios:\n\nTreatment vs. control groups (randomized trials)\nCase vs. control studies\nMen vs. women\nExposed vs. unexposed"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-answers-22",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-binomial-answers-22",
+    "title": "Midterm Review",
+    "section": "Practice: Binomial Answers (2/2)",
+    "text": "Practice: Binomial Answers (2/2)\n\n\nQuestion 3: What’s the probability that at least 18 are protected?\n\n# Question 3: At least 18 (same as &gt; 17)\npbinom(q = 17, size = 20, prob = 0.75, lower.tail = FALSE)\n\n[1] 0.09126043\n\n# OR: 1 - pbinom(q = 17, size = 20, prob = 0.75)\n\n\n\nQuestion 4: What’s the expected number protected?\n\n# Question 4: Expected value\nn &lt;- 20\np &lt;- 0.75\nexpected &lt;- n * p\nexpected\n\n[1] 15\n\n# Bonus: standard deviation\nvariance &lt;- n * p * (1 - p)\nst_dev &lt;- sqrt(variance)\nst_dev\n\n[1] 1.936492"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#paired-vs.-independent-the-key-difference",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#paired-vs.-independent-the-key-difference",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Paired vs. Independent: The key difference",
-    "text": "Paired vs. Independent: The key difference\n\n\n\n\n\nPaired Data\n\n\nStructure:\n\nSame people measured twice\nOR matched pairs\nSame sample size for both conditions\n\n\n\nAnalysis:\n\nCalculate differences\nOne number per person/pair\nOne-sample t-test on differences\n\n\n\nExample:\nWeight before and after diet program (same 50 people)\n\n\n\n\n\n\n\nIndependent Samples\n\n\nStructure:\n\nDifferent people in each group\nNo natural pairing\nCan have different sample sizes\n\n\n\nAnalysis:\n\nCompare two separate means\nTwo numbers: \\(\\bar{x}_1\\) and \\(\\bar{x}_2\\)\nTwo-sample t-test\n\n\n\nExample:\nWeight of 50 men vs. 50 women (different people)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#normal-distribution-functions",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#normal-distribution-functions",
+    "title": "Midterm Review",
+    "section": "Normal Distribution Functions",
+    "text": "Normal Distribution Functions\nThe same pattern applies!\n\n# d = density (height of curve at x)\ndnorm(x = 120, mean = 100, sd = 15)\n# Rarely used in practice\n\n# p = cumulative probability\npnorm(q = 120, mean = 100, sd = 15)\n# \"What proportion have values ≤ 120?\"\n\npnorm(q = 120, mean = 100, sd = 15, lower.tail = FALSE)\n# \"What proportion have values &gt; 120?\"\n\n# q = quantile (most common!)\nqnorm(p = 0.95, mean = 100, sd = 15)\n# \"What value has 95% below it?\" (95th percentile)\n\n# r = random samples\nrnorm(n = 100, mean = 100, sd = 15)\n# \"Give me 100 random values from this distribution\""
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-caffeine-and-finger-tapping",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#todays-example-caffeine-and-finger-tapping",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Today’s example: Caffeine and finger tapping",
-    "text": "Today’s example: Caffeine and finger tapping\n\n\n\nResearch Question\n\n\nDoes caffeine increase finger tapping speed?\n\n\n\n\n\n:: columns ::: {.column width=“50%”} Study design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl: Decaffeinated coffee\nCaffeine: Coffee with ~200mg caffeine\n\nDouble-blind design\nAfter 2 hours, tested finger taps per minute :::\n\n\nWhy independent samples?\n\nDifferent students in each group\nEach person tested only once\nNo pairing or matching\n\n:::"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#visual-normal-distribution",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#visual-normal-distribution",
+    "title": "Midterm Review",
+    "section": "Visual: Normal Distribution",
+    "text": "Visual: Normal Distribution"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-the-caffeine-data",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#loading-the-caffeine-data",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Loading the caffeine data",
-    "text": "Loading the caffeine data\n\n# Load the data\nCaffTaps &lt;- read_csv(here(\"data\", \n                          \"CaffeineTaps_n35.csv\"))\n\n# Check structure\nglimpse(CaffTaps)\n\nRows: 70\nColumns: 2\n$ Taps  &lt;dbl&gt; 246, 248, 250, 252, 248, 250, 246, 248, 245, 250, 242, 245, 244,…\n$ Group &lt;chr&gt; \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caffeine\", \"Caf…\n\n\n\n\nWhat we have:\n\nTaps: Finger taps per minute\nGroup: Caffeine or NoCaffeine\nEach row is one person\n35 people per group"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-distribution",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-distribution",
+    "title": "Midterm Review",
+    "section": "Practice: Normal Distribution",
+    "text": "Practice: Normal Distribution\nBlood pressure is Normal with mean = 120 mmHg, sd = 15 mmHg.\nWhich R function?\n\n\nQuestion 1: What proportion have BP above 135?\n\n# Your answer:\n\n\n\nQuestion 2: What proportion have BP between 110 and 130?\n\n# Your answer:\n\n\nQuestion 3: What BP value is the 90th percentile?\n\n# Your answer:\n\n\n\nQuestion 4: If we want the middle 95%, what are the cutoffs?\n\n# Your answer:"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#exploring-the-data-by-group",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#exploring-the-data-by-group",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Exploring the data by group",
-    "text": "Exploring the data by group\n\n# Summary statistics by group\nCaffTaps %&gt;%\n  group_by(Group) %&gt;%\n  get_summary_stats(Taps, type = \"mean_sd\") %&gt;%\n  gt() %&gt;% \n  tab_options(table.font.size = 40)\n\n\n\n\n\n\n\nGroup\nvariable\nn\nmean\nsd\n\n\n\n\nCaffeine\nTaps\n35\n248.114\n2.621\n\n\nNoCaffeine\nTaps\n35\n244.514\n2.318\n\n\n\n\n\n\n\n\n\nWhat we see:\n\nCaffeine group: mean = 248.1 taps/min\nControl group: mean = 244.5 taps/min\nDifference = 3.6 taps/min\n\n\n\nQuestion: Is this difference statistically significant?"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-answers-12",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-answers-12",
+    "title": "Midterm Review",
+    "section": "Practice: Normal Answers (1/2)",
+    "text": "Practice: Normal Answers (1/2)\n\nmu &lt;- 120\nsigma &lt;- 15\n\n# Question 1: Above 135\npnorm(135, mean = mu, sd = sigma, lower.tail = FALSE)\n\n[1] 0.1586553\n\n# OR\n1 - pnorm(135, mean = mu, sd = sigma, lower.tail = TRUE)\n\n[1] 0.1586553\n\n\n\n\n\n# Question 2: Between 110 and 130\npnorm(130, mean = mu, sd = sigma) - pnorm(110, mean = mu, sd = sigma)\n\n[1] 0.4950149"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-independent-samples",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#visualizing-independent-samples",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Visualizing independent samples",
-    "text": "Visualizing independent samples\n\n\n\n\n\n\n\n\n\n\n\nBox plots with individual points\n\n\n\n\n\n\n\n\n\n\nOverlapping histograms\n\n\n\nNote: We cannot calculate 35 paired differences - these are different people!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-answers-22",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#practice-normal-answers-22",
+    "title": "Midterm Review",
+    "section": "Practice: Normal Answers (2/2)",
+    "text": "Practice: Normal Answers (2/2)\n\n# Question 3: 90th percentile\nqnorm(0.90, mean = mu, sd = sigma)\n\n[1] 139.2233\n\n\n\n\n\n# Question 4: Middle 95% (2.5th to 97.5th percentiles)\nqnorm(0.025, mean = mu, sd = sigma)  # Lower\n\n[1] 90.60054\n\nqnorm(0.975, mean = mu, sd = sigma)  # Upper\n\n[1] 149.3995"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-two-independent-samples",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#notation-for-two-independent-samples",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Notation for two independent samples",
-    "text": "Notation for two independent samples\n\n\n\nPopulation Parameters vs. Sample Statistics\n\n\n\n\nPopulation\n\nGroup 1 mean: \\(\\mu_1\\)\nGroup 2 mean: \\(\\mu_2\\)\nDifference: \\(\\mu_1 - \\mu_2\\)\nGroup 1 SD: \\(\\sigma_1\\)\nGroup 2 SD: \\(\\sigma_2\\)\n\n\nSample\n\nGroup 1 mean: \\(\\bar{x}_1\\)\nGroup 2 mean: \\(\\bar{x}_2\\)\nDifference: \\(\\bar{x}_1 - \\bar{x}_2\\)\nGroup 1 SD: \\(s_1\\)\nGroup 2 SD: \\(s_2\\)\n\n\n\n\n\n\n\nKey difference from paired data:\n\nTwo separate groups with potentially different SDs\nCannot reduce to a single set of differences\nNeed a different standard error formula!"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#central-limit-theorem-what-you-need-to-know",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#central-limit-theorem-what-you-need-to-know",
+    "title": "Midterm Review",
+    "section": "Central Limit Theorem: What You Need to Know",
+    "text": "Central Limit Theorem: What You Need to Know\n\n\n\nThe CLT in plain language\n\n\nFor a random sample of size \\(n\\) from ANY population with mean \\(\\mu\\) and SD \\(\\sigma\\):\nThe sampling distribution of \\(\\bar{X}\\) is approximately normal when \\(n\\) is large (\\(\\ge 30\\))\nWith:\n\nMean = \\(\\mu\\)\nStandard Error = \\(\\sigma / \\sqrt{n}\\)\n\n\n\n\n\n\nWhy this matters:\n\nWe can use normal distribution tools even if data aren’t normal\nLarger samples → smaller standard error → more precise estimates\nThis is the foundation for confidence intervals and hypothesis tests!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-12",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-12",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Hypothesis test for two independent samples (1/2)",
-    "text": "Hypothesis test for two independent samples (1/2)\n\n\nCaffeine example: Does caffeine increase finger tapping speed?\n\n\nNull hypothesis (no effect): \\[H_0: \\mu_{caffeine} = \\mu_{control} \\quad \\Longleftrightarrow \\quad \\mu_{caffeine} - \\mu_{control} = 0\\]\n\n\nAlternative hypothesis (caffeine increases tapping): \\[H_A: \\mu_{caffeine} &gt; \\mu_{control} \\quad \\Longleftrightarrow \\quad \\mu_{caffeine} - \\mu_{control} &gt; 0\\]\n\n\nWhy one-sided? We specifically predicted caffeine would increase tapping, not just “make it different”"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#standard-error-vs.-standard-deviation",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#standard-error-vs.-standard-deviation",
+    "title": "Midterm Review",
+    "section": "Standard Error vs. Standard Deviation",
+    "text": "Standard Error vs. Standard Deviation\n\n\n\nDon’t confuse these!\n\n\nStandard Deviation (\\(s\\) or \\(\\sigma\\)):\n\nMeasures spread of individual observations\nDescribes variability in the data\nFormula: \\(s = \\sqrt{\\frac{\\sum(x_i - \\bar{x})^2}{n-1}}\\)\n\n\n\nStandard Error (SE):\n\nMeasures uncertainty of the sample mean\nDescribes variability of \\(\\bar{x}\\) across (theoretical) samples\nFormula: \\(SE = \\frac{s}{\\sqrt{n}}\\)\n\n\n\n\n\n\nKey insight: SE gets smaller as \\(n\\) increases, but \\(s\\) stays roughly the same!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-22",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#hypothesis-test-for-two-independent-samples-22",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Hypothesis test for two independent samples (2/2)",
-    "text": "Hypothesis test for two independent samples (2/2)\n\n\n\n\n\nGeneral form\n\n\nFor two independent samples, we always test \\(H_0: \\mu_1 - \\mu_2 = 0\\) against ONE of:\n\n\\(H_A: \\mu_1 - \\mu_2 \\neq 0\\) (two-sided)\n\\(H_A: \\mu_1 - \\mu_2 &gt; 0\\) (one-sided upper)\n\n\\(H_A: \\mu_1 - \\mu_2 &lt; 0\\) (one-sided lower)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#example-clt-in-action",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#example-clt-in-action",
+    "title": "Midterm Review",
+    "section": "Example: CLT in Action",
+    "text": "Example: CLT in Action\nPopulation: Mean = 5.1 hours, SD = 1.9 hours, right-skewed\nSample: n = 40\nWhat’s the sampling distribution of \\(\\bar{X}\\)?\n\n# Parameters\nmu &lt;- 5.1\nsigma &lt;- 1.9\nn &lt;- 40\n\n# Sampling distribution\nmean_xbar &lt;- mu\nse_xbar &lt;- sigma / sqrt(n)\n\nmean_xbar\n\n[1] 5.1\n\nse_xbar\n\n[1] 0.3004164\n\n# Example probability about the sample mean, P(Xbar &gt; 5.6)\npnorm(5.6, mean = mean_xbar, sd = se_xbar, lower.tail = FALSE)\n\n[1] 0.04802059\n\n\n\n\nSampling distribution: approximately Normal(mean = \\(mu\\), sd = \\(\\frac{s}{\\sqrt{n}}\\)). Even though the original data are right-skewed!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Example: Does caffeine increase finger tapping speed?",
-    "text": "Example: Does caffeine increase finger tapping speed?\n\n\nStep 1: State hypotheses\n\\[H_0: \\mu_1 - \\mu_2 = 0\\] \\[H_A: \\mu_1 - \\mu_2 &gt; 0\\]\nWhere: \\(\\mu_1\\) = mean for Caffeine group, \\(\\mu_2\\) = mean for Control group\n\n\nStep 2: Set significance level\n\nUse \\(\\alpha = 0.05\\)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#confidence-interval-formula",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#confidence-interval-formula",
+    "title": "Midterm Review",
+    "section": "Confidence Interval Formula",
+    "text": "Confidence Interval Formula\n\n\n\nGeneral form\n\n\n\\[\\text{point estimate} \\pm \\text{critical value} \\times SE\\]\nFor a mean:\n\\[\\bar{x} \\pm t^* \\times \\frac{s}{\\sqrt{n}}\\]\nWhere:\n\n\\(\\bar{x}\\) = sample mean\n\\(t^*\\) = critical value from t-distribution with \\(df = n-1\\)\n\\(s\\) = sample standard deviation\n\n\\(n\\) = sample size"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed-1",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#example-does-caffeine-increase-finger-tapping-speed-1",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Example: Does caffeine increase finger tapping speed?",
-    "text": "Example: Does caffeine increase finger tapping speed?\n\n\nStep 3: Calculate test statistic\nThe test statistic for two independent samples:\n\\[t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}}\\]\n\n\nNotice the different SE formula!\n\nFor paired: \\(SE = \\frac{s_d}{\\sqrt{n}}\\)\nFor independent: \\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\n\n\nDegrees of freedom: By default, t.test() uses the Welch two-sample t-test (does not assume equal variances), so df is computed with the Welch–Satterthwaite formula and can be non-integer."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-12",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-12",
+    "title": "Midterm Review",
+    "section": "Calculating a 95% CI in R (1/2)",
+    "text": "Calculating a 95% CI in R (1/2)\n\n# Sample data\nn &lt;- 25\nxbar &lt;- 14.2\ns &lt;- 1.8\nconfidence_level &lt;- 0.95\n\n# Step 1: Find critical value\nt_star &lt;- qt((1 + confidence_level) / 2, df = n - 1)\n# OR: qt(0.975, df = 24)\nt_star\n\n[1] 2.063899\n\n# Step 2: Calculate standard error\nSE &lt;- s / sqrt(n)\nSE\n\n[1] 0.36"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions-1",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#check-the-assumptions-1",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Check the assumptions",
-    "text": "Check the assumptions\nStep 3: Check the assumptions\n\nThe assumptions to run a hypothesis test on a sample are:\n\nIndependent observations: Each observation from both samples is independent from all other observations\nApproximately normal sample or big n: the distribution of each sample should be approximately normal, or the sample size of each sample should be at least 30\n\n\n\n\n\nIn our example, we would check the assumptions with a statement:\n\nThe observations are independent from each other. Each caffeine group (aka sample) has 35 individuals. Thus, we can use CLT to approximate the sampling distribution for each sample."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-22",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#calculating-a-95-ci-in-r-22",
+    "title": "Midterm Review",
+    "section": "Calculating a 95% CI in R (2/2)",
+    "text": "Calculating a 95% CI in R (2/2)\n\n# Step 3: Calculate margin of error\nmargin_error &lt;- t_star * SE\nmargin_error\n\n[1] 0.7430035\n\n# Step 4: Build the interval\nlower &lt;- xbar - margin_error\nupper &lt;- xbar + margin_error\n\nc(lower, upper)\n\n[1] 13.457 14.943"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-two-sample-t-test-in-r",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#running-a-two-sample-t-test-in-r",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Running a two-sample t-test in R",
-    "text": "Running a two-sample t-test in R\nSteps 4 and 5: Calculate test statistic and p-value\n \nUsing formula notation:\n\n# Test using formula: outcome ~ group\nt.test(Taps ~ Group, \n       data = CaffTaps, \n       alternative = \"greater\")\n\n\n    Welch Two Sample t-test\n\ndata:  Taps by Group\nt = 6.0867, df = 67.002, p-value = 3.133e-08\nalternative hypothesis: true difference in means between group Caffeine and group NoCaffeine is greater than 0\n95 percent confidence interval:\n 2.613502      Inf\nsample estimates:\n  mean in group Caffeine mean in group NoCaffeine \n                248.1143                 244.5143 \n\n\n\n\nNote: R automatically determines which group is “group 1” alphabetically (Caffeine comes before NoCaffeine)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#interpreting-confidence-intervals",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#interpreting-confidence-intervals",
+    "title": "Midterm Review",
+    "section": "Interpreting Confidence Intervals",
+    "text": "Interpreting Confidence Intervals\n\n\n\nCorrect interpretation\n\n\n“We are 95% confident that the population mean is between 13.5 and 14.9.”\nWhat this means:\n\nIf we repeated this process many times (new samples, new CIs)\nAbout 95% of those intervals would contain the true \\(\\mu\\)\nWe don’t know if this specific interval contains \\(\\mu\\), but we’re using a reliable method\n\n\n\n\n\n\n\n\n\nCommon mistakes - DON’T SAY:\n\n\n\n❌ “There’s a 95% probability that \\(\\mu\\) is in this interval”\n❌ “95% of the data are in this interval”\n❌ “We’re 95% sure the sample mean is in this interval”"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#using-rstatix",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#using-rstatix",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Using rstatix",
-    "text": "Using rstatix\n\nlibrary(rstatix) \n\nt_test(data = CaffTaps, \n       Taps ~ Group, \n       detailed = TRUE)\n\n# A tibble: 1 × 15\n  estimate estimate1 estimate2 .y.   group1 group2    n1    n2 statistic       p\n*    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1     3.60      248.      245. Taps  Caffe… NoCaf…    35    35      6.09 6.27e-8\n# ℹ 5 more variables: df &lt;dbl&gt;, conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, method &lt;chr&gt;,\n#   alternative &lt;chr&gt;"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#what-affects-ci-width",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#what-affects-ci-width",
+    "title": "Midterm Review",
+    "section": "What Affects CI Width?",
+    "text": "What Affects CI Width?\n\n\nMargin of error = \\(t^* \\times \\frac{s}{\\sqrt{n}}\\)\n\n\nTo get a narrower CI:\n\nIncrease sample size (\\(n\\) ↑ → SE ↓ → narrower CI)\nDecrease confidence level (95% → 90% → smaller \\(t^*\\) → narrower CI)\n\nBut this means less confidence!\n\nReduce variability (\\(s\\) ↓ → SE ↓ → narrower CI)\n\nOften not under our control\n\n\n\n\nTrade-off: Precision vs. Confidence"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-two-sample-t-test",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#interpreting-the-two-sample-t-test",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Interpreting the two-sample t-test",
-    "text": "Interpreting the two-sample t-test\nSteps 6: make a conclusion\n\n# Save and tidy results\ncaff_test &lt;- t.test(Taps ~ Group, \n                    data = CaffTaps, \n                    alternative = \"greater\")\n\ntidy(caff_test, \n     conf.int = TRUE) %&gt;% \n  gt() %&gt;% \n  tab_options(table.font.size = 30)\n\n\n\n\n\n\n\nestimate\nestimate1\nestimate2\nstatistic\np.value\nparameter\nconf.low\nconf.high\nmethod\nalternative\n\n\n\n\n3.6\n248.1143\n244.5143\n6.086677\n3.132816e-08\n67.00222\n2.613502\nInf\nWelch Two Sample t-test\ngreater\n\n\n\n\n\n\n\nWhat we see:\n\nMean difference: \\(\\bar{x}_1 - \\bar{x}_2 =\\) 3.6 taps/min\nt-statistic = 6.09\np-value = &lt; 0.001\nOne-sided 95% CI: (2.6, Inf)\n\nConclusion: There is strong evidence that caffeine increases finger tapping speed (p &lt; 0.001)."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#the-hypothesis-testing-framework",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#the-hypothesis-testing-framework",
+    "title": "Midterm Review",
+    "section": "The Hypothesis Testing Framework",
+    "text": "The Hypothesis Testing Framework\n\n\nSix steps:\n\nState hypotheses: \\(H_0\\) and \\(H_A\\)\nSet significance level: Usually \\(\\alpha = 0.05\\)\nCheck assumptions: Independence, normality/large sample\nCalculate test statistic: \\(t = \\frac{\\bar{x} - \\mu_0}{s/\\sqrt{n}}\\)\nFind p-value: Probability of seeing data this extreme if \\(H_0\\) true\nMake conclusion: Reject \\(H_0\\) if p-value &lt; \\(\\alpha\\)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#complete-conclusion-for-two-sample-test",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#complete-conclusion-for-two-sample-test",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Complete conclusion for two-sample test",
-    "text": "Complete conclusion for two-sample test\n\n\n\nBest Practice: Report Both Groups\n\n\nFor two-sample tests, report:\n\nMeans and SDs for both groups\nDifference in means\nTest statistic and df\nP-value\nConfidence interval for difference\n\n\n\n\n\n\nOur conclusion:\nMean (SD) tapping speed among students who consumed caffeine was 248.1 taps/min compared to 244.5 taps/min among the control group. Taps/min was significantly higher in the caffeine group (t = 6.09, df = 67.00, p &lt; 0.001, one-sided two-sample t-test). On average, students who consumed caffeine tapped 3.6 taps/min faster than those in the control group (95% CI: at least 2.6 taps/min faster)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#writing-hypotheses",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#writing-hypotheses",
+    "title": "Midterm Review",
+    "section": "Writing Hypotheses",
+    "text": "Writing Hypotheses\n\n\n\nTemplate\n\n\n\\(H_0: \\mu = \\mu_0\\) (null value)\n\\(H_A: \\mu \\neq \\mu_0\\) (two-sided) OR \\(\\mu &gt; \\mu_0\\) OR \\(\\mu &lt; \\mu_0\\) (one-sided)\n\n\n\n\n\nExample: Is mean body temperature different from 98.6°F?\n\n\\(H_0: \\mu = 98.6\\)\n\\(H_A: \\mu \\neq 98.6\\)\n\n\n\nIn words:\n\n\\(H_0\\): The population mean body temperature is 98.6°F\n\\(H_A\\): The population mean body temperature is not 98.6°F"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-rule-to-remember",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#one-rule-to-remember",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "One rule to remember",
-    "text": "One rule to remember\n\n\n\nThe decision rule\n\n\nAsk one question:\n\nCan I calculate a meaningful difference for each individual (or pair)?\n\n\nYes → Paired t-test\nNo → Two-sample t-test\n\nThis is determined by study design, not by the values in the data.\n\n\n\n\n\nKey idea:\nPairing is about how the data were collected, not how they are stored or analyzed."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#p-values-what-they-mean",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#p-values-what-they-mean",
+    "title": "Midterm Review",
+    "section": "P-values: What They Mean",
+    "text": "P-values: What They Mean\n\n\n\nDefinition\n\n\nThe p-value is the probability of observing data as extreme as (or more extreme than) what we observed, assuming \\(H_0\\) is true.\n\n\n\n\n\nInterpretation guide:\n\np-value &lt; 0.05 → Strong evidence against \\(H_0\\) → Reject \\(H_0\\)\np-value ≥ 0.05 → Insufficient evidence → Fail to reject \\(H_0\\)\n\n\n\n\n\n\nWhat p-values are NOT\n\n\n\n❌ NOT the probability that \\(H_0\\) is true\n❌ NOT the probability of making an error\n❌ NOT a measure of effect size or importance"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-paired-vs.-independent",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#examples-paired-vs.-independent",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Examples: Paired vs. Independent",
-    "text": "Examples: Paired vs. Independent\n\n\n\n\n\n\n\n\nScenario\nData Structure\nTest\n\n\n\n\nBlood pressure before and after medication\nSame people, two measurements\nPaired t-test\n\n\nWeight loss: Diet A vs. Diet B\nDifferent people in each group\nTwo-sample t-test\n\n\nLeft eye vs. right eye vision\nSame people\nPaired t-test\n\n\nTest scores: Men vs. Women\nDifferent people\nTwo-sample t-test\n\n\nCholesterol: Twin 1 vs. Twin 2\nMatched pairs\nPaired t-test\n\n\nPain score: Treatment vs. Placebo (RCT)\nDifferent people\nTwo-sample t-test\n\n\n\n\n\nShortcut:\nIf you can draw a line connecting two measurements, it’s paired."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#one-sample-t-test-in-r",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#one-sample-t-test-in-r",
+    "title": "Midterm Review",
+    "section": "One-Sample t-test in R",
+    "text": "One-Sample t-test in R\n\n# Using raw data\nt.test(data$variable, \n       mu = null_value, \n       alternative = \"two.sided\")  # or \"less\" or \"greater\"\n\n\n\nExample:\n\n# Test if mean pulse rate is different from 72 bpm\ndata(\"nhanes.samp\")\n\nt.test(nhanes.samp$Pulse, \n       mu = 72, \n       alternative = \"two.sided\")"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#common-mistakes-to-avoid",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#common-mistakes-to-avoid",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Common mistakes to avoid",
-    "text": "Common mistakes to avoid\n\n\n\nMistakes we see all the time\n\n\n1. Using a paired test for independent data\n\nExample: Testing men vs. women with paired = TRUE\nWhy it’s wrong: R pairs observations by row order, not by any real relationship\nResult: Meaningless inference\n\n\n\n2. Treating paired data as independent\n\nExample: Analyzing before/after as two separate groups\nWhy it’s wrong: Ignores within-person comparison\nResult: Larger SE and reduced power\n\n\n\n\n\n\nBottom line:\nYou don’t get to choose the test based on convenience — the design chooses it for you."
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#understanding-t.test-output",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#understanding-t.test-output",
+    "title": "Midterm Review",
+    "section": "Understanding t.test() Output",
+    "text": "Understanding t.test() Output\n\n\n\n    One Sample t-test\n\ndata:  nhanes.samp$Pulse\nt = 2.1383, df = 170, p-value = 0.03392\nalternative hypothesis: true mean is not equal to 72\n95 percent confidence interval:\n 72.15999 76.00376\nsample estimates:\nmean of x \n 74.08187 \n\n\n\n\nWhat to report:\n\nt-statistic: How many SEs away from null value\np-value: Evidence against \\(H_0\\)\n95% CI: Range of plausible values for \\(\\mu\\)\nSample mean: Our point estimate"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#checking-your-work-does-it-make-sense",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#checking-your-work-does-it-make-sense",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Checking your work: Does it make sense?",
-    "text": "Checking your work: Does it make sense?\nAfter running your test, ask:\n\n\n\nDoes the sample size match my study design?\n\nPaired: Should see n = number of pairs\nIndependent: Should see n1 + n2 = total people\n\nDo the means make sense?\n\nCheck that group means match your data summaries\n\nIs the SE reasonable?\n\nPaired tests usually have smaller SE (less variability)\nIndependent tests have larger SE (more variability)\n\nDoes the conclusion answer the research question?\n\nMake sure you’re interpreting the right comparison"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#connection-cis-and-hypothesis-tests",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#connection-cis-and-hypothesis-tests",
+    "title": "Midterm Review",
+    "section": "Connection: CIs and Hypothesis Tests",
+    "text": "Connection: CIs and Hypothesis Tests\n\n\n\nKey relationship\n\n\nFor a two-sided test at \\(\\alpha = 0.05\\):\nIf the 95% CI does NOT contain \\(\\mu_0\\), then we reject \\(H_0: \\mu = \\mu_0\\)\nIf the 95% CI DOES contain \\(\\mu_0\\), then we fail to reject \\(H_0\\)\n\n\n\n\n\nBoth methods use the same math - just different framing!\n\nCI: “What values are plausible for \\(\\mu\\)?”\nHypothesis test: “Is this specific value plausible?”"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-paired-vs.-independent",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#summary-paired-vs.-independent",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Summary: Paired vs. Independent",
-    "text": "Summary: Paired vs. Independent\nPaired Data:\n\nSame people or matched pairs\nCalculate differences first\nUse: t.test(differences, mu = 0) or t.test(x, y, paired = TRUE)\nSE: \\(\\frac{s_d}{\\sqrt{n}}\\)\ndf: \\(n - 1\\)\n\n\n\nIndependent Samples:\n\nDifferent people in each group\nCompare two means directly\nUse: t.test(outcome ~ group, data = ...)\nSE: \\(\\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\ndf: varies (Welch formula; see R output)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#statistical-significance-vs.-practical-significance",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#statistical-significance-vs.-practical-significance",
+    "title": "Midterm Review",
+    "section": "Statistical Significance vs. Practical Significance",
+    "text": "Statistical Significance vs. Practical Significance\n\n\n\nDon’t confuse these!\n\n\nStatistical significance (p &lt; 0.05):\n\nEvidence that there’s a real effect\nDoesn’t tell you if the effect matters\n\n\n\nPractical/Clinical significance:\n\nEffect is large enough to matter in real-world terms\nYou must judge this based on context\n\n\n\n\n\n\nExample: A drug lowers blood pressure by 0.5 mmHg (p = 0.001)\n\nStatistically significant? ✅ Yes\nClinically meaningful? ❌ No (too small to affect patient outcomes)"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#key-takeaways",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#key-takeaways",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Key takeaways",
-    "text": "Key takeaways\n\nStudy design determines analysis\n\nPaired or independent is about how data were collected\nCannot change after the fact!\n\nPaired tests are more powerful\n\nWhen appropriate, pairing reduces variability\nSmaller SE → easier to detect true effects\n\nBoth tests follow same logic\n\nState hypotheses\nCalculate test statistic\nFind p-value\nMake conclusion\n\nAlways check assumptions\n\nIndependence (within or between pairs)\nApproximate normality (or large n)"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#common-mistakes-to-avoid",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#common-mistakes-to-avoid",
+    "title": "Midterm Review",
+    "section": "Common Mistakes to Avoid",
+    "text": "Common Mistakes to Avoid\n\nForgetting to check assumptions before running tests\nConfusing standard deviation and standard error\nUsing lower.tail = TRUE when you need FALSE (or vice versa)\nMisinterpreting p-values and confidence intervals\nForgetting to include na.rm = TRUE when there are missing values\nNot rendering your document before submitting\n\n\n\nPro tip: When using pbinom() or ppois(), sketch a quick picture to check if you want the left or right tail!"
   },
   {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means.html#looking-ahead",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means.html#looking-ahead",
-    "title": "Comparing Two Means: Paired and Independent Samples",
-    "section": "Looking ahead",
-    "text": "Looking ahead\n\n\nNext time:\n\nMidterm review\n\n\n\n\nBMSC 620 | Comparing Two Means"
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#exam-strategy",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#exam-strategy",
+    "title": "Midterm Review",
+    "section": "Exam Strategy",
+    "text": "Exam Strategy\nTime management:\n\nDon’t get stuck on one question\nMove on and come back if needed\nLeave buffer time for rendering and checking\n\n\n\nInterpretation questions:\n\nWrite in complete sentences\nReference numbers from your calculations\nConnect to context (not just abstract statistics)\n\n\n\nCoding questions:\n\nShow your work (don’t just give answers)\nUse comments to explain your logic\nCheck that your code actually runs!"
+  },
+  {
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#resources",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#resources",
+    "title": "Midterm Review",
+    "section": "Resources",
+    "text": "Resources\nDuring the exam:\n\nLecture slides (especially the summary slides)\nHomework solutions (you’ve seen similar questions!)\nR help: ?t.test, ?pnorm, etc.\n\n\n\nAfter you submit:\n\nThe exam will close Monday at 11 PM\nSolutions will be available after\nWe’ll get feedback to you within a week\nRemember: This is a learning experience!"
+  },
+  {
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#your-turn",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#your-turn",
+    "title": "Midterm Review",
+    "section": "Your Turn!",
+    "text": "Your Turn!\nWhat questions do you have?\n\nConcepts that are still unclear?\nR functions you’re unsure about?\nSpecific exam questions you want to discuss?\n\n\n\nRemember:\n\nExam opens today at 3 PM\nYou have until Monday at 11 PM\nYou’ve got this! 💪"
+  },
+  {
+    "objectID": "lessons/14_midterm_review/14_midterm_review.html#good-luck",
+    "href": "lessons/14_midterm_review/14_midterm_review.html#good-luck",
+    "title": "Midterm Review",
+    "section": "Good luck!",
+    "text": "Good luck!\nYou’re well prepared:\n\n✅ You’ve done the homework\n✅ You’ve come to class\n✅ You’ve practiced with R\n✅ You know where to find help\n\n\n\nTrust your preparation and think carefully about each question.\n\n\n\nBMSC 620 | Midterm Review"
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
+    "title": "Response to Muddy Points",
+    "section": "",
+    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
+    "title": "Response to Muddy Points",
+    "section": "",
+    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
+    "title": "Response to Muddy Points",
+    "section": "Conceptual Clarifications",
+    "text": "Conceptual Clarifications\n\nHypothesis Testing Ethics: Can You Change Your Hypothesis After Seeing Data?\n“What if we failed to reject the null, then tested the opposite direction?”\nThis is an excellent ethical question that gets at the heart of hypothesis testing. You should not reframe a confirmatory hypothesis after looking at the data. Here’s why:\nThe entire hypothesis testing framework is built on specifying your hypothesis before collecting data. When you set \\(\\alpha = 0.05\\), you’re accepting a 5% chance of a false positive. But if you:\n\nTest one direction (e.g., caffeine increases tapping) → get \\(p = 0.10\\)\nThen test the other direction (caffeine decreases tapping) → get \\(p = 0.03\\)\n\nYou’ve now done two tests, each with a 5% false positive rate. Your actual false positive rate is higher than 5% (this is the multiple testing problem we’ll discuss later in the course). Conceptually, you are giving yourself multiple chances to find significance after seeing the data.\nWhat you CAN do:\n\nReport the result as exploratory: “We found a non-significant trend toward increased tapping. Interestingly, there was a significant decrease…”\nUse the finding to design a new study with an a priori hypothesis\nBe transparent in publications: “This was a post-hoc analysis”\n\nThe key is transparency about what was pre-specified vs discovered during analysis.\n\n\nToo Many Options: What Should I Actually Use?\n“Giving all the options confuses me - what do you mainly use?”\nFair feedback! I show you multiple approaches so you can understand different code you might encounter, but here’s what I recommend you actually use:\nFor t-tests, use this approach:\n# Two independent samples\nt.test(outcome ~ group, data = mydata)\n\n# Two independent samples (long format)\nt.test(outcome ~ group, data = mydata) \n\n# Paired samples (long format - one outcome column, one time/condition column)\nt.test(outcome ~ group, data = mydata, paired = TRUE)\n\n# Paired samples (wide format - separate before/after columns)\nt.test(x = mydata$after, y = mydata$before, paired = TRUE)\n\n# One sample\nt.test(mydata$variable, mu = 0)\nIf you remember only one thing: use the formula interface for two-sample tests, and add paired = TRUE only when the same units are measured twice.\nWhy this approach?\n\nWorks with tidyverse piping\nClear syntax showing what you’re comparing\nEasy to modify (just add paired = TRUE or change mu)\nYou’ll see this format in most modern R code\n\nYou can ignore the rstatix package methods for now unless you’re specifically doing grouped analyses. I mention them so you’ll recognize them if you see them in other people’s code or Stack Overflow."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
+    "title": "Response to Muddy Points",
+    "section": "The here Package",
+    "text": "The here Package\n“I think Here is confusing still”\nLet me break this down with a concrete example. Say your project structure looks like this:\nmy_project/\n├── my_project.Rproj\n├── code/\n│   └── analysis.R\n└── data/\n    └── nhanes.csv\nWithout here: If you’re working in analysis.R, you might write:\ndata &lt;- read_csv(\"../data/nhanes.csv\")  # Fragile! Depends on where you run code\nWith here:\nlibrary(here)\ndata &lt;- read_csv(here(\"data\", \"nhanes.csv\"))  # Always works!\nThe magic: here() always builds paths from your project root (where the .Rproj file lives), regardless of:\n\nWhat folder your script is in\nWhether you run code line-by-line or knit the whole document\n\nWhether you’re on Mac, PC, or different computers\n\nThink of it as: here() says “start at my project folder, then go into data folder, then grab nhanes.csv”\nWhen to use it: Anytime you’re reading or writing files in your project. You’ll get practice with this in upcoming homework.\nIf this still feels abstract right now, that’s normal. It usually “clicks” the first time a project breaks without here()."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
+    "title": "Response to Muddy Points",
+    "section": "Understanding t.test() Arguments",
+    "text": "Understanding t.test() Arguments\n\nWhy mu = 0 Sometimes But Not Always?\n“Why set mu = 0 for DiffChol but not when comparing two columns?”\nGreat observation! The key thing to understand: mu = 0 is the default for ALL t-tests — I just chose when to write it explicitly.\nOne-sample t-test:\nt.test(chol$DiffChol, mu = 0)  # Explicit\nt.test(chol$DiffChol)           # Same thing - mu = 0 is default\nTwo-sample t-test (paired):\nt.test(x = chol$After, y = chol$Before, paired = TRUE)           # mu = 0 by default\nt.test(x = chol$After, y = chol$Before, paired = TRUE, mu = 0)   # Could write this too\nWhy I sometimes write it explicitly:\nIn the one-sample example with DiffChol, I wrote mu = 0 to emphasize what we’re testing: “Is the mean difference equal to zero?” It makes the null hypothesis more visible in the code.\nIn the two-sample paired example, I left it off because it’s the default and the syntax already makes it clear we’re comparing before and after values.\nBoth are testing difference = 0 — I just chose to be explicit about it in the one-sample case for teaching purposes. You could write mu = 0 in every t-test call, or leave it off in all of them. The code does the same thing either way. The definition of the difference depends on the test (one-sample, paired, or two-sample), but the default null value does not.\n\n\nPaired vs Independent: The Resistance Model Question\n“Would a resistance model be paired or independent?”\nThis is a nuanced question! Let’s think through it:\nPaired data requires: The same biological unit measured twice, or closely matched units.\nYour scenario: Resistant cells vs naive cells from the same original culture.\nThis is independent samples because:\n\nThey’re different cells (not the same cells measured twice)\nEven though they share an ancestor, they’ve undergone different selection pressures\nYou’re comparing two distinct populations that have diverged\n\nWhen it WOULD be paired:\n\nIf you measured gene expression in cells, then treated them, then measured again (same cells, before/after)\nIf you had matched tumor samples from the same patient (primary vs metastatic site)\n\nThe key question: “Am I measuring the exact same thing twice, or two related but distinct things?” In your case, it’s the latter. Shared origin does not automatically imply pairing — pairing requires a one-to-one linkage between measurements.\nIn practice, shared background like this is better handled with blocking or mixed models, which is out of scope for this course. But for t-test decision rules, this is not paired data.\nI think about this example like: “If I accidentally swapped the labels on three of my ‘resistant’ wells, could I still reconstruct exactly which ‘naive’ wells they were supposed to be paired with?” In a true paired design (like a patient’s left and right eye), the answer is yes. In a lineage model, the answer is no — the pairing is not intrinsic.\nLeft and right eyes are paired because they are two measurements on the same indivisible experimental unit; resistant and naive lineages are not, because they are separate populations whose relationship exists only through experimental history, not identity."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
+    "title": "Response to Muddy Points",
+    "section": "R Packages and Installation",
+    "text": "R Packages and Installation\n“I think it will be clearer once I start working with it”\nYou’re right - this becomes much more intuitive with practice! Just remember:\nOne-time setup (per computer):\ninstall.packages(\"packagename\")  # Downloads from internet\nEvery R session:\nlibrary(packagename)  # Loads into your current session\nCommon confusion: You only need to install once, but you need to library() in every script/document that uses it.\nIf you get stuck: The error message “there is no package called ‘X’” means you need to install it. The error “could not find function ‘Y’” often means you forgot to load the library."
+  },
+  {
+    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
+    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
+    "title": "Response to Muddy Points",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nWe’ll continue practicing these concepts, and you’ll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with: - Choosing appropriate t-tests - Using R projects and here() - Interpreting results in context\nDon’t hesitate to come to office hours if anything remains unclear!"
   },
   {
     "objectID": "lessons/03_intro_to_r/03_intro_to_r.html#learning-objectives-today",
@@ -6086,54 +6492,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html",
-    "title": "Response to Muddy Points",
-    "section": "",
-    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#pacing-and-what-worked",
-    "title": "Response to Muddy Points",
-    "section": "",
-    "text": "Great news on pacing - 100% of you who responded found the pace “about right”! Many of you appreciated the clarity on when to use paired vs independent t-tests, and the R project workflow at the end was highlighted as particularly helpful. I’m glad the distinction between test types and the code walkthroughs are landing well."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#conceptual-clarifications",
-    "title": "Response to Muddy Points",
-    "section": "Conceptual Clarifications",
-    "text": "Conceptual Clarifications\n\nHypothesis Testing Ethics: Can You Change Your Hypothesis After Seeing Data?\n“What if we failed to reject the null, then tested the opposite direction?”\nThis is an excellent ethical question that gets at the heart of hypothesis testing. You should not reframe a confirmatory hypothesis after looking at the data. Here’s why:\nThe entire hypothesis testing framework is built on specifying your hypothesis before collecting data. When you set \\(\\alpha = 0.05\\), you’re accepting a 5% chance of a false positive. But if you:\n\nTest one direction (e.g., caffeine increases tapping) → get \\(p = 0.10\\)\nThen test the other direction (caffeine decreases tapping) → get \\(p = 0.03\\)\n\nYou’ve now done two tests, each with a 5% false positive rate. Your actual false positive rate is higher than 5% (this is the multiple testing problem we’ll discuss later in the course). Conceptually, you are giving yourself multiple chances to find significance after seeing the data.\nWhat you CAN do:\n\nReport the result as exploratory: “We found a non-significant trend toward increased tapping. Interestingly, there was a significant decrease…”\nUse the finding to design a new study with an a priori hypothesis\nBe transparent in publications: “This was a post-hoc analysis”\n\nThe key is transparency about what was pre-specified vs discovered during analysis.\n\n\nToo Many Options: What Should I Actually Use?\n“Giving all the options confuses me - what do you mainly use?”\nFair feedback! I show you multiple approaches so you can understand different code you might encounter, but here’s what I recommend you actually use:\nFor t-tests, use this approach:\n# Two independent samples\nt.test(outcome ~ group, data = mydata)\n\n# Two independent samples (long format)\nt.test(outcome ~ group, data = mydata) \n\n# Paired samples (long format - one outcome column, one time/condition column)\nt.test(outcome ~ group, data = mydata, paired = TRUE)\n\n# Paired samples (wide format - separate before/after columns)\nt.test(x = mydata$after, y = mydata$before, paired = TRUE)\n\n# One sample\nt.test(mydata$variable, mu = 0)\nIf you remember only one thing: use the formula interface for two-sample tests, and add paired = TRUE only when the same units are measured twice.\nWhy this approach?\n\nWorks with tidyverse piping\nClear syntax showing what you’re comparing\nEasy to modify (just add paired = TRUE or change mu)\nYou’ll see this format in most modern R code\n\nYou can ignore the rstatix package methods for now unless you’re specifically doing grouped analyses. I mention them so you’ll recognize them if you see them in other people’s code or Stack Overflow."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#the-here-package",
-    "title": "Response to Muddy Points",
-    "section": "The here Package",
-    "text": "The here Package\n“I think Here is confusing still”\nLet me break this down with a concrete example. Say your project structure looks like this:\nmy_project/\n├── my_project.Rproj\n├── code/\n│   └── analysis.R\n└── data/\n    └── nhanes.csv\nWithout here: If you’re working in analysis.R, you might write:\ndata &lt;- read_csv(\"../data/nhanes.csv\")  # Fragile! Depends on where you run code\nWith here:\nlibrary(here)\ndata &lt;- read_csv(here(\"data\", \"nhanes.csv\"))  # Always works!\nThe magic: here() always builds paths from your project root (where the .Rproj file lives), regardless of:\n\nWhat folder your script is in\nWhether you run code line-by-line or knit the whole document\n\nWhether you’re on Mac, PC, or different computers\n\nThink of it as: here() says “start at my project folder, then go into data folder, then grab nhanes.csv”\nWhen to use it: Anytime you’re reading or writing files in your project. You’ll get practice with this in upcoming homework.\nIf this still feels abstract right now, that’s normal. It usually “clicks” the first time a project breaks without here()."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#understanding-t.test-arguments",
-    "title": "Response to Muddy Points",
-    "section": "Understanding t.test() Arguments",
-    "text": "Understanding t.test() Arguments\n\nWhy mu = 0 Sometimes But Not Always?\n“Why set mu = 0 for DiffChol but not when comparing two columns?”\nGreat observation! The key thing to understand: mu = 0 is the default for ALL t-tests - I just chose when to write it explicitly.\nOne-sample t-test:\nt.test(chol$DiffChol, mu = 0)  # Explicit\nt.test(chol$DiffChol)           # Same thing - mu = 0 is default\nTwo-sample t-test (paired):\nt.test(x = chol$After, y = chol$Before, paired = TRUE)           # mu = 0 by default\nt.test(x = chol$After, y = chol$Before, paired = TRUE, mu = 0)   # Could write this too\nWhy I sometimes write it explicitly:\nIn the one-sample example with DiffChol, I wrote mu = 0 to emphasize what we’re testing: “Is the mean difference equal to zero?” It makes the null hypothesis more visible in the code.\nIn the two-sample paired example, I left it off because it’s the default and the syntax already makes it clear we’re comparing before and after values.\nBoth are testing difference = 0 - I just chose to be explicit about it in the one-sample case for teaching purposes. You could write mu = 0 in every t-test call, or leave it off in all of them. The code does the same thing either way. The definition of the difference depends on the test (one-sample, paired, or two-sample), but the default null value does not.\n\n\nPaired vs Independent: The Resistance Model Question\n“Would a resistance model be paired or independent?”\nThis is a nuanced question! Let’s think through it:\nPaired data requires: The same biological unit measured twice, or closely matched units.\nYour scenario: Resistant cells vs naive cells from the same original culture.\nThis is independent samples because:\n\nThey’re different cells (not the same cells measured twice)\nEven though they share an ancestor, they’ve undergone different selection pressures\nYou’re comparing two distinct populations that have diverged\n\nWhen it WOULD be paired:\n\nIf you measured gene expression in cells, then treated them, then measured again (same cells, before/after)\nIf you had matched tumor samples from the same patient (primary vs metastatic site)\n\nThe key question: “Am I measuring the exact same thing twice, or two related but distinct things?” In your case, it’s the latter. Shared origin does not automatically imply pairing — pairing requires a one-to-one linkage between measurements.\nIn practice, shared background like this is better handled with blocking or mixed models, which is out of scope for this course. But for t-test decision rules, this is not paired data.\nI think about this example like: “If I accidentally swapped the labels on three of my ‘resistant’ wells, could I still reconstruct exactly which ‘naive’ wells they were supposed to be paired with?” In a true paired design (like a patient’s left and right eye), the answer is yes. In a lineage model, the answer is no — the pairing is not intrinsic.\nLeft and right eyes are paired because they are two measurements on the same indivisible experimental unit; resistant and naive lineages are not, because they are separate populations whose relationship exists only through experimental history, not identity."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#r-packages-and-installation",
-    "title": "Response to Muddy Points",
-    "section": "R Packages and Installation",
-    "text": "R Packages and Installation\n“I think it will be clearer once I start working with it”\nYou’re right - this becomes much more intuitive with practice! Just remember:\nOne-time setup (per computer):\ninstall.packages(\"packagename\")  # Downloads from internet\nEvery R session:\nlibrary(packagename)  # Loads into your current session\nCommon confusion: You only need to install once, but you need to library() in every script/document that uses it.\nIf you get stuck: The error message “there is no package called ‘X’” means you need to install it. The error “could not find function ‘Y’” often means you forgot to load the library."
-  },
-  {
-    "objectID": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
-    "href": "lessons/13_comparing_two_means/13_comparing_two_means_muddy_points.html#looking-ahead",
-    "title": "Response to Muddy Points",
-    "section": "Looking Ahead",
-    "text": "Looking Ahead\nWe’ll continue practicing these concepts, and you’ll get more comfortable with the workflow as we go. The homework this week will give you hands-on experience with: - Choosing appropriate t-tests - Using R projects and here() - Interpreting results in context\nDon’t hesitate to come to office hours if anything remains unclear!"
   }
 ]

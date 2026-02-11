@@ -79,7 +79,7 @@ By the end of the week, you should be able to:
     -   Hypothesis testing framework
     -   Common pitfalls and tips
 -   **Slides**
-    -   Midterm Review - coming soon
+    -   Midterm Review ([HTML](/lessons/14_midterm_review/14_midterm_review.qmd) \| [PDF](/lessons/13_comparing_two_means/13_comparing_two_means.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
     -   Coming soon
 -   **Muddy points**
