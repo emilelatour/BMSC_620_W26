@@ -9,4 +9,30 @@ editor_options:
   chunk_output_type: console
 ---
 
-See Sakai
+## Midterm Exam
+
+**Available:** Wednesday, February 11 at 3:00 PM through Monday, February 16 at 11:00 PM
+
+**Access:** [Sakai](https://sakai.ohsu.edu/)
+
+**Time to budget:** 3–5 hours (you don't need to complete it in one sitting)
+
+### Submission Requirements
+
+Upload **both** files to Sakai:
+
+1. Your `.qmd` source file
+2. The rendered `.html` file
+
+**File naming:** `Lastname_FirstInitial_Midterm` (e.g., `Smith_J_Midterm.qmd` and `Smith_J_Midterm.html`)
+
+### Important Reminders
+
+- **Open book/notes:** You may use course materials, R documentation, and your notes
+- **No collaboration:** Work independently—no help from other students, AI assistants, or online forums
+- **Check before submitting:** Make sure your document renders to HTML without errors
+
+### Resources
+
+- Midterm Review ([HTML](/lessons/14_midterm_review/14_midterm_review.qmd) \| [PDF](/lessons/14_midterm_review/14_midterm_review.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+- See [Schedule](schedule.qmd) for all lecture materials and homework
