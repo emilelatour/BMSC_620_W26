@@ -1109,6 +1109,8 @@ Where:
 
 ## Calculating a 95% CI in R (1/2)
 
+<!-- t_star <- qt((1 + confidence_level) / 2, df = n - 1) -->
+
 ```{r}
 # Sample data
 n <- 25
@@ -1116,8 +1118,11 @@ xbar <- 14.2
 s <- 1.8
 confidence_level <- 0.95
 
+alpha <- 1 - confidence_level
+
 # Step 1: Find critical value
-t_star <- qt((1 + confidence_level) / 2, df = n - 1)
+t_star <- qt(1 - alpha / 2, df = n - 1)
+
 # OR: qt(0.975, df = 24)
 t_star
 
