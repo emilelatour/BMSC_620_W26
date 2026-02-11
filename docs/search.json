@@ -4079,7 +4079,7 @@
     "href": "lessons/14_midterm_review/14_midterm_review.html#ggplot2-example",
     "title": "Midterm Review",
     "section": "ggplot2: Example",
-    "text": "ggplot2: Example\n\nlibrary(ggplot2)\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n# Histogram\nggplot(nhanes.samp, aes(x = Height)) +\n  geom_histogram(bins = 20) +\n  labs(title = \"Distribution of Height\",\n       x = \"Height (cm)\",\n       y = \"Count\")\n\n# Boxplot by group\nggplot(nhanes.samp, \n       aes(x = Gender, y = Weight, fill = Gender)) +\n  geom_boxplot() +\n  labs(title = \"Weight by Gender\",\n       x = \"Weight (kg)\",\n       y = \"Age (years)\")\n\n\n\nRemember: Start with ggplot(), then add layers with +"
+    "text": "ggplot2: Example\n\nlibrary(ggplot2)\nlibrary(oibiostat)\ndata(\"nhanes.samp\")\n\n# Histogram\nggplot(nhanes.samp, aes(x = Height)) +\n  geom_histogram(bins = 20) +\n  labs(title = \"Distribution of Height\",\n       x = \"Height (cm)\",\n       y = \"Count\")\n\n# Boxplot by group\nggplot(nhanes.samp, \n       aes(x = Gender, y = Weight, fill = Gender)) +\n  geom_boxplot() +\n  labs(title = \"Weight by Gender\",\n       x = \"Gender\",\n       y = \"Weight (kg)\")\n\n\n\nRemember: Start with ggplot(), then add layers with +"
   },
   {
     "objectID": "lessons/14_midterm_review/14_midterm_review.html#dplyr-rstatix-summary-statistics",
