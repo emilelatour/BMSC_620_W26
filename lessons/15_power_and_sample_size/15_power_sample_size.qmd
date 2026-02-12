@@ -1,0 +1,1210 @@
+---
+title: "Power and Sample Size"
+subtitle: "Textbook Section 5.4"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w7d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Power and Sample Size"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(patchwork)
+library(rstatix)
+library(pwr)  # NEW package for power calculations
+
+library(lamisc)
+library(laviz)     
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none", 
+                                     axis = "xy", 
+                                     base_size = 16))
+
+set.seed(456)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1.  Understand the four components in equilibrium in a hypothesis test
+2.  Define and interpret Type I and Type II errors
+3.  Define power and understand its role in study design
+4.  Calculate power and sample size using R for one-sample t-tests
+5.  Calculate power and sample size using R for two-sample t-tests
+
+## Roadmap for Today
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: The Four Components**
+
+-   What affects our ability to detect effects?
+-   Significance level ($\alpha$)
+-   Sample size ($n$)
+-   Effect size
+-   Power ($1-\beta$)
+
+**Part 2: Errors in Hypothesis Testing**
+
+-   Type I errors ($\alpha$)
+-   Type II errors ($\beta$)
+-   Power as "correct detection"
+-   Visualizing errors with distributions
+:::
+
+::: {.column width="50%"}
+**Part 3: Calculating Power and Sample Size**
+
+-   Introduction to Cohen's *d*
+-   Using the `pwr` package in R
+-   One-sample t-test examples
+-   Two-sample t-test examples
+
+**Part 4: Study Design Applications**
+
+-   Planning studies with power in mind
+-   Interpreting existing study results
+-   Trade-offs and practical considerations
+:::
+:::::
+
+# Connecting to What We Know
+
+## Where are we in the course?
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+#| fig-align: center
+
+# Create a simple flowchart
+tibble(
+  x = c(1, 2, 3, 4, 5),
+  y = c(1, 1, 1, 1, 1),
+  label = c("Descriptive\nStatistics", 
+            "Probability &\nDistributions",
+            "Sampling\nDistributions", 
+            "Confidence\nIntervals",
+            "Hypothesis\nTests"),
+  current = c(FALSE, FALSE, FALSE, FALSE, FALSE)
+) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_segment(aes(x = x - 0.3, xend = x + 0.3, y = y, yend = y), 
+               linewidth = 10, color = "#0072B2", alpha = 0.7) +
+  geom_text(aes(label = label), size = 5, color = "white", fontface = "bold") +
+  annotate("segment", x = 1.3, y = 1, xend = 1.7, yend = 1,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
+  annotate("segment", x = 2.3, y = 1, xend = 2.7, yend = 1,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
+  annotate("segment", x = 3.3, y = 1, xend = 3.7, yend = 1,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
+  annotate("segment", x = 4.3, y = 1, xend = 4.7, yend = 1,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
+  annotate("segment", x = 5.3, y = 1, xend = 5.7, yend = 1,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1, color = "#D55E00") +
+  annotate("text", x = 6, y = 1, label = "Power &\nSample Size", 
+           size = 5.5, fontface = "bold", color = "#D55E00") +
+  coord_cartesian(xlim = c(0.5, 6.5), ylim = c(0.5, 1.5)) +
+  theme_void()
+```
+
+\
+
+**Today we answer:** How do we design studies to have adequate power to detect effects?
+
+**Why this matters:** No point running an experiment if it's unlikely to detect a real effect!
+
+## Review: What we've learned about hypothesis tests
+
+**We've covered three types of t-tests:**
+
+::::: columns
+::: {.column width="30%"}
+**One-sample**
+
+-   Compare sample mean to known value
+-   $H_0: \mu = \mu_0$
+-   Example: Body temp vs 98.6°F
+-   Test stat: $t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$
+:::
+
+::: {.column width="35%"}
+**Paired samples**
+
+-   Compare paired differences
+-   $H_0: \mu_d = 0$
+-   Example: Blood pressure before/after treatment
+-   Test stat: $t = \frac{\bar{x}_d - 0}{s_d/\sqrt{n}}$
+:::
+
+::: {.column width="35%"}
+**Two independent samples**
+
+-   Compare means from two groups
+-   $H_0: \mu_1 = \mu_2$
+-   Example: Treatment vs control
+-   Test stat: $t = \frac{(\bar{x}_1-\bar{x}_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
+:::
+:::::
+
+\
+
+**Today's question:** For each of these tests, how do we determine if we have enough data to detect a real effect?
+
+## Motivating example: The caffeine study
+
+**Research Question:** Does caffeine increase finger tapping speed?
+
+\
+
+**Study Design:**
+
+-   70 college students trained to tap fingers rapidly
+-   Randomly assigned to two groups:
+    -   **Control group:** Decaffeinated coffee (n=35)
+    -   **Caffeine group:** Coffee with 200mg caffeine (n=35)
+-   After 2 hours, measure taps per minute
+
+\
+
+**Results we saw:** The caffeine group had significantly higher taps/min
+
+\
+
+**Questions we might ask *before* running this study:**
+
+-   How many participants do we need?
+-   What if we could only recruit 20 per group - would that be enough?
+-   What factors determine whether we can detect an effect?
+
+# Part 1: The Four Components
+
+## What affects our ability to detect an effect?
+
+**Scenario:** Imagine two populations that differ in their mean tapping speed
+
+\
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+#| fig-align: center
+
+# Create two overlapping distributions
+mu1 <- 245
+mu2 <- 250
+sd <- 2
+
+ggplot(data.frame(x = c(238, 257)), aes(x)) + 
+  stat_function(fun = dnorm, 
+                args = list(mean = mu1, sd = sd), 
+                linewidth = 1.5, 
+                color = "#E69F00") +
+  stat_function(fun = dnorm, 
+                args = list(mean = mu2, sd = sd), 
+                linewidth = 1.5, 
+                color = "#0072B2") +
+  annotate("text", x = 240, y = 0.12, label = "Control\nGroup", 
+           size = 5, color = "#E69F00") +
+  annotate("text", x = 254, y = 0.12, label = "Caffeine\nGroup", 
+           size = 5, color = "#0072B2") +
+  labs(x = "Taps per minute", y = "Probability density",
+       title = "Population distributions: 5 taps/min difference") +
+  theme(text = element_text(size = 14))
+```
+
+\
+
+**Question:** When we take samples from these groups, will it be easy to tell them apart?
+
+**Answer:** It depends on several factors...
+
+## Scenario 1: Small standard deviation
+
+**Same difference (5 taps/min), but less variability (SD = 1 instead of 2)**
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+#| fig-align: center
+
+mu1 <- 245
+mu2 <- 250
+sd <- 1
+
+ggplot(data.frame(x = c(238, 257)), aes(x)) + 
+  stat_function(fun = dnorm, 
+                args = list(mean = mu1, sd = sd), 
+                linewidth = 1.5, 
+                color = "#E69F00") +
+  stat_function(fun = dnorm, 
+                args = list(mean = mu2, sd = sd), 
+                linewidth = 1.5, 
+                color = "#0072B2") +
+  annotate("text", x = 242, y = 0.3, label = "Control", 
+           size = 5, color = "#E69F00") +
+  annotate("text", x = 253, y = 0.3, label = "Caffeine", 
+           size = 5, color = "#0072B2") +
+  labs(x = "Taps per minute", y = "Probability density",
+       title = "Less overlap → Easier to detect difference") +
+  theme(text = element_text(size = 14))
+```
+
+\
+
+**Observation:** Less overlap between distributions makes the difference easier to detect!
+
+## Scenario 2: Larger difference
+
+**Larger difference (10 taps/min instead of 5), same variability (SD = 2)**
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+#| fig-align: center
+
+mu1 <- 245
+mu2 <- 255
+sd <- 2
+
+ggplot(data.frame(x = c(238, 263)), aes(x)) + 
+  stat_function(fun = dnorm, 
+                args = list(mean = mu1, sd = sd), 
+                linewidth = 1.5, 
+                color = "#E69F00") +
+  stat_function(fun = dnorm, 
+                args = list(mean = mu2, sd = sd), 
+                linewidth = 1.5, 
+                color = "#0072B2") +
+  annotate("text", x = 240, y = 0.12, label = "Control", 
+           size = 5, color = "#E69F00") +
+  annotate("text", x = 260, y = 0.12, label = "Caffeine", 
+           size = 5, color = "#0072B2") +
+  labs(x = "Taps per minute", y = "Probability density",
+       title = "Bigger difference → Easier to detect") +
+  theme(text = element_text(size = 14))
+```
+
+\
+
+**Observation:** A larger true difference is easier to detect!
+
+## The four components in equilibrium
+
+**In any hypothesis test, four quantities are mathematically related:**
+
+\
+
+::::: columns
+::: {.column width="48%"}
+::: {.callout-note icon="false"}
+## 1. Significance level ($\alpha$)
+
+-   Probability of Type I error
+-   Usually set at 0.05
+-   Set *before* collecting data
+-   Determines rejection region
+:::
+
+::: {.callout-note icon="false"}
+## 2. Sample size ($n$)
+
+-   Number of observations
+-   Larger $n$ → smaller SE
+-   Often what we're trying to determine
+-   Constrained by time, cost, ethics
+:::
+:::
+
+::: {.column width="48%"}
+::: {.callout-note icon="false"}
+## 3. Effect size
+
+-   Difference we want to detect
+-   Relative to variability
+-   Often measured by Cohen's *d*
+-   Based on pilot data or literature
+:::
+
+::: {.callout-note icon="false"}
+## 4. Power ($1-\beta$)
+
+-   Probability of detecting a real effect
+-   Typically want 80% or 90%
+-   What we calculate given the others
+-   The probability of "correctly rejecting"
+:::
+:::
+:::::
+
+\
+
+**Key insight:** If you fix any three of these, the fourth is determined!
+
+# Part 2: Errors in Hypothesis Testing
+
+## Type I and Type II errors
+
+**Remember:** Hypothesis tests can make mistakes in two ways
+
+\
+
+::::: columns
+::: {.column width="48%"}
+::: {.callout-important icon="false"}
+## Type I Error (False Positive)
+
+**Definition:** Reject $H_0$ when it's actually true
+
+**Notation:** Probability = $\alpha$
+
+**Example:** Conclude caffeine increases tapping when it really doesn't
+
+**Control:** Set $\alpha$ before study (usually 0.05)
+
+**Also called:** False positive, $\alpha$ error
+:::
+:::
+
+::: {.column width="48%"}
+::: {.callout-warning icon="false"}
+## Type II Error (False Negative)
+
+**Definition:** Fail to reject $H_0$ when it's false
+
+**Notation:** Probability = $\beta$
+
+**Example:** Fail to detect caffeine effect when it really exists
+
+**Control:** Increase sample size, decrease variability
+
+**Also called:** False negative, $\beta$ error
+:::
+:::
+:::::
+
+\
+
+**Trade-off:** Decreasing one type of error often increases the other!
+
+## Power: The probability of correctly detecting an effect
+
+::: {.callout-tip icon="false"}
+## Power Definition
+
+**Power** = $1 - \beta$ = Probability of correctly rejecting $H_0$ when it's false
+
+-   Also called "sensitivity" or "true positive rate"
+-   The probability of detecting an effect that actually exists
+-   Typically want power ≥ 0.80 (80%)
+-   Some fields require 0.90 (90%)
+:::
+
+\
+
+**Why 80%?** This is a convention balancing:
+
+-   Reasonable chance of detecting real effects
+-   Practical constraints on sample size
+-   Cost and feasibility
+
+\
+
+**Think of it this way:**
+
+-   High power = good "detector" - likely to find effect if it exists
+-   Low power = bad "detector" - might miss real effects
+
+## The complete picture
+
+| **Reality** | **$H_0$ True** | **$H_0$ False** |
+|-------------|----------------|-----------------|
+| **Reject $H_0$** | Type I Error ($\alpha$) | **Power** ($1-\beta$) ✓ |
+| **Fail to reject $H_0$** | Correct ($1-\alpha$) ✓ | Type II Error ($\beta$) |
+
+\
+
+**Correct decisions:**
+
+-   $1 - \alpha$: Specificity (correctly fail to reject when $H_0$ true)
+-   $1 - \beta$: Power (correctly reject when $H_0$ false)
+
+\
+
+**Errors:**
+
+-   $\alpha$: Type I error rate (false positive)
+-   $\beta$: Type II error rate (false negative)
+
+\
+
+**What we control in study design:** We typically fix $\alpha$ at 0.05 and choose $n$ to achieve desired power
+
+## Visualizing these concepts
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 6
+#| fig-align: center
+
+# Set up parameters
+mu_null <- 0
+mu_alt <- 3
+sd <- 1
+alpha <- 0.05
+cv <- qnorm(1 - alpha/2)  # Critical value for two-sided test
+
+# Create the plot
+ggplot(data.frame(x = c(-3, 7)), aes(x)) +
+  # Null distribution
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_null, sd = sd),
+                linewidth = 1.5,
+                color = "#E69F00") +
+  # Alternative distribution  
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_alt, sd = sd),
+                linewidth = 1.5,
+                color = "#0072B2") +
+  # Rejection regions under null (Type I error)
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_null, sd = sd),
+                xlim = c(-3, -cv),
+                geom = "area", 
+                fill = "#CC79A7", 
+                alpha = 0.7) +
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_null, sd = sd),
+                xlim = c(cv, 4),
+                geom = "area", 
+                fill = "#CC79A7", 
+                alpha = 0.7) +
+  # Type II error region
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_alt, sd = sd),
+                xlim = c(-1, cv),
+                geom = "area", 
+                fill = "#F0E442", 
+                alpha = 0.6) +
+  # Power region
+  stat_function(fun = dnorm, 
+                args = list(mean = mu_alt, sd = sd),
+                xlim = c(cv, 7),
+                geom = "area", 
+                fill = "#009E73", 
+                alpha = 0.5) +
+  # Labels
+  annotate("text", x = -1.5, y = 0.3, 
+           label = "Null\nDistribution", 
+           size = 5, color = "#E69F00") +
+  annotate("text", x = 4, y = 0.3, 
+           label = "Alternative\nDistribution", 
+           size = 5, color = "#0072B2") +
+  annotate("text", x = -2.5, y = 0.02, 
+           label = "α/2", 
+           size = 5, color = "#CC79A7") +
+  annotate("text", x = 2.7, y = 0.02, 
+           label = "α/2", 
+           size = 5, color = "#CC79A7") +
+  annotate("text", x = 1, y = 0.08, 
+           label = "β\n(Type II error)", 
+           size = 4.5, color = "#806000") +
+  annotate("text", x = 4, y = 0.15, 
+           label = "Power\n(1-β)", 
+           size = 5, color = "#009E73") +
+  # Critical value line
+  geom_vline(xintercept = cv, 
+             linetype = "dashed", 
+             linewidth = 1,
+             color = "black") +
+  annotate("text", x = cv + 0.3, y = 0.42, 
+           label = "Critical\nvalue", 
+           size = 4) +
+  labs(x = "Test Statistic", 
+       y = "Probability Density",
+       title = "Type I error, Type II error, and Power") +
+  theme(text = element_text(size = 14))
+```
+
+**Key observations:**
+
+-   Type I error ($\alpha$): Area in tails under null distribution
+-   Type II error ($\beta$): Area to left of critical value under alternative
+-   Power ($1-\beta$): Area to right of critical value under alternative
+
+## What increases power?
+
+**Power increases when:**
+
+::::: columns
+::: {.column width="48%"}
+**1. Larger sample size ($n$)**
+
+-   Reduces standard error
+-   Narrows sampling distributions
+-   Makes distributions more separated
+
+\
+
+**2. Larger effect size**
+
+-   Greater true difference
+-   More separation between null and alternative
+-   Easier to distinguish groups
+:::
+
+::: {.column width="48%"}
+**3. Less variability**
+
+-   Smaller population SD ($\sigma$)
+-   Tighter distributions
+-   Less overlap
+
+\
+
+**4. Higher significance level**
+
+-   Larger $\alpha$ (but increases Type I error!)
+-   Usually not recommended
+-   Trade-off between errors
+:::
+:::::
+
+\
+
+**Practical implications:**
+
+-   We usually have most control over sample size
+-   Can sometimes reduce variability through better measurement
+-   Effect size is determined by nature/treatment
+-   Significance level is conventionally fixed at 0.05
+
+# Part 3: Calculating Power and Sample Size
+
+## Why do power calculations?
+
+**Before collecting data (prospective):**
+
+-   Determine required sample size for adequate power
+-   Justify sample size in grant proposals/protocols
+-   Avoid underpowered studies that waste resources
+-   Ensure ethical use of participants
+
+\
+
+**After collecting data (post-hoc):**
+
+-   Understand power of completed study
+-   Interpret non-significant results
+-   Plan follow-up studies
+
+\
+
+::: {.callout-warning}
+## Important Note
+
+Post-hoc power calculations for non-significant results can be misleading! Better to report confidence intervals showing uncertainty.
+:::
+
+## Cohen's d: Standardized effect size
+
+**Problem:** Effect sizes are in original units (e.g., taps/min, mmHg, °F)
+
+-   Hard to compare across studies
+-   Can't have general guidelines
+
+\
+
+**Solution:** Cohen's *d* standardizes the effect size
+
+\
+
+::: {.callout-note icon="false"}
+## Cohen's d Formulas
+
+**One-sample test (or paired):**
+$$d = \frac{\bar{x} - \mu_0}{s} \quad \text{or} \quad d = \frac{\bar{x}_d - \delta_0}{s_d}$$
+
+**Two-sample test:**
+$$d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}$$
+
+where $s_{\text{pooled}} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$
+:::
+
+## Interpreting Cohen's d
+
+**Cohen's guidelines for effect size:**
+
+| Effect Size | $d$ value | Interpretation |
+|-------------|-----------|----------------|
+| Small | 0.2 | Difficult to detect, subtle effect |
+| Medium | 0.5 | Moderate effect, visible to careful observer |
+| Large | 0.8 | Large effect, obvious to casual observer |
+
+\
+
+**Example interpretations:**
+
+-   *d* = 0.2: Treatment shifts mean by 0.2 standard deviations
+-   *d* = 0.5: Treatment shifts mean by half a standard deviation
+-   *d* = 0.8: Treatment shifts mean by 0.8 standard deviations
+
+\
+
+**Important:** These are just guidelines! What's "small" or "large" depends on context
+
+-   In medicine: Small effects can be clinically important
+-   In psychology: Large effects might indicate measurement problems
+
+## The pwr package in R
+
+**We'll use the `pwr` package for power calculations**
+
+```{r}
+library(pwr)
+```
+
+\
+
+**Key function:** `pwr.t.test()`
+
+-   Works for one-sample, two-sample, and paired t-tests
+-   Specify all parameters except one
+-   Returns the missing parameter
+
+\
+
+**Function structure:**
+
+```{r}
+#| eval: false
+
+pwr.t.test(n = NULL,           # Sample size per group
+           d = NULL,           # Cohen's d effect size  
+           sig.level = 0.05,   # Significance level (α)
+           power = NULL,       # Power (1-β)
+           type = "two.sample", # or "one.sample", "paired"
+           alternative = "two.sided") # or "less", "greater"
+```
+
+**Leave out the parameter you want to calculate!**
+
+## Example 1: One-sample test - Finding sample size
+
+**Scenario:** Body temperature study
+
+-   We believe true mean is 98.25°F (vs. claimed 98.6°F)
+-   Pilot data suggests SD ≈ 0.73°F
+-   Want 80% power with $\alpha = 0.05$
+-   **Question:** How many people do we need?
+
+\
+
+**Step 1:** Calculate Cohen's d
+
+```{r}
+# Effect size
+mu0 <- 98.6      # Null value
+mu_true <- 98.25 # What we believe is true
+s <- 0.73        # Standard deviation from pilot data
+
+d <- (mu_true - mu0) / s
+d
+```
+
+**Interpretation:** The true mean differs from null by `r round(abs(d), 2)` standard deviations
+
+## Example 1: One-sample test - Finding sample size (cont.)
+
+**Step 2:** Use `pwr.t.test()` to find required sample size
+
+```{r}
+result <- pwr.t.test(
+  d = (98.6 - 98.25) / 0.73,  # Cohen's d
+  sig.level = 0.05,            # α = 0.05
+  power = 0.80,                # Want 80% power
+  type = "one.sample",         # One-sample test
+  alternative = "two.sided"    # Two-sided test
+)
+
+result
+```
+
+\
+
+**Conclusion:** We need **`r ceiling(result$n)` participants** to have 80% power to detect this difference at $\alpha = 0.05$
+
+## Visualizing the power curve
+
+```{r}
+#| fig-width: 10
+#| fig-height: 6
+#| fig-align: center
+
+plot(result)
+```
+
+**The curve shows:** As sample size increases, power increases (holding other factors constant)
+
+## Example 2: One-sample test - Calculating power
+
+**Scenario:** Same body temperature study, but we already collected data
+
+-   n = 130 participants
+-   Effect size: d = 0.479
+-   $\alpha = 0.05$
+-   **Question:** What power did we have?
+
+\
+
+```{r}
+result_power <- pwr.t.test(
+  n = 130,                     # Sample size we collected
+  d = (98.6 - 98.25) / 0.73,  # Cohen's d
+  sig.level = 0.05,            # α = 0.05
+  type = "one.sample",
+  alternative = "two.sided"
+)
+
+result_power
+```
+
+\
+
+**Conclusion:** With n=130, we had **`r round(result_power$power * 100, 1)`%** power! (Very high - almost certain to detect the effect if it exists)
+
+## Example 3: Two-sample test - Finding sample size
+
+**Scenario:** Caffeine tapping study
+
+-   Want to detect 2 taps/min difference between groups
+-   Expect SD ≈ 2.6 taps/min in each group
+-   Want 80% power with $\alpha = 0.05$
+-   **Question:** How many participants per group?
+
+\
+
+**Step 1:** Calculate Cohen's d
+
+```{r}
+diff <- 2      # Difference we want to detect
+sd_pooled <- 2.6  # Expected SD in each group
+
+d <- diff / sd_pooled
+d
+```
+
+\
+
+**Step 2:** Calculate required sample size
+
+```{r}
+result_caff <- pwr.t.test(
+  d = d,
+  sig.level = 0.05,
+  power = 0.80,
+  type = "two.sample",        # Two independent groups
+  alternative = "two.sided"
+)
+
+result_caff
+```
+
+**Conclusion:** Need **`r ceiling(result_caff$n)` participants per group** (total n = `r ceiling(result_caff$n) * 2`)
+
+## Example 4: Two-sample test - Calculating power
+
+**Scenario:** We ran the caffeine study with 35 per group
+
+-   Effect size: d = 0.77
+-   $\alpha = 0.05$
+-   **Question:** What power did we have?
+
+\
+
+```{r}
+result_caff_power <- pwr.t.test(
+  n = 35,
+  d = 2 / 2.6,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+)
+
+result_caff_power
+```
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+plot(result_caff_power)
+```
+
+**Conclusion:** With n=35 per group, we had **`r round(result_caff_power$power * 100, 1)`%** power (excellent!)
+
+## One-sided vs two-sided tests and power
+
+**Two-sided test:** $H_A: \mu \neq \mu_0$ (most common)
+
+**One-sided test:** $H_A: \mu > \mu_0$ or $H_A: \mu < \mu_0$
+
+\
+
+**Power comparison:**
+
+```{r}
+# Two-sided test
+two_sided <- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80, 
+                        type = "two.sample", alternative = "two.sided")
+
+# One-sided test  
+one_sided <- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,
+                        type = "two.sample", alternative = "greater")
+
+cat("Two-sided requires n =", ceiling(two_sided$n), "per group\n")
+cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
+```
+
+\
+
+**Key point:** One-sided tests require smaller sample sizes BUT:
+
+-   Only justified when direction is known *a priori*
+-   Can't detect effects in "wrong" direction
+-   Generally not recommended unless strong scientific justification
+
+# Part 4: Study Design Applications
+
+## The power-sample size trade-off
+
+::::: columns
+::: {.column width="48%"}
+**Increasing sample size:**
+
+✓ Increases power
+
+✓ More likely to detect real effects
+
+✓ More precise estimates
+
+\
+
+✗ More expensive
+
+✗ Takes longer
+
+✗ May not be feasible
+:::
+
+::: {.column width="48%"}
+**Practical constraints:**
+
+-   Budget limitations
+-   Time constraints
+-   Available participants
+-   Ethical considerations
+-   Feasibility
+
+\
+
+**The balance:** Choose smallest $n$ that gives adequate power (usually 80-90%)
+:::
+:::::
+
+## Common mistakes in power analysis
+
+::: {.callout-warning}
+## Mistake 1: Post-hoc power for non-significant results
+
+**Don't do this:** "Our result was non-significant (p=0.12). Let me calculate power..."
+
+**Why it's wrong:** Post-hoc power for non-significant results is always low - tells you nothing!
+
+**Do instead:** Report confidence interval showing uncertainty
+:::
+
+\
+
+::: {.callout-warning}
+## Mistake 2: Using observed effect size for power
+
+**Don't do this:** Calculate power using the effect size you observed
+
+**Why it's wrong:** If result was non-significant, observed effect is likely underestimate
+
+**Do instead:** Use effect size from pilot data, literature, or smallest clinically meaningful effect
+:::
+
+## Common mistakes continued
+
+::: {.callout-warning}
+## Mistake 3: Ignoring practical significance
+
+**Don't do this:** Design study to detect any statistically significant difference
+
+**Why it's wrong:** Tiny, clinically meaningless effects can be significant with large n
+
+**Do instead:** Base power on *clinically/scientifically meaningful* effect size
+:::
+
+\
+
+::: {.callout-warning}
+## Mistake 4: Not considering variability
+
+**Don't do this:** Assume optimistic (low) SD when planning sample size
+
+**Why it's wrong:** Real data often more variable → study underpowered
+
+**Do instead:** Use conservative (higher) SD estimate, or add 10-20% to planned n as buffer
+:::
+
+## Real-world example: A cautionary tale
+
+**Study:** New drug to lower blood pressure
+
+-   Powered to detect 5 mmHg reduction
+-   Assumed SD = 10 mmHg (from literature)
+-   Calculated need for n = 64 per group
+-   Only recruited n = 50 per group (budget constraints)
+-   Actual SD in study was 12 mmHg (more variability than expected)
+
+\
+
+**Result:**
+
+-   Observed reduction: 4 mmHg (close to target!)
+-   P-value = 0.09 (not significant at 0.05 level)
+-   Actual power was only 58% (not the planned 80%)
+
+\
+
+**Lessons:**
+
+1.  Small deviations from plan can substantially reduce power
+2.  Under-recruitment is very common - build in buffer
+3.  Conservative SD estimates are wise
+
+## When is a study "underpowered"?
+
+**Conventionally:**
+
+-   Power < 50%: Severely underpowered
+-   Power 50-70%: Underpowered
+-   Power 70-80%: Marginally adequate
+-   Power 80-90%: Good
+-   Power > 90%: Excellent (sometimes wasteful)
+
+\
+
+**Practical considerations:**
+
+-   **80% power** is standard for many studies
+-   **90% power** for important decisions (e.g., FDA approval)
+-   **Lower power acceptable** for:
+    -   Pilot/feasibility studies
+    -   Exploratory research
+    -   Studies where negative result is informative
+
+\
+
+::: {.callout-tip}
+Always report your power analysis in papers/grants! Shows thoughtful study design.
+:::
+
+## Using power analysis in different scenarios
+
+::::: columns
+::: {.column width="48%"}
+**Planning a new study:**
+
+1.  Review literature for expected effect size
+2.  Use conservative estimates
+3.  Calculate sample size for 80% power
+4.  Add 10-20% buffer for dropout
+5.  Check if feasible
+
+\
+
+**Evaluating a completed study:**
+
+1.  Calculate achieved power
+2.  If significant: power is high
+3.  If non-significant: report CI, not power
+4.  Use for planning follow-up
+:::
+
+::: {.column width="48%"}
+**Reviewing others' work:**
+
+1.  Check if power analysis reported
+2.  Evaluate if assumptions reasonable
+3.  Consider if study adequately powered
+4.  Be skeptical of underpowered studies
+
+\
+
+**Grant writing:**
+
+1.  Justify sample size with power analysis
+2.  Show you calculated it prospectively
+3.  Document all assumptions
+4.  Include sensitivity analyses
+:::
+:::::
+
+# Wrap-up and Key Takeaways
+
+## Summary: The big picture
+
+**Four quantities in equilibrium:**
+
+1.  **Significance level** ($\alpha$) - usually fixed at 0.05
+2.  **Effect size** - determined by nature/treatment
+3.  **Sample size** ($n$) - what we typically calculate
+4.  **Power** ($1-\beta$) - probability of detecting real effect
+
+\
+
+**Key concepts:**
+
+-   Power = Probability of correctly detecting an effect when it exists
+-   Type I error ($\alpha$) = False positive
+-   Type II error ($\beta$) = False negative  
+-   Cohen's *d* = Standardized effect size
+-   Typical target: 80-90% power
+
+## Key R functions
+
+**Main function:** `pwr.t.test()`
+
+```{r}
+#| eval: false
+
+# Calculate sample size (leave n = NULL)
+pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,
+           type = "two.sample", alternative = "two.sided")
+
+# Calculate power (leave power = NULL)  
+pwr.t.test(n = 50, d = 0.5, sig.level = 0.05,
+           type = "two.sample", alternative = "two.sided")
+
+# Calculate detectable effect size (leave d = NULL)
+pwr.t.test(n = 50, sig.level = 0.05, power = 0.80,
+           type = "two.sample", alternative = "two.sided")
+```
+
+\
+
+**Types:** `"one.sample"`, `"two.sample"`, `"paired"`
+
+**Alternatives:** `"two.sided"` (most common), `"less"`, `"greater"`
+
+## Best practices for power analysis
+
+1.  **Plan prospectively** - before collecting data
+2.  **Use realistic effect sizes** - from literature or pilot data  
+3.  **Be conservative** - overestimate SD, add buffer to sample size
+4.  **Consider practical significance** - not just statistical
+5.  **Report your analysis** - document all assumptions
+6.  **Don't do post-hoc power** for non-significant results
+7.  **Use confidence intervals** to show uncertainty
+8.  **Consider feasibility** - balance power with resources
+
+## Additional resources
+
+**R documentation:**
+
+-   `?pwr.t.test` - help for power calculations
+-   PASS documentation: <https://www.ncss.com/software/pass/pass-documentation/#Means>
+
+\
+
+**Interactive tools:**
+
+-   <https://rpsychologist.com/d3/NHST/> - Visualize power
+-   <https://www.statmethods.net/stats/power.html> - Power analysis examples
+
+\
+
+**Textbook:**
+
+-   Section 5.4: Power and Sample Size for means
+
+\
+
+**Further reading:**
+
+-   Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences*
+-   Lenth, R. V. (2001). "Some Practical Guidelines for Effective Sample Size Determination"
+
+## Looking ahead
+
+**Next time:**
+
+-   Comparing two proportions
+-   Chi-square tests
+-   Categorical data analysis
+
+\
+
+**How today connects:**
+
+-   Power applies to ALL hypothesis tests (not just t-tests!)
+-   Same principles for proportions, chi-square, regression, etc.
+-   Understanding power helps you critically evaluate research
+-   Essential skill for your own research career
+
+\
+
+**Practice:**
+
+-   Homework will have power calculation problems
+-   Try different scenarios in R
+-   Calculate power for studies you read about
+
+## Questions?
+
+**Key questions to ask yourself:**
+
+-   Can you explain the four components of hypothesis testing?
+-   What's the difference between Type I and Type II errors?
+-   Why do we care about power?
+-   How do you calculate sample size for a t-test?
+-   When is a study underpowered?
+
+\
+
+**Office hours:** Come discuss your research study designs!
+
+**Next class:** We'll start talking about categorical data and proportions
