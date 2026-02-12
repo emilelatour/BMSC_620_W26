@@ -83,7 +83,7 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Midterm review](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQD-E9tXZI-BQpWX0kVdDGBLATepXQimAUXaEX7sJadSv30?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=TUJA6n)
 -   **Muddy points**
-    -   Coming soon
+    -   [Muddy Points - Lesson 11](/lessons/14_midterm_review/14_midterm_review_muddy_points.qmd)
 
 ------------------------------------------------------------------------
 

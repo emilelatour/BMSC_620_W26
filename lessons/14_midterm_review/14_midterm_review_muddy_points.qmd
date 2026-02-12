@@ -1,0 +1,159 @@
+---
+title: "Response to Muddy Points"
+subtitle: "Lecture: Midterm Review"
+author: "Emile"
+date: "Week 6, Day 2"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 2
+    code-fold: false
+    code-tools: true
+---
+
+
+
+Thank you all for the positive feedback on the review session! I'm glad the format was helpful and that concepts like standard error vs. standard deviation are starting to click. Here are responses to the two muddy points:
+
+## Order of Operations in R
+
+**The question:** "I don't quite understand when order of operations matters in R vs when it doesn't"
+
+This is a great practical question! Order of operations matters in R in some contexts but not others. Here's when to pay attention:
+
+### When order DOES matter:
+
+1. **Mathematical operations follow standard rules (PEMDAS):**
+
+```{r}
+#| eval: false
+2 + 3 * 4    # = 14 (multiplication first)
+(2 + 3) * 4  # = 20 (parentheses first)
+```
+
+If you are unsure, use parentheses to make your intent explicit.
+
+2. **Piping with `%>%` is strictly left-to-right:**
+
+Each step modifies the object for the next step. This filters first, then summarizes.
+
+```{r}
+#| eval: false
+data %>% 
+  filter(age > 50) %>%  # Filter first
+  summarize(mean_bmi = mean(BMI))  # Then summarize filtered data
+```
+
+But, this will not work because after summarize(), the age column no longer exists.
+
+```{r}
+#| eval: false
+data %>% 
+  summarize(mean_bmi = mean(BMI)) %>%  # Summarize first
+  filter(age > 50)  # This won't work - age doesn't exist after summarizing!
+```
+
+**Pipes always execute sequentially.**
+
+3. **Function arguments process in the order you provide them:**
+
+The p-value will be the same (two-sided), but the sign of the test statistic and direction of the difference change. Order matters when direction matters.
+
+```{r}
+#| eval: false
+t.test(group1, group2, alternative = "two.sided")
+# Different from:
+t.test(group2, group1, alternative = "two.sided")
+# The order of the groups changes the sign of the test statistic
+```
+
+### When order DOESN'T matter:
+
+1. **Multiple `filter()` statements (they're all "AND" operations):**
+
+```{r}
+#| eval: false
+data %>% filter(age > 50) %>% filter(gender == "Female")
+# Same as:
+data %>% filter(gender == "Female") %>% filter(age > 50)
+```
+
+2. **Addition and multiplication (commutative operations):**
+
+```{r}
+#| eval: false
+3 + 5  # same as 5 + 3
+4 * 7  # same as 7 * 4
+```
+
+**Practical tips:** 
+
+- When in doubt, use parentheses to make your intention clear
+- Test your code with small examples to make sure it's doing what you expect!
+- If your code depends on sequence (especially with pipes), read it top to bottom like a sentence. That is exactly how R executes it.
+
+## Standard Error vs Standard Deviation - When to Use Which?
+
+**The question:** "Standard error vs. standard deviation - I'm not sure if I know when to use which one for real life data."
+
+Excellent question - this is one of the most important distinctions in statistics! Here's the practical guide:
+
+### Use **Standard Deviation (SD)** when describing your data:
+
+**Purpose:** Describes the *variability in the data itself*  
+**Question it answers:** "How spread out are the individual observations?"
+
+**Example scenarios:**
+
+- Reporting patient characteristics in a study: "The mean BMI was 28.5 kg/m² (SD = 4.2)"
+- Describing measurement variability: "Systolic blood pressure ranged widely (mean = 125 mmHg, SD = 18)"
+- Understanding individual-level variation: "How much do patients differ in their cholesterol levels?"
+
+**R code:** `sd(data$variable)`
+
+### Use **Standard Error (SE)** when making inferences about a population:
+
+**Purpose:** Describes the *uncertainty in your estimate of the mean*  
+**Question it answers:** "How precise is my sample mean as an estimate of the true population mean?"
+
+**Example scenarios:**
+
+- Constructing confidence intervals: "95% CI = mean ± 1.96 × SE"
+- Comparing groups: "The difference in means was 5.2 (SE = 1.1)"
+- Assessing precision of estimates: "With a larger sample, our SE decreases"
+
+**R code:** `sd(data$variable) / sqrt(length(data$variable))` or from test output
+
+### The key insight:
+
+- **SD describes your data** 
+- **SE describes your estimate** 
+
+As sample size increases:
+
+- SD stays roughly the same
+- SE decreases
+
+This is why larger studies have narrower confidence intervals and greater power.
+
+### Practical example with BMI:
+
+Suppose you measure BMI in 100 patients and get mean = 28 kg/m², SD = 5 kg/m²:
+
+- The **$SD = 5$** tells you: "Individual patients' BMIs typically differ from the mean by about 5 kg/m²"
+- The **$SE = \frac{5}{\sqrt{100}} = 0.5$** tells you: "If we repeated this study, our sample mean would typically differ from 28 by about 0.5 kg/m²"
+
+**For the midterm:** You'll mostly encounter SE in the context of confidence intervals and hypothesis tests (it's built into the test statistics). You'll report SD when describing your sample's characteristics.
+
+## General Exam Tips
+
+Since this was a review session, a few reminders:
+
+- **Focus on concepts, not formulas** - you can use R for calculations
+- **Interpret results in context** - what does a p-value or confidence interval mean for the research question?
+- **Pay attention to assumptions** - when is each test appropriate?
+- **Practice reading R output** - know where to find what you need
+
+Good luck on the midterm! Feel free to come to office hours if you have questions.
+```
