@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Power and Sample Size">
 
-<title>Exams – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 7 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="assets/css/styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -79,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
     </a>
   </div>
@@ -90,23 +120,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedule.html"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./homework.html"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./exams.html"> 
+    <a class="nav-link" href="../exams.html"> 
 <span class="menu-text">Exams</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -120,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exams.html">Exams</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_07.html">Week 7</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -142,25 +172,25 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./homework.html" class="sidebar-item-text sidebar-link">
+  <a href="../homework.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homework</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exams.html" class="sidebar-item-text sidebar-link active">
+  <a href="../exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -175,19 +205,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instructors.html" class="sidebar-item-text sidebar-link">
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -195,52 +225,52 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Weekly materials</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_01.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_02.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_03.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_04.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_05.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_06.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_07.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_07.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
@@ -256,35 +286,40 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#midterm-exam" id="toc-midterm-exam" class="nav-link active" data-scroll-target="#midterm-exam">Midterm Exam</a>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
   <ul class="collapse">
-  <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a></li>
-  <li><a href="#important-reminders" id="toc-important-reminders" class="nav-link" data-scroll-target="#important-reminders">Important Reminders</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#monday-no-class-presidents-day" id="toc-monday-no-class-presidents-day" class="nav-link" data-scroll-target="#monday-no-class-presidents-day">Monday — No Class (Presidents Day)</a></li>
+  <li><a href="#wednesday-power-and-sample-size" id="toc-wednesday-power-and-sample-size" class="nav-link" data-scroll-target="#wednesday-power-and-sample-size">Wednesday — Power and Sample Size</a></li>
   </ul></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#midterm-exam" id="toc-midterm-exam" class="nav-link" data-scroll-target="#midterm-exam">Midterm Exam</a></li>
+  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_07.html">Week 7</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exams</h1>
+<h1 class="title">Week 7</h1>
+</div>
+
+<div>
+  <div class="description">
+    Power and Sample Size
+  </div>
 </div>
 
 
-
-<div class="quarto-title-meta column-body">
+<div class="quarto-title-meta">
 
     
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 17, 2026</p>
-    </div>
-  </div>
     
   </div>
   
@@ -293,37 +328,140 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
+<ul>
+<li><strong>Monday, February 16</strong> is a university holiday (Presidents Day) — <strong>no class</strong></li>
+<li><strong>Midterm Exam</strong> closes <strong>Monday, February 16 at 11:00 PM</strong>. Solutions are posted under <strong>Resources</strong> on Sakai.</li>
+<li><strong>HW 5</strong> is due <strong>Sunday, February 22 at 11:00 PM</strong></li>
+</ul>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This week we have one class meeting focused on <strong>power and sample size calculations</strong>.</p>
+<p>After completing the midterm, we shift our attention to study design: understanding how to plan research studies with adequate statistical power to detect meaningful effects. Power analysis helps us answer critical questions like “How many participants do I need?” and “What effect size can I realistically detect?”</p>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>understand the four components in equilibrium in a hypothesis test (significance level, sample size, effect size, and power),</li>
+<li>define and interpret Type I and Type II errors,</li>
+<li>explain what statistical power means and why it matters,</li>
+<li>calculate power and sample size for one-sample and two-sample t-tests using R,</li>
+<li>apply power analysis to both study planning and interpretation of existing research.</li>
+</ul>
+</section>
+<section id="readings-before-class" class="level2">
+<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
+<ul>
+<li>Textbook section 5.4 (Power calculations for comparing means)</li>
+</ul>
+<p>(Additional resources will be posted if helpful.)</p>
+</section>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<section id="monday-no-class-presidents-day" class="level3">
+<h3 class="anchored" data-anchor-id="monday-no-class-presidents-day">Monday — No Class (Presidents Day)</h3>
+<ul>
+<li>University holiday — enjoy the break!</li>
+<li><strong>Reminder:</strong> Midterm exam is still open. It closes <strong>Mondaay at 11:00 PM</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="wednesday-power-and-sample-size" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-power-and-sample-size">Wednesday — Power and Sample Size</h3>
+<ul>
+<li><strong>Topics</strong>
+<ul>
+<li>The four components of hypothesis testing: significance level (<span class="math inline">\(\alpha\)</span>), sample size (<span class="math inline">\(n\)</span>), effect size, and power (<span class="math inline">\(1−\beta\)</span>)</li>
+<li>Type I and Type II errors</li>
+<li>Defining and interpreting statistical power</li>
+<li>Introduction to effect size (Cohen’s <em>d</em>)</li>
+<li>Calculating power and sample size using the <code>pwr</code> package in R</li>
+<li>Power calculations for one-sample t-tests</li>
+<li>Power calculations for two-sample t-tests</li>
+<li>Study design applications and trade-offs</li>
+<li>Interpreting published research through the lens of power</li>
+</ul></li>
+<li><strong>Slides</strong>
+<ul>
+<li>Power and Sample Size (<a href="../lessons/15_power_sample_size/15_power_sample_size.qmd">HTML</a> | <a href="../lessons/15_power_sample_size/15_power_sample_size.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+</ul></li>
+<li><strong>Recording</strong>
+<ul>
+<li>Recording link will be posted after class</li>
+</ul></li>
+<li><strong>Muddy points</strong>
+<ul>
+<li>Muddy points response will be posted after class</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li><strong>HW 5</strong>
+<ul>
+<li>Released <strong>Wednesday, February 18</strong> (posted during the holiday)</li>
+<li>Due <strong>Sunday, February 22 at 11:00 PM</strong></li>
+<li>Covers:
+<ul>
+<li>Loading data from CSV and Excel files using <code>here()</code> and <code>readr</code>/<code>readxl</code></li>
+<li>Paired t-tests (gene expression example)</li>
+<li>Independent two-sample t-tests (Vitamin C recovery example)</li>
+<li>Choosing the appropriate test based on study design</li>
+<li>Interpreting confidence intervals and p-values</li>
+</ul></li>
+<li><a href="../homework/HW05/HW05.html">View HW 5 instructions</a></li>
+<li>txga_luad_top2a.csv and vitamin_c_recovery.xlsx available in <a href="https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/data?csf=1&amp;web=1&amp;e=P9czhc">data folder on OneDrive</a></li>
+</ul></li>
+<li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
+</ul>
+</section>
 <section id="midterm-exam" class="level2">
 <h2 class="anchored" data-anchor-id="midterm-exam">Midterm Exam</h2>
-<p><strong>Available:</strong> Wednesday, February 11 at 3:00 PM through Monday, February 16 at 11:00 PM</p>
-<p><strong>Access:</strong> <a href="https://sakai.ohsu.edu/">Sakai</a></p>
-<p><strong>Time to budget:</strong> 3–5 hours (you don’t need to complete it in one sitting)</p>
-<section id="submission-requirements" class="level3">
-<h3 class="anchored" data-anchor-id="submission-requirements">Submission Requirements</h3>
-<p>Upload <strong>both</strong> files to Sakai:</p>
-<ol type="1">
-<li>Your <code>.qmd</code> source file</li>
-<li>The rendered <code>.html</code> file</li>
-</ol>
-<p><strong>File naming:</strong> <code>Lastname_FirstInitial_Midterm</code> (e.g., <code>Smith_J_Midterm.qmd</code> and <code>Smith_J_Midterm.html</code>)</p>
-</section>
-<section id="important-reminders" class="level3">
-<h3 class="anchored" data-anchor-id="important-reminders">Important Reminders</h3>
 <ul>
-<li><strong>Open book/notes:</strong> You may use course materials, R documentation, and your notes</li>
-<li><strong>No collaboration:</strong> Work independently—no help from other students, AI assistants, or online forums</li>
-<li><strong>Check before submitting:</strong> Make sure your document renders to HTML without errors</li>
+<li><strong>Closes:</strong> Monday, February 16 at 11:00 PM</li>
+<li><strong>Format:</strong> 8 parts, 120 points total</li>
+<li><strong>Coverage:</strong> Lessons 1-9 (through hypothesis testing and one-sample t-tests)</li>
+<li><strong>Submit:</strong> Both <code>.qmd</code> and <code>.html</code> files before the deadline</li>
 </ul>
 </section>
-<section id="resources" class="level3">
-<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<section id="post-class-check-in-attendance" class="level2">
+<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
 <ul>
-<li>Midterm Review (<a href="./lessons/14_midterm_review/14_midterm_review.html">HTML</a> | <a href="./lessons/14_midterm_review/14_midterm_review.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-<li>See <a href="./schedule.html">Schedule</a> for all lecture materials and homework</li>
+<li>Please complete the post-class check-in after Wednesday’s class meeting.</li>
+<li>Used for attendance credit and to identify topics that need clarification.</li>
+<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
 </ul>
-
-
 </section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>After the midterm and power, we will continue building our statistical inference toolkit:</p>
+<ul>
+<li><strong>Week 8</strong>:
+<ul>
+<li>Inference for proportions (single and two-sample)</li>
+<li>Chi-squared tests for categorical data</li>
+<li>Fisher’s exact test for 2×2 tables</li>
+</ul></li>
+<li><strong>Week 9</strong>:
+<ul>
+<li>Comparing means across multiple groups with ANOVA</li>
+<li>Nonparametric tests (alternatives to t-tests)</li>
+</ul></li>
+</ul>
+<p>These concepts extend our hypothesis testing framework to categorical outcomes and multiple-group comparisons.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -433,11 +571,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -757,5 +890,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

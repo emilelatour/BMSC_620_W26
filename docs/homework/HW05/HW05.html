@@ -8,7 +8,7 @@
 
 <meta name="author" content="Your Name">
 
-<title>BMSC 620 — Homework 2 – BMSC 620: Introduction to Biostatistics</title>
+<title>BMSC 620 — Homework 5 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -4980,7 +4980,7 @@ white-space: nowrap;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">BMSC 620 — Homework 2</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">BMSC 620 — Homework 5</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -5116,46 +5116,40 @@ white-space: nowrap;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#homework-2" id="toc-homework-2" class="nav-link active" data-scroll-target="#homework-2">Homework 2</a></li>
-  <li><a href="#part-0-setup" id="toc-part-0-setup" class="nav-link" data-scroll-target="#part-0-setup">Part 0: Setup</a></li>
-  <li><a href="#part-1-exploring-data-with-tidyverse-tools" id="toc-part-1-exploring-data-with-tidyverse-tools" class="nav-link" data-scroll-target="#part-1-exploring-data-with-tidyverse-tools">Part 1: Exploring data with tidyverse tools</a>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#part-0-project-setup" id="toc-part-0-project-setup" class="nav-link" data-scroll-target="#part-0-project-setup">Part 0: Project Setup</a></li>
+  <li><a href="#part-1-gene-expression-in-lung-adenocarcinoma-paired-t-test" id="toc-part-1-gene-expression-in-lung-adenocarcinoma-paired-t-test" class="nav-link" data-scroll-target="#part-1-gene-expression-in-lung-adenocarcinoma-paired-t-test">Part 1: Gene Expression in Lung Adenocarcinoma (Paired <em>t</em>-test)</a>
   <ul class="collapse">
-  <li><a href="#a.-initial-data-inspection" id="toc-a.-initial-data-inspection" class="nav-link" data-scroll-target="#a.-initial-data-inspection">1A. Initial data inspection</a></li>
-  <li><a href="#b.-using-filter-and-select" id="toc-b.-using-filter-and-select" class="nav-link" data-scroll-target="#b.-using-filter-and-select">1B. Using filter() and select()</a></li>
-  <li><a href="#c.-creating-new-variables-with-mutate" id="toc-c.-creating-new-variables-with-mutate" class="nav-link" data-scroll-target="#c.-creating-new-variables-with-mutate">1C. Creating new variables with mutate()</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#a.-load-the-data" id="toc-a.-load-the-data" class="nav-link" data-scroll-target="#a.-load-the-data">1A. Load the data</a></li>
+  <li><a href="#b.-why-is-this-a-paired-design" id="toc-b.-why-is-this-a-paired-design" class="nav-link" data-scroll-target="#b.-why-is-this-a-paired-design">1B. Why is this a paired design?</a></li>
+  <li><a href="#c.-compute-the-difference-scores" id="toc-c.-compute-the-difference-scores" class="nav-link" data-scroll-target="#c.-compute-the-difference-scores">1C. Compute the difference scores</a></li>
+  <li><a href="#d.-summary-statistics" id="toc-d.-summary-statistics" class="nav-link" data-scroll-target="#d.-summary-statistics">1D. Summary statistics</a></li>
+  <li><a href="#e.-visualization-optional-not-graded-but-encouraged" id="toc-e.-visualization-optional-not-graded-but-encouraged" class="nav-link" data-scroll-target="#e.-visualization-optional-not-graded-but-encouraged">1E. Visualization (Optional — not graded, but encouraged!)</a></li>
+  <li><a href="#f.-state-the-hypotheses" id="toc-f.-state-the-hypotheses" class="nav-link" data-scroll-target="#f.-state-the-hypotheses">1F. State the hypotheses</a></li>
+  <li><a href="#g.-check-the-assumptions" id="toc-g.-check-the-assumptions" class="nav-link" data-scroll-target="#g.-check-the-assumptions">1G. Check the assumptions</a></li>
+  <li><a href="#h.-explore-the-documentation" id="toc-h.-explore-the-documentation" class="nav-link" data-scroll-target="#h.-explore-the-documentation">1H. Explore the documentation</a></li>
+  <li><a href="#i.-run-the-paired-t-test" id="toc-i.-run-the-paired-t-test" class="nav-link" data-scroll-target="#i.-run-the-paired-t-test">1I. Run the paired <em>t</em>-test</a></li>
+  <li><a href="#j.-interpret-the-results" id="toc-j.-interpret-the-results" class="nav-link" data-scroll-target="#j.-interpret-the-results">1J. Interpret the results</a></li>
   </ul></li>
-  <li><a href="#part-2-summary-statistics-with-rstatix" id="toc-part-2-summary-statistics-with-rstatix" class="nav-link" data-scroll-target="#part-2-summary-statistics-with-rstatix">Part 2: Summary statistics with rstatix</a>
+  <li><a href="#part-2-vitamin-c-and-muscle-soreness-independent-two-sample-t-test" id="toc-part-2-vitamin-c-and-muscle-soreness-independent-two-sample-t-test" class="nav-link" data-scroll-target="#part-2-vitamin-c-and-muscle-soreness-independent-two-sample-t-test">Part 2: Vitamin C and Muscle Soreness (Independent Two-Sample <em>t</em>-test)</a>
   <ul class="collapse">
-  <li><a href="#a.-summary-for-one-variable" id="toc-a.-summary-for-one-variable" class="nav-link" data-scroll-target="#a.-summary-for-one-variable">2A. Summary for one variable</a></li>
-  <li><a href="#b.-summary-by-groups" id="toc-b.-summary-by-groups" class="nav-link" data-scroll-target="#b.-summary-by-groups">2B. Summary by groups</a></li>
-  <li><a href="#c.-multiple-variables-and-groups" id="toc-c.-multiple-variables-and-groups" class="nav-link" data-scroll-target="#c.-multiple-variables-and-groups">2C. Multiple variables and groups</a></li>
+  <li><a href="#background-1" id="toc-background-1" class="nav-link" data-scroll-target="#background-1">Background</a></li>
+  <li><a href="#a.-load-the-data-1" id="toc-a.-load-the-data-1" class="nav-link" data-scroll-target="#a.-load-the-data-1">2A. Load the data</a></li>
+  <li><a href="#b.-why-is-this-an-independent-two-sample-design" id="toc-b.-why-is-this-an-independent-two-sample-design" class="nav-link" data-scroll-target="#b.-why-is-this-an-independent-two-sample-design">2B. Why is this an independent two-sample design?</a></li>
+  <li><a href="#c.-summary-statistics-by-group" id="toc-c.-summary-statistics-by-group" class="nav-link" data-scroll-target="#c.-summary-statistics-by-group">2C. Summary statistics by group</a></li>
+  <li><a href="#d.-visualization-optional-not-graded-but-encouraged" id="toc-d.-visualization-optional-not-graded-but-encouraged" class="nav-link" data-scroll-target="#d.-visualization-optional-not-graded-but-encouraged">2D. Visualization (Optional — not graded, but encouraged!)</a></li>
+  <li><a href="#e.-state-the-hypotheses" id="toc-e.-state-the-hypotheses" class="nav-link" data-scroll-target="#e.-state-the-hypotheses">2E. State the hypotheses</a></li>
+  <li><a href="#f.-check-the-assumptions" id="toc-f.-check-the-assumptions" class="nav-link" data-scroll-target="#f.-check-the-assumptions">2F. Check the assumptions</a></li>
+  <li><a href="#g.-run-the-two-sample-t-test" id="toc-g.-run-the-two-sample-t-test" class="nav-link" data-scroll-target="#g.-run-the-two-sample-t-test">2G. Run the two-sample <em>t</em>-test</a></li>
+  <li><a href="#h.-interpret-the-results" id="toc-h.-interpret-the-results" class="nav-link" data-scroll-target="#h.-interpret-the-results">2H. Interpret the results</a></li>
   </ul></li>
-  <li><a href="#part-3-frequency-tables-with-janitor" id="toc-part-3-frequency-tables-with-janitor" class="nav-link" data-scroll-target="#part-3-frequency-tables-with-janitor">Part 3: Frequency tables with janitor</a>
+  <li><a href="#part-3-connecting-the-two-analyses" id="toc-part-3-connecting-the-two-analyses" class="nav-link" data-scroll-target="#part-3-connecting-the-two-analyses">Part 3: Connecting the Two Analyses</a>
   <ul class="collapse">
-  <li><a href="#a.-one-way-frequency-table" id="toc-a.-one-way-frequency-table" class="nav-link" data-scroll-target="#a.-one-way-frequency-table">3A. One-way frequency table</a></li>
-  <li><a href="#b.-two-way-table" id="toc-b.-two-way-table" class="nav-link" data-scroll-target="#b.-two-way-table">3B. Two-way table</a></li>
-  <li><a href="#c.-adorned-tables" id="toc-c.-adorned-tables" class="nav-link" data-scroll-target="#c.-adorned-tables">3C. Adorned tables</a></li>
+  <li><a href="#a.-paired-vs.-independent-the-key-distinction" id="toc-a.-paired-vs.-independent-the-key-distinction" class="nav-link" data-scroll-target="#a.-paired-vs.-independent-the-key-distinction">3A. Paired vs. independent — the key distinction</a></li>
+  <li><a href="#b.-interpreting-confidence-intervals" id="toc-b.-interpreting-confidence-intervals" class="nav-link" data-scroll-target="#b.-interpreting-confidence-intervals">3B. Interpreting confidence intervals</a></li>
   </ul></li>
-  <li><a href="#part-4-data-visualization-with-ggplot2" id="toc-part-4-data-visualization-with-ggplot2" class="nav-link" data-scroll-target="#part-4-data-visualization-with-ggplot2">Part 4: Data visualization with ggplot2</a>
-  <ul class="collapse">
-  <li><a href="#a.-histogram" id="toc-a.-histogram" class="nav-link" data-scroll-target="#a.-histogram">4A. Histogram</a></li>
-  <li><a href="#b.-boxplot-by-group" id="toc-b.-boxplot-by-group" class="nav-link" data-scroll-target="#b.-boxplot-by-group">4B. Boxplot by group</a></li>
-  <li><a href="#c.-scatterplot" id="toc-c.-scatterplot" class="nav-link" data-scroll-target="#c.-scatterplot">4C. Scatterplot</a></li>
-  <li><a href="#d.-bar-chart" id="toc-d.-bar-chart" class="nav-link" data-scroll-target="#d.-bar-chart">4D. Bar chart</a></li>
-  </ul></li>
-  <li><a href="#part-5-combining-dplyr-and-ggplot2-bonus---optional" id="toc-part-5-combining-dplyr-and-ggplot2-bonus---optional" class="nav-link" data-scroll-target="#part-5-combining-dplyr-and-ggplot2-bonus---optional">Part 5: Combining dplyr and ggplot2 (BONUS - Optional)</a>
-  <ul class="collapse">
-  <li><a href="#a.-filter-then-visualize" id="toc-a.-filter-then-visualize" class="nav-link" data-scroll-target="#a.-filter-then-visualize">5A. Filter then visualize</a></li>
-  <li><a href="#b.-complex-workflow" id="toc-b.-complex-workflow" class="nav-link" data-scroll-target="#b.-complex-workflow">5B. Complex workflow</a></li>
-  </ul></li>
-  <li><a href="#part-6-probability-concepts" id="toc-part-6-probability-concepts" class="nav-link" data-scroll-target="#part-6-probability-concepts">Part 6: Probability concepts</a>
-  <ul class="collapse">
-  <li><a href="#a.-marginal-probabilities" id="toc-a.-marginal-probabilities" class="nav-link" data-scroll-target="#a.-marginal-probabilities">6A. Marginal probabilities</a></li>
-  <li><a href="#b.-joint-probabilities" id="toc-b.-joint-probabilities" class="nav-link" data-scroll-target="#b.-joint-probabilities">6B. Joint probabilities</a></li>
-  <li><a href="#c.-conditional-probabilities" id="toc-c.-conditional-probabilities" class="nav-link" data-scroll-target="#c.-conditional-probabilities">6C. Conditional probabilities</a></li>
-  <li><a href="#d.-interpretation" id="toc-d.-interpretation" class="nav-link" data-scroll-target="#d.-interpretation">6D. Interpretation</a></li>
-  </ul></li>
-  <li><a href="#final-check" id="toc-final-check" class="nav-link" data-scroll-target="#final-check">Final check</a></li>
+  <li><a href="#submission-checklist" id="toc-submission-checklist" class="nav-link" data-scroll-target="#submission-checklist">Submission checklist</a></li>
   </ul>
 </nav>
     </div>
@@ -5164,7 +5158,8 @@ white-space: nowrap;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BMSC 620 — Homework 2</h1>
+<h1 class="title">BMSC 620 — Homework 5</h1>
+<p class="subtitle lead">Comparing Two Means: Paired and Independent Samples</p>
 </div>
 
 
@@ -5199,296 +5194,458 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>File naming and submission</strong></p>
 <p>Please use the following file naming convention:</p>
-<p><code>Lastname_FirstInitial_HW##</code></p>
+<p><code>Lastname_FirstInitial_HW05</code></p>
 <p>Examples:</p>
 <ul>
-<li>Smith_J_HW02.qmd</li>
-<li>Smith_J_HW02.html</li>
+<li>Smith_J_HW05.qmd</li>
+<li>Smith_J_HW05.html</li>
 </ul>
-<p>When submitting Homework 2, upload <strong>both</strong>:</p>
+<p>When submitting Homework 5, upload <strong>both</strong>:</p>
 <ul>
 <li>the <code>.qmd</code> file</li>
 <li>the rendered <code>.html</code> file</li>
 </ul>
 </div>
 </div>
-<section id="homework-2" class="level2">
-<h2 class="anchored" data-anchor-id="homework-2">Homework 2</h2>
-<p>This assignment reviews:</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ul>
-<li>data wrangling with <code>dplyr</code></li>
-<li>summary tables with <code>janitor</code> and <code>rstatix</code></li>
-<li>data visualization with <code>ggplot2</code></li>
-<li>probability concepts: marginal, joint, and conditional probabilities</li>
+<li>Answer each question clearly and concisely.</li>
+<li>Show your work using R code chunks.</li>
+<li><strong>Rounding:</strong> Round estimates and confidence intervals to 1–2 decimal places. Round <em>p</em>-values to 3 decimal places (or report as <em>p</em> &lt; 0.001 if very small).</li>
+<li>This homework uses <strong>external data files</strong> — see Part 0 below before writing any code.</li>
+<li>Code chunks marked <code># Your code here</code> are intentionally blank. You are expected to write the code yourself. Hints are provided to guide you.</li>
 </ul>
-<p>Unless stated otherwise, show your work using R code chunks.</p>
 <hr>
 </section>
-<section id="part-0-setup" class="level2">
-<h2 class="anchored" data-anchor-id="part-0-setup">Part 0: Setup</h2>
+<section id="part-0-project-setup" class="level2">
+<h2 class="anchored" data-anchor-id="part-0-project-setup">Part 0: Project Setup</h2>
+<p><strong>Before writing any code, do the following:</strong></p>
 <ol type="1">
-<li>In the chunk below, load the packages you need for this homework.</li>
-<li>Run the chunk to confirm there are no errors.</li>
-</ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: If you don&#39;t already have the oibiostat package installed, then uncomment and run the two lines below. Then re-comment them and check installation with `library(oibiostat)`.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;OI-Biostat/oi_biostat_data&quot;, force = TRUE)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(oibiostat)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstatix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="part-1-exploring-data-with-tidyverse-tools" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-exploring-data-with-tidyverse-tools">Part 1: Exploring data with tidyverse tools</h2>
-<p>In this homework, you will work with the <strong>nhanes.samp</strong> dataset (the same dataset from HW1, but now using tidyverse tools!).</p>
-<p>Load the dataset:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;nhanes.samp&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="a.-initial-data-inspection" class="level3">
-<h3 class="anchored" data-anchor-id="a.-initial-data-inspection">1A. Initial data inspection</h3>
-<p>Use the following tidyverse functions to explore the data:</p>
-<ol type="1">
-<li><code>glimpse()</code> to see the structure</li>
-<li>Use the pipe <code>%&gt;%</code> with <code>head()</code> to see first 5 rows (e.g., <code>nhanes.samp %&gt;% head(5)</code>)</li>
-<li><code>dim()</code> to get dimensions</li>
-</ol>
-<p>Answer in plain text:</p>
-<ol type="1">
-<li>How many rows and columns does nhanes.samp have?</li>
-<li>What type of variable is <code>Race1</code>? What about <code>Age</code>?</li>
-<li>How is this different from using <code>str()</code> in HW1?</li>
-</ol>
-<p>Answers: 1. 2. 3.</p>
-</section>
-<section id="b.-using-filter-and-select" class="level3">
-<h3 class="anchored" data-anchor-id="b.-using-filter-and-select">1B. Using filter() and select()</h3>
-<ol type="1">
-<li>Use <code>filter()</code> to keep only people with <code>PhysActive == &quot;Yes&quot;</code> (physically active)</li>
-<li>Then use <code>select()</code> to keep only the columns: <code>Age</code>, <code>Gender</code>, <code>Race1</code>, <code>PhysActive</code>, <code>Pulse</code></li>
-<li>Assign this filtered/selected data to a new object called <code>active_people</code></li>
-</ol>
-<p>How many physically active people are in the dataset? (Use <code>nrow()</code> on your new object)</p>
-<p>Answer:</p>
-</section>
-<section id="c.-creating-new-variables-with-mutate" class="level3">
-<h3 class="anchored" data-anchor-id="c.-creating-new-variables-with-mutate">1C. Creating new variables with mutate()</h3>
-<p>Using the full <code>nhanes.samp</code> dataset:</p>
-<ol type="1">
-<li>Use <code>mutate()</code> to create a new variable called <code>age_group</code> that categorizes age:
+<li>Make sure you are working inside your BMSC 620 R Project (look for the project name in the top-right corner of RStudio).</li>
+<li>Download the two data files from OneDrive and place them inside your project’s <code>data/</code> folder:
 <ul>
-<li>“Child” if Age &lt; 18</li>
-<li>“Adult” if Age &lt; 65</li>
-<li>“Senior” if Age &gt;= 65</li>
+<li><code>tcga_luad_top2a.csv</code></li>
+<li><code>vitamin_c_recovery.xlsx</code></li>
 </ul></li>
-<li>Use <code>select()</code> to show just <code>ID</code>, <code>Age</code>, and <code>age_group</code></li>
-<li>Use <code>head()</code> to show the first 10 rows</li>
+<li>Your folder structure should look like this:</li>
 </ol>
-<p>Hint: Use <code>case_when()</code> inside <code>mutate()</code>.</p>
+<pre><code>BMSC620/
+├── BMSC620.Rproj
+├── data/
+│   ├── tcga_luad_top2a.csv
+│   └── vitamin_c_recovery.xlsx
+└── homework/
+    └── Smith_J_HW05.qmd    ← your file goes here</code></pre>
+<p>Load the packages you will need. Run this chunk first to confirm there are no errors. Install any missing packages before proceeding.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
 </section>
-</section>
-<section id="part-2-summary-statistics-with-rstatix" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-summary-statistics-with-rstatix">Part 2: Summary statistics with rstatix</h2>
-<section id="a.-summary-for-one-variable" class="level3">
-<h3 class="anchored" data-anchor-id="a.-summary-for-one-variable">2A. Summary for one variable</h3>
-<p>Use <code>get_summary_stats()</code> from the <code>rstatix</code> package to calculate the mean and standard deviation of <code>Pulse</code>. Use <code>type = &quot;mean_sd&quot;</code>.</p>
-</section>
-<section id="b.-summary-by-groups" class="level3">
-<h3 class="anchored" data-anchor-id="b.-summary-by-groups">2B. Summary by groups</h3>
-<p>Use <code>group_by()</code> and <code>get_summary_stats()</code> to calculate the mean and standard deviation of <code>Pulse</code> by <code>PhysActive</code> (physically active yes/no).</p>
-<p>Do physically active people have a higher or lower mean pulse rate? What might explain this?</p>
-<p>Answer:</p>
-</section>
-<section id="c.-multiple-variables-and-groups" class="level3">
-<h3 class="anchored" data-anchor-id="c.-multiple-variables-and-groups">2C. Multiple variables and groups</h3>
-<p>Calculate summary statistics for <code>Age</code>, <code>Pulse</code>, and <code>Weight</code> grouped by both <code>Gender</code> AND <code>PhysActive</code> status. Use <code>type = &quot;mean_sd&quot;</code>.</p>
-</section>
-</section>
-<section id="part-3-frequency-tables-with-janitor" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-frequency-tables-with-janitor">Part 3: Frequency tables with janitor</h2>
-<section id="a.-one-way-frequency-table" class="level3">
-<h3 class="anchored" data-anchor-id="a.-one-way-frequency-table">3A. One-way frequency table</h3>
-<p>Use <code>tabyl()</code> to create a frequency table for the <code>Race1</code> variable.</p>
-<p>Which racial/ethnic group has the highest percentage in this sample?</p>
-<p>Answer:</p>
-</section>
-<section id="b.-two-way-table" class="level3">
-<h3 class="anchored" data-anchor-id="b.-two-way-table">3B. Two-way table</h3>
-<p>Create a two-way table showing the relationship between <code>Gender</code> and <code>PhysActive</code> using <code>tabyl()</code>.</p>
-</section>
-<section id="c.-adorned-tables" class="level3">
-<h3 class="anchored" data-anchor-id="c.-adorned-tables">3C. Adorned tables</h3>
-<ol type="1">
-<li>Create the same Gender × PhysActive table</li>
-<li>Add row percentages using <code>adorn_percentages(&quot;row&quot;)</code></li>
-<li>Format percentages with one decimal place using <code>adorn_pct_formatting(digits = 1)</code></li>
-<li>Add totals for rows and columns using <code>adorn_totals(c(&quot;row&quot;, &quot;col&quot;))</code></li>
-</ol>
-<p>Among females, what percentage are physically active? Among males? (Look at the row percentages)</p>
-<p>Answer:</p>
-</section>
-</section>
-<section id="part-4-data-visualization-with-ggplot2" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-data-visualization-with-ggplot2">Part 4: Data visualization with ggplot2</h2>
-<section id="a.-histogram" class="level3">
-<h3 class="anchored" data-anchor-id="a.-histogram">4A. Histogram</h3>
-<p>Create a histogram of <code>Age</code> using <code>ggplot2</code>. Include:</p>
+<section id="part-1-gene-expression-in-lung-adenocarcinoma-paired-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-gene-expression-in-lung-adenocarcinoma-paired-t-test">Part 1: Gene Expression in Lung Adenocarcinoma (Paired <em>t</em>-test)</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>The dataset <code>tcga_luad_top2a.csv</code> contains TOP2A gene expression levels from <strong>20 patients</strong> diagnosed with Lung Adenocarcinoma (LUAD). TOP2A (DNA Topoisomerase II Alpha) is involved in DNA replication and is frequently overexpressed in tumor tissue because cancer cells divide rapidly.</p>
+<p>For each patient, <strong>two tissue samples</strong> were collected:</p>
 <ul>
-<li><code>bins = 20</code></li>
-<li>A title: “Distribution of Age in NHANES Sample”</li>
-<li>An x-axis label: “Age (years)”</li>
+<li><code>Normal_Expr</code>: TOP2A expression level in healthy lung tissue adjacent to the tumor</li>
+<li><code>Tumor_Expr</code>: TOP2A expression level in malignant tumor tissue from the same patient</li>
 </ul>
-<p>Describe the distribution in 1-2 sentences (shape, center, spread, any interesting features).</p>
-<p>Answer:</p>
+<blockquote class="blockquote">
+<p><em>Data simulated for educational purposes, inspired by gene expression patterns observed in The Cancer Genome Atlas (TCGA) Lung Adenocarcinoma (LUAD) cohort. Values do not represent real patient data.</em></p>
+</blockquote>
+<hr>
 </section>
-<section id="b.-boxplot-by-group" class="level3">
-<h3 class="anchored" data-anchor-id="b.-boxplot-by-group">4B. Boxplot by group</h3>
-<p>Create a boxplot comparing <code>Pulse</code> across <code>PhysActive</code> groups. Include:</p>
+<section id="a.-load-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="a.-load-the-data">1A. Load the data</h3>
+<p>Import <code>tcga_luad_top2a.csv</code> and assign it to an object called <code>gene_expr</code>. Print the first few rows to confirm it loaded correctly (or use <code>dplyr::glimpse()</code>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>read_csv()</code> and <code>here()</code> together. Refer back to the Week 6 R workflow slides if you need a reminder of the syntax.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How many rows and columns does this dataset have?</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="b.-why-is-this-a-paired-design" class="level3">
+<h3 class="anchored" data-anchor-id="b.-why-is-this-a-paired-design">1B. Why is this a paired design?</h3>
+<p>In 2–3 sentences, explain why a <strong>paired</strong> <em>t</em>-test (rather than an independent two-sample <em>t</em>-test) is the correct choice for this dataset. Think about what it means for two observations to be “paired.”</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="c.-compute-the-difference-scores" class="level3">
+<h3 class="anchored" data-anchor-id="c.-compute-the-difference-scores">1C. Compute the difference scores</h3>
+<p>For paired data, our analysis focuses on the <strong>within-patient difference</strong>. Add a new variable called <code>diff_expr</code> equal to <code>Tumor_Expr - Normal_Expr</code> for each patient. Assign the result back to <code>gene_expr</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>mutate()</code> to create the new column.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="d.-summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="d.-summary-statistics">1D. Summary statistics</h3>
+<p>Calculate the mean, standard deviation, and sample size of <code>diff_expr</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>rstatix::get_summary_stats()</code> or <code>summarize()</code> with <code>mean()</code>, <code>sd()</code>, and <code>n()</code> will work well here.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Based on the mean difference, does it appear that TOP2A expression is higher in tumor tissue or normal tissue? Is this what you would expect biologically?</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="e.-visualization-optional-not-graded-but-encouraged" class="level3">
+<h3 class="anchored" data-anchor-id="e.-visualization-optional-not-graded-but-encouraged">1E. Visualization (Optional — not graded, but encouraged!)</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Visualizing paired data before running the test is good practice. One simple approach: create a histogram or density plot of the <code>diff_expr</code> values to see the distribution of differences. Does it look roughly symmetric and centered away from zero?</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here (optional)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="f.-state-the-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="f.-state-the-hypotheses">1F. State the hypotheses</h3>
+<p>Write the null and alternative hypotheses for this test. We want to know whether mean TOP2A expression differs between tumor and normal tissue.</p>
+<p>You may write your hypotheses using statistical notation (if you’re comfortable) or in plain words. Either way, be clear about what parameter you’re testing and what values it takes under each hypothesis.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mu_d\)</span> denote the population mean of the paired differences (Tumor <span class="math inline">\(-\)</span> Normal). What value would <span class="math inline">\(\mu_d\)</span> have if there were no difference between tumor and normal tissue?</p>
+</div>
+</div>
+<p><strong>Answer:</strong></p>
+<p><span class="math display">\[H_0: \]</span></p>
+<p><span class="math display">\[H_A: \]</span></p>
+<hr>
+</section>
+<section id="g.-check-the-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="g.-check-the-assumptions">1G. Check the assumptions</h3>
+<p>State whether the assumptions for a paired <em>t</em>-test are met for this dataset. Address each one explicitly:</p>
+<ol type="1">
+<li><strong>Independence</strong> of the paired differences</li>
+<li><strong>Approximate normality</strong> (or large enough sample size)</li>
+</ol>
+<p><strong>Answer:</strong></p>
+<ol type="1">
+<li></li>
+<li></li>
+</ol>
+<hr>
+</section>
+<section id="h.-explore-the-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="h.-explore-the-documentation">1H. Explore the documentation</h3>
+<p>Before running the test, look at the help file for <code>t.test()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?t.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Which argument controls whether the test is paired or independent? What value would you set it to for a paired test?</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="i.-run-the-paired-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="i.-run-the-paired-t-test">1I. Run the paired <em>t</em>-test</h3>
+<p>Run a paired <em>t</em>-test using base R’s <code>t.test()</code>. Save the result to an object called <code>gene_test</code>, then use <code>broom::tidy()</code> to display the output as a clean data frame.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You have two options for supplying the data:</p>
 <ul>
-<li>Appropriate axis labels</li>
-<li>A title</li>
-<li>Try adding <code>fill = PhysActive</code> inside <code>aes()</code> for color</li>
+<li>Supply <code>x</code> and <code>y</code> as two separate vectors (e.g., <code>gene_expr$Tumor_Expr</code>) and set the appropriate argument to indicate this is a paired design, <strong>or</strong></li>
+<li>Test your <code>diff_expr</code> variable against <code>mu = 0</code> with a one-sample <em>t</em>-test.</li>
 </ul>
-<p>Do physically active people appear to have different pulse rates? Are there any outliers?</p>
-<p>Answer:</p>
+<p>Either is acceptable. Use a two-sided alternative.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test and save the result</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gene_test <span class="ot">&lt;-</span> <span class="co"># Your code here</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the output</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(gene_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
 </section>
-<section id="c.-scatterplot" class="level3">
-<h3 class="anchored" data-anchor-id="c.-scatterplot">4C. Scatterplot</h3>
-<p>Create a scatterplot of <code>Age</code> (x-axis) vs <code>Pulse</code> (y-axis).</p>
+<section id="j.-interpret-the-results" class="level3">
+<h3 class="anchored" data-anchor-id="j.-interpret-the-results">1J. Interpret the results</h3>
+<p>Using the output from 1I, fill in the blanks and write a complete conclusion.</p>
 <ul>
-<li>Color the points by <code>Gender</code></li>
-<li>Set <code>alpha = 0.5</code> for transparency</li>
-<li>Add appropriate labels and a title</li>
+<li>Mean difference (<span class="math inline">\(\bar{x}_d\)</span>): ________</li>
+<li><em>t</em>-statistic: ________</li>
+<li>Degrees of freedom: ________</li>
+<li><em>p</em>-value: ________</li>
+<li>95% confidence interval: (________, ________)</li>
 </ul>
-<p>Describe any relationship between age and pulse rate in 1-2 sentences.</p>
-<p>Answer:</p>
+<p><strong>Conclusion</strong> (2–3 sentences in context — state the direction of the effect, whether it is statistically significant at <span class="math inline">\(\alpha = 0.05\)</span>, and what it means biologically):</p>
+<p><strong>Answer:</strong></p>
+<hr>
 </section>
-<section id="d.-bar-chart" class="level3">
-<h3 class="anchored" data-anchor-id="d.-bar-chart">4D. Bar chart</h3>
-<p>Create a bar chart showing counts of the <code>Race1</code> variable.</p>
+</section>
+<section id="part-2-vitamin-c-and-muscle-soreness-independent-two-sample-t-test" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-vitamin-c-and-muscle-soreness-independent-two-sample-t-test">Part 2: Vitamin C and Muscle Soreness (Independent Two-Sample <em>t</em>-test)</h2>
+<section id="background-1" class="level3">
+<h3 class="anchored" data-anchor-id="background-1">Background</h3>
+<p>The dataset <code>vitamin_c_recovery.xlsx</code> comes from a randomized study investigating whether high-dose Vitamin C supplementation reduces delayed-onset muscle soreness (DOMS) after intense exercise.</p>
+<p><strong>Study design:</strong></p>
 <ul>
-<li>Add a title and axis labels</li>
-<li>Use <code>coord_flip()</code> at the end to make horizontal bars (easier to read the labels)</li>
+<li>30 volunteers were randomly assigned to one of two <strong>independent</strong> groups</li>
+<li><code>placebo</code> (n = 15): Received a sugar pill daily for two weeks</li>
+<li><code>vitamin_c</code> (n = 15): Received 1,000 mg Vitamin C daily for two weeks</li>
+<li>All participants then completed a standardized eccentric exercise protocol</li>
+<li>48 hours later, they rated soreness on a Visual Analog Scale (VAS): 0 = no pain, 100 = extreme pain</li>
 </ul>
+<blockquote class="blockquote">
+<p><em>Data simulated for educational purposes, inspired by Bryer &amp; Goldfarb (2006),</em> <em>Int J Sport Nutr Exerc Metab, 16:270–280. Values do not represent real participant data.</em></p>
+</blockquote>
+<hr>
 </section>
+<section id="a.-load-the-data-1" class="level3">
+<h3 class="anchored" data-anchor-id="a.-load-the-data-1">2A. Load the data</h3>
+<p>Import <code>vitamin_c_recovery.xlsx</code> and assign it to an object called <code>vitc</code>. Print the first few rows to confirm it loaded correctly (or use <code>dplyr::glimpse()</code>).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Excel files require <code>readxl::read_excel()</code> instead of <code>read_csv()</code>. The syntax is similar: <code>read_excel(here(&quot;data&quot;, &quot;filename.xlsx&quot;))</code>.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
 </section>
-<section id="part-5-combining-dplyr-and-ggplot2-bonus---optional" class="level2">
-<h2 class="anchored" data-anchor-id="part-5-combining-dplyr-and-ggplot2-bonus---optional">Part 5: Combining dplyr and ggplot2 (BONUS - Optional)</h2>
-<p><strong>This section is optional but recommended for extra practice combining dplyr and ggplot2.</strong></p>
-<section id="a.-filter-then-visualize" class="level3">
-<h3 class="anchored" data-anchor-id="a.-filter-then-visualize">5A. Filter then visualize</h3>
+<section id="b.-why-is-this-an-independent-two-sample-design" class="level3">
+<h3 class="anchored" data-anchor-id="b.-why-is-this-an-independent-two-sample-design">2B. Why is this an independent two-sample design?</h3>
+<p>In 2–3 sentences, explain why a <strong>two-sample</strong> (independent) <em>t</em>-test is the correct choice here, and why a paired <em>t</em>-test would be inappropriate.</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="c.-summary-statistics-by-group" class="level3">
+<h3 class="anchored" data-anchor-id="c.-summary-statistics-by-group">2C. Summary statistics by group</h3>
+<p>Calculate the mean, standard deviation, and sample size of <code>pain_score</code> separately for each group.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>group_by()</code> followed by <code>rstatix::get_summary_stats()</code>. Or <code>group_by()</code> followed by <code>summarize()</code> from the <code>dplyr</code> package.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Based on these summaries, which group has higher pain scores on average? Does the difference look meaningful relative to the within-group variability?</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="d.-visualization-optional-not-graded-but-encouraged" class="level3">
+<h3 class="anchored" data-anchor-id="d.-visualization-optional-not-graded-but-encouraged">2D. Visualization (Optional — not graded, but encouraged!)</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A side-by-side boxplot is a natural choice for two independent groups. Consider layering <code>geom_jitter()</code> on top of <code>geom_boxplot()</code> to show the individual data points alongside the boxes. You can play with the <code>width</code> and <code>height</code> arguments to <code>geom_jitter</code> to control the placing of the points, and <code>alpha</code> to control the transparency.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here (optional)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="e.-state-the-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="e.-state-the-hypotheses">2E. State the hypotheses</h3>
+<p>Write the null and alternative hypotheses for this test. We want to know whether mean pain scores differ between the two groups.</p>
+<p>You may write your hypotheses using statistical notation (if you’re comfortable) or in plain words. Either way, be clear about what you’re comparing.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\mu_1\)</span> denote the mean pain score for the placebo group and <span class="math inline">\(\mu_2\)</span> for the Vitamin C group. Under the null hypothesis, how do these two population means relate to each other?</p>
+</div>
+</div>
+<p><strong>Answer:</strong></p>
+<p><span class="math display">\[H_0: \]</span></p>
+<p><span class="math display">\[H_A: \]</span></p>
+<hr>
+</section>
+<section id="f.-check-the-assumptions" class="level3">
+<h3 class="anchored" data-anchor-id="f.-check-the-assumptions">2F. Check the assumptions</h3>
+<p>State whether the assumptions for an independent two-sample <em>t</em>-test are met. Address each one explicitly:</p>
 <ol type="1">
-<li>Use pipes to filter to people under age 20 (children/adolescents)</li>
-<li>Create a histogram of their <code>Pulse</code></li>
-<li>Use <code>facet_wrap(~Gender)</code> to create separate panels by gender</li>
+<li><strong>Independence</strong> (between groups and within each group)</li>
+<li><strong>Approximate normality</strong> (or large enough sample size) for each group</li>
 </ol>
-<p>Do the pulse rate distributions look similar between males and females in this age group?</p>
-<p>Answer:</p>
-</section>
-<section id="b.-complex-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="b.-complex-workflow">5B. Complex workflow</h3>
-<p>Create a workflow that:</p>
+<p><strong>Answer:</strong></p>
 <ol type="1">
-<li>Filters to people who are physically active (<code>PhysActive == &quot;Yes&quot;</code>)</li>
-<li>Creates a new variable <code>age_category</code>:
+<li></li>
+<li></li>
+</ol>
+<hr>
+</section>
+<section id="g.-run-the-two-sample-t-test" class="level3">
+<h3 class="anchored" data-anchor-id="g.-run-the-two-sample-t-test">2G. Run the two-sample <em>t</em>-test</h3>
+<p>Run the test using base R’s <code>t.test()</code> with <strong>formula notation</strong>. Save the result to an object called <code>vitc_test</code>, then tidy the output.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For two independent groups, <code>t.test()</code> accepts a formula of the form <code>outcome ~ group</code>. The <code>data</code> argument tells R where to find those variables. Think carefully: does this test require <code>paired = TRUE</code> or <code>paired = FALSE</code>?</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test and save the result</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>vitc_test <span class="ot">&lt;-</span> <span class="co"># Your code here</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy the output</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(vitc_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="h.-interpret-the-results" class="level3">
+<h3 class="anchored" data-anchor-id="h.-interpret-the-results">2H. Interpret the results</h3>
+<p>Using the output from 2G, fill in the blanks and write a complete conclusion.</p>
 <ul>
-<li>“Under 30” if Age &lt; 30</li>
-<li>“30-50” if Age &lt; 50</li>
-<li>“50+” if Age &gt;= 50</li>
-</ul></li>
-<li>Creates a boxplot of <code>Pulse</code> by <code>age_category</code></li>
-<li>Colors the boxes by <code>age_category</code> using <code>fill = age_category</code> in <code>aes()</code></li>
-<li>Facets by <code>Gender</code></li>
-</ol>
+<li>Mean pain score, placebo group: ________</li>
+<li>Mean pain score, Vitamin C group: ________</li>
+<li>Estimated difference (<span class="math inline">\(\bar{x}_1 - \bar{x}_2\)</span>): ________</li>
+<li><em>t</em>-statistic: ________</li>
+<li>Degrees of freedom: ________</li>
+<li><em>p</em>-value: ________</li>
+<li>95% confidence interval for the difference: (________, ________)</li>
+</ul>
+<p><strong>Conclusion</strong> (2–3 sentences in context — state which group had higher pain, whether the difference is statistically significant at <span class="math inline">\(\alpha = 0.05\)</span>, and what this suggests about Vitamin C supplementation for muscle recovery):</p>
+<p><strong>Answer:</strong></p>
+<hr>
 </section>
 </section>
-<section id="part-6-probability-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="part-6-probability-concepts">Part 6: Probability concepts</h2>
-<p>For this section, we’ll work with a medical testing scenario.</p>
-<p>Consider the following contingency table showing disease status and test results for 1,000 patients:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;">Disease</th>
-<th style="text-align: center;">No Disease</th>
-<th style="text-align: center;">Total</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Test +</strong></td>
-<td style="text-align: center;">90</td>
-<td style="text-align: center;">180</td>
-<td style="text-align: center;">270</td>
-</tr>
-<tr class="even">
-<td><strong>Test -</strong></td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">720</td>
-<td style="text-align: center;">730</td>
-</tr>
-<tr class="odd">
-<td><strong>Total</strong></td>
-<td style="text-align: center;">100</td>
-<td style="text-align: center;">900</td>
-<td style="text-align: center;">1,000</td>
-</tr>
-</tbody>
-</table>
-<section id="a.-marginal-probabilities" class="level3">
-<h3 class="anchored" data-anchor-id="a.-marginal-probabilities">6A. Marginal probabilities</h3>
-<p>Calculate the following marginal probabilities:</p>
+<section id="part-3-connecting-the-two-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-connecting-the-two-analyses">Part 3: Connecting the Two Analyses</h2>
+<section id="a.-paired-vs.-independent-the-key-distinction" class="level3">
+<h3 class="anchored" data-anchor-id="a.-paired-vs.-independent-the-key-distinction">3A. Paired vs. independent — the key distinction</h3>
+<p>In your own words, explain the fundamental difference between the two study designs you analyzed in this homework. Why does it matter which test you use? What would go wrong if you used the wrong one?</p>
+<p><strong>Answer:</strong></p>
+<hr>
+</section>
+<section id="b.-interpreting-confidence-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="b.-interpreting-confidence-intervals">3B. Interpreting confidence intervals</h3>
+<p>For each analysis, you obtained a 95% confidence interval for a difference.</p>
 <ol type="1">
-<li><span class="math inline">\(P(\text{Disease})\)</span></li>
-<li><span class="math inline">\(P(\text{Test +})\)</span></li>
-<li><span class="math inline">\(P(\text{No Disease})\)</span></li>
+<li>In Part 1, the CI is for the <strong>mean paired difference</strong> (Tumor <span class="math inline">\(-\)</span> Normal). Does the interval include 0? What does that tell you?</li>
+<li>In Part 2, the CI is for the <strong>difference in group means</strong> (placebo <span class="math inline">\(-\)</span> vitamin_c). How can you use the CI alone — without looking at the <em>p</em>-value — to decide whether the groups differ significantly?</li>
 </ol>
-<p>Show your calculations below (you can do this by hand or in R):</p>
-<p>Answers: 1. P(Disease) = 2. P(Test +) = 3. P(No Disease) =</p>
-</section>
-<section id="b.-joint-probabilities" class="level3">
-<h3 class="anchored" data-anchor-id="b.-joint-probabilities">6B. Joint probabilities</h3>
-<p>Calculate the following joint probabilities:</p>
+<p><strong>Answers:</strong></p>
 <ol type="1">
-<li><span class="math inline">\(P(\text{Disease and Test +})\)</span></li>
-<li><span class="math inline">\(P(\text{No Disease and Test -})\)</span></li>
-<li><span class="math inline">\(P(\text{Disease and Test -})\)</span></li>
+<li></li>
+<li></li>
 </ol>
-<p>Answers: 1. P(Disease and Test +) = 2. P(No Disease and Test -) = 3. P(Disease and Test -) =</p>
-</section>
-<section id="c.-conditional-probabilities" class="level3">
-<h3 class="anchored" data-anchor-id="c.-conditional-probabilities">6C. Conditional probabilities</h3>
-<p>Calculate the following conditional probabilities. Remember:</p>
-<p><span class="math display">\[P(A \mid B) = \frac{P(A \text{ and } B)}{P(B)}\]</span></p>
-<ol type="1">
-<li><span class="math inline">\(P(\text{Disease} \mid \text{Test +})\)</span> - This is the Positive Predictive Value (PPV)</li>
-<li><span class="math inline">\(P(\text{No Disease} \mid \text{Test -})\)</span> - This is the Negative Predictive Value (NPV)</li>
-<li><span class="math inline">\(P(\text{Test +} \mid \text{Disease})\)</span> - This is the sensitivity</li>
-</ol>
-<p>Show your work:</p>
-<p>Answers: 1. P(Disease | Test +) = 2. P(No Disease | Test -) = 3. P(Test + | Disease) =</p>
-</section>
-<section id="d.-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="d.-interpretation">6D. Interpretation</h3>
-<p>In 2-3 sentences, explain what the Positive Predictive Value (PPV) from 6C.1 tells us. Why might this value be lower than the sensitivity?</p>
-<p>Answer:</p>
+<hr>
 </section>
 </section>
-<section id="final-check" class="level2">
-<h2 class="anchored" data-anchor-id="final-check">Final check</h2>
-<p>Before submitting, confirm that:</p>
-<ul>
-<li>The document renders to HTML without errors</li>
-<li>All code chunks run successfully</li>
-<li>Your name appears at the top</li>
-<li>You’ve answered all text questions in Parts 1-6</li>
-<li>You uploaded both the .qmd and .html files</li>
-<li>(Optional) If you completed Part 5, make sure those chunks run too!</li>
+<section id="submission-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="submission-checklist">Submission checklist</h2>
+<p>Before submitting, make sure you have:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Both data files are in your <code>data/</code> folder</label></li>
+<li><label><input type="checkbox">All code chunks run without errors when rendered</label></li>
+<li><label><input type="checkbox">Answered all written questions</label></li>
+<li><label><input type="checkbox">Interpretations are written in full sentences, in context</label></li>
+<li><label><input type="checkbox">Rendered your HTML successfully</label></li>
+<li><label><input type="checkbox">Uploaded both <code>.qmd</code> and <code>.html</code> files</label></li>
 </ul>
 
 
