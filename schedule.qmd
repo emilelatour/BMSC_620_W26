@@ -57,7 +57,7 @@ source(here("class_dates.R"))
 [🎥 Lecture Recordings (loom.com)](https://loom.com/share/folder/1ccd8ec81f1b4d53a92361ea5f8e2db4) – Part 2 of Lecture 3
 
 | Week | Dates | Lesson | Topics | Chapter sections |
-|:--:|:--:|:--:|----|:--:|
+|:-------------:|:-------------:|:-------------:|---------------|:-------------:|
 | [1](/weeks/week_01.qmd) | `{r} format(w1d1, '%a, %m/%d')` | 0 | Welcome |  |
 |  |  | 1 | Intro to Data, Summarizing numerical data | 1.1-1.4 |
 |  | `{r} format(w1d2, '%a, %m/%d')` | 2 | Introduction to R & RStudio |  |
@@ -84,7 +84,7 @@ source(here("class_dates.R"))
 |  | [**`{r} format(mid_opens, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM opens at 3pm**]{.hw-row} |  |
 |  |  |  | Midterm will cover Lessons 1–9 |  |
 |  |  |  |  |  |
-| 7 | **`{r} format(w7d1, '%a, %m/%d')`** |  | **No class, Presidents Day** |  |
+| [7](/weeks/week_07.qmd) | **`{r} format(w7d1, '%a, %m/%d')`** |  | **No class, Presidents Day** |  |
 |  | [**`{r} format(mid_closes, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM closes at 11pm**]{.hw-row} |  |
 |  | `{r} format(w7d2, '%a, %m/%d')` | 12 | Power | 5.4, extra |
 |  | [**`{r} format(hw5, '%a, %m/%d')`**]{.hw-row} |  | [**HW 5 due \@ 11 pm**]{.hw-row} |  |
