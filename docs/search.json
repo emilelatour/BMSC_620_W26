@@ -729,11 +729,11 @@
     "text": "The complete picture\n\n\n\n\n\n\nReality\n\n\n\n\nTest decision\n\n\n\\(H_0\\) True\n\n\n\\(H_A\\) True\n\n\n\n\n\n\nReject \\(H_0\\)\n\n\nType I Error (\\(\\alpha\\))\n\n\nPower (\\(1-\\beta\\)) ✓\n\n\n\n\nFail to reject \\(H_0\\)\n\n\nCorrect (\\(1-\\alpha\\)) ✓\n\n\nType II Error (\\(\\beta\\))\n\n\n\n\n\n\n\n\n\n\nCorrect decisions:\n\n\\(1 - \\alpha\\): Confidence (correctly fail to reject when \\(H_0\\) is true)\n\\(1 - \\beta\\): Power (correctly reject \\(H_0\\) when \\(H_A\\) is true)\n\n\n\nErrors:\n\n\\(\\alpha\\): Type I error rate (false positive)\n\\(\\beta\\): Type II error rate (false negative)\n\n\n\nWhat we control in study design: We typically fix \\(\\alpha\\) at 0.05 and choose \\(n\\) to achieve desired power"
   },
   {
-    "objectID": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power-ii",
-    "href": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power-ii",
+    "objectID": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power",
+    "href": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power",
     "title": "Power and Sample Size",
-    "section": "Visualizing Type I error, Type II error, and Power (II)",
-    "text": "Visualizing Type I error, Type II error, and Power (II)\n\n\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve):\n\nPink region (α) = Type I error when we wrongly reject\n\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
+    "section": "Visualizing Type I error, Type II error, and Power",
+    "text": "Visualizing Type I error, Type II error, and Power\n\n\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve):\n\nPink region (α) = Type I error when we wrongly reject\n\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
   },
   {
     "objectID": "lessons/15_power_sample_size/15_power_sample_size.html#what-increases-power",
@@ -3337,7 +3337,7 @@
     "href": "weeks/week_07.html",
     "title": "Week 7",
     "section": "",
-    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Sunday, February 22 at 11:00 PM",
+    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -3349,7 +3349,7 @@
     "href": "weeks/week_07.html#announcements",
     "title": "Week 7",
     "section": "",
-    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Sunday, February 22 at 11:00 PM",
+    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -3385,7 +3385,7 @@
     "href": "weeks/week_07.html#materials",
     "title": "Week 7",
     "section": "Materials",
-    "text": "Materials\n\nMonday — No Class (Presidents Day)\n\nUniversity holiday — enjoy the break!\nReminder: Midterm exam is still open. It closes Mondaay at 11:00 PM.\n\n\n\n\nWednesday — Power and Sample Size\n\nTopics\n\nThe four components of hypothesis testing: significance level (\\(\\alpha\\)), sample size (\\(n\\)), effect size, and power (\\(1−\\beta\\))\nType I and Type II errors\nDefining and interpreting statistical power\nIntroduction to effect size (Cohen’s d)\nCalculating power and sample size using the pwr package in R\nPower calculations for one-sample t-tests\nPower calculations for two-sample t-tests\nStudy design applications and trade-offs\nInterpreting published research through the lens of power\n\nSlides\n\nPower and Sample Size (HTML | PDF | OneDrive)\n\nRecording\n\nRecording link will be posted after class\n\nMuddy points\n\nMuddy points response will be posted after class",
+    "text": "Materials\n\nMonday — No Class (Presidents Day)\n\nUniversity holiday — enjoy the break!\nReminder: Midterm exam is still open. It closes Monday at 11:00 PM.\n\n\n\n\nWednesday — Power and Sample Size\n\nTopics\n\nThe four components of hypothesis testing: significance level (\\(\\alpha\\)), sample size (\\(n\\)), effect size, and power (\\(1−\\beta\\))\nType I and Type II errors\nDefining and interpreting statistical power\nIntroduction to effect size (Cohen’s d)\nCalculating power and sample size using the pwr package in R\nPower calculations for one-sample t-tests\nPower calculations for two-sample t-tests\nStudy design applications and trade-offs\nInterpreting published research through the lens of power\n\nSlides\n\nPower and Sample Size (HTML | PDF | OneDrive)\n\nRecording\n\nPower and Sample Size\n\nMuddy points\n\nMuddy points response will be posted after class",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -3397,7 +3397,7 @@
     "href": "weeks/week_07.html#homework",
     "title": "Week 7",
     "section": "Homework",
-    "text": "Homework\n\nHW 5\n\nReleased Wednesday, February 18 (posted during the holiday)\nDue Sunday, February 22 at 11:00 PM\nCovers:\n\nLoading data from CSV and Excel files using here() and readr/readxl\nPaired t-tests (gene expression example)\nIndependent two-sample t-tests (Vitamin C recovery example)\nChoosing the appropriate test based on study design\nInterpreting confidence intervals and p-values\n\nView HW 5 instructions\ntxga_luad_top2a.csv and vitamin_c_recovery.xlsx available in data folder on OneDrive\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 5\n\nReleased Wednesday, February 18\nDue Monday, February 23 at 11:00 PM\nCovers:\n\nLoading data from CSV and Excel files using here() and readr/readxl\nPaired t-tests (gene expression example)\nIndependent two-sample t-tests (Vitamin C recovery example)\nChoosing the appropriate test based on study design\nInterpreting confidence intervals and p-values\n\nView HW 5 instructions\ntxga_luad_top2a.csv and vitamin_c_recovery.xlsx available in data folder on OneDrive\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
@@ -7052,12 +7052,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power",
-    "href": "lessons/15_power_sample_size/15_power_sample_size.html#visualizing-type-i-error-type-ii-error-and-power",
-    "title": "Power and Sample Size",
-    "section": "Visualizing Type I error, Type II error, and Power",
-    "text": "Visualizing Type I error, Type II error, and Power\n\n\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve):\n\nPink region (α) = Type I error when we wrongly reject\n\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
   }
 ]
