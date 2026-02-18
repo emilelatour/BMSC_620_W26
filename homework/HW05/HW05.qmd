@@ -1,0 +1,515 @@
+---
+title: "BMSC 620 — Homework 5"
+subtitle: "Comparing Two Means: Paired and Independent Samples"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+```{r}
+#| include: false
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(eval = TRUE)
+
+```
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW05`
+
+Examples:
+
+- Smith_J_HW05.qmd
+- Smith_J_HW05.html
+
+When submitting Homework 5, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Instructions
+
+- Answer each question clearly and concisely.
+- Show your work using R code chunks.
+- **Rounding:** Round estimates and confidence intervals to 1–2 decimal places.
+  Round *p*-values to 3 decimal places (or report as *p* < 0.001 if very small).
+- This homework uses **external data files** — see Part 0 below before writing
+  any code.
+- Code chunks marked `# Your code here` are intentionally blank. You are
+  expected to write the code yourself. Hints are provided to guide you.
+
+---
+
+## Part 0: Project Setup
+
+**Before writing any code, do the following:**
+
+1. Make sure you are working inside your BMSC 620 R Project (look for the
+   project name in the top-right corner of RStudio).
+2. Download the two data files from OneDrive and place them inside your project's
+   `data/` folder:
+   - `tcga_luad_top2a.csv`
+   - `vitamin_c_recovery.xlsx`
+3. Your folder structure should look like this:
+
+```
+BMSC620/
+├── BMSC620.Rproj
+├── data/
+│   ├── tcga_luad_top2a.csv
+│   └── vitamin_c_recovery.xlsx
+└── homework/
+    └── Smith_J_HW05.qmd    ← your file goes here
+```
+
+Load the packages you will need. Run this chunk first to confirm there are no
+errors. Install any missing packages before proceeding.
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(here)
+library(broom)
+library(readxl)
+
+```
+
+---
+
+## Part 1: Gene Expression in Lung Adenocarcinoma (Paired *t*-test)
+
+### Background
+
+The dataset `tcga_luad_top2a.csv` contains TOP2A gene expression levels from
+**20 patients** diagnosed with Lung Adenocarcinoma (LUAD). TOP2A (DNA
+Topoisomerase II Alpha) is involved in DNA replication and is frequently
+overexpressed in tumor tissue because cancer cells divide rapidly.
+
+For each patient, **two tissue samples** were collected:
+
+- `Normal_Expr`: TOP2A expression level in healthy lung tissue adjacent to the tumor
+- `Tumor_Expr`: TOP2A expression level in malignant tumor tissue from the same patient
+
+> *Data simulated for educational purposes, inspired by gene expression patterns
+> observed in The Cancer Genome Atlas (TCGA) Lung Adenocarcinoma (LUAD) cohort.
+> Values do not represent real patient data.*
+
+---
+
+### 1A. Load the data
+
+Import `tcga_luad_top2a.csv` and assign it to an object called `gene_expr`.
+Print the first few rows to confirm it loaded correctly (or use `dplyr::glimpse()`).
+
+::: {.callout-tip}
+Use `read_csv()` and `here()` together. Refer back to the Week 6 R workflow
+slides if you need a reminder of the syntax.
+:::
+
+```{r}
+#| label: load-gene
+
+# Your code here
+
+```
+
+How many rows and columns does this dataset have?
+
+**Answer:**
+
+---
+
+### 1B. Why is this a paired design?
+
+In 2–3 sentences, explain why a **paired** *t*-test (rather than an independent
+two-sample *t*-test) is the correct choice for this dataset. Think about what
+it means for two observations to be "paired."
+
+**Answer:**
+
+---
+
+### 1C. Compute the difference scores
+
+For paired data, our analysis focuses on the **within-patient difference**. Add
+a new variable called `diff_expr` equal to `Tumor_Expr - Normal_Expr` for
+each patient. Assign the result back to `gene_expr`.
+
+::: {.callout-tip}
+Use `mutate()` to create the new column.
+:::
+
+```{r}
+#| label: gene-diff
+
+# Your code here
+
+```
+
+---
+
+### 1D. Summary statistics
+
+Calculate the mean, standard deviation, and sample size of `diff_expr`.
+
+::: {.callout-tip}
+`rstatix::get_summary_stats()` or `summarize()` with `mean()`, `sd()`, and `n()` will work well here.
+:::
+
+```{r}
+#| label: gene-summstats
+
+# Your code here
+
+```
+
+Based on the mean difference, does it appear that TOP2A expression is higher
+in tumor tissue or normal tissue? Is this what you would expect biologically?
+
+**Answer:**
+
+---
+
+### 1E. Visualization (Optional — not graded, but encouraged!)
+
+::: {.callout-tip}
+Visualizing paired data before running the test is good practice. One simple
+approach: create a histogram or density plot of the `diff_expr` values to see
+the distribution of differences. Does it look roughly symmetric and centered
+away from zero?
+:::
+
+```{r}
+#| label: gene-viz
+
+# Your code here (optional)
+
+```
+
+**Answer:**
+
+---
+
+### 1F. State the hypotheses
+
+Write the null and alternative hypotheses for this test. We want to know whether mean TOP2A expression differs between tumor and normal tissue.
+
+You may write your hypotheses using statistical notation (if you're comfortable) or in plain words. Either way, be clear about what parameter you're testing and what values it takes under each hypothesis.
+
+::: {.callout-tip}
+Let $\mu_d$ denote the population mean of the paired differences (Tumor $-$ Normal).
+What value would $\mu_d$ have if there were no difference between tumor and
+normal tissue?
+:::
+
+**Answer:**
+
+$$H_0: $$
+
+$$H_A: $$
+
+---
+
+### 1G. Check the assumptions
+
+State whether the assumptions for a paired *t*-test are met for this dataset.
+Address each one explicitly:
+
+1. **Independence** of the paired differences
+2. **Approximate normality** (or large enough sample size)
+
+**Answer:**
+
+1. 
+2. 
+
+---
+
+### 1H. Explore the documentation
+
+Before running the test, look at the help file for `t.test()`:
+
+```{r}
+#| label: help-ttest
+
+?t.test
+
+```
+
+Which argument controls whether the test is paired or independent?
+What value would you set it to for a paired test?
+
+**Answer:**
+
+---
+
+### 1I. Run the paired *t*-test
+
+Run a paired *t*-test using base R's `t.test()`. Save the result to an object
+called `gene_test`, then use `broom::tidy()` to display the output as a clean
+data frame.
+
+::: {.callout-tip}
+You have two options for supplying the data:
+
+- Supply `x` and `y` as two separate vectors (e.g., `gene_expr$Tumor_Expr`)
+  and set the appropriate argument to indicate this is a paired design, **or**
+- Test your `diff_expr` variable against `mu = 0` with a one-sample *t*-test.
+
+Either is acceptable. Use a two-sided alternative.
+:::
+
+```{r}
+#| label: gene-ttest
+
+# Run the test and save the result
+gene_test <- # Your code here
+
+# Tidy the output
+tidy(gene_test)
+
+```
+
+---
+
+### 1J. Interpret the results
+
+Using the output from 1I, fill in the blanks and write a complete conclusion.
+
+- Mean difference ($\bar{x}_d$): ________
+- *t*-statistic: ________
+- Degrees of freedom: ________
+- *p*-value: ________
+- 95% confidence interval: (________, ________)
+
+**Conclusion** (2–3 sentences in context — state the direction of the effect,
+whether it is statistically significant at $\alpha = 0.05$, and what it means
+biologically):
+
+**Answer:**
+
+---
+
+## Part 2: Vitamin C and Muscle Soreness (Independent Two-Sample *t*-test)
+
+### Background
+
+The dataset `vitamin_c_recovery.xlsx` comes from a randomized study investigating
+whether high-dose Vitamin C supplementation reduces delayed-onset muscle soreness
+(DOMS) after intense exercise.
+
+**Study design:**
+
+- 30 volunteers were randomly assigned to one of two **independent** groups
+- `placebo` (n = 15): Received a sugar pill daily for two weeks
+- `vitamin_c` (n = 15): Received 1,000 mg Vitamin C daily for two weeks
+- All participants then completed a standardized eccentric exercise protocol
+- 48 hours later, they rated soreness on a Visual Analog Scale (VAS):
+  0 = no pain, 100 = extreme pain
+
+> *Data simulated for educational purposes, inspired by Bryer & Goldfarb (2006),*
+> *Int J Sport Nutr Exerc Metab, 16:270–280. Values do not represent real participant data.*
+
+---
+
+### 2A. Load the data
+
+Import `vitamin_c_recovery.xlsx` and assign it to an object called `vitc`.
+Print the first few rows to confirm it loaded correctly (or use `dplyr::glimpse()`).
+
+::: {.callout-tip}
+Excel files require `readxl::read_excel()` instead of `read_csv()`. The syntax
+is similar: `read_excel(here("data", "filename.xlsx"))`.
+:::
+
+```{r}
+#| label: load-vitc
+
+# Your code here
+
+```
+
+---
+
+### 2B. Why is this an independent two-sample design?
+
+In 2–3 sentences, explain why a **two-sample** (independent) *t*-test is the
+correct choice here, and why a paired *t*-test would be inappropriate.
+
+**Answer:**
+
+---
+
+### 2C. Summary statistics by group
+
+Calculate the mean, standard deviation, and sample size of `pain_score`
+separately for each group.
+
+::: {.callout-tip}
+Use `group_by()` followed by `rstatix::get_summary_stats()`. Or `group_by()` followed by `summarize()` from the `dplyr` package.
+:::
+
+```{r}
+#| label: vitc-summstats
+
+# Your code here
+
+```
+
+Based on these summaries, which group has higher pain scores on average?
+Does the difference look meaningful relative to the within-group variability?
+
+**Answer:**
+
+---
+
+### 2D. Visualization (Optional — not graded, but encouraged!)
+
+::: {.callout-tip}
+A side-by-side boxplot is a natural choice for two independent groups. Consider
+layering `geom_jitter()` on top of `geom_boxplot()` to show the individual
+data points alongside the boxes. You can play with the `width` and `height` arguments to `geom_jitter` to control the placing of the points, and `alpha` to control the transparency.
+:::
+
+```{r}
+#| label: vitc-viz
+
+# Your code here (optional)
+
+```
+
+**Answer:**
+
+---
+
+### 2E. State the hypotheses
+
+Write the null and alternative hypotheses for this test. We want to know
+whether mean pain scores differ between the two groups.
+
+You may write your hypotheses using statistical notation (if you're comfortable) or in plain words. Either way, be clear about what you're comparing.
+
+::: {.callout-tip}
+Let $\mu_1$ denote the mean pain score for the placebo group and $\mu_2$ for
+the Vitamin C group. Under the null hypothesis, how do these two population
+means relate to each other?
+:::
+
+**Answer:**
+
+$$H_0: $$
+
+$$H_A: $$
+
+---
+
+### 2F. Check the assumptions
+
+State whether the assumptions for an independent two-sample *t*-test are met.
+Address each one explicitly:
+
+1. **Independence** (between groups and within each group)
+2. **Approximate normality** (or large enough sample size) for each group
+
+**Answer:**
+
+1. 
+2. 
+
+---
+
+### 2G. Run the two-sample *t*-test
+
+Run the test using base R's `t.test()` with **formula notation**. Save the
+result to an object called `vitc_test`, then tidy the output.
+
+::: {.callout-tip}
+For two independent groups, `t.test()` accepts a formula of the form
+`outcome ~ group`. The `data` argument tells R where to find those variables.
+Think carefully: does this test require `paired = TRUE` or `paired = FALSE`?
+:::
+
+```{r}
+#| label: vitc-ttest
+
+# Run the test and save the result
+vitc_test <- # Your code here
+
+# Tidy the output
+tidy(vitc_test)
+
+```
+
+---
+
+### 2H. Interpret the results
+
+Using the output from 2G, fill in the blanks and write a complete conclusion.
+
+- Mean pain score, placebo group: ________
+- Mean pain score, Vitamin C group: ________
+- Estimated difference ($\bar{x}_1 - \bar{x}_2$): ________
+- *t*-statistic: ________
+- Degrees of freedom: ________
+- *p*-value: ________
+- 95% confidence interval for the difference: (________, ________)
+
+**Conclusion** (2–3 sentences in context — state which group had higher pain,
+whether the difference is statistically significant at $\alpha = 0.05$, and
+what this suggests about Vitamin C supplementation for muscle recovery):
+
+**Answer:**
+
+---
+
+## Part 3: Connecting the Two Analyses
+
+### 3A. Paired vs. independent — the key distinction
+
+In your own words, explain the fundamental difference between the two study
+designs you analyzed in this homework. Why does it matter which test you use?
+What would go wrong if you used the wrong one?
+
+**Answer:**
+
+---
+
+### 3B. Interpreting confidence intervals
+
+For each analysis, you obtained a 95% confidence interval for a difference.
+
+1. In Part 1, the CI is for the **mean paired difference** (Tumor $-$ Normal).
+   Does the interval include 0? What does that tell you?
+2. In Part 2, the CI is for the **difference in group means**
+   (placebo $-$ vitamin_c). How can you use the CI alone — without looking at
+   the *p*-value — to decide whether the groups differ significantly?
+
+**Answers:**
+
+1. 
+2. 
+
+---
+
+## Submission checklist
+
+Before submitting, make sure you have:
+
+- [ ] Both data files are in your `data/` folder
+- [ ] All code chunks run without errors when rendered
+- [ ] Answered all written questions
+- [ ] Interpretations are written in full sentences, in context
+- [ ] Rendered your HTML successfully
+- [ ] Uploaded both `.qmd` and `.html` files
