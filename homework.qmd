@@ -43,7 +43,7 @@ Homework solutions will be posted in Sakai after the submission deadline. These 
 | 2 | `{r} format(hw2, '%m/%d')` | [HW 02 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgB6-UGUHWPfQqWbDTKVk5PFAf6Uk6i5z1MaNv_4kjMBOk8?e=ESbDNM) | [View HW 02](/homework/HW02/HW02.qmd) |
 | 3 | `{r} format(hw3, '%m/%d')` | [HW 03 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCJONNcABvgSZ4R7JaHY7UWAeaIZ-D2DG9tvL0HEvbVrWA?e=me2guY) | [View HW 03](/homework/HW03/HW03.qmd) |
 | 4 | `{r} format(hw4, '%m/%d')` | [HW 04 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgB4i4IrW_hkQJvjr7qNUouiAWxuqbCiRDSIKJ31y1OxiCg?e=EtZTib) | [View HW 04](/homework/HW04/HW04.qmd) |
-| 5 | `{r} format(hw5, '%m/%d')` | (to be posted) | (to be posted) |
+| 5 | `{r} format(hw5, '%m/%d')` | [HW 05 files (OneDrive)](https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/homework/HW05?csf=1&web=1&e=eGueid) | [View HW 05](/homework/HW05/HW05.qmd) |
 | 6 | `{r} format(hw6, '%m/%d')` | (to be posted) | (to be posted) |
 | 7 | `{r} format(hw7, '%m/%d')` | (to be posted) | (to be posted) |
 | 8 | `{r} format(hw8, '%m/%d')` | (to be posted) | (to be posted) |

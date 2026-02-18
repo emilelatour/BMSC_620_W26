@@ -14,7 +14,7 @@ execute:
 #| include: false
 #### Global chunk options -----------------------------
 
-knitr::opts_chunk$set(eval = TRUE)
+knitr::opts_chunk$set(eval = FALSE)
 
 ```
 
