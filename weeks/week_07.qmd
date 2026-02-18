@@ -19,9 +19,9 @@ Think of the weekly page as answering just five student questions:
 
 ## Announcements
 
--   **Monday, February 17** is a university holiday (Presidents Day) — **no class**
--   **Midterm Exam** closes **Wednesday, February 19 at 11:00 PM**
--   **HW 5** is due **Sunday, February 23 at 11:00 PM**
+-   **Monday, February 16** is a university holiday (Presidents Day) — **no class**
+-   **Midterm Exam** closes **Monday, February 16 at 11:00 PM**. Solutions are posted under **Resources** on Sakai. 
+-   **HW 5** is due **Sunday, February 22 at 11:00 PM**
 
 ## Overview
 
@@ -48,14 +48,14 @@ By the end of the week, you should be able to:
 ### Monday — No Class (Presidents Day)
 
 -   University holiday — enjoy the break!
--   **Reminder:** Midterm exam is still open. It closes **Wednesday at 11:00 PM**.
+-   **Reminder:** Midterm exam is still open. It closes **Mondaay at 11:00 PM**.
 
 ------------------------------------------------------------------------
 
 ### Wednesday — Power and Sample Size
 
 -   **Topics**
-    -   The four components of hypothesis testing: significance level (α), sample size (n), effect size, and power (1−β)
+    -   The four components of hypothesis testing: significance level ($\alpha$), sample size ($n$), effect size, and power ($1−\beta$)
     -   Type I and Type II errors
     -   Defining and interpreting statistical power
     -   Introduction to effect size (Cohen's *d*)
@@ -76,8 +76,8 @@ By the end of the week, you should be able to:
 ## Homework
 
 -   **HW 5**
-    -   Released **Monday, February 17** (posted during the holiday)
-    -   Due **Sunday, February 23 at 11:00 PM**
+    -   Released **Wednesday, February 18** (posted during the holiday)
+    -   Due **Sunday, February 22 at 11:00 PM**
     -   Covers:
         -   Loading data from CSV and Excel files using `here()` and `readr`/`readxl`
         -   Paired t-tests (gene expression example)
@@ -90,7 +90,7 @@ By the end of the week, you should be able to:
 
 ## Midterm Exam
 
--   **Closes:** Wednesday, February 19 at 11:00 PM
+-   **Closes:** Monday, February 16 at 11:00 PM
 -   **Format:** 8 parts, 120 points total
 -   **Coverage:** Lessons 1-9 (through hypothesis testing and one-sample t-tests)
 -   **Submit:** Both `.qmd` and `.html` files before the deadline
