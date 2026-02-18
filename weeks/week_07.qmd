@@ -21,7 +21,7 @@ Think of the weekly page as answering just five student questions:
 
 -   **Monday, February 16** is a university holiday (Presidents Day) — **no class**
 -   **Midterm Exam** closes **Monday, February 16 at 11:00 PM**. Solutions are posted under **Resources** on Sakai. 
--   **HW 5** is due **Sunday, February 22 at 11:00 PM**
+-   **HW 5** is due **Monday, February 23 at 11:00 PM**
 
 ## Overview
 
@@ -48,7 +48,7 @@ By the end of the week, you should be able to:
 ### Monday — No Class (Presidents Day)
 
 -   University holiday — enjoy the break!
--   **Reminder:** Midterm exam is still open. It closes **Mondaay at 11:00 PM**.
+-   **Reminder:** Midterm exam is still open. It closes **Monday at 11:00 PM**.
 
 ------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ By the end of the week, you should be able to:
 -   **Slides**
     -   Power and Sample Size ([HTML](/lessons/15_power_sample_size/15_power_sample_size.qmd) \| [PDF](/lessons/15_power_sample_size/15_power_sample_size.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
-    -   Recording link will be posted after class
+    -   [Power and Sample Size](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBokBoEMZ7hRobYRVntKgBwAW3aAy3PK_hDNki3QAQd2E0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Lymehc)
 -   **Muddy points**
     -   Muddy points response will be posted after class
 
@@ -76,8 +76,8 @@ By the end of the week, you should be able to:
 ## Homework
 
 -   **HW 5**
-    -   Released **Wednesday, February 18** (posted during the holiday)
-    -   Due **Sunday, February 22 at 11:00 PM**
+    -   Released **Wednesday, February 18** 
+    -   Due **Monday, February 23 at 11:00 PM**
     -   Covers:
         -   Loading data from CSV and Excel files using `here()` and `readr`/`readxl`
         -   Paired t-tests (gene expression example)
