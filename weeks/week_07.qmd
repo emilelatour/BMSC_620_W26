@@ -85,7 +85,7 @@ By the end of the week, you should be able to:
         -   Choosing the appropriate test based on study design
         -   Interpreting confidence intervals and p-values
     -   [View HW 5 instructions](/homework/HW05/HW05.qmd)
-    -   txga_luad_top2a.csv and vitamin_c_recovery.xlsx available in [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/data?csf=1&web=1&e=P9czhc)
+    -   `txga_luad_top2a.csv` and `vitamin_c_recovery.xlsx` available in [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/data?csf=1&web=1&e=P9czhc)
 
 -   See the full list of assignments on the [Homework](/homework.qmd) page.
 

@@ -83,6 +83,37 @@ The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 :::
 
 
+## What did we just observe?
+
+**From our visual examples, we noticed:**
+
+::: incremental
+1.  **Less variability** (smaller SD) → distributions pull apart → easier to detect difference
+
+2.  **Bigger true difference** → distributions pull apart → easier to detect difference
+
+3.  These affect how much **overlap** there is between groups
+:::
+
+\
+
+::: fragment
+**But we're missing something important:**
+
+-   What about sample size? More data should help us detect differences
+-   What about our significance level? Being more strict (lower $\alpha$) changes our threshold
+:::
+
+\
+
+::: fragment
+**Let's formalize these ideas...**
+
+Statisticians recognize **four components** that work together in any hypothesis test. Change one, and you affect the others!
+:::
+
+
+
 
 
 
@@ -102,17 +133,6 @@ knitr::opts_chunk$set(eval = FALSE)
 ```
 
 
-
-
-I need helping making this Wednesdays lecture on the Normal Distribution and maybe the Poisson Distribution. Attached are Nicky and Meike's slides. Nicky originally did them both in one lecture on the same day. Then she split them up. Meike's is in one lecture still
-
-
-
-The normal distribution is super important. The Poisson -- I'd really just like for them to recognize it and to know when they might need it (counts and rates). Or maybe its an optional recorded lecture. I'm not sure what;s best. But the Normal needs to be covered for sure. I'd take your thoughts and advice.
-
-
-
-The book covers the normal dist on pages 152-167. And the Poisson on pages 168-169
 
 
 

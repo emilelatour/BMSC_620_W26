@@ -482,8 +482,9 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li>Made a conclusion (reject <span class="math inline">\(H_0\)</span> or fail to reject)</li>
 </ol>
 </section>
-<section id="quick-reference-everything-weve-covered" class="slide level2 smaller">
+<section id="quick-reference-everything-weve-covered" class="slide level2">
 <h2>Quick reference: Everything we’ve covered</h2>
+<!-- ## Quick reference: Everything we've covered {.smaller} -->
 <p><br>
 </p>
 <table class="caption-top">
@@ -818,7 +819,11 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="hypothesis-testing-errors" class="slide level2">
 <h2>Hypothesis testing errors</h2>
 
-<img data-src="../../img_slides/type_i_type_ii_pregnant.jpg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/">StatisticsSolutions</a></p></section>
+<img data-src="../../img_slides/type_i_type_ii_pregnant.jpg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/">StatisticsSolutions</a></p><ul>
+<li>Null hypothesis: The patient is not pregnant.</li>
+<li>Alternative hypothesis: The patient is pregnant.</li>
+</ul>
+</section>
 <section id="justice-system-analogy" class="slide level2">
 <h2>Justice system analogy</h2>
 <p><br><br></p>
@@ -919,7 +924,7 @@ Test decision
 <span class="math inline">\(H_0\)</span> True
 </th>
 <th>
-<span class="math inline">\(H_1\)</span> True
+<span class="math inline">\(H_A\)</span> True
 </th>
 </tr>
 </thead>
@@ -957,7 +962,7 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 <p><strong>Correct decisions:</strong></p>
 <ul>
 <li><span class="math inline">\(1 - \alpha\)</span>: Confidence (correctly fail to reject when <span class="math inline">\(H_0\)</span> is true)</li>
-<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_1\)</span> is true)</li>
+<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_A\)</span> is true)</li>
 </ul>
 <p><br>
 </p>
@@ -1164,8 +1169,8 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 <!--         axis.text.y = element_blank()) -->
 <!-- ``` -->
 </section>
-<section id="visualizing-type-i-error-type-ii-error-and-power-ii" class="slide level2">
-<h2>Visualizing Type I error, Type II error, and Power (II)</h2>
+<section id="visualizing-type-i-error-type-ii-error-and-power" class="slide level2">
+<h2>Visualizing Type I error, Type II error, and Power</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
 <div class="fragment">
@@ -1382,9 +1387,9 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 </p>
 <p><strong>Example interpretations:</strong></p>
 <ul>
-<li><em>d</em> = 0.2: Treatment shifts mean by 0.2 standard deviations</li>
-<li><em>d</em> = 0.5: Treatment shifts mean by half a standard deviation</li>
-<li><em>d</em> = 0.8: Treatment shifts mean by 0.8 standard deviations</li>
+<li><span class="math inline">\(d = 0.2\)</span>: Treatment shifts mean by 0.2 standard deviations</li>
+<li><span class="math inline">\(d = 0.5\)</span>: Treatment shifts mean by half a standard deviation</li>
+<li><span class="math inline">\(d = 0.8\)</span>: Treatment shifts mean by 0.8 standard deviations</li>
 </ul>
 <p><br>
 </p>
@@ -1408,17 +1413,17 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 <li>Specify all parameters except one</li>
 <li>Returns the missing parameter</li>
 </ul>
-<p><br>
-</p>
 <p><strong>Function structure:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>,           <span class="co"># Sample size per group</span></span>
-<span id="cb2-2"><a></a>           <span class="at">d =</span> <span class="cn">NULL</span>,           <span class="co"># Cohen's d effect size  </span></span>
-<span id="cb2-3"><a></a>           <span class="at">sig.level =</span> <span class="fl">0.05</span>,   <span class="co"># Significance level (α)</span></span>
-<span id="cb2-4"><a></a>           <span class="at">power =</span> <span class="cn">NULL</span>,       <span class="co"># Power (1-β)</span></span>
-<span id="cb2-5"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="co"># or "one.sample", "paired"</span></span>
-<span id="cb2-6"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>) <span class="co"># or "less", "greater"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="cn">NULL</span>,                    <span class="co"># Sample size per group</span></span>
+<span id="cb2-2"><a></a>           <span class="at">d =</span> <span class="cn">NULL</span>,                    <span class="co"># Cohen's d effect size  </span></span>
+<span id="cb2-3"><a></a>           <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># Significance level (α)</span></span>
+<span id="cb2-4"><a></a>           <span class="at">power =</span> <span class="cn">NULL</span>,                <span class="co"># Power (1-β)</span></span>
+<span id="cb2-5"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>,         <span class="co"># or "one.sample", "paired"</span></span>
+<span id="cb2-6"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)   <span class="co"># or "less", "greater"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br>
+</p>
 <p><strong>Leave out the parameter you want to calculate!</strong></p>
 </section>
 <section id="example-1-one-sample-test---finding-sample-size" class="slide level2">
@@ -1435,9 +1440,9 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 <p><strong>Step 1:</strong> Calculate Cohen’s d</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Effect size</span></span>
-<span id="cb3-2"><a></a>mu0 <span class="ot">&lt;-</span> <span class="fl">98.6</span>      <span class="co"># Null value</span></span>
-<span id="cb3-3"><a></a>mu_true <span class="ot">&lt;-</span> <span class="fl">98.25</span> <span class="co"># What we believe is true</span></span>
-<span id="cb3-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.73</span>        <span class="co"># Standard deviation from pilot data</span></span>
+<span id="cb3-2"><a></a>mu0 <span class="ot">&lt;-</span> <span class="fl">98.6</span>        <span class="co"># Null value</span></span>
+<span id="cb3-3"><a></a>mu_true <span class="ot">&lt;-</span> <span class="fl">98.25</span>   <span class="co"># What we believe is true</span></span>
+<span id="cb3-4"><a></a>s <span class="ot">&lt;-</span> <span class="fl">0.73</span>          <span class="co"># Standard deviation from pilot data</span></span>
 <span id="cb3-5"><a></a></span>
 <span id="cb3-6"><a></a>d <span class="ot">&lt;-</span> (mu_true <span class="sc">-</span> mu0) <span class="sc">/</span> s</span>
 <span id="cb3-7"><a></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1454,7 +1459,7 @@ Type II Error (<span class="math inline">\(\beta\)</span>)
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Specify all parameters except for sample size, n</span></span>
 <span id="cb5-2"><a></a></span>
 <span id="cb5-3"><a></a>result <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb5-4"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,  <span class="co"># Cohen's d</span></span>
+<span id="cb5-4"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,   <span class="co"># Cohen's d</span></span>
 <span id="cb5-5"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># α = 0.05</span></span>
 <span id="cb5-6"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,                <span class="co"># Want 80% power</span></span>
 <span id="cb5-7"><a></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,         <span class="co"># One-sample test</span></span>
@@ -1772,7 +1777,7 @@ NOTE: n is number in *each* group</code></pre>
 </div>
 <div class="callout-content">
 <p><strong>Don’t do this:</strong> “Our result was non-significant (p=0.12). Let me calculate power…”</p>
-<p><strong>Why it’s wrong:</strong> Post-hoc power for non-significant results is always low - tells you nothing!</p>
+<p><strong>Why it’s wrong:</strong> Post-hoc power is mathematically tied to your p-value — it simply restates your result in different units and adds no new information</p>
 <p><strong>Do instead:</strong> Report confidence interval showing uncertainty</p>
 </div>
 </div>
@@ -1785,11 +1790,12 @@ NOTE: n is number in *each* group</code></pre>
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Mistake 2: Using observed effect size for power</strong></p>
+<p><strong>Mistake 2: Using observed effect size for post-hoc power</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>Don’t do this:</strong> Calculate power using the effect size you observed</p>
-<p><strong>Why it’s wrong:</strong> If result was non-significant, observed effect is likely underestimate</p>
+<p><strong>Don’t do this:</strong> Calculate power using your observed effect size to evaluate your own completed study</p>
+<p><strong>Why it’s wrong:</strong> Post-hoc power will almost always be low when p &gt; 0.05 — it tells you nothing beyond what the p-value already told you</p>
+<p><strong>Note:</strong> Your observed effect <em>can</em> inform planning a future study, but treat it as a noisy estimate and consider a range of plausible values</p>
 <p><strong>Do instead:</strong> Use effect size from pilot data, literature, or smallest clinically meaningful effect</p>
 </div>
 </div>
@@ -1858,12 +1864,14 @@ NOTE: n is number in *each* group</code></pre>
 <li>Study deemed “negative” despite clinically meaningful effect</li>
 </ul>
 </div><div class="column" style="width:50%;">
+<div class="fragment">
 <p><strong>Lessons:</strong></p>
 <ol type="1">
 <li>Small deviations from plan can substantially reduce power</li>
 <li>Under-recruitment is very common - build in buffer</li>
 <li>Conservative SD estimates are wise</li>
 </ol>
+</div>
 </div></div>
 </section>
 <section id="when-is-a-study-underpowered" class="slide level2">
@@ -1925,7 +1933,15 @@ NOTE: n is number in *each* group</code></pre>
 </ol>
 <p><br>
 </p>
-<p><strong>Evaluating a completed study:</strong> 1. Focus on effect estimates and confidence intervals 2. If non-significant: Is CI compatible with meaningful effect? 3. Don’t calculate “achieved power” (mathematically determined by the <em>p</em>-value) 4. Use observed effect size &amp; SD to plan follow-up studies</p>
+<p><strong>Evaluating a completed study:</strong></p>
+<ol type="1">
+<li>Focus on effect estimates and confidence intervals</li>
+<li>If non-significant: Is CI compatible with meaningful effect?</li>
+<li>Don’t calculate “achieved power” (mathematically determined by the <em>p</em>-value)</li>
+<li>Use observed effect size &amp; SD to plan follow-up studies</li>
+</ol>
+</div><div class="column" style="width:4%;">
+
 </div><div class="column" style="width:48%;">
 <p><strong>Reviewing others’ work:</strong></p>
 <ol type="1">

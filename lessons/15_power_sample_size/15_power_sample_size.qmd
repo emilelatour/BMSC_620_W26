@@ -114,7 +114,8 @@ By the end of today's lecture, you will be able to:
 3.  Got a p-value
 4.  Made a conclusion (reject $H_0$ or fail to reject)
 
-## Quick reference: Everything we've covered {.smaller}
+## Quick reference: Everything we've covered 
+<!-- ## Quick reference: Everything we've covered {.smaller} -->
 
 \
 
@@ -711,6 +712,10 @@ print(combined_plot)
 
 ![[StatisticsSolutions](https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/)](/img_slides/type_i_type_ii_pregnant.jpg){fig-align="center" width="70%"}
 
+
+- Null hypothesis: The patient is not pregnant.
+- Alternative hypothesis: The patient is pregnant.
+
 ## Justice system analogy 
 
 <br><br>
@@ -804,7 +809,7 @@ print(combined_plot)
   <tr>
     <th>Test decision</th>
     <th>$H_0$ True</th>
-    <th>$H_1$ True</th>
+    <th>$H_A$ True</th>
   </tr>
 </thead>
 <tbody>
@@ -833,7 +838,7 @@ print(combined_plot)
 **Correct decisions:**
 
 -   $1 - \alpha$: Confidence (correctly fail to reject when $H_0$ is true)
--   $1 - \beta$: Power (correctly reject $H_0$ when $H_1$ is true)
+-   $1 - \beta$: Power (correctly reject $H_0$ when $H_A$ is true)
 
 \
 
@@ -1073,7 +1078,7 @@ print(combined_plot)
 <!--         axis.text.y = element_blank()) -->
 <!-- ``` -->
 
-## Visualizing Type I error, Type II error, and Power (II)
+## Visualizing Type I error, Type II error, and Power 
 
 ::: columns
 ::: {.column width="30%"}
@@ -1141,7 +1146,7 @@ ggplot(data.frame(x = c(-3, 7)), aes(x)) +
   
   # 5. Strategic Labeling (using plotmath for Greek)
   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) +
-  annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) +
+  annotate("text", x = mu_alt, y = 0.42, label = "H[A]", parse = TRUE, color = "#0072B2", size = 7) +
   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) +
   annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) +
   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) +
@@ -1315,9 +1320,9 @@ For two-sample d, we often use pooled SD when group variances are similar; there
 
 **Example interpretations:**
 
--   *d* = 0.2: Treatment shifts mean by 0.2 standard deviations
--   *d* = 0.5: Treatment shifts mean by half a standard deviation
--   *d* = 0.8: Treatment shifts mean by 0.8 standard deviations
+-   $d = 0.2$: Treatment shifts mean by 0.2 standard deviations
+-   $d = 0.5$: Treatment shifts mean by half a standard deviation
+-   $d = 0.8$: Treatment shifts mean by 0.8 standard deviations
 
 \
 
@@ -1342,20 +1347,20 @@ library(pwr)
 -   Specify all parameters except one
 -   Returns the missing parameter
 
-\
-
 **Function structure:**
 
 ```{r}
 #| eval: false
 
-pwr.t.test(n = NULL,           # Sample size per group
-           d = NULL,           # Cohen's d effect size  
-           sig.level = 0.05,   # Significance level (α)
-           power = NULL,       # Power (1-β)
-           type = "two.sample", # or "one.sample", "paired"
-           alternative = "two.sided") # or "less", "greater"
+pwr.t.test(n = NULL,                    # Sample size per group
+           d = NULL,                    # Cohen's d effect size  
+           sig.level = 0.05,            # Significance level (α)
+           power = NULL,                # Power (1-β)
+           type = "two.sample",         # or "one.sample", "paired"
+           alternative = "two.sided")   # or "less", "greater"
 ```
+
+\
 
 **Leave out the parameter you want to calculate!**
 
@@ -1374,9 +1379,9 @@ pwr.t.test(n = NULL,           # Sample size per group
 
 ```{r}
 # Effect size
-mu0 <- 98.6      # Null value
-mu_true <- 98.25 # What we believe is true
-s <- 0.73        # Standard deviation from pilot data
+mu0 <- 98.6        # Null value
+mu_true <- 98.25   # What we believe is true
+s <- 0.73          # Standard deviation from pilot data
 
 d <- (mu_true - mu0) / s
 d
@@ -1392,7 +1397,7 @@ d
 # Specify all parameters except for sample size, n
 
 result <- pwr.t.test(
-  d = (98.6 - 98.25) / 0.73,  # Cohen's d
+  d = (98.6 - 98.25) / 0.73,   # Cohen's d
   sig.level = 0.05,            # α = 0.05
   power = 0.80,                # Want 80% power
   type = "one.sample",         # One-sample test
@@ -1663,7 +1668,8 @@ one_sided
 
 **Don't do this:** "Our result was non-significant (p=0.12). Let me calculate power..."
 
-**Why it's wrong:** Post-hoc power for non-significant results is always low - tells you nothing!
+**Why it's wrong:** Post-hoc power is mathematically tied to your p-value — it simply restates your result in different units
+and adds no new information
 
 **Do instead:** Report confidence interval showing uncertainty
 :::
@@ -1671,11 +1677,14 @@ one_sided
 \
 
 ::: callout-warning
-## Mistake 2: Using observed effect size for power
 
-**Don't do this:** Calculate power using the effect size you observed
+## Mistake 2: Using observed effect size for post-hoc power
 
-**Why it's wrong:** If result was non-significant, observed effect is likely underestimate
+**Don't do this:** Calculate power using your observed effect size to evaluate your own completed study
+
+**Why it's wrong:** Post-hoc power will almost always be low when p > 0.05 — it tells you nothing beyond what the p-value already told you
+
+**Note:** Your observed effect *can* inform planning a future study, but treat it as a noisy estimate and consider a range of plausible values
 
 **Do instead:** Use effect size from pilot data, literature, or smallest clinically meaningful effect
 :::
@@ -1683,6 +1692,7 @@ one_sided
 ## Common mistakes continued
 
 ::: callout-warning
+
 ## Mistake 3: Ignoring practical significance
 
 **Don't do this:** Design study to detect any statistically significant difference
@@ -1695,6 +1705,7 @@ one_sided
 \
 
 ::: callout-warning
+
 ## Mistake 4: Not considering variability
 
 **Don't do this:** Assume optimistic (low) SD when planning sample size
@@ -1753,11 +1764,15 @@ power_calc <- pwr.t.test(n = 50,
 :::
 
 ::: {.column width="50%"}
+
+::: fragment
 **Lessons:**
 
 1.  Small deviations from plan can substantially reduce power
 2.  Under-recruitment is very common - build in buffer
 3.  Conservative SD estimates are wise
+:::
+
 :::
 :::
 
@@ -1814,10 +1829,15 @@ Always report your power analysis in papers/grants! Shows thoughtful study desig
 \
 
 **Evaluating a completed study:**
+
 1.  Focus on effect estimates and confidence intervals
 2.  If non-significant: Is CI compatible with meaningful effect?
 3.  Don't calculate "achieved power" (mathematically determined by the *p*-value)
 4.  Use observed effect size & SD to plan follow-up studies
+:::
+
+::: {.column width="4%"}
+
 :::
 
 ::: {.column width="48%"}

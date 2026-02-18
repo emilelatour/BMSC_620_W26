@@ -45,7 +45,8 @@ mid_closes = cal_dates[43]
 ## Week 7 dates
 w7d1 = cal_dates[43] # No class
 w7d2 = cal_dates[45]
-hw5 = cal_dates[49]
+# hw5 = cal_dates[49]
+hw5 = cal_dates[50]
 
 ## Week 8 dates
 w8d1 = cal_dates[50]
