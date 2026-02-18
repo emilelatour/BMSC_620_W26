@@ -581,6 +581,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="motivating-example-the-caffeine-study" class="slide level2">
 <h2>Motivating example: The caffeine study</h2>
+<p><br>
+</p>
 <p><strong>Research Question:</strong> Does caffeine increase finger tapping speed?</p>
 <p><br>
 </p>
@@ -632,36 +634,60 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="what-affects-our-ability-to-detect-an-effect" class="slide level2">
 <h2>What affects our ability to detect an effect?</h2>
-<p><strong>Scenario:</strong> Imagine two populations that differ in their mean tapping speed</p>
 <p><br>
 </p>
+<p><strong>Scenario:</strong> Imagine two populations that differ in their mean tapping speed</p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
-</p>
-<p><strong>Question:</strong> When we take samples from these groups, will it be easy to tell them apart?</p>
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><strong>Question:</strong> When we take samples from these groups, will it be easy to tell them apart?</p>
 <p><strong>Answer:</strong> It depends on several factors…</p>
 </section>
 <section id="scenario-1-small-standard-deviation" class="slide level2">
 <h2>Scenario 1: Small standard deviation</h2>
+<p><br>
+</p>
 <p><strong>Same difference (5 taps/min), but less variability (SD = 1 instead of 2)</strong></p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
-</p>
-<p><strong>Observation:</strong> Less overlap between distributions makes the difference easier to detect!</p>
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><strong>Observation:</strong> Less overlap between distributions makes the difference easier to detect!</p>
 </section>
 <section id="scenario-2-larger-difference" class="slide level2">
 <h2>Scenario 2: Larger difference</h2>
 <p><strong>Larger difference (10 taps/min instead of 5), same variability (SD = 2)</strong></p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><br>
 </p>
 <p><strong>Observation:</strong> A larger true difference is easier to detect!</p>
 </section>
-<section id="the-four-components-in-equilibrium" class="slide level2">
-<h2>The four components in equilibrium</h2>
-<p><strong>In any hypothesis test, four quantities are mathematically related:</strong></p>
+<section id="what-did-we-just-observe" class="slide level2">
+<h2>What did we just observe?</h2>
+<p><strong>From our visual examples, we noticed:</strong></p>
+<div>
+<ol type="1">
+<li class="fragment"><p><strong>Less variability</strong> (smaller SD) → distributions pull apart → easier to detect difference</p></li>
+<li class="fragment"><p><strong>Bigger true difference</strong> → distributions pull apart → easier to detect difference</p></li>
+<li class="fragment"><p>These affect how much <strong>overlap</strong> there is between groups</p></li>
+</ol>
+</div>
 <p><br>
 </p>
+<div class="fragment">
+<p><strong>But we’re missing something important:</strong></p>
+<ul>
+<li>What about sample size? More data should help us detect differences</li>
+<li>What about our significance level? Being more strict (lower <span class="math inline">\(\alpha\)</span>) changes our threshold</li>
+</ul>
+</div>
+<p><br>
+</p>
+<div class="fragment">
+<p><strong>Let’s formalize these ideas…</strong></p>
+<p>Statisticians recognize <strong>four components</strong> that work together in any hypothesis test. Change one, and you affect the others!</p>
+</div>
+</section>
+<section id="the-four-components-in-equilibrium" class="slide level2">
+<h2>The four components in equilibrium</h2>
+<p><br>
+</p>
+<p><strong>In any hypothesis test, four quantities are mathematically related:</strong></p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -682,38 +708,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>2. Sample size (<span class="math inline">\(n\)</span>)</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Number of observations</li>
-<li>Larger <span class="math inline">\(n\)</span> → smaller SE</li>
-<li>Often what we’re trying to determine</li>
-<li>Constrained by time, cost, ethics</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:48%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>3. Effect size</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Difference we want to detect</li>
-<li>Relative to variability</li>
-<li>Often measured by Cohen’s <em>d</em></li>
-<li>Based on pilot data or literature</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>4. Power (<span class="math inline">\(1-\beta\)</span>)</strong></p>
+<p><strong>2. Power (<span class="math inline">\(1-\beta\)</span>)</strong></p>
 </div>
 <div class="callout-content">
 <ul>
@@ -725,21 +720,115 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 </div>
+</div><div class="column" style="width:48%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Sample size (<span class="math inline">\(n\)</span>)</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Number of observations</li>
+<li>Larger <span class="math inline">\(n\)</span> → smaller SE</li>
+<li>Often what we’re trying to determine</li>
+<li>Constrained by time, cost, ethics</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>4. Effect size</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Difference we want to detect</li>
+<li>Relative to variability</li>
+<li>Often measured by Cohen’s <em>d</em></li>
+<li>Based on pilot data or literature</li>
+</ul>
+</div>
+</div>
+</div>
 </div></div>
-<p><br>
-</p>
-<p><strong>Key insight:</strong> If you fix any three of these, the fourth is determined!</p>
+<p><strong>Key insight:</strong> Given any 3 pieces, we can solve for the 4th.</p>
 </section></section>
 <section>
 <section id="part-2-errors-in-hypothesis-testing" class="title-slide slide level1 center">
 <h1>Part 2: Errors in Hypothesis Testing</h1>
 
 </section>
+<section id="significance-levels-and-critical-values" class="slide level2">
+<h2>Significance levels and critical values</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>What are critical values?</strong></p>
+</div>
+<div class="callout-content">
+<p>Cutoff points that determine when to reject <span class="math inline">\(H_0\)</span></p>
+<p><strong>Determined by:</strong></p>
+<ul>
+<li>Significance level (<span class="math inline">\(\alpha\)</span>)</li>
+<li>One- vs two-sided test<br>
+</li>
+<li>Distribution type</li>
+</ul>
+<p><strong>For our tests:</strong></p>
+<ul>
+<li>We’ve been using <span class="math inline">\(t^*\)</span> from t-distribution (figure shows z-distribution)</li>
+<li>Typically <span class="math inline">\(\alpha = 0.05\)</span></li>
+<li>Two-sided tests (most common)</li>
+</ul>
+<p><strong>If |test statistic| &gt; critical value → reject</strong> <span class="math inline">\(\boldsymbol{H_0}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="rejection-regions" class="slide level2">
+<h2>Rejection regions</h2>
+<ul>
+<li>If the absolute value of the test statistic is greater than the critical value, we reject <span class="math inline">\(H_0\)</span>
+<ul>
+<li>In this case the test statistic is in the <strong>rejection region</strong>.</li>
+<li>Otherwise it’s in the non-rejection region.</li>
+</ul></li>
+</ul>
+
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><a href="https://www.geo.fu-berlin.de/en/v/soga/Basics-of-statistics/Hypothesis-Tests/Introduction-to-Hypothesis-Testing/Critical-Value-and-the-p-Value-Approach/index.html">Stats &amp; Geospatial Analysis</a></p>
+</section>
+<section id="visual-one-sided-vs.-two-sided" class="slide level2">
+<h2>Visual: One-sided vs.&nbsp;two-sided</h2>
+
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"></section>
+<section id="hypothesis-testing-errors" class="slide level2">
+<h2>Hypothesis testing errors</h2>
+
+<img data-src="../../img_slides/type_i_type_ii_pregnant.jpg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/">StatisticsSolutions</a></p></section>
+<section id="justice-system-analogy" class="slide level2">
+<h2>Justice system analogy</h2>
+<p><br><br></p>
+
+<img data-src="../../img_slides/intuitor_charts.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="http://www.intuitor.com/statistics/T1T2Errors.html">Type I and Type II Errors - Making Mistakes in the Justice System</a></p></section>
 <section id="type-i-and-type-ii-errors" class="slide level2">
 <h2>Type I and Type II errors</h2>
-<p><strong>Remember:</strong> Hypothesis tests can make mistakes in two ways</p>
 <p><br>
 </p>
+<p><strong>Remember:</strong> Hypothesis tests can make mistakes in two ways</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -749,7 +838,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <div class="callout-content">
 <p><strong>Definition:</strong> Reject <span class="math inline">\(H_0\)</span> when it’s actually true</p>
-<p><strong>Notation:</strong> Probability = <span class="math inline">\(\alpha\)</span></p>
+<p><strong>Notation:</strong> Probability of making a Type I error = <span class="math inline">\(\alpha\)</span></p>
 <p><strong>Example:</strong> Conclude caffeine increases tapping when it really doesn’t</p>
 <p><strong>Control:</strong> Set <span class="math inline">\(\alpha\)</span> before study (usually 0.05)</p>
 <p><strong>Also called:</strong> False positive, <span class="math inline">\(\alpha\)</span> error</p>
@@ -764,7 +853,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <div class="callout-content">
 <p><strong>Definition:</strong> Fail to reject <span class="math inline">\(H_0\)</span> when it’s false</p>
-<p><strong>Notation:</strong> Probability = <span class="math inline">\(\beta\)</span></p>
+<p><strong>Notation:</strong> Probability of making a Type II error = <span class="math inline">\(\beta\)</span></p>
 <p><strong>Example:</strong> Fail to detect caffeine effect when it really exists</p>
 <p><strong>Control:</strong> Increase sample size, decrease variability</p>
 <p><strong>Also called:</strong> False negative, <span class="math inline">\(\beta\)</span> error</p>
@@ -786,7 +875,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="callout-content">
 <p><strong>Power</strong> = <span class="math inline">\(1 - \beta\)</span> = Probability of correctly rejecting <span class="math inline">\(H_0\)</span> when it’s false</p>
 <ul>
-<li>Also called “sensitivity” or “true positive rate”</li>
 <li>The probability of detecting an effect that actually exists</li>
 <li>Typically want power ≥ 0.80 (80%)</li>
 <li>Some fields require 0.90 (90%)</li>
@@ -796,54 +884,80 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <p><br>
 </p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>Why 80%?</strong> This is a convention balancing:</p>
 <ul>
 <li>Reasonable chance of detecting real effects</li>
 <li>Practical constraints on sample size</li>
 <li>Cost and feasibility</li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <p><strong>Think of it this way:</strong></p>
 <ul>
 <li>High power = good “detector” - likely to find effect if it exists</li>
 <li>Low power = bad “detector” - might miss real effects</li>
 </ul>
+</div></div>
 </section>
 <section id="the-complete-picture" class="slide level2">
 <h2>The complete picture</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 28%">
-<col style="width: 34%">
-<col style="width: 36%">
-</colgroup>
+<table style="border-bottom: 1px solid black;">
 <thead>
-<tr class="header">
-<th><strong>Reality</strong></th>
-<th><span class="math inline">\(H_0\)</span> True</th>
-<th><span class="math inline">\(H_0\)</span> False</th>
+<tr>
+<th>
+</th>
+<th colspan="2" style="text-align: center;">
+Reality
+</th>
+</tr>
+<tr>
+<th>
+Test decision
+</th>
+<th>
+<span class="math inline">\(H_0\)</span> True
+</th>
+<th>
+<span class="math inline">\(H_1\)</span> True
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td><strong>Reject</strong> <span class="math inline">\(H_0\)</span></td>
-<td>Type I Error (<span class="math inline">\(\alpha\)</span>)</td>
-<td><strong>Power</strong> (<span class="math inline">\(1-\beta\)</span>) ✓</td>
+<tr>
+<td>
+<strong>Reject</strong> <span class="math inline">\(H_0\)</span>
+</td>
+<td>
+Type I Error (<span class="math inline">\(\alpha\)</span>)
+</td>
+<td>
+<strong>Power</strong> (<span class="math inline">\(1-\beta\)</span>) ✓
+</td>
 </tr>
-<tr class="even">
-<td><strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span></td>
-<td>Correct (<span class="math inline">\(1-\alpha\)</span>) ✓</td>
-<td>Type II Error (<span class="math inline">\(\beta\)</span>)</td>
+<tr>
+<td>
+<strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span>
+</td>
+<td>
+Correct (<span class="math inline">\(1-\alpha\)</span>) ✓
+</td>
+<td>
+Type II Error (<span class="math inline">\(\beta\)</span>)
+</td>
 </tr>
 </tbody>
 </table>
+<!-- | **Reality**              | $H_0$ True              | $H_0$ False             | -->
+<!-- |---------------------|-------------------------|---------------------------| -->
+<!-- | **Reject** $H_0$         | Type I Error ($\alpha$) | **Power** ($1-\beta$) ✓ | -->
+<!-- | **Fail to reject** $H_0$ | Correct ($1-\alpha$) ✓  | Type II Error ($\beta$) | -->
 <p><br>
 </p>
 <p><strong>Correct decisions:</strong></p>
 <ul>
-<li><span class="math inline">\(1 - \alpha\)</span>: Specificity (correctly fail to reject when <span class="math inline">\(H_0\)</span> true)</li>
-<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject when <span class="math inline">\(H_0\)</span> false)</li>
+<li><span class="math inline">\(1 - \alpha\)</span>: Confidence (correctly fail to reject when <span class="math inline">\(H_0\)</span> is true)</li>
+<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_1\)</span> is true)</li>
 </ul>
 <p><br>
 </p>
@@ -855,16 +969,242 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><br>
 </p>
 <p><strong>What we control in study design:</strong> We typically fix <span class="math inline">\(\alpha\)</span> at 0.05 and choose <span class="math inline">\(n\)</span> to achieve desired power</p>
+<!-- ## Visualizing these concepts -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+<!-- # Set up parameters -->
+<!-- mu_null <- 0 -->
+<!-- mu_alt <- 3 -->
+<!-- sd <- 1 -->
+<!-- alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2)  # Critical value for two-sided test -->
+<!-- # Create the plot -->
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # Null distribution -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 1.5, -->
+<!--                 color = "#E69F00") + -->
+<!--   # Alternative distribution   -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.5, -->
+<!--                 color = "#0072B2") + -->
+<!--   # Rejection regions under null (Type I error) -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(-3, -cv), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#CC79A7",  -->
+<!--                 alpha = 0.7) + -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#CC79A7",  -->
+<!--                 alpha = 0.7) + -->
+<!--   # Type II error region -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#F0E442",  -->
+<!--                 alpha = 0.6) + -->
+<!--   # Power region -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#009E73",  -->
+<!--                 alpha = 0.5) + -->
+<!--   # Labels -->
+<!--   annotate("text", x = -1.5, y = 0.3,  -->
+<!--            label = "Null\nDistribution",  -->
+<!--            size = 5, color = "#E69F00") + -->
+<!--   annotate("text", x = 4, y = 0.3,  -->
+<!--            label = "Alternative\nDistribution",  -->
+<!--            size = 5, color = "#0072B2") + -->
+<!--   annotate("text", x = -2.5, y = 0.02,  -->
+<!--            label = "α/2",  -->
+<!--            size = 5, color = "#CC79A7") + -->
+<!--   annotate("text", x = 2.7, y = 0.02,  -->
+<!--            label = "α/2",  -->
+<!--            size = 5, color = "#CC79A7") + -->
+<!--   annotate("text", x = 1, y = 0.08,  -->
+<!--            label = "β\n(Type II error)",  -->
+<!--            size = 4.5, color = "#806000") + -->
+<!--   annotate("text", x = 4, y = 0.15,  -->
+<!--            label = "Power\n(1-β)",  -->
+<!--            size = 5, color = "#009E73") + -->
+<!--   # Critical value line -->
+<!--   geom_vline(xintercept = cv,  -->
+<!--              linetype = "dashed",  -->
+<!--              linewidth = 1, -->
+<!--              color = "black") + -->
+<!--   annotate("text", x = cv + 0.3, y = 0.42,  -->
+<!--            label = "Critical\nvalue",  -->
+<!--            size = 4) + -->
+<!--   labs(x = "Test Statistic",  -->
+<!--        y = "Probability Density", -->
+<!--        title = "Type I error, Type II error, and Power") + -->
+<!--   theme(text = element_text(size = 14)) -->
+<!-- ``` -->
+<!-- **Key observations:** -->
+<!-- -   Type I error ($\alpha$): Area in tails under null distribution -->
+<!-- -   Type II error ($\beta$): Area to left of critical value under alternative -->
+<!-- -   Power ($1-\beta$): Area to right of critical value under alternative -->
+<!-- ## Visualizing Type I error, Type II error, and Power -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+<!-- library(ggplot2) -->
+<!-- # Parameters -->
+<!-- mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2) -->
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # 1. Shading (Power and Beta) - Keep these primary -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) + -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) + -->
+<!--   # 2. Rejection Region (Alpha) - Small but distinct -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) + -->
+<!--   # 3. The Curves (Linewidth hierarchy) -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background" -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.2, color = "#0072B2") + -->
+<!--   # 4. The "Decision Wall" -->
+<!--   geom_vline(xintercept = cv, linewidth = 1, color = "black") + -->
+<!--   annotate("label", x = cv, y = 0.42, label = "Critical Value",  -->
+<!--            fill = "white", size = NA, fontface = "bold") + -->
+<!--   # 5. Strategic Labeling (using plotmath for Greek) -->
+<!--   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) + -->
+<!--   annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) + -->
+<!--   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) +  -->
+<!--   # 6. Clean Theme -->
+<!--   laviz::theme_minimal_white(grid = "none") + -->
+<!--   labs(x = NULL,  -->
+<!--        y = NULL,  -->
+<!--        title = "The Relationship Between Alpha, Beta, and Power") + -->
+<!--   theme(panel.grid.minor = element_blank(), -->
+<!--         axis.text.x = element_blank(),  -->
+<!--         axis.text.y = element_blank()) -->
+<!-- ``` -->
+<!-- ## Visualizing Type I error, Type II error, and Power -->
+<!-- ::: {.fragment} -->
+<!-- **Two possible realities:** -->
+<!-- - Dashed grey: $H_0$ is true (no effect) -->
+<!-- - Solid blue: $H_A$ is true (real effect exists) -->
+<!-- ::: -->
+<!-- ::: {.fragment} -->
+<!-- **Our decision boundary:** The critical value separates "reject" from "don't reject" -->
+<!-- ::: -->
+<!-- ::: {.fragment} -->
+<!-- **Under $H_0$ (grey curve):** Pink region (α) = Type I error when we wrongly reject -->
+<!-- ::: -->
+<!-- ::: {.fragment} -->
+<!-- **Under $H_A$ (blue curve):**  -->
+<!-- - Yellow (β) = Type II error - we miss the real effect -->
+<!-- - Green (1-β) = **Power** - we correctly detect the effect! -->
+<!-- ::: -->
+<!-- ::: {.fragment} -->
+<!-- **The key insight:** These are all connected - changing one affects the others! -->
+<!-- ::: -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+<!-- library(ggplot2) -->
+<!-- # Parameters -->
+<!-- mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2) -->
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # 1. Shading (Power and Beta) - Keep these primary -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) + -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) + -->
+<!--   # 2. Rejection Region (Alpha) - Small but distinct -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) + -->
+<!--   # 3. The Curves (Linewidth hierarchy) -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background" -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.2, color = "#0072B2") + -->
+<!--   # 4. The "Decision Wall" -->
+<!--   geom_vline(xintercept = cv, linewidth = 1, color = "black") + -->
+<!--   annotate("label", x = cv, y = 0.42, label = "Critical Value",  -->
+<!--            fill = "white", label.size = NA, fontface = "bold") + -->
+<!--   # 5. Strategic Labeling (using plotmath for Greek) -->
+<!--   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) + -->
+<!--   annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) + -->
+<!--   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) +  -->
+<!--   # 6. Clean Theme -->
+<!--   laviz::theme_minimal_white(grid = "none") + -->
+<!--   labs(x = NULL,  -->
+<!--        y = NULL,  -->
+<!--        title = "The Relationship Between Alpha, Beta, and Power") + -->
+<!--   theme(panel.grid.minor = element_blank(), -->
+<!--         axis.text.x = element_blank(),  -->
+<!--         axis.text.y = element_blank()) -->
+<!-- ``` -->
 </section>
-<section id="visualizing-these-concepts" class="slide level2">
-<h2>Visualizing these concepts</h2>
-
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><strong>Key observations:</strong></p>
+<section id="visualizing-type-i-error-type-ii-error-and-power-ii" class="slide level2">
+<h2>Visualizing Type I error, Type II error, and Power (II)</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="fragment">
+<p><strong>Two possible realities:</strong></p>
 <ul>
-<li>Type I error (<span class="math inline">\(\alpha\)</span>): Area in tails under null distribution</li>
-<li>Type II error (<span class="math inline">\(\beta\)</span>): Area to left of critical value under alternative</li>
-<li>Power (<span class="math inline">\(1-\beta\)</span>): Area to right of critical value under alternative</li>
+<li>Dashed grey: <span class="math inline">\(H_0\)</span> is true (no effect)</li>
+<li>Solid blue: <span class="math inline">\(H_A\)</span> is true (real effect exists)</li>
 </ul>
+</div>
+<div class="fragment">
+<p><strong>Our decision boundary:</strong> The critical value separates “reject” from “don’t reject”</p>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_0\)</span> (grey curve):</strong></p>
+<ul>
+<li>Pink region (α) = Type I error when we wrongly reject</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_A\)</span> (blue curve):</strong></p>
+<ul>
+<li>Yellow (β) = Type II error - we miss the real effect</li>
+<li>Green (1-β) = <strong>Power</strong> - we correctly detect the effect!</li>
+</ul>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>The key insight:</strong> These are all connected - changing one affects the others!</p>
+</div>
+</div></div>
 </section>
 <section id="what-increases-power" class="slide level2">
 <h2>What increases power?</h2>
@@ -903,13 +1243,36 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div></div>
 <p><br>
 </p>
-<p><strong>Practical implications:</strong></p>
+</section>
+<section id="practical-implications" class="slide level2">
+<h2>Practical implications:</h2>
+<p><br>
+</p>
 <ul>
 <li>We usually have most control over sample size</li>
 <li>Can sometimes reduce variability through better measurement</li>
-<li>Effect size is determined by nature/treatment</li>
+<li>Effect size is a property of reality — we estimate it, we don’t choose it</li>
 <li>Significance level is conventionally fixed at 0.05</li>
 </ul>
+<!-- The key insight: -->
+<!-- You can't change the true effect size - it's a property of reality. -->
+<!-- If a new blood pressure medication truly reduces systolic BP by an average of 8 mmHg compared to placebo, that's what it does. You can't make that effect bigger just because you want more statistical power. The drug's actual effectiveness is determined by its pharmacology (nature) and how it interacts with the human body (biology). -->
+<!-- Contrast with what you CAN control: -->
+<!-- Sample size: You can recruit 50 people or 500 people - totally in your control (with budget/time constraints) -->
+<!-- Variability: You have some control - use better measurement equipment, standardize protocols, select more homogeneous populations -->
+<!-- Alpha: Technically flexible, but conventionally fixed at 0.05 -->
+<!-- Effect size: NOT in your control - it is what it is in the real world -->
+<!-- For power analysis purposes: -->
+<!-- When planning a study, you have to: -->
+<!-- Guess/estimate what the effect size might be (from pilot data, literature, or clinical meaningfulness) -->
+<!-- Accept that guess as your working assumption -->
+<!-- Manipulate sample size to achieve desired power for detecting that effect size -->
+<!-- You can't say "I need more power, so I'll assume a bigger effect size" - that would be wishful thinking! -->
+<!-- Better phrasing options: -->
+<!-- If this still feels unclear for your students, you might consider: -->
+<!-- "Effect size reflects the true magnitude of the phenomenon we're studying" -->
+<!-- "Effect size is a property of the real-world phenomenon, not a design choice" -->
+<!-- "We estimate effect size; we don't choose it" -->
 </section></section>
 <section>
 <section id="part-3-calculating-power-and-sample-size" class="title-slide slide level1 center">
@@ -930,7 +1293,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>After collecting data (post-hoc):</strong></p>
 <ul>
 <li>Understand power of completed study</li>
-<li>Interpret non-significant results</li>
 <li>Plan follow-up studies</li>
 </ul>
 <p><br>
@@ -951,6 +1313,8 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="cohens-d-standardized-effect-size" class="slide level2">
 <h2>Cohen’s d: Standardized effect size</h2>
+<p><br>
+</p>
 <p><strong>Problem:</strong> Effect sizes are in original units (e.g., taps/min, mmHg, °F)</p>
 <ul>
 <li>Hard to compare across studies</li>
@@ -959,6 +1323,9 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><br>
 </p>
 <p><strong>Solution:</strong> Cohen’s <em>d</em> standardizes the effect size</p>
+</section>
+<section id="cohens-d-standardized-effect-size-1" class="slide level2">
+<h2>Cohen’s d: Standardized effect size</h2>
 <p><br>
 </p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -970,6 +1337,9 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>One-sample test (or paired):</strong> <span class="math display">\[d = \frac{\bar{x} - \mu_0}{s} \quad \text{or} \quad d = \frac{\bar{x}_d - \delta_0}{s_d}\]</span></p>
 <p><strong>Two-sample test:</strong> <span class="math display">\[d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}\]</span></p>
 <p>where <span class="math inline">\(s_{\text{pooled}} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}\)</span></p>
+<p><br>
+</p>
+<p>For two-sample d, we often use pooled SD when group variances are similar; there are variants when they are not.</p>
 </div>
 </div>
 </div>
@@ -1081,15 +1451,17 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Example 1: One-sample test - Finding sample size (cont.)</h2>
 <p><strong>Step 2:</strong> Use <code>pwr.t.test()</code> to find required sample size</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>result <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb5-2"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,  <span class="co"># Cohen's d</span></span>
-<span id="cb5-3"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># α = 0.05</span></span>
-<span id="cb5-4"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,                <span class="co"># Want 80% power</span></span>
-<span id="cb5-5"><a></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,         <span class="co"># One-sample test</span></span>
-<span id="cb5-6"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span>    <span class="co"># Two-sided test</span></span>
-<span id="cb5-7"><a></a>)</span>
-<span id="cb5-8"><a></a></span>
-<span id="cb5-9"><a></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Specify all parameters except for sample size, n</span></span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>result <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb5-4"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,  <span class="co"># Cohen's d</span></span>
+<span id="cb5-5"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># α = 0.05</span></span>
+<span id="cb5-6"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,                <span class="co"># Want 80% power</span></span>
+<span id="cb5-7"><a></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,         <span class="co"># One-sample test</span></span>
+<span id="cb5-8"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span>    <span class="co"># Two-sided test</span></span>
+<span id="cb5-9"><a></a>)</span>
+<span id="cb5-10"><a></a></span>
+<span id="cb5-11"><a></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      One-sample t test power calculation 
@@ -1111,29 +1483,37 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">plot</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><strong>The curve shows:</strong> As sample size increases, power increases (holding other factors constant)</p>
+<img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><strong>The curve shows:</strong> As sample size increases, power increases (holding other factors constant)</p>
 </section>
 <section id="example-2-one-sample-test---calculating-power" class="slide level2">
 <h2>Example 2: One-sample test - Calculating power</h2>
-<p><strong>Scenario:</strong> Same body temperature study, but we already collected data</p>
+<p><strong>Scenario:</strong> Same body temperature study, but the sample size is fixed</p>
 <ul>
 <li>n = 130 participants</li>
 <li>Effect size: d = 0.479</li>
 <li><span class="math inline">\(\alpha = 0.05\)</span></li>
-<li><strong>Question:</strong> What power did we have?</li>
+<li><strong>Question:</strong> What power do we have given the sample size we have?</li>
 </ul>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>result_power <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb8-2"><a></a>  <span class="at">n =</span> <span class="dv">130</span>,                     <span class="co"># Sample size we collected</span></span>
-<span id="cb8-3"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,  <span class="co"># Cohen's d</span></span>
-<span id="cb8-4"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># α = 0.05</span></span>
-<span id="cb8-5"><a></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,</span>
-<span id="cb8-6"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
-<span id="cb8-7"><a></a>)</span>
-<span id="cb8-8"><a></a></span>
-<span id="cb8-9"><a></a>result_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Specify all parameters except for power</span></span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>result_power <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb8-4"><a></a>  <span class="at">n =</span> <span class="dv">130</span>,                     <span class="co"># Sample size we have</span></span>
+<span id="cb8-5"><a></a>  <span class="at">d =</span> (<span class="fl">98.6</span> <span class="sc">-</span> <span class="fl">98.25</span>) <span class="sc">/</span> <span class="fl">0.73</span>,   <span class="co"># Cohen's d</span></span>
+<span id="cb8-6"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,            <span class="co"># α = 0.05</span></span>
+<span id="cb8-7"><a></a>  <span class="at">type =</span> <span class="st">"one.sample"</span>,</span>
+<span id="cb8-8"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb8-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-2-one-sample-test---calculating-power-cont." class="slide level2">
+<h2>Example 2: One-sample test - Calculating power (cont.)</h2>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>result_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      One-sample t test power calculation 
@@ -1151,39 +1531,46 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="example-3-two-sample-test---finding-sample-size" class="slide level2">
 <h2>Example 3: Two-sample test - Finding sample size</h2>
+<p><br>
+</p>
 <p><strong>Scenario:</strong> Caffeine tapping study</p>
 <ul>
 <li>Want to detect 2 taps/min difference between groups</li>
 <li>Expect SD ≈ 2.6 taps/min in each group</li>
 <li>Want 80% power with <span class="math inline">\(\alpha = 0.05\)</span></li>
-<li><strong>Question:</strong> How many participants per group?</li>
+<li><strong>Question:</strong> How many participants per group do we need?</li>
 </ul>
 <p><br>
 </p>
 <p><strong>Step 1:</strong> Calculate Cohen’s d</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>diff <span class="ot">&lt;-</span> <span class="dv">2</span>      <span class="co"># Difference we want to detect</span></span>
-<span id="cb10-2"><a></a>sd_pooled <span class="ot">&lt;-</span> <span class="fl">2.6</span>  <span class="co"># Expected SD in each group</span></span>
-<span id="cb10-3"><a></a></span>
-<span id="cb10-4"><a></a>d <span class="ot">&lt;-</span> diff <span class="sc">/</span> sd_pooled</span>
-<span id="cb10-5"><a></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>diff <span class="ot">&lt;-</span> <span class="dv">2</span>          <span class="co"># Difference we want to detect</span></span>
+<span id="cb11-2"><a></a>sd_pooled <span class="ot">&lt;-</span> <span class="fl">2.6</span>   <span class="co"># Expected SD in each group</span></span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a>d <span class="ot">&lt;-</span> diff <span class="sc">/</span> sd_pooled</span>
+<span id="cb11-5"><a></a>d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7692308</code></pre>
 </div>
 </div>
 <p><br>
 </p>
+</section>
+<section id="example-3-two-sample-test---finding-sample-size-cont." class="slide level2">
+<h2>Example 3: Two-sample test - Finding sample size (cont.)</h2>
 <p><strong>Step 2:</strong> Calculate required sample size</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>result_caff <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb12-2"><a></a>  <span class="at">d =</span> d,</span>
-<span id="cb12-3"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb12-4"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb12-5"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,        <span class="co"># Two independent groups</span></span>
-<span id="cb12-6"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
-<span id="cb12-7"><a></a>)</span>
-<span id="cb12-8"><a></a></span>
-<span id="cb12-9"><a></a>result_caff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Specify all parameters except for sample size, n</span></span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>result_caff <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb13-4"><a></a>  <span class="at">d =</span> d,</span>
+<span id="cb13-5"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb13-6"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb13-7"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,        <span class="co"># Two independent groups</span></span>
+<span id="cb13-8"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb13-9"><a></a>)</span>
+<span id="cb13-10"><a></a></span>
+<span id="cb13-11"><a></a>result_caff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -1201,24 +1588,40 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="example-4-two-sample-test---calculating-power" class="slide level2">
 <h2>Example 4: Two-sample test - Calculating power</h2>
-<p><strong>Scenario:</strong> We ran the caffeine study with 35 per group</p>
+<p><br>
+</p>
+<p><strong>Scenario:</strong> We have 35 subjects per group in the Caffeine study</p>
 <ul>
-<li>Effect size: d = 0.77</li>
+<li>Effect size: <span class="math inline">\(d = 0.77\)</span>
+<ul>
+<li>difference of <span class="math inline">\(2\)</span> points between the two groups</li>
+<li>assuming <span class="math inline">\(SD = 2.6\)</span> in both groups</li>
+</ul></li>
 <li><span class="math inline">\(\alpha = 0.05\)</span></li>
-<li><strong>Question:</strong> What power did we have?</li>
+<li><strong>Question:</strong> What power do we have to detect this difference?</li>
 </ul>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>result_caff_power <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
-<span id="cb14-2"><a></a>  <span class="at">n =</span> <span class="dv">35</span>,</span>
-<span id="cb14-3"><a></a>  <span class="at">d =</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fl">2.6</span>,</span>
-<span id="cb14-4"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb14-5"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
-<span id="cb14-6"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
-<span id="cb14-7"><a></a>)</span>
-<span id="cb14-8"><a></a></span>
-<span id="cb14-9"><a></a>result_caff_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Specify all parameters except for power</span></span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>result_caff_power <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb15-4"><a></a>  <span class="at">n =</span> <span class="dv">35</span>,      <span class="co"># Sample size per group             </span></span>
+<span id="cb15-5"><a></a>  <span class="at">d =</span> <span class="dv">2</span> <span class="sc">/</span> <span class="fl">2.6</span>,</span>
+<span id="cb15-6"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb15-7"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb15-8"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb15-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-4-two-sample-test---calculating-power-cont." class="slide level2">
+<h2>Example 4: Two-sample test - Calculating power (cont.)</h2>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>result_caff_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Two-sample t test power calculation 
@@ -1232,34 +1635,87 @@ NOTE: n is number in *each* group</code></pre>
 NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
-
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"><p><strong>Conclusion:</strong> With n=35 per group, we had <strong>88.7%</strong> power (excellent!)</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">plot</span>(result_caff_power)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="15_power_sample_size_4_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><br>
+</p>
+<p><strong>Conclusion:</strong> With n=35 per group, we have <strong>88.7%</strong> power (excellent!)</p>
 </section>
 <section id="one-sided-vs-two-sided-tests-and-power" class="slide level2">
 <h2>One-sided vs two-sided tests and power</h2>
-<p><strong>Two-sided test:</strong> <span class="math inline">\(H_A: \mu \neq \mu_0\)</span> (most common)</p>
-<p><strong>One-sided test:</strong> <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span> or <span class="math inline">\(H_A: \mu &lt; \mu_0\)</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="two-sided-test">Two-sided test:</h3>
+<p><span class="math inline">\(H_A: \mu \neq \mu_0\)</span> (most common)</p>
 <p><br>
 </p>
-<p><strong>Power comparison:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Two-sided test</span></span>
-<span id="cb16-2"><a></a>two_sided <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>, </span>
-<span id="cb16-3"><a></a>                        <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb16-4"><a></a></span>
-<span id="cb16-5"><a></a><span class="co"># One-sided test  </span></span>
-<span id="cb16-6"><a></a>one_sided <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb16-7"><a></a>                        <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>)</span>
-<span id="cb16-8"><a></a></span>
-<span id="cb16-9"><a></a><span class="fu">cat</span>(<span class="st">"Two-sided requires n ="</span>, <span class="fu">ceiling</span>(two_sided<span class="sc">$</span>n), <span class="st">"per group</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Two-sided test</span></span>
+<span id="cb19-2"><a></a>two_sided <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb19-3"><a></a>  <span class="at">d =</span> <span class="fl">0.5</span>, </span>
+<span id="cb19-4"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb19-5"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>, </span>
+<span id="cb19-6"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>, </span>
+<span id="cb19-7"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb19-8"><a></a>)</span>
+<span id="cb19-9"><a></a></span>
+<span id="cb19-10"><a></a>two_sided</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Two-sided requires n = 64 per group</code></pre>
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 63.76561
+              d = 0.5
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">cat</span>(<span class="st">"One-sided requires n ="</span>, <span class="fu">ceiling</span>(one_sided<span class="sc">$</span>n), <span class="st">"per group</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="one-sided-test">One-sided test:</h3>
+<p><span class="math inline">\(H_A: \mu &gt; \mu_0\)</span> or <span class="math inline">\(H_A: \mu &lt; \mu_0\)</span></p>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># One-sided test  </span></span>
+<span id="cb21-2"><a></a>one_sided <span class="ot">&lt;-</span> <span class="fu">pwr.t.test</span>(</span>
+<span id="cb21-3"><a></a>  <span class="at">d =</span> <span class="fl">0.5</span>, </span>
+<span id="cb21-4"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>, </span>
+<span id="cb21-5"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb21-6"><a></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>, </span>
+<span id="cb21-7"><a></a>  <span class="at">alternative =</span> <span class="st">"greater"</span></span>
+<span id="cb21-8"><a></a>)</span>
+<span id="cb21-9"><a></a></span>
+<span id="cb21-10"><a></a>one_sided</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>One-sided requires n = 51 per group</code></pre>
+<pre><code>
+     Two-sample t test power calculation 
+
+              n = 50.1508
+              d = 0.5
+      sig.level = 0.05
+          power = 0.8
+    alternative = greater
+
+NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
+</div></div>
+</section>
+<section id="one-sided-vs-two-sided-tests-and-power-cont." class="slide level2">
+<h2>One-sided vs two-sided tests and power (cont.)</h2>
 <p><br>
 </p>
 <p><strong>Key point:</strong> One-sided tests require smaller sample sizes BUT:</p>
@@ -1267,6 +1723,7 @@ NOTE: n is number in *each* group</code></pre>
 <li>Only justified when direction is known <em>a priori</em></li>
 <li>Can’t detect effects in “wrong” direction</li>
 <li>Generally not recommended unless strong scientific justification</li>
+<li>Reviewers/collaborators often require lower <span class="math inline">\(\alpha\)</span> (e.g., 0.025) for one-sided tests</li>
 </ul>
 </section></section>
 <section>
@@ -1276,6 +1733,8 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="the-power-sample-size-trade-off" class="slide level2">
 <h2>The power-sample size trade-off</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Increasing sample size:</strong></p>
@@ -1373,12 +1832,20 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="real-world-example-a-cautionary-tale" class="slide level2">
 <h2>Real-world example: A cautionary tale</h2>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>Study:</strong> New drug to lower blood pressure</p>
 <ul>
 <li>Powered to detect 5 mmHg reduction</li>
 <li>Assumed SD = 10 mmHg (from literature)</li>
 <li>Calculated need for n = 64 per group</li>
-<li>Only recruited n = 50 per group (budget constraints)</li>
+</ul>
+<p><br>
+</p>
+<ul>
+<li>Only recruited n = 50 per group due to budget constraints</li>
 <li>Actual SD in study was 12 mmHg (more variability than expected)</li>
 </ul>
 <p><br>
@@ -1386,20 +1853,25 @@ NOTE: n is number in *each* group</code></pre>
 <p><strong>Result:</strong></p>
 <ul>
 <li>Observed reduction: 4 mmHg (close to target!)</li>
-<li>P-value = 0.09 (not significant at 0.05 level)</li>
-<li>Actual power was only 58% (not the planned 80%)</li>
+<li><em>p</em>-value = 0.090 (not significant at 0.05 level)</li>
+<li>Actual power was only 38% (not the planned 80%)</li>
+<li>Study deemed “negative” despite clinically meaningful effect</li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <p><strong>Lessons:</strong></p>
 <ol type="1">
 <li>Small deviations from plan can substantially reduce power</li>
 <li>Under-recruitment is very common - build in buffer</li>
 <li>Conservative SD estimates are wise</li>
 </ol>
+</div></div>
 </section>
 <section id="when-is-a-study-underpowered" class="slide level2">
 <h2>When is a study “underpowered”?</h2>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>Conventionally:</strong></p>
 <ul>
 <li>Power &lt; 50%: Severely underpowered</li>
@@ -1408,8 +1880,7 @@ NOTE: n is number in *each* group</code></pre>
 <li>Power 80-90%: Good</li>
 <li>Power &gt; 90%: Excellent (sometimes wasteful)</li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <p><strong>Practical considerations:</strong></p>
 <ul>
 <li><strong>80% power</strong> is standard for many studies</li>
@@ -1421,6 +1892,7 @@ NOTE: n is number in *each* group</code></pre>
 <li>Studies where negative result is informative</li>
 </ul></li>
 </ul>
+</div></div>
 <p><br>
 </p>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -1439,25 +1911,21 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="using-power-analysis-in-different-scenarios" class="slide level2">
 <h2>Using power analysis in different scenarios</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Planning a new study:</strong></p>
 <ol type="1">
 <li>Review literature for expected effect size</li>
 <li>Use conservative estimates</li>
-<li>Calculate sample size for 80% power</li>
+<li>Choose a target power (usually 80–90%) and calculate required sample size</li>
 <li>Add 10-20% buffer for dropout</li>
 <li>Check if feasible</li>
 </ol>
 <p><br>
 </p>
-<p><strong>Evaluating a completed study:</strong></p>
-<ol type="1">
-<li>Calculate achieved power</li>
-<li>If significant: power is high</li>
-<li>If non-significant: report CI, not power</li>
-<li>Use for planning follow-up</li>
-</ol>
+<p><strong>Evaluating a completed study:</strong> 1. Focus on effect estimates and confidence intervals 2. If non-significant: Is CI compatible with meaningful effect? 3. Don’t calculate “achieved power” (mathematically determined by the <em>p</em>-value) 4. Use observed effect size &amp; SD to plan follow-up studies</p>
 </div><div class="column" style="width:48%;">
 <p><strong>Reviewing others’ work:</strong></p>
 <ol type="1">
@@ -1484,10 +1952,12 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="summary-the-big-picture" class="slide level2">
 <h2>Summary: The big picture</h2>
+<p><br>
+</p>
 <p><strong>Four quantities in equilibrium:</strong></p>
 <ol type="1">
 <li><strong>Significance level</strong> (<span class="math inline">\(\alpha\)</span>) - usually fixed at 0.05</li>
-<li><strong>Effect size</strong> - determined by nature/treatment</li>
+<li><strong>Effect size</strong> - a property of reality (we estimate it, we do not choose it)</li>
 <li><strong>Sample size</strong> (<span class="math inline">\(n\)</span>) - what we typically calculate</li>
 <li><strong>Power</strong> (<span class="math inline">\(1-\beta\)</span>) - probability of detecting real effect</li>
 </ol>
@@ -1507,17 +1977,19 @@ NOTE: n is number in *each* group</code></pre>
 <h2>Key R functions</h2>
 <p><strong>Main function:</strong> <code>pwr.t.test()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Calculate sample size (leave n = NULL)</span></span>
-<span id="cb20-2"><a></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb20-3"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb20-4"><a></a></span>
-<span id="cb20-5"><a></a><span class="co"># Calculate power (leave power = NULL)  </span></span>
-<span id="cb20-6"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb20-7"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb20-8"><a></a></span>
-<span id="cb20-9"><a></a><span class="co"># Calculate detectable effect size (leave d = NULL)</span></span>
-<span id="cb20-10"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb20-11"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(pwr)</span>
+<span id="cb23-2"><a></a></span>
+<span id="cb23-3"><a></a><span class="co"># Calculate sample size (leave n = NULL)</span></span>
+<span id="cb23-4"><a></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb23-5"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb23-6"><a></a></span>
+<span id="cb23-7"><a></a><span class="co"># Calculate power (leave power = NULL)  </span></span>
+<span id="cb23-8"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">d =</span> <span class="fl">0.5</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb23-9"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb23-10"><a></a></span>
+<span id="cb23-11"><a></a><span class="co"># Calculate detectable effect size (leave d = NULL)</span></span>
+<span id="cb23-12"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb23-13"><a></a>           <span class="at">type =</span> <span class="st">"two.sample"</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -1537,75 +2009,95 @@ NOTE: n is number in *each* group</code></pre>
 <li><strong>Use confidence intervals</strong> to show uncertainty</li>
 <li><strong>Consider feasibility</strong> - balance power with resources</li>
 </ol>
+<!-- # Resources for power and sample size calculations -->
+<!-- ## Additional resources -->
+<!-- **R documentation:** -->
+<!-- -   `?pwr.t.test` - help for power calculations -->
+<!-- -   PASS documentation: <https://www.ncss.com/software/pass/pass-documentation/#Means> -->
+<!-- \ -->
+<!-- **Interactive tools:** -->
+<!-- -   <https://rpsychologist.com/d3/NHST/> - Visualize power -->
+<!-- -   <https://www.statmethods.net/stats/power.html> - Power analysis examples -->
+<!-- \ -->
+<!-- **Textbook:** -->
+<!-- -   Section 5.4: Power and Sample Size for means -->
+<!-- \ -->
+<!-- **Further reading:** -->
+<!-- -   Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences* -->
+<!-- -   Lenth, R. V. (2001). "Some Practical Guidelines for Effective Sample Size Determination" -->
+</section></section>
+<section>
+<section id="resources-for-power-and-sample-size-calculations" class="title-slide slide level1 center">
+<h1>Resources for power and sample size calculations</h1>
+
+</section>
+<section id="more-software-for-power-and-sample-size-calculations-pass" class="slide level2">
+<h2>More software for power and sample size calculations: PASS</h2>
+<ul>
+<li>PASS is a very powerful (&amp; expensive) software that does power and sample size calculations for many advanced statistical modeling techniques.
+<ul>
+<li>Even if you don’t have access to PASS, their <a href="https://www.ncss.com/software/pass/pass-documentation/">documentation</a> is very good and free online.</li>
+<li>Documentation includes formulas and references.</li>
+<li>PASS documentation for powering <a href="https://www.ncss.com/software/pass/pass-documentation/#Means">means</a>
+<ul>
+<li>One mean, paired means, two independent means</li>
+</ul></li>
+</ul></li>
+<li>One-sample t-test documentation: <a href="https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/One-Sample_T-Tests.pdf" class="uri">https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/One-Sample_T-Tests.pdf</a></li>
+</ul>
+</section>
+<section id="octri-berd-power-sample-size-presentations" class="slide level2">
+<h2>OCTRI-BERD power &amp; sample size presentations</h2>
+<div style="font-size: 90%;">
+<ul>
+<li><strong>Power and Sample Size 101</strong>
+<ul>
+<li>Presented by Meike Niederhausen; April 13, 2023</li>
+<li>Slides: <a href="http://bit.ly/PSS101-BERD-April2023" class="uri">http://bit.ly/PSS101-BERD-April2023</a></li>
+<li><a href="https://echo360.org/media/10f37fa6-7196-4525-bd64-6b9fcca60ac0/public">Recording</a></li>
+</ul></li>
+<li><strong>Power and Sample Size for Clinical Trials: An Introduction</strong>
+<ul>
+<li>Presented by Yiyi Chen; Feb 18, 2021</li>
+<li>Slides: <a href="http://bit.ly/PSS-ClinicalTrials" class="uri">http://bit.ly/PSS-ClinicalTrials</a></li>
+<li><a href="https://echo360.org/lesson/9a21deb8-258d-4305-bdc9-7effdc35e719/classroom">Recording</a></li>
+</ul></li>
+<li><strong>Planning a Study with Power and Sample Size Considerations in Mind</strong>
+<ul>
+<li>Presented by David Yanez; May 29, 2019</li>
+<li><a href="https://www.ohsu.edu/sites/default/files/2019-12/PowerAndSampleSize_29MAY2019.pdf">Slides</a></li>
+<li><a href="https://echo360.org/lesson/44c9a3e9-b8ec-4042-84d8-4758cc779a1f/classroom">Recording</a></li>
+</ul></li>
+<li><strong>Power and Sample Size Simulations in R</strong>
+<ul>
+<li>Presented by Robin Baudier; Sept 21, 2023</li>
+<li><a href="https://www.slideshare.net/ssuser84c78e/octri-pss-simulations-in-r-seminarpdf">Slides</a></li>
+<li><a href="https://echo360.org/media/12e6e603-13f9-4b50-bf76-787185acdfce/public">Recording</a></li>
+</ul></li>
+</ul>
+</div>
 </section>
 <section id="additional-resources" class="slide level2">
 <h2>Additional resources</h2>
-<p><strong>R documentation:</strong></p>
-<ul>
-<li><code>?pwr.t.test</code> - help for power calculations</li>
-<li>PASS documentation: <a href="https://www.ncss.com/software/pass/pass-documentation/#Means" class="uri">https://www.ncss.com/software/pass/pass-documentation/#Means</a></li>
-</ul>
 <p><br>
 </p>
+<p><strong>Good paper</strong></p>
+<ul>
+<li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7745163/">Sample size, power and effect size revisited: simplified and practical approaches in pre-clinical, clinical and laboratory studies (Serdar et al.)</a></li>
+</ul>
+<p>&nbsp;</p>
 <p><strong>Interactive tools:</strong></p>
 <ul>
-<li><a href="https://rpsychologist.com/d3/NHST/" class="uri">https://rpsychologist.com/d3/NHST/</a> - Visualize power</li>
-<li><a href="https://www.statmethods.net/stats/power.html" class="uri">https://www.statmethods.net/stats/power.html</a> - Power analysis examples</li>
+<li><a href="https://rpsychologist.com/d3/NHST/">Understanding Statistical Power and Significance Testing</a></li>
 </ul>
 <p><br>
 </p>
-<p><strong>Textbook:</strong></p>
+<p><strong>Free software:</strong></p>
 <ul>
-<li>Section 5.4: Power and Sample Size for means</li>
+<li><a href="https://sample-size.net/calculator-finder">Sample size calculators from UCSF</a></li>
+<li><a href="https://stattools.crab.org/">CRAB (Cancer Research and Biostatistics) Statistical Tools</a></li>
+<li><a href="https://stats.oarc.ucla.edu/other/gpower/">G*Power - free, open source power analysis software</a></li>
 </ul>
-<p><br>
-</p>
-<p><strong>Further reading:</strong></p>
-<ul>
-<li>Cohen, J. (1988). <em>Statistical Power Analysis for the Behavioral Sciences</em></li>
-<li>Lenth, R. V. (2001). “Some Practical Guidelines for Effective Sample Size Determination”</li>
-</ul>
-</section>
-<section id="looking-ahead" class="slide level2">
-<h2>Looking ahead</h2>
-<p><strong>Next time:</strong></p>
-<ul>
-<li>Comparing two proportions</li>
-<li>Chi-square tests</li>
-<li>Categorical data analysis</li>
-</ul>
-<p><br>
-</p>
-<p><strong>How today connects:</strong></p>
-<ul>
-<li>Power applies to ALL hypothesis tests (not just t-tests!)</li>
-<li>Same principles for proportions, chi-square, regression, etc.</li>
-<li>Understanding power helps you critically evaluate research</li>
-<li>Essential skill for your own research career</li>
-</ul>
-<p><br>
-</p>
-<p><strong>Practice:</strong></p>
-<ul>
-<li>Homework will have power calculation problems</li>
-<li>Try different scenarios in R</li>
-<li>Calculate power for studies you read about</li>
-</ul>
-</section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p><strong>Key questions to ask yourself:</strong></p>
-<ul>
-<li>Can you explain the four components of hypothesis testing?</li>
-<li>What’s the difference between Type I and Type II errors?</li>
-<li>Why do we care about power?</li>
-<li>How do you calculate sample size for a t-test?</li>
-<li>When is a study underpowered?</li>
-</ul>
-<p><br>
-</p>
-<p><strong>Office hours:</strong> Come discuss your research study designs!</p>
-<p><strong>Next class:</strong> We’ll start talking about categorical data and proportions</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

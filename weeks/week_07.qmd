@@ -1,0 +1,116 @@
+---
+title: "Week 7"
+description: "Power and Sample Size"
+format:
+  html:
+    toc: true
+---
+
+```{=html}
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+```
+
+## Announcements
+
+-   **Monday, February 17** is a university holiday (Presidents Day) — **no class**
+-   **Midterm Exam** closes **Wednesday, February 19 at 11:00 PM**
+-   **HW 5** is due **Sunday, February 23 at 11:00 PM**
+
+## Overview
+
+This week we have one class meeting focused on **power and sample size calculations**.
+
+After completing the midterm, we shift our attention to study design: understanding how to plan research studies with adequate statistical power to detect meaningful effects. Power analysis helps us answer critical questions like "How many participants do I need?" and "What effect size can I realistically detect?"
+
+By the end of the week, you should be able to:
+
+-   understand the four components in equilibrium in a hypothesis test (significance level, sample size, effect size, and power),
+-   define and interpret Type I and Type II errors,
+-   explain what statistical power means and why it matters,
+-   calculate power and sample size for one-sample and two-sample t-tests using R,
+-   apply power analysis to both study planning and interpretation of existing research.
+
+## Readings (before class)
+
+-   Textbook section 5.4 (Power calculations for comparing means)
+
+(Additional resources will be posted if helpful.)
+
+## Materials
+
+### Monday — No Class (Presidents Day)
+
+-   University holiday — enjoy the break!
+-   **Reminder:** Midterm exam is still open. It closes **Wednesday at 11:00 PM**.
+
+------------------------------------------------------------------------
+
+### Wednesday — Power and Sample Size
+
+-   **Topics**
+    -   The four components of hypothesis testing: significance level (α), sample size (n), effect size, and power (1−β)
+    -   Type I and Type II errors
+    -   Defining and interpreting statistical power
+    -   Introduction to effect size (Cohen's *d*)
+    -   Calculating power and sample size using the `pwr` package in R
+    -   Power calculations for one-sample t-tests
+    -   Power calculations for two-sample t-tests
+    -   Study design applications and trade-offs
+    -   Interpreting published research through the lens of power
+-   **Slides**
+    -   Power and Sample Size ([HTML](/lessons/15_power_sample_size/15_power_sample_size.qmd) \| [PDF](/lessons/15_power_sample_size/15_power_sample_size.pdf) \| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+-   **Recording**
+    -   Recording link will be posted after class
+-   **Muddy points**
+    -   Muddy points response will be posted after class
+
+------------------------------------------------------------------------
+
+## Homework
+
+-   **HW 5**
+    -   Released **Monday, February 17** (posted during the holiday)
+    -   Due **Sunday, February 23 at 11:00 PM**
+    -   Covers:
+        -   Loading data from CSV and Excel files using `here()` and `readr`/`readxl`
+        -   Paired t-tests (gene expression example)
+        -   Independent two-sample t-tests (Vitamin C recovery example)
+        -   Choosing the appropriate test based on study design
+        -   Interpreting confidence intervals and p-values
+    -   [View HW 5 instructions](/homework/HW05/HW05.qmd)
+
+-   See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Midterm Exam
+
+-   **Closes:** Wednesday, February 19 at 11:00 PM
+-   **Format:** 8 parts, 120 points total
+-   **Coverage:** Lessons 1-9 (through hypothesis testing and one-sample t-tests)
+-   **Submit:** Both `.qmd` and `.html` files before the deadline
+
+## Post-class check-in (attendance)
+
+-   Please complete the post-class check-in after Wednesday's class meeting.
+-   Used for attendance credit and to identify topics that need clarification.
+-   Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+After the midterm and power, we will continue building our statistical inference toolkit:
+
+-   **Week 8**:
+    -   Inference for proportions (single and two-sample)
+    -   Chi-squared tests for categorical data
+    -   Fisher's exact test for 2×2 tables
+-   **Week 9**:
+    -   Comparing means across multiple groups with ANOVA
+    -   Nonparametric tests (alternatives to t-tests)
+
+These concepts extend our hypothesis testing framework to categorical outcomes and multiple-group comparisons.

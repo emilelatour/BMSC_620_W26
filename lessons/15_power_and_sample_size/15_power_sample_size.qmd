@@ -94,89 +94,79 @@ By the end of today's lecture, you will be able to:
 
 # Connecting to What We Know
 
-## Where are we in the course?
+## Where we've been: Hypothesis testing
 
-```{r}
-#| echo: false
-#| fig-width: 12
-#| fig-height: 5
-#| fig-align: center
+**Over the past few lectures, we've learned to:**
 
-# Create a simple flowchart
-tibble(
-  x = c(1, 2, 3, 4, 5),
-  y = c(1, 1, 1, 1, 1),
-  label = c("Descriptive\nStatistics", 
-            "Probability &\nDistributions",
-            "Sampling\nDistributions", 
-            "Confidence\nIntervals",
-            "Hypothesis\nTests"),
-  current = c(FALSE, FALSE, FALSE, FALSE, FALSE)
-) %>%
-  ggplot(aes(x = x, y = y)) +
-  geom_segment(aes(x = x - 0.3, xend = x + 0.3, y = y, yend = y), 
-               linewidth = 10, color = "#0072B2", alpha = 0.7) +
-  geom_text(aes(label = label), size = 5, color = "white", fontface = "bold") +
-  annotate("segment", x = 1.3, y = 1, xend = 1.7, yend = 1,
-           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
-  annotate("segment", x = 2.3, y = 1, xend = 2.7, yend = 1,
-           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
-  annotate("segment", x = 3.3, y = 1, xend = 3.7, yend = 1,
-           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
-  annotate("segment", x = 4.3, y = 1, xend = 4.7, yend = 1,
-           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1) +
-  annotate("segment", x = 5.3, y = 1, xend = 5.7, yend = 1,
-           arrow = arrow(length = unit(0.3, "cm")), linewidth = 1, color = "#D55E00") +
-  annotate("text", x = 6, y = 1, label = "Power &\nSample Size", 
-           size = 5.5, fontface = "bold", color = "#D55E00") +
-  coord_cartesian(xlim = c(0.5, 6.5), ylim = c(0.5, 1.5)) +
-  theme_void()
-```
+-   Use **confidence intervals** to estimate population parameters
+-   Conduct **hypothesis tests** to evaluate claims about parameters
+-   Work with three types of t-tests:
+    -   One-sample (compare to known value)
+    -   Paired (compare before/after)
+    -   Two independent samples (compare groups)
 
 \
 
-**Today we answer:** How do we design studies to have adequate power to detect effects?
+**In each case, we:**
 
-**Why this matters:** No point running an experiment if it's unlikely to detect a real effect!
+1.  Collected data
+2.  Calculated a test statistic
+3.  Got a p-value
+4.  Made a conclusion (reject $H_0$ or fail to reject)
 
-## Review: What we've learned about hypothesis tests
+## Quick reference: Everything we've covered {.smaller}
 
-**We've covered three types of t-tests:**
+\
+
+|   | One-sample | Independent two-sample | Paired sample |
+|------------------|------------------|------------------|------------------|
+| Example | Body temp: Population mean is 98.6°F, is sample different? | Caffeine: taps/min between caffeine and non-caffeine group | Vegetarian diet: cholesterol before and after |
+| Sample statistic | $\bar{x}$ | $\bar{x}_1 - \bar{x}_2$ | $\bar{x}_d$ |
+| Population parameter | $\mu$ | $\mu_1 - \mu_2$ | $\mu_d$ or $\delta$ |
+| Possible hypothesis tests | $H_0: \mu = \mu_0$ | $H_0: \mu_1 = \mu_2$ or $\mu_1 - \mu_2 = 0$ | $H_0: \mu_d = 0$ or $\delta = 0$ |
+| Standard error | $SE = \frac{s}{\sqrt{n}}$ | $SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$ | $SE = \frac{s_d}{\sqrt{n}}$ |
+| Test statistic | $t = \frac{\bar{x} - \mu_0}{SE}$ | $t = \frac{(\bar{x}_1 - \bar{x}_2) - 0}{SE}$ | $t = \frac{\bar{x}_d - 0}{SE}$ |
+| Confidence intervals | $\bar{x} \pm t^* \times SE$ | $(\bar{x}_1 - \bar{x}_2) \pm t^* \times SE$ | $\bar{x}_d \pm t^* \times SE$ |
+
+\
+
+*This summarizes all three test types - we'll use these concepts as we think about power*
+
+## The question we haven't answered yet
+
+\
+
+**Scenario:** You're planning a new study
+
+\
 
 ::::: columns
-::: {.column width="30%"}
-**One-sample**
+::: {.column width="48%"}
+**Questions you need to answer:**
 
--   Compare sample mean to known value
--   $H_0: \mu = \mu_0$
--   Example: Body temp vs 98.6°F
--   Test stat: $t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$
+-   How many participants do I need?
+-   Can I detect the effect I'm looking for?
+-   What if I can only recruit 20 people?
+-   Is my study worth running?
 :::
 
-::: {.column width="35%"}
-**Paired samples**
+::: {.column width="48%"}
+**This is about study design:**
 
--   Compare paired differences
--   $H_0: \mu_d = 0$
--   Example: Blood pressure before/after treatment
--   Test stat: $t = \frac{\bar{x}_d - 0}{s_d/\sqrt{n}}$
-:::
-
-::: {.column width="35%"}
-**Two independent samples**
-
--   Compare means from two groups
--   $H_0: \mu_1 = \mu_2$
--   Example: Treatment vs control
--   Test stat: $t = \frac{(\bar{x}_1-\bar{x}_2) - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
+-   *Before* collecting data
+-   *Before* spending time/money
+-   *Before* asking participants to volunteer
+-   Making sure your study can answer your question
 :::
 :::::
 
 \
 
-**Today's question:** For each of these tests, how do we determine if we have enough data to detect a real effect?
+**Today:** We learn how to design studies with adequate **power** to detect real effects
 
 ## Motivating example: The caffeine study
+
+\
 
 **Research Question:** Does caffeine increase finger tapping speed?
 
@@ -192,27 +182,37 @@ tibble(
 
 \
 
-**Results we saw:** The caffeine group had significantly higher taps/min
+**Results:** The caffeine group had significantly higher taps/min (p \< 0.001)
+
+## The questions we SHOULD have asked first
+
+**But what if we had asked BEFORE running the study:**
+
+-   "We can only recruit 20 per group - is that enough?"
+-   "What difference can we actually detect with this sample size?"
+-   "How likely are we to find an effect if it's really there?"
 
 \
 
-**Questions we might ask *before* running this study:**
+**These questions are about POWER** - and that's what we'll learn today
 
--   How many participants do we need?
--   What if we could only recruit 20 per group - would that be enough?
--   What factors determine whether we can detect an effect?
+\
+
+::: callout-note
+Power analysis happens *before* data collection, not after!
+:::
 
 # Part 1: The Four Components
 
 ## What affects our ability to detect an effect?
 
-**Scenario:** Imagine two populations that differ in their mean tapping speed
-
 \
+
+**Scenario:** Imagine two populations that differ in their mean tapping speed
 
 ```{r}
 #| echo: false
-#| fig-width: 12
+#| fig-width: 8
 #| fig-height: 4
 #| fig-align: center
 
@@ -236,10 +236,8 @@ ggplot(data.frame(x = c(238, 257)), aes(x)) +
            size = 5, color = "#0072B2") +
   labs(x = "Taps per minute", y = "Probability density",
        title = "Population distributions: 5 taps/min difference") +
-  theme(text = element_text(size = 14))
+  theme(text = element_text(size = 12))
 ```
-
-\
 
 **Question:** When we take samples from these groups, will it be easy to tell them apart?
 
@@ -247,11 +245,13 @@ ggplot(data.frame(x = c(238, 257)), aes(x)) +
 
 ## Scenario 1: Small standard deviation
 
+\
+
 **Same difference (5 taps/min), but less variability (SD = 1 instead of 2)**
 
 ```{r}
 #| echo: false
-#| fig-width: 12
+#| fig-width: 8
 #| fig-height: 4
 #| fig-align: center
 
@@ -274,10 +274,8 @@ ggplot(data.frame(x = c(238, 257)), aes(x)) +
            size = 5, color = "#0072B2") +
   labs(x = "Taps per minute", y = "Probability density",
        title = "Less overlap → Easier to detect difference") +
-  theme(text = element_text(size = 14))
+  theme(text = element_text(size = 12))
 ```
-
-\
 
 **Observation:** Less overlap between distributions makes the difference easier to detect!
 
@@ -287,7 +285,7 @@ ggplot(data.frame(x = c(238, 257)), aes(x)) +
 
 ```{r}
 #| echo: false
-#| fig-width: 12
+#| fig-width: 8
 #| fig-height: 4
 #| fig-align: center
 
@@ -310,21 +308,50 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
            size = 5, color = "#0072B2") +
   labs(x = "Taps per minute", y = "Probability density",
        title = "Bigger difference → Easier to detect") +
-  theme(text = element_text(size = 14))
+  theme(text = element_text(size = 12))
 ```
 
 \
 
 **Observation:** A larger true difference is easier to detect!
 
-## The four components in equilibrium
+## What did we just observe?
 
-**In any hypothesis test, four quantities are mathematically related:**
+**From our visual examples, we noticed:**
+
+::: incremental
+1.  **Less variability** (smaller SD) → distributions pull apart → easier to detect difference
+
+2.  **Bigger true difference** → distributions pull apart → easier to detect difference
+
+3.  These affect how much **overlap** there is between groups
+:::
 
 \
 
-::::: columns
-::: {.column width="48%"}
+::: fragment
+**But we're missing something important:**
+
+-   What about sample size? More data should help us detect differences
+-   What about our significance level? Being more strict (lower $\alpha$) changes our threshold
+:::
+
+\
+
+::: fragment
+**Let's formalize these ideas...**
+
+Statisticians recognize **four components** that work together in any hypothesis test. Change one, and you affect the others!
+:::
+
+## The four components in equilibrium
+
+\
+
+**In any hypothesis test, four quantities are mathematically related:**
+
+::::::::: columns
+::::: {.column width="48%"}
 ::: {.callout-note icon="false"}
 ## 1. Significance level ($\alpha$)
 
@@ -335,56 +362,375 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 :::
 
 ::: {.callout-note icon="false"}
-## 2. Sample size ($n$)
-
--   Number of observations
--   Larger $n$ → smaller SE
--   Often what we're trying to determine
--   Constrained by time, cost, ethics
-:::
-:::
-
-::: {.column width="48%"}
-::: {.callout-note icon="false"}
-## 3. Effect size
-
--   Difference we want to detect
--   Relative to variability
--   Often measured by Cohen's *d*
--   Based on pilot data or literature
-:::
-
-::: {.callout-note icon="false"}
-## 4. Power ($1-\beta$)
+## 2. Power ($1-\beta$)
 
 -   Probability of detecting a real effect
 -   Typically want 80% or 90%
 -   What we calculate given the others
 -   The probability of "correctly rejecting"
 :::
-:::
 :::::
 
-\
+::::: {.column width="48%"}
+::: {.callout-note icon="false"}
+## 3. Sample size ($n$)
 
-**Key insight:** If you fix any three of these, the fourth is determined!
+-   Number of observations
+-   Larger $n$ → smaller SE
+-   Often what we're trying to determine
+-   Constrained by time, cost, ethics
+:::
+
+::: {.callout-note icon="false"}
+## 4. Effect size
+
+-   Difference we want to detect
+-   Relative to variability
+-   Often measured by Cohen's *d*
+-   Based on pilot data or literature
+:::
+:::::
+:::::::::
+
+**Key insight:** Given any 3 pieces, we can solve for the 4th.
 
 # Part 2: Errors in Hypothesis Testing
 
-## Type I and Type II errors
 
-**Remember:** Hypothesis tests can make mistakes in two ways
+
+## Significance levels and critical values
+
+:::::: columns
+::: {.column width="55%"}
+```{r}
+#| fig-width: 11
+#| fig-height: 6
+#| echo: false
+cv90 <- 1.645
+cv95 <- 1.96
+cv99 <- 2.575
+ggplot(NULL, aes(c(-3,3))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.8, xlim = c(-3, -cv99)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.6, xlim = c(-cv99, -cv95)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.4, xlim = c(-cv95, -cv90)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.1, xlim = c(-cv90, cv90)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.4, xlim = c(cv90, cv95)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.6, xlim = c(cv95, cv99)) +
+  geom_area(stat = "function", fun = dnorm, fill = "#E69F00", alpha =0.8, xlim = c(cv99, 3)) +
+  labs(x = "z", y = "") +
+  scale_y_continuous(breaks = NULL) +
+  scale_x_continuous(breaks = c(-cv99, -cv95, -cv90, 0, cv90, cv95, cv99), 
+                     labels = \(x) lamisc::fmt_num(x = x, accuracy = 0.01)) +
+  annotate("text", x = -2.8, y = .1, label = "0.005", size = 6) +
+  annotate("text", x = -2.2, y = .1, label = "0.025", size = 6)  +
+  annotate("text", x = -1.7, y = .1, label = "0.05", size = 6)  +
+  annotate("text", x = 2.8, y = .1, label = "0.005", size = 6)  +
+  annotate("text", x = 2.2, y = .1, label = "0.025", size = 6)  +
+  annotate("text", x = 1.7, y = .1, label = "0.05", size = 6)  +
+  labs(title="Critical Values for a Normal Distribution") + 
+  laviz::theme_minimal_white(border = TRUE, 
+                             grid = "X" ,
+                             base_size = 16)
+```
+:::
+
+:::: {.column width="45%"}
+::: {.callout-note icon="false"}
+## What are critical values?
+
+Cutoff points that determine when to reject $H_0$
+
+**Determined by:**
+
+-   Significance level ($\alpha$)
+-   One- vs two-sided test\
+-   Distribution type
+
+**For our tests:**
+
+-   We've been using $t^*$ from t-distribution (figure shows z-distribution)
+-   Typically $\alpha = 0.05$
+-   Two-sided tests (most common)
+
+**If |test statistic| > critical value → reject** $\boldsymbol{H_0}$
+:::
+::::
+::::::
+
+## Rejection regions
+
+-   If the absolute value of the test statistic is greater than the critical value, we reject $H_0$
+    -   In this case the test statistic is in the **rejection region**.
+    -   Otherwise it's in the non-rejection region.
+
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+#| fig-align: center
+
+# 1. Define constants
+alpha <- 0.05
+z_crit <- qnorm(1 - alpha/2) # 1.96 for alpha = 0.05
+
+
+ggplot(data.frame(x = c(-4, 4)), aes(x)) +
+  # 1. Curve and Shading
+  stat_function(fun = dnorm, xlim = c(-4, -z_crit), geom = "area", fill = "#D55E00", alpha = 0.6) +
+  stat_function(fun = dnorm, xlim = c(z_crit, 4), geom = "area", fill = "#D55E00", alpha = 0.6) +
+  stat_function(fun = dnorm, linewidth = 1, color = "#2C5F9E") +
+  geom_vline(xintercept = c(-z_crit, z_crit), linetype = "dashed") +
+  
+  # 2. Mathematical Labels (Fixed with quotes/tildes)
+  annotate("text", x = 0, y = 0.15, label = "1 - alpha", parse = TRUE, size = 6.5, fontface = "bold") +
+  annotate("text", x = 0, y = 0.42, label = "'Do not reject ' ~ H[0]", parse = TRUE, size = 5) +
+  annotate("text", x = -3, y = 0.42, label = "'Reject ' ~ H[0]", parse = TRUE, size = 6) +
+  annotate("text", x = 3, y = 0.42, label = "'Reject ' ~ H[0]", parse = TRUE, size = 6) +
+  annotate("text", x = -2.8, y = 0.08, label = "alpha / 2", parse = TRUE, size = 6) +
+  annotate("text", x = 2.8, y = 0.08, label = "alpha / 2", parse = TRUE, size = 6) +
+  
+  # 3. Arrows and Segments (Using annotate to avoid data length warnings)
+  annotate("segment", x = -2.4, y = 0.25, xend = -z_crit - 0.05, yend = 0.25, 
+           arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("segment", x = 2.4, y = 0.25, xend = z_crit + 0.05, yend = 0.25, 
+           arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("segment", x = -2.6, y = 0.07, xend = -2.1, yend = 0.02, 
+           arrow = arrow(length = unit(0.2, "cm"))) +
+  annotate("segment", x = 2.6, y = 0.07, xend = 2.1, yend = 0.02, 
+           arrow = arrow(length = unit(0.2, "cm"))) +
+  
+  # 4. Final Critical Value Text
+  annotate("text", x = -2.7, y = 0.25, label = "Critical\nValue", size = 5) +
+  annotate("text", x = 2.7, y = 0.25, label = "Critical\nValue", size = 5) +
+  
+  # 5. Bottom Region Labels (Replacing Braces) ---
+  annotate("text", x = -3, y = -0.05, label = "Rejection region", size = 5) +
+  annotate("text", x = 0, y = -0.05, label = "Nonrejection region", size = 5) +
+  annotate("text", x = 3, y = -0.05, label = "Rejection region", size = 5) +
+  
+  # 6. Styling
+  laviz::theme_minimal_white(grid = FALSE) + 
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_blank(), 
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank()) +
+  coord_cartesian(clip = "off")
+
+```
+
+[Stats & Geospatial Analysis](https://www.geo.fu-berlin.de/en/v/soga/Basics-of-statistics/Hypothesis-Tests/Introduction-to-Hypothesis-Testing/Critical-Value-and-the-p-Value-Approach/index.html)
+
+## Visual: One-sided vs. two-sided
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+
+# Hypothesis Testing Visualization
+# Recreates the two-tailed, left-tailed, and right-tailed test diagram
+
+library(tidyverse)
+library(patchwork)
+
+# Function to create hypothesis test plot
+make_hyp_test_plot <- function(test_type = "two-tailed", alpha = 0.05) {
+  
+  # Calculate critical values
+  if (test_type == "two-tailed") {
+    z_crit_lower <- qnorm(alpha/2)
+    z_crit_upper <- qnorm(1 - alpha/2)
+    title_text <- "Two-tailed"
+    h0_text <- "H[0]: mu == mu[0]"
+    ha_text <- "H[A]: mu != mu[0]"
+  } else if (test_type == "left-tailed") {
+    z_crit_lower <- qnorm(alpha)
+    z_crit_upper <- Inf
+    title_text <- "Left-tailed"
+    h0_text <- "H[0]: mu >= mu[0]"
+    ha_text <- "H[A]: mu < mu[0]"
+  } else if (test_type == "right-tailed") {
+    z_crit_lower <- -Inf
+    z_crit_upper <- qnorm(1 - alpha)
+    title_text <- "Right-tailed"
+    h0_text <- "H[0]: mu <= mu[0]"
+    ha_text <- "H[A]: mu > mu[0]"
+  }
+  
+  # Create base plot with normal distribution
+  p <- ggplot(data.frame(x = c(-4, 4)), aes(x = x)) +
+    stat_function(
+      fun = dnorm, 
+      args = list(mean = 0, sd = 1),
+      linewidth = 1.2, 
+      color = "#2C5F9E"
+    ) +
+    # scale_y_continuous(breaks = NULL, 
+    #                expand = expansion(mult = c(0.05, 0), add = c(0, 0)), 
+    #                limits = c(-0.12, 0.42)) + 
+    scale_y_continuous(breaks = NULL, 
+                       limits = c(-0.12, 0.42),  # Space below for text
+                       expand = c(0, 0)) +        # No extra expansion
+    scale_x_continuous(breaks = NULL) +
+    labs(x = NULL, y = NULL, title = title_text) +
+    theme_minimal(base_size = 14) +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+      panel.grid = element_blank(),
+      # axis.line.x = element_line(color = "black", linewidth = 0.5),
+      plot.margin = margin(t = 10, r = 10, b = 10, l = 10)
+    )
+  
+  # Add shaded rejection regions and labels based on test type
+  if (test_type == "two-tailed") {
+    # Both tails shaded
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(-4, z_crit_lower),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(z_crit_upper, 4),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha labels
+      annotate("text", x = -3, y = 0.05, 
+               label = "alpha/2", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      annotate("text", x = 3, y = 0.05, 
+               label = "alpha/2", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = -2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE) +
+      annotate("text", x = 2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+    
+  } else if (test_type == "left-tailed") {
+    # Left tail only
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(-4, z_crit_lower),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha label
+      annotate("text", x = -2.5, y = 0.05, 
+               label = "alpha", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = -2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+    
+  } else if (test_type == "right-tailed") {
+    # Right tail only
+    p <- p + 
+      stat_function(
+        fun = dnorm, 
+        args = list(mean = 0, sd = 1),
+        xlim = c(z_crit_upper, 4),
+        geom = "area", 
+        fill = "#D55E00", 
+        alpha = 0.6
+      ) +
+      # Alpha label
+      annotate("text", x = 2.5, y = 0.05, 
+               label = "alpha", 
+               size = 5, color = "#C55A00", parse = TRUE) +
+      # Rejection region labels
+      annotate("text", x = 0, y = 0.15, 
+               label = "Do~not~reject~H[0]",
+               size = 3.5, color = "#2C5F9E", parse = TRUE) +
+      annotate("text", x = 2.5, y = -0.02, 
+               label = "Reject~H[0]",
+               size = 3.2, color = "#8B3A00", parse = TRUE)
+  }
+  
+  # Add hypothesis labels in top left
+  p <- p +
+    annotate("text", x = -3.7, y = 0.40, 
+             label = h0_text, 
+             size = 4.5, hjust = 0, parse = TRUE) +
+    annotate("text", x = -3.7, y = 0.36, 
+             label = ha_text, 
+             size = 4.5, hjust = 0, parse = TRUE)
+  
+  return(p)
+}
+
+# Create the three plots
+p1 <- make_hyp_test_plot("two-tailed")
+p2 <- make_hyp_test_plot("left-tailed")
+p3 <- make_hyp_test_plot("right-tailed")
+
+# Combine using patchwork
+combined_plot <- p1 + p2 + p3 +
+  plot_annotation(
+    title = "Hypothesis Testing",
+    theme = theme(
+      plot.title = element_text(
+        size = 22, 
+        face = "bold", 
+        hjust = 0.5,
+        margin = margin(t = 10, b = 15),
+        color = "white"
+      ),
+      plot.background = element_rect(fill = "#E67C3A", color = NA),
+      plot.margin = margin(t = 15, r = 10, b = 10, l = 10)
+    )
+  ) &
+  theme(plot.background = element_rect(fill = "white", color = NA))
+
+# Display the plot
+print(combined_plot)
+```
+
+
+## Hypothesis testing errors
+
+![[StatisticsSolutions](https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/)](/img_slides/type_i_type_ii_pregnant.jpg){fig-align="center" width="70%"}
+
+## Justice system analogy 
+
+<br><br>
+
+![[Type I and Type II Errors - Making Mistakes in the Justice System](http://www.intuitor.com/statistics/T1T2Errors.html)](/img_slides/intuitor_charts.png){fig-align="center"}
+
+## Type I and Type II errors
 
 \
 
-::::: columns
-::: {.column width="48%"}
+**Remember:** Hypothesis tests can make mistakes in two ways
+
+::::::: columns
+:::: {.column width="48%"}
 ::: {.callout-important icon="false"}
 ## Type I Error (False Positive)
 
 **Definition:** Reject $H_0$ when it's actually true
 
-**Notation:** Probability = $\alpha$
+**Notation:** Probability of making a Type I error = $\alpha$
 
 **Example:** Conclude caffeine increases tapping when it really doesn't
 
@@ -392,15 +738,15 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 
 **Also called:** False positive, $\alpha$ error
 :::
-:::
+::::
 
-::: {.column width="48%"}
+:::: {.column width="48%"}
 ::: {.callout-warning icon="false"}
 ## Type II Error (False Negative)
 
 **Definition:** Fail to reject $H_0$ when it's false
 
-**Notation:** Probability = $\beta$
+**Notation:** Probability of making a Type II error = $\beta$
 
 **Example:** Fail to detect caffeine effect when it really exists
 
@@ -408,8 +754,8 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 
 **Also called:** False negative, $\beta$ error
 :::
-:::
-:::::
+::::
+:::::::
 
 \
 
@@ -418,11 +764,11 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 ## Power: The probability of correctly detecting an effect
 
 ::: {.callout-tip icon="false"}
+
 ## Power Definition
 
 **Power** = $1 - \beta$ = Probability of correctly rejecting $H_0$ when it's false
 
--   Also called "sensitivity" or "true positive rate"
 -   The probability of detecting an effect that actually exists
 -   Typically want power ≥ 0.80 (80%)
 -   Some fields require 0.90 (90%)
@@ -430,32 +776,64 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 
 \
 
+::: columns
+::: {.column width="50%"}
 **Why 80%?** This is a convention balancing:
 
 -   Reasonable chance of detecting real effects
 -   Practical constraints on sample size
 -   Cost and feasibility
+:::
 
-\
-
+::: {.column width="50%"}
 **Think of it this way:**
 
 -   High power = good "detector" - likely to find effect if it exists
 -   Low power = bad "detector" - might miss real effects
+:::
+:::
 
 ## The complete picture
 
-| **Reality** | **$H_0$ True** | **$H_0$ False** |
-|-------------|----------------|-----------------|
-| **Reject $H_0$** | Type I Error ($\alpha$) | **Power** ($1-\beta$) ✓ |
-| **Fail to reject $H_0$** | Correct ($1-\alpha$) ✓ | Type II Error ($\beta$) |
+<table style="border-bottom: 1px solid black;">
+<thead>
+  <tr>
+    <th></th>
+    <th colspan="2" style="text-align: center;">Reality</th>
+  </tr>
+  <tr>
+    <th>Test decision</th>
+    <th>$H_0$ True</th>
+    <th>$H_1$ True</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><strong>Reject</strong> $H_0$</td>
+    <td>Type I Error ($\alpha$)</td>
+    <td><strong>Power</strong> ($1-\beta$) ✓</td>
+  </tr>
+  <tr>
+    <td><strong>Fail to reject</strong> $H_0$</td>
+    <td>Correct ($1-\alpha$) ✓</td>
+    <td>Type II Error ($\beta$)</td>
+  </tr>
+</tbody>
+</table>
+
+
+
+<!-- | **Reality**              | $H_0$ True              | $H_0$ False             | -->
+<!-- |---------------------|-------------------------|---------------------------| -->
+<!-- | **Reject** $H_0$         | Type I Error ($\alpha$) | **Power** ($1-\beta$) ✓ | -->
+<!-- | **Fail to reject** $H_0$ | Correct ($1-\alpha$) ✓  | Type II Error ($\beta$) | -->
 
 \
 
 **Correct decisions:**
 
--   $1 - \alpha$: Specificity (correctly fail to reject when $H_0$ true)
--   $1 - \beta$: Power (correctly reject when $H_0$ false)
+-   $1 - \alpha$: Confidence (correctly fail to reject when $H_0$ is true)
+-   $1 - \beta$: Power (correctly reject $H_0$ when $H_1$ is true)
 
 \
 
@@ -468,98 +846,327 @@ ggplot(data.frame(x = c(238, 263)), aes(x)) +
 
 **What we control in study design:** We typically fix $\alpha$ at 0.05 and choose $n$ to achieve desired power
 
-## Visualizing these concepts
+<!-- ## Visualizing these concepts -->
 
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+
+<!-- # Set up parameters -->
+<!-- mu_null <- 0 -->
+<!-- mu_alt <- 3 -->
+<!-- sd <- 1 -->
+<!-- alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2)  # Critical value for two-sided test -->
+
+<!-- # Create the plot -->
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # Null distribution -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 1.5, -->
+<!--                 color = "#E69F00") + -->
+<!--   # Alternative distribution   -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.5, -->
+<!--                 color = "#0072B2") + -->
+<!--   # Rejection regions under null (Type I error) -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(-3, -cv), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#CC79A7",  -->
+<!--                 alpha = 0.7) + -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#CC79A7",  -->
+<!--                 alpha = 0.7) + -->
+<!--   # Type II error region -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#F0E442",  -->
+<!--                 alpha = 0.6) + -->
+<!--   # Power region -->
+<!--   stat_function(fun = dnorm,  -->
+<!--                 args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), -->
+<!--                 geom = "area",  -->
+<!--                 fill = "#009E73",  -->
+<!--                 alpha = 0.5) + -->
+<!--   # Labels -->
+<!--   annotate("text", x = -1.5, y = 0.3,  -->
+<!--            label = "Null\nDistribution",  -->
+<!--            size = 5, color = "#E69F00") + -->
+<!--   annotate("text", x = 4, y = 0.3,  -->
+<!--            label = "Alternative\nDistribution",  -->
+<!--            size = 5, color = "#0072B2") + -->
+<!--   annotate("text", x = -2.5, y = 0.02,  -->
+<!--            label = "α/2",  -->
+<!--            size = 5, color = "#CC79A7") + -->
+<!--   annotate("text", x = 2.7, y = 0.02,  -->
+<!--            label = "α/2",  -->
+<!--            size = 5, color = "#CC79A7") + -->
+<!--   annotate("text", x = 1, y = 0.08,  -->
+<!--            label = "β\n(Type II error)",  -->
+<!--            size = 4.5, color = "#806000") + -->
+<!--   annotate("text", x = 4, y = 0.15,  -->
+<!--            label = "Power\n(1-β)",  -->
+<!--            size = 5, color = "#009E73") + -->
+<!--   # Critical value line -->
+<!--   geom_vline(xintercept = cv,  -->
+<!--              linetype = "dashed",  -->
+<!--              linewidth = 1, -->
+<!--              color = "black") + -->
+<!--   annotate("text", x = cv + 0.3, y = 0.42,  -->
+<!--            label = "Critical\nvalue",  -->
+<!--            size = 4) + -->
+<!--   labs(x = "Test Statistic",  -->
+<!--        y = "Probability Density", -->
+<!--        title = "Type I error, Type II error, and Power") + -->
+<!--   theme(text = element_text(size = 14)) -->
+<!-- ``` -->
+
+
+<!-- **Key observations:** -->
+
+<!-- -   Type I error ($\alpha$): Area in tails under null distribution -->
+<!-- -   Type II error ($\beta$): Area to left of critical value under alternative -->
+<!-- -   Power ($1-\beta$): Area to right of critical value under alternative -->
+
+<!-- ## Visualizing Type I error, Type II error, and Power -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+
+<!-- library(ggplot2) -->
+
+<!-- # Parameters -->
+<!-- mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2) -->
+
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # 1. Shading (Power and Beta) - Keep these primary -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) + -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) + -->
+
+<!--   # 2. Rejection Region (Alpha) - Small but distinct -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) + -->
+
+<!--   # 3. The Curves (Linewidth hierarchy) -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background" -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.2, color = "#0072B2") + -->
+
+<!--   # 4. The "Decision Wall" -->
+<!--   geom_vline(xintercept = cv, linewidth = 1, color = "black") + -->
+<!--   annotate("label", x = cv, y = 0.42, label = "Critical Value",  -->
+<!--            fill = "white", size = NA, fontface = "bold") + -->
+
+<!--   # 5. Strategic Labeling (using plotmath for Greek) -->
+<!--   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) + -->
+<!--   annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) + -->
+<!--   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) +  -->
+
+<!--   # 6. Clean Theme -->
+<!--   laviz::theme_minimal_white(grid = "none") + -->
+<!--   labs(x = NULL,  -->
+<!--        y = NULL,  -->
+<!--        title = "The Relationship Between Alpha, Beta, and Power") + -->
+<!--   theme(panel.grid.minor = element_blank(), -->
+<!--         axis.text.x = element_blank(),  -->
+<!--         axis.text.y = element_blank()) -->
+<!-- ``` -->
+
+<!-- ## Visualizing Type I error, Type II error, and Power -->
+
+<!-- ::: {.fragment} -->
+<!-- **Two possible realities:** -->
+
+<!-- - Dashed grey: $H_0$ is true (no effect) -->
+<!-- - Solid blue: $H_A$ is true (real effect exists) -->
+<!-- ::: -->
+
+<!-- ::: {.fragment} -->
+<!-- **Our decision boundary:** The critical value separates "reject" from "don't reject" -->
+<!-- ::: -->
+
+<!-- ::: {.fragment} -->
+<!-- **Under $H_0$ (grey curve):** Pink region (α) = Type I error when we wrongly reject -->
+<!-- ::: -->
+
+<!-- ::: {.fragment} -->
+<!-- **Under $H_A$ (blue curve):**  -->
+
+<!-- - Yellow (β) = Type II error - we miss the real effect -->
+<!-- - Green (1-β) = **Power** - we correctly detect the effect! -->
+<!-- ::: -->
+
+<!-- ::: {.fragment} -->
+<!-- **The key insight:** These are all connected - changing one affects the others! -->
+<!-- ::: -->
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 12 -->
+<!-- #| fig-height: 6 -->
+<!-- #| fig-align: center -->
+
+<!-- library(ggplot2) -->
+
+<!-- # Parameters -->
+<!-- mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05 -->
+<!-- cv <- qnorm(1 - alpha/2) -->
+
+<!-- ggplot(data.frame(x = c(-3, 7)), aes(x)) + -->
+<!--   # 1. Shading (Power and Beta) - Keep these primary -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) + -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) + -->
+
+<!--   # 2. Rejection Region (Alpha) - Small but distinct -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) + -->
+
+<!--   # 3. The Curves (Linewidth hierarchy) -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd), -->
+<!--                 linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background" -->
+<!--   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd), -->
+<!--                 linewidth = 1.2, color = "#0072B2") + -->
+
+<!--   # 4. The "Decision Wall" -->
+<!--   geom_vline(xintercept = cv, linewidth = 1, color = "black") + -->
+<!--   annotate("label", x = cv, y = 0.42, label = "Critical Value",  -->
+<!--            fill = "white", label.size = NA, fontface = "bold") + -->
+
+<!--   # 5. Strategic Labeling (using plotmath for Greek) -->
+<!--   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) + -->
+<!--   annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) + -->
+<!--   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) + -->
+<!--   annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) +  -->
+
+<!--   # 6. Clean Theme -->
+<!--   laviz::theme_minimal_white(grid = "none") + -->
+<!--   labs(x = NULL,  -->
+<!--        y = NULL,  -->
+<!--        title = "The Relationship Between Alpha, Beta, and Power") + -->
+<!--   theme(panel.grid.minor = element_blank(), -->
+<!--         axis.text.x = element_blank(),  -->
+<!--         axis.text.y = element_blank()) -->
+<!-- ``` -->
+
+## Visualizing Type I error, Type II error, and Power (II)
+
+::: columns
+::: {.column width="30%"}
+::: {.fragment}
+**Two possible realities:**
+
+- Dashed grey: $H_0$ is true (no effect)
+- Solid blue: $H_A$ is true (real effect exists)
+:::
+
+::: {.fragment}
+**Our decision boundary:** The critical value separates "reject" from "don't reject"
+:::
+
+::: {.fragment}
+**Under $H_0$ (grey curve):** 
+
+- Pink region (α) = Type I error when we wrongly reject
+:::
+
+::: {.fragment}
+**Under $H_A$ (blue curve):** 
+
+- Yellow (β) = Type II error - we miss the real effect
+- Green (1-β) = **Power** - we correctly detect the effect!
+:::
+
+
+:::
+
+::: {.column width="70%"}
 ```{r}
 #| echo: false
 #| fig-width: 12
 #| fig-height: 6
 #| fig-align: center
 
-# Set up parameters
-mu_null <- 0
-mu_alt <- 3
-sd <- 1
-alpha <- 0.05
-cv <- qnorm(1 - alpha/2)  # Critical value for two-sided test
+library(ggplot2)
 
-# Create the plot
+# Parameters
+mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05
+cv <- qnorm(1 - alpha/2)
+
 ggplot(data.frame(x = c(-3, 7)), aes(x)) +
-  # Null distribution
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_null, sd = sd),
-                linewidth = 1.5,
-                color = "#E69F00") +
-  # Alternative distribution  
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_alt, sd = sd),
-                linewidth = 1.5,
-                color = "#0072B2") +
-  # Rejection regions under null (Type I error)
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_null, sd = sd),
-                xlim = c(-3, -cv),
-                geom = "area", 
-                fill = "#CC79A7", 
-                alpha = 0.7) +
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_null, sd = sd),
-                xlim = c(cv, 4),
-                geom = "area", 
-                fill = "#CC79A7", 
-                alpha = 0.7) +
-  # Type II error region
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_alt, sd = sd),
-                xlim = c(-1, cv),
-                geom = "area", 
-                fill = "#F0E442", 
-                alpha = 0.6) +
-  # Power region
-  stat_function(fun = dnorm, 
-                args = list(mean = mu_alt, sd = sd),
-                xlim = c(cv, 7),
-                geom = "area", 
-                fill = "#009E73", 
-                alpha = 0.5) +
-  # Labels
-  annotate("text", x = -1.5, y = 0.3, 
-           label = "Null\nDistribution", 
-           size = 5, color = "#E69F00") +
-  annotate("text", x = 4, y = 0.3, 
-           label = "Alternative\nDistribution", 
-           size = 5, color = "#0072B2") +
-  annotate("text", x = -2.5, y = 0.02, 
-           label = "α/2", 
-           size = 5, color = "#CC79A7") +
-  annotate("text", x = 2.7, y = 0.02, 
-           label = "α/2", 
-           size = 5, color = "#CC79A7") +
-  annotate("text", x = 1, y = 0.08, 
-           label = "β\n(Type II error)", 
-           size = 4.5, color = "#806000") +
-  annotate("text", x = 4, y = 0.15, 
-           label = "Power\n(1-β)", 
-           size = 5, color = "#009E73") +
-  # Critical value line
-  geom_vline(xintercept = cv, 
-             linetype = "dashed", 
-             linewidth = 1,
-             color = "black") +
-  annotate("text", x = cv + 0.3, y = 0.42, 
-           label = "Critical\nvalue", 
-           size = 4) +
-  labs(x = "Test Statistic", 
-       y = "Probability Density",
-       title = "Type I error, Type II error, and Power") +
-  theme(text = element_text(size = 14))
+  # 1. Shading (Power and Beta) - Keep these primary
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) +
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) +
+  
+  # 2. Rejection Region (Alpha) - Small but distinct
+  stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+                xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) +
+  
+  # 3. The Curves (Linewidth hierarchy)
+  stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+                linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background"
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                linewidth = 1.2, color = "#0072B2") +
+  
+  # 4. The "Decision Wall"
+  geom_vline(xintercept = cv, linewidth = 1, color = "black") +
+  annotate("label", x = cv, y = 0.42, label = "Critical Value", 
+           fill = "white", label.size = NA, fontface = "bold") +
+  
+  # 5. Strategic Labeling (using plotmath for Greek)
+  annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) +
+  annotate("text", x = mu_alt, y = 0.42, label = "H[1]", parse = TRUE, color = "#0072B2", size = 7) +
+  annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) +
+  annotate("text", x = 3.25, y = 0.15, label = "1-beta", parse = TRUE, size = 7) +
+  annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) +
+  annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) + 
+  
+  # 6. Clean Theme
+  laviz::theme_minimal_white(grid = "none") +
+  labs(x = NULL, 
+       y = NULL, 
+       title = "The Relationship Between Alpha, Beta, and Power") +
+  theme(panel.grid.minor = element_blank(),
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank())
 ```
 
-**Key observations:**
+::: {.fragment}
+**The key insight:** These are all connected - changing one affects the others!
+:::
+:::
+:::
 
--   Type I error ($\alpha$): Area in tails under null distribution
--   Type II error ($\beta$): Area to left of critical value under alternative
--   Power ($1-\beta$): Area to right of critical value under alternative
+
+
+
+
 
 ## What increases power?
 
@@ -567,7 +1174,7 @@ ggplot(data.frame(x = c(-3, 7)), aes(x)) +
 
 ::::: columns
 ::: {.column width="48%"}
-**1. Larger sample size ($n$)**
+**1. Larger sample size (**$n$)
 
 -   Reduces standard error
 -   Narrows sampling distributions
@@ -601,12 +1208,39 @@ ggplot(data.frame(x = c(-3, 7)), aes(x)) +
 
 \
 
-**Practical implications:**
+## Practical implications:
+
+\
 
 -   We usually have most control over sample size
 -   Can sometimes reduce variability through better measurement
--   Effect size is determined by nature/treatment
+-   Effect size is a property of reality — we estimate it, we don’t choose it
 -   Significance level is conventionally fixed at 0.05
+
+<!-- The key insight: -->
+<!-- You can't change the true effect size - it's a property of reality. -->
+<!-- If a new blood pressure medication truly reduces systolic BP by an average of 8 mmHg compared to placebo, that's what it does. You can't make that effect bigger just because you want more statistical power. The drug's actual effectiveness is determined by its pharmacology (nature) and how it interacts with the human body (biology). -->
+<!-- Contrast with what you CAN control: -->
+
+<!-- Sample size: You can recruit 50 people or 500 people - totally in your control (with budget/time constraints) -->
+<!-- Variability: You have some control - use better measurement equipment, standardize protocols, select more homogeneous populations -->
+<!-- Alpha: Technically flexible, but conventionally fixed at 0.05 -->
+<!-- Effect size: NOT in your control - it is what it is in the real world -->
+
+<!-- For power analysis purposes: -->
+<!-- When planning a study, you have to: -->
+
+<!-- Guess/estimate what the effect size might be (from pilot data, literature, or clinical meaningfulness) -->
+<!-- Accept that guess as your working assumption -->
+<!-- Manipulate sample size to achieve desired power for detecting that effect size -->
+
+<!-- You can't say "I need more power, so I'll assume a bigger effect size" - that would be wishful thinking! -->
+<!-- Better phrasing options: -->
+<!-- If this still feels unclear for your students, you might consider: -->
+
+<!-- "Effect size reflects the true magnitude of the phenomenon we're studying" -->
+<!-- "Effect size is a property of the real-world phenomenon, not a design choice" -->
+<!-- "We estimate effect size; we don't choose it" -->
 
 # Part 3: Calculating Power and Sample Size
 
@@ -624,18 +1258,20 @@ ggplot(data.frame(x = c(-3, 7)), aes(x)) +
 **After collecting data (post-hoc):**
 
 -   Understand power of completed study
--   Interpret non-significant results
 -   Plan follow-up studies
 
 \
 
-::: {.callout-warning}
+::: callout-warning
 ## Important Note
 
 Post-hoc power calculations for non-significant results can be misleading! Better to report confidence intervals showing uncertainty.
 :::
 
 ## Cohen's d: Standardized effect size
+
+\
+
 
 **Problem:** Effect sizes are in original units (e.g., taps/min, mmHg, °F)
 
@@ -646,29 +1282,34 @@ Post-hoc power calculations for non-significant results can be misleading! Bette
 
 **Solution:** Cohen's *d* standardizes the effect size
 
+
+## Cohen's d: Standardized effect size
+
 \
 
 ::: {.callout-note icon="false"}
 ## Cohen's d Formulas
 
-**One-sample test (or paired):**
-$$d = \frac{\bar{x} - \mu_0}{s} \quad \text{or} \quad d = \frac{\bar{x}_d - \delta_0}{s_d}$$
+**One-sample test (or paired):** $$d = \frac{\bar{x} - \mu_0}{s} \quad \text{or} \quad d = \frac{\bar{x}_d - \delta_0}{s_d}$$
 
-**Two-sample test:**
-$$d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}$$
+**Two-sample test:** $$d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}$$
 
 where $s_{\text{pooled}} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$
+
+\
+
+For two-sample d, we often use pooled SD when group variances are similar; there are variants when they are not.
 :::
 
 ## Interpreting Cohen's d
 
 **Cohen's guidelines for effect size:**
 
-| Effect Size | $d$ value | Interpretation |
-|-------------|-----------|----------------|
-| Small | 0.2 | Difficult to detect, subtle effect |
-| Medium | 0.5 | Moderate effect, visible to careful observer |
-| Large | 0.8 | Large effect, obvious to casual observer |
+| Effect Size | $d$ value | Interpretation                               |
+|-------------|-----------|----------------------------------------------|
+| Small       | 0.2       | Difficult to detect, subtle effect           |
+| Medium      | 0.5       | Moderate effect, visible to careful observer |
+| Large       | 0.8       | Large effect, obvious to casual observer     |
 
 \
 
@@ -748,6 +1389,8 @@ d
 **Step 2:** Use `pwr.t.test()` to find required sample size
 
 ```{r}
+# Specify all parameters except for sample size, n
+
 result <- pwr.t.test(
   d = (98.6 - 98.25) / 0.73,  # Cohen's d
   sig.level = 0.05,            # α = 0.05
@@ -777,24 +1420,34 @@ plot(result)
 
 ## Example 2: One-sample test - Calculating power
 
-**Scenario:** Same body temperature study, but we already collected data
+**Scenario:** Same body temperature study, but the sample size is fixed
 
 -   n = 130 participants
 -   Effect size: d = 0.479
 -   $\alpha = 0.05$
--   **Question:** What power did we have?
+-   **Question:** What power do we have given the sample size we have?
 
 \
 
 ```{r}
+# Specify all parameters except for power
+
 result_power <- pwr.t.test(
-  n = 130,                     # Sample size we collected
-  d = (98.6 - 98.25) / 0.73,  # Cohen's d
+  n = 130,                     # Sample size we have
+  d = (98.6 - 98.25) / 0.73,   # Cohen's d
   sig.level = 0.05,            # α = 0.05
   type = "one.sample",
   alternative = "two.sided"
 )
 
+
+```
+
+## Example 2: One-sample test - Calculating power (cont.)
+
+\
+
+```{r}
 result_power
 ```
 
@@ -804,20 +1457,22 @@ result_power
 
 ## Example 3: Two-sample test - Finding sample size
 
+\
+
 **Scenario:** Caffeine tapping study
 
 -   Want to detect 2 taps/min difference between groups
 -   Expect SD ≈ 2.6 taps/min in each group
 -   Want 80% power with $\alpha = 0.05$
--   **Question:** How many participants per group?
+-   **Question:** How many participants per group do we need?
 
 \
 
 **Step 1:** Calculate Cohen's d
 
 ```{r}
-diff <- 2      # Difference we want to detect
-sd_pooled <- 2.6  # Expected SD in each group
+diff <- 2          # Difference we want to detect
+sd_pooled <- 2.6   # Expected SD in each group
 
 d <- diff / sd_pooled
 d
@@ -825,9 +1480,13 @@ d
 
 \
 
+## Example 3: Two-sample test - Finding sample size (cont.)
+
 **Step 2:** Calculate required sample size
 
 ```{r}
+# Specify all parameters except for sample size, n
+
 result_caff <- pwr.t.test(
   d = d,
   sig.level = 0.05,
@@ -843,57 +1502,110 @@ result_caff
 
 ## Example 4: Two-sample test - Calculating power
 
-**Scenario:** We ran the caffeine study with 35 per group
+\
 
--   Effect size: d = 0.77
--   $\alpha = 0.05$
--   **Question:** What power did we have?
+**Scenario:** We have 35 subjects per group in the Caffeine study
+
+- Effect size: $d = 0.77$
+  - difference of $2$ points between the two groups
+  - assuming $SD = 2.6$ in both groups
+- $\alpha = 0.05$
+- **Question:** What power do we have to detect this difference?
 
 \
 
 ```{r}
+
+# Specify all parameters except for power
+
 result_caff_power <- pwr.t.test(
-  n = 35,
+  n = 35,      # Sample size per group             
   d = 2 / 2.6,
   sig.level = 0.05,
   type = "two.sample",
   alternative = "two.sided"
 )
 
-result_caff_power
+
 ```
 
-```{r}
-#| echo: false
-#| fig-width: 10
-#| fig-height: 5
-plot(result_caff_power)
-```
 
-**Conclusion:** With n=35 per group, we had **`r round(result_caff_power$power * 100, 1)`%** power (excellent!)
-
-## One-sided vs two-sided tests and power
-
-**Two-sided test:** $H_A: \mu \neq \mu_0$ (most common)
-
-**One-sided test:** $H_A: \mu > \mu_0$ or $H_A: \mu < \mu_0$
+## Example 4: Two-sample test - Calculating power (cont.)
 
 \
 
-**Power comparison:**
+::: columns
+::: {.column width="50%"}
+```{r}
+result_caff_power
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: true
+
+plot(result_caff_power)
+```
+
+:::
+:::
+
+\
+
+**Conclusion:** With n=35 per group, we have **`r round(result_caff_power$power * 100, 1)`%** power (excellent!)
+
+## One-sided vs two-sided tests and power
+
+
+::: columns
+::: {.column width="50%"}
+
+### Two-sided test:
+
+$H_A: \mu \neq \mu_0$ (most common)
+
+\
 
 ```{r}
 # Two-sided test
-two_sided <- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80, 
-                        type = "two.sample", alternative = "two.sided")
+two_sided <- pwr.t.test(
+  d = 0.5, 
+  sig.level = 0.05, 
+  power = 0.80, 
+  type = "two.sample", 
+  alternative = "two.sided"
+)
 
-# One-sided test  
-one_sided <- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,
-                        type = "two.sample", alternative = "greater")
-
-cat("Two-sided requires n =", ceiling(two_sided$n), "per group\n")
-cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
+two_sided
 ```
+
+:::
+::: {.column width="50%"}
+
+### One-sided test:
+
+$H_A: \mu > \mu_0$ or $H_A: \mu < \mu_0$
+
+\
+
+```{r}
+# One-sided test  
+one_sided <- pwr.t.test(
+  d = 0.5, 
+  sig.level = 0.05, 
+  power = 0.80,
+  type = "two.sample", 
+  alternative = "greater"
+)
+
+one_sided
+```
+
+:::
+:::
+
+## One-sided vs two-sided tests and power (cont.)
 
 \
 
@@ -902,10 +1614,13 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 -   Only justified when direction is known *a priori*
 -   Can't detect effects in "wrong" direction
 -   Generally not recommended unless strong scientific justification
+-   Reviewers/collaborators often require lower $\alpha$ (e.g., 0.025) for one-sided tests
 
 # Part 4: Study Design Applications
 
 ## The power-sample size trade-off
+
+\
 
 ::::: columns
 ::: {.column width="48%"}
@@ -943,7 +1658,7 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 
 ## Common mistakes in power analysis
 
-::: {.callout-warning}
+::: callout-warning
 ## Mistake 1: Post-hoc power for non-significant results
 
 **Don't do this:** "Our result was non-significant (p=0.12). Let me calculate power..."
@@ -955,7 +1670,7 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 
 \
 
-::: {.callout-warning}
+::: callout-warning
 ## Mistake 2: Using observed effect size for power
 
 **Don't do this:** Calculate power using the effect size you observed
@@ -967,7 +1682,7 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 
 ## Common mistakes continued
 
-::: {.callout-warning}
+::: callout-warning
 ## Mistake 3: Ignoring practical significance
 
 **Don't do this:** Design study to detect any statistically significant difference
@@ -979,7 +1694,7 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 
 \
 
-::: {.callout-warning}
+::: callout-warning
 ## Mistake 4: Not considering variability
 
 **Don't do this:** Assume optimistic (low) SD when planning sample size
@@ -991,12 +1706,40 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 
 ## Real-world example: A cautionary tale
 
+\
+
+::: columns
+::: {.column width="50%"}
 **Study:** New drug to lower blood pressure
+
+```{r}
+#| include: false
+
+ss_calc <- pwr.t.test(d = 5 / 10, 
+                      sig.level = 0.05, 
+                      power = 0.80, 
+                      type = "two.sample", 
+                      alternative = "two.sided")
+
+
+power_calc <- pwr.t.test(n = 50, 
+                         d = 4 / 12, 
+                         sig.level = 0.05, 
+                         # power = 0.80, 
+                         type = "two.sample", 
+                         alternative = "two.sided")
+
+
+```
+
 
 -   Powered to detect 5 mmHg reduction
 -   Assumed SD = 10 mmHg (from literature)
--   Calculated need for n = 64 per group
--   Only recruited n = 50 per group (budget constraints)
+-   Calculated need for n = `r round(ss_calc$n)` per group
+
+\
+
+-   Only recruited n = 50 per group due to budget constraints
 -   Actual SD in study was 12 mmHg (more variability than expected)
 
 \
@@ -1004,29 +1747,38 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
 **Result:**
 
 -   Observed reduction: 4 mmHg (close to target!)
--   P-value = 0.09 (not significant at 0.05 level)
--   Actual power was only 58% (not the planned 80%)
+-   *p*-value = 0.090 (not significant at 0.05 level)
+-   Actual power was only `r lamisc::fmt_pct(power_calc$power, 1.0)` (not the planned 80%)
+-   Study deemed "negative" despite clinically meaningful effect
+:::
 
-\
-
+::: {.column width="50%"}
 **Lessons:**
 
 1.  Small deviations from plan can substantially reduce power
 2.  Under-recruitment is very common - build in buffer
 3.  Conservative SD estimates are wise
+:::
+:::
+
+
+
 
 ## When is a study "underpowered"?
 
+\
+
+::: columns
+::: {.column width="50%"}
 **Conventionally:**
 
--   Power < 50%: Severely underpowered
+-   Power \< 50%: Severely underpowered
 -   Power 50-70%: Underpowered
 -   Power 70-80%: Marginally adequate
 -   Power 80-90%: Good
--   Power > 90%: Excellent (sometimes wasteful)
-
-\
-
+-   Power \> 90%: Excellent (sometimes wasteful)
+:::
+::: {.column width="50%"}
 **Practical considerations:**
 
 -   **80% power** is standard for many studies
@@ -1035,14 +1787,19 @@ cat("One-sided requires n =", ceiling(one_sided$n), "per group\n")
     -   Pilot/feasibility studies
     -   Exploratory research
     -   Studies where negative result is informative
+:::
+:::
+
 
 \
 
-::: {.callout-tip}
+::: callout-tip
 Always report your power analysis in papers/grants! Shows thoughtful study design.
 :::
 
 ## Using power analysis in different scenarios
+
+\
 
 ::::: columns
 ::: {.column width="48%"}
@@ -1050,18 +1807,17 @@ Always report your power analysis in papers/grants! Shows thoughtful study desig
 
 1.  Review literature for expected effect size
 2.  Use conservative estimates
-3.  Calculate sample size for 80% power
+3.  Choose a target power (usually 80–90%) and calculate required sample size
 4.  Add 10-20% buffer for dropout
 5.  Check if feasible
 
 \
 
 **Evaluating a completed study:**
-
-1.  Calculate achieved power
-2.  If significant: power is high
-3.  If non-significant: report CI, not power
-4.  Use for planning follow-up
+1.  Focus on effect estimates and confidence intervals
+2.  If non-significant: Is CI compatible with meaningful effect?
+3.  Don't calculate "achieved power" (mathematically determined by the *p*-value)
+4.  Use observed effect size & SD to plan follow-up studies
 :::
 
 ::: {.column width="48%"}
@@ -1087,10 +1843,12 @@ Always report your power analysis in papers/grants! Shows thoughtful study desig
 
 ## Summary: The big picture
 
+\
+
 **Four quantities in equilibrium:**
 
 1.  **Significance level** ($\alpha$) - usually fixed at 0.05
-2.  **Effect size** - determined by nature/treatment
+2.  **Effect size** - a property of reality (we estimate it, we do not choose it)
 3.  **Sample size** ($n$) - what we typically calculate
 4.  **Power** ($1-\beta$) - probability of detecting real effect
 
@@ -1100,7 +1858,7 @@ Always report your power analysis in papers/grants! Shows thoughtful study desig
 
 -   Power = Probability of correctly detecting an effect when it exists
 -   Type I error ($\alpha$) = False positive
--   Type II error ($\beta$) = False negative  
+-   Type II error ($\beta$) = False negative\
 -   Cohen's *d* = Standardized effect size
 -   Typical target: 80-90% power
 
@@ -1110,6 +1868,8 @@ Always report your power analysis in papers/grants! Shows thoughtful study desig
 
 ```{r}
 #| eval: false
+
+library(pwr)
 
 # Calculate sample size (leave n = NULL)
 pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,
@@ -1133,7 +1893,7 @@ pwr.t.test(n = 50, sig.level = 0.05, power = 0.80,
 ## Best practices for power analysis
 
 1.  **Plan prospectively** - before collecting data
-2.  **Use realistic effect sizes** - from literature or pilot data  
+2.  **Use realistic effect sizes** - from literature or pilot data\
 3.  **Be conservative** - overestimate SD, add buffer to sample size
 4.  **Consider practical significance** - not just statistical
 5.  **Report your analysis** - document all assumptions
@@ -1141,70 +1901,89 @@ pwr.t.test(n = 50, sig.level = 0.05, power = 0.80,
 7.  **Use confidence intervals** to show uncertainty
 8.  **Consider feasibility** - balance power with resources
 
+
+<!-- # Resources for power and sample size calculations -->
+
+<!-- ## Additional resources -->
+
+<!-- **R documentation:** -->
+
+<!-- -   `?pwr.t.test` - help for power calculations -->
+<!-- -   PASS documentation: <https://www.ncss.com/software/pass/pass-documentation/#Means> -->
+
+<!-- \ -->
+
+<!-- **Interactive tools:** -->
+
+<!-- -   <https://rpsychologist.com/d3/NHST/> - Visualize power -->
+<!-- -   <https://www.statmethods.net/stats/power.html> - Power analysis examples -->
+
+<!-- \ -->
+
+<!-- **Textbook:** -->
+
+<!-- -   Section 5.4: Power and Sample Size for means -->
+
+<!-- \ -->
+
+<!-- **Further reading:** -->
+
+<!-- -   Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences* -->
+<!-- -   Lenth, R. V. (2001). "Some Practical Guidelines for Effective Sample Size Determination" -->
+
+
+# Resources for power and sample size calculations
+
+## More software for power and sample size calculations: PASS
+
+-   PASS is a very powerful (& expensive) software that does power and sample size calculations for many advanced statistical modeling techniques.
+    -   Even if you don't have access to PASS, their [documentation](https://www.ncss.com/software/pass/pass-documentation/) is very good and free online.
+    -   Documentation includes formulas and references.
+    -   PASS documentation for powering [means](https://www.ncss.com/software/pass/pass-documentation/#Means)
+        -   One mean, paired means, two independent means
+-   One-sample t-test documentation: <https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/One-Sample_T-Tests.pdf>
+
+## OCTRI-BERD power & sample size presentations
+
+::: {style="font-size: 90%;"}
+-   **Power and Sample Size 101**
+    -   Presented by Meike Niederhausen; April 13, 2023
+    -   Slides: <http://bit.ly/PSS101-BERD-April2023>
+    -   [Recording](https://echo360.org/media/10f37fa6-7196-4525-bd64-6b9fcca60ac0/public)
+-   **Power and Sample Size for Clinical Trials: An Introduction**
+    -   Presented by Yiyi Chen; Feb 18, 2021
+    -   Slides: <http://bit.ly/PSS-ClinicalTrials>
+    -   [Recording](https://echo360.org/lesson/9a21deb8-258d-4305-bdc9-7effdc35e719/classroom)
+-   **Planning a Study with Power and Sample Size Considerations in Mind**
+    -   Presented by David Yanez; May 29, 2019
+    -   [Slides](https://www.ohsu.edu/sites/default/files/2019-12/PowerAndSampleSize_29MAY2019.pdf)
+    -   [Recording](https://echo360.org/lesson/44c9a3e9-b8ec-4042-84d8-4758cc779a1f/classroom)
+-   **Power and Sample Size Simulations in R**
+    -   Presented by Robin Baudier; Sept 21, 2023
+    -   [Slides](https://www.slideshare.net/ssuser84c78e/octri-pss-simulations-in-r-seminarpdf)
+    -   [Recording](https://echo360.org/media/12e6e603-13f9-4b50-bf76-787185acdfce/public)
+:::
+
+
 ## Additional resources
 
-**R documentation:**
-
--   `?pwr.t.test` - help for power calculations
--   PASS documentation: <https://www.ncss.com/software/pass/pass-documentation/#Means>
-
 \
+
+**Good paper**
+
+- [Sample size, power and effect size revisited: simplified and practical approaches in pre-clinical, clinical and laboratory studies (Serdar et al.)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7745163/)
+
+\ 
 
 **Interactive tools:**
 
--   <https://rpsychologist.com/d3/NHST/> - Visualize power
--   <https://www.statmethods.net/stats/power.html> - Power analysis examples
+-   [Understanding Statistical Power and Significance Testing](https://rpsychologist.com/d3/NHST/)
 
 \
 
-**Textbook:**
+**Free software:**
 
--   Section 5.4: Power and Sample Size for means
+-   [Sample size calculators from UCSF](https://sample-size.net/calculator-finder)
+-   [CRAB (Cancer Research and Biostatistics) Statistical Tools](https://stattools.crab.org/)
+-   [G*Power - free, open source power analysis software](https://stats.oarc.ucla.edu/other/gpower/)
 
-\
-
-**Further reading:**
-
--   Cohen, J. (1988). *Statistical Power Analysis for the Behavioral Sciences*
--   Lenth, R. V. (2001). "Some Practical Guidelines for Effective Sample Size Determination"
-
-## Looking ahead
-
-**Next time:**
-
--   Comparing two proportions
--   Chi-square tests
--   Categorical data analysis
-
-\
-
-**How today connects:**
-
--   Power applies to ALL hypothesis tests (not just t-tests!)
--   Same principles for proportions, chi-square, regression, etc.
--   Understanding power helps you critically evaluate research
--   Essential skill for your own research career
-
-\
-
-**Practice:**
-
--   Homework will have power calculation problems
--   Try different scenarios in R
--   Calculate power for studies you read about
-
-## Questions?
-
-**Key questions to ask yourself:**
-
--   Can you explain the four components of hypothesis testing?
--   What's the difference between Type I and Type II errors?
--   Why do we care about power?
--   How do you calculate sample size for a t-test?
--   When is a study underpowered?
-
-\
-
-**Office hours:** Come discuss your research study designs!
-
-**Next class:** We'll start talking about categorical data and proportions

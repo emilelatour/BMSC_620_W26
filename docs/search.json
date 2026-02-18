@@ -4349,14 +4349,14 @@
     "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#the-question-we-havent-answered-yet",
     "title": "Power and Sample Size",
     "section": "The question we haven’t answered yet",
-    "text": "The question we haven’t answered yet\nScenario: You’re planning a new study\n\n\n\n\nQuestions you need to answer:\n\nHow many participants do I need?\nCan I detect the effect I’m looking for?\nWhat if I can only recruit 20 people?\nIs my study worth running?\n\n\nThis is about study design:\n\nBefore collecting data\nBefore spending time/money\nBefore asking participants to volunteer\nMaking sure your study can answer your question\n\n\n\n\nToday: We learn how to design studies with adequate power to detect real effects"
+    "text": "The question we haven’t answered yet\n\n\nScenario: You’re planning a new study\n\n\n\n\nQuestions you need to answer:\n\nHow many participants do I need?\nCan I detect the effect I’m looking for?\nWhat if I can only recruit 20 people?\nIs my study worth running?\n\n\nThis is about study design:\n\nBefore collecting data\nBefore spending time/money\nBefore asking participants to volunteer\nMaking sure your study can answer your question\n\n\n\n\nToday: We learn how to design studies with adequate power to detect real effects"
   },
   {
     "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#motivating-example-the-caffeine-study",
     "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#motivating-example-the-caffeine-study",
     "title": "Power and Sample Size",
     "section": "Motivating example: The caffeine study",
-    "text": "Motivating example: The caffeine study\nResearch Question: Does caffeine increase finger tapping speed?\n\n\nStudy Design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl group: Decaffeinated coffee (n=35)\nCaffeine group: Coffee with 200mg caffeine (n=35)\n\nAfter 2 hours, measure taps per minute\n\n\n\nResults: The caffeine group had significantly higher taps/min (p &lt; 0.001)\n\n\nBut what if we had asked BEFORE running the study:\n\n“We can only recruit 20 per group - is that enough?”\n“What difference can we actually detect with this sample size?”\n“How likely are we to find an effect if it’s really there?”\n\nThese questions are about POWER - and that’s what we’ll learn today"
+    "text": "Motivating example: The caffeine study\nResearch Question: Does caffeine increase finger tapping speed?\n\n\nStudy Design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl group: Decaffeinated coffee (n=35)\nCaffeine group: Coffee with 200mg caffeine (n=35)\n\nAfter 2 hours, measure taps per minute\n\n\n\nResults: The caffeine group had significantly higher taps/min (p &lt; 0.001)"
   },
   {
     "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#what-affects-our-ability-to-detect-an-effect",
@@ -4440,7 +4440,7 @@
     "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#interpreting-cohens-d",
     "title": "Power and Sample Size",
     "section": "Interpreting Cohen’s d",
-    "text": "Interpreting Cohen’s d\nCohen’s guidelines for effect size:\n\n\n\nEffect Size\n\\(d\\) value\nInterpretation\n\n\n\n\nSmall\n0.2\nDifficult to detect, subtle effect\n\n\nMedium\n0.5\nModerate effect, visible to careful observer\n\n\nLarge\n0.8\nLarge effect, obvious to casual observer\n\n\n\n\n\nExample interpretations:\n\nd = 0.2: Treatment shifts mean by 0.2 standard deviations\nd = 0.5: Treatment shifts mean by half a standard deviation\nd = 0.8: Treatment shifts mean by 0.8 standard deviations\n\n\n\nImportant: These are just guidelines! What’s “small” or “large” depends on context\n\nIn medicine: Small effects can be clinically important\nIn psychology: Large effects might indicate measurement problems"
+    "text": "Interpreting Cohen’s d\nCohen’s guidelines for effect size:\n\n\n\n\n\n\n\n\nEffect Size\n\\(d\\) value\nInterpretation\n\n\n\n\nSmall\n0.2\nDifficult to detect, subtle effect\n\n\nMedium\n0.5\nModerate effect, visible to careful observer\n\n\nLarge\n0.8\nLarge effect, obvious to casual observer\n\n\n\n\n\nExample interpretations:\n\nd = 0.2: Treatment shifts mean by 0.2 standard deviations\nd = 0.5: Treatment shifts mean by half a standard deviation\nd = 0.8: Treatment shifts mean by 0.8 standard deviations\n\n\n\nImportant: These are just guidelines! What’s “small” or “large” depends on context\n\nIn medicine: Small effects can be clinically important\nIn psychology: Large effects might indicate measurement problems"
   },
   {
     "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#the-pwr-package-in-r",
@@ -7056,5 +7056,761 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#not-sure-where-to-go-yet",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#not-sure-where-to-go-yet",
+    "title": "Power and Sample Size",
+    "section": "Not sure where to go yet",
+    "text": "Not sure where to go yet\n\n\n\n\n\n\n\n\n\n\nOne-sample\nIndependent two-sample\nPaired sample\n\n\n\n\nExample\nBody temp: Population mean is 98.6°F, is sample different?\nCaffeine: taps/min between caffeine and non-caffeine group\nVegetarian diet: cholesterol before and after\n\n\nSample statistic\n\\(\\bar{x}\\)\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\\(\\bar{x}_d\\)\n\n\nPopulation parameter\n\\(\\mu\\)\n\\(\\mu_1 - \\mu_2\\)\n\\(\\mu_d\\) or \\(\\delta\\)\n\n\nPossible hypothesis tests\n\\(H_0: \\mu = \\mu_0\\) | \\(H_0: \\mu_1 = \\mu_2\\) or \\(\\mu_1 - \\mu_2 = 0\\) | \\(H_0: \\mu_d = 0\\) or \\(\\delta = 0\\) | | | \\(H_A: \\mu \\neq \\mu_0\\) (or \\(&lt;\\), \\(&gt;\\)) | \\(H_A: \\mu_1 \\neq \\mu_2\\) (or \\(&lt;\\), \\(&gt;\\)) | \\(H_A: \\mu_d \\neq 0\\) (or \\(&lt;\\), \\(&gt;\\)) |\n\n\nStandard error\n\\(SE = \\frac{s}{\\sqrt{n}}\\)\n\\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(SE = \\frac{s_d}{\\sqrt{n}}\\)\n\n\nTest statistic\n\\(t = \\frac{\\bar{x} - \\mu_0}{SE}\\)\n\\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{SE}\\)\n\\(t = \\frac{\\bar{x}_d - 0}{SE}\\)\n\n\nConfidence intervals\n\\(\\bar{x} \\pm t^* \\times SE\\)\n\\((\\bar{x}_1 - \\bar{x}_2) \\pm t^* \\times SE\\)\n\\(\\bar{x}_d \\pm t^* \\times SE\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#quick-reference-everything-weve-covered",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#quick-reference-everything-weve-covered",
+    "title": "Power and Sample Size",
+    "section": "Quick reference: Everything we’ve covered",
+    "text": "Quick reference: Everything we’ve covered\n\n\n\n\n\n\n\n\n\n\n\n\nOne-sample\nIndependent two-sample\nPaired sample\n\n\n\n\nExample\nBody temp: Population mean is 98.6°F, is sample different?\nCaffeine: taps/min between caffeine and non-caffeine group\nVegetarian diet: cholesterol before and after\n\n\nSample statistic\n\\(\\bar{x}\\)\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\\(\\bar{x}_d\\)\n\n\nPopulation parameter\n\\(\\mu\\)\n\\(\\mu_1 - \\mu_2\\)\n\\(\\mu_d\\) or \\(\\delta\\)\n\n\nPossible hypothesis tests\n\\(H_0: \\mu = \\mu_0\\)\n\\(H_0: \\mu_1 = \\mu_2\\) or \\(\\mu_1 - \\mu_2 = 0\\)\n\\(H_0: \\mu_d = 0\\) or \\(\\delta = 0\\)\n\n\nStandard error\n\\(SE = \\frac{s}{\\sqrt{n}}\\)\n\\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(SE = \\frac{s_d}{\\sqrt{n}}\\)\n\n\nTest statistic\n\\(t = \\frac{\\bar{x} - \\mu_0}{SE}\\)\n\\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{SE}\\)\n\\(t = \\frac{\\bar{x}_d - 0}{SE}\\)\n\n\nConfidence intervals\n\\(\\bar{x} \\pm t^* \\times SE\\)\n\\((\\bar{x}_1 - \\bar{x}_2) \\pm t^* \\times SE\\)\n\\(\\bar{x}_d \\pm t^* \\times SE\\)\n\n\n\n\n\nThis summarizes all three test types - we’ll use these concepts as we think about power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#the-questions-we-should-have-asked-first",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_2.html#the-questions-we-should-have-asked-first",
+    "title": "Power and Sample Size",
+    "section": "The questions we SHOULD have asked first",
+    "text": "The questions we SHOULD have asked first\nBut what if we had asked BEFORE running the study:\n\n“We can only recruit 20 per group - is that enough?”\n“What difference can we actually detect with this sample size?”\n“How likely are we to find an effect if it’s really there?”\n\n\n\nThese questions are about POWER - and that’s what we’ll learn today\n\n\n\n\n\n\n\n\nNote\n\n\nPower analysis happens before data collection, not after!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#roadmap-for-today",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#roadmap-for-today",
+    "title": "Power and Sample Size",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: The Four Components\n\nWhat affects our ability to detect effects?\nSignificance level (\\(\\alpha\\))\nSample size (\\(n\\))\nEffect size\nPower (\\(1-\\beta\\))\n\nPart 2: Errors in Hypothesis Testing\n\nType I errors (\\(\\alpha\\))\nType II errors (\\(\\beta\\))\nPower as “correct detection”\nVisualizing errors with distributions\n\n\nPart 3: Calculating Power and Sample Size\n\nIntroduction to Cohen’s d\nUsing the pwr package in R\nOne-sample t-test examples\nTwo-sample t-test examples\n\nPart 4: Study Design Applications\n\nPlanning studies with power in mind\nInterpreting existing study results\nTrade-offs and practical considerations"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#where-weve-been-hypothesis-testing",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#where-weve-been-hypothesis-testing",
+    "title": "Power and Sample Size",
+    "section": "Where we’ve been: Hypothesis testing",
+    "text": "Where we’ve been: Hypothesis testing\nOver the past few lectures, we’ve learned to:\n\nUse confidence intervals to estimate population parameters\nConduct hypothesis tests to evaluate claims about parameters\nWork with three types of t-tests:\n\nOne-sample (compare to known value)\nPaired (compare before/after)\nTwo independent samples (compare groups)\n\n\n\n\nIn each case, we:\n\nCollected data\nCalculated a test statistic\nGot a p-value\nMade a conclusion (reject \\(H_0\\) or fail to reject)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#quick-reference-everything-weve-covered",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#quick-reference-everything-weve-covered",
+    "title": "Power and Sample Size",
+    "section": "Quick reference: Everything we’ve covered",
+    "text": "Quick reference: Everything we’ve covered\n\n\n\n\n\n\n\n\n\n\n\n\nOne-sample\nIndependent two-sample\nPaired sample\n\n\n\n\nExample\nBody temp: Population mean is 98.6°F, is sample different?\nCaffeine: taps/min between caffeine and non-caffeine group\nVegetarian diet: cholesterol before and after\n\n\nSample statistic\n\\(\\bar{x}\\)\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\\(\\bar{x}_d\\)\n\n\nPopulation parameter\n\\(\\mu\\)\n\\(\\mu_1 - \\mu_2\\)\n\\(\\mu_d\\) or \\(\\delta\\)\n\n\nPossible hypothesis tests\n\\(H_0: \\mu = \\mu_0\\)\n\\(H_0: \\mu_1 = \\mu_2\\) or \\(\\mu_1 - \\mu_2 = 0\\)\n\\(H_0: \\mu_d = 0\\) or \\(\\delta = 0\\)\n\n\nStandard error\n\\(SE = \\frac{s}{\\sqrt{n}}\\)\n\\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(SE = \\frac{s_d}{\\sqrt{n}}\\)\n\n\nTest statistic\n\\(t = \\frac{\\bar{x} - \\mu_0}{SE}\\)\n\\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{SE}\\)\n\\(t = \\frac{\\bar{x}_d - 0}{SE}\\)\n\n\nConfidence intervals\n\\(\\bar{x} \\pm t^* \\times SE\\)\n\\((\\bar{x}_1 - \\bar{x}_2) \\pm t^* \\times SE\\)\n\\(\\bar{x}_d \\pm t^* \\times SE\\)\n\n\n\n\n\nThis summarizes all three test types - we’ll use these concepts as we think about power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-question-we-havent-answered-yet",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-question-we-havent-answered-yet",
+    "title": "Power and Sample Size",
+    "section": "The question we haven’t answered yet",
+    "text": "The question we haven’t answered yet\n\n\nScenario: You’re planning a new study\n\n\n\n\nQuestions you need to answer:\n\nHow many participants do I need?\nCan I detect the effect I’m looking for?\nWhat if I can only recruit 20 people?\nIs my study worth running?\n\n\nThis is about study design:\n\nBefore collecting data\nBefore spending time/money\nBefore asking participants to volunteer\nMaking sure your study can answer your question\n\n\n\n\nToday: We learn how to design studies with adequate power to detect real effects"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#motivating-example-the-caffeine-study",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#motivating-example-the-caffeine-study",
+    "title": "Power and Sample Size",
+    "section": "Motivating example: The caffeine study",
+    "text": "Motivating example: The caffeine study\nResearch Question: Does caffeine increase finger tapping speed?\n\n\nStudy Design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl group: Decaffeinated coffee (n=35)\nCaffeine group: Coffee with 200mg caffeine (n=35)\n\nAfter 2 hours, measure taps per minute\n\n\n\nResults: The caffeine group had significantly higher taps/min (p &lt; 0.001)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-questions-we-should-have-asked-first",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-questions-we-should-have-asked-first",
+    "title": "Power and Sample Size",
+    "section": "The questions we SHOULD have asked first",
+    "text": "The questions we SHOULD have asked first\nBut what if we had asked BEFORE running the study:\n\n“We can only recruit 20 per group - is that enough?”\n“What difference can we actually detect with this sample size?”\n“How likely are we to find an effect if it’s really there?”\n\n\n\nThese questions are about POWER - and that’s what we’ll learn today\n\n\n\n\n\n\n\n\nNote\n\n\nPower analysis happens before data collection, not after!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-affects-our-ability-to-detect-an-effect",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-affects-our-ability-to-detect-an-effect",
+    "title": "Power and Sample Size",
+    "section": "What affects our ability to detect an effect?",
+    "text": "What affects our ability to detect an effect?\n\n\nScenario: Imagine two populations that differ in their mean tapping speed\n\nQuestion: When we take samples from these groups, will it be easy to tell them apart?\nAnswer: It depends on several factors…"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#scenario-1-small-standard-deviation",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#scenario-1-small-standard-deviation",
+    "title": "Power and Sample Size",
+    "section": "Scenario 1: Small standard deviation",
+    "text": "Scenario 1: Small standard deviation\n\n\nSame difference (5 taps/min), but less variability (SD = 1 instead of 2)\n\nObservation: Less overlap between distributions makes the difference easier to detect!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#scenario-2-larger-difference",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#scenario-2-larger-difference",
+    "title": "Power and Sample Size",
+    "section": "Scenario 2: Larger difference",
+    "text": "Scenario 2: Larger difference\nLarger difference (10 taps/min instead of 5), same variability (SD = 2)\n\n\n\nObservation: A larger true difference is easier to detect!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-four-components-in-equilibrium",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-four-components-in-equilibrium",
+    "title": "Power and Sample Size",
+    "section": "The four components in equilibrium",
+    "text": "The four components in equilibrium\n\n\nIn any hypothesis test, four quantities are mathematically related:\n\n\n\n\n\n1. Significance level (\\(\\alpha\\))\n\n\n\nProbability of Type I error\nUsually set at 0.05\nSet before collecting data\nDetermines rejection region\n\n\n\n\n\n\n\n2. Power (\\(1-\\beta\\))\n\n\n\nProbability of detecting a real effect\nTypically want 80% or 90%\nWhat we calculate given the others\nThe probability of “correctly rejecting”\n\n\n\n\n\n\n\n\n3. Sample size (\\(n\\))\n\n\n\nNumber of observations\nLarger \\(n\\) → smaller SE\nOften what we’re trying to determine\nConstrained by time, cost, ethics\n\n\n\n\n\n\n\n4. Effect size\n\n\n\nDifference we want to detect\nRelative to variability\nOften measured by Cohen’s d\nBased on pilot data or literature\n\n\n\n\n\nKey insight: Given any 3 pieces, we can solve for the 4th."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#type-i-and-type-ii-errors",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#type-i-and-type-ii-errors",
+    "title": "Power and Sample Size",
+    "section": "Type I and Type II errors",
+    "text": "Type I and Type II errors\n\n\nRemember: Hypothesis tests can make mistakes in two ways\n\n\n\n\n\nType I Error (False Positive)\n\n\nDefinition: Reject \\(H_0\\) when it’s actually true\nNotation: Probability of making a Type I error = \\(\\alpha\\)\nExample: Conclude caffeine increases tapping when it really doesn’t\nControl: Set \\(\\alpha\\) before study (usually 0.05)\nAlso called: False positive, \\(\\alpha\\) error\n\n\n\n\n\n\n\nType II Error (False Negative)\n\n\nDefinition: Fail to reject \\(H_0\\) when it’s false\nNotation: Probability of making a Type II error = \\(\\beta\\)\nExample: Fail to detect caffeine effect when it really exists\nControl: Increase sample size, decrease variability\nAlso called: False negative, \\(\\beta\\) error\n\n\n\n\n\n\nTrade-off: Decreasing one type of error often increases the other!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#power-the-probability-of-correctly-detecting-an-effect",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#power-the-probability-of-correctly-detecting-an-effect",
+    "title": "Power and Sample Size",
+    "section": "Power: The probability of correctly detecting an effect",
+    "text": "Power: The probability of correctly detecting an effect\n\n\n\nPower Definition\n\n\nPower = \\(1 - \\beta\\) = Probability of correctly rejecting \\(H_0\\) when it’s false\n\nThe probability of detecting an effect that actually exists\nTypically want power ≥ 0.80 (80%)\nSome fields require 0.90 (90%)\n\n\n\n\n\n\n\n\nWhy 80%? This is a convention balancing:\n\nReasonable chance of detecting real effects\nPractical constraints on sample size\nCost and feasibility\n\n\nThink of it this way:\n\nHigh power = good “detector” - likely to find effect if it exists\nLow power = bad “detector” - might miss real effects"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-complete-picture",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-complete-picture",
+    "title": "Power and Sample Size",
+    "section": "The complete picture",
+    "text": "The complete picture\n\n\n\n\n\n\nReality\n\n\n\n\nTest decision\n\n\n\\(H_0\\) True\n\n\n\\(H_1\\) True\n\n\n\n\n\n\nReject \\(H_0\\)\n\n\nType I Error (\\(\\alpha\\))\n\n\nPower (\\(1-\\beta\\)) ✓\n\n\n\n\nFail to reject \\(H_0\\)\n\n\nCorrect (\\(1-\\alpha\\)) ✓\n\n\nType II Error (\\(\\beta\\))\n\n\n\n\n\n\n\n\n\n\nCorrect decisions:\n\n\\(1 - \\alpha\\): Confidence. Correctly fail to reject when \\(H_0\\) is true)\n\\(1 - \\beta\\): Power (correctly reject \\(H_0\\) when \\(H_1\\) is true)\n\n\n\nErrors:\n\n\\(\\alpha\\): Type I error rate (false positive)\n\\(\\beta\\): Type II error rate (false negative)\n\n\n\nWhat we control in study design: We typically fix \\(\\alpha\\) at 0.05 and choose \\(n\\) to achieve desired power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-these-concepts",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-these-concepts",
+    "title": "Power and Sample Size",
+    "section": "Visualizing these concepts",
+    "text": "Visualizing these concepts\n\nKey observations:\n\nType I error (\\(\\alpha\\)): Area in tails under null distribution\nType II error (\\(\\beta\\)): Area to left of critical value under alternative\nPower (\\(1-\\beta\\)): Area to right of critical value under alternative"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-increases-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-increases-power",
+    "title": "Power and Sample Size",
+    "section": "What increases power?",
+    "text": "What increases power?\nPower increases when:\n\n\n1. Larger sample size (\\(n\\))\n\nReduces standard error\nNarrows sampling distributions\nMakes distributions more separated\n\n\n\n2. Larger effect size\n\nGreater true difference\nMore separation between null and alternative\nEasier to distinguish groups\n\n\n3. Less variability\n\nSmaller population SD (\\(\\sigma\\))\nTighter distributions\nLess overlap\n\n\n\n4. Higher significance level\n\nLarger \\(\\alpha\\) (but increases Type I error!)\nUsually not recommended\nTrade-off between errors\n\n\n\n\nPractical implications:\n\nWe usually have most control over sample size\nCan sometimes reduce variability through better measurement\nEffect size is determined by nature/treatment\nSignificance level is conventionally fixed at 0.05"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#why-do-power-calculations",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#why-do-power-calculations",
+    "title": "Power and Sample Size",
+    "section": "Why do power calculations?",
+    "text": "Why do power calculations?\nBefore collecting data (prospective):\n\nDetermine required sample size for adequate power\nJustify sample size in grant proposals/protocols\nAvoid underpowered studies that waste resources\nEnsure ethical use of participants\n\n\n\nAfter collecting data (post-hoc):\n\nUnderstand power of completed study\nInterpret non-significant results\nPlan follow-up studies\n\n\n\n\n\n\n\n\n\nImportant Note\n\n\nPost-hoc power calculations for non-significant results can be misleading! Better to report confidence intervals showing uncertainty."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#cohens-d-standardized-effect-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#cohens-d-standardized-effect-size",
+    "title": "Power and Sample Size",
+    "section": "Cohen’s d: Standardized effect size",
+    "text": "Cohen’s d: Standardized effect size\nProblem: Effect sizes are in original units (e.g., taps/min, mmHg, °F)\n\nHard to compare across studies\nCan’t have general guidelines\n\n\n\nSolution: Cohen’s d standardizes the effect size\n\n\n\n\n\nCohen’s d Formulas\n\n\nOne-sample test (or paired): \\[d = \\frac{\\bar{x} - \\mu_0}{s} \\quad \\text{or} \\quad d = \\frac{\\bar{x}_d - \\delta_0}{s_d}\\]\nTwo-sample test: \\[d = \\frac{\\bar{x}_1 - \\bar{x}_2}{s_{\\text{pooled}}}\\]\nwhere \\(s_{\\text{pooled}} = \\sqrt{\\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#interpreting-cohens-d",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#interpreting-cohens-d",
+    "title": "Power and Sample Size",
+    "section": "Interpreting Cohen’s d",
+    "text": "Interpreting Cohen’s d\nCohen’s guidelines for effect size:\n\n\n\n\n\n\n\n\nEffect Size\n\\(d\\) value\nInterpretation\n\n\n\n\nSmall\n0.2\nDifficult to detect, subtle effect\n\n\nMedium\n0.5\nModerate effect, visible to careful observer\n\n\nLarge\n0.8\nLarge effect, obvious to casual observer\n\n\n\n\n\nExample interpretations:\n\nd = 0.2: Treatment shifts mean by 0.2 standard deviations\nd = 0.5: Treatment shifts mean by half a standard deviation\nd = 0.8: Treatment shifts mean by 0.8 standard deviations\n\n\n\nImportant: These are just guidelines! What’s “small” or “large” depends on context\n\nIn medicine: Small effects can be clinically important\nIn psychology: Large effects might indicate measurement problems"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-pwr-package-in-r",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-pwr-package-in-r",
+    "title": "Power and Sample Size",
+    "section": "The pwr package in R",
+    "text": "The pwr package in R\nWe’ll use the pwr package for power calculations\n\nlibrary(pwr)\n\n\n\nKey function: pwr.t.test()\n\nWorks for one-sample, two-sample, and paired t-tests\nSpecify all parameters except one\nReturns the missing parameter\n\n\n\nFunction structure:\n\npwr.t.test(n = NULL,           # Sample size per group\n           d = NULL,           # Cohen's d effect size  \n           sig.level = 0.05,   # Significance level (α)\n           power = NULL,       # Power (1-β)\n           type = \"two.sample\", # or \"one.sample\", \"paired\"\n           alternative = \"two.sided\") # or \"less\", \"greater\"\n\nLeave out the parameter you want to calculate!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-1-one-sample-test---finding-sample-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-1-one-sample-test---finding-sample-size",
+    "title": "Power and Sample Size",
+    "section": "Example 1: One-sample test - Finding sample size",
+    "text": "Example 1: One-sample test - Finding sample size\nScenario: Body temperature study\n\nWe believe true mean is 98.25°F (vs. claimed 98.6°F)\nPilot data suggests SD ≈ 0.73°F\nWant 80% power with \\(\\alpha = 0.05\\)\nQuestion: How many people do we need?\n\n\n\nStep 1: Calculate Cohen’s d\n\n# Effect size\nmu0 &lt;- 98.6      # Null value\nmu_true &lt;- 98.25 # What we believe is true\ns &lt;- 0.73        # Standard deviation from pilot data\n\nd &lt;- (mu_true - mu0) / s\nd\n\n[1] -0.4794521\n\n\nInterpretation: The true mean differs from null by 0.48 standard deviations"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-1-one-sample-test---finding-sample-size-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-1-one-sample-test---finding-sample-size-cont.",
+    "title": "Power and Sample Size",
+    "section": "Example 1: One-sample test - Finding sample size (cont.)",
+    "text": "Example 1: One-sample test - Finding sample size (cont.)\nStep 2: Use pwr.t.test() to find required sample size\n\nresult &lt;- pwr.t.test(\n  d = (98.6 - 98.25) / 0.73,  # Cohen's d\n  sig.level = 0.05,            # α = 0.05\n  power = 0.80,                # Want 80% power\n  type = \"one.sample\",         # One-sample test\n  alternative = \"two.sided\"    # Two-sided test\n)\n\nresult\n\n\n     One-sample t test power calculation \n\n              n = 36.11196\n              d = 0.4794521\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\nConclusion: We need 37 participants to have 80% power to detect this difference at \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-the-power-curve",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-the-power-curve",
+    "title": "Power and Sample Size",
+    "section": "Visualizing the power curve",
+    "text": "Visualizing the power curve\n\nplot(result)\n\n\nThe curve shows: As sample size increases, power increases (holding other factors constant)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-2-one-sample-test---calculating-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-2-one-sample-test---calculating-power",
+    "title": "Power and Sample Size",
+    "section": "Example 2: One-sample test - Calculating power",
+    "text": "Example 2: One-sample test - Calculating power\nScenario: Same body temperature study, but we already collected data\n\nn = 130 participants\nEffect size: d = 0.479\n\\(\\alpha = 0.05\\)\nQuestion: What power did we have?\n\n\n\n\nresult_power &lt;- pwr.t.test(\n  n = 130,                     # Sample size we collected\n  d = (98.6 - 98.25) / 0.73,  # Cohen's d\n  sig.level = 0.05,            # α = 0.05\n  type = \"one.sample\",\n  alternative = \"two.sided\"\n)\n\nresult_power\n\n\n     One-sample t test power calculation \n\n              n = 130\n              d = 0.4794521\n      sig.level = 0.05\n          power = 0.9997354\n    alternative = two.sided\n\n\n\n\nConclusion: With n=130, we had 100% power! (Very high - almost certain to detect the effect if it exists)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-3-two-sample-test---finding-sample-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-3-two-sample-test---finding-sample-size",
+    "title": "Power and Sample Size",
+    "section": "Example 3: Two-sample test - Finding sample size",
+    "text": "Example 3: Two-sample test - Finding sample size\nScenario: Caffeine tapping study\n\nWant to detect 2 taps/min difference between groups\nExpect SD ≈ 2.6 taps/min in each group\nWant 80% power with \\(\\alpha = 0.05\\)\nQuestion: How many participants per group?\n\n\n\nStep 1: Calculate Cohen’s d\n\ndiff &lt;- 2      # Difference we want to detect\nsd_pooled &lt;- 2.6  # Expected SD in each group\n\nd &lt;- diff / sd_pooled\nd\n\n[1] 0.7692308\n\n\n\n\nStep 2: Calculate required sample size\n\nresult_caff &lt;- pwr.t.test(\n  d = d,\n  sig.level = 0.05,\n  power = 0.80,\n  type = \"two.sample\",        # Two independent groups\n  alternative = \"two.sided\"\n)\n\nresult_caff\n\n\n     Two-sample t test power calculation \n\n              n = 27.52331\n              d = 0.7692308\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nConclusion: Need 28 participants per group (total n = 56)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-4-two-sample-test---calculating-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#example-4-two-sample-test---calculating-power",
+    "title": "Power and Sample Size",
+    "section": "Example 4: Two-sample test - Calculating power",
+    "text": "Example 4: Two-sample test - Calculating power\nScenario: We ran the caffeine study with 35 per group\n\nEffect size: d = 0.77\n\\(\\alpha = 0.05\\)\nQuestion: What power did we have?\n\n\n\n\nresult_caff_power &lt;- pwr.t.test(\n  n = 35,\n  d = 2 / 2.6,\n  sig.level = 0.05,\n  type = \"two.sample\",\n  alternative = \"two.sided\"\n)\n\nresult_caff_power\n\n\n     Two-sample t test power calculation \n\n              n = 35\n              d = 0.7692308\n      sig.level = 0.05\n          power = 0.8872805\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\nConclusion: With n=35 per group, we had 88.7% power (excellent!)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#one-sided-vs-two-sided-tests-and-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#one-sided-vs-two-sided-tests-and-power",
+    "title": "Power and Sample Size",
+    "section": "One-sided vs two-sided tests and power",
+    "text": "One-sided vs two-sided tests and power\nTwo-sided test: \\(H_A: \\mu \\neq \\mu_0\\) (most common)\nOne-sided test: \\(H_A: \\mu &gt; \\mu_0\\) or \\(H_A: \\mu &lt; \\mu_0\\)\n\n\nPower comparison:\n\n# Two-sided test\ntwo_sided &lt;- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80, \n                        type = \"two.sample\", alternative = \"two.sided\")\n\n# One-sided test  \none_sided &lt;- pwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,\n                        type = \"two.sample\", alternative = \"greater\")\n\ncat(\"Two-sided requires n =\", ceiling(two_sided$n), \"per group\\n\")\n\nTwo-sided requires n = 64 per group\n\ncat(\"One-sided requires n =\", ceiling(one_sided$n), \"per group\\n\")\n\nOne-sided requires n = 51 per group\n\n\n\n\nKey point: One-sided tests require smaller sample sizes BUT:\n\nOnly justified when direction is known a priori\nCan’t detect effects in “wrong” direction\nGenerally not recommended unless strong scientific justification"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-power-sample-size-trade-off",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#the-power-sample-size-trade-off",
+    "title": "Power and Sample Size",
+    "section": "The power-sample size trade-off",
+    "text": "The power-sample size trade-off\n\n\nIncreasing sample size:\n✓ Increases power\n✓ More likely to detect real effects\n✓ More precise estimates\n\n\n✗ More expensive\n✗ Takes longer\n✗ May not be feasible\n\nPractical constraints:\n\nBudget limitations\nTime constraints\nAvailable participants\nEthical considerations\nFeasibility\n\n\n\nThe balance: Choose smallest \\(n\\) that gives adequate power (usually 80-90%)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#common-mistakes-in-power-analysis",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#common-mistakes-in-power-analysis",
+    "title": "Power and Sample Size",
+    "section": "Common mistakes in power analysis",
+    "text": "Common mistakes in power analysis\n\n\n\n\n\n\nMistake 1: Post-hoc power for non-significant results\n\n\nDon’t do this: “Our result was non-significant (p=0.12). Let me calculate power…”\nWhy it’s wrong: Post-hoc power for non-significant results is always low - tells you nothing!\nDo instead: Report confidence interval showing uncertainty\n\n\n\n\n\n\n\n\n\n\n\nMistake 2: Using observed effect size for power\n\n\nDon’t do this: Calculate power using the effect size you observed\nWhy it’s wrong: If result was non-significant, observed effect is likely underestimate\nDo instead: Use effect size from pilot data, literature, or smallest clinically meaningful effect"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#common-mistakes-continued",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#common-mistakes-continued",
+    "title": "Power and Sample Size",
+    "section": "Common mistakes continued",
+    "text": "Common mistakes continued\n\n\n\n\n\n\nMistake 3: Ignoring practical significance\n\n\nDon’t do this: Design study to detect any statistically significant difference\nWhy it’s wrong: Tiny, clinically meaningless effects can be significant with large n\nDo instead: Base power on clinically/scientifically meaningful effect size\n\n\n\n\n\n\n\n\n\n\n\nMistake 4: Not considering variability\n\n\nDon’t do this: Assume optimistic (low) SD when planning sample size\nWhy it’s wrong: Real data often more variable → study underpowered\nDo instead: Use conservative (higher) SD estimate, or add 10-20% to planned n as buffer"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#real-world-example-a-cautionary-tale",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#real-world-example-a-cautionary-tale",
+    "title": "Power and Sample Size",
+    "section": "Real-world example: A cautionary tale",
+    "text": "Real-world example: A cautionary tale\nStudy: New drug to lower blood pressure\n\nPowered to detect 5 mmHg reduction\nAssumed SD = 10 mmHg (from literature)\nCalculated need for n = 64 per group\nOnly recruited n = 50 per group (budget constraints)\nActual SD in study was 12 mmHg (more variability than expected)\n\n\n\nResult:\n\nObserved reduction: 4 mmHg (close to target!)\nP-value = 0.09 (not significant at 0.05 level)\nActual power was only 58% (not the planned 80%)\n\n\n\nLessons:\n\nSmall deviations from plan can substantially reduce power\nUnder-recruitment is very common - build in buffer\nConservative SD estimates are wise"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#when-is-a-study-underpowered",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#when-is-a-study-underpowered",
+    "title": "Power and Sample Size",
+    "section": "When is a study “underpowered”?",
+    "text": "When is a study “underpowered”?\nConventionally:\n\nPower &lt; 50%: Severely underpowered\nPower 50-70%: Underpowered\nPower 70-80%: Marginally adequate\nPower 80-90%: Good\nPower &gt; 90%: Excellent (sometimes wasteful)\n\n\n\nPractical considerations:\n\n80% power is standard for many studies\n90% power for important decisions (e.g., FDA approval)\nLower power acceptable for:\n\nPilot/feasibility studies\nExploratory research\nStudies where negative result is informative\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nAlways report your power analysis in papers/grants! Shows thoughtful study design."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#using-power-analysis-in-different-scenarios",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#using-power-analysis-in-different-scenarios",
+    "title": "Power and Sample Size",
+    "section": "Using power analysis in different scenarios",
+    "text": "Using power analysis in different scenarios\n\n\nPlanning a new study:\n\nReview literature for expected effect size\nUse conservative estimates\nCalculate sample size for 80% power\nAdd 10-20% buffer for dropout\nCheck if feasible\n\n\n\nEvaluating a completed study:\n\nCalculate achieved power\nIf significant: power is high\nIf non-significant: report CI, not power\nUse for planning follow-up\n\n\nReviewing others’ work:\n\nCheck if power analysis reported\nEvaluate if assumptions reasonable\nConsider if study adequately powered\nBe skeptical of underpowered studies\n\n\n\nGrant writing:\n\nJustify sample size with power analysis\nShow you calculated it prospectively\nDocument all assumptions\nInclude sensitivity analyses"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#summary-the-big-picture",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#summary-the-big-picture",
+    "title": "Power and Sample Size",
+    "section": "Summary: The big picture",
+    "text": "Summary: The big picture\nFour quantities in equilibrium:\n\nSignificance level (\\(\\alpha\\)) - usually fixed at 0.05\nEffect size - determined by nature/treatment\nSample size (\\(n\\)) - what we typically calculate\nPower (\\(1-\\beta\\)) - probability of detecting real effect\n\n\n\nKey concepts:\n\nPower = Probability of correctly detecting an effect when it exists\nType I error (\\(\\alpha\\)) = False positive\nType II error (\\(\\beta\\)) = False negative\n\nCohen’s d = Standardized effect size\nTypical target: 80-90% power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#key-r-functions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#key-r-functions",
+    "title": "Power and Sample Size",
+    "section": "Key R functions",
+    "text": "Key R functions\nMain function: pwr.t.test()\n\n# Calculate sample size (leave n = NULL)\npwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n# Calculate power (leave power = NULL)  \npwr.t.test(n = 50, d = 0.5, sig.level = 0.05,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n# Calculate detectable effect size (leave d = NULL)\npwr.t.test(n = 50, sig.level = 0.05, power = 0.80,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n\n\nTypes: \"one.sample\", \"two.sample\", \"paired\"\nAlternatives: \"two.sided\" (most common), \"less\", \"greater\""
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#best-practices-for-power-analysis",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#best-practices-for-power-analysis",
+    "title": "Power and Sample Size",
+    "section": "Best practices for power analysis",
+    "text": "Best practices for power analysis\n\nPlan prospectively - before collecting data\nUse realistic effect sizes - from literature or pilot data\n\nBe conservative - overestimate SD, add buffer to sample size\nConsider practical significance - not just statistical\nReport your analysis - document all assumptions\nDon’t do post-hoc power for non-significant results\nUse confidence intervals to show uncertainty\nConsider feasibility - balance power with resources"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#additional-resources",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#additional-resources",
+    "title": "Power and Sample Size",
+    "section": "Additional resources",
+    "text": "Additional resources\nR documentation:\n\n?pwr.t.test - help for power calculations\nPASS documentation: https://www.ncss.com/software/pass/pass-documentation/#Means\n\n\n\nInteractive tools:\n\nhttps://rpsychologist.com/d3/NHST/ - Visualize power\nhttps://www.statmethods.net/stats/power.html - Power analysis examples\n\n\n\nTextbook:\n\nSection 5.4: Power and Sample Size for means\n\n\n\nFurther reading:\n\nCohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences\nLenth, R. V. (2001). “Some Practical Guidelines for Effective Sample Size Determination”"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#looking-ahead",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#looking-ahead",
+    "title": "Power and Sample Size",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nComparing two proportions\nChi-square tests\nCategorical data analysis\n\n\n\nHow today connects:\n\nPower applies to ALL hypothesis tests (not just t-tests!)\nSame principles for proportions, chi-square, regression, etc.\nUnderstanding power helps you critically evaluate research\nEssential skill for your own research career\n\n\n\nPractice:\n\nHomework will have power calculation problems\nTry different scenarios in R\nCalculate power for studies you read about"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#questions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#questions",
+    "title": "Power and Sample Size",
+    "section": "Questions?",
+    "text": "Questions?\nKey questions to ask yourself:\n\nCan you explain the four components of hypothesis testing?\nWhat’s the difference between Type I and Type II errors?\nWhy do we care about power?\nHow do you calculate sample size for a t-test?\nWhen is a study underpowered?\n\n\n\nOffice hours: Come discuss your research study designs!\nNext class: We’ll start talking about categorical data and proportions\n\n\n\nBMSC 620 | Power and Sample Size"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-did-we-just-observe",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#what-did-we-just-observe",
+    "title": "Power and Sample Size",
+    "section": "What did we just observe?",
+    "text": "What did we just observe?\nFrom our visual examples, we noticed:\n\n\nLess variability (smaller SD) → distributions pull apart → easier to detect difference\nBigger true difference → distributions pull apart → easier to detect difference\nThese affect how much overlap there is between groups\n\n\n\n\n\nBut we’re missing something important:\n\nWhat about sample size? More data should help us detect differences\nWhat about our significance level? Being more strict (lower \\(\\alpha\\)) changes our threshold\n\n\n\n\n\nLet’s formalize these ideas…\nStatisticians recognize four components that work together in any hypothesis test. Change one, and you affect the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#significance-levels-and-critical-values",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#significance-levels-and-critical-values",
+    "title": "Power and Sample Size",
+    "section": "Significance levels and critical values",
+    "text": "Significance levels and critical values\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat are critical values?\n\n\nCutoff points that determine when to reject \\(H_0\\)\nDetermined by:\n\nSignificance level (\\(\\alpha\\))\nOne- vs two-sided test\n\nDistribution type\n\nFor our tests:\n\nWe’ve been using \\(t^*\\) from t-distribution\nTypically \\(\\alpha = 0.05\\)\nTwo-sided tests (most common)\n\nIf |test statistic| &gt; critical value → reject \\(\\boldsymbol{H_0}\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#rejection-regions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#rejection-regions",
+    "title": "Power and Sample Size",
+    "section": "Rejection regions",
+    "text": "Rejection regions\n\nIf the absolute value of the test statistic is greater than the critical value, we reject \\(H_0\\)\n\nIn this case the test statistic is in the rejection region.\nOtherwise it’s in the non-rejection region.\n\n\n\n\n\nStats & Geospatial Analysis"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#significance-levels-and-critical-values-1",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#significance-levels-and-critical-values-1",
+    "title": "Power and Sample Size",
+    "section": "Significance levels and critical values",
+    "text": "Significance levels and critical values\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat are critical values?\n\n\nCutoff points that determine when to reject \\(H_0\\)\nDetermined by:\n\nSignificance level (\\(\\alpha\\))\nOne- vs two-sided test\n\nDistribution type\n\nFor our tests:\n\nWe’ve been using \\(t^*\\) from t-distribution\nTypically \\(\\alpha = 0.05\\)\nTwo-sided tests (most common)\n\nIf \\(\\left|\\text{test statistic}\\right| \\gt \\text{critical value}→ \\text{reject } H_0\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#new-slide",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#new-slide",
+    "title": "Power and Sample Size",
+    "section": "New slide",
+    "text": "New slide"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visual-one-sided-vs.-two-sided",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visual-one-sided-vs.-two-sided",
+    "title": "Power and Sample Size",
+    "section": "Visual: One-sided vs. two-sided",
+    "text": "Visual: One-sided vs. two-sided"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#other-new-slide",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#other-new-slide",
+    "title": "Power and Sample Size",
+    "section": "Other new slide",
+    "text": "Other new slide"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#hypothesis-testing-errors",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#hypothesis-testing-errors",
+    "title": "Power and Sample Size",
+    "section": "Hypothesis testing errors",
+    "text": "Hypothesis testing errors\n\nStatisticsSolutions"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#justice-system-analogy",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#justice-system-analogy",
+    "title": "Power and Sample Size",
+    "section": "Justice system analogy",
+    "text": "Justice system analogy\n\n\nType I and Type II Errors - Making Mistakes in the Justice System"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#complete-picture",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#complete-picture",
+    "title": "Power and Sample Size",
+    "section": "Complete picture",
+    "text": "Complete picture\n\n\n\n\n\n\nReality\n\n\n\n\nTest decision\n\n\n\\(H_0\\) True\n\n\n\\(H_0\\) False\n\n\n\n\n\n\nReject \\(H_0\\)\n\n\nType I Error (\\(\\alpha\\))\n\n\nPower (\\(1-\\beta\\)) ✓\n\n\n\n\nFail to reject \\(H_0\\)\n\n\nCorrect (\\(1-\\alpha\\)) ✓\n\n\nType II Error (\\(\\beta\\))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTest decision\n\n\"Truth\"\n\n\n\n$H_0$ True\n$H_0$ False\n\n\n\n\nReject \\(H_0\\)\nType I Error (\\(\u0007lpha\\))\nPower (\\(1-\beta\\)) ✓\n\n\nFail to reject \\(H_0\\)\nCorrect (\\(1-\u0007lpha\\)) ✓\nType II Error (\\(\beta\\))"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-type-i-error-type-ii-error-and-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-type-i-error-type-ii-error-and-power",
+    "title": "Power and Sample Size",
+    "section": "Visualizing Type I error, Type II error, and Power",
+    "text": "Visualizing Type I error, Type II error, and Power\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve): Pink region (α) = Type I error when we wrongly reject\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-type-i-error-type-ii-error-and-power-ii",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_3.html#visualizing-type-i-error-type-ii-error-and-power-ii",
+    "title": "Power and Sample Size",
+    "section": "Visualizing Type I error, Type II error, and Power (II)",
+    "text": "Visualizing Type I error, Type II error, and Power (II)\n\n\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve): Pink region (α) = Type I error when we wrongly reject\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#roadmap-for-today",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#roadmap-for-today",
+    "title": "Power and Sample Size",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: The Four Components\n\nWhat affects our ability to detect effects?\nSignificance level (\\(\\alpha\\))\nSample size (\\(n\\))\nEffect size\nPower (\\(1-\\beta\\))\n\nPart 2: Errors in Hypothesis Testing\n\nType I errors (\\(\\alpha\\))\nType II errors (\\(\\beta\\))\nPower as “correct detection”\nVisualizing errors with distributions\n\n\nPart 3: Calculating Power and Sample Size\n\nIntroduction to Cohen’s d\nUsing the pwr package in R\nOne-sample t-test examples\nTwo-sample t-test examples\n\nPart 4: Study Design Applications\n\nPlanning studies with power in mind\nInterpreting existing study results\nTrade-offs and practical considerations"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#where-weve-been-hypothesis-testing",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#where-weve-been-hypothesis-testing",
+    "title": "Power and Sample Size",
+    "section": "Where we’ve been: Hypothesis testing",
+    "text": "Where we’ve been: Hypothesis testing\nOver the past few lectures, we’ve learned to:\n\nUse confidence intervals to estimate population parameters\nConduct hypothesis tests to evaluate claims about parameters\nWork with three types of t-tests:\n\nOne-sample (compare to known value)\nPaired (compare before/after)\nTwo independent samples (compare groups)\n\n\n\n\nIn each case, we:\n\nCollected data\nCalculated a test statistic\nGot a p-value\nMade a conclusion (reject \\(H_0\\) or fail to reject)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#quick-reference-everything-weve-covered",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#quick-reference-everything-weve-covered",
+    "title": "Power and Sample Size",
+    "section": "Quick reference: Everything we’ve covered",
+    "text": "Quick reference: Everything we’ve covered\n\n\n\n\n\n\n\n\n\n\n\n\nOne-sample\nIndependent two-sample\nPaired sample\n\n\n\n\nExample\nBody temp: Population mean is 98.6°F, is sample different?\nCaffeine: taps/min between caffeine and non-caffeine group\nVegetarian diet: cholesterol before and after\n\n\nSample statistic\n\\(\\bar{x}\\)\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\\(\\bar{x}_d\\)\n\n\nPopulation parameter\n\\(\\mu\\)\n\\(\\mu_1 - \\mu_2\\)\n\\(\\mu_d\\) or \\(\\delta\\)\n\n\nPossible hypothesis tests\n\\(H_0: \\mu = \\mu_0\\)\n\\(H_0: \\mu_1 = \\mu_2\\) or \\(\\mu_1 - \\mu_2 = 0\\)\n\\(H_0: \\mu_d = 0\\) or \\(\\delta = 0\\)\n\n\nStandard error\n\\(SE = \\frac{s}{\\sqrt{n}}\\)\n\\(SE = \\sqrt{\\frac{s_1^2}{n_1} + \\frac{s_2^2}{n_2}}\\)\n\\(SE = \\frac{s_d}{\\sqrt{n}}\\)\n\n\nTest statistic\n\\(t = \\frac{\\bar{x} - \\mu_0}{SE}\\)\n\\(t = \\frac{(\\bar{x}_1 - \\bar{x}_2) - 0}{SE}\\)\n\\(t = \\frac{\\bar{x}_d - 0}{SE}\\)\n\n\nConfidence intervals\n\\(\\bar{x} \\pm t^* \\times SE\\)\n\\((\\bar{x}_1 - \\bar{x}_2) \\pm t^* \\times SE\\)\n\\(\\bar{x}_d \\pm t^* \\times SE\\)\n\n\n\n\n\nThis summarizes all three test types - we’ll use these concepts as we think about power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-question-we-havent-answered-yet",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-question-we-havent-answered-yet",
+    "title": "Power and Sample Size",
+    "section": "The question we haven’t answered yet",
+    "text": "The question we haven’t answered yet\n\n\nScenario: You’re planning a new study\n\n\n\n\nQuestions you need to answer:\n\nHow many participants do I need?\nCan I detect the effect I’m looking for?\nWhat if I can only recruit 20 people?\nIs my study worth running?\n\n\nThis is about study design:\n\nBefore collecting data\nBefore spending time/money\nBefore asking participants to volunteer\nMaking sure your study can answer your question\n\n\n\n\nToday: We learn how to design studies with adequate power to detect real effects"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#motivating-example-the-caffeine-study",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#motivating-example-the-caffeine-study",
+    "title": "Power and Sample Size",
+    "section": "Motivating example: The caffeine study",
+    "text": "Motivating example: The caffeine study\n\n\nResearch Question: Does caffeine increase finger tapping speed?\n\n\nStudy Design:\n\n70 college students trained to tap fingers rapidly\nRandomly assigned to two groups:\n\nControl group: Decaffeinated coffee (n=35)\nCaffeine group: Coffee with 200mg caffeine (n=35)\n\nAfter 2 hours, measure taps per minute\n\n\n\nResults: The caffeine group had significantly higher taps/min (p &lt; 0.001)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-questions-we-should-have-asked-first",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-questions-we-should-have-asked-first",
+    "title": "Power and Sample Size",
+    "section": "The questions we SHOULD have asked first",
+    "text": "The questions we SHOULD have asked first\nBut what if we had asked BEFORE running the study:\n\n“We can only recruit 20 per group - is that enough?”\n“What difference can we actually detect with this sample size?”\n“How likely are we to find an effect if it’s really there?”\n\n\n\nThese questions are about POWER - and that’s what we’ll learn today\n\n\n\n\n\n\n\n\nNote\n\n\nPower analysis happens before data collection, not after!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-affects-our-ability-to-detect-an-effect",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-affects-our-ability-to-detect-an-effect",
+    "title": "Power and Sample Size",
+    "section": "What affects our ability to detect an effect?",
+    "text": "What affects our ability to detect an effect?\n\n\nScenario: Imagine two populations that differ in their mean tapping speed\n\nQuestion: When we take samples from these groups, will it be easy to tell them apart?\nAnswer: It depends on several factors…"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#scenario-1-small-standard-deviation",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#scenario-1-small-standard-deviation",
+    "title": "Power and Sample Size",
+    "section": "Scenario 1: Small standard deviation",
+    "text": "Scenario 1: Small standard deviation\n\n\nSame difference (5 taps/min), but less variability (SD = 1 instead of 2)\n\nObservation: Less overlap between distributions makes the difference easier to detect!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#scenario-2-larger-difference",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#scenario-2-larger-difference",
+    "title": "Power and Sample Size",
+    "section": "Scenario 2: Larger difference",
+    "text": "Scenario 2: Larger difference\nLarger difference (10 taps/min instead of 5), same variability (SD = 2)\n\n\n\nObservation: A larger true difference is easier to detect!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-did-we-just-observe",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-did-we-just-observe",
+    "title": "Power and Sample Size",
+    "section": "What did we just observe?",
+    "text": "What did we just observe?\nFrom our visual examples, we noticed:\n\n\nLess variability (smaller SD) → distributions pull apart → easier to detect difference\nBigger true difference → distributions pull apart → easier to detect difference\nThese affect how much overlap there is between groups\n\n\n\n\n\nBut we’re missing something important:\n\nWhat about sample size? More data should help us detect differences\nWhat about our significance level? Being more strict (lower \\(\\alpha\\)) changes our threshold\n\n\n\n\n\nLet’s formalize these ideas…\nStatisticians recognize four components that work together in any hypothesis test. Change one, and you affect the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-four-components-in-equilibrium",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-four-components-in-equilibrium",
+    "title": "Power and Sample Size",
+    "section": "The four components in equilibrium",
+    "text": "The four components in equilibrium\n\n\nIn any hypothesis test, four quantities are mathematically related:\n\n\n\n\n\n1. Significance level (\\(\\alpha\\))\n\n\n\nProbability of Type I error\nUsually set at 0.05\nSet before collecting data\nDetermines rejection region\n\n\n\n\n\n\n\n2. Power (\\(1-\\beta\\))\n\n\n\nProbability of detecting a real effect\nTypically want 80% or 90%\nWhat we calculate given the others\nThe probability of “correctly rejecting”\n\n\n\n\n\n\n\n\n3. Sample size (\\(n\\))\n\n\n\nNumber of observations\nLarger \\(n\\) → smaller SE\nOften what we’re trying to determine\nConstrained by time, cost, ethics\n\n\n\n\n\n\n\n4. Effect size\n\n\n\nDifference we want to detect\nRelative to variability\nOften measured by Cohen’s d\nBased on pilot data or literature\n\n\n\n\n\nKey insight: Given any 3 pieces, we can solve for the 4th."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#significance-levels-and-critical-values",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#significance-levels-and-critical-values",
+    "title": "Power and Sample Size",
+    "section": "Significance levels and critical values",
+    "text": "Significance levels and critical values\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat are critical values?\n\n\nCutoff points that determine when to reject \\(H_0\\)\nDetermined by:\n\nSignificance level (\\(\\alpha\\))\nOne- vs two-sided test\n\nDistribution type\n\nFor our tests:\n\nWe’ve been using \\(t^*\\) from t-distribution (figure shows z-distribution)\nTypically \\(\\alpha = 0.05\\)\nTwo-sided tests (most common)\n\nIf |test statistic| &gt; critical value → reject \\(\\boldsymbol{H_0}\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#rejection-regions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#rejection-regions",
+    "title": "Power and Sample Size",
+    "section": "Rejection regions",
+    "text": "Rejection regions\n\nIf the absolute value of the test statistic is greater than the critical value, we reject \\(H_0\\)\n\nIn this case the test statistic is in the rejection region.\nOtherwise it’s in the non-rejection region.\n\n\n\nStats & Geospatial Analysis"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visual-one-sided-vs.-two-sided",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visual-one-sided-vs.-two-sided",
+    "title": "Power and Sample Size",
+    "section": "Visual: One-sided vs. two-sided",
+    "text": "Visual: One-sided vs. two-sided"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#hypothesis-testing-errors",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#hypothesis-testing-errors",
+    "title": "Power and Sample Size",
+    "section": "Hypothesis testing errors",
+    "text": "Hypothesis testing errors\n\nStatisticsSolutions"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#justice-system-analogy",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#justice-system-analogy",
+    "title": "Power and Sample Size",
+    "section": "Justice system analogy",
+    "text": "Justice system analogy\n\n\nType I and Type II Errors - Making Mistakes in the Justice System"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#type-i-and-type-ii-errors",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#type-i-and-type-ii-errors",
+    "title": "Power and Sample Size",
+    "section": "Type I and Type II errors",
+    "text": "Type I and Type II errors\n\n\nRemember: Hypothesis tests can make mistakes in two ways\n\n\n\n\n\nType I Error (False Positive)\n\n\nDefinition: Reject \\(H_0\\) when it’s actually true\nNotation: Probability of making a Type I error = \\(\\alpha\\)\nExample: Conclude caffeine increases tapping when it really doesn’t\nControl: Set \\(\\alpha\\) before study (usually 0.05)\nAlso called: False positive, \\(\\alpha\\) error\n\n\n\n\n\n\n\nType II Error (False Negative)\n\n\nDefinition: Fail to reject \\(H_0\\) when it’s false\nNotation: Probability of making a Type II error = \\(\\beta\\)\nExample: Fail to detect caffeine effect when it really exists\nControl: Increase sample size, decrease variability\nAlso called: False negative, \\(\\beta\\) error\n\n\n\n\n\n\nTrade-off: Decreasing one type of error often increases the other!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#power-the-probability-of-correctly-detecting-an-effect",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#power-the-probability-of-correctly-detecting-an-effect",
+    "title": "Power and Sample Size",
+    "section": "Power: The probability of correctly detecting an effect",
+    "text": "Power: The probability of correctly detecting an effect\n\n\n\nPower Definition\n\n\nPower = \\(1 - \\beta\\) = Probability of correctly rejecting \\(H_0\\) when it’s false\n\nThe probability of detecting an effect that actually exists\nTypically want power ≥ 0.80 (80%)\nSome fields require 0.90 (90%)\n\n\n\n\n\n\n\n\nWhy 80%? This is a convention balancing:\n\nReasonable chance of detecting real effects\nPractical constraints on sample size\nCost and feasibility\n\n\nThink of it this way:\n\nHigh power = good “detector” - likely to find effect if it exists\nLow power = bad “detector” - might miss real effects"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-complete-picture",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-complete-picture",
+    "title": "Power and Sample Size",
+    "section": "The complete picture",
+    "text": "The complete picture\n\n\n\n\n\n\nReality\n\n\n\n\nTest decision\n\n\n\\(H_0\\) True\n\n\n\\(H_1\\) True\n\n\n\n\n\n\nReject \\(H_0\\)\n\n\nType I Error (\\(\\alpha\\))\n\n\nPower (\\(1-\\beta\\)) ✓\n\n\n\n\nFail to reject \\(H_0\\)\n\n\nCorrect (\\(1-\\alpha\\)) ✓\n\n\nType II Error (\\(\\beta\\))\n\n\n\n\n\n\n\n\n\n\nCorrect decisions:\n\n\\(1 - \\alpha\\): Confidence (correctly fail to reject when \\(H_0\\) is true)\n\\(1 - \\beta\\): Power (correctly reject \\(H_0\\) when \\(H_1\\) is true)\n\n\n\nErrors:\n\n\\(\\alpha\\): Type I error rate (false positive)\n\\(\\beta\\): Type II error rate (false negative)\n\n\n\nWhat we control in study design: We typically fix \\(\\alpha\\) at 0.05 and choose \\(n\\) to achieve desired power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-these-concepts",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-these-concepts",
+    "title": "Power and Sample Size",
+    "section": "Visualizing these concepts",
+    "text": "Visualizing these concepts\n\nKey observations:\n\nType I error (\\(\\alpha\\)): Area in tails under null distribution\nType II error (\\(\\beta\\)): Area to left of critical value under alternative\nPower (\\(1-\\beta\\)): Area to right of critical value under alternative"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#new-slide",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#new-slide",
+    "title": "Power and Sample Size",
+    "section": "New slide",
+    "text": "New slide"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-type-i-error-type-ii-error-and-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-type-i-error-type-ii-error-and-power",
+    "title": "Power and Sample Size",
+    "section": "Visualizing Type I error, Type II error, and Power",
+    "text": "Visualizing Type I error, Type II error, and Power\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve): Pink region (α) = Type I error when we wrongly reject\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-type-i-error-type-ii-error-and-power-ii",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-type-i-error-type-ii-error-and-power-ii",
+    "title": "Power and Sample Size",
+    "section": "Visualizing Type I error, Type II error, and Power (II)",
+    "text": "Visualizing Type I error, Type II error, and Power (II)\n\n\n\nTwo possible realities:\n\nDashed grey: \\(H_0\\) is true (no effect)\nSolid blue: \\(H_A\\) is true (real effect exists)\n\n\n\nOur decision boundary: The critical value separates “reject” from “don’t reject”\n\n\nUnder \\(H_0\\) (grey curve):\n\nPink region (α) = Type I error when we wrongly reject\n\n\n\nUnder \\(H_A\\) (blue curve):\n\nYellow (β) = Type II error - we miss the real effect\nGreen (1-β) = Power - we correctly detect the effect!\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight: These are all connected - changing one affects the others!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-increases-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#what-increases-power",
+    "title": "Power and Sample Size",
+    "section": "What increases power?",
+    "text": "What increases power?\nPower increases when:\n\n\n1. Larger sample size (\\(n\\))\n\nReduces standard error\nNarrows sampling distributions\nMakes distributions more separated\n\n\n\n2. Larger effect size\n\nGreater true difference\nMore separation between null and alternative\nEasier to distinguish groups\n\n\n3. Less variability\n\nSmaller population SD (\\(\\sigma\\))\nTighter distributions\nLess overlap\n\n\n\n4. Higher significance level\n\nLarger \\(\\alpha\\) (but increases Type I error!)\nUsually not recommended\nTrade-off between errors"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#why-do-power-calculations",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#why-do-power-calculations",
+    "title": "Power and Sample Size",
+    "section": "Why do power calculations?",
+    "text": "Why do power calculations?\nBefore collecting data (prospective):\n\nDetermine required sample size for adequate power\nJustify sample size in grant proposals/protocols\nAvoid underpowered studies that waste resources\nEnsure ethical use of participants\n\n\n\nAfter collecting data (post-hoc):\n\nUnderstand power of completed study\nPlan follow-up studies\n\n\n\n\n\n\n\n\n\nImportant Note\n\n\nPost-hoc power calculations for non-significant results can be misleading! Better to report confidence intervals showing uncertainty."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#cohens-d-standardized-effect-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#cohens-d-standardized-effect-size",
+    "title": "Power and Sample Size",
+    "section": "Cohen’s d: Standardized effect size",
+    "text": "Cohen’s d: Standardized effect size\n\n\nProblem: Effect sizes are in original units (e.g., taps/min, mmHg, °F)\n\nHard to compare across studies\nCan’t have general guidelines\n\n\n\nSolution: Cohen’s d standardizes the effect size"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#interpreting-cohens-d",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#interpreting-cohens-d",
+    "title": "Power and Sample Size",
+    "section": "Interpreting Cohen’s d",
+    "text": "Interpreting Cohen’s d\nCohen’s guidelines for effect size:\n\n\n\n\n\n\n\n\nEffect Size\n\\(d\\) value\nInterpretation\n\n\n\n\nSmall\n0.2\nDifficult to detect, subtle effect\n\n\nMedium\n0.5\nModerate effect, visible to careful observer\n\n\nLarge\n0.8\nLarge effect, obvious to casual observer\n\n\n\n\n\nExample interpretations:\n\nd = 0.2: Treatment shifts mean by 0.2 standard deviations\nd = 0.5: Treatment shifts mean by half a standard deviation\nd = 0.8: Treatment shifts mean by 0.8 standard deviations\n\n\n\nImportant: These are just guidelines! What’s “small” or “large” depends on context\n\nIn medicine: Small effects can be clinically important\nIn psychology: Large effects might indicate measurement problems"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-pwr-package-in-r",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-pwr-package-in-r",
+    "title": "Power and Sample Size",
+    "section": "The pwr package in R",
+    "text": "The pwr package in R\nWe’ll use the pwr package for power calculations\n\nlibrary(pwr)\n\n\n\nKey function: pwr.t.test()\n\nWorks for one-sample, two-sample, and paired t-tests\nSpecify all parameters except one\nReturns the missing parameter\n\n\n\nFunction structure:\n\npwr.t.test(n = NULL,           # Sample size per group\n           d = NULL,           # Cohen's d effect size  \n           sig.level = 0.05,   # Significance level (α)\n           power = NULL,       # Power (1-β)\n           type = \"two.sample\", # or \"one.sample\", \"paired\"\n           alternative = \"two.sided\") # or \"less\", \"greater\"\n\nLeave out the parameter you want to calculate!"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-1-one-sample-test---finding-sample-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-1-one-sample-test---finding-sample-size",
+    "title": "Power and Sample Size",
+    "section": "Example 1: One-sample test - Finding sample size",
+    "text": "Example 1: One-sample test - Finding sample size\nScenario: Body temperature study\n\nWe believe true mean is 98.25°F (vs. claimed 98.6°F)\nPilot data suggests SD ≈ 0.73°F\nWant 80% power with \\(\\alpha = 0.05\\)\nQuestion: How many people do we need?\n\n\n\nStep 1: Calculate Cohen’s d\n\n# Effect size\nmu0 &lt;- 98.6      # Null value\nmu_true &lt;- 98.25 # What we believe is true\ns &lt;- 0.73        # Standard deviation from pilot data\n\nd &lt;- (mu_true - mu0) / s\nd\n\n[1] -0.4794521\n\n\nInterpretation: The true mean differs from null by 0.48 standard deviations"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-1-one-sample-test---finding-sample-size-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-1-one-sample-test---finding-sample-size-cont.",
+    "title": "Power and Sample Size",
+    "section": "Example 1: One-sample test - Finding sample size (cont.)",
+    "text": "Example 1: One-sample test - Finding sample size (cont.)\nStep 2: Use pwr.t.test() to find required sample size\n\n# Specify all parameters except for sample size, n\n\nresult &lt;- pwr.t.test(\n  d = (98.6 - 98.25) / 0.73,  # Cohen's d\n  sig.level = 0.05,            # α = 0.05\n  power = 0.80,                # Want 80% power\n  type = \"one.sample\",         # One-sample test\n  alternative = \"two.sided\"    # Two-sided test\n)\n\nresult\n\n\n     One-sample t test power calculation \n\n              n = 36.11196\n              d = 0.4794521\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\nConclusion: We need 37 participants to have 80% power to detect this difference at \\(\\alpha = 0.05\\)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-the-power-curve",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#visualizing-the-power-curve",
+    "title": "Power and Sample Size",
+    "section": "Visualizing the power curve",
+    "text": "Visualizing the power curve\n\nplot(result)\n\n\nThe curve shows: As sample size increases, power increases (holding other factors constant)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-2-one-sample-test---calculating-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-2-one-sample-test---calculating-power",
+    "title": "Power and Sample Size",
+    "section": "Example 2: One-sample test - Calculating power",
+    "text": "Example 2: One-sample test - Calculating power\nScenario: Same body temperature study, but the sample size is fixed\n\nn = 130 participants\nEffect size: d = 0.479\n\\(\\alpha = 0.05\\)\nQuestion: What power do we have given the sample size we have?\n\n\n\n\n# Specify all parameters except for power\n\nresult_power &lt;- pwr.t.test(\n  n = 130,                     # Sample size we have\n  d = (98.6 - 98.25) / 0.73,   # Cohen's d\n  sig.level = 0.05,            # α = 0.05\n  type = \"one.sample\",\n  alternative = \"two.sided\"\n)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-3-two-sample-test---finding-sample-size",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-3-two-sample-test---finding-sample-size",
+    "title": "Power and Sample Size",
+    "section": "Example 3: Two-sample test - Finding sample size",
+    "text": "Example 3: Two-sample test - Finding sample size\n\n\nScenario: Caffeine tapping study\n\nWant to detect 2 taps/min difference between groups\nExpect SD ≈ 2.6 taps/min in each group\nWant 80% power with \\(\\alpha = 0.05\\)\nQuestion: How many participants per group do we need?\n\n\n\nStep 1: Calculate Cohen’s d\n\ndiff &lt;- 2          # Difference we want to detect\nsd_pooled &lt;- 2.6   # Expected SD in each group\n\nd &lt;- diff / sd_pooled\nd\n\n[1] 0.7692308"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-4-two-sample-test---calculating-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-4-two-sample-test---calculating-power",
+    "title": "Power and Sample Size",
+    "section": "Example 4: Two-sample test - Calculating power",
+    "text": "Example 4: Two-sample test - Calculating power\n\n\nScenario: We have 35 subjects per group in the Caffeine study\n\nEffect size: \\(d = 0.77\\)\n\ndifference of \\(2\\) points between the two groups\nassuming \\(SD = 2.6\\) in both groups\n\n\\(\\alpha = 0.05\\)\nQuestion: What power do we have to detect this difference?\n\n\n\n\n# Specify all parameters except for power\n\nresult_caff_power &lt;- pwr.t.test(\n  n = 35,      # Sample size per group             \n  d = 2 / 2.6,\n  sig.level = 0.05,\n  type = \"two.sample\",\n  alternative = \"two.sided\"\n)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#one-sided-vs-two-sided-tests-and-power",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#one-sided-vs-two-sided-tests-and-power",
+    "title": "Power and Sample Size",
+    "section": "One-sided vs two-sided tests and power",
+    "text": "One-sided vs two-sided tests and power\n\n\nTwo-sided test:\n\\(H_A: \\mu \\neq \\mu_0\\) (most common)\n\n\n\n# Two-sided test\ntwo_sided &lt;- pwr.t.test(\n  d = 0.5, \n  sig.level = 0.05, \n  power = 0.80, \n  type = \"two.sample\", \n  alternative = \"two.sided\"\n)\n\ntwo_sided\n\n\n     Two-sample t test power calculation \n\n              n = 63.76561\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\nOne-sided test:\n\\(H_A: \\mu &gt; \\mu_0\\) or \\(H_A: \\mu &lt; \\mu_0\\)\n\n\n\n# One-sided test  \none_sided &lt;- pwr.t.test(\n  d = 0.5, \n  sig.level = 0.05, \n  power = 0.80,\n  type = \"two.sample\", \n  alternative = \"greater\"\n)\n\none_sided\n\n\n     Two-sample t test power calculation \n\n              n = 50.1508\n              d = 0.5\n      sig.level = 0.05\n          power = 0.8\n    alternative = greater\n\nNOTE: n is number in *each* group"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-power-sample-size-trade-off",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#the-power-sample-size-trade-off",
+    "title": "Power and Sample Size",
+    "section": "The power-sample size trade-off",
+    "text": "The power-sample size trade-off\n\n\n\n\nIncreasing sample size:\n✓ Increases power\n✓ More likely to detect real effects\n✓ More precise estimates\n\n\n✗ More expensive\n✗ Takes longer\n✗ May not be feasible\n\nPractical constraints:\n\nBudget limitations\nTime constraints\nAvailable participants\nEthical considerations\nFeasibility\n\n\n\nThe balance: Choose smallest \\(n\\) that gives adequate power (usually 80-90%)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#common-mistakes-in-power-analysis",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#common-mistakes-in-power-analysis",
+    "title": "Power and Sample Size",
+    "section": "Common mistakes in power analysis",
+    "text": "Common mistakes in power analysis\n\n\n\n\n\n\nMistake 1: Post-hoc power for non-significant results\n\n\nDon’t do this: “Our result was non-significant (p=0.12). Let me calculate power…”\nWhy it’s wrong: Post-hoc power for non-significant results is always low - tells you nothing!\nDo instead: Report confidence interval showing uncertainty\n\n\n\n\n\n\n\n\n\n\n\nMistake 2: Using observed effect size for power\n\n\nDon’t do this: Calculate power using the effect size you observed\nWhy it’s wrong: If result was non-significant, observed effect is likely underestimate\nDo instead: Use effect size from pilot data, literature, or smallest clinically meaningful effect"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#common-mistakes-continued",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#common-mistakes-continued",
+    "title": "Power and Sample Size",
+    "section": "Common mistakes continued",
+    "text": "Common mistakes continued\n\n\n\n\n\n\nMistake 3: Ignoring practical significance\n\n\nDon’t do this: Design study to detect any statistically significant difference\nWhy it’s wrong: Tiny, clinically meaningless effects can be significant with large n\nDo instead: Base power on clinically/scientifically meaningful effect size\n\n\n\n\n\n\n\n\n\n\n\nMistake 4: Not considering variability\n\n\nDon’t do this: Assume optimistic (low) SD when planning sample size\nWhy it’s wrong: Real data often more variable → study underpowered\nDo instead: Use conservative (higher) SD estimate, or add 10-20% to planned n as buffer"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#real-world-example-a-cautionary-tale",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#real-world-example-a-cautionary-tale",
+    "title": "Power and Sample Size",
+    "section": "Real-world example: A cautionary tale",
+    "text": "Real-world example: A cautionary tale\n\n\n\n\nStudy: New drug to lower blood pressure\n\nPowered to detect 5 mmHg reduction\nAssumed SD = 10 mmHg (from literature)\nCalculated need for n = 64 per group\n\n\n\n\nOnly recruited n = 50 per group due to budget constraints\nActual SD in study was 12 mmHg (more variability than expected)\n\n\n\nResult:\n\nObserved reduction: 4 mmHg (close to target!)\np-value = 0.090 (not significant at 0.05 level)\nActual power was only 38% (not the planned 80%)\nStudy deemed “negative” despite clinically meaningful effect\n\n\nLessons:\n\nSmall deviations from plan can substantially reduce power\nUnder-recruitment is very common - build in buffer\nConservative SD estimates are wise"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#when-is-a-study-underpowered",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#when-is-a-study-underpowered",
+    "title": "Power and Sample Size",
+    "section": "When is a study “underpowered”?",
+    "text": "When is a study “underpowered”?\n\n\n\n\nConventionally:\n\nPower &lt; 50%: Severely underpowered\nPower 50-70%: Underpowered\nPower 70-80%: Marginally adequate\nPower 80-90%: Good\nPower &gt; 90%: Excellent (sometimes wasteful)\n\n\nPractical considerations:\n\n80% power is standard for many studies\n90% power for important decisions (e.g., FDA approval)\nLower power acceptable for:\n\nPilot/feasibility studies\nExploratory research\nStudies where negative result is informative\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nAlways report your power analysis in papers/grants! Shows thoughtful study design."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#using-power-analysis-in-different-scenarios",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#using-power-analysis-in-different-scenarios",
+    "title": "Power and Sample Size",
+    "section": "Using power analysis in different scenarios",
+    "text": "Using power analysis in different scenarios\n\n\n\n\nPlanning a new study:\n\nReview literature for expected effect size\nUse conservative estimates\nChoose a target power (usually 80–90%) and calculate required sample size\nAdd 10-20% buffer for dropout\nCheck if feasible\n\n\n\nEvaluating a completed study: 1. Focus on effect estimates and confidence intervals 2. If non-significant: Is CI compatible with meaningful effect? 3. Don’t calculate “achieved power” (mathematically determined by the p-value) 4. Use observed effect size & SD to plan follow-up studies\n\nReviewing others’ work:\n\nCheck if power analysis reported\nEvaluate if assumptions reasonable\nConsider if study adequately powered\nBe skeptical of underpowered studies\n\n\n\nGrant writing:\n\nJustify sample size with power analysis\nShow you calculated it prospectively\nDocument all assumptions\nInclude sensitivity analyses"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#summary-the-big-picture",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#summary-the-big-picture",
+    "title": "Power and Sample Size",
+    "section": "Summary: The big picture",
+    "text": "Summary: The big picture\n\n\nFour quantities in equilibrium:\n\nSignificance level (\\(\\alpha\\)) - usually fixed at 0.05\nEffect size - a property of reality (we estimate it, we do not choose it)\nSample size (\\(n\\)) - what we typically calculate\nPower (\\(1-\\beta\\)) - probability of detecting real effect\n\n\n\nKey concepts:\n\nPower = Probability of correctly detecting an effect when it exists\nType I error (\\(\\alpha\\)) = False positive\nType II error (\\(\\beta\\)) = False negative\n\nCohen’s d = Standardized effect size\nTypical target: 80-90% power"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#key-r-functions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#key-r-functions",
+    "title": "Power and Sample Size",
+    "section": "Key R functions",
+    "text": "Key R functions\nMain function: pwr.t.test()\n\nlibrary(pwr)\n\n# Calculate sample size (leave n = NULL)\npwr.t.test(d = 0.5, sig.level = 0.05, power = 0.80,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n# Calculate power (leave power = NULL)  \npwr.t.test(n = 50, d = 0.5, sig.level = 0.05,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n# Calculate detectable effect size (leave d = NULL)\npwr.t.test(n = 50, sig.level = 0.05, power = 0.80,\n           type = \"two.sample\", alternative = \"two.sided\")\n\n\n\nTypes: \"one.sample\", \"two.sample\", \"paired\"\nAlternatives: \"two.sided\" (most common), \"less\", \"greater\""
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#best-practices-for-power-analysis",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#best-practices-for-power-analysis",
+    "title": "Power and Sample Size",
+    "section": "Best practices for power analysis",
+    "text": "Best practices for power analysis\n\nPlan prospectively - before collecting data\nUse realistic effect sizes - from literature or pilot data\n\nBe conservative - overestimate SD, add buffer to sample size\nConsider practical significance - not just statistical\nReport your analysis - document all assumptions\nDon’t do post-hoc power for non-significant results\nUse confidence intervals to show uncertainty\nConsider feasibility - balance power with resources"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#additional-resources",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#additional-resources",
+    "title": "Power and Sample Size",
+    "section": "Additional resources",
+    "text": "Additional resources\n\n\nGood paper\n\nSample size, power and effect size revisited: simplified and practical approaches in pre-clinical, clinical and laboratory studies (Serdar et al.)\n\n \nInteractive tools:\n\nUnderstanding Statistical Power and Significance Testing\n\n\n\nFree software:\n\nSample size calculators from UCSF\nCRAB (Cancer Research and Biostatistics) Statistical Tools\nG*Power - free, open source power analysis software\n\n\n\n\nBMSC 620 | Power and Sample Size"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#looking-ahead",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#looking-ahead",
+    "title": "Power and Sample Size",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext time:\n\nComparing two proportions\nChi-square tests\nCategorical data analysis\n\n\n\nHow today connects:\n\nPower applies to ALL hypothesis tests (not just t-tests!)\nSame principles for proportions, chi-square, regression, etc.\nUnderstanding power helps you critically evaluate research\nEssential skill for your own research career\n\n\n\nPractice:\n\nHomework will have power calculation problems\nTry different scenarios in R\nCalculate power for studies you read about"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#questions",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#questions",
+    "title": "Power and Sample Size",
+    "section": "Questions?",
+    "text": "Questions?\nKey questions to ask yourself:\n\nCan you explain the four components of hypothesis testing?\nWhat’s the difference between Type I and Type II errors?\nWhy do we care about power?\nHow do you calculate sample size for a t-test?\nWhen is a study underpowered?\n\n\n\nOffice hours: Come discuss your research study designs!\nNext class: We’ll start talking about categorical data and proportions\n\n\n\nBMSC 620 | Power and Sample Size"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#practical-implications",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#practical-implications",
+    "title": "Power and Sample Size",
+    "section": "Practical implications:",
+    "text": "Practical implications:\n\n\n\nWe usually have most control over sample size\nCan sometimes reduce variability through better measurement\nEffect size is a property of reality — we estimate it, we don’t choose it\nSignificance level is conventionally fixed at 0.05"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#cohens-d-standardized-effect-size-1",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#cohens-d-standardized-effect-size-1",
+    "title": "Power and Sample Size",
+    "section": "Cohen’s d: Standardized effect size",
+    "text": "Cohen’s d: Standardized effect size\n\n\n\n\n\nCohen’s d Formulas\n\n\nOne-sample test (or paired): \\[d = \\frac{\\bar{x} - \\mu_0}{s} \\quad \\text{or} \\quad d = \\frac{\\bar{x}_d - \\delta_0}{s_d}\\]\nTwo-sample test: \\[d = \\frac{\\bar{x}_1 - \\bar{x}_2}{s_{\\text{pooled}}}\\]\nwhere \\(s_{\\text{pooled}} = \\sqrt{\\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}\\)\n\n\nFor two-sample d, we often use pooled SD when group variances are similar; there are variants when they are not."
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-2-one-sample-test---calculating-power-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-2-one-sample-test---calculating-power-cont.",
+    "title": "Power and Sample Size",
+    "section": "Example 2: One-sample test - Calculating power (cont.)",
+    "text": "Example 2: One-sample test - Calculating power (cont.)\n\n\n\nresult_power\n\n\n     One-sample t test power calculation \n\n              n = 130\n              d = 0.4794521\n      sig.level = 0.05\n          power = 0.9997354\n    alternative = two.sided\n\n\n\n\nConclusion: With n=130, we had 100% power! (Very high - almost certain to detect the effect if it exists)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-3-two-sample-test---finding-sample-size-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-3-two-sample-test---finding-sample-size-cont.",
+    "title": "Power and Sample Size",
+    "section": "Example 3: Two-sample test - Finding sample size (cont.)",
+    "text": "Example 3: Two-sample test - Finding sample size (cont.)\nStep 2: Calculate required sample size\n\n# Specify all parameters except for sample size, n\n\nresult_caff &lt;- pwr.t.test(\n  d = d,\n  sig.level = 0.05,\n  power = 0.80,\n  type = \"two.sample\",        # Two independent groups\n  alternative = \"two.sided\"\n)\n\nresult_caff\n\n\n     Two-sample t test power calculation \n\n              n = 27.52331\n              d = 0.7692308\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\nConclusion: Need 28 participants per group (total n = 56)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-4-two-sample-test---calculating-power-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#example-4-two-sample-test---calculating-power-cont.",
+    "title": "Power and Sample Size",
+    "section": "Example 4: Two-sample test - Calculating power (cont.)",
+    "text": "Example 4: Two-sample test - Calculating power (cont.)\n\n\n\n\n\nresult_caff_power\n\n\n     Two-sample t test power calculation \n\n              n = 35\n              d = 0.7692308\n      sig.level = 0.05\n          power = 0.8872805\n    alternative = two.sided\n\nNOTE: n is number in *each* group\n\n\n\n\nplot(result_caff_power)\n\n\n\n\n\n\n\n\n\n\n\nConclusion: With n=35 per group, we have 88.7% power (excellent!)"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#one-sided-vs-two-sided-tests-and-power-cont.",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#one-sided-vs-two-sided-tests-and-power-cont.",
+    "title": "Power and Sample Size",
+    "section": "One-sided vs two-sided tests and power (cont.)",
+    "text": "One-sided vs two-sided tests and power (cont.)\n\n\nKey point: One-sided tests require smaller sample sizes BUT:\n\nOnly justified when direction is known a priori\nCan’t detect effects in “wrong” direction\nGenerally not recommended unless strong scientific justification\nReviewers/collaborators often require lower \\(\\alpha\\) (e.g., 0.025) for one-sided tests"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#more-software-for-power-and-sample-size-calculations-pass",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#more-software-for-power-and-sample-size-calculations-pass",
+    "title": "Power and Sample Size",
+    "section": "More software for power and sample size calculations: PASS",
+    "text": "More software for power and sample size calculations: PASS\n\nPASS is a very powerful (& expensive) software that does power and sample size calculations for many advanced statistical modeling techniques.\n\nEven if you don’t have access to PASS, their documentation is very good and free online.\nDocumentation includes formulas and references.\nPASS documentation for powering means\n\nOne mean, paired means, two independent means\n\n\nOne-sample t-test documentation: https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/One-Sample_T-Tests.pdf"
+  },
+  {
+    "objectID": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#octri-berd-power-sample-size-presentations",
+    "href": "lessons/15_power_and_sample_size/15_power_sample_size_4.html#octri-berd-power-sample-size-presentations",
+    "title": "Power and Sample Size",
+    "section": "OCTRI-BERD power & sample size presentations",
+    "text": "OCTRI-BERD power & sample size presentations\n\n\nPower and Sample Size 101\n\nPresented by Meike Niederhausen; April 13, 2023\nSlides: http://bit.ly/PSS101-BERD-April2023\nRecording\n\nPower and Sample Size for Clinical Trials: An Introduction\n\nPresented by Yiyi Chen; Feb 18, 2021\nSlides: http://bit.ly/PSS-ClinicalTrials\nRecording\n\nPlanning a Study with Power and Sample Size Considerations in Mind\n\nPresented by David Yanez; May 29, 2019\nSlides\nRecording\n\nPower and Sample Size Simulations in R\n\nPresented by Robin Baudier; Sept 21, 2023\nSlides\nRecording"
   }
 ]

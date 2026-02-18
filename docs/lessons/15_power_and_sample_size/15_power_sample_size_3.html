@@ -632,36 +632,60 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="what-affects-our-ability-to-detect-an-effect" class="slide level2">
 <h2>What affects our ability to detect an effect?</h2>
-<p><strong>Scenario:</strong> Imagine two populations that differ in their mean tapping speed</p>
 <p><br>
 </p>
+<p><strong>Scenario:</strong> Imagine two populations that differ in their mean tapping speed</p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
-</p>
-<p><strong>Question:</strong> When we take samples from these groups, will it be easy to tell them apart?</p>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><strong>Question:</strong> When we take samples from these groups, will it be easy to tell them apart?</p>
 <p><strong>Answer:</strong> It depends on several factors…</p>
 </section>
 <section id="scenario-1-small-standard-deviation" class="slide level2">
 <h2>Scenario 1: Small standard deviation</h2>
+<p><br>
+</p>
 <p><strong>Same difference (5 taps/min), but less variability (SD = 1 instead of 2)</strong></p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
-</p>
-<p><strong>Observation:</strong> Less overlap between distributions makes the difference easier to detect!</p>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><strong>Observation:</strong> Less overlap between distributions makes the difference easier to detect!</p>
 </section>
 <section id="scenario-2-larger-difference" class="slide level2">
 <h2>Scenario 2: Larger difference</h2>
 <p><strong>Larger difference (10 taps/min instead of 5), same variability (SD = 2)</strong></p>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><br>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"><p><br>
 </p>
 <p><strong>Observation:</strong> A larger true difference is easier to detect!</p>
 </section>
-<section id="the-four-components-in-equilibrium" class="slide level2">
-<h2>The four components in equilibrium</h2>
-<p><strong>In any hypothesis test, four quantities are mathematically related:</strong></p>
+<section id="what-did-we-just-observe" class="slide level2">
+<h2>What did we just observe?</h2>
+<p><strong>From our visual examples, we noticed:</strong></p>
+<div>
+<ol type="1">
+<li class="fragment"><p><strong>Less variability</strong> (smaller SD) → distributions pull apart → easier to detect difference</p></li>
+<li class="fragment"><p><strong>Bigger true difference</strong> → distributions pull apart → easier to detect difference</p></li>
+<li class="fragment"><p>These affect how much <strong>overlap</strong> there is between groups</p></li>
+</ol>
+</div>
 <p><br>
 </p>
+<div class="fragment">
+<p><strong>But we’re missing something important:</strong></p>
+<ul>
+<li>What about sample size? More data should help us detect differences</li>
+<li>What about our significance level? Being more strict (lower <span class="math inline">\(\alpha\)</span>) changes our threshold</li>
+</ul>
+</div>
+<p><br>
+</p>
+<div class="fragment">
+<p><strong>Let’s formalize these ideas…</strong></p>
+<p>Statisticians recognize <strong>four components</strong> that work together in any hypothesis test. Change one, and you affect the others!</p>
+</div>
+</section>
+<section id="the-four-components-in-equilibrium" class="slide level2">
+<h2>The four components in equilibrium</h2>
+<p><br>
+</p>
+<p><strong>In any hypothesis test, four quantities are mathematically related:</strong></p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -682,38 +706,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>2. Sample size (<span class="math inline">\(n\)</span>)</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Number of observations</li>
-<li>Larger <span class="math inline">\(n\)</span> → smaller SE</li>
-<li>Often what we’re trying to determine</li>
-<li>Constrained by time, cost, ethics</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:48%;">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>3. Effect size</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li>Difference we want to detect</li>
-<li>Relative to variability</li>
-<li>Often measured by Cohen’s <em>d</em></li>
-<li>Based on pilot data or literature</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>4. Power (<span class="math inline">\(1-\beta\)</span>)</strong></p>
+<p><strong>2. Power (<span class="math inline">\(1-\beta\)</span>)</strong></p>
 </div>
 <div class="callout-content">
 <ul>
@@ -725,21 +718,117 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div>
 </div>
+</div><div class="column" style="width:48%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>3. Sample size (<span class="math inline">\(n\)</span>)</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Number of observations</li>
+<li>Larger <span class="math inline">\(n\)</span> → smaller SE</li>
+<li>Often what we’re trying to determine</li>
+<li>Constrained by time, cost, ethics</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>4. Effect size</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Difference we want to detect</li>
+<li>Relative to variability</li>
+<li>Often measured by Cohen’s <em>d</em></li>
+<li>Based on pilot data or literature</li>
+</ul>
+</div>
+</div>
+</div>
 </div></div>
-<p><br>
-</p>
-<p><strong>Key insight:</strong> If you fix any three of these, the fourth is determined!</p>
+<p><strong>Key insight:</strong> Given any 3 pieces, we can solve for the 4th.</p>
 </section></section>
 <section>
 <section id="part-2-errors-in-hypothesis-testing" class="title-slide slide level1 center">
 <h1>Part 2: Errors in Hypothesis Testing</h1>
 
 </section>
-<section id="type-i-and-type-ii-errors" class="slide level2">
-<h2>Type I and Type II errors</h2>
-<p><strong>Remember:</strong> Hypothesis tests can make mistakes in two ways</p>
+<section id="significance-levels-and-critical-values" class="slide level2">
+<h2>Significance levels and critical values</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-4-1.png" width="1056"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>What are critical values?</strong></p>
+</div>
+<div class="callout-content">
+<p>Cutoff points that determine when to reject <span class="math inline">\(H_0\)</span></p>
+<p><strong>Determined by:</strong></p>
+<ul>
+<li>Significance level (<span class="math inline">\(\alpha\)</span>)</li>
+<li>One- vs two-sided test<br>
+</li>
+<li>Distribution type</li>
+</ul>
+<p><strong>For our tests:</strong></p>
+<ul>
+<li>We’ve been using <span class="math inline">\(t^*\)</span> from t-distribution</li>
+<li>Typically <span class="math inline">\(\alpha = 0.05\)</span></li>
+<li>Two-sided tests (most common)</li>
+</ul>
+<p><strong>If |test statistic| &gt; critical value → reject</strong> <span class="math inline">\(\boldsymbol{H_0}\)</span></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="rejection-regions" class="slide level2">
+<h2>Rejection regions</h2>
+<ul>
+<li>If the absolute value of the test statistic is greater than the critical value, we reject <span class="math inline">\(H_0\)</span>
+<ul>
+<li>In this case the test statistic is in the <strong>rejection region</strong>.</li>
+<li>Otherwise it’s in the non-rejection region.</li>
+</ul></li>
+</ul>
 <p><br>
 </p>
+
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><a href="https://www.geo.fu-berlin.de/en/v/soga/Basics-of-statistics/Hypothesis-Tests/Introduction-to-Hypothesis-Testing/Critical-Value-and-the-p-Value-Approach/index.html">Stats &amp; Geospatial Analysis</a></p>
+</section>
+<section id="visual-one-sided-vs.-two-sided" class="slide level2">
+<h2>Visual: One-sided vs.&nbsp;two-sided</h2>
+
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"></section>
+<section id="hypothesis-testing-errors" class="slide level2">
+<h2>Hypothesis testing errors</h2>
+
+<img data-src="../../img_slides/type_i_type_ii_pregnant.jpg" style="width:70.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.statisticssolutions.com/to-err-is-human-what-are-type-i-and-ii-errors/">StatisticsSolutions</a></p></section>
+<section id="justice-system-analogy" class="slide level2">
+<h2>Justice system analogy</h2>
+<p><br><br></p>
+
+<img data-src="../../img_slides/intuitor_charts.png" class="r-stretch quarto-figure-center"><p class="caption"><a href="http://www.intuitor.com/statistics/T1T2Errors.html">Type I and Type II Errors - Making Mistakes in the Justice System</a></p></section>
+<section id="type-i-and-type-ii-errors" class="slide level2">
+<h2>Type I and Type II errors</h2>
+<p><br>
+</p>
+<p><strong>Remember:</strong> Hypothesis tests can make mistakes in two ways</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -749,7 +838,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <div class="callout-content">
 <p><strong>Definition:</strong> Reject <span class="math inline">\(H_0\)</span> when it’s actually true</p>
-<p><strong>Notation:</strong> Probability = <span class="math inline">\(\alpha\)</span></p>
+<p><strong>Notation:</strong> Probability of making a Type I error = <span class="math inline">\(\alpha\)</span></p>
 <p><strong>Example:</strong> Conclude caffeine increases tapping when it really doesn’t</p>
 <p><strong>Control:</strong> Set <span class="math inline">\(\alpha\)</span> before study (usually 0.05)</p>
 <p><strong>Also called:</strong> False positive, <span class="math inline">\(\alpha\)</span> error</p>
@@ -764,7 +853,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <div class="callout-content">
 <p><strong>Definition:</strong> Fail to reject <span class="math inline">\(H_0\)</span> when it’s false</p>
-<p><strong>Notation:</strong> Probability = <span class="math inline">\(\beta\)</span></p>
+<p><strong>Notation:</strong> Probability of making a Type II error = <span class="math inline">\(\beta\)</span></p>
 <p><strong>Example:</strong> Fail to detect caffeine effect when it really exists</p>
 <p><strong>Control:</strong> Increase sample size, decrease variability</p>
 <p><strong>Also called:</strong> False negative, <span class="math inline">\(\beta\)</span> error</p>
@@ -786,7 +875,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="callout-content">
 <p><strong>Power</strong> = <span class="math inline">\(1 - \beta\)</span> = Probability of correctly rejecting <span class="math inline">\(H_0\)</span> when it’s false</p>
 <ul>
-<li>Also called “sensitivity” or “true positive rate”</li>
 <li>The probability of detecting an effect that actually exists</li>
 <li>Typically want power ≥ 0.80 (80%)</li>
 <li>Some fields require 0.90 (90%)</li>
@@ -796,54 +884,80 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <p><br>
 </p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>Why 80%?</strong> This is a convention balancing:</p>
 <ul>
 <li>Reasonable chance of detecting real effects</li>
 <li>Practical constraints on sample size</li>
 <li>Cost and feasibility</li>
 </ul>
-<p><br>
-</p>
+</div><div class="column" style="width:50%;">
 <p><strong>Think of it this way:</strong></p>
 <ul>
 <li>High power = good “detector” - likely to find effect if it exists</li>
 <li>Low power = bad “detector” - might miss real effects</li>
 </ul>
+</div></div>
 </section>
 <section id="the-complete-picture" class="slide level2">
 <h2>The complete picture</h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 28%">
-<col style="width: 34%">
-<col style="width: 36%">
-</colgroup>
+<table style="border-bottom: 1px solid black;">
 <thead>
-<tr class="header">
-<th><strong>Reality</strong></th>
-<th><span class="math inline">\(H_0\)</span> True</th>
-<th><span class="math inline">\(H_0\)</span> False</th>
+<tr>
+<th>
+</th>
+<th colspan="2" style="text-align: center;">
+Reality
+</th>
+</tr>
+<tr>
+<th>
+Test decision
+</th>
+<th>
+<span class="math inline">\(H_0\)</span> True
+</th>
+<th>
+<span class="math inline">\(H_1\)</span> True
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td><strong>Reject</strong> <span class="math inline">\(H_0\)</span></td>
-<td>Type I Error (<span class="math inline">\(\alpha\)</span>)</td>
-<td><strong>Power</strong> (<span class="math inline">\(1-\beta\)</span>) ✓</td>
+<tr>
+<td>
+<strong>Reject</strong> <span class="math inline">\(H_0\)</span>
+</td>
+<td>
+Type I Error (<span class="math inline">\(\alpha\)</span>)
+</td>
+<td>
+<strong>Power</strong> (<span class="math inline">\(1-\beta\)</span>) ✓
+</td>
 </tr>
-<tr class="even">
-<td><strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span></td>
-<td>Correct (<span class="math inline">\(1-\alpha\)</span>) ✓</td>
-<td>Type II Error (<span class="math inline">\(\beta\)</span>)</td>
+<tr>
+<td>
+<strong>Fail to reject</strong> <span class="math inline">\(H_0\)</span>
+</td>
+<td>
+Correct (<span class="math inline">\(1-\alpha\)</span>) ✓
+</td>
+<td>
+Type II Error (<span class="math inline">\(\beta\)</span>)
+</td>
 </tr>
 </tbody>
 </table>
+<!-- | **Reality**              | $H_0$ True              | $H_0$ False             | -->
+<!-- |---------------------|-------------------------|---------------------------| -->
+<!-- | **Reject** $H_0$         | Type I Error ($\alpha$) | **Power** ($1-\beta$) ✓ | -->
+<!-- | **Fail to reject** $H_0$ | Correct ($1-\alpha$) ✓  | Type II Error ($\beta$) | -->
 <p><br>
 </p>
 <p><strong>Correct decisions:</strong></p>
 <ul>
-<li><span class="math inline">\(1 - \alpha\)</span>: Specificity (correctly fail to reject when <span class="math inline">\(H_0\)</span> true)</li>
-<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject when <span class="math inline">\(H_0\)</span> false)</li>
+<li><span class="math inline">\(1 - \alpha\)</span>: Confidence. Correctly fail to reject when <span class="math inline">\(H_0\)</span> is true)</li>
+<li><span class="math inline">\(1 - \beta\)</span>: Power (correctly reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_1\)</span> is true)</li>
 </ul>
 <p><br>
 </p>
@@ -859,12 +973,82 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <section id="visualizing-these-concepts" class="slide level2">
 <h2>Visualizing these concepts</h2>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><strong>Key observations:</strong></p>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><p><strong>Key observations:</strong></p>
 <ul>
 <li>Type I error (<span class="math inline">\(\alpha\)</span>): Area in tails under null distribution</li>
 <li>Type II error (<span class="math inline">\(\beta\)</span>): Area to left of critical value under alternative</li>
 <li>Power (<span class="math inline">\(1-\beta\)</span>): Area to right of critical value under alternative</li>
 </ul>
+</section>
+<section id="new-slide" class="slide level2">
+<h2>New slide</h2>
+
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"></section>
+<section id="visualizing-type-i-error-type-ii-error-and-power" class="slide level2">
+<h2>Visualizing Type I error, Type II error, and Power</h2>
+<div class="fragment">
+<p><strong>Two possible realities:</strong></p>
+<ul>
+<li>Dashed grey: <span class="math inline">\(H_0\)</span> is true (no effect)</li>
+<li>Solid blue: <span class="math inline">\(H_A\)</span> is true (real effect exists)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Our decision boundary:</strong> The critical value separates “reject” from “don’t reject”</p>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_0\)</span> (grey curve):</strong> Pink region (α) = Type I error when we wrongly reject</p>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_A\)</span> (blue curve):</strong></p>
+<ul>
+<li>Yellow (β) = Type II error - we miss the real effect</li>
+<li>Green (1-β) = <strong>Power</strong> - we correctly detect the effect!</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>The key insight:</strong> These are all connected - changing one affects the others!</p>
+</div>
+
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"></section>
+<section id="visualizing-type-i-error-type-ii-error-and-power-ii" class="slide level2">
+<h2>Visualizing Type I error, Type II error, and Power (II)</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="fragment">
+<p><strong>Two possible realities:</strong></p>
+<ul>
+<li>Dashed grey: <span class="math inline">\(H_0\)</span> is true (no effect)</li>
+<li>Solid blue: <span class="math inline">\(H_A\)</span> is true (real effect exists)</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>Our decision boundary:</strong> The critical value separates “reject” from “don’t reject”</p>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_0\)</span> (grey curve):</strong> Pink region (α) = Type I error when we wrongly reject</p>
+</div>
+<div class="fragment">
+<p><strong>Under <span class="math inline">\(H_A\)</span> (blue curve):</strong></p>
+<ul>
+<li>Yellow (β) = Type II error - we miss the real effect</li>
+<li>Green (1-β) = <strong>Power</strong> - we correctly detect the effect!</li>
+</ul>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>The key insight:</strong> These are all connected - changing one affects the others!</p>
+</div>
+</div></div>
 </section>
 <section id="what-increases-power" class="slide level2">
 <h2>What increases power?</h2>
@@ -1111,7 +1295,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">plot</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><strong>The curve shows:</strong> As sample size increases, power increases (holding other factors constant)</p>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p><strong>The curve shows:</strong> As sample size increases, power increases (holding other factors constant)</p>
 </section>
 <section id="example-2-one-sample-test---calculating-power" class="slide level2">
 <h2>Example 2: One-sample test - Calculating power</h2>
@@ -1233,7 +1417,7 @@ NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
 
-<img data-src="15_power_sample_size_2_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"><p><strong>Conclusion:</strong> With n=35 per group, we had <strong>88.7%</strong> power (excellent!)</p>
+<img data-src="15_power_sample_size_3_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"><p><strong>Conclusion:</strong> With n=35 per group, we had <strong>88.7%</strong> power (excellent!)</p>
 </section>
 <section id="one-sided-vs-two-sided-tests-and-power" class="slide level2">
 <h2>One-sided vs two-sided tests and power</h2>
