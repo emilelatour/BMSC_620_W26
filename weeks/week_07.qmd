@@ -69,7 +69,7 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Power and Sample Size](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBokBoEMZ7hRobYRVntKgBwAW3aAy3PK_hDNki3QAQd2E0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=Lymehc)
 -   **Muddy points**
-    -   Muddy points response will be posted after class
+    -   [Muddy Points - Lesson 12](/lessons/15_power_sample_size/15_power_sample_size_muddy_points.qmd)
 
 ------------------------------------------------------------------------
 

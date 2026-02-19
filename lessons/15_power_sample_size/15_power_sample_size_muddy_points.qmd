@@ -1,0 +1,339 @@
+---
+title: "Response to Muddy Points"
+subtitle: "Lecture: Power and Sample Size (Week 7, Day 2)"
+author: "Emile"
+date: "2026-02-18"
+date-format: long
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    html-math-method: mathjax
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(pwr)
+library(patchwork)
+library(knitr)
+
+library(lamisc)
+library(laviz)
+
+theme_set(laviz::theme_minimal_white(grid = "none", axis = FALSE, base_size = 14))
+```
+
+# Overview
+
+First, a big thank you to everyone for the thoughtful survey responses! Seeing ~94% of you rate the pace as "about right" is really encouraging.
+
+The muddy points this week reflect some genuinely deep questions. Many of them touching on how these ideas apply in your specific research contexts. Let me work through the main themes.
+
+::: {.callout-note}
+You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.
+:::
+
+---
+
+# What counts as "n" in basic science experiments?
+
+> *"When doing something like flow or microscopy where you have thousands of cells but the actual number varies and you run the experiment 3 times, is the sample size the n of each experiment or is the n 3?"*
+
+This is one of the most important and genuinely difficult questions in biostatistics --- and it comes up constantly in basic science. The short answer: **it depends on what you are trying to make inferences about**, but in most bench science scenarios, **n = the number of independent biological replicates** (e.g., 3), not the number of cells measured.
+
+Here is the key distinction:
+
+**Technical replicates** are repeated measurements of the same biological sample --- measuring the same tube of cells three times on the flow cytometer, for example. These tell you about measurement precision, not biological variability. They do not contribute to your statistical $n$.
+
+**Biological replicates** are independent experimental units --- cells from three separately cultured wells, three different mice, three independently treated samples. *This* is your $n$ for statistical purposes.
+
+When you image 10,000 cells from a single well, those 10,000 cells are **pseudoreplicates** of that one experimental unit. You can summarize them (e.g., calculate a median fluorescence intensity, or a percent positive), and *that summary value* becomes your single data point. You then have $n = 1$ for that experiment.
+
+So in your scenario: if you run the experiment 3 independent times, you likely have $n = 3$ (one summary value per experiment). Three is, frankly, quite small for a formal power analysis, which brings us to the effect size challenge you raised...
+
+**For basic science where there is no known "clinical relevance":** this is where the guidelines (small $d \approx 0.2$, medium $d \approx 0.5$, large $d \approx 0.8$) become more useful as a starting point, or where pilot data from the literature (or your own preliminary experiments) help establish a plausible effect size. Many basic science fields also have informal conventions (e.g., "we power to detect a 2-fold change"). The important thing for grant writing is to be transparent about your assumptions and justify them as best you can --- reviewers know pilot data in basic science is noisy.
+
+---
+
+# What does "conservative" mean in this context?
+
+> *"I'm a bit confused as to what you mean by conservative --- does that mean having larger SDs? More animals?"*
+
+"Conservative" in power analysis means making assumptions that lead you to calculate a **larger required sample size** --- erring on the side of caution so your study doesn't end up underpowered.
+
+The most common way to be conservative is to **use a larger SD estimate**. Here's why: if you assume a smaller SD and the true variability turns out to be higher, your study will have less power than planned. If you overestimate the SD, you'll recruit more participants than strictly necessary, but you'll have more than adequate power --- a much better outcome.
+
+Other conservative choices:
+
+- Assuming a **smaller effect size** than your best estimate (harder to detect → need more $n$)
+- Adding a **10--20% buffer** to your calculated sample size to account for dropout or exclusions
+
+So: yes, "conservative" here means assuming larger SDs and/or smaller effects, which drives $n$ upward. It does *not* necessarily mean more animals by default --- it means whatever inputs to your power calculation push you toward more participants, because that reduces the risk of an underpowered study.
+
+In the blood pressure example from class: we used SD = 10 mmHg from the literature. If there was uncertainty, a conservative researcher might use SD = 12 or 13 mmHg to build in a buffer --- exactly what happened in that scenario, just unintentionally.
+
+---
+
+# Why is Cohen's d > 1 not "meaningless"?
+
+> *"Why is Cohen's d above 1 meaningless?"*
+
+I want to clarify: Cohen's $d > 1$ is **not** meaningless! I may not have been as precise as I should have been. Let me correct this.
+
+Cohen's $d$ can absolutely be greater than 1 --- it just means the two groups differ by more than one standard deviation, which is a very large effect. The guidelines (small = 0.2, medium = 0.5, large = 0.8) are benchmarks, not ceilings.
+
+What *is* tricky about very large $d$ values (say, $d > 1.5$ or $d > 2$) is that they can sometimes signal a measurement or calculation issue:
+
+- Are the groups truly that different, or is the SD being used artificially small?
+- Is this a highly controlled lab setting that might not reflect real-world variability?
+
+But in many contexts --- especially in basic science where you're comparing, say, a knockout to a wildtype under carefully controlled conditions --- large Cohen's $d$ values are entirely real and interpretable. A $d$ of 1.5 means your treatment shifts the mean by 1.5 standard deviations. That's a big, meaningful, detectable effect.
+
+The practical upside: a large effect size means you need **fewer participants/animals** to achieve 80% power, which is often welcome news in basic science settings.
+
+---
+
+# How does power connect to Type I and Type II errors? How does it look visually?
+
+Several of you mentioned confusion about the relationship between the error types, $1 - \alpha$, and power. Let me try to make this as concrete as possible.
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 6
+#| fig-align: center
+
+# # Parameters
+# mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05
+# cv <- qnorm(1 - alpha/2)
+# 
+# ggplot(data.frame(x = c(-3, 7)), aes(x)) +
+#   # 1. Shading (Power and Beta) - Keep these primary
+#   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+#                 xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.4) +
+#   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+#                 xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.4) +
+#   
+#   # 2. Rejection Region (Alpha) - Small but distinct
+#   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+#                 xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) +
+#   
+#   # 3. The Curves (Linewidth hierarchy)
+#   stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+#                 linewidth = 0.8, color = "grey40", linetype = "dashed") + # Null as "background"
+#   stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+#                 linewidth = 1.2, color = "#0072B2") +
+#   
+#   # 4. The "Decision Wall"
+#   geom_vline(xintercept = cv, linewidth = 1, color = "black") +
+#   annotate("label", x = cv, y = 0.42, label = "Critical Value", 
+#            fill = "white", label.size = NA, fontface = "bold") +
+#   
+#   # 5. Strategic Labeling (using plotmath for Greek)
+#   annotate("text", x = mu_null, y = 0.42, label = "H[0]", parse = TRUE, color = "grey40", size = 7) +
+#   annotate("text", x = mu_alt, y = 0.42, label = "H[A]", parse = TRUE, color = "#0072B2", size = 7) +
+#   annotate("text", x = 1.2, y = 0.02, label = "beta", parse = TRUE, size = 7) +
+#   annotate("text", x = 3.25, y = 0.15, label = "1-beta\n(Power)", parse = TRUE, size = 7) +
+#   annotate("text", x = 2.2, y = 0.02, label = "alpha", parse = TRUE, size = 7) +
+#   annotate("text", x = -0.25, y = 0.15, label = "1-alpha", parse = TRUE, size = 7) + 
+#   
+#   # 6. Clean Theme
+#   laviz::theme_minimal_white(grid = "none") +
+#   labs(x = NULL, 
+#        y = NULL, 
+#        title = "The Relationship Between Alpha, Beta, and Power") +
+#   theme(panel.grid.minor = element_blank(),
+#         axis.text.x = element_blank(), 
+#         axis.text.y = element_blank())
+```
+
+Here is the core diagram with both distributions labelled clearly:
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+#| fig-align: center
+
+mu_null <- 0; mu_alt <- 3; sd <- 1; alpha <- 0.05
+cv <- qnorm(1 - alpha/2)
+
+ggplot(data.frame(x = c(-3, 7)), aes(x)) +
+  # Beta region (Type II error)
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                xlim = c(-1, cv), geom = "area", fill = "#F0E442", alpha = 0.5) +
+  # Power region
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                xlim = c(cv, 7), geom = "area", fill = "#009E73", alpha = 0.5) +
+  # Alpha region (Type I error)
+  stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+                xlim = c(cv, 4), geom = "area", fill = "#CC79A7", alpha = 0.6) +
+  # 1-alpha region
+  stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+                xlim = c(-4, cv), geom = "area", fill = "#E69F00", alpha = 0.15) +
+  # Curves
+  stat_function(fun = dnorm, args = list(mean = mu_null, sd = sd),
+                linewidth = 1, color = "grey40", linetype = "dashed") +
+  stat_function(fun = dnorm, args = list(mean = mu_alt, sd = sd),
+                linewidth = 1.2, color = "#0072B2") +
+  # Decision wall
+  geom_vline(xintercept = cv, linewidth = 1, color = "black") +
+  annotate("label", x = cv, y = 0.44, label = "Critical Value",
+           fill = "white", label.size = NA, fontface = "bold", size = 4) +
+  # Labels
+  annotate("text", x = mu_null - .5, y = 0.422, label = "H[0]~distribution",
+           parse = TRUE, color = "grey40", size = 5) +
+  annotate("text", x = mu_alt + .5, y = 0.42, label = "H[A]~distribution",
+           parse = TRUE, color = "#0072B2", size = 5) +
+  annotate("text", x = 1.1, y = 0.025, label = "beta\n(Type II error)",
+           parse = FALSE, size = 3.5, color = "black", fontface = "bold") +
+  annotate("text", x = 3.6, y = 0.12, label = "1 - beta\n(Power)",
+           parse = FALSE, size = 3.5, color = "black", fontface = "bold") +
+  annotate("text", x = 2.4, y = 0.025, label = "alpha\n(Type I error)",
+           parse = FALSE, size = 3.5, color = "black", fontface = "bold") +
+  annotate("text", x = -0.5, y = 0.12, label = "1 - alpha\n(Correct non-rejection)",
+           parse = FALSE, size = 3, color = "black", fontface = "bold") +
+  labs(x = NULL, y = NULL,
+       title = "All four quantities live on the same picture",
+       # subtitle = "Dashed grey = $H_0$ distribution; Solid blue = H\u2090 distribution"
+       ) +
+  theme(axis.text.x = element_blank(), axis.text.y = element_blank())
+```
+
+**The key to reading this picture:**
+
+The **dashed grey curve** is the null hypothesis distribution --- what the sampling distribution of our test statistic looks like *if $H_0$ is true*. The **solid blue curve** is the alternative hypothesis distribution --- what the sampling distribution looks like *if $H_A$ is true* (i.e., if there is a real effect).
+
+The **critical value** is a vertical wall. Everything to the right of it is the rejection region.
+
+| Region | Which curve? | What does it mean? | Notation |
+|--------|-------------|-------------------|----------|
+| Tan (left of critical value, under $H_0$) | Grey | Correctly fail to reject --- $H_0$ is true and we don't reject | $1 - \alpha$ |
+| Pink (right of critical value, under $H_0$) | Grey | **Type I Error** --- $H_0$ is true but we wrongly reject | $\alpha$ |
+| Yellow (left of critical value, under $H_A$) | Blue | **Type II Error** --- $H_A$ is true but we fail to detect it | $\beta$ |
+| Green (right of critical value, under $H_A$) | Blue | **Power** --- $H_A$ is true and we correctly detect it | $1 - \beta$ |
+
+So $1 - \alpha$ is the large tan region under the $H_0$ curve to the *left* of the critical value. It represents the probability of correctly *not* rejecting $H_0$ when it is true --- this is the "right" decision when there really is no effect.
+
+**Why can't you reduce both errors at once?** Moving the critical value to the *right* shrinks the pink region ($\alpha$ decreases, fewer false positives) but enlarges the yellow region ($\beta$ increases, more false negatives). The only way to reduce *both* simultaneously is to increase your sample size, which narrows both distributions and pushes them apart.
+
+---
+
+# Power and the critical value --- how does this translate to real data?
+
+> *"I understand visually how changing the critical value affects alpha and beta, but I don't really understand how this conceptually applies to actual data."*
+
+This is a great distinction to push on. Here is the translation:
+
+In your actual analysis, you never work directly with those bell curve pictures. Instead:
+
+1. You collect data and compute a **test statistic** (e.g., a $t$-statistic)
+2. You compare that $t$ to a **critical value** from the $t$-distribution
+3. If $|t| > t^*$, you reject $H_0$
+
+The bell curves in the power diagram are **probability models** --- they describe where that test statistic is *likely to land* under each hypothesis, if you were to repeat your study many times. The critical value in the picture is the same critical value you compare your test statistic against in real analysis.
+
+So when we say power = 80%, we mean: if the true effect is as big as we assumed, and we ran this study 100 times, we'd expect to get a statistically significant $t$-statistic (one that clears the critical value) about 80 of those times.
+
+**In a single real study**, you either get a significant result or you don't --- you can't directly observe power. Power is a property of the *study design*, not of a single outcome. That's why it has to be thought about *before* you collect data.
+
+---
+
+# Pilot data vs. post-hoc power --- why is one OK and not the other?
+
+> *"I understand that calculating power post-study is not statistically sound, but isn't that similar to using pilot data to calculate power? Why is it okay to use pilot data for a larger study?"*
+
+This is a really insightful question --- the distinction is subtle but important.
+
+**Using pilot data prospectively:** You run a small pilot study (say, $n = 10$ per group), get a rough estimate of the effect size and SD, then use those estimates to power a larger, properly designed study. You are using the pilot data to *inform your design assumptions* going forward. The pilot data and the main study are **independent**. Your power calculation is prospective --- made before the main study is run.
+
+**Post-hoc power from a non-significant result:** You run your main study, get $p = 0.12$, and then ask "what was my power?" Here, the power you calculate is mathematically constrained by your observed $p$-value --- it can be shown that a $p$-value just above 0.05 corresponds to power just below 50%, by definition. So post-hoc power on a non-significant result always tells you "your power was low" --- which is circular and uninformative. You're using the same data for both the test and the power calculation.
+
+The right approach after a non-significant result is to **report confidence intervals** and discuss whether the CI is consistent with a meaningful effect. For example: "We observed a 4 mmHg reduction (95% CI: -1 to 9 mmHg). While not statistically significant, we cannot rule out a clinically relevant effect." That's much more useful than a post-hoc power calculation.
+
+**Is pilot data for power always reliable?** Not perfectly --- small pilots give noisy estimates, especially for SD. This is why conservative (larger) SD estimates and sample size buffers matter when piloting.
+
+---
+
+# Pooled SD --- do we need to calculate it?
+
+> *"I'm still confused about the pooled SD. Is this something we will be expected to calculate for two-sample t-tests or will it be given to us?"*
+
+For **power calculations using `pwr.t.test()`**, you do not compute the pooled SD by hand in the formal sense. You calculate Cohen's $d$ directly:
+
+$$d = \frac{\bar{x}_1 - \bar{x}_2}{s_\text{pooled}}$$
+
+In practice, when you have pilot data or literature values, you often have an estimate of the common (assumed equal) SD for both groups. If the groups have similar variability, you can use either group's SD as a rough estimate of the pooled SD. If they differ:
+
+$$s_\text{pooled} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+
+For power analysis planning purposes, you will typically either: (a) be given a single assumed SD from the literature, or (b) use the formula above if you have pilot data from two separate groups. R will handle the rest via `pwr.t.test()`.
+
+For **conducting the actual two-sample t-test** in R (`t.test()`), the default Welch's t-test does not assume equal variances and does *not* use pooled SD --- so you don't need to compute it there either. Pooled SD appears most explicitly in Cohen's $d$ for power analysis.
+
+---
+
+# How power applies to mouse models, in vivo, and cancer biology specifically
+
+Several of you raised this, which is worth addressing directly. Power analysis applies to mouse experiments in exactly the same way --- the four components (effect size, SD, $n$, power) are universal. But there are some practical realities of in vivo work:
+
+**Effect sizes in mouse studies:** You often have published literature or your own preliminary data to estimate the effect. For tumor growth curves, you might ask: "what difference in final tumor volume, or in median survival time, would I consider biologically meaningful?" That defines your target effect size.
+
+**Variability in mouse experiments:** SD in in vivo studies can be large (biological variability between animals, cage effects, etc.). This is where being conservative matters most --- use the *larger* SD estimates from published studies, not the best-case scenario.
+
+**The n = 3 problem:** Three biological replicates is often insufficient for meaningful power in a formal statistical sense, but it is a common constraint in early-stage in vivo work. In that context, it's more honest to frame the experiment as **hypothesis-generating** and report effect sizes and confidence intervals, rather than p-values from an underpowered test. This is actually increasingly accepted in the field, and journals are pushing for better reporting of effect sizes in preclinical research.
+
+**What test to use:** For comparing two groups (e.g., treated vs. control mice) on a continuous outcome (tumor volume, body weight, etc.), a two-sample t-test or Welch's t-test is usually appropriate. For repeated measures (same animal over time), a paired or mixed-model approach is better. Mixed-models, longitudinal analysis, and survival analysis are out of the scope of an intro to biostats class. But again, the same four components of a power analysis apply. I would be happy to discuss specifics about your work/studies in office hours.
+
+---
+
+# Determining effect size --- do you need data from both groups?
+
+> *"Does the preliminary data need to include both groups you are comparing? If you only have data from the control group, how do you determine a meaningful difference? Do you ever just use the guidelines?"*
+
+You do **not** need data from both groups, and this is very common in practice. Here is how to think about it:
+
+**What you need for Cohen's $d$:**
+
+$$d = \frac{\mu_1 - \mu_2}{s_\text{pooled}} \approx \frac{\text{expected difference}}{s}$$
+
+So you need: (1) an estimate of the **expected difference** between groups, and (2) an estimate of the **SD**.
+
+You can get these from different sources:
+
+- **SD from control group data only:** If you have pilot data or literature for controls, you can use that SD as your estimate. Assuming similar variability in the treatment group is reasonable when the effect is expected to shift the mean without dramatically changing variability.
+  
+- **Expected difference from clinical or biological reasoning:** Even without treatment data, you can specify what a "meaningful" difference would be. For example: "Based on the literature, a 20% reduction in tumor volume would be considered biologically significant. Our control group has a mean of 500 mm³ (SD = 100 mm³), so we are targeting a 100 mm³ difference." That's enough to calculate $d = 100/100 = 1.0$.
+
+- **Cohen's guidelines as a last resort:** Yes, you can use them! If you genuinely have no data and no domain knowledge, using a medium effect size ($d = 0.5$) is a defensible starting point. Grant reviewers generally prefer literature-justified effect sizes, but for pilot/feasibility proposals, guideline-based estimates with a clear rationale are acceptable. Always be explicit about the assumption.
+
+---
+
+# Pace and general comments
+
+The pace feedback was very positive this week (94% "about right"). The feedback about contextualizing examples in basic science --- mouse models, flow cytometry, microscopy --- is well taken and is reflected in the extended discussion above. I will continue looking for opportunities to use those experimental paradigms in examples.
+
+For those who found the notation summary table at the beginning helpful: I'll try to carry that forward as we introduce new methods.
+
+---
+
+# Summary
+
+- **Sample size in basic science:** $n$ = number of independent biological replicates, not technical replicates or cells measured
+- **"Conservative"** = use larger SD estimates and smaller effect size estimates → larger required $n$, but more reliable power
+- **Cohen's $d > 1$** is perfectly valid and meaningful; the guidelines are benchmarks, not ceilings
+- **$1 - \alpha$** is the probability of correctly *not* rejecting $H_0$ when it is true --- the large central region under the null distribution
+- **Post-hoc power** on non-significant results is circular; use confidence intervals instead
+- **Pilot data** is fine for prospective planning; the key is that the data informing the power calculation is independent of the study being planned
+- **Pooled SD** in the context of this class will generally be provided or estimable from a common SD; `pwr.t.test()` handles the rest
+- **Effect size for planning:** you do not need data from both groups --- control-group SD + a clinically/biologically meaningful difference is sufficient
+
