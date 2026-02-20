@@ -86,7 +86,7 @@ source(here("class_dates.R"))
 |  |  |  |  |  |
 | [7](/weeks/week_07.qmd) | **`{r} format(w7d1, '%a, %m/%d')`** |  | **No class, Presidents Day** |  |
 |  | [**`{r} format(mid_closes, '%a, %m/%d')`**]{.hw-row} |  | [**MIDTERM closes at 11pm**]{.hw-row} |  |
-|  | `{r} format(w7d2, '%a, %m/%d')` | 12 | Power | 5.4, extra |
+|  | `{r} format(w7d2, '%a, %m/%d')` | 12 | Power | 5.4 |
 |  | [**`{r} format(hw5, '%a, %m/%d')`**]{.hw-row} |  | [**HW 5 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
 | 8 | `{r} format(w8d1, '%a, %m/%d')` | 13 | Inference for proportions and 2x2 tables | 8.1-8.2 |
