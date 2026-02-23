@@ -97,7 +97,7 @@ By the end of the week, you should be able to:
         -   Comparing two independent proportions (two-sample z-test)
         -   Measures of association from a 2×2 table: risk difference, relative risk, and odds ratio
         -   Exact binomial inference when the normal approximation fails
-    -   Data files needed: `cardiac_trial.csv` (available in the [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/data?csf=1&web=1&e=P9czhc))
+    -   Data files needed: `cardiac_trial.csv` (available in the [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4))
     -   [View HW 6 instructions](/homework/HW06/HW06.qmd)
 
 -   See the full list of assignments on the [Homework](/homework.qmd) page.

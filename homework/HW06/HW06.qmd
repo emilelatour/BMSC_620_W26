@@ -1,0 +1,554 @@
+---
+title: "BMSC 620 — Homework 6"
+subtitle: "Power Analysis and Inference for Proportions"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+---
+
+```{r}
+#| include: false
+#### Global chunk options -----------------------------
+
+knitr::opts_chunk$set(eval = TRUE)
+```
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW06`
+
+Examples:
+
+- Smith_J_HW06.qmd
+- Smith_J_HW06.html
+
+When submitting Homework 6, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Instructions
+
+- Answer each question clearly and concisely.
+- Show your work using R code chunks.
+- **Rounding:** Round proportions and confidence intervals to 3 decimal places.
+  Round *p*-values to 3 decimal places (or report as *p* < 0.001 if very small).
+- This homework uses **external data files** — see Part 0 below before writing
+  any code.
+- Code chunks marked `# Your code here` are intentionally blank. You are
+  expected to write the code yourself. Hints are provided to guide you.
+
+::: {.callout-note}
+**A note on this homework**
+
+This assignment covers two lectures that may feel a bit disconnected: power
+analysis (for *t*-tests) and inference for proportions. Don't worry — that
+reflects where we are in the course. We will return to power analysis later
+in the semester when we discuss proportions and more complex designs.
+For now, think of Part 1 as consolidating your understanding of power before
+we move on, and Parts 2–5 as introducing the new inference framework we'll be
+using for categorical outcomes.
+:::
+
+---
+
+## Part 0: Project Setup
+
+**Before writing any code, do the following:**
+
+1. Make sure you are working inside your BMSC 620 R Project.
+2. Download the data file from OneDrive and place it inside your
+   project's `data/` folder:
+   - `cardiac_trial.csv`
+3. Your folder structure should look like this:
+
+```
+BMSC620/
+├── BMSC620.Rproj
+├── data/
+│   ├── cardiac_trial.csv
+└── homework/
+    └── Smith_J_HW06.qmd    ← your file goes here
+```
+
+Load the packages you will need:
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(here)
+library(broom)
+library(rstatix)
+library(janitor)
+library(pwr)
+```
+
+---
+
+## Part 1: Power Analysis for *t*-Tests
+
+### Background
+
+A research team is planning a randomized controlled trial to evaluate whether
+a new exercise intervention reduces resting heart rate in sedentary adults.
+Based on pilot data, they expect:
+
+- Mean resting heart rate in the **control group** (standard care): 75 bpm
+- Mean resting heart rate in the **intervention group**: 71 bpm (a 4 bpm reduction)
+- Standard deviation in both groups: approximately 8 bpm
+- They want **80% power** at $\alpha = 0.05$ (two-sided)
+
+---
+
+### 1A. Calculate Cohen's *d*
+
+Before using `pwr.t.test()`, compute the standardized effect size (Cohen's *d*)
+for this scenario.
+
+::: {.callout-tip}
+For a two-sample design, Cohen's *d* is the expected difference divided by the
+common standard deviation. You can compute it directly in R and assign it to
+an object called `d_heart` for use in the next question.
+:::
+
+```{r}
+#| label: cohens-d
+
+# Your code here
+
+```
+
+Is this a small, medium, or large effect by Cohen's conventional thresholds
+(0.2 / 0.5 / 0.8)?
+
+**Answer:**
+
+---
+
+### 1B. Find the required sample size
+
+Use `pwr.t.test()` to determine how many participants are needed **per group**
+to achieve the desired power. Round up to the nearest whole person.
+
+::: {.callout-tip}
+Leave `n = NULL` to find the sample size. Set `type = "two.sample"` since
+participants are randomized to independent groups. Remember that `pwr.t.test()`
+returns the per-group *n*, so total sample size = 2 × *n*.
+:::
+
+```{r}
+#| label: sample-size
+
+# Your code here
+
+```
+
+How many participants are needed in total across both groups?
+
+**Answer:**
+
+---
+
+### 1C. Calculate power for a budget-constrained design
+
+The research team receives funding for only **40 participants per group**
+(80 total). Using the same effect size and significance level, what power
+will this study have?
+
+```{r}
+#| label: power-calc
+
+# Your code here
+
+```
+
+Write a sentence interpreting this power value. If the intervention truly
+reduces resting heart rate by 4 bpm, what is the probability the study
+will detect it?
+
+**Answer:**
+
+---
+
+### 1D. Reflect on the trade-off
+
+The team is deciding whether to proceed with 40 participants per group.
+In 2–3 sentences, discuss the implications of the power level you found
+in 1C. What does it mean for the study if $H_0$ is false but the study
+fails to reject it?
+
+**Answer:**
+
+---
+
+## Part 2: Single Proportion Inference
+
+### Background
+
+The `cardiac_trial.csv` dataset comes from a simulated randomized controlled
+trial of **400 patients** with elevated cardiovascular risk. Patients were
+randomized 1:1 to receive either a statin medication or a placebo for two
+years. The primary outcome was **MACE** — a major adverse cardiac event
+(heart attack, stroke, or cardiovascular death) — recorded as `Yes` or `No`.
+
+> *Data simulated for educational purposes. Values do not represent real
+> patient data.*
+
+---
+
+### 2A. Load and inspect the data
+
+Import `cardiac_trial.csv` and assign it to an object called `cardiac`.
+Use `glimpse()` to inspect the structure.
+
+```{r}
+#| label: load-cardiac
+
+# Your code here
+
+```
+
+How many patients are in each treatment group? How many experienced a MACE
+event overall?
+
+::: {.callout-tip}
+`janitor::tabyl()` is a convenient way to count observations. Try
+`tabyl(treatment)` and `tabyl(mace)` to answer both parts.
+:::
+
+```{r}
+#| label: tabyl-counts
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 2B. Tabulate MACE by treatment group
+
+Create a two-way frequency table showing MACE outcome by treatment group.
+
+::: {.callout-tip}
+`tabyl(treatment, mace)` will cross-tabulate the two variables. Pipe the
+result into `adorn_totals(c("row", "col"))` to add row and column totals.
+:::
+
+```{r}
+#| label: two-way-table
+
+# Your code here
+
+```
+
+Based on the table, what is the observed MACE rate in each group?
+
+**Answer:**
+
+---
+
+### 2C. Test the statin group against a historical benchmark
+
+Historical data from similar high-risk populations suggests a two-year MACE
+rate of approximately **15%** without treatment. We want to know whether the
+statin group's MACE rate is **lower than** this historical benchmark.
+
+**State the hypotheses** for this one-sided test. Let $p$ be the true MACE
+probability for patients receiving statins.
+
+**Answer:**
+
+$$H_0: $$
+
+$$H_A: $$
+
+---
+
+### 2D. Check the success-failure condition
+
+Before running the test, verify that the normal approximation is appropriate
+for the statin group.
+
+::: {.callout-tip}
+Under $H_0$, check $np_0 \geq 10$ and $n(1-p_0) \geq 10$ using the null
+value $p_0 = 0.15$ and the statin group sample size.
+:::
+
+```{r}
+#| label: check-conditions-single
+
+# Your code here
+
+```
+
+Is the success-failure condition met? Briefly explain.
+
+**Answer:**
+
+---
+
+### 2E. Run the one-sample proportion test
+
+Test whether the statin group's MACE rate is lower than the 15% historical benchmark. Use the appropriate one-sided alternative and `correct = TRUE`.
+
+::: {.callout-tip}
+
+You can use either `rstatix::prop_test()` or base R's `prop.test()` plus `broom::tidy()` — both produce the same results.
+
+You will need `x` (number of MACE events in the statin group) and `n`
+(statin group size). You can extract these from your table in 2B, or
+use `filter()` and `summarize()` to compute them from `cardiac`.
+:::
+
+```{r}
+#| label: single-prop-test
+
+# Your code here
+
+```
+
+Report the test statistic, p-value, and 95% confidence interval.
+Write a 2–3 sentence conclusion in context.
+
+**Answer:**
+
+---
+
+## Part 3: Comparing Two Proportions
+
+### 3A. State the hypotheses
+
+We now want to formally compare the MACE rate between the statin and placebo
+groups. Let $p_1$ = MACE probability for statin patients and $p_2$ = MACE
+probability for placebo patients.
+
+State the null and alternative hypotheses for a **two-sided** test.
+
+**Answer:**
+
+$$H_0: $$
+
+$$H_A: $$
+
+---
+
+### 3B. Check the success-failure condition for both groups
+
+Before running the test, verify the normal approximation is valid for **both**
+groups.
+
+::: {.callout-tip}
+
+For a two-sample test, check success-failure using the pooled proportion under $H_0$. For a CI, check using each group’s observed $\hat{p}$ values.
+
+:::
+
+```{r}
+#| label: check-conditions-two
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 3C. Run the two-sample proportion test
+
+Compare the proportions for the two groups. Supply `x` and `n` as vectors with the statin group first.
+
+::: {.callout-tip}
+
+You can use either `rstatix::prop_test()` or base R's `prop.test()` plus `broom::tidy()` — both produce the same results.
+
+:::
+
+```{r}
+#| label: two-prop-test
+
+# Your code here
+
+```
+
+---
+
+### 3D. Interpret the results
+
+Fill in the blanks and write a complete conclusion.
+
+- Observed MACE rate, statin group ($\hat{p}_1$): ________
+- Observed MACE rate, placebo group ($\hat{p}_2$): ________
+- p-value: ________
+- 95% confidence interval for $p_1 - p_2$: (________, ________)
+
+**Conclusion** (2–3 sentences: state which group had higher MACE rates, whether
+the difference is statistically significant at $\alpha = 0.05$, and what this
+suggests about statin therapy in this population):
+
+**Answer:**
+
+---
+
+## Part 4: Measures of Association from a 2×2 Table
+
+Using the counts from your table in Question 2B, calculate three measures of
+association for the cardiac trial data.
+
+---
+
+### 4A. Risk difference
+
+Calculate the risk difference (RD = $\hat{p}_\text{statin} - \hat{p}_\text{placebo}$).
+
+```{r}
+#| label: risk-difference
+
+# Your code here
+
+```
+
+Interpret the RD in a sentence. What does this mean in practical terms for
+patients?
+
+**Answer:**
+
+---
+
+### 4B. Relative risk
+
+Calculate the relative risk ($RR = \hat{p}_\text{statin} / \hat{p}_\text{placebo}$).
+
+```{r}
+#| label: relative-risk
+
+# Your code here
+
+```
+
+Interpret the RR. By what percentage does statin therapy reduce the relative
+risk of MACE? **Hint**: Relative risk reduction = 1 - RR
+
+
+
+**Answer:**
+
+---
+
+### 4C. Odds ratio
+
+Calculate the odds ratio ($OR = \frac{\hat{p}_1/(1-\hat{p}_1)}{\hat{p}_2/(1-\hat{p}_2)}$).
+
+```{r}
+#| label: odds-ratio
+
+# Your code here
+
+```
+
+In this dataset, is the OR close to the RR? Why or why not? (Hint: think about
+how common or rare the outcome is.)
+
+**Answer:**
+
+---
+
+## Part 5: Exact Binomial Inference
+
+### Background
+
+Researchers conducted a small pilot study evaluating post-operative stroke risk following a new cardiac surgery technique. In this study, **4 out of 18 patients** experienced a stroke within 30 days. The historical stroke rate for standard surgical techniques is approximately **3%**.
+
+The research team wants to know whether the new technique is associated with an
+elevated stroke rate.
+
+---
+
+### 5A. Set up the study values
+
+Based on the background above, assign the key values to named objects for use in the analysis.
+```{r}
+#| label: setup-pilot
+
+# Your code here
+# Hint: you need n_pilot, x_pilot, and p0_pilot
+```
+
+---
+
+### 5B. Check the success-failure condition
+
+Before deciding which test to use, check whether the normal approximation is
+valid for this scenario.
+
+```{r}
+#| label: check-exact-conditions
+
+# Check success-failure condition under H0
+# Your code here
+
+```
+
+Does the success-failure condition hold? Which test should you use and why?
+
+**Answer:**
+
+---
+
+### 5C. Run the exact binomial test
+
+Use `rstatix::binom_test()` to test whether the observed stroke rate exceeds
+the 3% historical benchmark. Use a one-sided alternative.
+
+::: {.callout-tip}
+You can use either `rstatix::binom_test()` or base R's `binom.test()` plus `broom::tidy()` — both produce exact p-values and Clopper-Pearson confidence intervals.
+
+`binom_test()` takes the same arguments as `prop_test()`: `x`, `n`, `p`,
+`alternative`, and `conf.level`.
+:::
+
+
+```{r}
+#| label: exact-binom-test
+
+# Your code here
+
+```
+
+---
+
+### 5D. Interpret the results
+
+Report the exact p-value and the Clopper-Pearson 95% confidence interval for
+the true stroke rate.
+
+Write a 2–3 sentence conclusion. What do the results suggest about the safety
+of this surgical technique? Why is the exact test the appropriate choice here?
+
+**Answer:**
+
+---
+
+## Submission checklist
+
+Before submitting, make sure you have:
+
+- [ ] Both data files are in your `data/` folder
+- [ ] All code chunks run without errors when rendered
+- [ ] Answered all written questions
+- [ ] Interpretations are written in full sentences, in context
+- [ ] Rendered your HTML successfully
+- [ ] Uploaded both `.qmd` and `.html` files
