@@ -62,6 +62,8 @@ website:
             text: Week 6
           - href: weeks/week_07.qmd
             text: Week 7
+          - href: weeks/week_08.qmd
+            text: Week 8
 
 execute:
   freeze: auto
