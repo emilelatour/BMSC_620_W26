@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Inference for Proportions and Categorical Data">
 
-<title>Essential RStudio Keyboard Shortcuts – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 8 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,11 +69,40 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -120,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Essential RStudio Keyboard Shortcuts</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Week 8</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -251,28 +281,44 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
+  <ul class="collapse">
+  <li><a href="#monday-inference-for-proportions-and-22-tables" id="toc-monday-inference-for-proportions-and-22-tables" class="nav-link" data-scroll-target="#monday-inference-for-proportions-and-22-tables">Monday — Inference for Proportions and 2×2 Tables</a></li>
+  <li><a href="#wednesday-chi-squared-tests-and-fishers-exact-test" id="toc-wednesday-chi-squared-tests-and-fishers-exact-test" class="nav-link" data-scroll-target="#wednesday-chi-squared-tests-and-fishers-exact-test">Wednesday — Chi-Squared Tests and Fisher’s Exact Test</a></li>
+  </ul></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Essential RStudio Keyboard Shortcuts</h1>
-<p class="subtitle lead">Quick reference for the shortcuts you’ll use most</p>
+<h1 class="title">Week 8</h1>
 </div>
 
+<div>
+  <div class="description">
+    Inference for Proportions and Categorical Data
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 22, 2026</p>
-    </div>
-  </div>
     
   </div>
   
@@ -281,157 +327,151 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>These are the keyboard shortcuts you’ll use most frequently in RStudio. Learning even a few of these will make your workflow much faster!</p>
-<section id="most-essential-shortcuts" class="level2">
-<h2 class="anchored" data-anchor-id="most-essential-shortcuts">Most Essential Shortcuts</h2>
-<table class="table-hover caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 8%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Action</th>
-<th>Mac</th>
-<th>Windows/Linux</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Insert pipe <code>%&gt;%</code></strong></td>
-<td><code>Cmd + Shift + M</code></td>
-<td><code>Ctrl + Shift + M</code></td>
-</tr>
-<tr class="even">
-<td><strong>Insert code chunk</strong></td>
-<td><code>Cmd + Option + I</code></td>
-<td><code>Ctrl + Alt + I</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Run current line/selection</strong></td>
-<td><code>Cmd + Enter</code></td>
-<td><code>Ctrl + Enter</code></td>
-</tr>
-<tr class="even">
-<td><strong>Run current chunk</strong></td>
-<td><code>Cmd + Shift + Enter</code></td>
-<td><code>Ctrl + Shift + Enter</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Run all chunks above</strong></td>
-<td><code>Cmd + Option + P</code></td>
-<td><code>Ctrl + Alt + P</code></td>
-</tr>
-<tr class="even">
-<td><strong>Comment/uncomment line(s)</strong></td>
-<td><code>Cmd + Shift + C</code></td>
-<td><code>Ctrl + Shift + C</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Insert assignment <code>&lt;-</code></strong></td>
-<td><code>Option + -</code> (minus)</td>
-<td><code>Alt + -</code> (minus)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="additional-helpful-shortcuts" class="level2">
-<h2 class="anchored" data-anchor-id="additional-helpful-shortcuts">Additional Helpful Shortcuts</h2>
-<table class="table-hover caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 8%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Action</th>
-<th>Mac</th>
-<th>Windows/Linux</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Move cursor to source editor</strong></td>
-<td><code>Ctrl + 1</code></td>
-<td><code>Ctrl + 1</code></td>
-</tr>
-<tr class="even">
-<td><strong>Move cursor to console</strong></td>
-<td><code>Ctrl + 2</code></td>
-<td><code>Ctrl + 2</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Clear console</strong></td>
-<td><code>Ctrl + L</code></td>
-<td><code>Ctrl + L</code></td>
-</tr>
-<tr class="even">
-<td><strong>Restart R session</strong></td>
-<td><code>Cmd + Shift + 0</code></td>
-<td><code>Ctrl + Shift + F10</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Show keyboard shortcut reference</strong></td>
-<td><code>Option + Shift + K</code></td>
-<td><code>Alt + Shift + K</code></td>
-</tr>
-<tr class="even">
-<td><strong>Find in files</strong></td>
-<td><code>Cmd + Shift + F</code></td>
-<td><code>Ctrl + Shift + F</code></td>
-</tr>
-<tr class="odd">
-<td><strong>Auto-complete</strong></td>
-<td><code>Tab</code></td>
-<td><code>Tab</code></td>
-</tr>
-<tr class="even">
-<td><strong>Get help for function</strong></td>
-<td><code>F1</code> (cursor on function)</td>
-<td><code>F1</code> (cursor on function)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tips-for-learning-shortcuts" class="level2">
-<h2 class="anchored" data-anchor-id="tips-for-learning-shortcuts">Tips for Learning Shortcuts</h2>
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
 <ul>
-<li><strong>Start with 2-3</strong>: Don’t try to memorize all of these at once. Start with the pipe operator and running code.</li>
-<li><strong>Use them consistently</strong>: The more you use a shortcut, the more automatic it becomes.</li>
-<li><strong>View all shortcuts</strong>: In RStudio, go to <strong>Tools → Keyboard Shortcuts Help</strong> or press <code>Option/Alt + Shift + K</code> to see the complete list.</li>
-<li><strong>Customize shortcuts</strong>: You can customize shortcuts in <strong>Tools → Modify Keyboard Shortcuts</strong>.</li>
+<li><strong>HW 5</strong> is due <strong>Monday, February 23 at 11:00 PM</strong></li>
+<li><strong>HW 6</strong> is due <strong>Sunday, March 1 at 11:00 PM</strong></li>
 </ul>
 </section>
-<section id="the-shortcuts-youll-use-every-class" class="level2">
-<h2 class="anchored" data-anchor-id="the-shortcuts-youll-use-every-class">The Shortcuts You’ll Use Every Class</h2>
-<p>If you only remember three shortcuts, make them these:</p>
-<ol type="1">
-<li><strong><code>Cmd/Ctrl + Shift + M</code></strong> - Insert pipe <code>%&gt;%</code></li>
-<li><strong><code>Cmd/Ctrl + Enter</code></strong> - Run current line</li>
-<li><strong><code>Cmd/Ctrl + Shift + C</code></strong> - Comment/uncomment</li>
-</ol>
-<p>These three will save you countless hours of typing!</p>
-</section>
-<section id="rstudio-cheatsheets" class="level2">
-<h2 class="anchored" data-anchor-id="rstudio-cheatsheets">RStudio Cheatsheets</h2>
-<p>RStudio provides official cheatsheets for many packages and topics. Access them in RStudio:</p>
-<p><strong>Help → Cheatsheets</strong></p>
-<p>Or download them directly from: <a href="https://posit.co/resources/cheatsheets/" class="uri">https://posit.co/resources/cheatsheets/</a></p>
-<section id="most-relevant-cheatsheets-for-this-course" class="level3">
-<h3 class="anchored" data-anchor-id="most-relevant-cheatsheets-for-this-course">Most relevant cheatsheets for this course:</h3>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This week we extend our hypothesis testing toolkit to <strong>categorical outcomes</strong>, covering two full class meetings.</p>
+<p>Monday focuses on inference for proportions — from single-proportion tests and confidence intervals through comparing two independent proportions and interpreting 2×2 tables. Wednesday introduces chi-squared tests for larger contingency tables and Fisher’s exact test for situations where sample sizes are small.</p>
+<p>By the end of the week, you should be able to:</p>
 <ul>
-<li><strong>RStudio IDE Cheat Sheet</strong> - Overview of RStudio interface and shortcuts</li>
-<li><strong>Data Transformation with dplyr</strong> - The dplyr verbs we use constantly</li>
-<li><strong>Data Visualization with ggplot2</strong> - Creating plots</li>
-<li><strong>R Markdown</strong> - Works for Quarto documents too</li>
+<li>apply the normal approximation to the sampling distribution of a sample proportion,</li>
+<li>conduct hypothesis tests for a single proportion,</li>
+<li>construct and interpret confidence intervals for a single proportion,</li>
+<li>test for differences between two independent proportions,</li>
+<li>interpret data displayed in 2×2 tables and select the appropriate inference method based on study design,</li>
+<li>conduct chi-squared tests for independence in contingency tables,</li>
+<li>apply Fisher’s exact test when expected cell counts are small, and</li>
+<li>recognize when each method is appropriate given the data and research question.</li>
+</ul>
+</section>
+<section id="readings-before-class" class="level2">
+<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
+<ul>
+<li>Textbook sections 8.1–8.2 (before Monday)</li>
+<li>Textbook sections 8.3–8.4 (before Wednesday)</li>
+</ul>
+</section>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<section id="monday-inference-for-proportions-and-22-tables" class="level3">
+<h3 class="anchored" data-anchor-id="monday-inference-for-proportions-and-22-tables">Monday — Inference for Proportions and 2×2 Tables</h3>
+<ul>
+<li><strong>Topics</strong>
+<ul>
+<li>The sampling distribution of a sample proportion</li>
+<li>Normal approximation conditions (success-failure condition)</li>
+<li>Hypothesis tests for a single proportion (one-sample z-test)</li>
+<li>Confidence intervals for a single proportion (Wilson score interval)</li>
+<li>Comparing two independent proportions</li>
+<li>2×2 contingency tables: structure and interpretation</li>
+<li>Relative risk and odds ratios</li>
+<li>Choosing the appropriate inference method based on study design</li>
+</ul></li>
+<li><strong>Slides</strong>
+<ul>
+<li>Inference for Proportions and 2×2 Tables (<a href="../lessons/16_proportions_inference/16_proportions_inference.html">HTML</a> | <a href="../lessons/16_proportions_inference/16_proportions_inference.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/">OneDrive</a>)</li>
+</ul></li>
+<li><strong>Recording</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
+<li><strong>Muddy points</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
 </ul>
 <hr>
-<p><em>Tip: Print out the dplyr and ggplot2 cheatsheets and keep them handy while coding!</em></p>
-
-
 </section>
+<section id="wednesday-chi-squared-tests-and-fishers-exact-test" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-chi-squared-tests-and-fishers-exact-test">Wednesday — Chi-Squared Tests and Fisher’s Exact Test</h3>
+<ul>
+<li><strong>Topics</strong>
+<ul>
+<li>Chi-squared test for independence (general <span class="math inline">\(r \times c\)</span> tables)</li>
+<li>Expected cell counts and the chi-squared statistic</li>
+<li>Degrees of freedom and the chi-squared distribution</li>
+<li>Assumptions and conditions for the chi-squared test</li>
+<li>Fisher’s exact test for 2×2 tables with small expected counts</li>
+<li>When to use chi-squared vs.&nbsp;Fisher’s exact test</li>
+<li>Reporting results from tests of association</li>
+</ul></li>
+<li><strong>Slides</strong>
+<ul>
+<li>Chi-Squared Tests and Fisher’s Exact Test (HTML | PDF| OneDrive)</li>
+</ul></li>
+<li><strong>Recording</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
+<li><strong>Muddy points</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li><strong>HW 6</strong>
+<ul>
+<li>Released <strong>Monday, February 23</strong></li>
+<li>Due <strong>Sunday, March 1 at 11:00 PM</strong></li>
+<li>Covers:
+<ul>
+<li>Power analysis for two-sample t-tests (Cohen’s <em>d</em>, sample size, power trade-offs)</li>
+<li>One-sample proportion test against a historical benchmark</li>
+<li>Checking the success-failure condition for the normal approximation</li>
+<li>Comparing two independent proportions (two-sample z-test)</li>
+<li>Measures of association from a 2×2 table: risk difference, relative risk, and odds ratio</li>
+<li>Exact binomial inference when the normal approximation fails</li>
+</ul></li>
+<li>Data files needed: <code>cardiac_trial.csv</code> (available in the <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4">data folder on OneDrive</a>)</li>
+<li><a href="../homework/HW06/HW06.html">View HW 6 instructions</a></li>
+</ul></li>
+<li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
+</ul>
+</section>
+<section id="post-class-check-in-attendance" class="level2">
+<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
+<ul>
+<li>Please complete the post-class check-in after each class meeting.</li>
+<li>Used for attendance credit and to identify topics that need clarification.</li>
+<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>After categorical inference, we continue building our toolkit:</p>
+<ul>
+<li><strong>Week 9</strong>:
+<ul>
+<li>Comparing means across multiple groups with ANOVA</li>
+<li>Nonparametric tests (alternatives to t-tests when assumptions fail)</li>
+</ul></li>
+<li><strong>Week 10</strong>:
+<ul>
+<li>Correlation and association</li>
+<li>Introduction to simple linear regression</li>
+</ul></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
