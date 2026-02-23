@@ -82,6 +82,12 @@ The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 :::
 :::
 
+::: {.callout-note}
+`prop.test()` reports a Wilson score confidence interval, not the Wald interval from our hand calculation — hence the slight difference in the lower bound. Wilson is preferred in practice.
+
+Affects two-sided and one-sided intervals. Two-sided shown here.
+:::
+
 
 ## What did we just observe?
 

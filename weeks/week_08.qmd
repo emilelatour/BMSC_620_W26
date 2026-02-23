@@ -1,0 +1,120 @@
+---
+title: "Week 8"
+description: "Inference for Proportions and Categorical Data"
+format:
+  html:
+    toc: true
+---
+
+```{=html}
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+```
+
+## Announcements
+
+-   **HW 5** is due **Monday, February 23 at 11:00 PM**
+-   **HW 6** is due **Sunday, March 1 at 11:00 PM**
+
+## Overview
+
+This week we extend our hypothesis testing toolkit to **categorical outcomes**, covering two full class meetings.
+
+Monday focuses on inference for proportions — from single-proportion tests and confidence intervals through comparing two independent proportions and interpreting 2×2 tables. Wednesday introduces chi-squared tests for larger contingency tables and Fisher's exact test for situations where sample sizes are small.
+
+By the end of the week, you should be able to:
+
+-   apply the normal approximation to the sampling distribution of a sample proportion,
+-   conduct hypothesis tests for a single proportion,
+-   construct and interpret confidence intervals for a single proportion,
+-   test for differences between two independent proportions,
+-   interpret data displayed in 2×2 tables and select the appropriate inference method based on study design,
+-   conduct chi-squared tests for independence in contingency tables,
+-   apply Fisher's exact test when expected cell counts are small, and
+-   recognize when each method is appropriate given the data and research question.
+
+## Readings (before class)
+
+-   Textbook sections 8.1–8.2 (before Monday)
+-   Textbook sections 8.3–8.4 (before Wednesday)
+
+## Materials
+
+### Monday — Inference for Proportions and 2×2 Tables
+
+-   **Topics**
+    -   The sampling distribution of a sample proportion
+    -   Normal approximation conditions (success-failure condition)
+    -   Hypothesis tests for a single proportion (one-sample z-test)
+    -   Confidence intervals for a single proportion (Wilson score interval)
+    -   Comparing two independent proportions
+    -   2×2 contingency tables: structure and interpretation
+    -   Relative risk and odds ratios
+    -   Choosing the appropriate inference method based on study design
+-   **Slides**
+    -   Inference for Proportions and 2×2 Tables ([HTML](/lessons/16_proportions_inference/16_proportions_inference.qmd) | [PDF](/lessons/16_proportions_inference/16_proportions_inference.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/))
+-   **Recording**
+    -   Coming soon.
+-   **Muddy points**
+    -   Coming soon.
+
+------------------------------------------------------------------------
+
+### Wednesday — Chi-Squared Tests and Fisher's Exact Test
+
+-   **Topics**
+    -   Chi-squared test for independence (general $r \times c$ tables)
+    -   Expected cell counts and the chi-squared statistic
+    -   Degrees of freedom and the chi-squared distribution
+    -   Assumptions and conditions for the chi-squared test
+    -   Fisher's exact test for 2×2 tables with small expected counts
+    -   When to use chi-squared vs. Fisher's exact test
+    -   Reporting results from tests of association
+-   **Slides**
+    -   Chi-Squared Tests and Fisher's Exact Test (HTML | PDF| OneDrive)
+-   **Recording**
+    -   Coming soon.
+-   **Muddy points**
+    -   Coming soon.
+
+------------------------------------------------------------------------
+
+## Homework
+
+-   **HW 6**
+    -   Released **Monday, February 23**
+    -   Due **Sunday, March 1 at 11:00 PM**
+    -   Covers:
+        -   Power analysis for two-sample t-tests (Cohen's *d*, sample size, power trade-offs)
+        -   One-sample proportion test against a historical benchmark
+        -   Checking the success-failure condition for the normal approximation
+        -   Comparing two independent proportions (two-sample z-test)
+        -   Measures of association from a 2×2 table: risk difference, relative risk, and odds ratio
+        -   Exact binomial inference when the normal approximation fails
+    -   Data files needed: `cardiac_trial.csv` (available in the [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/data?csf=1&web=1&e=P9czhc))
+    -   [View HW 6 instructions](/homework/HW06/HW06.qmd)
+
+-   See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+-   Please complete the post-class check-in after each class meeting.
+-   Used for attendance credit and to identify topics that need clarification.
+-   Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+After categorical inference, we continue building our toolkit:
+
+-   **Week 9**:
+    -   Comparing means across multiple groups with ANOVA
+    -   Nonparametric tests (alternatives to t-tests when assumptions fail)
+-   **Week 10**:
+    -   Correlation and association
+    -   Introduction to simple linear regression
