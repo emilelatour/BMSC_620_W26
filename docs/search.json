@@ -1118,7 +1118,7 @@
     "href": "lessons/16_proportions_inference/16_proportions_inference.html#step-3-check-the-assumptions",
     "title": "Inference for Proportions and 2×2 Tables",
     "section": "Step 3: Check the assumptions",
-    "text": "Step 3: Check the assumptions\n\n# Study data\nn &lt;- 52           # Sample size\nx &lt;- 21           # Number of responders\np_hat &lt;- x / n    # Sample proportion\np0 &lt;- 0.30        # Null hypothesis value\n\n# Print values\np_hat\n\n[1] 0.4038462\n\n\n\n\n1. Independence: Patients in a clinical trial are reasonably independent (one patient’s response doesn’t affect another’s)\n\n\n2. Success-failure condition under \\(H_0\\):\n\nn * p0              # Expected successes\n\n[1] 15.6\n\nn * (1 - p0)        # Expected failures\n\n[1] 36.4\n\n\nBoth \\(\\geq 10\\) ✓ — the normal approximation is appropriate!"
+    "text": "Step 3: Check the assumptions\n\n# Study data\nn &lt;- 52           # Sample size\nx &lt;- 21           # Number of responders\np_hat &lt;- x / n    # Sample proportion\np0 &lt;- 0.30        # Null hypothesis value\n\n# Print values\np_hat\n\n[1] 0.4038462\n\n\n\n\n1. Independence: Patients in a clinical trial are reasonably independent (one patient’s response doesn’t affect another’s)\n\n\n2. Success-failure condition under \\(H_0\\):\n\nn * p0              # Expected successes\n## [1] 15.6\nn * (1 - p0)        # Expected failures\n## [1] 36.4\n\nBoth \\(\\geq 10\\) ✓ — the normal approximation is appropriate!"
   },
   {
     "objectID": "lessons/16_proportions_inference/16_proportions_inference.html#step-4-calculate-the-test-statistic",

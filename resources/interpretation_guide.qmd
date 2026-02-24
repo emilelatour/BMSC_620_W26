@@ -1,0 +1,155 @@
+---
+title: "Elements of a Complete Statistical Interpretation"
+subtitle: "A Reference Guide for Homework and Exams"
+author: "Emile"
+date: "today"
+date-format: long
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    html-math-method: mathjax
+    embed-resources: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(knitr)
+
+library(lamisc)
+library(laviz)
+
+theme_set(laviz::theme_minimal_white(grid = "none", axis = FALSE, base_size = 14))
+```
+
+# Purpose
+
+This guide summarizes what a complete statistical interpretation looks like in this course. Use it as a checklist when writing up results for homework and exams.
+
+The goal is not to produce a rigid formula. It is to communicate your findings clearly enough that someone unfamiliar with your analysis could understand what you did, what you found, and what it means.
+
+::: {.callout-tip}
+When in doubt, ask yourself: *Could someone read this and know exactly what test I ran, what I found, and what conclusion I drew?* If yes, you are in good shape.
+:::
+
+---
+
+# Step 1: State Your Hypotheses
+
+Always state your hypotheses explicitly before conducting a test. Do not leave the reader to infer them from your conclusion.
+
+Hypotheses should be stated in terms of a **population parameter**, not sample statistics.
+
+**Examples:**
+
+$$H_0: p = 0.5 \quad \text{versus} \quad H_A: p \neq 0.5$$
+
+$$H_0: p_1 = p_2 \quad \text{versus} \quad H_A: p_1 \neq p_2$$
+
+$$H_0: \mu_1 = \mu_2 \quad \text{versus} \quad H_A: \mu_1 \neq \mu_2$$
+
+$$H_0: \text{There is no association between } X \text{ and } Y \quad \text{versus} \quad H_A: \text{There is an association between } X \text{ and } Y$$
+
+For regression contexts:
+
+$$H_0: \beta_1 = 0 \quad \text{versus} \quad H_A: \beta_1 \neq 0$$
+
+---
+
+# Step 2: Report the Key Results
+
+A complete write-up includes all of the following:
+
+::: {.callout-note appearance="simple"}
+**Checklist**
+
+- [ ] The **test statistic** and its type (e.g., $z$, $t$, $\chi^2$)
+- [ ] The **$p$-value**, rounded to 3 decimal places (e.g., $p = 0.032$). If the $p$-value is less than 0.001, it is acceptable to report $p < 0.001$ rather than the exact value.
+- [ ] The **estimate of interest** with units (e.g., a proportion, mean difference, odds ratio)
+- [ ] A **95% confidence interval** for that estimate, with units
+- [ ] The **$\alpha$ level** used for the decision
+- [ ] A **conclusion** about the null hypothesis
+:::
+
+**A note on transformed coefficients:** Do not report untransformed coefficients when the parameter of interest is on a different scale. For example, in logistic regression, report the **odds ratio** (and its 95% CI), not the log odds.
+
+---
+
+# Step 3: Write Your Conclusion Carefully
+
+Two important rules:
+
+1. **We do not "accept" the null hypothesis.** We either *reject* $H_0$ or *fail to reject* $H_0$. A non-significant result does not prove the null is true --- it means we did not find sufficient evidence against it. The study may simply have been underpowered.
+
+2. **Frame your conclusion in the context of the problem.** Don't just say "we reject $H_0$." Say what that means for the research question, in plain language, with appropriate hedging.
+
+---
+
+# A Complete Example
+
+The following example illustrates all of the required components. Each label **(a)** through **(d)** corresponds to a checklist item.
+
+---
+
+> In a double-blind randomized clinical trial, there was a non-significant difference between the proportion of patients who died in the treatment and control groups (z-test, $z = -1.90$; $p = 0.058$) **(a)**.
+>
+> The proportion of patients who died in the control group was 8.1% (95% CI: 6.1% to 10.0%), and the proportion who died in the treatment group was 5.6% (95% CI: 3.9% to 7.3%). The proportion of patients who died in the treatment group was 2.5 percentage points lower (95% CI: 0.1 percentage points higher to 5.1 percentage points lower) than in the control group **(b)**.
+>
+> Since the $p$-value of 0.058 exceeds our pre-specified $\alpha = 0.05$ **(c)**, there is marginal but insufficient evidence to conclude the true proportions differ, and we fail to reject the null hypothesis **(d)**. We conclude there is not a statistically significant difference in mortality between the treatment and control groups.
+
+---
+
+**What each label represents:**
+
+| Label | Component | What was reported |
+|---|---|---|
+| **(a)** | Test statistic and $p$-value | $z = -1.90$, $p = 0.058$, test type named |
+| **(b)** | Estimate + 95% CI with units | Risk difference = −2.5 percentage points (95% CI: −5.1 to 0.1 pp) |
+| **(c)** | $\alpha$ level | Pre-specified $\alpha = 0.05$ |
+| **(d)** | Conclusion about $H_0$ | Fail to reject $H_0$; conclusion stated in context |
+
+---
+
+# Common Mistakes to Avoid
+
+**Saying "we accept the null hypothesis"**
+
+> ~~"We accept $H_0$ and conclude there is no difference."~~
+
+Failing to reject is not the same as proving the null is true. A study with low power might miss a real effect.
+
+**Omitting the confidence interval**
+
+The $p$-value tells you whether a result is statistically significant. The confidence interval tells you *how large* the effect might plausibly be. Both are needed.
+
+**Reporting a difference without units**
+
+> ~~"The treatment group had a lower proportion."~~
+
+Always specify the magnitude and units: *"The treatment group had a proportion 2.5 percentage points lower (95% CI: 0.1 to 5.1 percentage points lower)."*
+
+**Confusing "percent" and "percentage points"**
+
+A change from 8.1% to 5.6% is a difference of **2.5 percentage points** (absolute) and a **31% relative reduction**. These are not interchangeable. In most homework write-ups, you will report the absolute difference in percentage points.
+
+**Forgetting to name the test**
+
+Always identify what test you used: *z-test, two-sample t-test, chi-squared test of independence*, etc.
+
+---
+
+# Quick Reference: Grading Criteria
+
+Recall that the interpretation and communication criterion in this course (2 points) looks for:
+
+> *Answers include written interpretation where appropriate, with an attempt to explain results in context (e.g., direction, magnitude, units, or meaning of statistical output).*
+
+Using this guide as a checklist will help you meet that criterion consistently.
