@@ -62,7 +62,8 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Inference for Proportions and 2×2 Tables](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQAzN0MBkNWPQqlTS6AlqxzrAS_VzOPFNiT8mWPVdPdGnhA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=d1lLaD)
 -   **Muddy points**
-    -   Coming soon.
+    -   [Muddy Points - Lesson 13](/lessons/16_proportions_inference/16_proportions_inference_muddy_points.qmd)
+
 
 ------------------------------------------------------------------------
 
