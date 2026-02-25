@@ -85,7 +85,7 @@ By the end of the week, you should be able to:
   - [Download R Module 1: Reproducible Reports in Quarto (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/slides/r_module1_reproducible_reports_in_quarto.qmd?csf=1&web=1&e=8d2sUB)
   
 -   **Recording**
-    -   Coming soon.
+    -   [Chi-Squared Tests and Fisher's Exact Test](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQB6_dM0JSJvTIa30-yLrKE7AZ8NVaXitUo03y_YKqT4xZ8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=piWYgE)
 -   **Muddy points**
     -   Coming soon.
 
