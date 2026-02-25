@@ -1,0 +1,669 @@
+---
+title: "R Module 1: Reproducible Reports in Quarto"
+subtitle: "BMSC 620 | R Workflow Series"
+author: "Emile Latour"
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Inference for Proportions"
+    html-math-method: mathjax
+    chalkboard: true
+    progress: true
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: github
+    fig-align: center
+    incremental: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+library(tidyverse)
+library(oibiostat)
+
+data("nhanes.samp")
+```
+
+## What We're Learning Today {.section-slide}
+
+::: {.learning-objectives}
+By the end of this module, you will be able to:
+
+1. Understand and modify the **YAML header** in a `.qmd` file
+2. Use **chunk options** to control how code and output appear
+3. Insert **R results directly into prose** using inline R
+4. Produce a report where numbers never need to be manually copy-pasted
+:::
+
+::: {.callout-note}
+These skills apply directly to every homework and future manuscript you write.
+:::
+
+---
+
+## The Problem We're Solving
+
+Imagine you run an analysis and write up your results:
+
+> "The mean BMI in our sample was **27.3** kg/m², with a standard deviation of **6.1**."
+
+Then your collaborator sends you a corrected dataset.
+
+. . .
+
+You re-run your analysis. The mean is now **27.6**. The SD is now **6.3**.
+
+. . .
+
+**How many places in your report do you need to update?**
+
+. . .
+
+::: {.fragment .highlight-red}
+Every. Single. One. Manually.
+:::
+
+---
+
+## The Solution: Reproducible Reporting
+
+What if your prose *was* your code?
+
+````{markdown}
+The mean BMI in our sample was `r mean(nhanes.samp$BMI, na.rm = TRUE) |> round(1)` kg/m²,
+with a standard deviation of `r sd(nhanes.samp$BMI, na.rm = TRUE) |> round(1)`.
+````
+
+\
+
+When the data changes, you re-render. **Everything updates.**
+
+> The mean BMI in our sample was `r mean(nhanes.samp$BMI, na.rm = TRUE) |> round(1)` kg/m²,
+with a standard deviation of `r sd(nhanes.samp$BMI, na.rm = TRUE) |> round(1)`.
+
+. . .
+
+\
+
+This is what Quarto makes possible — and it starts with understanding the structure of a `.qmd` file.
+
+---
+
+## Anatomy of a `.qmd` File {.section-slide}
+
+A Quarto document has three parts:
+
+::: {.columns}
+::: {.column width="50%"}
+````
+---                     ← YAML header
+title: "My Report"
+format: html
+---
+
+Some prose text       ← Markdown text
+
+```{{r}}              ← Code chunk
+mean(x)
+```
+````
+:::
+
+::: {.column width="50%"}
+| Section | Purpose |
+|---------|---------|
+| **YAML** | Document settings and metadata |
+| **Prose** | Your writing (Markdown) |
+| **Chunks** | Your R code |
+
+All three work together to produce your final document.
+:::
+:::
+
+---
+
+## Part 1: The YAML Header {.section-slide}
+
+---
+
+## What Is YAML?
+
+YAML = "YAML Ain't Markup Language" *(don't worry about the name)*
+
+It lives between the two sets of `---` at the **very top** of your file.
+
+```{yaml}
+---
+title: "NHANES Sample Analysis"
+author: "Your Name"
+date: today
+format: html
+---
+```
+
+::: {.callout-important}
+**YAML is indentation-sensitive.** Misaligned spaces will cause your document to fail to render. Always use spaces, not tabs.
+:::
+
+---
+
+## Essential YAML Fields
+
+```{yaml}
+---
+title: "NHANES Sample Analysis"       # Document title
+subtitle: "BMSC 620 Homework 3"       # Optional subtitle  
+author: "Your Name"                   # Your name
+date: today                           # Auto-fills today's date
+format: html                          # Output format
+---
+```
+
+\
+
+`date: today` is a Quarto shortcut — it automatically uses the current date when you render. No more hardcoding dates.
+
+---
+
+## Controlling Your Output Format
+
+The `format` field controls what kind of document is produced.
+
+::: {.columns}
+::: {.column width="50%"}
+**Simple version:**
+```{yaml}
+format: html
+```
+:::
+
+::: {.column width="50%"}
+**With options:**
+```{yaml}
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    theme: flatly
+    self-contained: true
+```
+:::
+:::
+
+. . .
+
+\
+
+`self-contained: true` bundles everything into one `.html` file — **very useful for submitting homework.**
+
+---
+
+## Useful `format: html` Options
+
+| Option | What it does |
+|--------|-------------|
+| `toc: true` | Adds a table of contents |
+| `toc-depth: 2` | How many heading levels in the TOC |
+| `number-sections: true` | Numbers your section headings |
+| `theme: flatly` | Changes the visual theme |
+| `self-contained: true` | One file, easy to submit |
+| `code-fold: true` | Hides code by default (reader can expand) |
+
+---
+
+## Document-Level Execute Options
+
+You can set default behavior for **all** code chunks in the YAML:
+
+```{yaml}
+---
+title: "NHANES Analysis"
+format: html
+execute:
+  echo: true       # Show code by default
+  warning: false   # Hide warnings by default
+  message: false   # Hide package messages by default
+---
+```
+
+\
+
+::: {.callout-tip}
+Setting `warning: false` and `message: false` at the document level is almost always a good idea. Individual chunks can override these defaults.
+:::
+
+---
+
+## Part 2: Chunk Options {.section-slide}
+
+---
+
+## What Are Chunk Options?
+
+Chunk options control **how a specific chunk of code behaves** when the document renders.
+
+They go at the top of a chunk using the `#|` prefix (the "hashpipe"):
+
+````{markdown}
+```{{r}}
+#| label: my-analysis
+#| echo: false
+#| warning: false
+
+mean(nhanes.samp$BMI, na.rm = TRUE)
+```
+````
+
+Each `#|` line is one option. You can have as many as you need.
+
+---
+
+## The Most Important Chunk Options
+
+| Option | Values | What it controls |
+|--------|--------|-----------------|
+| `label` | any name | Names the chunk (useful for debugging) |
+| `echo` | `true/false` | Show the code in output? |
+| `eval` | `true/false` | Run the code? |
+| `warning` | `true/false` | Show warnings? |
+| `message` | `true/false` | Show messages? |
+| `include` | `true/false` | Include *anything* from this chunk? |
+
+---
+
+
+
+## `echo`: Show or Hide Code
+
+::: {.columns}
+::: {.column width="50%"}
+**`echo: true`** — code and output both appear
+```{r}
+#| label: echo-demo-true
+#| echo: true
+nhanes.samp %>% 
+  summarise(
+    mean_bmi = mean(BMI, na.rm = TRUE) %>% round(1),
+    sd_bmi   = sd(BMI, na.rm = TRUE) %>% round(1)
+  )
+```
+:::
+
+::: {.column width="50%"}
+**`echo: false`** — only the output appears
+```{r}
+#| label: echo-demo-false
+#| echo: false
+nhanes.samp %>% 
+  summarise(
+    mean_bmi = mean(BMI, na.rm = TRUE) %>% round(1),
+    sd_bmi   = sd(BMI, na.rm = TRUE) %>% round(1)
+  )
+```
+
+\
+
+\
+
+\
+
+::: {.callout-tip}
+Use `echo: false` in polished reports where the code isn't the point — readers see only the result.
+:::
+:::
+:::
+
+---
+
+## `eval`: Run or Skip Code
+
+````{markdown}
+```{{r}}
+#| eval: false
+
+# This code will be shown but NOT run
+install.packages("tidyverse")
+```
+````
+
+
+\
+
+::: {.callout-tip}
+`eval: false` is perfect for showing installation instructions or example code that you don't want to actually execute when rendering.
+:::
+
+---
+
+## `include`: Invisible but Active
+
+````{markdown}
+```{r}
+#| label: setup-chunk
+#| include: false
+
+# This entire chunk — code AND output — is invisible in the final document
+# But the code still runs!
+library(tidyverse)
+library(oibiostat)
+data("nhanes.samp")
+```
+````
+
+`include: false` is what you use for your **setup chunk** — you need the libraries loaded, but readers don't need to see that.
+
+---
+
+## Chunk Options for Figures
+
+````markdown
+```{{r}}
+#| label: fig-bmi-hist
+#| fig-width: 7
+#| fig-height: 4
+#| fig-cap: "Distribution of BMI in the NHANES sample (n = 200)"
+#| fig-alt: "Histogram showing a roughly normal distribution of BMI"
+
+ggplot(nhanes.samp, aes(x = BMI)) +
+  geom_histogram(bins = 30)
+```
+````
+
+| Option | Purpose |
+|--------|---------|
+| `fig-width` / `fig-height` | Dimensions in inches |
+| `fig-cap` | Caption below figure |
+| `fig-alt` | Accessibility alt text |
+
+---
+
+## Why Label Your Chunks?
+
+````markdown
+```{{r}}
+#| label: bmi-summary
+
+nhanes.samp |> 
+  summarise(mean_bmi = mean(BMI, na.rm = TRUE))
+```
+````
+
+Chunk labels help you in three ways:
+
+1. **Debugging** — error messages tell you exactly which chunk failed
+2. **Navigation** — RStudio shows labeled chunks in the document outline
+3. **Cross-referencing** — figures labeled `fig-*` can be cited in text
+
+::: {.callout-important}
+Label names must be **unique** within a document and contain no spaces (use `-` or `_` instead).
+:::
+
+---
+
+## Part 3: Inline R {.section-slide}
+
+---
+
+## What Is Inline R?
+
+Inline R lets you embed a **single R expression** directly inside your prose.
+
+\
+
+**Syntax:**
+
+```{markdown}
+The sample includes `r nrow(nhanes.samp)` participants.
+```
+
+\
+
+**Renders as:**
+
+> The sample includes `r nrow(nhanes.samp)` participants.
+
+
+\
+
+\
+
+The backtick-r opens it, the closing backtick ends it. Everything between is evaluated as R.
+
+---
+
+## A Realistic Example
+
+Suppose you want to report summary statistics in a sentence:
+
+```{r}
+#| echo: true
+
+# These are calculated in a code chunk
+n      <- nrow(nhanes.samp)
+m_bmi  <- mean(nhanes.samp$BMI, na.rm = TRUE) |> round(1)
+sd_bmi <- sd(nhanes.samp$BMI, na.rm = TRUE) |> round(1)
+```
+
+
+\
+
+**In your qmd:**
+```{markdown}
+The NHANES sample included `r n` participants.
+Mean BMI was `r m_bmi` kg/m² (SD = `r sd_bmi`).
+```
+
+\
+
+**Rendered output:**
+
+> The NHANES sample included `r n` participants. Mean BMI was `r m_bmi` kg/m² (SD = `r sd_bmi`).
+
+---
+
+## The Smart Workflow: Compute Then Report
+
+Rather than putting complex expressions inline, **compute first in a chunk, then report inline.**
+
+\
+
+::: {.columns}
+::: {.column width="50%"}
+**❌ Hard to read:**
+
+```{markdown}
+Mean BMI was 
+`r mean(nhanes.samp$BMI, na.rm=TRUE)|>round(1)`.
+```
+:::
+
+::: {.column width="50%"}
+**✅ Clean:**
+
+````{markdown}
+```{{r}}
+#| include: false
+m_bmi <- mean(nhanes.samp$BMI, 
+              na.rm = TRUE) |> round(1)
+```
+
+Mean BMI was `r m_bmi`.
+````
+:::
+:::
+
+\
+
+The chunk does the work. Inline R just reports it.
+
+---
+
+## Formatting Numbers Inline
+
+The `scales` package formats numbers directly — no more `round()` or `paste0()`:
+
+```{r}
+library(scales)
+
+n      <- nrow(nhanes.samp)
+m_bmi  <- mean(nhanes.samp$BMI, na.rm = TRUE)
+sd_bmi <- sd(nhanes.samp$BMI, na.rm = TRUE)
+
+prop_overweight <- mean(nhanes.samp$BMI >= 25, na.rm = TRUE)
+p_val <- 0.0003
+```
+
+\
+
+```{markdown}
+The sample included `r n` participants.
+Mean BMI was `r scales::number(m_bmi, accuracy = 0.1)` kg/m²
+(SD = `r scales::number(sd_bmi, accuracy = 0.1)`).
+`r scales::percent(prop_overweight, accuracy = 0.1)` had BMI ≥ 25.
+The association was statistically significant (*p* `r scales::pvalue(p_val)`).
+```
+
+\
+
+Renders as:
+
+> The sample included `r n` participants. Mean BMI was `r scales::number(m_bmi, accuracy = 0.1)` kg/m² (SD = `r scales::number(sd_bmi, accuracy = 0.1)`). `r scales::percent(prop_overweight, accuracy = 0.1)` had BMI ≥ 25. The association was statistically significant (*p* `r scales::pvalue(p_val)`).
+
+. . .
+
+The `accuracy` argument controls decimal places. `scales::pvalue()` automatically handles the `< 0.001` case.
+
+---
+
+
+
+## Putting It All Together {.section-slide}
+
+---
+
+## Before: The Fragile Report
+
+```markdown
+## Results
+
+We analyzed data from 200 participants. The mean age was
+38.2 years (SD = 14.7). Mean BMI was 26.7 kg/m²
+(SD = 6.5). Approximately 60.4% of participants had a 
+BMI ≥ 25.
+```
+
+Every number here is hardcoded. If the dataset changes — or if you made an error — **you have to find every number manually.**
+
+---
+
+## After: The Reproducible Report
+
+```{r}
+#| include: false
+n      <- nrow(nhanes.samp)
+m_age  <- mean(nhanes.samp$Age, na.rm = TRUE)
+sd_age <- sd(nhanes.samp$Age,   na.rm = TRUE)
+m_bmi  <- mean(nhanes.samp$BMI, na.rm = TRUE)
+sd_bmi <- sd(nhanes.samp$BMI,   na.rm = TRUE)
+pct_ow <- scales::percent(mean(nhanes.samp$BMI >= 25, na.rm = TRUE),
+                           accuracy = 0.1)
+```
+
+
+````{markdown}
+```{{r}}
+#| include: false
+n      <- nrow(nhanes.samp)
+m_age  <- mean(nhanes.samp$Age, na.rm = TRUE)
+sd_age <- sd(nhanes.samp$Age,   na.rm = TRUE)
+m_bmi  <- mean(nhanes.samp$BMI, na.rm = TRUE)
+sd_bmi <- sd(nhanes.samp$BMI,   na.rm = TRUE)
+pct_ow <- scales::percent(mean(nhanes.samp$BMI >= 25, na.rm = TRUE),
+                           accuracy = 0.1)
+```
+
+We analyzed data from `r n` participants. Mean age was
+`r scales::number(m_age, accuracy = 0.1)` years
+(SD = `r scales::number(sd_age, accuracy = 0.1)`). Mean BMI was
+`r scales::number(m_bmi, accuracy = 0.1)` kg/m²
+(SD = `r scales::number(sd_bmi, accuracy = 0.1)`).
+Approximately `r pct_ow` had a BMI ≥ 25.
+````
+Renders as:
+
+> We analyzed data from `r n` participants. Mean age was `r scales::number(m_age, accuracy = 0.1)` years (SD = `r scales::number(sd_age, accuracy = 0.1)`). Mean BMI was `r scales::number(m_bmi, accuracy = 0.1)` kg/m² (SD = `r scales::number(sd_bmi, accuracy = 0.1)`). Approximately `r pct_ow` had a BMI ≥ 25.
+
+Re-run with new data. **Everything updates.**
+
+---
+
+## Key Takeaways
+
+::: {.columns}
+::: {.column width="60%"}
+**YAML**
+
+- Controls document settings and metadata
+- `execute:` sets defaults for all chunks
+- `self-contained: true` for easy submission
+
+**Chunk options**
+
+- `echo` / `eval` / `include` control visibility
+- Always label your chunks
+- Fig options control plot appearance
+
+**Inline R**
+
+- Never manually type a number that R can compute
+- Compute in a chunk, report inline
+- `scales` package for clean formatting
+:::
+
+::: {.column width="40%"}
+::: {.callout-tip}
+**The rule:**
+
+If a number in your prose came from an analysis, it should come from R — not from you typing it.
+:::
+:::
+:::
+
+---
+
+## References
+
+\
+
+**YAML**
+
+- [Good intro to YAML](https://rpubs.com/drgregmartin/1266674) -- focus on "Document YAML" not "Project YAML".
+- [YAML in R for Data Science](https://r4ds.hadley.nz/quarto.html#yaml-header)
+- [Bootstrap themes](https://quarto.org/docs/output-formats/html-themes.html)
+
+\
+
+**Chunk options**
+
+- [Global chunk options in Quarto](https://quarto.org/docs/computations/execution-options.html)
+- [Quarto chunk options](https://rpubs.com/drgregmartin/1266667)
+- [Quarto documentation: chunk options](https://quarto.org/docs/computations/r.html#chunk-options)
+
+\
+
+**Inline R**
+
+- [Inline R Code in RMarkdown](https://uoepsy.github.io/scs/rmd-bootcamp/03-inline.html) -- Applies for Quarto too.
+- [Inline R code](https://yihui.org/rmarkdown-cookbook/r-code)
+- [Quarto documentation](https://quarto.org/docs/computations/inline-code.html) -- OK. Have to click on the "Knitr" tab to see `R`.

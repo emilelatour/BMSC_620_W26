@@ -65,20 +65,10 @@ En Dash –
 
 ::: columns
 ::: {.column width="50%"}
-```{r}
-10^2
-3 ^ 7
-6/9
-9-43
-```
+
 :::
-
 ::: {.column width="50%"}
-```{r}
-4^3-2* 7+9 /2
-```
 
-The equation above is computed as $$4^3 − (2 \cdot 7) + \frac{9}{2}$$
 :::
 :::
 
@@ -194,3 +184,71 @@ If your question has "greater than" or "at least" → lower.tail = FALSE
 
 For "at least 5" = "X ≥ 5" = "X > 4" → we want the upper (right) tail → lower.tail = FALSE
 So: ppois(q = 4, lambda = 3, lower.tail = FALSE) gives P(X > 4) which equals P(X ≥ 5).
+
+
+
+
+
+
+
+---
+title: "Inference for Proportions and 2×2 Tables"
+subtitle: "Textbook Sections 8.1, 8.2"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w8d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Inference for Proportions"
+    html-math-method: mathjax
+    chalkboard: true
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---

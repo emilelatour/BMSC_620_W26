@@ -78,7 +78,7 @@ By the end of the week, you should be able to:
     -   When to use chi-squared vs. Fisher's exact test
     -   Reporting results from tests of association
 -   **Slides**
-    -   Chi-Squared Tests and Fisher's Exact Test (HTML | PDF| OneDrive)
+    -   Chi-Squared Tests and Fisher's Exact Test ([HTML](/lessons/17_chi_squared_fisher/17_chi_squared_fisher.qmd) | PDF| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
     -   Coming soon.
 -   **Muddy points**

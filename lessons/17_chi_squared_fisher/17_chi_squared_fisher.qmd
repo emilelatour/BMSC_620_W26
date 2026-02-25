@@ -1,0 +1,1265 @@
+---
+title: "Chi-Squared Tests and Fisher's Exact Test"
+subtitle: "Textbook Sections 8.3–8.4"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w8d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Chi-Squared Tests and Fisher's Exact Test"
+    html-math-method: mathjax
+    chalkboard: true
+    header-includes: |
+      <style>
+      #wrap {
+        width: 1650px;
+        height: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #999;
+        border-radius: 8px;
+      }
+      #frame {
+        width: 1650px;
+        height: 900px;
+        border: 0;
+        zoom: 1.25;
+        -moz-transform: scale(1.25);
+        -moz-transform-origin: 0 0;
+      }
+      /* Make selected tables bigger in RevealJS slides (robust to flextable output) */
+      .reveal .tbl-big {
+        font-size: 28px !important;
+        /* center the output block inside the column */
+        display: flex;
+        justify-content: center;
+      
+        /* scale from center */
+        transform: scale(1.6);
+        transform-origin: top center;
+      }
+      .reveal .tbl-big table,
+      .reveal .tbl-big .flextable,
+      .reveal .tbl-big .flextable table {
+        font-size: 28px !important;
+      }
+      .reveal .tbl-big td,
+      .reveal .tbl-big th {
+        padding: 6px 10px !important;
+      }
+      </style>
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(gt)
+library(janitor)
+library(epitools)
+
+library(lamisc)
+library(laviz)
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+set.seed(456)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Explain what a contingency table is and why we need the chi-squared test
+2. Calculate expected cell counts under the null hypothesis of independence
+3. Conduct a chi-squared test of association/independence using R
+4. Check the technical conditions for the chi-squared test
+5. Recognize when to use Fisher's exact test instead of the chi-squared test
+6. Conduct Fisher's exact test in R and interpret results
+
+## Roadmap for Today
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: From 2×2 Tables to Bigger Tables**
+
+- Extending two-proportion tests
+- What is a contingency table?
+- The motivating example: depression and physical activity
+- Setting up the hypotheses
+
+**Part 2: The Chi-Squared Test**
+
+- Concept: observed vs. expected counts
+- The chi-squared statistic
+- The chi-squared distribution and degrees of freedom
+- Assumptions / technical conditions
+:::
+
+::: {.column width="50%"}
+**Part 3: Chi-Squared Test in Practice**
+
+- Walking through all 6 steps
+- Using `chisq.test()` in R
+- Extracting observed and expected counts
+- Writing a conclusion
+
+**Part 4: Fisher's Exact Test**
+
+- When chi-squared breaks down
+- The idea behind the exact test
+- Using `fisher.test()` in R
+- Chi-squared vs. Fisher's: how to decide
+:::
+:::::
+
+## Where we are in the course
+
+Last time we covered inference for **proportions**:
+
+\
+
+| Day | Method | Question |
+|:---:|:------:|:---------|
+| 13 | One proportion test | Is the response rate different from 30%? |
+| 13 | Two proportion test | Do response rates differ between groups? |
+| **Today** | **Chi-squared test** | **Is there an association between two categorical variables?** |
+| **Today** | **Fisher's exact test** | **Same question, but with small samples** |
+
+\
+
+**The key extension:** What if one or both variables has **more than 2 levels**? We can no longer rely on a simple difference in proportions — we need a new method.
+
+# Part 1: From 2×2 Tables to Bigger Tables
+
+## Why do we need something new?
+
+Last class, we tested whether two proportions are equal. For example:
+
+\
+
+> **Is the proportion of melanoma patients who respond to immunotherapy the same in treatment A vs. treatment B?**
+
+\
+
+This works great when both variables are **binary** (two levels each). But what about:
+
+\
+
+> **Is there an association between depression level (None / Several days / Most days) and physical activity (Yes / No)?**
+
+\
+
+Now the depression variable has **3 levels** — we can't just take a difference in two proportions! We need a way to compare proportions across multiple groups simultaneously.
+
+## The motivating example: Depression and Physical Activity
+
+::: {.callout-note icon="false"}
+## NHANES Data
+
+Data from the National Health and Nutrition Examination Survey (NHANES), 2009–2012. A random sample of **400 US adults** (aged ≥ 18) with data on:
+
+- **`Depressed`**: Self-reported number of days feeling down, depressed, or hopeless — **None**, **Several** (days), or **Most** (days)
+- **`PhysActive`**: Whether the participant does moderate or vigorous physical activity — **Yes** or **No**
+
+**Research Question:** Is there an association between depression status and physical activity?
+:::
+
+\
+
+This is a **2-row × 3-column contingency table** (or 3×2, depending on how you arrange it).
+
+## The contingency table
+
+A **contingency table** shows the frequency distribution of two categorical variables simultaneously.
+
+\
+
+
+::: {style="text-align: center;"}
+**Physical Activity by Depression Status (n = 400)**
+:::
+
+
+```{r}
+#| echo: false
+DepPA <- tibble(
+  Depression = c(rep("None", 314),
+                 rep("Several", 58),
+                 rep("Most", 28)),
+  PA = c(rep("Yes", 199),   # None
+         rep("No", 115),
+         rep("Yes", 26),    # Several
+         rep("No", 32),
+         rep("Yes", 1),     # Most
+         rep("No", 27))
+)
+
+DepPA <- DepPA |> 
+  mutate(Depression = factor(Depression, 
+                             levels = c("None", "Several", "Most")), 
+         PA = factor(PA, 
+                     levels = c("Yes", "No")))
+
+DepPA %>%
+  tabyl(PA, Depression) %>%
+  adorn_totals(where = c("row", "col")) %>%
+  adorn_title(placement = "combined") %>% 
+  knitr::kable()
+```
+
+\
+
+Each cell tells us: **how many people had this combination of depression status and physical activity level?**
+
+## Creating the contingency table in R
+
+\
+
+::::: columns
+::: {.column width="50%"}
+**If you have individual-level (tidy) data:**
+
+```{r}
+#| eval: false
+# Using janitor::tabyl()
+DepPA %>%
+  tabyl(PA, Depression)
+
+# Using base R table()
+table(DepPA$PA, DepPA$Depression)
+```
+
+\
+
+```{r}
+#| echo: false
+DepPA %>% tabyl(PA, Depression)
+```
+:::
+
+::: {.column width="50%"}
+**If you only have the summary counts:**
+
+```{r}
+DepPA_mat <- matrix(
+  c(199, 26,  1,   # PhysActive = Yes
+    115, 32, 27),  # PhysActive = No
+  nrow = 2,
+  byrow = TRUE
+)
+
+dimnames(DepPA_mat) <- list(
+  PA         = c("Yes", "No"),
+  Depression = c("None", "Several", "Most")
+)
+
+DepPA_mat
+```
+:::
+:::::
+
+## Setting up the hypotheses
+
+::: {.callout-important icon="false"}
+## Hypotheses for a Chi-Squared Test
+
+For chi-squared tests, we **do not use symbols** (no $p_1 - p_2 = 0$). We always state hypotheses in words.
+
+\
+
+**Two equivalent ways to write the hypotheses:**
+
+::: columns
+::: {.column width="50%"}
+**Test of "association" wording:**
+
+- $H_0$: There is **no association** between the two variables
+- $H_A$: There is **an association** between the two variables
+:::
+
+::: {.column width="50%"}
+**Test of "independence" wording:**
+
+- $H_0$: The two variables are **independent**
+- $H_A$: The two variables are **not independent**
+:::
+:::
+
+
+\
+
+Both wordings are correct — pick one and be consistent. **NOTE** The test is always two-sided.
+:::
+
+\
+
+**For our example:** $H_0$: There is no association between depression status and physical activity level
+
+# Part 2: The Chi-Squared Test
+
+## The core idea: observed vs. expected counts
+
+::: {.callout-tip icon="false"}
+## The Key Insight
+
+If depression and physical activity are truly **independent** (i.e., $H_0$ is true), then knowing someone's depression status tells us **nothing** about whether they are physically active.
+
+\
+
+In that case, the proportion who are physically active should be the **same across all depression groups**.
+
+\
+
+We test this by asking: **how far do the observed counts deviate from what we'd expect if the variables were independent?**
+:::
+
+\
+
+- **Observed counts** = what we actually see in the data
+- **Expected counts** = what we'd expect to see **if $H_0$ is true**
+
+<!-- ## Calculating expected counts -->
+
+<!-- Under independence, the probability of being in cell $(i, j)$ is: -->
+
+<!-- $$P(\text{row } i \cap \text{col } j) = P(\text{row } i) \times P(\text{col } j)$$ -->
+
+<!-- \ -->
+
+<!-- So the **expected count** for cell $(i, j)$ is: -->
+
+<!-- $$E_{ij} = n \times P(\text{row } i) \times P(\text{col } j) = \frac{(\text{row } i \text{ total}) \times (\text{col } j \text{ total})}{\text{table total}}$$ -->
+
+<!-- \ -->
+
+<!-- **Example:** Expected count for PhysActive = Yes, Depression = Several: -->
+
+<!-- $$E = \frac{(\text{row total for Yes}) \times (\text{col total for Several})}{\text{table total}} = \frac{226 \times 58}{400} = 32.77$$ -->
+
+## Calculating expected counts
+
+\
+
+Under independence, the probability of being in a given cell is just the product of the row and column probabilities. This leads to the expected count formula:
+
+$$E = \frac{R \times C}{N}$$
+where
+
+- $R$ is the marginal total for a given row
+- $C$ is the marginal total for a given column
+- $N$ is the grand total for the table
+
+\
+
+Expected counts will sum to the same row and column (marginal) totals.
+
+
+
+## Observed vs. expected: side by side
+
+::::: columns
+::: {.column width="50%"}
+**Observed counts:**
+
+```{r}
+#| echo: false
+
+DepPA %>%
+  tabyl(PA, Depression) %>%
+  adorn_totals(where = c("row", "col")) %>%
+  adorn_title(placement = "combined") %>%
+  knitr::kable(caption = "Observed")
+```
+:::
+
+::: {.column width="50%"}
+**Expected counts (if independent):**
+
+```{r}
+#| echo: false
+expected(DepPA_mat) %>%
+  tibble::as_tibble() %>% 
+  mutate(PA = c("Yes", "No")) %>% 
+  dplyr::relocate(PA, .before = dplyr::everything()) %>% 
+  adorn_totals(where = c("row", "col")) %>% 
+  mutate(dplyr::across(.cols = c(None:Total), 
+                       .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.01))) %>% 
+  dplyr::rename("PA/Depression" = PA) %>% 
+  knitr::kable(caption = "Expected")
+```
+:::
+:::::
+
+\
+
+::: fragment
+**Example:** Expected count for PhysActive = Yes, Depression = Several:
+
+$$E = \frac{(\text{row total for Yes}) \times (\text{col total for Several})}{\text{table total}} = \frac{226 \times 58}{400} = 32.77$$
+:::
+
+::: fragment
+::: {.callout-warning icon="false"}
+## Notice
+
+Look at **Most** depression, PhysActive = **Yes**: observed = 1, expected = 15.82. That's a huge discrepancy! People with the most depression days are far less physically active than independence would predict.
+:::
+:::
+
+## Calculating expected counts in R
+
+<!-- ```{r} -->
+<!-- # Using the epitools package -->
+<!-- library(epitools) -->
+<!-- expected(DepPA_mat) -->
+<!-- ``` -->
+
+<!-- \ -->
+
+<!-- Or, save the chi-squared test result and pull out the expected counts: -->
+
+<!-- ```{r} -->
+<!-- chisq_result <- chisq.test(DepPA_mat) -->
+<!-- chisq_result$expected -->
+<!-- ``` -->
+
+\
+
+```{r}
+observed_table <- DepPA_mat
+
+row_totals <- rowSums(observed_table)
+col_totals <- colSums(observed_table)
+grand_total <- sum(observed_table)
+
+# Calculate expected counts using the manual formula
+manual_expected <- outer(row_totals, col_totals) / grand_total
+
+# View the manually calculated expected counts
+manual_expected
+
+```
+
+\
+
+The `outer()` function in R computes the outer product of two vectors, which efficiently creates the matrix of `row_totals * col_totals` for all cells.
+
+## The chi-squared test statistic
+
+Once we have observed and expected counts, the **test statistic** quantifies the total discrepancy:
+
+$$\chi^2 = \sum_{\text{all cells}} \frac{(O - E)^2}{E}$$
+
+\
+
+- $O$ = observed count in a cell
+- $E$ = expected count in that cell
+- We sum this ratio over **all cells** in the table
+
+\
+
+**Intuition:**
+
+- If $H_0$ is true → $O \approx E$ → small $\chi^2$
+- If $H_A$ is true → some $O$ are very different from $E$ → large $\chi^2$
+- **Large $\chi^2$ = evidence against $H_0$**
+
+## Why $(O - E)^2 / E$?
+
+\
+$$\chi^2 = \sum_{\text{all cells}} \frac{(O - E)^2}{E}$$
+
+\
+
+- Each term measures how far a cell is from what we'd expect under independence
+- We square the difference so that **positive and negative deviations don't cancel out**.
+- We divide by $E$ to **standardize** — a deviation of 10 matters more when the expected count is 12 than when it's 300.
+
+## $\chi^2$ with depression/activity data
+
+\
+
+**For our depression/physical activity data:**
+
+$$\chi^2 = \frac{(199 - 178.13)^2}{178.13} + \frac{(26 - 32.77)^2}{32.77} + \frac{(1 - 15.82)^2}{15.82} + \cdots = 41.17$$
+
+\
+
+\
+
+Is $41.17$ large enough to reject $H_0$? We need to know what distribution this statistic follows!
+
+## The chi-squared distribution
+
+Under $H_0$, the test statistic follows a **chi-squared distribution** with degrees of freedom:
+
+$$df = (\text{\# rows} - 1) \times (\text{\# columns} - 1)$$
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+```{r}
+#| echo: false
+#| fig-height: 4
+
+tibble(x = seq(0, 20, length.out = 500)) %>%
+  mutate(
+    df2  = dchisq(x, df = 2),
+    df4  = dchisq(x, df = 4),
+    df6  = dchisq(x, df = 6),
+    df10 = dchisq(x, df = 10)
+  ) %>%
+  pivot_longer(-x, names_to = "df", values_to = "density") %>%
+  mutate(df = factor(df,
+                     levels = c("df2", "df4", "df6", "df10"),
+                     labels = c("df = 2", "df = 4", "df = 6", "df = 10"))) %>%
+  ggplot(aes(x = x, y = density, color = df)) +
+  geom_line(linewidth = 1.2) +
+  scale_color_manual(values = c("#E69F00", "#56B4E9", "#009E73", "#0072B2")) +
+  labs(x = expression(chi^2), y = "Density", color = "Degrees\nof Freedom") +
+  coord_cartesian(ylim = c(0, 0.5))
+```
+:::
+
+::: {.column width="45%"}
+**Key properties:**
+
+- Always **right-skewed**
+- Only takes **non-negative** values ($\chi^2 \geq 0$)
+- Shape depends entirely on **df**
+- As df increases, distribution becomes more symmetric
+
+\
+
+**For our 2×3 table:**
+
+$$df = (2-1)(3-1) = 2$$
+
+\
+
+**The p-value is always the area to the right of the observed $\chi^2$** — it is always a one-sided, upper-tail test.
+:::
+:::::
+
+## P-value for the chi-squared test
+
+\
+
+The p-value is the area to the **right** of our test statistic:
+
+```{r}
+#| echo: false
+#| fig-height: 5
+#| fig-width: 7
+
+chi_obs_lbl <- 41.17
+chi_obs     <- 5.99
+df_val      <- 2
+scale_fac   <- chi_obs_lbl / chi_obs  # ≈ 6.87
+
+tibble(x = seq(0, 60, length.out = 1000)) %>%
+  mutate(
+    density = dchisq(x, df = df_val) / scale_fac,
+    x       = x * scale_fac
+  ) %>%
+  ggplot(aes(x = x, y = density)) +
+  geom_area(data = . %>% filter(x >= chi_obs_lbl),
+            fill = "#E69F00", alpha = 0.7) +
+  geom_line(linewidth = 1.2) +
+  geom_vline(xintercept = chi_obs_lbl, linetype = "dashed", color = "gray40") +
+  annotate("text", x = chi_obs_lbl + 3, y = 0.05,
+           label = paste0("χ² = ", chi_obs_lbl), hjust = 0, size = 5) +
+  labs(x = expression(chi^2 ~ "(df = 2)"), y = "Density", title = NULL) + 
+  scale_x_continuous(limits = c(0, 150)) + 
+  scale_y_continuous(expand = c(0,0))
+```
+
+
+```{r}
+# Calculate p-value manually
+pchisq(abs(41.17), df = 2, lower.tail = FALSE)
+```
+
+
+
+
+
+## Technical conditions (assumptions)
+
+\
+
+Before running the chi-squared test, we need to check two conditions:
+
+::: {.callout-important icon="false"}
+## Conditions for the Chi-Squared Test
+
+::: columns
+::: {.column width="50%"}
+**1. Independence**
+
+Each observation must be independent. In practice:
+
+- Each person contributes to **exactly one cell** of the table
+- Observations are not paired or clustered (no repeated measures)
+:::
+::: {.column width="50%"}
+**2. Sample size (expected counts)**
+
+The chi-squared approximation is valid when:
+
+- **2×2 tables:** All expected counts ≥ 10
+- **Larger tables:** No more than 20% of expected counts < 5, **and** all expected counts ≥ 1
+:::
+:::
+
+
+\
+
+**If these fail → use Fisher's exact test (Part 4)**
+:::
+
+# Part 3: Chi-Squared Test in Practice
+
+## The 6-step framework
+
+\
+
+We'll use our standard 6-step approach for hypothesis testing.
+
+\
+
+**Our question:** Is there an association between depression status and physical activity among US adults?
+
+\
+
+**Data:** Random sample of 400 US adults from NHANES 2009–2012
+
+\
+
+Let's go through all 6 steps together.
+
+## From matrix to real data
+
+\
+In Part 2 we built `DepPA_mat` by hand to illustrate the concepts. 
+In practice, you always start from your actual dataset.
+
+\
+
+Base R's `table()` produces the same result:
+
+```{r}
+# These are equivalent
+DepPA_mat
+
+table(DepPA$PA, DepPA$Depression)
+```
+
+\
+
+For the 6 steps, we'll use `table()` on the real data — 
+which is how you'll do it in your own analyses.
+
+## Step 1: State the hypotheses
+
+\
+
+$H_0$: There is no association between depression status and physical activity
+
+$H_A$: There is an association between depression status and physical activity
+
+\
+
+::: {.callout-note icon="false"}
+## Note: No symbols needed
+
+Unlike tests for means or proportions, chi-squared hypotheses are **always stated in words**. There's no simple symbolic representation like $\mu_1 = \mu_2$ because we're simultaneously comparing proportions across multiple groups and levels.
+:::
+
+## Step 2: Set significance level
+
+$$\alpha = 0.05$$
+
+## Step 3: Check assumptions
+
+**Independence:** Each person contributes to exactly one cell. A person 
+can't be both physically active and not physically active, and can't have 
+both "None" and "Several" depression days. ✓
+
+**Expected counts:**
+
+In practice, I check expected counts *after* running the test — 
+`chisq.test()` will warn you if expected counts are too small, and you 
+can pull them directly from the result object:
+
+```{r}
+
+dep_pa_tab <- table(DepPA$PA, DepPA$Depression)
+
+chisq_result <- chisq.test(dep_pa_tab)
+
+# check what is stored in the result
+names(chisq_result)
+
+# Look at the expected counts
+chisq_result$expected
+```
+
+All expected counts > 5. The only borderline cell is PhysActive = Yes, 
+Depression = Most (expected = 15.82), which easily passes. ✓
+
+
+
+## Step 4: Calculate the test statistic
+
+$$\chi^2 = \sum_{\text{all cells}} \frac{(O - E)^2}{E}$$
+
+```{r}
+chisq_result <- chisq.test(dep_pa_tab)
+chisq_result
+```
+
+\
+
+\
+
+The test statistic is $\chi^2 = 41.17$ with $df = (2-1)(3-1) = 2$.
+
+## Step 5: Calculate the p-value
+
+\
+
+```{r}
+
+chisq_result$statistic   # test statistic
+chisq_result$parameter   # degrees of freedom
+chisq_result$p.value     # p-value
+```
+
+\
+
+- The p-value is essentially 0 (< 0.001). 
+- This means: **if there were truly no association between depression and physical activity (the null hypothesis is true), the probability of observing data as extreme as ours (or more extreme) is less than 0.001.**
+
+## Step 6: Conclusion
+
+Since $p < 0.001 < \alpha = 0.05$, we **reject $H_0$**.
+
+\
+
+::: {.callout-tip icon="false"}
+## Conclusion Statement
+
+Based on a random sample of 400 US adults from NHANES 2009–2012, there is very strong evidence of an association between depression status and physical activity level ($\chi^2 = 41.17$, $df = 2$, $p < 0.001$).
+
+Those with more days of depression appear to be substantially less physically active than would be expected if the variables were independent.
+:::
+
+\
+
+::: {.callout-warning icon="false"}
+## Common mistake
+
+If we fail to reject $H_0$, we do **NOT** say "the variables are independent." We say: "We have insufficient evidence of an association." Absence of evidence ≠ evidence of absence!
+:::
+
+## Base R: contingency table and expected counts
+
+\
+
+```{r}
+# Make the table
+dep_pa_tab <- table(DepPA$PA, DepPA$Depression)
+
+dep_pa_tab
+```
+
+\
+
+```{r}
+# Run the test
+chisq_result <- chisq.test(dep_pa_tab)
+
+# Check expected counts
+chisq_result$expected
+```
+
+## Base R: test result
+
+\
+
+```{r}
+chisq_result
+```
+
+\
+
+```{r}
+chisq_result %>% 
+  broom::tidy()
+```
+
+## janitor: contingency table and expected counts
+
+\
+
+```{r}
+# Make the table
+dep_pa_tab_janitor <- DepPA %>%
+  tabyl(PA, Depression)
+
+dep_pa_tab_janitor
+```
+
+\
+
+```{r}
+# Run the test
+chisq_result_janitor <- dep_pa_tab_janitor %>% 
+  chisq.test()
+
+# Check expected counts
+chisq_result_janitor$expected
+```
+
+## janitor: test result
+
+\
+
+```{r}
+chisq_result_janitor
+```
+
+\
+
+```{r}
+chisq_result_janitor %>% 
+  broom::tidy()
+```
+
+## rstatix: contingency table and expected counts
+
+\
+
+```{r}
+# Make the table
+dep_pa_tab <- table(DepPA$PA, DepPA$Depression)
+
+dep_pa_tab
+```
+
+\
+
+```{r}
+# Run the test
+chisq_result_rstatix <- dep_pa_tab %>% 
+  rstatix::chisq_test()
+
+# Check expected counts
+chisq_result_janitor$expected
+```
+
+
+## rstatix: test result
+
+\
+
+```{r}
+chisq_result_rstatix
+```
+
+::: {.callout-note icon="false"}
+## Note
+`rstatix` returns a tidy data frame directly — no need for `broom::tidy()`.
+:::
+
+
+
+## Part 3: Summary
+
+- Chi-squared test asks: **do the observed counts match what we'd expect under independence?**
+- Use `table()` or `janitor::tabyl()` to build the contingency table
+- Use `chisq.test()`, `janitor::chisq.test()`, or `rstatix::chisq_test()` to run it
+- Always check `$expected` — if any expected counts are too small, use Fisher's exact test (Part 4)
+
+# Part 4: Fisher's Exact Test
+
+## When chi-squared breaks down
+
+\
+
+The chi-squared test relies on an **approximation** — the test statistic only follows the chi-squared distribution when the **expected counts are large enough**.
+
+\
+
+**What happens when we have small samples?** Suppose instead of 400 adults, we had only **100** adults:
+
+\
+
+::: {style="text-align: center;"}
+**Physical Activity by Depression Status (n = 100)**
+:::
+
+```{r}
+#| echo: false
+
+DepPA100 <- tibble(
+  Depression = c(rep("None", 43 + 40),
+                 rep("Several", 5 + 4),
+                 rep("Most", 2 + 6)),
+  PA = c(rep("Yes", 43),   # None
+         rep("No", 40),
+         rep("Yes", 5),    # Several
+         rep("No", 4),
+         rep("Yes", 2),     # Most
+         rep("No", 6))
+) |> 
+  mutate(Depression = factor(Depression, 
+                             levels = c("None", "Several", "Most")), 
+         PA = factor(PA, 
+                     levels = c("Yes", "No")))
+
+# DepPA100_mat <- matrix(
+#   c(43,  5,  2,
+#     40,  4,  6),
+#   nrow = 2, byrow = TRUE
+# )
+# dimnames(DepPA100_mat) <- list(
+#   PA         = c("Yes", "No"),
+#   Depression = c("None", "Several", "Most")
+# )
+# DepPA100_mat
+```
+
+```{r}
+#| echo: false
+
+DepPA100 %>% # Simulated data
+  janitor::tabyl(PA, Depression) %>%
+  adorn_totals(where = c("row", "col")) %>%
+  adorn_title(placement = "combined") %>% 
+  knitr::kable()
+```
+
+
+## The chi-squared warning
+
+```{r}
+#| warning: true
+
+# Make the table
+dep_pa_tab <- table(DepPA100$PA, DepPA100$Depression)
+
+# Run the test
+chisq_res <- chisq.test(dep_pa_tab)
+
+```
+
+\
+
+::: {.callout-warning icon="false"}
+## What does this warning mean?
+
+R tells us: *"Chi-squared approximation may be incorrect."* The expected counts for the "Most" depression column are too small (< 5), violating our sample size condition. The chi-squared approximation can't be trusted here. **We need a different approach.**
+:::
+
+
+```{r}
+chisq_res$expected
+```
+
+
+## Fisher's Exact Test: the idea
+
+::: {.callout-note icon="false"}
+## The Core Concept
+
+Fisher's exact test computes the **exact probability** of observing our data (or data more extreme) given the **fixed row and column totals**.
+
+\
+
+It's called "exact" because instead of using an asymptotic approximation (like the chi-squared distribution), it computes the probability **exactly** using the **hypergeometric distribution** for $2 \times 2$ case; multivariate hypergeometric distribution in $r \times c$ case.
+
+\
+
+Think of it this way: if the row and column totals are fixed, there's only a limited number of ways to fill in the cells. Fisher's test calculates how likely our observed arrangement is under $H_0$.
+:::
+
+
+## Key features of Fisher's exact test
+
+::: {.callout-important icon="false"}
+## What's different about Fisher's exact test?
+
+1. **No test statistic** — the p-value is calculated directly from the data
+2. **No confidence interval** from the standard output (for tables larger than 2×2)
+3. **Always two-sided** — no option to specify direction of the alternative
+4. **No continuity correction** needed — the hypergeometric distribution is already discrete
+5. **Works for any sample size** — exact regardless of whether expected counts are small or large
+
+\
+
+**When to use it:**
+
+- **2×2 tables:** Any expected count < 10
+- **Larger tables:** More than 20% of expected counts < 5, or any expected count < 1
+:::
+
+## Fisher's exact test in R
+
+```{r}
+#| echo: false
+
+res_fisher <- fisher.test(dep_pa_tab)
+
+res_fisher <- fisher.test(dep_pa_tab)
+res_fisher_p <- lamisc::fmt_pvl(res_fisher$p.value)
+
+```
+
+
+```{r}
+fisher.test(dep_pa_tab)
+```
+
+\
+
+The p-value of `r res_fisher_p` provides no evidence of an association 
+between depression and physical activity in this smaller sample 
+(Fisher's exact test). We fail to reject $H_0$ at $\alpha = 0.05$.
+
+
+\
+
+Note: the larger sample (n = 400) gave very strong evidence of an association. With only n = 100, we don't have enough data to detect the association reliably — this is a **power** issue!
+
+## Base R: Fisher's exact test
+
+```{r}
+# Make the table
+dep_pa_tab100 <- table(DepPA100$PA, DepPA100$Depression)
+dep_pa_tab100
+```
+
+\
+
+```{r}
+# Run the test
+fisher_result <- fisher.test(dep_pa_tab100)
+fisher_result
+```
+
+\
+
+```{r}
+fisher_result %>% 
+  broom::tidy()
+```
+
+## janitor: Fisher's exact test
+
+```{r}
+# Make the table
+dep_pa_tab100_janitor <- DepPA100 %>%
+  tabyl(PA, Depression)
+dep_pa_tab100_janitor
+
+```
+
+\
+
+```{r}
+# Run the test
+fisher_result_janitor <- dep_pa_tab100_janitor %>% 
+  fisher.test()
+
+fisher_result_janitor
+```
+
+\
+
+```{r}
+fisher_result_janitor %>% 
+  broom::tidy()
+```
+
+## rstatix: Fisher's exact test
+
+```{r}
+# Make the table
+dep_pa_tab100 <- table(DepPA100$PA, DepPA100$Depression)
+dep_pa_tab100
+```
+
+```{r}
+dep_pa_tab100 %>% 
+  rstatix::fisher_test()
+```
+
+::: {.callout-note icon="false"}
+## Note
+`rstatix` returns a tidy data frame directly — no need for `broom::tidy()`.
+:::
+
+## Another small-sample example
+
+::: {.callout-note icon="false"}
+## Clinical Example: Adverse Events in a Cancer Drug Trial
+
+A pilot trial of 25 patients tests a new targeted therapy. Investigators are concerned about liver toxicity:
+
+|  | Elevated enzymes | Normal | Total |
+|:-:|:-:|:-:|:-:|
+| **Treated** | 5 | 8 | 13 |
+| **Control** | 1 | 11 | 12 |
+| **Total** | 6 | 19 | 25 |
+
+With only 25 patients, expected counts in the "Elevated enzymes" column will be very small. Chi-squared is not appropriate here.
+:::
+
+```{r}
+liver_mat <- matrix(
+  c(5,  8,
+    1, 11),
+  nrow = 2, byrow = TRUE,
+  dimnames = list(Group = c("Treated", "Control"),
+                  Enzymes = c("Elevated", "Normal"))
+)
+
+```
+
+## Interpreting the Fisher's exact test output
+
+```{r}
+#| echo: false
+
+liver_res <- fisher.test(liver_mat)
+
+liver_res <- liver_res %>% 
+  broom::tidy() %>% 
+  dplyr::mutate(dplyr::across(.cols = c(estimate, conf.low, conf.high), 
+                              .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.1)), 
+                p.value = lamisc::fmt_pvl(p.value))
+```
+
+
+
+```{r}
+fisher.test(liver_mat)
+```
+
+\
+
+- **p-value = `r liver_res$p.value`** → No significant evidence of an association at $\alpha = 0.05$
+- **Odds ratio = `r liver_res$estimate`** → Treated patients have about 7 times the odds of elevated liver enzymes compared to control
+- **95% CI: (`r liver_res$conf.low` — `r liver_res$conf.high`)** → Extremely wide — the study is **underpowered** for detecting a difference
+
+
+::: {.callout-tip icon="false"}
+## Takeaway
+
+With only 25 patients, we lack the statistical power to detect even a potentially large effect. This study should be viewed as exploratory — not definitive. Larger trials are needed.
+:::
+
+## Chi-Squared vs. Fisher's Exact: how to decide
+
+\
+
+| | Chi-Squared Test | Fisher's Exact Test |
+|:--|:--:|:--:|
+| When to use | Expected counts large enough | Expected counts too small |
+| **2×2 table** | All $E \geq 10$ | Any $E < 10$ |
+| **Larger tables** | ≤ 20% of $E < 5$, all $E \geq 1$ | > 20% of $E < 5$, or any $E < 1$ |
+| Test statistic | $\chi^2$ | None |
+| Distribution | Chi-squared (approx.) | Hypergeometric (exact) |
+| Confidence interval | No (from test) | For 2×2 only |
+| One-sided available? | No | No |
+| R function | `chisq.test()` | `fisher.test()` |
+
+\
+
+**Rule of thumb:** Always check expected counts first. If in doubt, Fisher's exact test is conservative and always valid — it just requires more computing time for large tables.
+
+## Bonus: simulated p-values for larger tables
+
+For **large contingency tables** with small expected counts, `fisher.test()` can be slow. An alternative is to simulate the p-value using `chisq.test()`:
+
+- This randomly generates many tables with the same row/column totals and calculates what proportion have a $\chi^2$ statistic as large as ours.
+- **B = 10000** means we simulate 10,000 random tables
+- Results will be slightly different each run (set a seed for reproducibility!)
+
+```{r}
+set.seed(456)
+chisq.test(dep_pa_tab, simulate.p.value = TRUE, B = 10000)
+```
+
+
+
+# Summary and Key Takeaways
+
+## What we learned today
+
+**1. Chi-squared test of association**
+
+- Tests whether two categorical variables are associated (independent)
+- Compares **observed** vs. **expected** counts under independence
+- Expected count = $\frac{\text{row total} \times \text{column total}}{\text{table total}}$
+- Test statistic: $\chi^2 = \sum \frac{(O-E)^2}{E}$, with $df = (r-1)(c-1)$
+- Use `chisq.test()` in R
+- **Always check expected counts first!**
+
+\
+
+**2. Fisher's exact test**
+
+- Use when expected counts are too small for chi-squared
+- Computes exact p-value using the hypergeometric distribution
+- No test statistic, no CI (for tables > 2×2), always two-sided
+- Use `fisher.test()` in R
+
+## Key decision: which test to use?
+
+\
+
+::: {style="text-align: center;"}
+**Decision workflow for categorical association tests**
+:::
+
+```{r}
+#| echo: false
+tibble(
+  Step = c("1. Create the contingency table",
+           "2. Calculate expected counts",
+           "3a. Expected counts are large enough",
+           "3b. Expected counts are too small"),
+  Action = c("tabyl() or table() or matrix()",
+             "chisq.test()$expected",
+             "→ Use chisq.test()",
+             "→ Use fisher.test()")
+) %>%
+  knitr::kable()
+```
+
