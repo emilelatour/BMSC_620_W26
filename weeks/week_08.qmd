@@ -79,6 +79,11 @@ By the end of the week, you should be able to:
     -   Reporting results from tests of association
 -   **Slides**
     -   Chi-Squared Tests and Fisher's Exact Test ([HTML](/lessons/17_chi_squared_fisher/17_chi_squared_fisher.qmd) | PDF| [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    - [R Module 1: Reproducible Reports in Quarto] ([HTML](/lessons/17_chi_squared_fisher/r_module1_slides.qmd) | PDF | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    
+- **Code along**
+  - [Download R Module 1: Reproducible Reports in Quarto (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQD_Phae_hH1S51TFZpGWdpYAU6-QNqwjTAvZsXn3mqDp18?e=UPhf58)
+  
 -   **Recording**
     -   Coming soon.
 -   **Muddy points**
