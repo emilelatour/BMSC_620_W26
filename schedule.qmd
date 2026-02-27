@@ -93,15 +93,15 @@ source(here("class_dates.R"))
 |  | `{r} format(w8d2, '%a, %m/%d')` | 14 | Chi-squared tests, Fishers exact test | 8.3-8.4 |
 |  | [**`{r} format(hw6, '%a, %m/%d')`**]{.hw-row} |  | [**HW 6 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 9 | `{r} format(w9d1, '%a, %m/%d')` | 15 | Comparing Means with ANOVA | 5.5, extra |
-|  | `{r} format(w9d2, '%a, %m/%d')` | 16 | Nonparametric tests | Extra |
+| 9 | `{r} format(w9d1, '%a, %m/%d')` | 15 | Power for proportions and correlated proportions | Not in textbook |
+|  | `{r} format(w9d2, '%a, %m/%d')` | 16 | Comparing Means with ANOVA | 5.5, extra |
 |  | [**`{r} format(hw7, '%a, %m/%d')`**]{.hw-row} |  | [**HW 7 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 10 | `{r} format(w10d1, '%a, %m/%d')` | 17 | Correlation and association | 1.6, extra |
-|  | `{r} format(w10d2, '%a, %m/%d')` | 18 | Simple Linear Regression | 6.1-6.2 |
+| 10 | `{r} format(w10d1, '%a, %m/%d')` | 17 | Nonparametric tests | Extra |
+|  | `{r} format(w10d2, '%a, %m/%d')` | 18 | Correlation and Simple Linear Regression | 1.6, 6.1-6.4 |
 |  | [**`{r} format(hw8, '%a, %m/%d')`**]{.hw-row} |  | [**HW 8 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 11 | `{r} format(w11d1, '%a, %m/%d')` | 19 | Simple Linear Regression; Finals review | 6.3-6.4 |
+| 11 | `{r} format(w11d1, '%a, %m/%d')` | 19 | Finals review |  |
 |  | [**`{r} format(final_opens, '%a, %m/%d')`**]{.hw-row} |  | [**FINAL opens at 3pm**]{.hw-row} |  |
 |  |  |  | Final exam is cumulative, with emphasis on Lessons 10–19 |  |
 |  | `{r} format(w11d2, '%a, %m/%d')` | 20 | Optional: Review and questions (no new material) | 7.1 |
