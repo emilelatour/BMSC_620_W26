@@ -11,6 +11,7 @@ format:
     toc-location: right
     html-math-method: mathjax
     embed-resources: true
+    self-contained: true
 execute:
   echo: true
   warning: false
@@ -191,7 +192,7 @@ Setting `warning: false` and `message: false` at the document level means you do
 
 **3. Inline R** — This is the key to reproducible numbers. Instead of writing "The mean BMI was 27.3," you write:
 
-````markdown
+````{markdown}
 The mean BMI was `r round(mean(data$BMI, na.rm = TRUE), 1)`.
 ````
 
