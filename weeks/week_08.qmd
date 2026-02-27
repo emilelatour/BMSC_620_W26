@@ -87,7 +87,9 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Chi-Squared Tests and Fisher's Exact Test](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQB6_dM0JSJvTIa30-yLrKE7AZ8NVaXitUo03y_YKqT4xZ8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=piWYgE)
 -   **Muddy points**
-    -   Coming soon.
+    
+    I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 14](/lessons/17_chi_squared_fisher/17_chi_squared_fisher_muddy_points.qmd)
 
 ------------------------------------------------------------------------
 
@@ -119,8 +121,8 @@ By the end of the week, you should be able to:
 After categorical inference, we continue building our toolkit:
 
 -   **Week 9**:
+    -   Power for proportions and correlated proportions
     -   Comparing means across multiple groups with ANOVA
-    -   Nonparametric tests (alternatives to t-tests when assumptions fail)
 -   **Week 10**:
-    -   Correlation and association
-    -   Introduction to simple linear regression
+    -   Nonparametric tests (alternatives to t-tests when assumptions fail)
+    -   Correlation and simple linear regression
