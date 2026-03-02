@@ -71,6 +71,258 @@
     ]
   },
   {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-were-learning-today",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#what-were-learning-today",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "What We’re Learning Today",
+    "text": "What We’re Learning Today\n\nBy the end of this module, you will be able to:\n\nUnderstand the difference between characters and factors in R\nUse forcats functions to reorder and relabel factor levels\nRecognize when data is in wide vs. long format\nUse pivot_longer() and pivot_wider() to reshape data\n\n\n\n\n\n\n\n\nNote\n\n\nThese skills come up constantly — every time you make a plot with categories or need to restructure data for analysis."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#two-problems-youve-probably-already-hit",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#two-problems-youve-probably-already-hit",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Two Problems You’ve Probably Already Hit",
+    "text": "Two Problems You’ve Probably Already Hit\n\n\nProblem 1: You make a bar chart and the categories are in alphabetical order instead of a meaningful order.\n\nProblem 2: You have data with multiple columns that should really be rows (or vice versa) and your ggplot() code won’t cooperate.\n\n\n\n\nBoth problems have the same root cause: R doesn’t know what you know about the structure of your data.\n\n\nToday we fix that."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-1-what-is-a-factor",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#part-1-what-is-a-factor",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Part 1: What Is a Factor?",
+    "text": "Part 1: What Is a Factor?"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-motivating-bug",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#the-motivating-bug",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "The Motivating Bug",
+    "text": "The Motivating Bug\n\nnhanes.samp %&gt;%\n  filter(!is.na(HealthGen)) %&gt;%\n  ggplot(aes(x = HealthGen)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Self-Reported Health Ratings\",\n       subtitle = \"Alphabetical order makes no sense here!\",\n       x = \"Health Rating\",\n       y = \"Count\") + \n  theme_bw(base_size = 16)\n\n\nThe categories are in alphabetical order. That’s not what we want."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#character-vs.-factor",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#character-vs.-factor",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Character vs. Factor",
+    "text": "Character vs. Factor\n\n\nCharacter\n\nJust text — R treats it like any string\nNo inherent order\nPlotted alphabetically by default\n\n\nclass(nhanes.samp$HealthGen)\n\n[1] \"character\"\n\n\n\nFactor\n\nA categorical variable with a defined set of levels\nLevels have an order (even if it’s arbitrary)\nYou control the order\n\n\nhealth_factor &lt;- factor(nhanes.samp$HealthGen)\nclass(health_factor)\n\n[1] \"factor\"\n\nlevels(health_factor)\n\n[1] \"Excellent\" \"Fair\"      \"Good\"      \"Poor\"      \"Vgood\"    \n\n\n\n\n\n\nWhen R converts a character to a factor automatically, it uses alphabetical order — which is almost never what you want."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#creating-factors-with-factor",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#creating-factors-with-factor",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Creating Factors with factor()",
+    "text": "Creating Factors with factor()\nYou can specify the exact order of levels:\n\nnhanes.samp &lt;- nhanes.samp %&gt;%\n  mutate(\n    HealthGen = factor(HealthGen,\n                       levels = c(\"Excellent\",\n                                  \"Vgood\",\n                                  \"Good\",\n                                  \"Fair\",\n                                  \"Poor\")))\n\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Vgood\"     \"Good\"      \"Fair\"      \"Poor\"     \n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThe levels argument defines the order. Categories not listed are set to NA."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-base-r",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-base-r",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Cleaning Up Labels with base R",
+    "text": "Cleaning Up Labels with base R\n“Vgood” isn’t great for a plot or a report. We can rename it:\n\n# Cleaning Up Labels\nnhanes.samp &lt;- nhanes.samp %&gt;%\n  mutate(\n    HealthGen = factor(HealthGen,\n                       levels = c(\"Excellent\", \"Vgood\", \"Good\", \"Fair\", \"Poor\"),\n                       labels = c(\"Excellent\", \"Very Good\", \"Good\", \"Fair\", \"Poor\"))\n  )\n\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Very Good\" \"Good\"      \"Fair\"      \"Poor\""
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-fix-ordered-factor-in-a-plot",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#the-fix-ordered-factor-in-a-plot",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "The Fix: Ordered Factor in a Plot",
+    "text": "The Fix: Ordered Factor in a Plot\n\nnhanes.samp %&gt;%\n  filter(!is.na(HealthGen)) %&gt;%\n  ggplot(aes(x = HealthGen)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Self-Reported Health Ratings\",\n       subtitle = \"Now in a meaningful order with a clean label\",\n       x = \"Health Rating\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)\n\n\nSame code. The only thing that changed was making HealthGen a factor with meaningful levels."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#levels-inspect-and-verify",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#levels-inspect-and-verify",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "levels() — Inspect and Verify",
+    "text": "levels() — Inspect and Verify\nlevels() is your diagnostic tool — use it to check that your factor is set up correctly:\n\n# What levels exist?\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Very Good\" \"Good\"      \"Fair\"      \"Poor\"     \n\n# How many levels?\nnlevels(nhanes.samp$HealthGen)\n\n[1] 5\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nAlways check levels() after creating a factor. If the order isn’t what you expect, fix it now — not after you’ve built plots and run models."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-2-the-forcats-package",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#part-2-the-forcats-package",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Part 2: The forcats Package",
+    "text": "Part 2: The forcats Package"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-forcats",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#why-forcats",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Why forcats?",
+    "text": "Why forcats?\nfactor() works, but it requires you to type out every level by hand. The forcats package (part of the tidyverse) gives you shortcut functions for common tasks:\n\n\n\n\n\nFunction\nWhat it does\n\n\n\n\nfct_relevel()\nManually reorder specific levels\n\n\nfct_reorder()\nReorder levels by a summary statistic\n\n\nfct_infreq()\nOrder levels by frequency\n\n\nfct_rev()\nReverse the current order\n\n\nfct_recode()\nRename levels\n\n\nfct_collapse()\nCombine levels into groups\n\n\n\n\n\nWe’ll focus on fct_relevel() and fct_reorder() — the two you’ll use most."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#education-is-already-a-factor",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#education-is-already-a-factor",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Education Is Already a Factor",
+    "text": "Education Is Already a Factor\nEducation was already a factor in the dataset:\n\nclass(nhanes.samp$Education)\n\n[1] \"factor\"\n\nlevels(nhanes.samp$Education)\n\n[1] \"8th Grade\"      \"9 - 11th Grade\" \"High School\"    \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\nThe levels are in a reasonable order — but what if we want to change the reference category for a model, or reorder by a statistic for a plot?\nThat’s where forcats comes in."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_relevel-manual-reordering",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_relevel-manual-reordering",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "fct_relevel() — Manual Reordering",
+    "text": "fct_relevel() — Manual Reordering\nMove specific levels to the front, or place them at a specific position:\n\n# Move \"College Grad\" to the first position\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"College Grad\")) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"College Grad\"   \"8th Grade\"      \"9 - 11th Grade\" \"High School\"   \n[5] \"Some College\"  \n\n\n\n\n\n# Move \"College Grad\" to the last position\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"College Grad\", after = Inf)) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"8th Grade\"      \"9 - 11th Grade\" \"High School\"    \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\nafter = Inf is the trick for “put it at the end.”"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_reorder-data-driven-reordering",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_reorder-data-driven-reordering",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "fct_reorder() — Data-Driven Reordering",
+    "text": "fct_reorder() — Data-Driven Reordering\nOrder factor levels by a summary statistic of another variable. This is especially powerful for plots:\n\nnhanes.samp %&gt;%\n  filter(!is.na(Education), !is.na(BMI)) %&gt;%\n  mutate(Education = fct_reorder(Education, BMI, .fun = median)) %&gt;%\n  ggplot(aes(x = Education, y = BMI)) +\n  geom_boxplot(fill = \"#0072B2\", alpha = 0.7) +\n  labs(title = \"BMI by education level (ordered by median BMI)\",\n       x = \"Education level\",\n       y = \"BMI (kg/m²)\") +\n  theme_bw(base_size = 16)"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_infreq-order-by-frequency",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_infreq-order-by-frequency",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "fct_infreq() — Order by Frequency",
+    "text": "fct_infreq() — Order by Frequency\nSometimes you just want categories ordered by how often they appear:\n\nnhanes.samp %&gt;%\n  filter(!is.na(Education)) %&gt;%\n  mutate(Education = fct_infreq(Education)) %&gt;%\n  ggplot(aes(x = Education)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Education levels ordered by frequency\",\n       x = \"Education level\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_recode-rename-levels",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_recode-rename-levels",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "fct_recode() — Rename Levels",
+    "text": "fct_recode() — Rename Levels\nSometimes level names are too long, abbreviated, or inconsistent. fct_recode() lets you rename them:\n\nunique(nhanes.samp$HealthGen)\n\n[1] Fair      Very Good &lt;NA&gt;      Good      Excellent Poor     \nLevels: Excellent Very Good Good Fair Poor\n\nnhanes.samp %&gt;%\n  mutate(\n    Education = fct_recode(Education,\n                           \"Some HS\" = \"9 - 11th Grade\",\n                           \"HS Grad\" = \"High School\",\n                           \"College\" = \"College Grad\")\n  ) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"8th Grade\"    \"Some HS\"      \"HS Grad\"      \"Some College\" \"College\"     \n\n\n\n\n\n\n\n\nNote\n\n\n\nThe syntax is \"new name\" = \"old name\". It feels backwards at first, but it follows the same left = right assignment pattern as mutate(). Only the levels you list are renamed — the rest stay as they are.\nUnlike the labels argument we used earlier, fct_recode() lets you pick and choose. If you only want to rename one category, the others will stay exactly as they were."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-factors-matter-for-modeling-preview",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#why-factors-matter-for-modeling-preview",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Why Factors Matter for Modeling (Preview)",
+    "text": "Why Factors Matter for Modeling (Preview)\nWhen you fit a regression model, R automatically creates dummy variables from factors. The first level becomes the reference category.\n\n\n\n# Current reference level (first in the list)\nlevels(nhanes.samp$Education)[1]\n\n[1] \"8th Grade\"\n\n\n\n\n\n# Change reference to \"High School\"\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"High School\")) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"High School\"    \"8th Grade\"      \"9 - 11th Grade\" \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\n\n\n\n\n\n\nNote\n\n\nWe’ll come back to this in detail when we cover regression. For now, just know that the first factor level = reference category in any model."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#factor-tools-summary",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#factor-tools-summary",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Factor Tools Summary",
+    "text": "Factor Tools Summary\n\n\nCreating factors\n\nfactor(x, levels = c(...)) — full control\nlevels() — inspect the result\nAlways verify your levels are correct\n\nCommon tasks\n\nReorder for plots → fct_reorder() or fct_infreq()\nSet reference level for modeling → fct_relevel()\nRename levels → fct_recode()\n\n\n\n\n\n\n\n\nTip\n\n\nThe rule of thumb:\n\nFor plots: use fct_reorder() to order by a statistic, or fct_infreq() to order by count\nFor models: use fct_relevel() to set your reference category"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-3-wide-vs.-long-data",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#part-3-wide-vs.-long-data",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Part 3: Wide vs. Long Data",
+    "text": "Part 3: Wide vs. Long Data"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-conceptual-shift",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#the-conceptual-shift",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "The Conceptual Shift",
+    "text": "The Conceptual Shift\nMost data you receive is in wide format — one row per subject, multiple measurement columns.\nBut many R operations (especially ggplot2) need data in long format — one row per observation.\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis is not about right vs. wrong. It’s about which shape your tool expects."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-does-wide-data-look-like",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#what-does-wide-data-look-like",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "What Does “Wide” Data Look Like?",
+    "text": "What Does “Wide” Data Look Like?\nEach subject is one row, with measurements spread across columns:\n\nnhanes_wide &lt;- nhanes.samp %&gt;%\n  select(ID, Age, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(5)\n\nnhanes_wide\n\n# A tibble: 5 × 5\n     ID   Age   BMI BPSysAve BPDiaAve\n  &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;\n1 63147    41  30        112       76\n2 67852    15  19.2      107       72\n3 57165    48  27.4      123       69\n4 68691     7  17.4       NA       NA\n5 69465    50  26.9      152      103\n\n\n\n\nFour measurement columns: Age, BMI, BPSysAve, BPDiaAve. This is the shape you’re used to seeing."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-does-long-data-look-like",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#what-does-long-data-look-like",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "What Does “Long” Data Look Like?",
+    "text": "What Does “Long” Data Look Like?\nEach measurement is its own row:\n\nnhanes_long &lt;- nhanes_wide %&gt;%\n  pivot_longer(\n    cols = c(Age, BMI, BPSysAve, BPDiaAve),\n    names_to = \"measure\",\n    values_to = \"value\"\n  )\n\nnhanes_long\n\n# A tibble: 20 × 3\n      ID measure  value\n   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n 1 63147 Age       41  \n 2 63147 BMI       30  \n 3 63147 BPSysAve 112  \n 4 63147 BPDiaAve  76  \n 5 67852 Age       15  \n 6 67852 BMI       19.2\n 7 67852 BPSysAve 107  \n 8 67852 BPDiaAve  72  \n 9 57165 Age       48  \n10 57165 BMI       27.4\n11 57165 BPSysAve 123  \n12 57165 BPDiaAve  69  \n13 68691 Age        7  \n14 68691 BMI       17.4\n15 68691 BPSysAve  NA  \n16 68691 BPDiaAve  NA  \n17 69465 Age       50  \n18 69465 BMI       26.9\n19 69465 BPSysAve 152  \n20 69465 BPDiaAve 103  \n\n\n\n\nSame data, different shape. Each subject now has 4 rows instead of 1."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-12",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-12",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Visualizing the Transformation (1/2)",
+    "text": "Visualizing the Transformation (1/2)\n\nVisual by Garrick Aden-Buie/tidyexplain"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-22",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-22",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Visualizing the Transformation (2/2)",
+    "text": "Visualizing the Transformation (2/2)"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-does-the-shape-matter",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#why-does-the-shape-matter",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Why Does the Shape Matter?",
+    "text": "Why Does the Shape Matter?\n\n\nWide format is good for:\n\nHuman readability\nSummary tables\nSpreadsheet-style work\nMost statistical tests in R\n\n\nLong format is good for:\n\nggplot2 — faceting, color mapping\nGrouped operations with group_by()\nRepeated measures analysis\nAny time you want to treat variable names as data\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nggplot2’s golden rule: if you want different variables to be distinguished by color, facet, or grouping, they usually need to be in the same column — which means long format."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-4-pivoting",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#part-4-pivoting",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Part 4: Pivoting",
+    "text": "Part 4: Pivoting"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-wide-to-long",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-wide-to-long",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "pivot_longer() — Wide to Long",
+    "text": "pivot_longer() — Wide to Long\npivot_longer() takes multiple columns and stacks them into two new columns: one for the variable names and one for the values.\n\nnhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(4) %&gt;%\n  pivot_longer(\n    cols = c(BMI, BPSysAve, BPDiaAve),        # columns to stack\n    names_to = \"measurement\",        # new column for variable names\n    values_to = \"value\"              # new column for the values\n  )\n\n# A tibble: 12 × 3\n      ID measurement value\n   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;\n 1 63147 BMI          30  \n 2 63147 BPSysAve    112  \n 3 63147 BPDiaAve     76  \n 4 67852 BMI          19.2\n 5 67852 BPSysAve    107  \n 6 67852 BPDiaAve     72  \n 7 57165 BMI          27.4\n 8 57165 BPSysAve    123  \n 9 57165 BPDiaAve     69  \n10 68691 BMI          17.4\n11 68691 BPSysAve     NA  \n12 68691 BPDiaAve     NA"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-the-three-arguments",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-the-three-arguments",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "pivot_longer() — The Three Arguments",
+    "text": "pivot_longer() — The Three Arguments\n\npivot_longer(\n  cols = c(BMI, BPSysAve, BPDiaAve),    # 1. Which columns to pivot\n  names_to = \"measurement\",             # 2. Name for the new \"names\" column\n  values_to = \"value\"                   # 3. Name for the new \"values\" column\n)\n\n\n\n\n\n\n\n\n\n\nArgument\nQuestion it answers\n\n\n\n\ncols\nWhich columns are being stacked?\n\n\nnames_to\nWhat should we call the column that holds the old column names?\n\n\nvalues_to\nWhat should we call the column that holds the values?\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThink of it as: “I want to make this data longer by stacking these columns.”"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-why-the-dimensions-change",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-why-the-dimensions-change",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "pivot_longer() — Why the Dimensions Change",
+    "text": "pivot_longer() — Why the Dimensions Change\n\nnhanes_subset &lt;- nhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve)\n\n# Wide: one row per subject\ndim(nhanes_subset)\n\n[1] 200   4\n\n# Long: one row per subject × measurement\nnhanes_subset %&gt;%\n  pivot_longer(cols = c(BMI, BPSysAve, BPDiaAve),\n               names_to = \"measurement\",\n               values_to = \"value\") %&gt;%\n  dim()\n\n[1] 600   3\n\n\n\n\nWe pivoted 3 columns, so we get 3× the rows and go from 4 columns down to 3 (ID + the two new columns)."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-long-to-wide",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-long-to-wide",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "pivot_wider() — Long to Wide",
+    "text": "pivot_wider() — Long to Wide\npivot_wider() does the reverse — it spreads rows back into columns:\n\nnhanes_long_example &lt;- nhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(4) %&gt;%\n  pivot_longer(cols = c(BMI, BPSysAve, BPDiaAve),\n               names_to = \"measurement\",\n               values_to = \"value\")\n\n# Now spread it back to wide\nnhanes_long_example %&gt;%\n  pivot_wider(\n    names_from = \"measurement\",     # column whose values become new column names\n    values_from = \"value\"           # column whose values fill the new columns\n  )\n\n# A tibble: 4 × 4\n     ID   BMI BPSysAve BPDiaAve\n  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 63147  30        112       76\n2 67852  19.2      107       72\n3 57165  27.4      123       69\n4 68691  17.4       NA       NA"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-the-two-arguments",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-the-two-arguments",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "pivot_wider() — The Two Arguments",
+    "text": "pivot_wider() — The Two Arguments\n\npivot_wider(\n  names_from = \"measurement\",    # 1. Which column has the new column names?\n  values_from = \"value\"          # 2. Which column has the values to fill in?\n)\n\n\n\n\n\n\nArgument\nQuestion it answers\n\n\n\n\nnames_from\nWhich column’s values should become new column names?\n\n\nvalues_from\nWhich column’s values should fill those new columns?\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThink of it as: “I want to make this data wider by spreading this column into multiple columns.”"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#putting-it-together-pivot-plot",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#putting-it-together-pivot-plot",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Putting It Together: Pivot → Plot",
+    "text": "Putting It Together: Pivot → Plot"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#a-three-step-workflow",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#a-three-step-workflow",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "A Three-Step Workflow",
+    "text": "A Three-Step Workflow\nSuppose we want to compare the distributions of BMI, BPSysAve, and BPDiaAve side by side. In wide format, this is awkward. In long format, it’s one ggplot() call:\n\n\nStep 1: Select the relevant columns\nStep 2: Pivot to long format\nStep 3: Plot with faceting"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot-plot-in-action",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot-plot-in-action",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Pivot → Plot in Action",
+    "text": "Pivot → Plot in Action\n\nnhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  pivot_longer(\n    cols = c(BMI, BPSysAve, BPDiaAve),\n    names_to = \"measurement\",\n    values_to = \"value\"\n  ) %&gt;%\n  ggplot(aes(x = value)) +\n  geom_histogram(bins = 30, fill = \"#0072B2\", color = \"white\") +\n  facet_wrap(~ measurement, scales = \"free\") +\n  labs(title = \"Distributions of BMI, BPSysAve, and BPDiaAve\",\n       x = \"Value\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)\n\n\n\n\nOne pipeline. Three plots. This is why reshaping matters."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#key-takeaways",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#key-takeaways",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nFactors\n\nCharacters have no order — factors do\nfactor(x, levels = ...) for full control\nfct_reorder() for data-driven plot ordering\nfct_relevel() to set reference categories\n\nReshaping\n\nWide = one row per subject, many measurement columns\nLong = one row per observation\npivot_longer() — wide to long (for plotting, grouping)\npivot_wider() — long to wide (for tables, summaries)\n\n\n\n\n\n\n\n\nTip\n\n\nThe rules:\nFactors: If your plot categories are in the wrong order, it’s a factor problem.\nReshaping: If ggplot wants your data in a different shape, pivot it."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/r_module2_slides.html#references",
+    "href": "lessons/18_power_proportions/r_module2_slides.html#references",
+    "title": "R Module 2: Factors and Reshaping Data",
+    "section": "References",
+    "text": "References\n\n\nFactors\n\nR for Data Science: Factors\nforcats documentation\nBe the boss of your factors — STAT 545\n\n\n\nReshaping data\n\nR for Data Science: Pivoting\ntidyr documentation\nGarrick Aden-Buie’s site — excellent visual explanations\n\n\n\n\nBMSC 620 | Factors and Reshaping Data"
+  },
+  {
     "objectID": "lessons/09_random_variables_binomial/09_random_variables_binomial_muddy_points.html",
     "href": "lessons/09_random_variables_binomial/09_random_variables_binomial_muddy_points.html",
     "title": "Muddy Points",
@@ -3142,591 +3394,155 @@
     ]
   },
   {
-    "objectID": "weeks/week_08.html",
-    "href": "weeks/week_08.html",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html",
+    "href": "weeks/week_09.html",
+    "title": "Week 9",
     "section": "",
-    "text": "HW 5 is due Monday, February 23 at 11:00 PM\nHW 6 is due Sunday, March 1 at 11:00 PM",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "HW 7 is due Sunday, March 8 at 11:00 PM"
   },
   {
-    "objectID": "weeks/week_08.html#announcements",
-    "href": "weeks/week_08.html#announcements",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#announcements",
+    "href": "weeks/week_09.html#announcements",
+    "title": "Week 9",
     "section": "",
-    "text": "HW 5 is due Monday, February 23 at 11:00 PM\nHW 6 is due Sunday, March 1 at 11:00 PM",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "HW 7 is due Sunday, March 8 at 11:00 PM"
   },
   {
-    "objectID": "weeks/week_08.html#overview",
-    "href": "weeks/week_08.html#overview",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#overview",
+    "href": "weeks/week_09.html#overview",
+    "title": "Week 9",
     "section": "Overview",
-    "text": "Overview\nThis week we extend our hypothesis testing toolkit to categorical outcomes, covering two full class meetings.\nMonday focuses on inference for proportions — from single-proportion tests and confidence intervals through comparing two independent proportions and interpreting 2×2 tables. Wednesday introduces chi-squared tests for larger contingency tables and Fisher’s exact test for situations where sample sizes are small.\nBy the end of the week, you should be able to:\n\napply the normal approximation to the sampling distribution of a sample proportion,\nconduct hypothesis tests for a single proportion,\nconstruct and interpret confidence intervals for a single proportion,\ntest for differences between two independent proportions,\ninterpret data displayed in 2×2 tables and select the appropriate inference method based on study design,\nconduct chi-squared tests for independence in contingency tables,\napply Fisher’s exact test when expected cell counts are small, and\nrecognize when each method is appropriate given the data and research question.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Overview\nThis week we cover two distinct topics across our two class meetings.\nMonday wraps up our unit on proportions with power analysis — how to determine the sample size needed to detect meaningful differences in proportions, including the special case of correlated (paired) proportions using McNemar’s test. Wednesday shifts gears to comparing means across more than two groups using Analysis of Variance (ANOVA).\nBy the end of the week, you should be able to:\n\nexplain why effect sizes for proportions require the arcsine transformation (Cohen’s h),\nconduct power and sample size calculations for one-sample and two-sample proportion tests,\nunderstand the role of discordant pairs in power analysis for McNemar’s test,\ndescribe when and why ANOVA is preferred over multiple t-tests,\nstate the null and alternative hypotheses for one-way ANOVA,\ncalculate and interpret the F-statistic,\ncheck ANOVA assumptions (independence, normality, equal variances), and\nconduct post-hoc pairwise comparisons when the overall F-test is significant."
   },
   {
-    "objectID": "weeks/week_08.html#readings-before-class",
-    "href": "weeks/week_08.html#readings-before-class",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#readings-before-class",
+    "href": "weeks/week_09.html#readings-before-class",
+    "title": "Week 9",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 8.1–8.2 (before Monday)\nTextbook sections 8.3–8.4 (before Wednesday)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Readings (before class)\n\nNo textbook reading for Monday (power for proportions is not covered in the textbook)\nTextbook section 5.5 (before Wednesday)"
   },
   {
-    "objectID": "weeks/week_08.html#materials",
-    "href": "weeks/week_08.html#materials",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#materials",
+    "href": "weeks/week_09.html#materials",
+    "title": "Week 9",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Inference for Proportions and 2×2 Tables\n\nTopics\n\nThe sampling distribution of a sample proportion\nNormal approximation conditions (success-failure condition)\nHypothesis tests for a single proportion (one-sample z-test)\nConfidence intervals for a single proportion (Wilson score interval)\nComparing two independent proportions\n2×2 contingency tables: structure and interpretation\nRelative risk and odds ratios\nChoosing the appropriate inference method based on study design\n\nSlides\n\nInference for Proportions and 2×2 Tables (HTML | PDF | OneDrive)\n\nRecording\n\nInference for Proportions and 2×2 Tables\n\nMuddy points\n\nMuddy Points - Lesson 13\n\n\n\n\n\nWednesday — Chi-Squared Tests and Fisher’s Exact Test\n\nTopics\n\nChi-squared test for independence (general \\(r \\times c\\) tables)\nExpected cell counts and the chi-squared statistic\nDegrees of freedom and the chi-squared distribution\nAssumptions and conditions for the chi-squared test\nFisher’s exact test for 2×2 tables with small expected counts\nWhen to use chi-squared vs. Fisher’s exact test\nReporting results from tests of association\n\nSlides\n\nChi-Squared Tests and Fisher’s Exact Test (HTML | PDF | OneDrive)\nR Module 1: Reproducible Reports in Quarto (HTML | PDF | OneDrive)\n\nCode along\n\nDownload R Module 1: Reproducible Reports in Quarto (.qmd)\n\nRecording\n\nChi-Squared Tests and Fisher’s Exact Test\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 14",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Materials\n\nMonday — Power for Proportions and Correlated Proportions\n\nTopics\n\nReview: power analysis concepts (Type II error, effect size, sample size)\nCohen’s h: the arcsine transformation for proportion effect sizes\nWhy the same absolute difference in proportions is not always the same effect size\nPower and sample size for a one-sample proportion test\nPower and sample size for comparing two independent proportions\nSensitivity analysis: varying the alternative proportion\nPaired proportions and McNemar’s test: the role of discordant pairs\nPower analysis for McNemar’s test via the simplified approach\n\nSlides\n\nPower for Proportions and Correlated Proportions (HTML | PDF | OneDrive)\n\nR Module 2: Factors and Reshaping Data (HTML | PDF | OneDrive)\nCode along\n\nDownload R Module 2: Factors and Reshaping Data (.qmd)\n\nRecording\n\nComing soon\n\nMuddy points\n\nComing soon\n\n\n\n\n\nWednesday — Comparing Means with ANOVA\n\nTopics\n\nThe problem with multiple t-tests (inflated Type I error)\nOne-way ANOVA: hypotheses, assumptions, and the F-statistic\nBetween-group and within-group variability\nThe ANOVA table: sums of squares, degrees of freedom, mean squares\nThe F-distribution and p-values\nChecking assumptions: independence, normality, equal variances\nPost-hoc pairwise comparisons (Tukey’s HSD)\nANOVA in R\n\nSlides\n\nComparing Means with ANOVA (HTML | PDF | OneDrive)\n\nRecording\n\nComing soon\n\nMuddy points\n\nComing soon"
   },
   {
-    "objectID": "weeks/week_08.html#homework",
-    "href": "weeks/week_08.html#homework",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#homework",
+    "href": "weeks/week_09.html#homework",
+    "title": "Week 9",
     "section": "Homework",
-    "text": "Homework\n\nHW 6\n\nReleased Monday, February 23\nDue Sunday, March 1 at 11:00 PM\nCovers:\n\nPower analysis for two-sample t-tests (Cohen’s d, sample size, power trade-offs)\nOne-sample proportion test against a historical benchmark\nChecking the success-failure condition for the normal approximation\nComparing two independent proportions (two-sample z-test)\nMeasures of association from a 2×2 table: risk difference, relative risk, and odds ratio\nExact binomial inference when the normal approximation fails\n\nData files needed: cardiac_trial.csv (available in the data folder on OneDrive)\nView HW 6 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Homework\n\nHW 7\n\nReleased Monday, March 2\nDue Sunday, March 8 at 11:00 PM\nCovers:\n\n\n\nData files needed: \nView HW 7 instructions\n\nSee the full list of assignments on the Homework page."
   },
   {
-    "objectID": "weeks/week_08.html#post-class-check-in-attendance",
-    "href": "weeks/week_08.html#post-class-check-in-attendance",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#post-class-check-in-attendance",
+    "href": "weeks/week_09.html#post-class-check-in-attendance",
+    "title": "Week 9",
     "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in"
   },
   {
-    "objectID": "weeks/week_08.html#looking-ahead",
-    "href": "weeks/week_08.html#looking-ahead",
-    "title": "Week 8",
+    "objectID": "weeks/week_09.html#looking-ahead",
+    "href": "weeks/week_09.html#looking-ahead",
+    "title": "Week 9",
     "section": "Looking ahead",
-    "text": "Looking ahead\nAfter categorical inference, we continue building our toolkit:\n\nWeek 9:\n\nPower for proportions and correlated proportions\nComparing means across multiple groups with ANOVA\n\nWeek 10:\n\nNonparametric tests (alternatives to t-tests when assumptions fail)\nCorrelation and simple linear regression",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 8"
-    ]
+    "text": "Looking ahead\nNext week we continue expanding our analysis toolkit:\n\nWeek 10:\n\nNonparametric tests (alternatives when ANOVA assumptions fail)\nCorrelation and simple linear regression"
   },
   {
-    "objectID": "weeks/week_04.html",
-    "href": "weeks/week_04.html",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html",
+    "href": "weeks/week_05.html",
+    "title": "Week 5",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "text": "HW 4 released Monday, February 2",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#announcements",
-    "href": "weeks/week_04.html#announcements",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#announcements",
+    "href": "weeks/week_05.html#announcements",
+    "title": "Week 5",
     "section": "",
-    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "text": "HW 4 released Monday, February 2",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#overview",
-    "href": "weeks/week_04.html#overview",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#overview",
+    "href": "weeks/week_05.html#overview",
+    "title": "Week 5",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution and calculate probabilities using R,\nidentify when the Poisson distribution applies and calculate probabilities using R.",
+    "text": "Overview\nThis week focuses on statistical inference: making conclusions about populations based on sample data.\nWe will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.\nBy the end of the week, you should be able to:\n\nunderstand the concept of a sampling distribution and standard error,\nconstruct and interpret confidence intervals for a population mean,\nexplain what a confidence level means,\nstate null and alternative hypotheses,\nconduct and interpret one-sample t-tests,\nunderstand p-values and statistical significance,\nrecognize the connection between confidence intervals and hypothesis tests.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#readings-before-class",
-    "href": "weeks/week_04.html#readings-before-class",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#readings-before-class",
+    "href": "weeks/week_05.html#readings-before-class",
+    "title": "Week 5",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Poisson distribution)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook section 4.1 (Variability in estimates)\nTextbook section 4.2 (Confidence intervals)\nTextbook section 4.3 (Hypothesis testing)\nTextbook section 5.1 (Single-sample inference with the t-distribution)\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#materials",
-    "href": "weeks/week_04.html#materials",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#materials",
+    "href": "weeks/week_05.html#materials",
+    "title": "Week 5",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\nNormal and Poisson Distributions\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 7",
+    "text": "Materials\n\nMonday — Estimation and Confidence Intervals\n\nTopics\n\nSampling distributions and standard error\nPoint estimates vs. interval estimates\nConfidence intervals for population means\nInterpreting confidence levels (e.g., 95% CI)\nUsing the t-distribution when σ is unknown\nCalculating confidence intervals in R\n\nSlides\n\nEstimation and Confidence Intervals (HTML | PDF | OneDrive)\n\nRecording\n\nEstimation and Confidence Intervals\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 8\n\n\n\n\n\nWednesday — Hypothesis Testing and One-Sample t-Tests\n\nTopics\n\nThe logic of hypothesis testing\nNull and alternative hypotheses\nTest statistics and p-values\nStatistical significance and decision rules\nOne-sample t-tests\nConducting t-tests in R\nConnection between confidence intervals and hypothesis tests\n\nSlides\n\nHypothesis Testing and One-Sample t-Tests (HTML | PDF | OneDrive)\nR Workflow: Projects, File Paths, and Reading Data (HTML | PDF | OneDrive)\n\nResource\n\nHypothesis Testing: One-Page Reference\nLink to class OneDrive folder – see data folder\n\nRecording\n\nHypothesis testing, one-sample t-tests, and R workflow\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 9",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#homework",
-    "href": "weeks/week_04.html#homework",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#homework",
+    "href": "weeks/week_05.html#homework",
+    "title": "Week 5",
     "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Sunday, February 1 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 4\n\nReleased Monday, February 2\nDue Sunday, February 8 at 11:00 pm\nCovers:\n\nNormal distribution and properties\nZ-scores and standardization\nCalculating probabilities with pnorm() and qnorm()\nNormal approximation to the Binomial\nPoisson distribution\n\nView HW 4 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#post-class-check-in-attendance",
-    "href": "weeks/week_04.html#post-class-check-in-attendance",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#post-class-check-in-attendance",
+    "href": "weeks/week_05.html#post-class-check-in-attendance",
+    "title": "Week 5",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
+      "Week 5"
     ]
   },
   {
-    "objectID": "weeks/week_04.html#looking-ahead",
-    "href": "weeks/week_04.html#looking-ahead",
-    "title": "Week 4",
+    "objectID": "weeks/week_05.html#looking-ahead",
+    "href": "weeks/week_05.html#looking-ahead",
+    "title": "Week 5",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence.",
+    "text": "Looking ahead\nNext week we will continue with statistical inference:\n\nMonday: Paired data and paired t-tests; Two-sample independent t-tests\nWednesday: Midterm review\n\nThese concepts extend our hypothesis testing framework to compare two groups and handle related measurements.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 4"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html",
-    "href": "weeks/week_07.html",
-    "title": "Week 7",
-    "section": "",
-    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#announcements",
-    "href": "weeks/week_07.html#announcements",
-    "title": "Week 7",
-    "section": "",
-    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#overview",
-    "href": "weeks/week_07.html#overview",
-    "title": "Week 7",
-    "section": "Overview",
-    "text": "Overview\nThis week we have one class meeting focused on power and sample size calculations.\nAfter completing the midterm, we shift our attention to study design: understanding how to plan research studies with adequate statistical power to detect meaningful effects. Power analysis helps us answer critical questions like “How many participants do I need?” and “What effect size can I realistically detect?”\nBy the end of the week, you should be able to:\n\nunderstand the four components in equilibrium in a hypothesis test (significance level, sample size, effect size, and power),\ndefine and interpret Type I and Type II errors,\nexplain what statistical power means and why it matters,\ncalculate power and sample size for one-sample and two-sample t-tests using R,\napply power analysis to both study planning and interpretation of existing research.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#readings-before-class",
-    "href": "weeks/week_07.html#readings-before-class",
-    "title": "Week 7",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 5.4 (Power calculations for comparing means)\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#materials",
-    "href": "weeks/week_07.html#materials",
-    "title": "Week 7",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — No Class (Presidents Day)\n\nUniversity holiday — enjoy the break!\nReminder: Midterm exam is still open. It closes Monday at 11:00 PM.\n\n\n\n\nWednesday — Power and Sample Size\n\nTopics\n\nThe four components of hypothesis testing: significance level (\\(\\alpha\\)), sample size (\\(n\\)), effect size, and power (\\(1−\\beta\\))\nType I and Type II errors\nDefining and interpreting statistical power\nIntroduction to effect size (Cohen’s d)\nCalculating power and sample size using the pwr package in R\nPower calculations for one-sample t-tests\nPower calculations for two-sample t-tests\nStudy design applications and trade-offs\nInterpreting published research through the lens of power\n\nSlides\n\nPower and Sample Size (HTML | PDF | OneDrive)\n\nRecording\n\nPower and Sample Size\n\nMuddy points\n\nMuddy Points - Lesson 12",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#homework",
-    "href": "weeks/week_07.html#homework",
-    "title": "Week 7",
-    "section": "Homework",
-    "text": "Homework\n\nHW 5\n\nReleased Wednesday, February 18\nDue Monday, February 23 at 11:00 PM\nCovers:\n\nLoading data from CSV and Excel files using here() and readr/readxl\nPaired t-tests (gene expression example)\nIndependent two-sample t-tests (Vitamin C recovery example)\nChoosing the appropriate test based on study design\nInterpreting confidence intervals and p-values\n\nView HW 5 instructions\ntxga_luad_top2a.csv and vitamin_c_recovery.xlsx available in data folder on OneDrive\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#midterm-exam",
-    "href": "weeks/week_07.html#midterm-exam",
-    "title": "Week 7",
-    "section": "Midterm Exam",
-    "text": "Midterm Exam\n\nCloses: Monday, February 16 at 11:00 PM\nFormat: 8 parts, 120 points total\nCoverage: Lessons 1-9 (through hypothesis testing and one-sample t-tests)\nSubmit: Both .qmd and .html files before the deadline",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#post-class-check-in-attendance",
-    "href": "weeks/week_07.html#post-class-check-in-attendance",
-    "title": "Week 7",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_07.html#looking-ahead",
-    "href": "weeks/week_07.html#looking-ahead",
-    "title": "Week 7",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nAfter the midterm and power, we will continue building our statistical inference toolkit:\n\nWeek 8:\n\nInference for proportions (single and two-sample)\nChi-squared tests for categorical data\nFisher’s exact test for 2×2 tables\n\nWeek 9:\n\nComparing means across multiple groups with ANOVA\nNonparametric tests (alternatives to t-tests)\n\n\nThese concepts extend our hypothesis testing framework to categorical outcomes and multiple-group comparisons.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 7"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html",
-    "href": "weeks/week_02.html",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#announcements",
-    "href": "weeks/week_02.html#announcements",
-    "title": "Week 2",
-    "section": "",
-    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#overview",
-    "href": "weeks/week_02.html#overview",
-    "title": "Week 2",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#readings-before-class",
-    "href": "weeks/week_02.html#readings-before-class",
-    "title": "Week 2",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#materials",
-    "href": "weeks/week_02.html#materials",
-    "title": "Week 2",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#homework",
-    "href": "weeks/week_02.html#homework",
-    "title": "Week 2",
-    "section": "Homework",
-    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
-    "href": "weeks/week_02.html#post-class-check-in-attendance",
-    "title": "Week 2",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_02.html#looking-ahead",
-    "href": "weeks/week_02.html#looking-ahead",
-    "title": "Week 2",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 2"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html",
-    "href": "weeks/week_01.html",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#overview",
-    "href": "weeks/week_01.html#overview",
-    "title": "Week 1",
-    "section": "",
-    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#readings-before-class",
-    "href": "weeks/week_01.html#readings-before-class",
-    "title": "Week 1",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#materials",
-    "href": "weeks/week_01.html#materials",
-    "title": "Week 1",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#day-1-course-background-survey",
-    "href": "weeks/week_01.html#day-1-course-background-survey",
-    "title": "Week 1",
-    "section": "Day 1 course background survey",
-    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
-    "href": "weeks/week_01.html#post-class-check-in-attendance",
-    "title": "Week 1",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#homework",
-    "href": "weeks/week_01.html#homework",
-    "title": "Week 1",
-    "section": "Homework",
-    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_01.html#looking-ahead",
-    "href": "weeks/week_01.html#looking-ahead",
-    "title": "Week 1",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 1"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html",
-    "href": "weeks/week_03.html",
-    "title": "Week 3",
-    "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#announcements",
-    "href": "weeks/week_03.html#announcements",
-    "title": "Week 3",
-    "section": "",
-    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#overview",
-    "href": "weeks/week_03.html#overview",
-    "title": "Week 3",
-    "section": "Overview",
-    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#readings-before-class",
-    "href": "weeks/week_03.html#readings-before-class",
-    "title": "Week 3",
-    "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#materials",
-    "href": "weeks/week_03.html#materials",
-    "title": "Week 3",
-    "section": "Materials",
-    "text": "Materials\n\nMonday — No class (MLK Day)\nPlease review on your own:\n\nBayes’ Theorem recording (HTML | PDF | OneDrive)\n\nLink to recording\n\n\nAdditional Bayes’ Theorem resources:\n\nAn Intuitive (and Short) Explanation of Bayes’ Theorem — A clear, accessible introduction\nBayes’ Theorem (3Blue1Brown video) — Excellent visual explanation\nBayes’ Theorem: A Primer — Another helpful walkthrough\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive)\n\nCode along\n\nDownload EDA and Data Viz code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization - part 1\nExploratory Data Analysis and Data Visualization - part 2\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 5",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#homework",
-    "href": "weeks/week_03.html#homework",
-    "title": "Week 3",
-    "section": "Homework",
-    "text": "Homework\n\nHW 2\n\nDue Monday, Tuesday 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#post-class-check-in-attendance",
-    "href": "weeks/week_03.html#post-class-check-in-attendance",
-    "title": "Week 3",
-    "section": "Post-class check-in (attendance)",
-    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
-    ]
-  },
-  {
-    "objectID": "weeks/week_03.html#looking-ahead",
-    "href": "weeks/week_03.html#looking-ahead",
-    "title": "Week 3",
-    "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course.",
-    "crumbs": [
-      "Home",
-      "Weekly materials",
-      "Week 3"
+      "Week 5"
     ]
   },
   {
@@ -3838,99 +3654,591 @@
     ]
   },
   {
-    "objectID": "weeks/week_05.html",
-    "href": "weeks/week_05.html",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html",
+    "href": "weeks/week_03.html",
+    "title": "Week 3",
     "section": "",
-    "text": "HW 4 released Monday, February 2",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#announcements",
-    "href": "weeks/week_05.html#announcements",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#announcements",
+    "href": "weeks/week_03.html#announcements",
+    "title": "Week 3",
     "section": "",
-    "text": "HW 4 released Monday, February 2",
+    "text": "No class Monday, January 19 (MLK Day)\nHW 2 due Tuesday, January 27 at 11:00 pm",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#overview",
-    "href": "weeks/week_05.html#overview",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#overview",
+    "href": "weeks/week_03.html#overview",
+    "title": "Week 3",
     "section": "Overview",
-    "text": "Overview\nThis week focuses on statistical inference: making conclusions about populations based on sample data.\nWe will learn how to estimate population parameters using confidence intervals and how to test hypotheses about population parameters using hypothesis tests.\nBy the end of the week, you should be able to:\n\nunderstand the concept of a sampling distribution and standard error,\nconstruct and interpret confidence intervals for a population mean,\nexplain what a confidence level means,\nstate null and alternative hypotheses,\nconduct and interpret one-sample t-tests,\nunderstand p-values and statistical significance,\nrecognize the connection between confidence intervals and hypothesis tests.",
+    "text": "Overview\nThis week focuses on exploratory data analysis (EDA) and data visualization.\nWe will learn how to explore and visualize data using histograms, box plots, and scatterplots. We’ll also introduce data frames and tibbles, practice subsetting and filtering data, and begin working with ggplot2 for creating publication-quality graphics.\nBy the end of the week, you should be able to:\n\ncreate and interpret histograms and box plots for numeric data,\nuse scatterplots to explore relationships between variables,\nunderstand the difference between data frames and tibbles,\nsubset and filter data effectively,\ncreate basic plots using ggplot2.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#readings-before-class",
-    "href": "weeks/week_05.html#readings-before-class",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#readings-before-class",
+    "href": "weeks/week_03.html#readings-before-class",
+    "title": "Week 3",
     "section": "Readings (before class)",
-    "text": "Readings (before class)\n\nTextbook section 4.1 (Variability in estimates)\nTextbook section 4.2 (Confidence intervals)\nTextbook section 4.3 (Hypothesis testing)\nTextbook section 5.1 (Single-sample inference with the t-distribution)\n\n(Additional resources will be posted if helpful.)",
+    "text": "Readings (before class)\n\nTextbook section 2.2 (Bayes’ Theorem)\nTextbook section 1.7 (exploratory data analysis (EDA) and data visualization)\n\n(Additional resources will be posted if helpful.)",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#materials",
-    "href": "weeks/week_05.html#materials",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#materials",
+    "href": "weeks/week_03.html#materials",
+    "title": "Week 3",
     "section": "Materials",
-    "text": "Materials\n\nMonday — Estimation and Confidence Intervals\n\nTopics\n\nSampling distributions and standard error\nPoint estimates vs. interval estimates\nConfidence intervals for population means\nInterpreting confidence levels (e.g., 95% CI)\nUsing the t-distribution when σ is unknown\nCalculating confidence intervals in R\n\nSlides\n\nEstimation and Confidence Intervals (HTML | PDF | OneDrive)\n\nRecording\n\nEstimation and Confidence Intervals\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 8\n\n\n\n\n\nWednesday — Hypothesis Testing and One-Sample t-Tests\n\nTopics\n\nThe logic of hypothesis testing\nNull and alternative hypotheses\nTest statistics and p-values\nStatistical significance and decision rules\nOne-sample t-tests\nConducting t-tests in R\nConnection between confidence intervals and hypothesis tests\n\nSlides\n\nHypothesis Testing and One-Sample t-Tests (HTML | PDF | OneDrive)\nR Workflow: Projects, File Paths, and Reading Data (HTML | PDF | OneDrive)\n\nResource\n\nHypothesis Testing: One-Page Reference\nLink to class OneDrive folder – see data folder\n\nRecording\n\nHypothesis testing, one-sample t-tests, and R workflow\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 9",
+    "text": "Materials\n\nMonday — No class (MLK Day)\nPlease review on your own:\n\nBayes’ Theorem recording (HTML | PDF | OneDrive)\n\nLink to recording\n\n\nAdditional Bayes’ Theorem resources:\n\nAn Intuitive (and Short) Explanation of Bayes’ Theorem — A clear, accessible introduction\nBayes’ Theorem (3Blue1Brown video) — Excellent visual explanation\nBayes’ Theorem: A Primer — Another helpful walkthrough\n\n\n\n\nWednesday — Exploratory Data Analysis and Data Visualization\n\nTopics\n\nHistograms and distribution shapes\nBox plots and identifying outliers\nScatterplots and relationships\nData frames vs tibbles\nSubsetting and filtering data\nIntroduction to ggplot2\n\nSlides\n\nExploratory Data Analysis and Data Visualization (HTML | PDF | OneDrive)\n\nCode along\n\nDownload EDA and Data Viz code along (.qmd)\n\nRecording\n\nExploratory Data Analysis and Data Visualization - part 1\nExploratory Data Analysis and Data Visualization - part 2\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 5",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#homework",
-    "href": "weeks/week_05.html#homework",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#homework",
+    "href": "weeks/week_03.html#homework",
+    "title": "Week 3",
     "section": "Homework",
-    "text": "Homework\n\nHW 4\n\nReleased Monday, February 2\nDue Sunday, February 8 at 11:00 pm\nCovers:\n\nNormal distribution and properties\nZ-scores and standardization\nCalculating probabilities with pnorm() and qnorm()\nNormal approximation to the Binomial\nPoisson distribution\n\nView HW 4 instructions\n\nSee the full list of assignments on the Homework page.",
+    "text": "Homework\n\nHW 2\n\nDue Monday, Tuesday 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr (filter(), select(), mutate())\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2 (histograms, boxplots, scatterplots, bar charts)\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nSee the full list of assignments on the Homework page.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#post-class-check-in-attendance",
-    "href": "weeks/week_05.html#post-class-check-in-attendance",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#post-class-check-in-attendance",
+    "href": "weeks/week_03.html#post-class-check-in-attendance",
+    "title": "Week 3",
     "section": "Post-class check-in (attendance)",
     "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
     ]
   },
   {
-    "objectID": "weeks/week_05.html#looking-ahead",
-    "href": "weeks/week_05.html#looking-ahead",
-    "title": "Week 5",
+    "objectID": "weeks/week_03.html#looking-ahead",
+    "href": "weeks/week_03.html#looking-ahead",
+    "title": "Week 3",
     "section": "Looking ahead",
-    "text": "Looking ahead\nNext week we will continue with statistical inference:\n\nMonday: Paired data and paired t-tests; Two-sample independent t-tests\nWednesday: Midterm review\n\nThese concepts extend our hypothesis testing framework to compare two groups and handle related measurements.",
+    "text": "Looking ahead\nNext week we will introduce random variables and probability distributions:\n\nMonday: Random variables and the binomial distribution\nWednesday: Normal distribution and sampling distributions\n\nThese concepts form the foundation for statistical inference and hypothesis testing later in the course.",
     "crumbs": [
       "Home",
       "Weekly materials",
-      "Week 5"
+      "Week 3"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html",
+    "href": "weeks/week_01.html",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#overview",
+    "href": "weeks/week_01.html#overview",
+    "title": "Week 1",
+    "section": "",
+    "text": "This week introduces the course structure, expectations, and the role of data as the foundation of biostatistics. We will focus on how data are collected and how to summarize numerical variables.\nBy the end of the week, you should be able to:\n\ndescribe different types of data,\ncompute and interpret basic numerical summaries,\nfeel comfortable navigating R and RStudio.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#readings-before-class",
+    "href": "weeks/week_01.html#readings-before-class",
+    "title": "Week 1",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.1–1.4\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#materials",
+    "href": "weeks/week_01.html#materials",
+    "title": "Week 1",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Welcome & Introduction to Data\n\nTopics\n\nWelcome and course overview\nIntroduction to data\nSummarizing numerical data\n\nSlides\n\nWelcome & course logistics (HTML | PDF | OneDrive)\nIntroduction to data & numerical summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 01 – Course Introduction + Intro to Data (Slides 1–22)\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 1\n\n\n\n\nWednesday — Introduction to R and RStudio\n\nTopics\n\nIntroduction to data (continued)\nIntroduction to R, RStudio, and Quarto\n\nSlides\n\nIntroduction to data & numerical summaries (Continued) (HTML | PDF | OneDrive)\nIntroduction to R, RStudio, and Quarto (HTML | PDF | OneDrive)\n\nSoftware\n\nInstall R and RStudio (see the Resources page)\n\nRecording\n\nLecture 02 – Intro to Data (Cont.) + Intro to R & RStudio, Quarto\n\nMuddy points\nI reviewed your post-class feedback and wrote short clarifications here:\n\nMuddy Points - Lesson 2",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#day-1-course-background-survey",
+    "href": "weeks/week_01.html#day-1-course-background-survey",
+    "title": "Week 1",
+    "section": "Day 1 course background survey",
+    "text": "Day 1 course background survey\nPlease complete the Course Background Survey after Monday’s class:\n\nCourse Background Survey\n\nThis short survey helps me learn about your prior experience with statistics, programming, and what you hope to get out of the course.\nYour responses will be used only to help tailor examples, pacing, and support for this class.\nThere are no right or wrong answers, and it is not graded for correctness.\nPlease complete this survey by Wednesday before class.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#post-class-check-in-attendance",
+    "href": "weeks/week_01.html#post-class-check-in-attendance",
+    "title": "Week 1",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#homework",
+    "href": "weeks/week_01.html#homework",
+    "title": "Week 1",
+    "section": "Homework",
+    "text": "Homework\n\nHW 0: Course setup\n\nDue Sunday at 11:00 pm\nFocuses on course setup and basic concepts from Week 1\nView HW 0 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_01.html#looking-ahead",
+    "href": "weeks/week_01.html#looking-ahead",
+    "title": "Week 1",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will introduce probability and begin exploratory data analysis and visualization.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 1"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html",
+    "href": "weeks/week_02.html",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#announcements",
+    "href": "weeks/week_02.html#announcements",
+    "title": "Week 2",
+    "section": "",
+    "text": "New TA: Nick Chaiyachakorn\nHW 0 Solutions released, and homework grading policy\nReminder: No class next Monday, January 19",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#overview",
+    "href": "weeks/week_02.html#overview",
+    "title": "Week 2",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on categorical data and probability.\nWe will learn how to summarize and compare categorical variables using tables and plots, and then introduce the basic ideas of probability, conditional probability, and Bayes’ theorem. These concepts form the foundation for statistical inference later in the course.\nBy the end of the week, you should be able to:\n\nsummarize categorical variables using counts and proportions,\ninterpret contingency tables using row and column percentages,\nunderstand probability as a long-run proportion,\ncompute conditional probabilities from tables,\nuse Bayes’ theorem to reverse conditioning in applied examples.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#readings-before-class",
+    "href": "weeks/week_02.html#readings-before-class",
+    "title": "Week 2",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 1.5–1.7 (categorical data and relationships)\nTextbook sections 2.1–2.2 (probability and conditional probability)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#materials",
+    "href": "weeks/week_02.html#materials",
+    "title": "Week 2",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Categorical data and relationships\n\nTopics\n\nCategorical variables\nFrequency tables and proportions\nBar plots\nContingency tables\nRow vs column percentages\nInterpreting conditional distributions\n\nSlides\n\nCategorical data and tables (HTML | PDF | OneDrive)\nR basics and data summaries (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 03, Part 1 – Categorical Data and Contingency Tables, R basics and data summaries\nLecture 03, Part 2 – Categorical Data and Contingency Tables, R basics and data\n\n\nI was trying out new recording software today, and there was a glitch about 1 hour and 20 minutes into class. You are not missing any required material; the full lecture is covered across the two recordings.\nPart 1 (the first ~1 hour and 20 minutes) is available on OneDrive in MP4 format.\nPart 2 (the final ~10 minutes of class) is available via Loom.\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 3\n\n\n\n\n\nWednesday — Probability and conditional probability\n\nTopics\n\nWhat probability means (long-run interpretation)\nSample space and events\nComplements and probability rules\nConditional probability\nBayes’ theorem\nDiagnostic testing example (PPV)\n\nSlides\n\nProbability and conditional probability (HTML | PDF | OneDrive)\n\nRecording\n\nLecture 04 – Probability and conditional probability (loom.com)\nLecture 04 – Probability and conditional probability (OneDrive folder)\nMuddy points\n\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 4",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#homework",
+    "href": "weeks/week_02.html#homework",
+    "title": "Week 2",
+    "section": "Homework",
+    "text": "Homework\n\nHW 1\n\nDue Sunday at 11:00 pm\nCovers:\n\nvectors and missing values\nnumeric and categorical summaries\ncontingency tables\nhistograms and box plots\n\nView HW 1 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#post-class-check-in-attendance",
+    "href": "weeks/week_02.html#post-class-check-in-attendance",
+    "title": "Week 2",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_02.html#looking-ahead",
+    "href": "weeks/week_02.html#looking-ahead",
+    "title": "Week 2",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nThere is no class next Monday.\nNext Wednesday we will begin data visualization and exploratory data analysis (EDA), including:\n\nhistograms, box plots, and scatterplots,\ndata frames vs tibbles,\nsubsetting and filtering data,\nan introduction to ggplot2.\n\nThese tools will help us move from summaries to storytelling with data.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 2"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html",
+    "href": "weeks/week_07.html",
+    "title": "Week 7",
+    "section": "",
+    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#announcements",
+    "href": "weeks/week_07.html#announcements",
+    "title": "Week 7",
+    "section": "",
+    "text": "Monday, February 16 is a university holiday (Presidents Day) — no class\nMidterm Exam closes Monday, February 16 at 11:00 PM. Solutions are posted under Resources on Sakai.\nHW 5 is due Monday, February 23 at 11:00 PM",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#overview",
+    "href": "weeks/week_07.html#overview",
+    "title": "Week 7",
+    "section": "Overview",
+    "text": "Overview\nThis week we have one class meeting focused on power and sample size calculations.\nAfter completing the midterm, we shift our attention to study design: understanding how to plan research studies with adequate statistical power to detect meaningful effects. Power analysis helps us answer critical questions like “How many participants do I need?” and “What effect size can I realistically detect?”\nBy the end of the week, you should be able to:\n\nunderstand the four components in equilibrium in a hypothesis test (significance level, sample size, effect size, and power),\ndefine and interpret Type I and Type II errors,\nexplain what statistical power means and why it matters,\ncalculate power and sample size for one-sample and two-sample t-tests using R,\napply power analysis to both study planning and interpretation of existing research.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#readings-before-class",
+    "href": "weeks/week_07.html#readings-before-class",
+    "title": "Week 7",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook section 5.4 (Power calculations for comparing means)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#materials",
+    "href": "weeks/week_07.html#materials",
+    "title": "Week 7",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — No Class (Presidents Day)\n\nUniversity holiday — enjoy the break!\nReminder: Midterm exam is still open. It closes Monday at 11:00 PM.\n\n\n\n\nWednesday — Power and Sample Size\n\nTopics\n\nThe four components of hypothesis testing: significance level (\\(\\alpha\\)), sample size (\\(n\\)), effect size, and power (\\(1−\\beta\\))\nType I and Type II errors\nDefining and interpreting statistical power\nIntroduction to effect size (Cohen’s d)\nCalculating power and sample size using the pwr package in R\nPower calculations for one-sample t-tests\nPower calculations for two-sample t-tests\nStudy design applications and trade-offs\nInterpreting published research through the lens of power\n\nSlides\n\nPower and Sample Size (HTML | PDF | OneDrive)\n\nRecording\n\nPower and Sample Size\n\nMuddy points\n\nMuddy Points - Lesson 12",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#homework",
+    "href": "weeks/week_07.html#homework",
+    "title": "Week 7",
+    "section": "Homework",
+    "text": "Homework\n\nHW 5\n\nReleased Wednesday, February 18\nDue Monday, February 23 at 11:00 PM\nCovers:\n\nLoading data from CSV and Excel files using here() and readr/readxl\nPaired t-tests (gene expression example)\nIndependent two-sample t-tests (Vitamin C recovery example)\nChoosing the appropriate test based on study design\nInterpreting confidence intervals and p-values\n\nView HW 5 instructions\ntxga_luad_top2a.csv and vitamin_c_recovery.xlsx available in data folder on OneDrive\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#midterm-exam",
+    "href": "weeks/week_07.html#midterm-exam",
+    "title": "Week 7",
+    "section": "Midterm Exam",
+    "text": "Midterm Exam\n\nCloses: Monday, February 16 at 11:00 PM\nFormat: 8 parts, 120 points total\nCoverage: Lessons 1-9 (through hypothesis testing and one-sample t-tests)\nSubmit: Both .qmd and .html files before the deadline",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#post-class-check-in-attendance",
+    "href": "weeks/week_07.html#post-class-check-in-attendance",
+    "title": "Week 7",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_07.html#looking-ahead",
+    "href": "weeks/week_07.html#looking-ahead",
+    "title": "Week 7",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nAfter the midterm and power, we will continue building our statistical inference toolkit:\n\nWeek 8:\n\nInference for proportions (single and two-sample)\nChi-squared tests for categorical data\nFisher’s exact test for 2×2 tables\n\nWeek 9:\n\nComparing means across multiple groups with ANOVA\nNonparametric tests (alternatives to t-tests)\n\n\nThese concepts extend our hypothesis testing framework to categorical outcomes and multiple-group comparisons.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 7"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html",
+    "href": "weeks/week_04.html",
+    "title": "Week 4",
+    "section": "",
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#announcements",
+    "href": "weeks/week_04.html#announcements",
+    "title": "Week 4",
+    "section": "",
+    "text": "HW 2 due Tuesday, January 27 at 11:00 pm\nHW 3 released Monday, January 26",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#overview",
+    "href": "weeks/week_04.html#overview",
+    "title": "Week 4",
+    "section": "Overview",
+    "text": "Overview\nThis week focuses on random variables and probability distributions.\nWe will learn about discrete and continuous random variables, calculate expected values and variances, and work with two fundamental probability distributions: the Binomial distribution and the Normal distribution.\nBy the end of the week, you should be able to:\n\ndefine random variables and distinguish between discrete and continuous types,\ncalculate expected values and variances of random variables,\nwork with linear combinations of random variables,\nidentify when the Binomial distribution applies and calculate probabilities,\nunderstand properties of the Normal distribution and calculate probabilities using R,\nidentify when the Poisson distribution applies and calculate probabilities using R.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#readings-before-class",
+    "href": "weeks/week_04.html#readings-before-class",
+    "title": "Week 4",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook section 3.1 (Random variables)\nTextbook section 3.2 (Binomial distribution)\nTextbook section 3.3 (Normal distribution)\nTextbook section 3.4 (Poisson distribution)\n\n(Additional resources will be posted if helpful.)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#materials",
+    "href": "weeks/week_04.html#materials",
+    "title": "Week 4",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Random Variables and Binomial Distribution\n\nTopics\n\nWhat are random variables?\nExpected value and variance\nLinear combinations of random variables\nBernoulli distribution\nBinomial distribution\nCalculating probabilities with R\n\nSlides\n\nRandom Variables and Binomial Distribution (HTML | PDF | OneDrive)\n\nRecording\n\nRandom Variables and Binomial Distribution\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 6\n\n\n\n\n\nWednesday — Normal and Poisson Distributions\n\nTopics\n\nThe Normal distribution\nStandard Normal (Z) distribution\nNormal probability calculations (pnorm(), qnorm())\nNormal approximation to the Binomial (with continuity correction)\nThe Poisson distribution\nPoisson probability calculations (dpois(), ppois())\nPoisson approximation to the Binomial (rare events)\n\nSlides\n\nNormal and Poisson Distributions (HTML | PDF | OneDrive)\n\nRecording\n\nNormal and Poisson Distributions\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 7",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#homework",
+    "href": "weeks/week_04.html#homework",
+    "title": "Week 4",
+    "section": "Homework",
+    "text": "Homework\n\nHW 2\n\nDue Tuesday, January 27 at 11:00 pm\nCovers:\n\ndata wrangling with dplyr\nsummary statistics with rstatix\nfrequency tables with janitor\ndata visualization with ggplot2\nprobability concepts (marginal, joint, and conditional probabilities)\n\nView HW 2 instructions\n\nHW 3\n\nReleased Monday, January 26\nDue Sunday, February 1 at 11:00 pm\nCovers:\n\nBayes’ Theorem\nRandom variables and expected value\nBinomial distribution\nContinued practice with tidyverse tools\n\nView HW 3 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#post-class-check-in-attendance",
+    "href": "weeks/week_04.html#post-class-check-in-attendance",
+    "title": "Week 4",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_04.html#looking-ahead",
+    "href": "weeks/week_04.html#looking-ahead",
+    "title": "Week 4",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nNext week we will begin statistical inference:\n\nMonday: Confidence intervals\nWednesday: Hypothesis testing introduction\n\nThese concepts are the foundation for drawing conclusions from data and making decisions based on evidence.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html",
+    "href": "weeks/week_08.html",
+    "title": "Week 8",
+    "section": "",
+    "text": "HW 5 is due Monday, February 23 at 11:00 PM\nHW 6 is due Sunday, March 1 at 11:00 PM",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#announcements",
+    "href": "weeks/week_08.html#announcements",
+    "title": "Week 8",
+    "section": "",
+    "text": "HW 5 is due Monday, February 23 at 11:00 PM\nHW 6 is due Sunday, March 1 at 11:00 PM",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#overview",
+    "href": "weeks/week_08.html#overview",
+    "title": "Week 8",
+    "section": "Overview",
+    "text": "Overview\nThis week we extend our hypothesis testing toolkit to categorical outcomes, covering two full class meetings.\nMonday focuses on inference for proportions — from single-proportion tests and confidence intervals through comparing two independent proportions and interpreting 2×2 tables. Wednesday introduces chi-squared tests for larger contingency tables and Fisher’s exact test for situations where sample sizes are small.\nBy the end of the week, you should be able to:\n\napply the normal approximation to the sampling distribution of a sample proportion,\nconduct hypothesis tests for a single proportion,\nconstruct and interpret confidence intervals for a single proportion,\ntest for differences between two independent proportions,\ninterpret data displayed in 2×2 tables and select the appropriate inference method based on study design,\nconduct chi-squared tests for independence in contingency tables,\napply Fisher’s exact test when expected cell counts are small, and\nrecognize when each method is appropriate given the data and research question.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#readings-before-class",
+    "href": "weeks/week_08.html#readings-before-class",
+    "title": "Week 8",
+    "section": "Readings (before class)",
+    "text": "Readings (before class)\n\nTextbook sections 8.1–8.2 (before Monday)\nTextbook sections 8.3–8.4 (before Wednesday)",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#materials",
+    "href": "weeks/week_08.html#materials",
+    "title": "Week 8",
+    "section": "Materials",
+    "text": "Materials\n\nMonday — Inference for Proportions and 2×2 Tables\n\nTopics\n\nThe sampling distribution of a sample proportion\nNormal approximation conditions (success-failure condition)\nHypothesis tests for a single proportion (one-sample z-test)\nConfidence intervals for a single proportion (Wilson score interval)\nComparing two independent proportions\n2×2 contingency tables: structure and interpretation\nRelative risk and odds ratios\nChoosing the appropriate inference method based on study design\n\nSlides\n\nInference for Proportions and 2×2 Tables (HTML | PDF | OneDrive)\n\nRecording\n\nInference for Proportions and 2×2 Tables\n\nMuddy points\n\nMuddy Points - Lesson 13\n\n\n\n\n\nWednesday — Chi-Squared Tests and Fisher’s Exact Test\n\nTopics\n\nChi-squared test for independence (general \\(r \\times c\\) tables)\nExpected cell counts and the chi-squared statistic\nDegrees of freedom and the chi-squared distribution\nAssumptions and conditions for the chi-squared test\nFisher’s exact test for 2×2 tables with small expected counts\nWhen to use chi-squared vs. Fisher’s exact test\nReporting results from tests of association\n\nSlides\n\nChi-Squared Tests and Fisher’s Exact Test (HTML | PDF | OneDrive)\nR Module 1: Reproducible Reports in Quarto (HTML | PDF | OneDrive)\n\nCode along\n\nDownload R Module 1: Reproducible Reports in Quarto (.qmd)\n\nRecording\n\nChi-Squared Tests and Fisher’s Exact Test\n\nMuddy points\nI reviewed your post-class feedback and wrote clarifications here:\n\nMuddy Points - Lesson 14",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#homework",
+    "href": "weeks/week_08.html#homework",
+    "title": "Week 8",
+    "section": "Homework",
+    "text": "Homework\n\nHW 6\n\nReleased Monday, February 23\nDue Sunday, March 1 at 11:00 PM\nCovers:\n\nPower analysis for two-sample t-tests (Cohen’s d, sample size, power trade-offs)\nOne-sample proportion test against a historical benchmark\nChecking the success-failure condition for the normal approximation\nComparing two independent proportions (two-sample z-test)\nMeasures of association from a 2×2 table: risk difference, relative risk, and odds ratio\nExact binomial inference when the normal approximation fails\n\nData files needed: cardiac_trial.csv (available in the data folder on OneDrive)\nView HW 6 instructions\n\nSee the full list of assignments on the Homework page.",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#post-class-check-in-attendance",
+    "href": "weeks/week_08.html#post-class-check-in-attendance",
+    "title": "Week 8",
+    "section": "Post-class check-in (attendance)",
+    "text": "Post-class check-in (attendance)\n\nPlease complete the post-class check-in after each class meeting.\nUsed for attendance credit and to identify topics that need clarification.\nLink: Post-class check-in",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
+    ]
+  },
+  {
+    "objectID": "weeks/week_08.html#looking-ahead",
+    "href": "weeks/week_08.html#looking-ahead",
+    "title": "Week 8",
+    "section": "Looking ahead",
+    "text": "Looking ahead\nAfter categorical inference, we continue building our toolkit:\n\nWeek 9:\n\nPower for proportions and correlated proportions\nComparing means across multiple groups with ANOVA\n\nWeek 10:\n\nNonparametric tests (alternatives to t-tests when assumptions fail)\nCorrelation and simple linear regression",
+    "crumbs": [
+      "Home",
+      "Weekly materials",
+      "Week 8"
     ]
   },
   {
@@ -8126,78 +8434,6 @@
     "text": "Questions?\n\n\n\n\nBMSC 620 | Random Variables & Binomial Distribution"
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "This page contains links to course materials, software setup, and shared resources. I will update it throughout the term.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#textbook-and-readings",
-    "href": "resources.html#textbook-and-readings",
-    "title": "Resources",
-    "section": "Textbook and readings",
-    "text": "Textbook and readings\n\nPrimary textbook\nIntroductory Statistics for the Life and Biomedical Sciences by Julie Vu and David Harrington\n\nThe textbook website is https://openintro.org/book/biostat/\nThe full PDF is free (with an optional contribution).\nA tablet-friendly PDF version with smaller margins is also available and may be easier to read.\n\n\n\nSupplementary reading (optional)\n\nAn Introduction to R (free pdf)",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#course-platforms",
-    "href": "resources.html#course-platforms",
-    "title": "Resources",
-    "section": "Course platforms",
-    "text": "Course platforms\n\nSakai\nAssignments, submissions, and grades will be managed through Sakai, OHSU’s learning management system.\nLinks to Sakai assignments will be provided on this website.\n\n\nShared course folder (OneDrive)\nA shared OneDrive folder will be used to distribute datasets, handouts, and other course files that do not live directly on this website.\n\nThe folder will include datasets used in class and on homework.\nFiles will be organized by topic or week.\nLinks to specific files may also appear on the Schedule page.\n\nLink to class OneDrive folder\n\n\nOffice hours platform\nWebex will be used for virtual office hours when applicable.\nTo help sessions run smoothly:\n\nPlease stay muted until you want to ask a question.\nUse the chat to indicate when you have a question.\nVideo is encouraged but not required.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#statistical-software",
-    "href": "resources.html#statistical-software",
-    "title": "Resources",
-    "section": "Statistical software",
-    "text": "Statistical software\nWe will use R and RStudio for homework assignments and in-class examples.\nQuarto will be used for creating reproducible reports.\n\nInstallation\nPlease install the following software:\n\nR https://www.r-project.org/\nRStudio Desktop https://posit.co/download/rstudio-desktop/\nQuarto https://quarto.org/docs/get-started/\n\nHelpful installation documentation is available here: https://rstudio-education.github.io/hopr/starting.html\nAlso, this handout by Meike Neiderhausen which contains some good additional resources for R.\nI encourage you to install these before the first class. We will reserve time early in the term to troubleshoot installation issues.\nIf you run into problems, please email me and include:\n\nYour operating system (Windows or Mac)\nThe full error message (copy/paste or screenshot)\nWhat you have already tried\n\n\n\nRStudio cheatsheets and shortcuts\nRStudio provides helpful reference materials for common tasks and packages.\n\nOfficial RStudio cheatsheets\nThese one-page reference guides are extremely helpful when learning R:\n\nAccess them in RStudio: Help → Cheatsheets\nOr download directly: https://posit.co/resources/cheatsheets/\n\nMost relevant for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and keyboard shortcuts\nData Transformation with dplyr - The verbs we use for data manipulation\nData Visualization with ggplot2 - Creating effective visualizations\nR Markdown Cheat Sheet - Also applies to Quarto documents\n\nI recommend printing or bookmarking the dplyr and ggplot2 cheatsheets - you’ll reference them frequently!\n\n\nKeyboard shortcuts\nLearning a few keyboard shortcuts will make your workflow much faster.\nView essential keyboard shortcuts - A quick reference for Mac and PC with the shortcuts you’ll use most.\nThe most important ones:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line/selection\nCmd/Ctrl + Shift + C - Comment/uncomment lines\n\nYou can view all available shortcuts in RStudio: Tools → Keyboard Shortcuts Help (or press Option/Alt + Shift + K)\n\n\n\nAdditional R resources (optional)\nThese resources are not required, but may be helpful if you want extra practice or alternative explanations.\n\nUseful online R resources\n\nR for the rest of us\nStatistical tools for high-throughput data analysis: ggplot2 essentials\nR-bloggers\nStack Overflow for troubleshooting\nR Graphical Manual\nQuick-R. Accessing the power of R\nR for SAS, STATA, and SPSS Users\nggplot2\nLearn R 4 free\nJoin a local R user groups\nLearning Machines\nData and Analytics for Research Training Program: Look at Modules with R coding language\n\n\n\nOnline R courses to complement or refresh material from class\n\nR for the rest of us\nCoursera: R programming\nedX: R basics\nData Carpentry for Biologists\nData Carpentry: For Ecologists\nPsychiatric R\nR coder",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#course-reference-materials",
-    "href": "resources.html#course-reference-materials",
-    "title": "Resources",
-    "section": "Course reference materials",
-    "text": "Course reference materials\nThese documents are intended as ongoing references throughout the course. Bookmark or download them for use on homework and exams.\n\nStatistical interpretation guide\nA checklist and worked example for writing up complete statistical results, including how to state hypotheses, what to report, and how to phrase conclusions.\nElements of a Complete Statistical Interpretation",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
-    "objectID": "resources.html#weekly-materials",
-    "href": "resources.html#weekly-materials",
-    "title": "Resources",
-    "section": "Weekly materials",
-    "text": "Weekly materials\nLecture slides, datasets, and handouts will be linked from the Schedule page by week, with files hosted either on this website or in the shared OneDrive folder.\n\nAttribution note: Portions of this Resources page were adapted from course materials by Nicky Wakim, with permission, and modified for BMSC 620.",
-    "crumbs": [
-      "Home",
-      "Course info",
-      "Resources"
-    ]
-  },
-  {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#roadmap-for-today",
     "href": "lessons/18_power_proportions/18_power_proportions.html#roadmap-for-today",
     "title": "Power and Sample Size for Proportions",
@@ -8317,11 +8553,18 @@
     "text": "What difference can we detect with fixed resources?\n\n\nSuppose budget limits enrollment to 50 patients per group. What’s our power, and what minimum difference can we detect?\n\n\n\n# What is our power with n = 50 per group?\npwr.2p.test(\n  h = ES.h(p1 = p_treatment, p2 = p_control),\n  n = 50,\n  sig.level = 0.05,\n  alternative = \"two.sided\"\n)\n\n\n     Difference of proportion power calculation for binomial distribution (arcsine transformation) \n\n              h = 0.4027158\n              n = 50\n      sig.level = 0.05\n          power = 0.5214145\n    alternative = two.sided\n\nNOTE: same sample sizes"
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion",
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-12",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-12",
     "title": "Power and Sample Size for Proportions",
-    "section": "Sensitivity analysis: varying the treatment proportion",
-    "text": "Sensitivity analysis: varying the treatment proportion\n\n\n\nscenarios2 &lt;- tibble(\n  p_tx   = c(0.50, 0.55, 0.60, 0.65, 0.70),\n  p_ctrl = 0.40,\n  h = ES.h(p_tx, p_ctrl)\n) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    n_per_group = ceiling(pwr.2p.test(h = h,\n                                      sig.level = 0.05,\n                                      power = 0.80,\n                                      alternative = \"two.sided\")$n),\n    n_total = n_per_group * 2\n  ) %&gt;%\n  ungroup()\nscenarios2\n\n# A tibble: 5 × 5\n   p_tx p_ctrl     h n_per_group n_total\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n1  0.5     0.4 0.201         388     776\n2  0.55    0.4 0.302         173     346\n3  0.6     0.4 0.403          97     194\n4  0.65    0.4 0.506          62     124\n5  0.7     0.4 0.613          42      84\n\n\n\n\n\nTip\n\n\nAsk: For each scenario, is the required sample size feasible given your study constraints? Is the assumed treatment effect realistic? Is it clinically meaningful?"
+    "section": "Sensitivity analysis: varying the treatment proportion (1/2)",
+    "text": "Sensitivity analysis: varying the treatment proportion (1/2)\n\n\n\nscenarios2 &lt;- tibble(\n  p_tx   = c(0.50, 0.55, 0.60, 0.65, 0.70),\n  p_ctrl = 0.40,\n  h = ES.h(p_tx, p_ctrl)\n) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    n_per_group = ceiling(pwr.2p.test(h = h,\n                                      sig.level = 0.05,\n                                      power = 0.80,\n                                      alternative = \"two.sided\")$n),\n    n_total = n_per_group * 2\n  ) %&gt;%\n  ungroup()"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-22",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-22",
+    "title": "Power and Sample Size for Proportions",
+    "section": "Sensitivity analysis: varying the treatment proportion (2/2)",
+    "text": "Sensitivity analysis: varying the treatment proportion (2/2)\n\n\n\nscenarios2\n\n# A tibble: 5 × 5\n   p_tx p_ctrl     h n_per_group n_total\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n1  0.5     0.4 0.201         388     776\n2  0.55    0.4 0.302         173     346\n3  0.6     0.4 0.403          97     194\n4  0.65    0.4 0.506          62     124\n5  0.7     0.4 0.613          42      84\n\n\n\n\n\n\n\nTip\n\n\nAsk: For each scenario, is the required sample size feasible given your study constraints? Is the assumed treatment effect realistic? Is it clinically meaningful?"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#comparing-power-calculations-means-vs.-proportions",
@@ -8338,11 +8581,18 @@
     "text": "When are proportions correlated?\n\n\nRecall from earlier in the course: observations can be paired or matched\n\n\nWe’ve seen this with means:\n\nPaired t-test: cholesterol before/after treatment in the same patient\nWithin-subject design: measurements are correlated\n\n\n\nThe same situation arises with proportions:\n\nDoes a screening test result change before and after a training intervention?\nIn a matched case-control study: does exposure status differ between cases and their matched controls?\nPre/post binary outcomes measured in the same individuals\n\n\n\n\nKey idea\n\n\nWhen binary outcomes are paired or matched, the observations are correlated — we cannot treat them as independent. Using the two-proportion test would be wrong!"
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example",
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-12",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-12",
     "title": "Power and Sample Size for Proportions",
-    "section": "A matched study example",
-    "text": "A matched study example\n\n\n\n\n\nStudy design\n\n\nResearchers want to evaluate a new patient education program for melanoma early detection. They recruit 50 patients and test each patient’s ability to correctly identify suspicious lesions before and after the program.\n\nOutcome: Correctly identified suspicious lesion (Yes/No)\nDesign: Each patient is their own control (paired)\n\n\n\n\n\n\nThe data structure: Each patient has two binary outcomes (before, after)\n\n# Simulated data\nset.seed(620)\n\neducation_data &lt;- tibble(\n  patient_id = 1:50,\n  before = rbinom(50, 1, 0.40),   # 40% correct before\n  after  = rbinom(50, 1, 0.70)    # 70% correct after (simulated improvement)\n) %&gt;%\n  mutate(\n    before = if_else(before == 1, \"Correct\", \"Incorrect\"),\n    after  = if_else(after == 1, \"Correct\", \"Incorrect\")\n  )\n\nhead(education_data)\n\n# A tibble: 6 × 3\n  patient_id before    after    \n       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;    \n1          1 Incorrect Correct  \n2          2 Incorrect Correct  \n3          3 Incorrect Incorrect\n4          4 Incorrect Incorrect\n5          5 Incorrect Correct  \n6          6 Correct   Correct"
+    "section": "A matched study example (1/2)",
+    "text": "A matched study example (1/2)\n\n\n\n\n\nStudy design\n\n\nResearchers want to evaluate a new patient education program for melanoma early detection. They recruit 50 patients and test each patient’s ability to correctly identify suspicious lesions before and after the program.\n\nOutcome: Correctly identified suspicious lesion (Yes/No)\nDesign: Each patient is their own control (paired)"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-22",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-22",
+    "title": "Power and Sample Size for Proportions",
+    "section": "A matched study example (2/2)",
+    "text": "A matched study example (2/2)\n\n\nThe data structure: Each patient has two binary outcomes (before, after)\n\n# Simulated data\nset.seed(620)\n\neducation_data &lt;- tibble(\n  patient_id = 1:50,\n  before = rbinom(50, 1, 0.40),   # 40% correct before\n  after  = rbinom(50, 1, 0.70)    # 70% correct after (simulated improvement)\n) %&gt;%\n  mutate(before = if_else(before == 1, \"Correct\", \"Incorrect\"),\n    after  = if_else(after == 1, \"Correct\", \"Incorrect\"))\n\nhead(education_data)\n\n# A tibble: 6 × 3\n  patient_id before    after    \n       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;    \n1          1 Incorrect Correct  \n2          2 Incorrect Correct  \n3          3 Incorrect Incorrect\n4          4 Incorrect Incorrect\n5          5 Incorrect Correct  \n6          6 Correct   Correct"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#the-22-table-for-paired-proportions",
@@ -8373,11 +8623,25 @@
     "text": "Interpreting the result\n\n\n\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  edu_tab\nMcNemar's chi-squared = 6.05, df = 1, p-value = 0.01391\n\n\n\n\n\n\n\nInterpretation\n\n\n21 / 50 (42%) patients correctly identified suspicious lesions before the education program compared to 33 / 50 (66%) after.\nMcNemar’s chi-squared test (\\(\\chi^2\\) = 6.05, df = 1, p = 0.014) provides evidence that the patient education program changed the proportion of patients who correctly identified suspicious lesions.\n\n\n\n\n\n\n\n\nWhat makes this different from a chi-squared test?\n\n\nA regular chi-squared test would treat the before/after observations as independent. McNemar’s test correctly accounts for the paired structure by focusing only on discordant pairs."
   },
   {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-with-janitor-or-rstatix",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-with-janitor-or-rstatix",
+    "title": "Power and Sample Size for Proportions",
+    "section": "McNemar’s test in R with janitor or rstatix",
+    "text": "McNemar’s test in R with janitor or rstatix\n\n\nUsing janitor:\n\neducation_data %&gt;%\n  tabyl(before, after) %&gt;%\n  column_to_rownames(\"before\") %&gt;% # Extra step using tibble::column_to_rownames\n  as.matrix() %&gt;%                  # Extra step to convert to matrix\n  mcnemar.test() %&gt;% \n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic p.value parameter method                                            \n      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                             \n1      6.05  0.0139         1 McNemar's Chi-squared test with continuity correc…\n\n\n\n\nUsing rstatix:\n\n# Create a table for mcnemar.test()\nedu_tab &lt;- table(education_data$before, education_data$after)\n\nrstatix::mcnemar_test(edu_tab)\n\n# A tibble: 1 × 6\n      n statistic    df      p p.signif method      \n* &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       \n1    50      6.05     1 0.0139 *        McNemar test"
+  },
+  {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-vs.-two-proportion-test",
     "href": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-vs.-two-proportion-test",
     "title": "Power and Sample Size for Proportions",
     "section": "McNemar’s test vs. two-proportion test",
     "text": "McNemar’s test vs. two-proportion test\n\n\n\n\nTwo-proportion test (Lesson 13)\n\nTwo independent groups\nExample: treatment A vs. treatment B in different patients\nTest: prop.test()\nAsks: are the proportions the same across groups?\n\n\n\n\nMcNemar’s test (today)\n\nPaired/matched observations on the same individuals\nExample: before vs. after in the same patients, or matched case-control pairs\nTest: mcnemar.test()\nAsks: are the discordant pairs symmetric?\n\n\n\n\n\n\n\nThe parallel to t-tests\n\n\nThis mirrors the distinction between the independent two-sample t-test (different people) and the paired t-test (same person measured twice). Using the wrong test leads to incorrect inference!"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
+    "title": "Power and Sample Size for Proportions",
+    "section": "Paired proportions: the 2×2 table",
+    "text": "Paired proportions: the 2×2 table\n\n\nEach pair produces two binary outcomes (e.g., before vs. after treatment):\n\n\n\n\nPost: +\nPost: −\n\n\n\n\nPre: +\n\\(p_{11}\\) (concordant)\n\\(p_{12}\\) (discordant)\n\n\nPre: −\n\\(p_{21}\\) (discordant)\n\\(p_{22}\\) (concordant)\n\n\n\n\nConcordant pairs (\\(p_{11}\\), \\(p_{22}\\)): outcome is the same at both time points\nDiscordant pairs (\\(p_{12}\\), \\(p_{21}\\)): outcome changes\n\n\\(p_{12}\\): changed from + to − (e.g., “got worse”)\n\\(p_{21}\\): changed from − to + (e.g., “improved”)\n\n\nMcNemar’s test asks: among the discordant pairs, is the split between \\(p_{12}\\) and \\(p_{21}\\) different from 50/50?"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#power-for-paired-proportions-the-key-inputs",
@@ -8391,7 +8655,7 @@
     "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach",
     "title": "Power and Sample Size for Proportions",
     "section": "Estimating power for McNemar’s: a simplified approach",
-    "text": "Estimating power for McNemar’s: a simplified approach\n\n\nOne practical approach: McNemar’s test on \\(n\\) total pairs is equivalent to a one-sample proportion test on the discordant pairs only.\nIf we expect:\n\nProportion of pairs with outcome change: \\(p_d = p_{12} + p_{21}\\) (total discordant pairs)\nAmong discordant pairs, proportion “improving” (\\(p_{21}\\)): \\(\\phi = p_{21} / p_d\\)\nUnder \\(H_0\\): \\(\\phi = 0.50\\) (changes equally likely in both directions)\n\n\n# Example: 25% of pairs expected to be discordant\n# Among discordant pairs, 70% are \"improvements\" (phi = 0.70)\n\np_discordant &lt;- 0.25\nphi_alt &lt;- 0.70       # expected proportion of discordant pairs that are \"improvements\"\n\n# Effective n for the test = n_total * p_discordant\n# Use pwr.p.test on the discordant pairs\npwr.p.test(\n  h = ES.h(p1 = phi_alt, p2 = 0.50),\n  sig.level = 0.05,\n  power = 0.80,\n  alternative = \"two.sided\"\n)\n\n\n     proportion power calculation for binomial distribution (arcsine transformation) \n\n              h = 0.4115168\n              n = 46.34804\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided"
+    "text": "Estimating power for McNemar’s: a simplified approach\n\n\nOne practical approach: McNemar’s test on \\(n\\) total pairs is equivalent to a one-sample proportion test on the discordant pairs only.\nIf we expect:\n\nProportion of pairs with outcome change: \\(p_d = p_{12} + p_{21}\\) (total discordant pairs)\nAmong discordant pairs, proportion “improving” (\\(p_{21}\\)): \\(\\phi = p_{21} / p_d\\)\nUnder \\(H_0\\): \\(\\phi = 0.50\\) (changes equally likely in both directions)"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#interpreting-power-for-mcnemars",
@@ -8429,339 +8693,75 @@
     "text": "Additional resources\n\n\nFor deeper reading on power for proportions:\n\nPASS documentation: Two Proportions\nSample size calculators from UCSF — web-based, user friendly\nG*Power — free desktop software with proportion-specific calculators\n\n\n\nFor power analysis with chi-squared tests (beyond this course):\n\nAbdul Rahman et al. (2025). “Practical guide to calculate sample size for chi-square test in biomedical research.” BMC Medical Research Methodology. https://pmc.ncbi.nlm.nih.gov/articles/PMC12107878/ — introduces Cohen’s w, includes a free web-based calculator\npwr.chisq.test() in the pwr package and PowerChisqTest() in the DescTools package are available in R if you need to do this programmatically\n\n\n\nFor McNemar’s test and power:\n\nPASS documentation: McNemar’s Test\nThe exact2x2 package in R has additional tools for exact McNemar’s calculations\n\n\n\nInteractive visualization:\n\nUnderstanding Statistical Power — drag sliders to see how components relate\n\n\n\n\nBMSC 620 | Power for Proportions"
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-12",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-12",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Sensitivity analysis: varying the treatment proportion (1/2)",
-    "text": "Sensitivity analysis: varying the treatment proportion (1/2)\n\n\n\nscenarios2 &lt;- tibble(\n  p_tx   = c(0.50, 0.55, 0.60, 0.65, 0.70),\n  p_ctrl = 0.40,\n  h = ES.h(p_tx, p_ctrl)\n) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    n_per_group = ceiling(pwr.2p.test(h = h,\n                                      sig.level = 0.05,\n                                      power = 0.80,\n                                      alternative = \"two.sided\")$n),\n    n_total = n_per_group * 2\n  ) %&gt;%\n  ungroup()"
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This page contains links to course materials, software setup, and shared resources. I will update it throughout the term.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-22",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-treatment-proportion-22",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Sensitivity analysis: varying the treatment proportion (2/2)",
-    "text": "Sensitivity analysis: varying the treatment proportion (2/2)\n\n\n\nscenarios2\n\n# A tibble: 5 × 5\n   p_tx p_ctrl     h n_per_group n_total\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;\n1  0.5     0.4 0.201         388     776\n2  0.55    0.4 0.302         173     346\n3  0.6     0.4 0.403          97     194\n4  0.65    0.4 0.506          62     124\n5  0.7     0.4 0.613          42      84\n\n\n\n\n\n\n\nTip\n\n\nAsk: For each scenario, is the required sample size feasible given your study constraints? Is the assumed treatment effect realistic? Is it clinically meaningful?"
+    "objectID": "resources.html#textbook-and-readings",
+    "href": "resources.html#textbook-and-readings",
+    "title": "Resources",
+    "section": "Textbook and readings",
+    "text": "Textbook and readings\n\nPrimary textbook\nIntroductory Statistics for the Life and Biomedical Sciences by Julie Vu and David Harrington\n\nThe textbook website is https://openintro.org/book/biostat/\nThe full PDF is free (with an optional contribution).\nA tablet-friendly PDF version with smaller margins is also available and may be easier to read.\n\n\n\nSupplementary reading (optional)\n\nAn Introduction to R (free pdf)",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-12",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-12",
-    "title": "Power and Sample Size for Proportions",
-    "section": "A matched study example (1/2)",
-    "text": "A matched study example (1/2)\n\n\n\n\n\nStudy design\n\n\nResearchers want to evaluate a new patient education program for melanoma early detection. They recruit 50 patients and test each patient’s ability to correctly identify suspicious lesions before and after the program.\n\nOutcome: Correctly identified suspicious lesion (Yes/No)\nDesign: Each patient is their own control (paired)"
+    "objectID": "resources.html#course-platforms",
+    "href": "resources.html#course-platforms",
+    "title": "Resources",
+    "section": "Course platforms",
+    "text": "Course platforms\n\nSakai\nAssignments, submissions, and grades will be managed through Sakai, OHSU’s learning management system.\nLinks to Sakai assignments will be provided on this website.\n\n\nShared course folder (OneDrive)\nA shared OneDrive folder will be used to distribute datasets, handouts, and other course files that do not live directly on this website.\n\nThe folder will include datasets used in class and on homework.\nFiles will be organized by topic or week.\nLinks to specific files may also appear on the Schedule page.\n\nLink to class OneDrive folder\n\n\nOffice hours platform\nWebex will be used for virtual office hours when applicable.\nTo help sessions run smoothly:\n\nPlease stay muted until you want to ask a question.\nUse the chat to indicate when you have a question.\nVideo is encouraged but not required.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-22",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#a-matched-study-example-22",
-    "title": "Power and Sample Size for Proportions",
-    "section": "A matched study example (2/2)",
-    "text": "A matched study example (2/2)\n\n\nThe data structure: Each patient has two binary outcomes (before, after)\n\n# Simulated data\nset.seed(620)\n\neducation_data &lt;- tibble(\n  patient_id = 1:50,\n  before = rbinom(50, 1, 0.40),   # 40% correct before\n  after  = rbinom(50, 1, 0.70)    # 70% correct after (simulated improvement)\n) %&gt;%\n  mutate(before = if_else(before == 1, \"Correct\", \"Incorrect\"),\n    after  = if_else(after == 1, \"Correct\", \"Incorrect\"))\n\nhead(education_data)\n\n# A tibble: 6 × 3\n  patient_id before    after    \n       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;    \n1          1 Incorrect Correct  \n2          2 Incorrect Correct  \n3          3 Incorrect Incorrect\n4          4 Incorrect Incorrect\n5          5 Incorrect Correct  \n6          6 Correct   Correct"
+    "objectID": "resources.html#statistical-software",
+    "href": "resources.html#statistical-software",
+    "title": "Resources",
+    "section": "Statistical software",
+    "text": "Statistical software\nWe will use R and RStudio for homework assignments and in-class examples.\nQuarto will be used for creating reproducible reports.\n\nInstallation\nPlease install the following software:\n\nR https://www.r-project.org/\nRStudio Desktop https://posit.co/download/rstudio-desktop/\nQuarto https://quarto.org/docs/get-started/\n\nHelpful installation documentation is available here: https://rstudio-education.github.io/hopr/starting.html\nAlso, this handout by Meike Neiderhausen which contains some good additional resources for R.\nI encourage you to install these before the first class. We will reserve time early in the term to troubleshoot installation issues.\nIf you run into problems, please email me and include:\n\nYour operating system (Windows or Mac)\nThe full error message (copy/paste or screenshot)\nWhat you have already tried\n\n\n\nRStudio cheatsheets and shortcuts\nRStudio provides helpful reference materials for common tasks and packages.\n\nOfficial RStudio cheatsheets\nThese one-page reference guides are extremely helpful when learning R:\n\nAccess them in RStudio: Help → Cheatsheets\nOr download directly: https://posit.co/resources/cheatsheets/\n\nMost relevant for this course:\n\nRStudio IDE Cheat Sheet - Overview of RStudio interface and keyboard shortcuts\nData Transformation with dplyr - The verbs we use for data manipulation\nData Visualization with ggplot2 - Creating effective visualizations\nR Markdown Cheat Sheet - Also applies to Quarto documents\n\nI recommend printing or bookmarking the dplyr and ggplot2 cheatsheets - you’ll reference them frequently!\n\n\nKeyboard shortcuts\nLearning a few keyboard shortcuts will make your workflow much faster.\nView essential keyboard shortcuts - A quick reference for Mac and PC with the shortcuts you’ll use most.\nThe most important ones:\n\nCmd/Ctrl + Shift + M - Insert pipe %&gt;%\nCmd/Ctrl + Enter - Run current line/selection\nCmd/Ctrl + Shift + C - Comment/uncomment lines\n\nYou can view all available shortcuts in RStudio: Tools → Keyboard Shortcuts Help (or press Option/Alt + Shift + K)\n\n\n\nAdditional R resources (optional)\nThese resources are not required, but may be helpful if you want extra practice or alternative explanations.\n\nUseful online R resources\n\nR for the rest of us\nStatistical tools for high-throughput data analysis: ggplot2 essentials\nR-bloggers\nStack Overflow for troubleshooting\nR Graphical Manual\nQuick-R. Accessing the power of R\nR for SAS, STATA, and SPSS Users\nggplot2\nLearn R 4 free\nJoin a local R user groups\nLearning Machines\nData and Analytics for Research Training Program: Look at Modules with R coding language\n\n\n\nOnline R courses to complement or refresh material from class\n\nR for the rest of us\nCoursera: R programming\nedX: R basics\nData Carpentry for Biologists\nData Carpentry: For Ecologists\nPsychiatric R\nR coder",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-1",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-1",
-    "title": "Power and Sample Size for Proportions",
-    "section": "McNemar’s test in R",
-    "text": "McNemar’s test in R\n\n\n**Using janitor:\n\neducation_data %&gt;%\n  tabyl(before, after) %&gt;%\n  column_to_rownames(\"before\") %&gt;% # Extra step using tibble::column_to_rownames\n  as.matrix() %&gt;%                  # Extra step to convert to matrix\n  mcnemar.test() %&gt;% \n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic p.value parameter method                                            \n      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                             \n1      6.05  0.0139         1 McNemar's Chi-squared test with continuity correc…\n\n\n\n\n**Using rstatix:\n\n# Create a table for mcnemar.test()\nedu_tab &lt;- table(education_data$before, education_data$after)\n\nrstatix::mcnemar_test(edu_tab)\n\n# A tibble: 1 × 6\n      n statistic    df      p p.signif method      \n* &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       \n1    50      6.05     1 0.0139 *        McNemar test"
+    "objectID": "resources.html#course-reference-materials",
+    "href": "resources.html#course-reference-materials",
+    "title": "Resources",
+    "section": "Course reference materials",
+    "text": "Course reference materials\nThese documents are intended as ongoing references throughout the course. Bookmark or download them for use on homework and exams.\n\nStatistical interpretation guide\nA checklist and worked example for writing up complete statistical results, including how to state hypotheses, what to report, and how to phrase conclusions.\nElements of a Complete Statistical Interpretation",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-with-janitor-or-rstatix",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-with-janitor-or-rstatix",
-    "title": "Power and Sample Size for Proportions",
-    "section": "McNemar’s test in R with janitor or rstatix",
-    "text": "McNemar’s test in R with janitor or rstatix\n\n\nUsing janitor:\n\neducation_data %&gt;%\n  tabyl(before, after) %&gt;%\n  column_to_rownames(\"before\") %&gt;% # Extra step using tibble::column_to_rownames\n  as.matrix() %&gt;%                  # Extra step to convert to matrix\n  mcnemar.test() %&gt;% \n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic p.value parameter method                                            \n      &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                                             \n1      6.05  0.0139         1 McNemar's Chi-squared test with continuity correc…\n\n\n\n\nUsing rstatix:\n\n# Create a table for mcnemar.test()\nedu_tab &lt;- table(education_data$before, education_data$after)\n\nrstatix::mcnemar_test(edu_tab)\n\n# A tibble: 1 × 6\n      n statistic    df      p p.signif method      \n* &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       \n1    50      6.05     1 0.0139 *        McNemar test"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Paired proportions: the 2×2 table",
-    "text": "Paired proportions: the 2×2 table\n\n\nEach pair produces two binary outcomes (e.g., before vs. after treatment):\n\n\n\n\nPost: +\nPost: −\n\n\n\n\nPre: +\n\\(p_{11}\\) (concordant)\n\\(p_{12}\\) (discordant)\n\n\nPre: −\n\\(p_{21}\\) (discordant)\n\\(p_{22}\\) (concordant)\n\n\n\n\nConcordant pairs (\\(p_{11}\\), \\(p_{22}\\)): outcome is the same at both time points\nDiscordant pairs (\\(p_{12}\\), \\(p_{21}\\)): outcome changes\n\n\\(p_{12}\\): changed from + to − (e.g., “got worse”)\n\\(p_{21}\\): changed from − to + (e.g., “improved”)\n\n\nMcNemar’s test asks: among the discordant pairs, is the split between \\(p_{12}\\) and \\(p_{21}\\) different from 50/50?"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-were-learning-today",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#what-were-learning-today",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "What We’re Learning Today",
-    "text": "What We’re Learning Today\n\nBy the end of this module, you will be able to:\n\nUnderstand the difference between characters and factors in R\nUse forcats functions to reorder and relabel factor levels\nRecognize when data is in wide vs. long format\nUse pivot_longer() and pivot_wider() to reshape data\n\n\n\n\n\n\n\n\nNote\n\n\nThese skills come up constantly — every time you make a plot with categories or need to restructure data for analysis."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#two-problems-youve-probably-already-hit",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#two-problems-youve-probably-already-hit",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Two Problems You’ve Probably Already Hit",
-    "text": "Two Problems You’ve Probably Already Hit\n\n\nProblem 1: You make a bar chart and the categories are in alphabetical order instead of a meaningful order.\n\nProblem 2: You have data with multiple columns that should really be rows (or vice versa) and your ggplot() code won’t cooperate.\n\n\n\n\nBoth problems have the same root cause: R doesn’t know what you know about the structure of your data.\n\n\nToday we fix that."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-1-what-is-a-factor",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#part-1-what-is-a-factor",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Part 1: What Is a Factor?",
-    "text": "Part 1: What Is a Factor?"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-motivating-bug",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#the-motivating-bug",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "The Motivating Bug",
-    "text": "The Motivating Bug\n\nnhanes.samp %&gt;%\n  filter(!is.na(HealthGen)) %&gt;%\n  ggplot(aes(x = HealthGen)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Self-Reported Health Ratings\",\n       subtitle = \"Alphabetical order makes no sense here!\",\n       x = \"Health Rating\",\n       y = \"Count\") + \n  theme_bw(base_size = 16)\n\n\nThe categories are in alphabetical order. That’s not what we want."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#character-vs.-factor",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#character-vs.-factor",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Character vs. Factor",
-    "text": "Character vs. Factor\n\n\nCharacter\n\nJust text — R treats it like any string\nNo inherent order\nPlotted alphabetically by default\n\n\nclass(nhanes.samp$HealthGen)\n\n[1] \"character\"\n\n\n\nFactor\n\nA categorical variable with a defined set of levels\nLevels have an order (even if it’s arbitrary)\nYou control the order\n\n\nhealth_factor &lt;- factor(nhanes.samp$HealthGen)\nclass(health_factor)\n\n[1] \"factor\"\n\nlevels(health_factor)\n\n[1] \"Excellent\" \"Fair\"      \"Good\"      \"Poor\"      \"Vgood\"    \n\n\n\n\n\n\nWhen R converts a character to a factor automatically, it uses alphabetical order — which is almost never what you want."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#creating-factors-with-factor",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#creating-factors-with-factor",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Creating Factors with factor()",
-    "text": "Creating Factors with factor()\nYou can specify the exact order of levels:\n\nnhanes.samp &lt;- nhanes.samp %&gt;%\n  mutate(\n    HealthGen = factor(HealthGen,\n                       levels = c(\"Excellent\",\n                                  \"Vgood\",\n                                  \"Good\",\n                                  \"Fair\",\n                                  \"Poor\")))\n\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Vgood\"     \"Good\"      \"Fair\"      \"Poor\"     \n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThe levels argument defines the order. Categories not listed are set to NA."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-fix-ordered-factor-in-a-plot",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#the-fix-ordered-factor-in-a-plot",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "The Fix: Ordered Factor in a Plot",
-    "text": "The Fix: Ordered Factor in a Plot\n\nnhanes.samp %&gt;%\n  filter(!is.na(HealthGen)) %&gt;%\n  ggplot(aes(x = HealthGen)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Self-Reported Health Ratings\",\n       subtitle = \"Now in a meaningful order with a clean label\",\n       x = \"Health Rating\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)\n\n\nSame code. The only thing that changed was making HealthGen a factor with meaningful levels."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#levels-inspect-and-verify",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#levels-inspect-and-verify",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "levels() — Inspect and Verify",
-    "text": "levels() — Inspect and Verify\nlevels() is your diagnostic tool — use it to check that your factor is set up correctly:\n\n# What levels exist?\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Very Good\" \"Good\"      \"Fair\"      \"Poor\"     \n\n# How many levels?\nnlevels(nhanes.samp$HealthGen)\n\n[1] 5\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nAlways check levels() after creating a factor. If the order isn’t what you expect, fix it now — not after you’ve built plots and run models."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-2-the-forcats-package",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#part-2-the-forcats-package",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Part 2: The forcats Package",
-    "text": "Part 2: The forcats Package"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-forcats",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#why-forcats",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Why forcats?",
-    "text": "Why forcats?\nfactor() works, but it requires you to type out every level by hand. The forcats package (part of the tidyverse) gives you shortcut functions for common tasks:\n\n\n\n\n\nFunction\nWhat it does\n\n\n\n\nfct_relevel()\nManually reorder specific levels\n\n\nfct_reorder()\nReorder levels by a summary statistic\n\n\nfct_infreq()\nOrder levels by frequency\n\n\nfct_rev()\nReverse the current order\n\n\nfct_recode()\nRename levels\n\n\nfct_collapse()\nCombine levels into groups\n\n\n\n\n\nWe’ll focus on fct_relevel() and fct_reorder() — the two you’ll use most."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_relevel-manual-reordering",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_relevel-manual-reordering",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "fct_relevel() — Manual Reordering",
-    "text": "fct_relevel() — Manual Reordering\nMove specific levels to the front, or place them at a specific position:\n\n# Move \"College Grad\" to the first position\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"College Grad\")) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"College Grad\"   \"8th Grade\"      \"9 - 11th Grade\" \"High School\"   \n[5] \"Some College\"  \n\n\n\n\n\n# Move \"College Grad\" to the last position\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"College Grad\", after = Inf)) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"8th Grade\"      \"9 - 11th Grade\" \"High School\"    \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\nafter = Inf is the trick for “put it at the end.”"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_reorder-data-driven-reordering",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_reorder-data-driven-reordering",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "fct_reorder() — Data-Driven Reordering",
-    "text": "fct_reorder() — Data-Driven Reordering\nOrder factor levels by a summary statistic of another variable. This is especially powerful for plots:\n\nnhanes.samp %&gt;%\n  filter(!is.na(Education), !is.na(BMI)) %&gt;%\n  mutate(Education = fct_reorder(Education, BMI, .fun = median)) %&gt;%\n  ggplot(aes(x = Education, y = BMI)) +\n  geom_boxplot(fill = \"#0072B2\", alpha = 0.7) +\n  labs(title = \"BMI by education level (ordered by median BMI)\",\n       x = \"Education level\",\n       y = \"BMI (kg/m²)\") +\n  theme_bw(base_size = 16)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_infreq-order-by-frequency",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_infreq-order-by-frequency",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "fct_infreq() — Order by Frequency",
-    "text": "fct_infreq() — Order by Frequency\nSometimes you just want categories ordered by how often they appear:\n\nnhanes.samp %&gt;%\n  filter(!is.na(Education)) %&gt;%\n  mutate(Education = fct_infreq(Education)) %&gt;%\n  ggplot(aes(x = Education)) +\n  geom_bar(fill = \"#0072B2\") +\n  labs(title = \"Education levels ordered by frequency\",\n       x = \"Education level\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-factors-matter-for-modeling-preview",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#why-factors-matter-for-modeling-preview",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Why Factors Matter for Modeling (Preview)",
-    "text": "Why Factors Matter for Modeling (Preview)\nWhen you fit a regression model, R automatically creates dummy variables from factors. The first level becomes the reference category.\n\n\n\n# Current reference level (first in the list)\nlevels(nhanes.samp$Education)[1]\n\n[1] \"8th Grade\"\n\n\n\n\n\n# Change reference to \"High School\"\nnhanes.samp %&gt;%\n  mutate(Education = fct_relevel(Education, \"High School\")) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"High School\"    \"8th Grade\"      \"9 - 11th Grade\" \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\n\n\n\n\n\n\nNote\n\n\nWe’ll come back to this in detail when we cover regression. For now, just know that the first factor level = reference category in any model."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#factor-tools-summary",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#factor-tools-summary",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Factor Tools Summary",
-    "text": "Factor Tools Summary\n\n\nCreating factors\n\nfactor(x, levels = c(...)) — full control\nlevels() — inspect the result\nAlways verify your levels are correct\n\nCommon tasks\n\nReorder for plots → fct_reorder() or fct_infreq()\nSet reference level for modeling → fct_relevel()\nRename levels → fct_recode()\n\n\n\n\n\n\n\n\nTip\n\n\nThe rule of thumb:\n\nFor plots: use fct_reorder() to order by a statistic, or fct_infreq() to order by count\nFor models: use fct_relevel() to set your reference category"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-3-wide-vs.-long-data",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#part-3-wide-vs.-long-data",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Part 3: Wide vs. Long Data",
-    "text": "Part 3: Wide vs. Long Data"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#the-conceptual-shift",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#the-conceptual-shift",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "The Conceptual Shift",
-    "text": "The Conceptual Shift\nMost data you receive is in wide format — one row per subject, multiple measurement columns.\nBut many R operations (especially ggplot2) need data in long format — one row per observation.\n\n\n\n\n\n\n\n\n\nNote\n\n\nThis is not about right vs. wrong. It’s about which shape your tool expects."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-does-wide-data-look-like",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#what-does-wide-data-look-like",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "What Does “Wide” Data Look Like?",
-    "text": "What Does “Wide” Data Look Like?\nEach subject is one row, with measurements spread across columns:\n\nnhanes_wide &lt;- nhanes.samp %&gt;%\n  select(ID, Age, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(5)\n\nnhanes_wide\n\n# A tibble: 5 × 5\n     ID   Age   BMI BPSysAve BPDiaAve\n  &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;    &lt;int&gt;\n1 63147    41  30        112       76\n2 67852    15  19.2      107       72\n3 57165    48  27.4      123       69\n4 68691     7  17.4       NA       NA\n5 69465    50  26.9      152      103\n\n\n\n\nFour measurement columns: Age, BMI, BPSysAve, BPDiaAve. This is the shape you’re used to seeing."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#what-does-long-data-look-like",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#what-does-long-data-look-like",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "What Does “Long” Data Look Like?",
-    "text": "What Does “Long” Data Look Like?\nEach measurement is its own row:\n\nnhanes_long &lt;- nhanes_wide %&gt;%\n  pivot_longer(\n    cols = c(Age, BMI, BPSysAve, BPDiaAve),\n    names_to = \"measure\",\n    values_to = \"value\"\n  )\n\nnhanes_long\n\n# A tibble: 20 × 3\n      ID measure  value\n   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n 1 63147 Age       41  \n 2 63147 BMI       30  \n 3 63147 BPSysAve 112  \n 4 63147 BPDiaAve  76  \n 5 67852 Age       15  \n 6 67852 BMI       19.2\n 7 67852 BPSysAve 107  \n 8 67852 BPDiaAve  72  \n 9 57165 Age       48  \n10 57165 BMI       27.4\n11 57165 BPSysAve 123  \n12 57165 BPDiaAve  69  \n13 68691 Age        7  \n14 68691 BMI       17.4\n15 68691 BPSysAve  NA  \n16 68691 BPDiaAve  NA  \n17 69465 Age       50  \n18 69465 BMI       26.9\n19 69465 BPSysAve 152  \n20 69465 BPDiaAve 103  \n\n\n\n\nSame data, different shape. Each subject now has 4 rows instead of 1."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation",
-    "text": "Visualizing the Transformation"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#why-does-the-shape-matter",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#why-does-the-shape-matter",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Why Does the Shape Matter?",
-    "text": "Why Does the Shape Matter?\n\n\nWide format is good for:\n\nHuman readability\nSummary tables\nSpreadsheet-style work\nMost statistical tests in R\n\n\nLong format is good for:\n\nggplot2 — faceting, color mapping\nGrouped operations with group_by()\nRepeated measures analysis\nAny time you want to treat variable names as data\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nggplot2’s golden rule: if you want different variables to be distinguished by color, facet, or grouping, they usually need to be in the same column — which means long format."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#part-4-pivoting",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#part-4-pivoting",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Part 4: Pivoting",
-    "text": "Part 4: Pivoting"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-wide-to-long",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-wide-to-long",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "pivot_longer() — Wide to Long",
-    "text": "pivot_longer() — Wide to Long\npivot_longer() takes multiple columns and stacks them into two new columns: one for the variable names and one for the values.\n\nnhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(4) %&gt;%\n  pivot_longer(\n    cols = c(BMI, BPSysAve, BPDiaAve),        # columns to stack\n    names_to = \"measurement\",        # new column for variable names\n    values_to = \"value\"              # new column for the values\n  )\n\n# A tibble: 12 × 3\n      ID measurement value\n   &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;\n 1 63147 BMI          30  \n 2 63147 BPSysAve    112  \n 3 63147 BPDiaAve     76  \n 4 67852 BMI          19.2\n 5 67852 BPSysAve    107  \n 6 67852 BPDiaAve     72  \n 7 57165 BMI          27.4\n 8 57165 BPSysAve    123  \n 9 57165 BPDiaAve     69  \n10 68691 BMI          17.4\n11 68691 BPSysAve     NA  \n12 68691 BPDiaAve     NA"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-the-three-arguments",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-the-three-arguments",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "pivot_longer() — The Three Arguments",
-    "text": "pivot_longer() — The Three Arguments\n\npivot_longer(\n  cols = c(BMI, BPSysAve, BPDiaAve),    # 1. Which columns to pivot\n  names_to = \"measurement\",             # 2. Name for the new \"names\" column\n  values_to = \"value\"                   # 3. Name for the new \"values\" column\n)\n\n\n\n\n\n\n\n\n\n\nArgument\nQuestion it answers\n\n\n\n\ncols\nWhich columns are being stacked?\n\n\nnames_to\nWhat should we call the column that holds the old column names?\n\n\nvalues_to\nWhat should we call the column that holds the values?\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThink of it as: “I want to make this data longer by stacking these columns.”"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-why-the-dimensions-change",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_longer-why-the-dimensions-change",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "pivot_longer() — Why the Dimensions Change",
-    "text": "pivot_longer() — Why the Dimensions Change\n\nnhanes_subset &lt;- nhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve)\n\n# Wide: one row per subject\ndim(nhanes_subset)\n\n[1] 200   4\n\n# Long: one row per subject × measurement\nnhanes_subset %&gt;%\n  pivot_longer(cols = c(BMI, BPSysAve, BPDiaAve),\n               names_to = \"measurement\",\n               values_to = \"value\") %&gt;%\n  dim()\n\n[1] 600   3\n\n\n\n\nWe pivoted 3 columns, so we get 3× the rows and go from 4 columns down to 3 (ID + the two new columns)."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-long-to-wide",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-long-to-wide",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "pivot_wider() — Long to Wide",
-    "text": "pivot_wider() — Long to Wide\npivot_wider() does the reverse — it spreads rows back into columns:\n\nnhanes_long_example &lt;- nhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  head(4) %&gt;%\n  pivot_longer(cols = c(BMI, BPSysAve, BPDiaAve),\n               names_to = \"measurement\",\n               values_to = \"value\")\n\n# Now spread it back to wide\nnhanes_long_example %&gt;%\n  pivot_wider(\n    names_from = \"measurement\",     # column whose values become new column names\n    values_from = \"value\"           # column whose values fill the new columns\n  )\n\n# A tibble: 4 × 4\n     ID   BMI BPSysAve BPDiaAve\n  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 63147  30        112       76\n2 67852  19.2      107       72\n3 57165  27.4      123       69\n4 68691  17.4       NA       NA"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-the-two-arguments",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot_wider-the-two-arguments",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "pivot_wider() — The Two Arguments",
-    "text": "pivot_wider() — The Two Arguments\n\npivot_wider(\n  names_from = \"measurement\",    # 1. Which column has the new column names?\n  values_from = \"value\"          # 2. Which column has the values to fill in?\n)\n\n\n\n\n\n\nArgument\nQuestion it answers\n\n\n\n\nnames_from\nWhich column’s values should become new column names?\n\n\nvalues_from\nWhich column’s values should fill those new columns?\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nThink of it as: “I want to make this data wider by spreading this column into multiple columns.”"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#putting-it-together-pivot-plot",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#putting-it-together-pivot-plot",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Putting It Together: Pivot → Plot",
-    "text": "Putting It Together: Pivot → Plot"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#a-three-step-workflow",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#a-three-step-workflow",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "A Three-Step Workflow",
-    "text": "A Three-Step Workflow\nSuppose we want to compare the distributions of BMI, BPSysAve, and BPDiaAve side by side. In wide format, this is awkward. In long format, it’s one ggplot() call:\nStep 1: Select the relevant columns\nStep 2: Pivot to long format\nStep 3: Plot with faceting"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#pivot-plot-in-action",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#pivot-plot-in-action",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Pivot → Plot in Action",
-    "text": "Pivot → Plot in Action\n\nnhanes.samp %&gt;%\n  select(ID, BMI, BPSysAve, BPDiaAve) %&gt;%\n  pivot_longer(\n    cols = c(BMI, BPSysAve, BPDiaAve),\n    names_to = \"measurement\",\n    values_to = \"value\"\n  ) %&gt;%\n  ggplot(aes(x = value)) +\n  geom_histogram(bins = 30, fill = \"#0072B2\", color = \"white\") +\n  facet_wrap(~ measurement, scales = \"free\") +\n  labs(title = \"Distributions of BMI, BPSysAve, and BPDiaAve\",\n       x = \"Value\",\n       y = \"Count\") +\n  theme_bw(base_size = 16)\n\n\n\n\nOne pipeline. Three plots. This is why reshaping matters."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#key-takeaways",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#key-takeaways",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Key Takeaways",
-    "text": "Key Takeaways\n\n\nFactors\n\nCharacters have no order — factors do\nfactor(x, levels = ...) for full control\nfct_reorder() for data-driven plot ordering\nfct_relevel() to set reference categories\n\nReshaping\n\nWide = one row per subject, many measurement columns\nLong = one row per observation\npivot_longer() — wide to long (for plotting, grouping)\npivot_wider() — long to wide (for tables, summaries)\n\n\n\n\n\n\n\n\nTip\n\n\nThe rules:\nFactors: If your plot categories are in the wrong order, it’s a factor problem.\nReshaping: If ggplot wants your data in a different shape, pivot it."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#references",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#references",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "References",
-    "text": "References\n\n\nFactors\n\nR for Data Science: Factors\nforcats documentation\nBe the boss of your factors — STAT 545\n\n\n\nReshaping data\n\nR for Data Science: Pivoting\ntidyr documentation\nPivoting vignette — excellent visual explanations\n\n\n\n\nBMSC 620 | Factors and Reshaping Data"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-13",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-13",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation (1/3)",
-    "text": "Visualizing the Transformation (1/3)\n\nVisual by Garrick Aden-Buie/tidyexplain"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-23",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-23",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation (2/3)",
-    "text": "Visualizing the Transformation (2/3)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-33",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-33",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation (3/3)",
-    "text": "Visualizing the Transformation (3/3)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-fct_recode",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-fct_recode",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Cleaning Up Labels with fct_recode()",
-    "text": "Cleaning Up Labels with fct_recode()\n“Vgood” isn’t great for a plot or a report. We can rename it:\n\n# Replacing the factor creation and recode with one block:\nnhanes.samp &lt;- nhanes.samp %&gt;%\n  mutate(\n    HealthGen = factor(HealthGen,\n                       levels = c(\"Excellent\", \"Vgood\", \"Good\", \"Fair\", \"Poor\"),\n                       labels = c(\"Excellent\", \"Very Good\", \"Good\", \"Fair\", \"Poor\"))\n  )\n\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Very Good\" \"Good\"      \"Fair\"      \"Poor\"     \n\n\n\n\n\n\n\n\n\n\nNote\n\n\nThe syntax is \"new name\" = \"old name\". It feels backwards at first, but it follows the same left = right pattern as mutate()."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#education-is-already-a-factor",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#education-is-already-a-factor",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Education Is Already a Factor",
-    "text": "Education Is Already a Factor\nEducation was already a factor in the dataset:\n\nclass(nhanes.samp$Education)\n\n[1] \"factor\"\n\nlevels(nhanes.samp$Education)\n\n[1] \"8th Grade\"      \"9 - 11th Grade\" \"High School\"    \"Some College\"  \n[5] \"College Grad\"  \n\n\n\n\nThe levels are in a reasonable order — but what if we want to change the reference category for a model, or reorder by a statistic for a plot?\nThat’s where forcats comes in."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#fct_recode-rename-levels",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#fct_recode-rename-levels",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "fct_recode() — Rename Levels",
-    "text": "fct_recode() — Rename Levels\nSometimes level names are too long, abbreviated, or inconsistent. fct_recode() lets you rename them:\n\nunique(nhanes.samp$HealthGen)\n\n[1] Fair      Very Good &lt;NA&gt;      Good      Excellent Poor     \nLevels: Excellent Very Good Good Fair Poor\n\nnhanes.samp %&gt;%\n  mutate(\n    Education = fct_recode(Education,\n                           \"Some HS\" = \"9 - 11th Grade\",\n                           \"HS Grad\" = \"High School\",\n                           \"College\" = \"College Grad\")\n  ) %&gt;%\n  pull(Education) %&gt;%\n  levels()\n\n[1] \"8th Grade\"    \"Some HS\"      \"HS Grad\"      \"Some College\" \"College\"     \n\n\n\n\n\n\n\n\nNote\n\n\n\nThe syntax is \"new name\" = \"old name\". It feels backwards at first, but it follows the same left = right assignment pattern as mutate(). Only the levels you list are renamed — the rest stay as they are.\nUnlike the labels argument we used earlier, fct_recode() lets you pick and choose. If you only want to rename one category, the others will stay exactly as they were."
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-12",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-12",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation (1/2)",
-    "text": "Visualizing the Transformation (1/2)\n\nVisual by Garrick Aden-Buie/tidyexplain"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-22",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#visualizing-the-transformation-22",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Visualizing the Transformation (2/2)",
-    "text": "Visualizing the Transformation (2/2)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-base-r",
-    "href": "lessons/18_power_proportions/r_module2_slides.html#cleaning-up-labels-with-base-r",
-    "title": "R Module 2: Factors and Reshaping Data",
-    "section": "Cleaning Up Labels with base R",
-    "text": "Cleaning Up Labels with base R\n“Vgood” isn’t great for a plot or a report. We can rename it:\n\n# Cleaning Up Labels\nnhanes.samp &lt;- nhanes.samp %&gt;%\n  mutate(\n    HealthGen = factor(HealthGen,\n                       levels = c(\"Excellent\", \"Vgood\", \"Good\", \"Fair\", \"Poor\"),\n                       labels = c(\"Excellent\", \"Very Good\", \"Good\", \"Fair\", \"Poor\"))\n  )\n\nlevels(nhanes.samp$HealthGen)\n\n[1] \"Excellent\" \"Very Good\" \"Good\"      \"Fair\"      \"Poor\""
+    "objectID": "resources.html#weekly-materials",
+    "href": "resources.html#weekly-materials",
+    "title": "Resources",
+    "section": "Weekly materials",
+    "text": "Weekly materials\nLecture slides, datasets, and handouts will be linked from the Schedule page by week, with files hosted either on this website or in the shared OneDrive folder.\n\nAttribution note: Portions of this Resources page were adapted from course materials by Nicky Wakim, with permission, and modified for BMSC 620.",
+    "crumbs": [
+      "Home",
+      "Course info",
+      "Resources"
+    ]
   }
 ]

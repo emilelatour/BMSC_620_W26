@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Power for Proportions and ANOVA">
 
-<title>Homework – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 9 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -79,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
     </a>
   </div>
@@ -90,23 +91,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./schedule.html"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./homework.html"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./exams.html"> 
+    <a class="nav-link" href="../exams.html"> 
 <span class="menu-text">Exams</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -120,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./homework.html">Homework</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Week 9</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -142,25 +143,25 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./homework.html" class="sidebar-item-text sidebar-link active">
+  <a href="../homework.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homework</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -175,19 +176,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instructors.html" class="sidebar-item-text sidebar-link">
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -204,49 +205,49 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_01.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_02.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_03.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_04.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_05.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_06.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_07.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week_08.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
@@ -257,27 +258,44 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
+  <ul class="collapse">
+  <li><a href="#monday-power-for-proportions-and-correlated-proportions" id="toc-monday-power-for-proportions-and-correlated-proportions" class="nav-link" data-scroll-target="#monday-power-for-proportions-and-correlated-proportions">Monday — Power for Proportions and Correlated Proportions</a></li>
+  <li><a href="#wednesday-comparing-means-with-anova" id="toc-wednesday-comparing-means-with-anova" class="nav-link" data-scroll-target="#wednesday-comparing-means-with-anova">Wednesday — Comparing Means with ANOVA</a></li>
+  </ul></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Homework</h1>
+<h1 class="title">Week 9</h1>
+</div>
+
+<div>
+  <div class="description">
+    Power for Proportions and ANOVA
+  </div>
 </div>
 
 
-
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta">
 
     
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 1, 2026</p>
-    </div>
-  </div>
     
   </div>
   
@@ -286,113 +304,146 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-File naming and submission
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>File naming</strong>: <code>Lastname_FirstInitial_HW##</code> (example: <code>Latour_E_HW01</code>)</p>
-<p><strong>Submit both</strong> files on Sakai:</p>
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
 <ul>
-<li>Lastname_FirstInitial_HW##.qmd</li>
-<li>Lastname_FirstInitial_HW##.html</li>
+<li><strong>HW 7</strong> is due <strong>Sunday, March 8 at 11:00 PM</strong></li>
 </ul>
-</div>
-</div>
-<p>Homework assignments are due on <strong>Sundays at 11:00 pm</strong> unless otherwise noted.</p>
-<p>Start from the provided <code>.qmd</code> template for each assignment.</p>
-<section id="homework-schedule" class="level2">
-<h2 class="anchored" data-anchor-id="homework-schedule">Homework schedule</h2>
-<p>All homework files are distributed through OneDrive. Each homework link contains everything you need for that assignment.</p>
-<p>Homework solutions will be posted in Sakai after the submission deadline. These are provided for review and learning purposes.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">HW</th>
-<th style="text-align: center;">Due (@11pm)</th>
-<th style="text-align: center;">Files</th>
-<th style="text-align: center;">Preview</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">01/11</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgAXMPuK4j5SSJBZciZj4Y96AR5OPvyfcNNzTxSL16n8UQQ?e=sQSOR5">HW 00 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW00/HW00.html">View HW 00</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">01/18</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgDNPvsaCmCLTJ4_EDwtr1_WAXRAjlX6jdEOt08nffiJOV4?e=WMUc7T">HW 01 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW01/HW01.html">View HW 01</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">01/27</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgB6-UGUHWPfQqWbDTKVk5PFAf6Uk6i5z1MaNv_4kjMBOk8?e=ESbDNM">HW 02 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW02/HW02.html">View HW 02</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">02/01</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCJONNcABvgSZ4R7JaHY7UWAeaIZ-D2DG9tvL0HEvbVrWA?e=me2guY">HW 03 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW03/HW03.html">View HW 03</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">02/08</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgB4i4IrW_hkQJvjr7qNUouiAWxuqbCiRDSIKJ31y1OxiCg?e=EtZTib">HW 04 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW04/HW04.html">View HW 04</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">02/23</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/homework/HW05?csf=1&amp;web=1&amp;e=eGueid">HW 05 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW05/HW05.html">View HW 05</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">03/01</td>
-<td style="text-align: center;"><a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBsqCG6HtQRSYjbjk6SXkyhARYqcnvdc9dAcxbmUtWrgQY?e=UVnRUX">HW 06 files (OneDrive)</a></td>
-<td style="text-align: center;"><a href="./homework/HW06/HW06.html">View HW 06</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">03/08</td>
-<td style="text-align: center;">(to be posted)</td>
-<td style="text-align: center;">(to be posted)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">03/15</td>
-<td style="text-align: center;">(to be posted)</td>
-<td style="text-align: center;">(to be posted)</td>
-</tr>
-</tbody>
-</table>
 </section>
-<section id="grading-rubric-10-points" class="level2">
-<h2 class="anchored" data-anchor-id="grading-rubric-10-points">Grading rubric (10 points)</h2>
-<p>Each homework is graded on a 10-point scale:</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This week we cover two distinct topics across our two class meetings.</p>
+<p>Monday wraps up our unit on proportions with power analysis — how to determine the sample size needed to detect meaningful differences in proportions, including the special case of correlated (paired) proportions using McNemar’s test. Wednesday shifts gears to comparing means across more than two groups using Analysis of Variance (ANOVA).</p>
+<p>By the end of the week, you should be able to:</p>
 <ul>
-<li><strong>Substantial completion (6 points)</strong>: ~75-80% of parts attempted with a genuine effort</li>
-<li><strong>Demonstrated process (2 points)</strong>: relevant work shown; R code included when used</li>
-<li><strong>Interpretation and communication (2 points)</strong>: brief written interpretation in context when appropriate</li>
+<li>explain why effect sizes for proportions require the arcsine transformation (Cohen’s <em>h</em>),</li>
+<li>conduct power and sample size calculations for one-sample and two-sample proportion tests,</li>
+<li>understand the role of discordant pairs in power analysis for McNemar’s test,</li>
+<li>describe when and why ANOVA is preferred over multiple t-tests,</li>
+<li>state the null and alternative hypotheses for one-way ANOVA,</li>
+<li>calculate and interpret the F-statistic,</li>
+<li>check ANOVA assumptions (independence, normality, equal variances), and</li>
+<li>conduct post-hoc pairwise comparisons when the overall F-test is significant.</li>
 </ul>
-<p>Homework is graded primarily for <strong>effort, reasoning, and clarity</strong>, not strict correctness.</p>
-<section id="late-homework" class="level3">
-<h3 class="anchored" data-anchor-id="late-homework">Late homework</h3>
-<p>Late homework is accepted for <strong>partial credit (up to 80% of total points)</strong>.</p>
-<p>Feedback is provided <strong>only</strong> for homework submitted on time.</p>
+</section>
+<section id="readings-before-class" class="level2">
+<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
+<ul>
+<li>No textbook reading for Monday (power for proportions is not covered in the textbook)</li>
+<li>Textbook section 5.5 (before Wednesday)</li>
+</ul>
+</section>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<section id="monday-power-for-proportions-and-correlated-proportions" class="level3">
+<h3 class="anchored" data-anchor-id="monday-power-for-proportions-and-correlated-proportions">Monday — Power for Proportions and Correlated Proportions</h3>
+<ul>
+<li><p><strong>Topics</strong></p>
+<ul>
+<li>Review: power analysis concepts (Type II error, effect size, sample size)</li>
+<li>Cohen’s <em>h</em>: the arcsine transformation for proportion effect sizes</li>
+<li>Why the same absolute difference in proportions is not always the same effect size</li>
+<li>Power and sample size for a one-sample proportion test</li>
+<li>Power and sample size for comparing two independent proportions</li>
+<li>Sensitivity analysis: varying the alternative proportion</li>
+<li>Paired proportions and McNemar’s test: the role of discordant pairs</li>
+<li>Power analysis for McNemar’s test via the simplified approach</li>
+</ul></li>
+<li><p><strong>Slides</strong></p>
+<ul>
+<li>Power for Proportions and Correlated Proportions (<a href="../lessons/18_power_proportions/18_power_proportions.html">HTML</a> | <a href="../lessons/18_power_proportions/18_power_proportions.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+</ul></li>
+<li><p>R Module 2: Factors and Reshaping Data (<a href="../lessons/19_anova/r_module2_slides.qmd">HTML</a> | <a href="../lessons/19_anova/r_module2_slides.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</p></li>
+<li><p><strong>Code along</strong></p>
+<ul>
+<li><a href="https://ohsuitg-my.sharepoint.com/:u:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/slides/r_module2_companion.qmd?csf=1&amp;web=1&amp;e=8d2sUB">Download R Module 2: Factors and Reshaping Data (.qmd)</a></li>
+</ul></li>
+<li><p><strong>Recording</strong></p>
+<ul>
+<li>Coming soon</li>
+</ul></li>
+<li><p><strong>Muddy points</strong></p>
+<ul>
+<li>Coming soon</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="wednesday-comparing-means-with-anova" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-comparing-means-with-anova">Wednesday — Comparing Means with ANOVA</h3>
+<ul>
+<li><strong>Topics</strong>
+<ul>
+<li>The problem with multiple t-tests (inflated Type I error)</li>
+<li>One-way ANOVA: hypotheses, assumptions, and the F-statistic</li>
+<li>Between-group and within-group variability</li>
+<li>The ANOVA table: sums of squares, degrees of freedom, mean squares</li>
+<li>The F-distribution and p-values</li>
+<li>Checking assumptions: independence, normality, equal variances</li>
+<li>Post-hoc pairwise comparisons (Tukey’s HSD)</li>
+<li>ANOVA in R</li>
+</ul></li>
+<li><strong>Slides</strong>
+<ul>
+<li>Comparing Means with ANOVA (HTML | PDF | OneDrive)</li>
+</ul></li>
+<li><strong>Recording</strong>
+<ul>
+<li>Coming soon</li>
+</ul></li>
+<li><strong>Muddy points</strong>
+<ul>
+<li>Coming soon</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="homework" class="level2">
+<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<ul>
+<li><strong>HW 7</strong>
+<ul>
+<li>Released <strong>Monday, March 2</strong></li>
+<li>Due <strong>Sunday, March 8 at 11:00 PM</strong></li>
+<li>Covers:
+<ul>
+<li><!-- TODO: Fill in HW 7 topics once finalized --></li>
+</ul></li>
+<li>Data files needed: <!-- TODO: Add data files --></li>
+<li><a href="../homework/HW07/HW07.qmd">View HW 7 instructions</a></li>
+</ul></li>
+<li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
+</ul>
+</section>
+<section id="post-class-check-in-attendance" class="level2">
+<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
+<ul>
+<li>Please complete the post-class check-in after each class meeting.</li>
+<li>Used for attendance credit and to identify topics that need clarification.</li>
+<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>Next week we continue expanding our analysis toolkit:</p>
+<ul>
+<li><strong>Week 10</strong>:
+<ul>
+<li>Nonparametric tests (alternatives when ANOVA assumptions fail)</li>
+<li>Correlation and simple linear regression</li>
+</ul></li>
+</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -502,11 +553,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -826,5 +872,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

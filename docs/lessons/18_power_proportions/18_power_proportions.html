@@ -1453,32 +1453,6 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 <li>Among discordant pairs, proportion “improving” (<span class="math inline">\(p_{21}\)</span>): <span class="math inline">\(\phi = p_{21} / p_d\)</span></li>
 <li>Under <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\phi = 0.50\)</span> (changes equally likely in both directions)</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># Example: 25% of pairs expected to be discordant</span></span>
-<span id="cb39-2"><a></a><span class="co"># Among discordant pairs, 70% are "improvements" (phi = 0.70)</span></span>
-<span id="cb39-3"><a></a></span>
-<span id="cb39-4"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
-<span id="cb39-5"><a></a>phi_alt <span class="ot">&lt;-</span> <span class="fl">0.70</span>       <span class="co"># expected proportion of discordant pairs that are "improvements"</span></span>
-<span id="cb39-6"><a></a></span>
-<span id="cb39-7"><a></a><span class="co"># Effective n for the test = n_total * p_discordant</span></span>
-<span id="cb39-8"><a></a><span class="co"># Use pwr.p.test on the discordant pairs</span></span>
-<span id="cb39-9"><a></a><span class="fu">pwr.p.test</span>(</span>
-<span id="cb39-10"><a></a>  <span class="at">h =</span> <span class="fu">ES.h</span>(<span class="at">p1 =</span> phi_alt, <span class="at">p2 =</span> <span class="fl">0.50</span>),</span>
-<span id="cb39-11"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb39-12"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
-<span id="cb39-13"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
-<span id="cb39-14"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     proportion power calculation for binomial distribution (arcsine transformation) 
-
-              h = 0.4115168
-              n = 46.34804
-      sig.level = 0.05
-          power = 0.8
-    alternative = two.sided</code></pre>
-</div>
-</div>
 </section>
 <section id="interpreting-power-for-mcnemars" class="slide level2">
 <h2>Interpreting power for McNemar’s</h2>
@@ -1500,11 +1474,11 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 </p>
 <p>This tells us we need <strong>47 discordant pairs</strong>. To get the total sample size:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>n_discordant_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(mcnemar_power<span class="sc">$</span>n)</span>
-<span id="cb42-2"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
-<span id="cb42-3"><a></a></span>
-<span id="cb42-4"><a></a>n_total_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n_discordant_needed <span class="sc">/</span> p_discordant)</span>
-<span id="cb42-5"><a></a>n_total_needed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>n_discordant_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(mcnemar_power<span class="sc">$</span>n)</span>
+<span id="cb40-2"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb40-3"><a></a></span>
+<span id="cb40-4"><a></a>n_total_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n_discordant_needed <span class="sc">/</span> p_discordant)</span>
+<span id="cb40-5"><a></a>n_total_needed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 188</code></pre>
 </div>
