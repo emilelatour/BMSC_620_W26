@@ -63,7 +63,7 @@ By the end of the week, you should be able to:
 -   **Code along**
     -   [Download R Module 2: Factors and Reshaping Data (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB)
 -   **Recording**
-    -   Coming soon
+    -   [Power for Proportions and Correlated Proportions](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQCeO_aWbqECRojXq58E7N0sAbeDbduU0UtpVfDmQz-kuc8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=j120H8)
 -   **Muddy points**
     -   Coming soon
 
