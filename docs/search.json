@@ -8611,14 +8611,14 @@
     "href": "lessons/18_power_proportions/18_power_proportions.html#what-if-we-can-only-enroll-40-patients",
     "title": "Power and Sample Size for Proportions",
     "section": "What if we can only enroll 40 patients?",
-    "text": "What if we can only enroll 40 patients?\n\n\nSometimes enrollment is limited by budget or feasibility. We can flip the question: what is our power with a fixed \\(n\\)?\n\n\n\np_null &lt;- 0.30      # historical/null proportion\np_alt  &lt;- 0.50      # expected proportion under new treatment\n\npwr.p.test(h = ES.h(p1 = p_alt, p2 = p_null),\n           n = 40,\n           sig.level = 0.05,\n           alternative = \"two.sided\")\n\n\n     proportion power calculation for binomial distribution (arcsine transformation) \n\n              h = 0.4115168\n              n = 40\n      sig.level = 0.05\n          power = 0.7397922\n    alternative = two.sided\n\n\n\n\n\nDiscussion\n\n\nWith only 40 patients, our power drops substantially. Is that acceptable? This depends on the context. For an early-phase pilot study, lower power may be acceptable. For a confirmatory trial, probably not."
+    "text": "What if we can only enroll 40 patients?\nSometimes enrollment is limited by budget or feasibility. We can flip the question: what is our power with a fixed \\(n\\)?\n\n\n\np_null &lt;- 0.30      # historical/null proportion\np_alt  &lt;- 0.50      # expected proportion under new treatment\n\npwr.p.test(h = ES.h(p1 = p_alt, p2 = p_null),\n           n = 40,\n           sig.level = 0.05,\n           alternative = \"two.sided\")\n\n\n     proportion power calculation for binomial distribution (arcsine transformation) \n\n              h = 0.4115168\n              n = 40\n      sig.level = 0.05\n          power = 0.7397922\n    alternative = two.sided\n\n\n\n\n\nDiscussion\n\n\nWith only 40 patients, our power drops substantially. Is that acceptable? This depends on the context. For an early-phase pilot study, lower power may be acceptable. For a confirmatory trial, probably not."
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-alternative-proportion",
     "href": "lessons/18_power_proportions/18_power_proportions.html#sensitivity-analysis-varying-the-alternative-proportion",
     "title": "Power and Sample Size for Proportions",
     "section": "Sensitivity analysis: varying the alternative proportion",
-    "text": "Sensitivity analysis: varying the alternative proportion\n\n\nWhat if we’re not sure the new treatment achieves 50%? We can calculate sample size for a range of alternatives:\n\nscenarios &lt;- tibble(\n  p_alt = c(0.40, 0.45, 0.50, 0.55, 0.60),\n  p_null = 0.30,\n  h = ES.h(p_alt, p_null)) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    n_needed = ceiling(pwr.p.test(h = h,\n                                  sig.level = 0.05,\n                                  power = 0.80,\n                                  alternative = \"two.sided\")$n)\n    ) %&gt;%\n  ungroup()\n\nscenarios\n\n# A tibble: 5 × 4\n  p_alt p_null     h n_needed\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1  0.4     0.3 0.210      178\n2  0.45    0.3 0.311       81\n3  0.5     0.3 0.412       47\n4  0.55    0.3 0.512       30\n5  0.6     0.3 0.613       21"
+    "text": "Sensitivity analysis: varying the alternative proportion\nWhat if we’re not sure the new treatment achieves 50%? We can calculate sample size for a range of alternatives:\n\nscenarios &lt;- tibble(\n  p_alt = c(0.40, 0.45, 0.50, 0.55, 0.60),\n  p_null = 0.30,\n  h = ES.h(p_alt, p_null)) %&gt;%\n  rowwise() %&gt;%\n  mutate(\n    n_needed = ceiling(pwr.p.test(h = h,\n                                  sig.level = 0.05,\n                                  power = 0.80,\n                                  alternative = \"two.sided\")$n)\n    ) %&gt;%\n  ungroup()\n\nscenarios\n\n# A tibble: 5 × 4\n  p_alt p_null     h n_needed\n  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1  0.4     0.3 0.210      178\n2  0.45    0.3 0.311       81\n3  0.5     0.3 0.412       47\n4  0.55    0.3 0.512       30\n5  0.6     0.3 0.613       21"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#visualizing-the-sensitivity-analysis",
@@ -8705,6 +8705,13 @@
     "text": "The 2×2 table for paired proportions\n\n\n\n# Cross-tabulate before vs. after\nedu_table &lt;- education_data %&gt;%\n  janitor::tabyl(before, after) %&gt;% \n  janitor::adorn_title(placement = \"combined\")\n\nedu_table\n\n before/after Correct Incorrect\n      Correct      17         4\n    Incorrect      16        13\n\n\n\n\n\n\nWhat these cells mean:\n\n\n\n\n\n\n\n\n\nAfter: Correct\nAfter: Incorrect\n\n\n\n\nBefore: Correct\na — Concordant (+/+)\nb — Discordant (+/−)\n\n\nBefore: Incorrect\nc — Discordant (−/+)\nd — Concordant (−/−)\n\n\n\n\n\n\n\nKey insight\n\n\nThe concordant pairs (a and d, where before = after) give us no information about change.\nOnly the discordant pairs (b and c) tell us something changed — and McNemar’s test focuses entirely on those."
   },
   {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#notation-for-paired-22-tables",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#notation-for-paired-22-tables",
+    "title": "Power and Sample Size for Proportions",
+    "section": "Notation for paired 2×2 tables",
+    "text": "Notation for paired 2×2 tables\n\n\nEach pair produces two binary outcomes (e.g., before vs. after treatment):\n\n\n\n\n\n\n\n\n\n\n\nPost: +\nPost: −\n\n\n\n\nPre: +\na = \\(p_{11}\\) (concordant)\nb = \\(p_{12}\\) (discordant)\n\n\nPre: −\nc = \\(p_{21}\\) (discordant)\nd = \\(p_{22}\\) (concordant)\n\n\n\n\n\n\nConcordant pairs (a and d): outcome is the same at both time points — no information about change\nDiscordant pairs (b and c): outcome changes — this is where the action is\n\nb (\\(p_{12}\\)): changed from + to − (e.g., “got worse”)\nc (\\(p_{21}\\)): changed from − to + (e.g., “improved”)\n\n\n\n\n\n\n\nLooking ahead\n\n\nMcNemar’s test asks: among the discordant pairs, is the split between b and c different from 50/50?"
+  },
+  {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-the-big-idea",
     "href": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-the-big-idea",
     "title": "Power and Sample Size for Proportions",
@@ -8723,7 +8730,7 @@
     "href": "lessons/18_power_proportions/18_power_proportions.html#interpreting-the-result-2",
     "title": "Power and Sample Size for Proportions",
     "section": "Interpreting the result",
-    "text": "Interpreting the result\n\n\n\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  edu_tab\nMcNemar's chi-squared = 6.05, df = 1, p-value = 0.01391\n\n\n\n\n\n\n\nInterpretation\n\n\n21 / 50 (42%) patients correctly identified suspicious lesions before the education program compared to 33 / 50 (66%) after.\nMcNemar’s chi-squared test (\\(\\chi^2\\) = 6.05, df = 1, p = 0.014) provides evidence that the patient education program changed the proportion of patients who correctly identified suspicious lesions.\n\n\n\n\n\n\n\n\nWhat makes this different from a chi-squared test?\n\n\nA regular chi-squared test would treat the before/after observations as independent. McNemar’s test correctly accounts for the paired structure by focusing only on discordant pairs."
+    "text": "Interpreting the result\n\n\n\n\n\n    McNemar's Chi-squared test with continuity correction\n\ndata:  edu_tab\nMcNemar's chi-squared = 6.05, df = 1, p-value = 0.01391\n\n\n\n\n\n\n\nInterpretation\n\n\n21 / 50 (42%) patients correctly identified suspicious lesions before the education program compared to 33 / 50 (66%) after.\nMcNemar’s chi-squared test (\\(\\chi^2\\) = 6.05, df = 1, p = 0.014) provides evidence that the patient education program changed the proportion of patients who correctly identified suspicious lesions.\n\n\n\n\n\n\nWhat makes this different from a chi-squared test?\n\n\nA regular chi-squared test would treat the before/after observations as independent. McNemar’s test correctly accounts for the paired structure by focusing only on discordant pairs."
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#mcnemars-test-in-r-with-janitor-or-rstatix",
@@ -8740,13 +8747,6 @@
     "text": "McNemar’s test vs. two-proportion test\n\n\n\n\nTwo-proportion test (Lesson 13)\n\nTwo independent groups\nExample: treatment A vs. treatment B in different patients\nTest: prop.test()\nAsks: are the proportions the same across groups?\n\n\n\n\nMcNemar’s test (today)\n\nPaired/matched observations on the same individuals\nExample: before vs. after in the same patients, or matched case-control pairs\nTest: mcnemar.test()\nAsks: are the discordant pairs symmetric?\n\n\n\n\n\n\n\nThe parallel to t-tests\n\n\nThis mirrors the distinction between the independent two-sample t-test (different people) and the paired t-test (same person measured twice). Using the wrong test leads to incorrect inference!"
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#paired-proportions-the-22-table",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Paired proportions: the 2×2 table",
-    "text": "Paired proportions: the 2×2 table\n\n\nEach pair produces two binary outcomes (e.g., before vs. after treatment):\n\n\n\n\nPost: +\nPost: −\n\n\n\n\nPre: +\n\\(p_{11}\\) (concordant)\n\\(p_{12}\\) (discordant)\n\n\nPre: −\n\\(p_{21}\\) (discordant)\n\\(p_{22}\\) (concordant)\n\n\n\n\nConcordant pairs (\\(p_{11}\\), \\(p_{22}\\)): outcome is the same at both time points\nDiscordant pairs (\\(p_{12}\\), \\(p_{21}\\)): outcome changes\n\n\\(p_{12}\\): changed from + to − (e.g., “got worse”)\n\\(p_{21}\\): changed from − to + (e.g., “improved”)\n\n\nMcNemar’s test asks: among the discordant pairs, is the split between \\(p_{12}\\) and \\(p_{21}\\) different from 50/50?"
-  },
-  {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#power-for-paired-proportions-the-key-inputs",
     "href": "lessons/18_power_proportions/18_power_proportions.html#power-for-paired-proportions-the-key-inputs",
     "title": "Power and Sample Size for Proportions",
@@ -8754,11 +8754,18 @@
     "text": "Power for paired proportions: the key inputs\n\n\nPower analysis for McNemar’s test is more complex than for independent proportions. The key insight:\n\n\nMcNemar’s test only uses the discordant pairs. So power depends on:\n\n\n\n\nTotal sample size (\\(n\\)) — total number of matched pairs\nProportion of discordant pairs (\\(p_d = b + c\\)) — pairs where the outcome changes\nThe direction of discordance — which way is the change expected to go?\n\n\n\n\n\n\nPractical implication\n\n\nA study with a high proportion of concordant pairs (most people don’t change) is effectively working with a smaller sample — and thus has lower power — than the total \\(n\\) would suggest.\nWhen planning a study using McNemar’s test, you need estimates of the discordant pair proportions from prior literature or pilot data."
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach",
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-12",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-12",
     "title": "Power and Sample Size for Proportions",
-    "section": "Estimating power for McNemar’s: a simplified approach",
-    "text": "Estimating power for McNemar’s: a simplified approach\n\n\nOne practical approach: McNemar’s test on \\(n\\) total pairs is equivalent to a one-sample proportion test on the discordant pairs only.\nIf we expect:\n\nProportion of pairs with outcome change: \\(p_d = p_{12} + p_{21}\\) (total discordant pairs)\nAmong discordant pairs, proportion “improving” (\\(p_{21}\\)): \\(\\phi = p_{21} / p_d\\)\nUnder \\(H_0\\): \\(\\phi = 0.50\\) (changes equally likely in both directions)"
+    "section": "Estimating power for McNemar’s: a simplified approach (1/2)",
+    "text": "Estimating power for McNemar’s: a simplified approach (1/2)\n\n\nOne practical approach: McNemar’s test on \\(n\\) total pairs is equivalent to a one-sample proportion test on the discordant pairs only.\n\n\n\n\n\n\nIf we expect:\n\nProportion of pairs with outcome change:\n\n\\(p_d = b + c\\) (total discordant pairs)\n\nAmong discordant pairs, the proportion “improving” (\\(c\\)):\n\n\\(\\phi = c / p_d\\)\n\nUnder \\(H_0\\): \\(\\phi = 0.50\\) (changes equally likely in both directions)"
+  },
+  {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-22",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-22",
+    "title": "Power and Sample Size for Proportions",
+    "section": "Estimating power for McNemar’s: a simplified approach (2/2)",
+    "text": "Estimating power for McNemar’s: a simplified approach (2/2)\nExample:\n\n25% of pairs expected to be discordant\nAmong discordant pairs, 70% are “improvements” (\\(\\phi = 0.70\\))\n\n\n\nStep 1: Define our assumptions\n\n# 25% of pairs expected to be discordant\np_discordant &lt;- 0.25\n\n# Among discordant pairs, 70% are \"improvements\"\nphi_alt &lt;- 0.70\n\n\n\nStep 2: Solve for the number of discordant pairs needed\n\n# Use pwr.p.test on the discordant pairs\nmcnemar_power &lt;- pwr.p.test(\n  h = ES.h(p1 = phi_alt, p2 = 0.50),\n  sig.level = 0.05,\n  power = 0.80,\n  alternative = \"two.sided\"\n)"
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#interpreting-power-for-mcnemars",
@@ -8766,6 +8773,13 @@
     "title": "Power and Sample Size for Proportions",
     "section": "Interpreting power for McNemar’s",
     "text": "Interpreting power for McNemar’s\n\n\n\nmcnemar_power\n\n\n     proportion power calculation for binomial distribution (arcsine transformation) \n\n              h = 0.4115168\n              n = 46.34804\n      sig.level = 0.05\n          power = 0.8\n    alternative = two.sided\n\n\n\n\nThis tells us we need 47 discordant pairs.\n\n\n\n\n\nTip\n\n\nBut we can’t just enroll discordant pairs — we have to enroll everyone and see who changes."
+  },
+  {
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#from-discordant-pairs-to-total-sample-size",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#from-discordant-pairs-to-total-sample-size",
+    "title": "Power and Sample Size for Proportions",
+    "section": "From discordant pairs to total sample size",
+    "text": "From discordant pairs to total sample size\n\n\nStep 3: Convert to total pairs needed\n\nTake the calculated number of discordant pairs needed\nDivide by the expected proportion of pairs to be discordant\n\n\nn_discordant_needed &lt;- ceiling(mcnemar_power$n)\np_discordant &lt;- 0.25\n\nn_total_needed &lt;- ceiling(n_discordant_needed / p_discordant)\nn_total_needed\n\n[1] 188\n\n\n\n\n\n\n\nNote\n\n\nIf only 25% of pairs are expected to be discordant, we need to enroll 188 total pairs to get enough discordant pairs for adequate power."
   },
   {
     "objectID": "lessons/18_power_proportions/18_power_proportions.html#summary-power-for-proportions",
@@ -8782,8 +8796,8 @@
     "text": "Connecting the course together\n\n\nWe’ve now covered power and sample size for the full set of tests we’ve studied:\n\n\n\n\n\n\n\n\n\n\nTest\nOutcome\nPower function\n\n\n\n\nOne-sample t-test\nContinuous\npwr.t.test(type = \"one.sample\")\n\n\nPaired t-test\nContinuous\npwr.t.test(type = \"paired\")\n\n\nTwo-sample t-test\nContinuous\npwr.t.test(type = \"two.sample\")\n\n\nOne proportion\nBinary\npwr.p.test()\n\n\nTwo independent proportions\nBinary\npwr.2p.test()\n\n\nPaired proportions (McNemar’s)\nBinary\npwr.p.test() on discordant n\n\n\n\n\n\n\n\n\nTip\n\n\nThe framework is always the same: four components, three known, one to solve for. The function changes, but the logic doesn’t."
   },
   {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead",
+    "objectID": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead-1",
+    "href": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead-1",
     "title": "Power and Sample Size for Proportions",
     "section": "Looking ahead",
     "text": "Looking ahead\n\n\nNext class (Lesson 16): ANOVA — Comparing means across 3 or more groups\n\nWhen the two-sample t-test isn’t enough\nThe F-test\nPost-hoc comparisons\n\n\n\nRemaining lectures:\n\nLesson 17: Nonparametric tests\nLesson 18: Correlation and Simple Linear Regression\nLesson 19: Finals review\nLesson 20: TBD\n\n\n\nHW 7 due Sunday 03/08 — will cover material from\n\nLesson 14: Chi-squared tests, Fishers exact test\nLesson 15 (today): Power for proportions and correlated proportions"
@@ -8866,40 +8880,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#notation-for-paired-22-tables",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#notation-for-paired-22-tables",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Notation for paired 2×2 tables",
-    "text": "Notation for paired 2×2 tables\n\n\nEach pair produces two binary outcomes (e.g., before vs. after treatment):\n\n\n\n\n\n\n\n\n\n\n\nPost: +\nPost: −\n\n\n\n\nPre: +\na = \\(p_{11}\\) (concordant)\nb = \\(p_{12}\\) (discordant)\n\n\nPre: −\nc = \\(p_{21}\\) (discordant)\nd = \\(p_{22}\\) (concordant)\n\n\n\n\n\n\nConcordant pairs (a and d): outcome is the same at both time points — no information about change\nDiscordant pairs (b and c): outcome changes — this is where the action is\n\nb (\\(p_{12}\\)): changed from + to − (e.g., “got worse”)\nc (\\(p_{21}\\)): changed from − to + (e.g., “improved”)\n\n\n\n\n\n\n\nLooking ahead\n\n\nMcNemar’s test asks: among the discordant pairs, is the split between b and c different from 50/50?"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead-1",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#looking-ahead-1",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Looking ahead",
-    "text": "Looking ahead\n\n\nNext class (Lesson 16): ANOVA — Comparing means across 3 or more groups\n\nWhen the two-sample t-test isn’t enough\nThe F-test\nPost-hoc comparisons\n\n\n\nRemaining lectures:\n\nLesson 17: Nonparametric tests\nLesson 18: Correlation and Simple Linear Regression\nLesson 19: Finals review\nLesson 20: TBD\n\n\n\nHW 7 due Sunday 03/08 — will cover material from\n\nLesson 14: Chi-squared tests, Fishers exact test\nLesson 15 (today): Power for proportions and correlated proportions"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-12",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-12",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Estimating power for McNemar’s: a simplified approach (1/2)",
-    "text": "Estimating power for McNemar’s: a simplified approach (1/2)\n\n\nOne practical approach: McNemar’s test on \\(n\\) total pairs is equivalent to a one-sample proportion test on the discordant pairs only.\n\n\n\n\n\n\nIf we expect:\n\nProportion of pairs with outcome change:\n\n\\(p_d = b + c\\) (total discordant pairs)\n\nAmong discordant pairs, the proportion “improving” (\\(c\\)):\n\n\\(\\phi = c / p_d\\)\n\nUnder \\(H_0\\): \\(\\phi = 0.50\\) (changes equally likely in both directions)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-22",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#estimating-power-for-mcnemars-a-simplified-approach-22",
-    "title": "Power and Sample Size for Proportions",
-    "section": "Estimating power for McNemar’s: a simplified approach (2/2)",
-    "text": "Estimating power for McNemar’s: a simplified approach (2/2)\nExample:\n\n25% of pairs expected to be discordant\nAmong discordant pairs, 70% are “improvements” (\\(\\phi = 0.70\\))\n\n\n\nStep 1: Define our assumptions\n\n# 25% of pairs expected to be discordant\np_discordant &lt;- 0.25\n\n# Among discordant pairs, 70% are \"improvements\"\nphi_alt &lt;- 0.70\n\n\n\nStep 2: Solve for the number of discordant pairs needed\n\n# Use pwr.p.test on the discordant pairs\nmcnemar_power &lt;- pwr.p.test(\n  h = ES.h(p1 = phi_alt, p2 = 0.50),\n  sig.level = 0.05,\n  power = 0.80,\n  alternative = \"two.sided\"\n)"
-  },
-  {
-    "objectID": "lessons/18_power_proportions/18_power_proportions.html#from-discordant-pairs-to-total-sample-size",
-    "href": "lessons/18_power_proportions/18_power_proportions.html#from-discordant-pairs-to-total-sample-size",
-    "title": "Power and Sample Size for Proportions",
-    "section": "From discordant pairs to total sample size",
-    "text": "From discordant pairs to total sample size\n\n\nStep 3: Convert to total pairs needed\n\nTake the calculated number of discordant pairs needed\nDivide by the expected proportion of pairs to be discordant\n\n\nn_discordant_needed &lt;- ceiling(mcnemar_power$n)\np_discordant &lt;- 0.25\n\nn_total_needed &lt;- ceiling(n_discordant_needed / p_discordant)\nn_total_needed\n\n[1] 188\n\n\n\n\n\n\n\nNote\n\n\nIf only 25% of pairs are expected to be discordant, we need to enroll 188 total pairs to get enough discordant pairs for adequate power."
   }
 ]
