@@ -1172,9 +1172,14 @@ NOTE: same sample sizes</code></pre>
 <p><br>
 </p>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:60%;">
 <p><strong>What these cells mean:</strong></p>
 <table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -1185,50 +1190,116 @@ NOTE: same sample sizes</code></pre>
 <tbody>
 <tr class="odd">
 <td><strong>Before: Correct</strong></td>
-<td>Concordant (+/+)</td>
-<td>Discordant (+/−)</td>
+<td><strong><em>a</em></strong> — Concordant (+/+)</td>
+<td><strong><em>b</em></strong> — Discordant (+/−)</td>
 </tr>
 <tr class="even">
 <td><strong>Before: Incorrect</strong></td>
-<td>Discordant (−/+)</td>
-<td>Concordant (−/−)</td>
+<td><strong><em>c</em></strong> — Discordant (−/+)</td>
+<td><strong><em>d</em></strong> — Concordant (−/−)</td>
 </tr>
 </tbody>
 </table>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:40%;">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Key insight</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>concordant pairs</strong> (where before = after) give us no information about change.</p>
-<p>Only the <strong>discordant pairs</strong> tell us something changed — and McNemar’s test focuses entirely on those.</p>
+<p>The <strong>concordant pairs</strong> (<em>a</em> and <em>d</em>, where before = after) give us no information about change.</p>
+<p>Only the <strong>discordant pairs</strong> (<em>b</em> and <em>c</em>) tell us something changed — and McNemar’s test focuses entirely on those.</p>
 </div>
 </div>
 </div>
 </div></div>
 </section>
-<section id="mcnemars-test-the-big-idea" class="slide level2">
-<h2>McNemar’s test: the big idea</h2>
-<p>McNemar’s test asks: <strong>among the discordant pairs, are they evenly split?</strong></p>
+<section id="notation-for-paired-22-tables" class="slide level2">
+<h2>Notation for paired 2×2 tables</h2>
 <p><br>
 </p>
-<p>Let:</p>
+<p>Each pair produces two binary outcomes (e.g., before vs.&nbsp;after treatment):</p>
+<p><br>
+</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 38%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;"><strong>Post: +</strong></th>
+<th style="text-align: center;"><strong>Post: −</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pre: +</strong></td>
+<td style="text-align: center;"><strong><em>a</em></strong> = <span class="math inline">\(p_{11}\)</span> (concordant)</td>
+<td style="text-align: center;"><strong><em>b</em></strong> = <span class="math inline">\(p_{12}\)</span> (discordant)</td>
+</tr>
+<tr class="even">
+<td><strong>Pre: −</strong></td>
+<td style="text-align: center;"><strong><em>c</em></strong> = <span class="math inline">\(p_{21}\)</span> (discordant)</td>
+<td style="text-align: center;"><strong><em>d</em></strong> = <span class="math inline">\(p_{22}\)</span> (concordant)</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+</p>
 <ul>
-<li><span class="math inline">\(b\)</span> = pairs where outcome changed from <strong>correct → incorrect</strong></li>
-<li><span class="math inline">\(c\)</span> = pairs where outcome changed from <strong>incorrect → correct</strong></li>
+<li><strong>Concordant pairs</strong> (<em>a</em> and <em>d</em>): outcome is the same at both time points — no information about change</li>
+<li><strong>Discordant pairs</strong> (<em>b</em> and <em>c</em>): outcome changes — this is where the action is
+<ul>
+<li><strong><em>b</em></strong> (<span class="math inline">\(p_{12}\)</span>): changed from <strong>+</strong> to <strong>−</strong> (e.g., “got worse”)</li>
+<li><strong><em>c</em></strong> (<span class="math inline">\(p_{21}\)</span>): changed from <strong>−</strong> to <strong>+</strong> (e.g., “improved”)</li>
+</ul></li>
 </ul>
 <p><br>
 </p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Looking ahead</strong></p>
+</div>
+<div class="callout-content">
+<p>McNemar’s test asks: among the discordant pairs, is the split between <em>b</em> and <em>c</em> different from 50/50?</p>
+</div>
+</div>
+</div>
+<!-- ## Paired proportions: the 2×2 table -->
+<!-- \ -->
+<!-- Each pair produces two binary outcomes (e.g., before vs. after treatment): -->
+<!-- |  | **Post: +** | **Post: −** | -->
+<!-- |---|:---:|:---:| -->
+<!-- | **Pre: +** | $p_{11}$ (concordant) | $p_{12}$ (discordant) | -->
+<!-- | **Pre: −** | $p_{21}$ (discordant) | $p_{22}$ (concordant) | -->
+<!-- - **Concordant pairs** ($p_{11}$, $p_{22}$): outcome is the same at both time points -->
+<!-- - **Discordant pairs** ($p_{12}$, $p_{21}$): outcome changes -->
+<!--   - $p_{12}$: changed from **+** to **−** (e.g., "got worse") -->
+<!--   - $p_{21}$: changed from **−** to **+** (e.g., "improved") -->
+<!-- McNemar's test asks: among the discordant pairs, is the split between $p_{12}$ and $p_{21}$ different from 50/50? -->
+</section>
+<section id="mcnemars-test-the-big-idea" class="slide level2">
+<h2>McNemar’s test: the big idea</h2>
+<p><br>
+</p>
+<p>McNemar’s test asks: <strong>among the discordant pairs, are they evenly split?</strong></p>
+<p>From our 2×2 table:</p>
+<ul>
+<li><em>b</em> = pairs where outcome changed from <strong>+ → −</strong> (e.g., correct → incorrect)</li>
+<li><em>c</em> = pairs where outcome changed from <strong>− → +</strong> (e.g., incorrect → correct)</li>
+</ul>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Hypotheses</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math inline">\(H_0\)</span>: The probability of changing in each direction is equal (<span class="math inline">\(p_{12} = p_{21}\)</span>, or equivalently <span class="math inline">\(b = c\)</span>)</p>
-<p><span class="math inline">\(H_A\)</span>: The probability of changing differs by direction (<span class="math inline">\(p_{12} \neq p_{21}\)</span>)</p>
+<p><span class="math inline">\(H_0\)</span>: The probability of changing in each direction is equal (<span class="math inline">\(b = c\)</span>)</p>
+<p><span class="math inline">\(H_A\)</span>: The probability of changing differs by direction (<span class="math inline">\(b \neq c\)</span>)</p>
 </div>
 </div>
 </div>
@@ -1379,42 +1450,6 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 </div>
 </div>
 </section>
-<section id="paired-proportions-the-22-table" class="slide level2">
-<h2>Paired proportions: the 2×2 table</h2>
-<p><br>
-</p>
-<p>Each pair produces two binary outcomes (e.g., before vs.&nbsp;after treatment):</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th style="text-align: center;"><strong>Post: +</strong></th>
-<th style="text-align: center;"><strong>Post: −</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Pre: +</strong></td>
-<td style="text-align: center;"><span class="math inline">\(p_{11}\)</span> (concordant)</td>
-<td style="text-align: center;"><span class="math inline">\(p_{12}\)</span> (discordant)</td>
-</tr>
-<tr class="even">
-<td><strong>Pre: −</strong></td>
-<td style="text-align: center;"><span class="math inline">\(p_{21}\)</span> (discordant)</td>
-<td style="text-align: center;"><span class="math inline">\(p_{22}\)</span> (concordant)</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>Concordant pairs</strong> (<span class="math inline">\(p_{11}\)</span>, <span class="math inline">\(p_{22}\)</span>): outcome is the same at both time points</li>
-<li><strong>Discordant pairs</strong> (<span class="math inline">\(p_{12}\)</span>, <span class="math inline">\(p_{21}\)</span>): outcome changes
-<ul>
-<li><span class="math inline">\(p_{12}\)</span>: changed from <strong>+</strong> to <strong>−</strong> (e.g., “got worse”)</li>
-<li><span class="math inline">\(p_{21}\)</span>: changed from <strong>−</strong> to <strong>+</strong> (e.g., “improved”)</li>
-</ul></li>
-</ul>
-<p>McNemar’s test asks: among the discordant pairs, is the split between <span class="math inline">\(p_{12}\)</span> and <span class="math inline">\(p_{21}\)</span> different from 50/50?</p>
-</section>
 <section id="power-for-paired-proportions-the-key-inputs" class="slide level2">
 <h2>Power for paired proportions: the key inputs</h2>
 <p><br>
@@ -1423,9 +1458,12 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 <p><br>
 </p>
 <p><strong>McNemar’s test only uses the discordant pairs.</strong> So power depends on:</p>
+<!-- 1. **Total sample size** ($n$) — total number of matched pairs -->
+<!-- 2. **Proportion of discordant pairs** ($p_d = p_{12} + p_{21}$) — pairs where the outcome changes -->
+<!-- 3. **The direction of discordance** — which way is the change expected to go? -->
 <ol type="1">
 <li><strong>Total sample size</strong> (<span class="math inline">\(n\)</span>) — total number of matched pairs</li>
-<li><strong>Proportion of discordant pairs</strong> (<span class="math inline">\(p_d = p_{12} + p_{21}\)</span>) — pairs where the outcome changes</li>
+<li><strong>Proportion of discordant pairs</strong> (<span class="math inline">\(p_d = b + c\)</span>) — pairs where the outcome changes</li>
 <li><strong>The direction of discordance</strong> — which way is the change expected to go?</li>
 </ol>
 <p><br>
@@ -1442,23 +1480,66 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 </div>
 </div>
 </section>
-<section id="estimating-power-for-mcnemars-a-simplified-approach" class="slide level2">
-<h2>Estimating power for McNemar’s: a simplified approach</h2>
+<section id="estimating-power-for-mcnemars-a-simplified-approach-12" class="slide level2">
+<h2>Estimating power for McNemar’s: a simplified approach (1/2)</h2>
 <p><br>
 </p>
 <p>One practical approach: McNemar’s test on <span class="math inline">\(n\)</span> total pairs is equivalent to a one-sample proportion test on the <strong>discordant pairs</strong> only.</p>
+<p><br>
+</p>
+<!-- If we expect: -->
+<!-- - Proportion of pairs with outcome change: $p_d = p_{12} + p_{21}$ (total discordant pairs) -->
+<!-- - Among discordant pairs, proportion "improving" ($p_{21}$): $\phi = p_{21} / p_d$ -->
+<!-- - Under $H_0$: $\phi = 0.50$ (changes equally likely in both directions) -->
 <p>If we expect:</p>
 <ul>
-<li>Proportion of pairs with outcome change: <span class="math inline">\(p_d = p_{12} + p_{21}\)</span> (total discordant pairs)</li>
-<li>Among discordant pairs, proportion “improving” (<span class="math inline">\(p_{21}\)</span>): <span class="math inline">\(\phi = p_{21} / p_d\)</span></li>
+<li>Proportion of pairs with outcome change:
+<ul>
+<li><span class="math inline">\(p_d = b + c\)</span> (total discordant pairs)</li>
+</ul></li>
+<li>Among discordant pairs, the proportion “improving” (<span class="math inline">\(c\)</span>):
+<ul>
+<li><span class="math inline">\(\phi = c / p_d\)</span></li>
+</ul></li>
 <li>Under <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\phi = 0.50\)</span> (changes equally likely in both directions)</li>
 </ul>
+</section>
+<section id="estimating-power-for-mcnemars-a-simplified-approach-22" class="slide level2">
+<h2>Estimating power for McNemar’s: a simplified approach (2/2)</h2>
+<p><strong>Example</strong>:</p>
+<ul>
+<li>25% of pairs expected to be discordant</li>
+<li>Among discordant pairs, 70% are “improvements” (<span class="math inline">\(\phi = 0.70\)</span>)</li>
+</ul>
+<p><br>
+</p>
+<p><strong>Step 1:</strong> Define our assumptions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># 25% of pairs expected to be discordant</span></span>
+<span id="cb39-2"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb39-3"><a></a></span>
+<span id="cb39-4"><a></a><span class="co"># Among discordant pairs, 70% are "improvements"</span></span>
+<span id="cb39-5"><a></a>phi_alt <span class="ot">&lt;-</span> <span class="fl">0.70</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br>
+</p>
+<p><strong>Step 2:</strong> Solve for the number of discordant pairs needed</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># Use pwr.p.test on the discordant pairs</span></span>
+<span id="cb40-2"><a></a>mcnemar_power <span class="ot">&lt;-</span> <span class="fu">pwr.p.test</span>(</span>
+<span id="cb40-3"><a></a>  <span class="at">h =</span> <span class="fu">ES.h</span>(<span class="at">p1 =</span> phi_alt, <span class="at">p2 =</span> <span class="fl">0.50</span>),</span>
+<span id="cb40-4"><a></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb40-5"><a></a>  <span class="at">power =</span> <span class="fl">0.80</span>,</span>
+<span id="cb40-6"><a></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb40-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="interpreting-power-for-mcnemars" class="slide level2">
 <h2>Interpreting power for McNemar’s</h2>
 <p><br>
 </p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>mcnemar_power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      proportion power calculation for binomial distribution (arcsine transformation) 
@@ -1472,17 +1553,41 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 </div>
 <p><br>
 </p>
-<p>This tells us we need <strong>47 discordant pairs</strong>. To get the total sample size:</p>
+<p>This tells us we need <strong>47 discordant pairs</strong>.</p>
+<p><br>
+</p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>But we can’t just enroll discordant pairs — we have to enroll <em>everyone</em> and see who changes.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="from-discordant-pairs-to-total-sample-size" class="slide level2">
+<h2>From discordant pairs to total sample size</h2>
+<p><br>
+</p>
+<p><strong>Step 3:</strong> Convert to total pairs needed</p>
+<ul>
+<li>Take the calculated number of discordant pairs needed</li>
+<li>Divide by the expected proportion of pairs to be discordant</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>n_discordant_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(mcnemar_power<span class="sc">$</span>n)</span>
-<span id="cb40-2"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
-<span id="cb40-3"><a></a></span>
-<span id="cb40-4"><a></a>n_total_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n_discordant_needed <span class="sc">/</span> p_discordant)</span>
-<span id="cb40-5"><a></a>n_total_needed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>n_discordant_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(mcnemar_power<span class="sc">$</span>n)</span>
+<span id="cb43-2"><a></a>p_discordant <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb43-3"><a></a></span>
+<span id="cb43-4"><a></a>n_total_needed <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(n_discordant_needed <span class="sc">/</span> p_discordant)</span>
+<span id="cb43-5"><a></a>n_total_needed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 188</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1634,7 +1739,7 @@ McNemar's chi-squared = 6.05, df = 1, p-value = 0.01391</code></pre>
 </div>
 </div>
 </section>
-<section id="looking-ahead" class="slide level2">
+<section id="looking-ahead-1" class="slide level2">
 <h2>Looking ahead</h2>
 <p><br>
 </p>

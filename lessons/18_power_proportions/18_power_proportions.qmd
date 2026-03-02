@@ -492,7 +492,6 @@ Note: always **round up** when solving for sample size — you can't have a frac
 
 ## What if we can only enroll 40 patients?
 
-\
 
 Sometimes enrollment is limited by budget or feasibility. We can flip the question: what is our power with a fixed $n$?
 
@@ -515,8 +514,6 @@ With only 40 patients, our power drops substantially. Is that acceptable? **This
 :::
 
 ## Sensitivity analysis: varying the alternative proportion
-
-\
 
 What if we're not sure the new treatment achieves 50%? We can calculate sample size for a range of alternatives:
 
@@ -780,7 +777,6 @@ head(education_data)
 ## The 2×2 table for paired proportions
 
 \
-
 ```{r}
 # Cross-tabulate before vs. after
 edu_table <- education_data %>%
@@ -793,49 +789,95 @@ edu_table
 \
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="60%"}
 
 **What these cells mean:**
 
 | | After: Correct | After: Incorrect |
 |---|---|---|
-| **Before: Correct** | Concordant (+/+) | Discordant (+/−) |
-| **Before: Incorrect** | Discordant (−/+) | Concordant (−/−) |
+| **Before: Correct** | ***a*** — Concordant (+/+) | ***b*** — Discordant (+/−) |
+| **Before: Incorrect** | ***c*** — Discordant (−/+) | ***d*** — Concordant (−/−) |
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ::: {.callout-tip icon="false"}
 ### Key insight
 
-The **concordant pairs** (where before = after) give us no information about change.
+The **concordant pairs** (*a* and *d*, where before = after) give us no information about change.
 
-Only the **discordant pairs** tell us something changed — and McNemar's test focuses entirely on those.
+Only the **discordant pairs** (*b* and *c*) tell us something changed — and McNemar's test focuses entirely on those.
 :::
 
 :::
 :::::
 
+## Notation for paired 2×2 tables
+
+\
+
+Each pair produces two binary outcomes (e.g., before vs. after treatment):
+
+\
+
+|  | **Post: +** | **Post: −** |
+|---|:---:|:---:|
+| **Pre: +** | ***a*** = $p_{11}$ (concordant) | ***b*** = $p_{12}$ (discordant) |
+| **Pre: −** | ***c*** = $p_{21}$ (discordant) | ***d*** = $p_{22}$ (concordant) |
+
+\
+
+- **Concordant pairs** (*a* and *d*): outcome is the same at both time points — no information about change
+- **Discordant pairs** (*b* and *c*): outcome changes — this is where the action is
+  - ***b*** ($p_{12}$): changed from **+** to **−** (e.g., "got worse")
+  - ***c*** ($p_{21}$): changed from **−** to **+** (e.g., "improved")
+
+\
+
+::: {.callout-note icon="false"}
+### Looking ahead
+
+McNemar's test asks: among the discordant pairs, is the split between *b* and *c* different from 50/50?
+:::
+
+<!-- ## Paired proportions: the 2×2 table -->
+
+<!-- \ -->
+
+<!-- Each pair produces two binary outcomes (e.g., before vs. after treatment): -->
+
+<!-- |  | **Post: +** | **Post: −** | -->
+<!-- |---|:---:|:---:| -->
+<!-- | **Pre: +** | $p_{11}$ (concordant) | $p_{12}$ (discordant) | -->
+<!-- | **Pre: −** | $p_{21}$ (discordant) | $p_{22}$ (concordant) | -->
+
+<!-- - **Concordant pairs** ($p_{11}$, $p_{22}$): outcome is the same at both time points -->
+<!-- - **Discordant pairs** ($p_{12}$, $p_{21}$): outcome changes -->
+<!--   - $p_{12}$: changed from **+** to **−** (e.g., "got worse") -->
+<!--   - $p_{21}$: changed from **−** to **+** (e.g., "improved") -->
+
+<!-- McNemar's test asks: among the discordant pairs, is the split between $p_{12}$ and $p_{21}$ different from 50/50? -->
+
 ## McNemar's test: the big idea
+
+\
 
 McNemar's test asks: **among the discordant pairs, are they evenly split?**
 
-\
 
-Let:
+From our 2×2 table:
 
-- $b$ = pairs where outcome changed from **correct → incorrect**
-- $c$ = pairs where outcome changed from **incorrect → correct**
+- *b* = pairs where outcome changed from **+ → −** (e.g., correct → incorrect)
+- *c* = pairs where outcome changed from **− → +** (e.g., incorrect → correct)
 
-\
 
 ::: {.callout-important icon="false"}
 ### Hypotheses
 
-$H_0$: The probability of changing in each direction is equal ($p_{12} = p_{21}$, or equivalently $b = c$)
+$H_0$: The probability of changing in each direction is equal ($b = c$)
 
-$H_A$: The probability of changing differs by direction ($p_{12} \neq p_{21}$)
+$H_A$: The probability of changing differs by direction ($b \neq c$)
 :::
 
 \
@@ -894,7 +936,6 @@ McNemar's chi-squared test ($\chi^2$ = `r round(edu_result$statistic, 2)`, df = 
 
 :::
 
-\
 
 ::: {.callout-tip icon="false"}
 ### What makes this different from a chi-squared test?
@@ -971,23 +1012,7 @@ rstatix::mcnemar_test(edu_tab)
 This mirrors the distinction between the **independent two-sample t-test** (different people) and the **paired t-test** (same person measured twice). Using the wrong test leads to incorrect inference!
 :::
 
-## Paired proportions: the 2×2 table
 
-\
-
-Each pair produces two binary outcomes (e.g., before vs. after treatment):
-
-|  | **Post: +** | **Post: −** |
-|---|:---:|:---:|
-| **Pre: +** | $p_{11}$ (concordant) | $p_{12}$ (discordant) |
-| **Pre: −** | $p_{21}$ (discordant) | $p_{22}$ (concordant) |
-
-- **Concordant pairs** ($p_{11}$, $p_{22}$): outcome is the same at both time points
-- **Discordant pairs** ($p_{12}$, $p_{21}$): outcome changes
-  - $p_{12}$: changed from **+** to **−** (e.g., "got worse")
-  - $p_{21}$: changed from **−** to **+** (e.g., "improved")
-
-McNemar's test asks: among the discordant pairs, is the split between $p_{12}$ and $p_{21}$ different from 50/50?
 
 ## Power for paired proportions: the key inputs
 
@@ -999,8 +1024,12 @@ Power analysis for McNemar's test is more complex than for independent proportio
 
 **McNemar's test only uses the discordant pairs.** So power depends on:
 
+<!-- 1. **Total sample size** ($n$) — total number of matched pairs -->
+<!-- 2. **Proportion of discordant pairs** ($p_d = p_{12} + p_{21}$) — pairs where the outcome changes -->
+<!-- 3. **The direction of discordance** — which way is the change expected to go? -->
+
 1. **Total sample size** ($n$) — total number of matched pairs
-2. **Proportion of discordant pairs** ($p_d = p_{12} + p_{21}$) — pairs where the outcome changes
+2. **Proportion of discordant pairs** ($p_d = b + c$) — pairs where the outcome changes
 3. **The direction of discordance** — which way is the change expected to go?
 
 \
@@ -1013,31 +1042,55 @@ A study with a high proportion of concordant pairs (most people don't change) is
 When planning a study using McNemar's test, you need estimates of the **discordant pair proportions** from prior literature or pilot data.
 :::
 
-## Estimating power for McNemar's: a simplified approach
+## Estimating power for McNemar's: a simplified approach (1/2)
 
 \
 
 One practical approach: McNemar's test on $n$ total pairs is equivalent to a one-sample proportion test on the **discordant pairs** only.
 
+\
+
+<!-- If we expect: -->
+
+<!-- - Proportion of pairs with outcome change: $p_d = p_{12} + p_{21}$ (total discordant pairs) -->
+<!-- - Among discordant pairs, proportion "improving" ($p_{21}$): $\phi = p_{21} / p_d$ -->
+<!-- - Under $H_0$: $\phi = 0.50$ (changes equally likely in both directions) -->
 
 If we expect:
 
-- Proportion of pairs with outcome change: $p_d = p_{12} + p_{21}$ (total discordant pairs)
-- Among discordant pairs, proportion "improving" ($p_{21}$): $\phi = p_{21} / p_d$
+- Proportion of pairs with outcome change: 
+  - $p_d = b + c$ (total discordant pairs)
+- Among discordant pairs, the proportion "improving" ($c$): 
+  - $\phi = c / p_d$
 - Under $H_0$: $\phi = 0.50$ (changes equally likely in both directions)
 
+
+
+## Estimating power for McNemar's: a simplified approach (2/2)
+
+**Example**: 
+
+- 25% of pairs expected to be discordant
+- Among discordant pairs, 70% are "improvements" ($\phi = 0.70$)
+
+\
+
+**Step 1:** Define our assumptions
 ```{r}
-#| include: false
-
-# Example: 25% of pairs expected to be discordant
-# Among discordant pairs, 70% are "improvements" (phi = 0.70)
-
+# 25% of pairs expected to be discordant
 p_discordant <- 0.25
-phi_alt <- 0.70       # expected proportion of discordant pairs that are "improvements"
 
-# Effective n for the test = n_total * p_discordant
+# Among discordant pairs, 70% are "improvements"
+phi_alt <- 0.70
+```
+
+\
+
+**Step 2:** Solve for the number of discordant pairs needed
+
+```{r}
 # Use pwr.p.test on the discordant pairs
-pwr.p.test(
+mcnemar_power <- pwr.p.test(
   h = ES.h(p1 = phi_alt, p2 = 0.50),
   sig.level = 0.05,
   power = 0.80,
@@ -1050,19 +1103,27 @@ pwr.p.test(
 \
 
 ```{r}
-#| echo: false
-mcnemar_power <- pwr.p.test(
-  h = ES.h(p1 = phi_alt, p2 = 0.50),
-  sig.level = 0.05,
-  power = 0.80,
-  alternative = "two.sided"
-)
 mcnemar_power
 ```
 
 \
 
-This tells us we need **`r ceiling(mcnemar_power$n)` discordant pairs**. To get the total sample size:
+This tells us we need **`r ceiling(mcnemar_power$n)` discordant pairs**. 
+
+\
+
+::: {.callout-tip icon="false"}
+But we can't just enroll discordant pairs — we have to enroll *everyone* and see who changes.
+:::
+
+## From discordant pairs to total sample size
+
+\
+
+**Step 3:** Convert to total pairs needed
+
+- Take the calculated number of discordant pairs needed
+- Divide by the expected proportion of pairs to be discordant
 
 ```{r}
 n_discordant_needed <- ceiling(mcnemar_power$n)
@@ -1072,6 +1133,7 @@ n_total_needed <- ceiling(n_discordant_needed / p_discordant)
 n_total_needed
 ```
 
+\
 
 ::: {.callout-note icon="false"}
 If only `r lamisc::fmt_pct(p_discordant, accuracy = 1.0)` of pairs are expected to be discordant, we need to enroll **`r n_total_needed` total pairs** to get enough discordant pairs for adequate power.
