@@ -61,7 +61,7 @@ By the end of the week, you should be able to:
 -   R Module 2: Factors and Reshaping Data ([HTML](/lessons/19_anova/r_module2_slides.qmd) | [PDF](/lessons/19_anova/r_module2_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 -   **Code along**
-    -   [Download R Module 2: Factors and Reshaping Data (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/slides/r_module2_companion.qmd?csf=1&web=1&e=8d2sUB)
+    -   [Download R Module 2: Factors and Reshaping Data (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB)
 -   **Recording**
     -   Coming soon
 -   **Muddy points**
@@ -95,8 +95,8 @@ By the end of the week, you should be able to:
     -   Released **Monday, March 2**
     -   Due **Sunday, March 8 at 11:00 PM**
     -   Covers:
-        -   <!-- TODO: Fill in HW 7 topics once finalized -->
-    -   Data files needed: <!-- TODO: Add data files -->
+        -   Chi-Squared Tests, Fisher's Exact Test, and Power for Proportions
+    -   Data files needed: `smoking_cessation.xlsx` (available in the [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4))
     -   [View HW 7 instructions](/homework/HW07/HW07.qmd)
 
 -   See the full list of assignments on the [Homework](/homework.qmd) page.

@@ -1,0 +1,639 @@
+---
+title: "BMSC 620 — Homework 7"
+subtitle: "Chi-Squared Tests, Fisher's Exact Test, and Power for Proportions"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    self-contained: true
+execute:
+  echo: true
+  eval: true
+---
+
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW07`
+
+Examples:
+
+- Smith_J_HW07.qmd
+- Smith_J_HW07.html
+
+When submitting Homework 7, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Instructions
+
+- Answer each question clearly and concisely.
+- Show your work using R code chunks.
+- **Rounding:** Round proportions to 3 decimal places.
+  Round *p*-values to 3 decimal places (or report as *p* < 0.001 if very small).
+- This homework uses an **external data file** — see Part 0 below before writing
+  any code.
+- Code chunks marked `# Your code here` are intentionally blank. You are
+  expected to write the code yourself. Hints are provided to guide you.
+
+::: {.callout-note}
+**A note on this homework**
+
+This assignment builds on what you learned about inference for proportions
+(Homework 6) and extends it to more complex categorical data. Parts 1–2 apply
+the chi-squared test to a multi-group comparison. Part 3 introduces Fisher's
+exact test for small samples. Part 4 covers power analysis for comparing two
+proportions, and Part 5 introduces McNemar's test for paired (correlated)
+proportions — a common scenario when the same subjects are measured at two
+time points.
+:::
+
+---
+
+## Part 0: Project Setup
+
+**Before writing any code, do the following:**
+
+1. Make sure you are working inside your BMSC 620 R Project.
+2. Download the data file from OneDrive and place it inside your
+   project's `data/` folder:
+   - `smoking_cessation.xlsx`
+3. Your folder structure should look like this:
+
+```
+BMSC620/
+├── BMSC620.Rproj
+├── data/
+│   ├── smoking_cessation.xlsx
+└── homework/
+    └── Smith_J_HW07.qmd    ← your file goes here
+```
+
+Load the packages you will need:
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(here)
+library(broom)
+library(rstatix)
+library(janitor)
+library(pwr)
+library(readxl)
+```
+
+---
+
+## Part 1: Chi-Squared Test of Association
+
+### Background
+
+The `smoking_cessation.xlsx` dataset comes from a simulated randomized
+controlled trial of **360 adults** who smoke and want to quit. Participants
+were randomized equally to one of three smoking cessation interventions:
+
+- **Patch**: Nicotine patch alone
+- **Counseling**: Behavioral counseling alone
+- **Combined**: Nicotine patch + behavioral counseling
+
+The primary outcome was **cessation status at 6 months** (`outcome_6mo`),
+recorded as one of three levels: `Quit`, `Reduced` (smoking reduced by ≥ 50%),
+or `No Change`.
+
+The dataset also includes `quit_6mo` (binary: Yes/No) and `quit_12mo`
+(binary quit status at 12 months for the same patients).
+
+> *Data simulated for educational purposes. Values do not represent real
+> patient data.*
+
+---
+
+### 1A. Load and inspect the data
+
+Import `smoking_cessation.xlsx` and assign it to an object called `smoking`.
+Use `glimpse()` to inspect the structure.
+
+```{r}
+#| label: load-smoking
+
+# Your code here
+
+```
+
+How many patients are in each treatment group? How many patients had each
+6-month outcome?
+
+::: {.callout-tip}
+`janitor::tabyl()` is a convenient way to count observations. Try
+`tabyl(treatment)` and `tabyl(outcome_6mo)` to answer both parts.
+:::
+
+```{r}
+#| label: tabyl-counts
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 1B. Create the contingency table
+
+Create a two-way frequency table showing 6-month cessation outcome by
+treatment group. Include row and column totals.
+
+::: {.callout-tip}
+`tabyl(treatment, outcome_6mo)` will cross-tabulate the two variables. Pipe
+the result into `adorn_totals(c("row", "col"))` to add margins.
+:::
+
+```{r}
+#| label: contingency-table
+
+# Your code here
+
+```
+
+Looking at the raw counts, which treatment group appears to have the highest
+quit rate? The lowest?
+
+**Answer:**
+
+---
+
+### 1C. State the hypotheses
+
+We want to test whether there is an association between treatment group and
+6-month cessation outcome.
+
+State the null and alternative hypotheses **in words** (not symbols).
+
+**Answer:**
+
+$H_0$:
+
+$H_A$:
+
+---
+
+### 1D. Check assumptions and expected counts
+
+Before interpreting the chi-squared test, we need to verify that the expected
+counts are large enough.
+
+::: {.callout-tip}
+Run `chisq.test()` on the contingency table and inspect the `$expected`
+element of the result. For a table larger than 2×2, the rule is: no more
+than 20% of expected counts should be < 5, and **all** expected counts
+should be ≥ 1.
+:::
+
+```{r}
+#| label: check-expected
+
+# Your code here
+# Hint: save the chisq.test() result to an object, then use $expected
+
+```
+
+Are the conditions for the chi-squared test met? Briefly explain.
+
+**Answer:**
+
+---
+
+### 1E. Run the chi-squared test
+
+Use `chisq.test()` to test for an association between treatment and 6-month
+outcome. Report the test statistic, degrees of freedom, and p-value.
+
+```{r}
+#| label: chisq-test
+
+# Your code here
+
+```
+
+---
+
+### 1F. Interpret the results
+
+Write a 2–3 sentence conclusion in context. Be sure to:
+
+- State whether you reject or fail to reject $H_0$ at $\alpha = 0.05$
+- Describe what the result means for the relationship between treatment and
+  cessation outcome
+- Mention the test statistic and p-value
+
+**Answer:**
+
+---
+
+## Part 2: Exploring the Association
+
+### 2A. Visualize and summarize the association
+
+The chi-squared test tells us *that* an association exists, but not *where*
+the differences lie. Create a **stacked proportion bar chart** showing the
+distribution of 6-month outcomes by treatment group, and compute **row
+proportions** to quantify the differences.
+
+::: {.callout-tip}
+For the chart, try
+`ggplot(smoking, aes(x = treatment, fill = outcome_6mo)) + geom_bar(position = "fill")`
+and add `+ labs(y = "Proportion")`.
+
+For the proportions table, pipe your `tabyl(treatment, outcome_6mo)` into
+`adorn_percentages("row")`, then `adorn_pct_formatting(digits = 1)`, and
+optionally `adorn_ns()` to show counts alongside percentages.
+:::
+
+```{r}
+#| label: bar-chart
+
+# Your code here
+
+```
+
+```{r}
+#| label: row-proportions
+
+# Your code here
+
+```
+
+Which treatment group has the highest quit rate? The highest "No Change"
+rate? In 1–2 sentences, describe what the chart and table reveal about how
+the three groups differ.
+
+**Answer:**
+
+---
+
+## Part 3: Fisher's Exact Test
+
+### Background
+
+A colleague is interested in whether the combined intervention is more
+effective than the patch alone specifically among **older male smokers**
+(males aged 60 and older). They ask you to compare quit rates
+(`quit_6mo`) between the Combined and Patch groups in this subgroup.
+
+---
+
+### 3A. Create the subset
+
+Filter `smoking` to include only **males aged 60 or older** in the
+**Combined** or **Patch** treatment groups. Assign this to an object called
+`older_males`.
+
+```{r}
+#| label: filter-subset
+
+# Your code here
+
+```
+
+How many patients are in this subset? Create a 2×2 table of `treatment`
+by `quit_6mo`.
+
+::: {.callout-tip}
+Use `tabyl(treatment, quit_6mo)` on the filtered data and add totals.
+:::
+
+```{r}
+#| label: subset-table
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 3B. Check whether chi-squared is appropriate
+
+Compute the expected counts for this 2×2 table. Are the conditions for the
+chi-squared test met?
+
+::: {.callout-tip}
+For a **2×2 table**, the chi-squared test requires all expected counts ≥ 10.
+You can check with `chisq.test()$expected` on the table.
+:::
+
+```{r}
+#| label: check-fisher-conditions
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 3C. Run Fisher's exact test
+
+Since the expected counts are too small, use Fisher's exact test to test
+whether quit rates differ between the two treatment groups in this subgroup.
+
+::: {.callout-tip}
+You can use `fisher.test()` on a table or matrix object. Pipe the result to
+`broom::tidy()` for a tidy output, or use `rstatix::fisher_test()` on the
+table directly.
+:::
+
+```{r}
+#| label: fisher-test
+
+# Your code here
+
+```
+
+---
+
+### 3D. Interpret the results
+
+Report the p-value and the odds ratio (with 95% CI) from the Fisher's exact
+test.
+
+Write a 2–3 sentence conclusion. Is there evidence of a difference in quit
+rates between Combined and Patch among older males? Why is Fisher's exact
+test the appropriate choice here?
+
+**Answer:**
+
+---
+
+## Part 4: Power Analysis for Comparing Two Proportions
+
+### Background
+
+Based on the trial results, researchers are planning a **new, larger study**
+comparing only the Combined intervention to the Patch. From the current
+data, they estimate:
+
+- Quit rate in the **Patch group**: approximately 21%
+- Quit rate in the **Combined group**: approximately 47%
+
+They want to design a study with **80% power** at $\alpha = 0.05$
+(two-sided) to detect this difference.
+
+---
+
+### 4A. Calculate Cohen's *h*
+
+Before using `pwr.2p.test()`, compute the effect size using **Cohen's *h***,
+which is the appropriate effect size measure for comparing two proportions.
+
+::: {.callout-tip}
+Cohen's *h* uses the arcsine transformation:
+$$h = 2 \arcsin(\sqrt{p_1}) - 2 \arcsin(\sqrt{p_2})$$
+
+The `pwr` package provides `ES.h(p1, p2)` to compute this directly.
+:::
+
+```{r}
+#| label: cohens-h
+
+# Your code here
+
+```
+
+Is this a small, medium, or large effect by Cohen's conventional thresholds
+(0.2 / 0.5 / 0.8)?
+
+**Answer:**
+
+---
+
+### 4B. Find the required sample size
+
+Use `pwr.2p.test()` to determine how many participants are needed
+**per group** to achieve 80% power. Round up to the nearest whole person.
+
+::: {.callout-tip}
+Leave `n = NULL` to solve for sample size. The function returns the
+per-group *n*, so total sample size = 2 × *n*.
+:::
+
+```{r}
+#| label: sample-size-prop
+
+# Your code here
+
+```
+
+How many participants are needed in total across both groups?
+
+**Answer:**
+
+---
+
+### 4C. Power for a budget-constrained design
+
+The research team can only recruit **50 participants per group** (100 total).
+Using the same effect size and significance level, what power will this
+study have?
+
+```{r}
+#| label: power-constrained
+
+# Your code here
+
+```
+
+Write a sentence interpreting this power value.
+
+**Answer:**
+
+---
+
+### 4D. Reflect on the design
+
+The team is considering whether 50 per group is sufficient. In 2–3
+sentences, discuss the implications of the power level you found in 4C.
+What are the risks of proceeding with an underpowered study?
+
+**Answer:**
+
+---
+
+## Part 5: McNemar's Test for Paired Proportions
+
+### Background
+
+The smoking cessation trial measured quit status for the **same patients**
+at two time points: 6 months (`quit_6mo`) and 12 months (`quit_12mo`).
+Researchers want to know whether the overall quit rate **changed** between
+these two time points across all participants, regardless of treatment group.
+
+Because the same individuals are measured at both time points, the
+observations are **paired** — we cannot treat these as independent
+proportions. This calls for **McNemar's test**.
+
+---
+
+### 5A. Create the paired 2×2 table
+
+Create a 2×2 frequency table crossing `quit_6mo` (rows) by `quit_12mo`
+(columns).
+
+::: {.callout-tip}
+Use `tabyl(quit_6mo, quit_12mo)` and add totals. The **concordant** cells
+(both Yes, both No) represent patients whose status didn't change. The
+**discordant** cells are the key to McNemar's test.
+:::
+
+```{r}
+#| label: mcnemar-table
+
+# Your code here
+
+```
+
+How many patients were **concordant** (same status at both times)?
+How many were **discordant** (status changed)?
+
+Of the discordant patients, how many **relapsed** (quit at 6 months but
+not at 12)? How many were **late quitters** (did not quit at 6 months but
+did quit at 12)?
+
+**Answer:**
+
+---
+
+### 5B. State the hypotheses
+
+Let $p_{12}$ be the probability of quitting at 6 months but not at 12
+(relapse), and $p_{21}$ be the probability of not quitting at 6 months
+but quitting at 12 (late quitting). McNemar's test focuses on whether
+these discordant probabilities are equal.
+
+State the null and alternative hypotheses.
+
+**Answer:**
+
+$H_0$:
+
+$H_A$:
+
+---
+
+### 5C. Run McNemar's test
+
+Use `mcnemar.test()` on the 2×2 table to test whether the quit rate
+changed from 6 to 12 months.
+
+::: {.callout-tip}
+`mcnemar.test()` expects a matrix or table object. You can create one with
+`table(smoking$quit_6mo, smoking$quit_12mo)`. By default it applies a
+continuity correction — this is fine for our purposes.
+:::
+
+```{r}
+#| label: mcnemar-test
+
+# Your code here
+
+```
+
+---
+
+### 5D. Interpret the results
+
+Report the test statistic, p-value, and the quit rate at each time point.
+
+Write a 2–3 sentence conclusion. Did the overall quit rate change
+significantly between 6 and 12 months? What does this suggest about the
+durability of cessation in this trial?
+
+::: {.callout-tip}
+To compute the overall quit rate at each time point, use
+`mean(smoking$quit_6mo == "Yes")` and `mean(smoking$quit_12mo == "Yes")`.
+:::
+
+```{r}
+#| label: quit-rates
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 5E. Power analysis for a future paired study
+
+Researchers are planning a **new, larger study** using McNemar's test to
+detect whether a similar cessation program changes quit rates over time.
+They want to estimate how many patients to enroll.
+
+The key insight from the lecture: McNemar's test only uses the **discordant
+pairs**, so power depends on how many pairs change status — not the total
+sample size alone.
+
+**Step 1:** From your table in 5A, estimate the proportion of patients who
+were discordant (i.e., whose quit status changed between 6 and 12 months).
+
+**Step 2:** Suppose the researchers expect that among discordant patients,
+**75% will be relapsers** (quit → not quit) and 25% will be late quitters.
+Under $H_0$, discordant patients would split 50/50. Use `ES.h()` to
+compute the effect size and `pwr.p.test()` to find how many **discordant
+pairs** are needed for 80% power at $\alpha = 0.05$ (two-sided).
+
+**Step 3:** Divide the required number of discordant pairs by your estimated
+proportion of discordant pairs from Step 1 to get the **total number of
+patients** needed.
+
+::: {.callout-tip}
+This approach treats McNemar's test as a one-sample proportion test on the
+discordant pairs only. Under $H_0$, the proportion of discordant pairs that
+go in one direction is 0.50. Use `pwr.p.test()` with
+`h = ES.h(0.75, 0.50)`.
+:::
+
+```{r}
+#| label: mcnemar-power
+
+# Step 1: proportion of discordant pairs
+# Your code here
+
+# Step 2: required number of discordant pairs
+# Your code here
+
+# Step 3: total patients needed
+# Your code here
+
+```
+
+How many total patients would the researchers need to enroll? Why is the
+total *n* larger than the number of discordant pairs required?
+
+**Answer:**
+
+---
+
+## Submission checklist
+
+Before submitting, make sure you have:
+
+- [ ] Data file is in your `data/` folder
+- [ ] All code chunks run without errors when rendered
+- [ ] Answered all written questions
+- [ ] Interpretations are written in full sentences, in context
+- [ ] Rendered your HTML successfully
+- [ ] Uploaded both `.qmd` and `.html` files
