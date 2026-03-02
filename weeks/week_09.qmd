@@ -58,7 +58,7 @@ By the end of the week, you should be able to:
     -   Power analysis for McNemar's test via the simplified approach
 -   **Slides**
     -   Power for Proportions and Correlated Proportions ([HTML](/lessons/18_power_proportions/18_power_proportions.qmd) | [PDF](/lessons/18_power_proportions/18_power_proportions.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
--   R Module 2: Factors and Reshaping Data ([HTML](/lessons/19_anova/r_module2_slides.qmd) | [PDF](/lessons/19_anova/r_module2_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   R Module 2: Factors and Reshaping Data ([HTML](/lessons/18_power_proportions/r_module2_slides.qmd) | [PDF](/lessons/18_power_proportions/r_module2_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 
 -   **Code along**
     -   [Download R Module 2: Factors and Reshaping Data (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB)
