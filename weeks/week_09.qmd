@@ -1,0 +1,116 @@
+---
+title: "Week 9"
+description: "Power for Proportions and ANOVA"
+format:
+  html:
+    toc: true
+---
+
+```{=html}
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+```
+
+## Announcements
+
+-   **HW 7** is due **Sunday, March 8 at 11:00 PM**
+
+## Overview
+
+This week we cover two distinct topics across our two class meetings.
+
+Monday wraps up our unit on proportions with power analysis — how to determine the sample size needed to detect meaningful differences in proportions, including the special case of correlated (paired) proportions using McNemar's test. Wednesday shifts gears to comparing means across more than two groups using Analysis of Variance (ANOVA).
+
+By the end of the week, you should be able to:
+
+-   explain why effect sizes for proportions require the arcsine transformation (Cohen's *h*),
+-   conduct power and sample size calculations for one-sample and two-sample proportion tests,
+-   understand the role of discordant pairs in power analysis for McNemar's test,
+-   describe when and why ANOVA is preferred over multiple t-tests,
+-   state the null and alternative hypotheses for one-way ANOVA,
+-   calculate and interpret the F-statistic,
+-   check ANOVA assumptions (independence, normality, equal variances), and
+-   conduct post-hoc pairwise comparisons when the overall F-test is significant.
+
+## Readings (before class)
+
+-   No textbook reading for Monday (power for proportions is not covered in the textbook)
+-   Textbook section 5.5 (before Wednesday)
+
+## Materials
+
+### Monday — Power for Proportions and Correlated Proportions
+
+-   **Topics**
+    -   Review: power analysis concepts (Type II error, effect size, sample size)
+    -   Cohen's *h*: the arcsine transformation for proportion effect sizes
+    -   Why the same absolute difference in proportions is not always the same effect size
+    -   Power and sample size for a one-sample proportion test
+    -   Power and sample size for comparing two independent proportions
+    -   Sensitivity analysis: varying the alternative proportion
+    -   Paired proportions and McNemar's test: the role of discordant pairs
+    -   Power analysis for McNemar's test via the simplified approach
+-   **Slides**
+    -   Power for Proportions and Correlated Proportions ([HTML](/lessons/18_power_proportions/18_power_proportions.qmd) | [PDF](/lessons/18_power_proportions/18_power_proportions.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+-   R Module 2: Factors and Reshaping Data ([HTML](/lessons/19_anova/r_module2_slides.qmd) | [PDF](/lessons/19_anova/r_module2_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+
+-   **Code along**
+    -   [Download R Module 2: Factors and Reshaping Data (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/r/personal/latour_ohsu_edu/Documents/BMSC_620/BMSC_620_W26/slides/r_module2_companion.qmd?csf=1&web=1&e=8d2sUB)
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
+
+------------------------------------------------------------------------
+
+### Wednesday — Comparing Means with ANOVA
+
+-   **Topics**
+    -   The problem with multiple t-tests (inflated Type I error)
+    -   One-way ANOVA: hypotheses, assumptions, and the F-statistic
+    -   Between-group and within-group variability
+    -   The ANOVA table: sums of squares, degrees of freedom, mean squares
+    -   The F-distribution and p-values
+    -   Checking assumptions: independence, normality, equal variances
+    -   Post-hoc pairwise comparisons (Tukey's HSD)
+    -   ANOVA in R
+-   **Slides**
+    -   Comparing Means with ANOVA (HTML | PDF | OneDrive)
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
+
+------------------------------------------------------------------------
+
+## Homework
+
+-   **HW 7**
+    -   Released **Monday, March 2**
+    -   Due **Sunday, March 8 at 11:00 PM**
+    -   Covers:
+        -   <!-- TODO: Fill in HW 7 topics once finalized -->
+    -   Data files needed: <!-- TODO: Add data files -->
+    -   [View HW 7 instructions](/homework/HW07/HW07.qmd)
+
+-   See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+-   Please complete the post-class check-in after each class meeting.
+-   Used for attendance credit and to identify topics that need clarification.
+-   Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+Next week we continue expanding our analysis toolkit:
+
+-   **Week 10**:
+    -   Nonparametric tests (alternatives when ANOVA assumptions fail)
+    -   Correlation and simple linear regression

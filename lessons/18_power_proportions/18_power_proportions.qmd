@@ -1,0 +1,1210 @@
+---
+title: "Power and Sample Size for Proportions"
+subtitle: "Not covered in textbook"
+author: "Emile Latour"
+date: "`r library(here); source(here('class_dates.R')); w9d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Power for Proportions"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+
+knitr::opts_chunk$set(dpi = 300)
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(janitor)
+library(pwr)
+
+library(lamisc)
+library(laviz)
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+set.seed(456)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Recall and apply the four components of power analysis
+2. Explain how effect size for proportions differs from Cohen's *d* for means
+3. Calculate power and sample size for a **single proportion** using `pwr.p.test()`
+4. Calculate power and sample size for **two independent proportions** using `pwr.2p.test()`
+5. Explain when **correlated (paired) proportions** arise in biomedical research
+6. Conduct McNemar's test in R and interpret results
+7. Describe the key inputs needed to estimate power for paired proportion designs
+
+## Roadmap for Today
+
+\
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: Connecting Back to What We Know**
+
+- The four components, revisited
+- What changes when outcomes are binary?
+- Effect size for proportions: Cohen's *h*
+- Using the `pwr` package for proportions
+
+**Part 2: Power for a Single Proportion**
+
+- One-sample proportion test recap
+- The melanoma immunotherapy example
+- Using `pwr.p.test()`
+- Interpreting results
+:::
+
+::: {.column width="50%"}
+**Part 3: Power for Two Independent Proportions**
+
+- Two-proportion test recap
+- A new treatment comparison example
+- Using `pwr.2p.test()`
+- Sensitivity analysis: varying assumptions
+
+**Part 4: Correlated Proportions and McNemar's Test**
+
+- When observations are paired
+- McNemar's test: the idea
+- Running McNemar's test in R
+- Power considerations for paired proportions
+:::
+:::::
+
+# Part 1: Connecting Back to What We Know
+
+## Recall: The four components of power
+
+\
+
+From Lesson 12, every power calculation involves four quantities in equilibrium:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-important icon="false"}
+### The Four Components
+
+1. **Significance level** ($\alpha$) — usually 0.05
+2. **Power** ($1 - \beta$) — usually 80–90%
+3. **Sample size** ($n$) — what we typically solve for
+4. **Effect size** ($\Delta$) — a property of reality
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**The key rule:** Specify any 3 to solve for the 4th.
+
+\
+
+| Study type | What we solve for |
+|---|:-:|
+| Prospective | Sample size ($n$) |
+| Pilot/budget-limited | Effect size ($\Delta$) |
+| Retrospective | Power ($1-\beta$) |
+
+:::
+:::::
+
+## What changed in Lessons 13–14?
+
+\
+
+In Lesson 12, we worked with **continuous outcomes** (means):
+
+- One-sample t-test: detect difference from a known mean
+- Paired t-test: detect before/after change
+- Two-sample t-test: detect difference between groups
+
+\
+
+**In Lessons 13–14, we shifted to categorical outcomes (proportions):**
+
+- One proportion: Is $p$ different from some $p_0$?
+- Two proportions: Is $p_1 - p_2 \neq 0$?
+
+\
+
+::: {.callout-note icon="false"}
+### Today: Power for proportions
+
+The **logic** of power is identical — we just need a different way to define effect size when our outcome is binary.
+:::
+
+## Effect size for proportions: Cohen's *h*
+
+\
+
+For **means**, we used Cohen's *d*: a standardized difference (one number)
+
+$$d = \frac{\mu_1 - \mu_2}{\sigma}$$
+
+\
+
+For **proportions**, effect size is called Cohen's *h*:
+
+$$h = 2\arcsin(\sqrt{p_1}) - 2\arcsin(\sqrt{p_2})$$
+
+\
+
+::: {.callout-tip icon="false"}
+### You don't need to memorize this!
+
+The `pwr` package computes *h* for you using `ES.h(p1, p2)`.
+
+What you **do** need to specify are the **two proportions** themselves — not a single standardized number.
+:::
+
+## Cohen's *h* in practice
+
+\
+
+```{r}
+library(pwr)
+
+# Effect size between p1 = 0.50 and p2 = 0.45
+ES.h(p1 = 0.50, p2 = 0.45)
+
+# Effect size between p1 = 0.10 and p2 = 0.05
+ES.h(p1 = 0.10, p2 = 0.05)
+```
+
+\
+
+::: {.callout-note icon="false"}
+### Key insight
+
+The same **absolute difference** of 0.05 between two proportions is not always the same effect size! A difference between 0.50 and 0.45 has a smaller effect size than a difference between 0.10 and 0.05.
+
+This is why we need the arcsine transformation — it accounts for the fact that variance depends on the proportion itself.
+:::
+
+## Why we need the arcsine transformation
+
+```{r}
+#| echo: false
+#| fig-width: 11.5
+#| fig-height: 5
+#| fig-align: center
+
+library(patchwork)
+
+p_vals <- tibble(p = seq(0.001, 0.999, by = 0.001))
+
+# Left panel: variance of p-hat
+p1 <- ggplot(p_vals, aes(x = p, y = p * (1 - p))) +
+  geom_line(linewidth = 1.5, color = "#0072B2") +
+  geom_vline(xintercept = 0.5, linetype = "dashed", 
+             color = "#E69F00", linewidth = 1) +
+  annotate("text", x = 0.60, y = 0.27, label = "Variance peaks\nat p = 0.5",
+           hjust = 0, color = "#E69F00", size = 5) +
+  labs(
+    title = expression(paste("Variance of ", hat(p), " = p(1 - p)")),
+    subtitle = "Same n, very different variability",
+    x = "True proportion (p)",
+    y = "p(1 – p)"
+  ) +
+  scale_x_continuous(labels = scales::percent_format()) + 
+  scale_y_continuous(limits = c(0, 0.3))
+
+# # Right panel: arcsine transformation
+# p2 <- ggplot(p_vals, aes(x = p, y = 2 * asin(sqrt(p)))) +
+#   geom_line(linewidth = 1.5, color = "#0072B2") +
+#   # Orange segment: 0.45 to 0.55 (Δp = 0.10 near 0.5)
+# annotate("segment",
+#          x = 0.45, xend = 0.55,
+#          y = 2 * asin(sqrt(0.45)), yend = 2 * asin(sqrt(0.55)),
+#          color = "#E69F00", linewidth = 1.2,
+#          arrow = arrow(ends = "both", length = unit(0.12, "inches"))) + 
+# # Pink segment: 0.05 to 0.15 (Δp = 0.10 near 0)
+#   annotate("segment",
+#            x = 0.05, xend = 0.15,
+#            y = 2 * asin(sqrt(0.05)), yend = 2 * asin(sqrt(0.15)),
+#            color = "#CC79A7", linewidth = 1.2,
+#            arrow = arrow(ends = "both", length = unit(0.12, "inches"))) +
+#   annotate("text", x = 0.63, y = 2 * asin(sqrt(0.50)),
+#            label = "Δp = 0.10\nnear 0.5",
+#            hjust = 0, color = "#E69F00", size = 4.5) +
+#   annotate("text", x = 0.18, y = 2 * asin(sqrt(0.10)),
+#            label = "Δp = 0.10\nnear 0",
+#            hjust = 0, color = "#CC79A7", size = 4.5) +
+#   labs(
+#     title = "Arcsine transformation: 2·arcsin(√p)",
+#     subtitle = 'Proportions near 0 and 1 are "stretched" to account for lower variability',
+#     x = "True proportion (p)",
+#     y = "2·arcsin(√p)"
+#   ) +
+#   scale_x_continuous(labels = scales::percent_format())
+
+p2 <- ggplot(p_vals, aes(x = p, y = 2 * asin(sqrt(p)))) +
+  geom_line(linewidth = 1.5, color = "#0072B2") +
+  # --- Orange Projection (near 0.5) ---
+  geom_segment(aes(x = 0.55, xend = 0.55,
+                   y = 2 * asin(sqrt(0.45)), yend = 2 * asin(sqrt(0.55))),
+               linetype = "dotted", color = "#E69F00", linewidth = 0.8) +
+  annotate("segment", x = 0.45, xend = 0.55,
+           y = 2 * asin(sqrt(0.45)), yend = 2 * asin(sqrt(0.55)),
+           color = "#E69F00", linewidth = 1.2,
+           arrow = arrow(ends = "both", length = unit(0.12, "inches"))) +
+
+  # --- Pink Projection (near 0) ---
+  geom_segment(aes(x = 0.15, xend = 0.15,
+                   y = 2 * asin(sqrt(0.05)), yend = 2 * asin(sqrt(0.15))),
+               linetype = "dotted", color = "#CC79A7", linewidth = 0.8) +
+  annotate("segment", x = 0.05, xend = 0.15,
+           y = 2 * asin(sqrt(0.05)), yend = 2 * asin(sqrt(0.15)),
+           color = "#CC79A7", linewidth = 1.2,
+           arrow = arrow(ends = "both", length = unit(0.12, "inches"))) +
+
+  # Labels and scales (as you had them)
+  annotate("text", x = 0.63, y = 1.5, label = "Small 'h'\ngap",
+           hjust = 0, color = "#E69F00", size = 4.5) +
+  annotate("text", x = 0.18, y = 0.6, label = "Large 'h'\ngap",
+           hjust = 0, color = "#CC79A7", size = 4.5) +
+  annotate("text", x = 0.0, y = 2.9, 
+           label = "The same Δp = 0.10 near 0 and 0.5", 
+           hjust = 0, size = 4.5) + 
+  labs(
+    title = "Arcsine transformation: 2·arcsin(√p)",
+    subtitle = 'Proportions near 0 and 1 are "stretched" to\naccount for lower variability',
+    x = "True proportion (p)",
+    y = "Cohen's h scale"
+  ) +
+  scale_x_continuous(labels = scales::percent_format())
+
+
+# # Right panel: arcsine transformation
+# p2 <- ggplot(p_vals, aes(x = p, y = 2 * asin(sqrt(p)))) +
+#   geom_line(linewidth = 1.5, color = "#0072B2") +
+#   # Orange segment: 0.45 to 0.55 (Δp = 0.10 near 0.5)
+#   geom_segment(aes(x = 0.55, xend = 0.55, 
+#                    y = 2 * asin(sqrt(0.45)), yend = 2 * asin(sqrt(0.55))), 
+#                linetype = "dotted", color = "#E69F00", linewidth = 0.8) +
+# annotate("segment",
+#          x = 0.45, xend = 0.55,
+#          y = 2 * asin(sqrt(0.45)), yend = 2 * asin(sqrt(0.55)),
+#          color = "#E69F00", linewidth = 1.2,
+#          arrow = arrow(ends = "both", length = unit(0.12, "inches"))) +
+# # Pink segment: 0.05 to 0.15 (Δp = 0.10 near 0)
+#   geom_segment(aes(x = 0.15, xend = 0.15, 
+#                    y = 2 * asin(sqrt(0.05)), yend = 2 * asin(sqrt(0.15))), 
+#                linetype = "dotted", color = "#CC79A7", linewidth = 0.8) +
+#   annotate("segment",
+#            x = 0.05, xend = 0.15,
+#            y = 2 * asin(sqrt(0.05)), yend = 2 * asin(sqrt(0.15)),
+#            color = "#CC79A7", linewidth = 1.2,
+#            arrow = arrow(ends = "both", length = unit(0.12, "inches"))) +
+#   annotate("text", x = 0.63, y = 2 * asin(sqrt(0.50)),
+#            label = "Δp = 0.10\nnear 0.5",
+#            hjust = 0, color = "#E69F00", size = 4.5) +
+#   annotate("text", x = 0.18, y = 2 * asin(sqrt(0.10)),
+#            label = "Δp = 0.10\nnear 0",
+#            hjust = 0, color = "#CC79A7", size = 4.5) +
+#   labs(
+#     title = "Arcsine transformation: 2·arcsin(√p)",
+#     subtitle = 'Proportions near 0 and 1 are "stretched" to\naccount for lower variability',
+#     x = "True proportion (p)",
+#     y = "Cohen's h scale"
+#   ) +
+#   scale_x_continuous(labels = scales::percent_format())
+
+
+
+p1 + p2
+
+
+```
+
+::: {.callout-note icon="false"}
+### The key insight
+
+**Left:** The variance of a proportion estimate is not constant — a difference of 0.10 near *p* = 0.50 is much noisier than the same difference near *p* = 0.05 or *p* = 0.95.
+
+**Right:** The arcsine transformation stretches the scale near 0 and 1, so that equal *transformed* gaps correspond to equal statistical difficulty — regardless of where on the [0,1] scale you are. This is what Cohen's *h* captures.
+:::
+
+## The `pwr` functions for proportions
+
+\
+
+Two main functions in the `pwr` package:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**One proportion:**
+
+```{r}
+#| eval: false
+pwr.p.test(
+  h = ES.h(p1, p0),     # effect size
+  n = NULL,             # solve for n
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+```
+
+Use when: comparing a sample proportion to a known historical value
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**Two proportions (equal n):**
+
+```{r}
+#| eval: false
+pwr.2p.test(
+  h = ES.h(p1, p2),     # effect size
+  n = NULL,             # n PER GROUP
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+```
+
+Use when: comparing two independent groups
+
+:::
+:::::
+
+\
+
+Just like `pwr.t.test()` — leave the quantity you want to solve for as `NULL`!
+
+# Part 2: Power for a Single Proportion
+
+## Recall: The melanoma immunotherapy example
+
+\
+
+From Lesson 13, we worked with a melanoma immunotherapy study:
+
+
+::: {.callout-note icon="false"}
+### The question
+
+Historical data show that approximately **30%** of melanoma patients respond to standard treatment.
+
+A new immunotherapy is hypothesized to increase the response rate to **50%**.
+
+Before running the trial, researchers want to know: **how many patients do we need?**
+:::
+
+\
+
+**This is a one-sample proportion test:**
+
+- $H_0: p = 0.30$
+- $H_A: p \neq 0.30$
+
+## Power for a single proportion
+
+\
+
+**Step 1:** Define the proportions
+
+```{r}
+p_null <- 0.30      # historical/null proportion
+p_alt  <- 0.50      # expected proportion under new treatment
+```
+
+\
+
+**Step 2:** Calculate the effect size
+
+```{r}
+h <- ES.h(p1 = p_alt, p2 = p_null)
+h
+```
+
+\
+
+**Step 3:** Solve for sample size
+
+```{r}
+pwr.p.test(h = h, sig.level = 0.05, power = 0.80, alternative = "two.sided")
+```
+
+## Interpreting the result
+
+\
+
+```{r}
+#| echo: false
+result <- pwr.p.test(h = h, 
+                     sig.level = 0.05, 
+                     power = 0.80, 
+                     alternative = "two.sided")
+result
+```
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+To detect an increase in response rate from 30% to 50% (Cohen's *h* = `r round(result$h, 3)`) with 80% power and $\alpha$ = 0.05, we would need **n = `r ceiling(result$n)` patients**.
+
+Note: always **round up** when solving for sample size — you can't have a fraction of a person!
+:::
+
+## What if we can only enroll 40 patients?
+
+\
+
+Sometimes enrollment is limited by budget or feasibility. We can flip the question: what is our power with a fixed $n$?
+
+\
+
+```{r}
+p_null <- 0.30      # historical/null proportion
+p_alt  <- 0.50      # expected proportion under new treatment
+
+pwr.p.test(h = ES.h(p1 = p_alt, p2 = p_null),
+           n = 40,
+           sig.level = 0.05,
+           alternative = "two.sided")
+```
+
+::: {.callout-tip icon="false"}
+### Discussion
+
+With only 40 patients, our power drops substantially. Is that acceptable? **This depends on the context**. For an early-phase pilot study, lower power may be acceptable. For a confirmatory trial, probably not.
+:::
+
+## Sensitivity analysis: varying the alternative proportion
+
+\
+
+What if we're not sure the new treatment achieves 50%? We can calculate sample size for a range of alternatives:
+
+```{r}
+scenarios <- tibble(
+  p_alt = c(0.40, 0.45, 0.50, 0.55, 0.60),
+  p_null = 0.30,
+  h = ES.h(p_alt, p_null)) %>%
+  rowwise() %>%
+  mutate(
+    n_needed = ceiling(pwr.p.test(h = h,
+                                  sig.level = 0.05,
+                                  power = 0.80,
+                                  alternative = "two.sided")$n)
+    ) %>%
+  ungroup()
+
+scenarios
+```
+
+## Visualizing the sensitivity analysis
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-align: center
+
+ggplot(scenarios, aes(x = p_alt, y = n_needed)) +
+  geom_line(linewidth = 1.5, color = "#0072B2") +
+  geom_point(size = 4, color = "#0072B2") +
+  geom_hline(yintercept = 40, linetype = "dashed", color = "#E69F00", linewidth = 1) +
+  annotate("text", x = 0.605, y = 49, label = "n = 40 (budget limit)", 
+           hjust = 1, color = "#E69F00", size = 5) +
+  labs(
+    title = "Required sample size by assumed response rate",
+    subtitle = expression(paste("Null: ", p[0], " = 0.30, power = 80%, ", alpha, " = 0.05")),
+    x = "Assumed response rate under new treatment",
+    y = "Required sample size (n)"
+  ) +
+  scale_x_continuous(labels = scales::percent_format()) #+
+  # scale_x_continuous(labels = scales::percent_format(), 
+  #                    limits = c(0.3, 0.6), 
+  #                    breaks = seq(0.3, 0.6, by = 0.05))
+```
+
+The further the true proportion is from the null, the smaller the sample we need — because the effect is easier to detect.
+
+# Part 3: Power for Two Independent Proportions
+
+## A new treatment comparison
+
+\
+
+::: {.callout-note icon="false"}
+### Research scenario
+
+A clinical trial is planned to compare two immunotherapy regimens for melanoma:
+
+- **Standard immunotherapy** (control): historical response rate of **40%**
+- **Novel combination therapy** (treatment): expected response rate of **60%**
+
+Two groups of equal size will be randomized. **How many patients per group do we need?**
+:::
+
+\
+
+This is a **two independent proportions** problem:
+
+- $H_0: p_1 = p_2$
+- $H_A: p_1 \neq p_2$
+
+## Power for two proportions: sample size
+
+
+**Step 1:** Define the two proportions
+
+```{r}
+p_control   <- 0.40    # response rate, standard treatment
+p_treatment <- 0.60    # expected response rate, novel treatment
+```
+
+\
+
+**Step 2:** Compute effect size and solve for n
+
+```{r}
+pwr.2p.test(
+  h = ES.h(p1 = p_treatment, p2 = p_control),
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+```
+
+<!-- ::: {.callout-important icon="false"} -->
+<!-- **n is per group!** Always multiply by the number of groups to get the total sample size. -->
+<!-- ::: -->
+
+## Interpreting the result
+
+```{r}
+#| echo: false
+result2 <- pwr.2p.test(
+  h = ES.h(p1 = p_treatment, p2 = p_control),
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+result2
+```
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+To detect a difference in response rates from 40% to 60% (Cohen's *h* = `r round(result2$h, 3)`) with 80% power and $\alpha$ = 0.05:
+
+- **n = `r ceiling(result2$n)` per group**
+- **Total N = `r 2 * ceiling(result2$n)`** (both groups combined)
+
+Add 10–20% buffer for dropout: plan for approximately **`r ceiling(ceiling(result2$n) * 1.15)` per group** in practice.
+:::
+
+## What difference can we detect with fixed resources?
+
+\
+
+Suppose budget limits enrollment to **50 patients per group**. What's our power, and what minimum difference can we detect?
+
+\
+
+```{r}
+# What is our power with n = 50 per group?
+pwr.2p.test(
+  h = ES.h(p1 = p_treatment, p2 = p_control),
+  n = 50,
+  sig.level = 0.05,
+  alternative = "two.sided"
+)
+```
+
+## Sensitivity analysis: varying the treatment proportion (1/2)
+
+\
+
+```{r}
+scenarios2 <- tibble(
+  p_tx   = c(0.50, 0.55, 0.60, 0.65, 0.70),
+  p_ctrl = 0.40,
+  h = ES.h(p_tx, p_ctrl)
+) %>%
+  rowwise() %>%
+  mutate(
+    n_per_group = ceiling(pwr.2p.test(h = h,
+                                      sig.level = 0.05,
+                                      power = 0.80,
+                                      alternative = "two.sided")$n),
+    n_total = n_per_group * 2
+  ) %>%
+  ungroup()
+```
+
+
+## Sensitivity analysis: varying the treatment proportion (2/2)
+
+\
+
+```{r}
+scenarios2
+```
+
+\
+
+::: {.callout-tip icon="false"}
+**Ask:** For each scenario, is the required sample size feasible given your study constraints? Is the assumed treatment effect realistic? Is it clinically meaningful?
+:::
+
+## Comparing power calculations: means vs. proportions
+
+\
+
+| | Means | Proportions |
+|---|---|---|
+| Effect size | Cohen's *d*: one standardized number | Cohen's *h*: computed from two proportions |
+| Key inputs | $\mu_1, \mu_2, \sigma$ | $p_1, p_2$ |
+| R function (one group) | `pwr.t.test(type = "one.sample")` | `pwr.p.test()` |
+| R function (two groups) | `pwr.t.test(type = "two.sample")` | `pwr.2p.test()` |
+| R function (paired) | `pwr.t.test(type = "paired")` | *Today: Part 4* |
+| Solve for n? | Leave `n = NULL` | Leave `n = NULL` |
+| Solve for power? | Leave `power = NULL` | Leave `power = NULL` |
+
+\
+
+**The workflow is the same — just different inputs and functions!**
+
+# Part 4: Correlated Proportions and McNemar's Test
+
+## When are proportions correlated?
+
+\
+
+Recall from earlier in the course: observations can be **paired or matched**
+
+\
+
+We've seen this with means:
+
+- Paired t-test: cholesterol before/after treatment in the *same patient*
+- Within-subject design: measurements are correlated
+
+\
+
+**The same situation arises with proportions:**
+
+- Does a screening test result change before and after a training intervention?
+- In a matched case-control study: does exposure status differ between cases and their matched controls?
+- Pre/post binary outcomes measured in the same individuals
+
+
+::: {.callout-note icon="false"}
+### Key idea
+When binary outcomes are paired or matched, the observations are **correlated** — we cannot treat them as independent. Using the two-proportion test would be wrong!
+:::
+
+## A matched study example (1/2)
+
+\
+
+::: {.callout-note icon="false"}
+### Study design
+
+Researchers want to evaluate a new patient education program for melanoma early detection. They recruit **50 patients** and test each patient's ability to correctly identify suspicious lesions **before** and **after** the program.
+
+- **Outcome:** Correctly identified suspicious lesion (Yes/No)
+- **Design:** Each patient is their own control (paired)
+:::
+
+## A matched study example (2/2)
+
+\
+
+**The data structure:** Each patient has two binary outcomes (before, after)
+
+```{r}
+# Simulated data
+set.seed(620)
+
+education_data <- tibble(
+  patient_id = 1:50,
+  before = rbinom(50, 1, 0.40),   # 40% correct before
+  after  = rbinom(50, 1, 0.70)    # 70% correct after (simulated improvement)
+) %>%
+  mutate(before = if_else(before == 1, "Correct", "Incorrect"),
+    after  = if_else(after == 1, "Correct", "Incorrect"))
+
+head(education_data)
+```
+
+## The 2×2 table for paired proportions
+
+\
+
+```{r}
+# Cross-tabulate before vs. after
+edu_table <- education_data %>%
+  janitor::tabyl(before, after) %>% 
+  janitor::adorn_title(placement = "combined")
+
+edu_table
+```
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+**What these cells mean:**
+
+| | After: Correct | After: Incorrect |
+|---|---|---|
+| **Before: Correct** | Concordant (+/+) | Discordant (+/−) |
+| **Before: Incorrect** | Discordant (−/+) | Concordant (−/−) |
+
+:::
+
+::: {.column width="50%"}
+
+::: {.callout-tip icon="false"}
+### Key insight
+
+The **concordant pairs** (where before = after) give us no information about change.
+
+Only the **discordant pairs** tell us something changed — and McNemar's test focuses entirely on those.
+:::
+
+:::
+:::::
+
+## McNemar's test: the big idea
+
+McNemar's test asks: **among the discordant pairs, are they evenly split?**
+
+\
+
+Let:
+
+- $b$ = pairs where outcome changed from **correct → incorrect**
+- $c$ = pairs where outcome changed from **incorrect → correct**
+
+\
+
+::: {.callout-important icon="false"}
+### Hypotheses
+
+$H_0$: The probability of changing in each direction is equal ($p_{12} = p_{21}$, or equivalently $b = c$)
+
+$H_A$: The probability of changing differs by direction ($p_{12} \neq p_{21}$)
+:::
+
+\
+
+**Test statistic:**
+
+$$\chi^2 = \frac{(b - c)^2}{b + c}$$
+
+This follows a chi-squared distribution with 1 degree of freedom.
+
+## McNemar's test in R
+
+\
+
+```{r}
+# Create a table for mcnemar.test()
+edu_tab <- table(education_data$before, education_data$after)
+
+edu_tab
+```
+
+\
+
+```{r}
+# Run McNemar's test
+mcnemar.test(edu_tab)
+```
+
+
+## Interpreting the result
+
+\
+
+```{r}
+#| echo: false
+
+n_edu <- sum(edu_tab)
+pre_correct <- sum(edu_tab[1, ])
+pre_correct <- glue::glue("{pre_correct} / {n_edu} ({lamisc::fmt_pct(pre_correct/n_edu, accuracy = 1.0)})")
+
+post_correct <- sum(edu_tab[, 1])
+post_correct <- glue::glue("{post_correct} / {n_edu} ({lamisc::fmt_pct(post_correct/n_edu, accuracy = 1.0)})")
+
+edu_result <- mcnemar.test(edu_tab)
+edu_result
+```
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+`r pre_correct` patients correctly identified suspicious lesions before the education program compared to `r post_correct` after.
+
+McNemar's chi-squared test ($\chi^2$ = `r round(edu_result$statistic, 2)`, df = `r edu_result$parameter`, *p* = `r round(edu_result$p.value, 3)`) provides evidence that the patient education program changed the proportion of patients who correctly identified suspicious lesions.
+
+:::
+
+\
+
+::: {.callout-tip icon="false"}
+### What makes this different from a chi-squared test?
+
+A regular chi-squared test would treat the before/after observations as independent. McNemar's test correctly accounts for the paired structure by focusing only on discordant pairs.
+:::
+
+
+## McNemar's test in R with `janitor` or `rstatix`
+
+\
+
+**Using `janitor`:**
+
+```{r}
+education_data %>%
+  tabyl(before, after) %>%
+  column_to_rownames("before") %>% # Extra step using tibble::column_to_rownames
+  as.matrix() %>%                  # Extra step to convert to matrix
+  mcnemar.test() %>% 
+  broom::tidy()
+
+```
+
+\
+
+**Using `rstatix`:**
+
+```{r}
+# Create a table for mcnemar.test()
+edu_tab <- table(education_data$before, education_data$after)
+
+rstatix::mcnemar_test(edu_tab)
+
+```
+
+
+## McNemar's test vs. two-proportion test
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Two-proportion test (Lesson 13)**
+
+- Two **independent** groups
+- Example: treatment A vs. treatment B in different patients
+- Test: `prop.test()`
+- Asks: are the proportions the same across groups?
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**McNemar's test (today)**
+
+- **Paired/matched** observations on the same individuals
+- Example: before vs. after in the same patients, or matched case-control pairs
+- Test: `mcnemar.test()`
+- Asks: are the discordant pairs symmetric?
+
+:::
+:::::
+
+\
+
+::: {.callout-note icon="false"}
+### The parallel to t-tests
+
+This mirrors the distinction between the **independent two-sample t-test** (different people) and the **paired t-test** (same person measured twice). Using the wrong test leads to incorrect inference!
+:::
+
+## Paired proportions: the 2×2 table
+
+\
+
+Each pair produces two binary outcomes (e.g., before vs. after treatment):
+
+|  | **Post: +** | **Post: −** |
+|---|:---:|:---:|
+| **Pre: +** | $p_{11}$ (concordant) | $p_{12}$ (discordant) |
+| **Pre: −** | $p_{21}$ (discordant) | $p_{22}$ (concordant) |
+
+- **Concordant pairs** ($p_{11}$, $p_{22}$): outcome is the same at both time points
+- **Discordant pairs** ($p_{12}$, $p_{21}$): outcome changes
+  - $p_{12}$: changed from **+** to **−** (e.g., "got worse")
+  - $p_{21}$: changed from **−** to **+** (e.g., "improved")
+
+McNemar's test asks: among the discordant pairs, is the split between $p_{12}$ and $p_{21}$ different from 50/50?
+
+## Power for paired proportions: the key inputs
+
+\
+
+Power analysis for McNemar's test is more complex than for independent proportions. The key insight:
+
+\
+
+**McNemar's test only uses the discordant pairs.** So power depends on:
+
+1. **Total sample size** ($n$) — total number of matched pairs
+2. **Proportion of discordant pairs** ($p_d = p_{12} + p_{21}$) — pairs where the outcome changes
+3. **The direction of discordance** — which way is the change expected to go?
+
+\
+
+::: {.callout-note icon="false"}
+### Practical implication
+
+A study with a high proportion of concordant pairs (most people don't change) is effectively working with a smaller sample — and thus has lower power — than the total $n$ would suggest.
+
+When planning a study using McNemar's test, you need estimates of the **discordant pair proportions** from prior literature or pilot data.
+:::
+
+## Estimating power for McNemar's: a simplified approach
+
+\
+
+One practical approach: McNemar's test on $n$ total pairs is equivalent to a one-sample proportion test on the **discordant pairs** only.
+
+
+If we expect:
+
+- Proportion of pairs with outcome change: $p_d = p_{12} + p_{21}$ (total discordant pairs)
+- Among discordant pairs, proportion "improving" ($p_{21}$): $\phi = p_{21} / p_d$
+- Under $H_0$: $\phi = 0.50$ (changes equally likely in both directions)
+
+```{r}
+#| include: false
+
+# Example: 25% of pairs expected to be discordant
+# Among discordant pairs, 70% are "improvements" (phi = 0.70)
+
+p_discordant <- 0.25
+phi_alt <- 0.70       # expected proportion of discordant pairs that are "improvements"
+
+# Effective n for the test = n_total * p_discordant
+# Use pwr.p.test on the discordant pairs
+pwr.p.test(
+  h = ES.h(p1 = phi_alt, p2 = 0.50),
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+```
+
+## Interpreting power for McNemar's
+
+\
+
+```{r}
+#| echo: false
+mcnemar_power <- pwr.p.test(
+  h = ES.h(p1 = phi_alt, p2 = 0.50),
+  sig.level = 0.05,
+  power = 0.80,
+  alternative = "two.sided"
+)
+mcnemar_power
+```
+
+\
+
+This tells us we need **`r ceiling(mcnemar_power$n)` discordant pairs**. To get the total sample size:
+
+```{r}
+n_discordant_needed <- ceiling(mcnemar_power$n)
+p_discordant <- 0.25
+
+n_total_needed <- ceiling(n_discordant_needed / p_discordant)
+n_total_needed
+```
+
+
+::: {.callout-note icon="false"}
+If only `r lamisc::fmt_pct(p_discordant, accuracy = 1.0)` of pairs are expected to be discordant, we need to enroll **`r n_total_needed` total pairs** to get enough discordant pairs for adequate power.
+:::
+
+# Wrap-up and Key Takeaways
+
+## Summary: Power for proportions
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**What's the same as means:**
+
+- Four components still in equilibrium ($\alpha$, power, $n$, effect)
+- Leave one `= NULL` to solve for it
+- 80% power is the standard target
+- Always round $n$ up
+- Report your power analysis!
+
+\
+
+**Key R functions:**
+
+- `ES.h(p1, p2)` — compute effect size
+- `pwr.p.test()` — one proportion
+- `pwr.2p.test()` — two independent proportions
+- `mcnemar.test()` — test for paired proportions
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**What's different for proportions:**
+
+- Effect size requires **two** proportions, not a single *d*
+- The same absolute difference has different effect sizes at different baseline proportions
+- For paired proportions: McNemar's test focuses on discordant pairs
+- Power for McNemar's requires knowing the proportion of discordant pairs
+
+\
+
+**Decision guide:**
+
+| Design | Analysis | Power function |
+|---|---|---|
+| One proportion vs. $p_0$ | `prop.test()` | `pwr.p.test()` |
+| Two independent groups | `prop.test()` | `pwr.2p.test()` |
+| Paired/matched binary | `mcnemar.test()` | `pwr.p.test()` on discordant $n$ |
+
+:::
+:::::
+
+## Connecting the course together
+
+\
+
+We've now covered power and sample size for the full set of tests we've studied:
+
+\
+
+| Test | Outcome | Power function |
+|---|---|---|
+| One-sample t-test | Continuous | `pwr.t.test(type = "one.sample")` |
+| Paired t-test | Continuous | `pwr.t.test(type = "paired")` |
+| Two-sample t-test | Continuous | `pwr.t.test(type = "two.sample")` |
+| One proportion | Binary | `pwr.p.test()` |
+| Two independent proportions | Binary | `pwr.2p.test()` |
+| Paired proportions (McNemar's) | Binary | `pwr.p.test()` on discordant *n* |
+
+\
+
+::: {.callout-tip icon="false"}
+The framework is always the same: four components, three known, one to solve for. The function changes, but the logic doesn't.
+:::
+
+## Looking ahead
+
+\
+
+**Next class (Lesson 16):** ANOVA — Comparing means across 3 or more groups
+
+- When the two-sample t-test isn't enough
+- The F-test
+- Post-hoc comparisons
+
+\
+
+**Remaining lectures:**
+
+- Lesson 17: Nonparametric tests
+- Lesson 18: Correlation and Simple Linear Regression
+- Lesson 19: Finals review
+- Lesson 20: TBD
+
+\
+
+**HW 7 due Sunday 03/08** — will cover material from 
+
+- Lesson 14: Chi-squared tests, Fishers exact test
+- Lesson 15 (today): Power for proportions and correlated proportions
+
+## Additional resources
+
+\
+
+**For deeper reading on power for proportions:**
+
+- PASS documentation: [Two Proportions](https://www.ncss.com/software/pass/pass-documentation/#Proportions)
+- [Sample size calculators from UCSF](https://sample-size.net/calculator-finder) — web-based, user friendly
+- [G\*Power](https://stats.oarc.ucla.edu/other/gpower/) — free desktop software with proportion-specific calculators
+
+\
+
+**For power analysis with chi-squared tests (beyond this course):**
+
+- Abdul Rahman et al. (2025). "Practical guide to calculate sample size for chi-square test in biomedical research." *BMC Medical Research Methodology.* [https://pmc.ncbi.nlm.nih.gov/articles/PMC12107878/](https://pmc.ncbi.nlm.nih.gov/articles/PMC12107878/) — introduces Cohen's *w*, includes a free web-based calculator
+- `pwr.chisq.test()` in the `pwr` package and `PowerChisqTest()` in the `DescTools` package are available in R if you need to do this programmatically
+
+\
+
+**For McNemar's test and power:**
+
+- PASS documentation: [McNemar's Test](https://www.ncss.com/wp-content/themes/ncss/pdf/Procedures/PASS/Tests_for_Two_Correlated_Proportions-McNemar_Test.pdf)
+- The `exact2x2` package in R has additional tools for exact McNemar's calculations
+
+\
+
+**Interactive visualization:**
+
+- [Understanding Statistical Power](https://rpsychologist.com/d3/NHST/) — drag sliders to see how components relate
