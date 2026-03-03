@@ -65,7 +65,10 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Power for Proportions and Correlated Proportions](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQCeO_aWbqECRojXq58E7N0sAbeDbduU0UtpVfDmQz-kuc8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=j120H8)
 -   **Muddy points**
-    -   Coming soon
+    
+    I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 15](/lessons/18_power_proportions/18_power_proportions_muddy_points.qmd)
+
 
 ------------------------------------------------------------------------
 
