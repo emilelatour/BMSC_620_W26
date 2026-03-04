@@ -84,7 +84,7 @@ By the end of the week, you should be able to:
     -   Post-hoc pairwise comparisons (Tukey's HSD)
     -   ANOVA in R
 -   **Slides**
-    -   Comparing Means with ANOVA ([HTML](/lessons/19_anova/19_anova.qmd) | [PDF](lessons/19_anova/19_anova.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   Comparing Means with ANOVA ([HTML](/lessons/19_anova/19_anova.qmd) | [PDF](/lessons/19_anova/19_anova.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
     -   Coming soon
 -   **Muddy points**
