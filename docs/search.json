@@ -8887,5 +8887,285 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#roadmap-for-today",
+    "href": "lessons/19_anova/19_anova.html#roadmap-for-today",
+    "title": "Comparing Means Across Groups",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\nPart 1: Why Not Just Use More t-Tests?\n\nExtending our toolkit beyond two groups\nThe multiple comparisons problem\nIntroducing ANOVA\n\nPart 2: The Logic of ANOVA\n\nThe research question and data\nBetween-group vs. within-group variability\nThe F-statistic and F-distribution\nReading the ANOVA table\n\n\nPart 3: Running ANOVA in R\n\nChecking assumptions\nThe six-step hypothesis test\nRunning aov() in R\nWriting a complete conclusion\n\nPart 4: Post-Hoc Comparisons\n\nWhich groups are actually different?\nTukey’s HSD\nBonferroni correction\nFalse Discovery Rate (FDR)"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#where-weve-been",
+    "href": "lessons/19_anova/19_anova.html#where-weve-been",
+    "title": "Comparing Means Across Groups",
+    "section": "Where we’ve been",
+    "text": "Where we’ve been\n\n\nSo far our inference toolkit for numerical outcomes has been:\n\n\n\n\n\nLesson\nTest\nGroups\n\n\n\n\n9\nOne-sample t-test\n1\n\n\n10\nPaired t-test\n2 (matched)\n\n\n11\nTwo-sample t-test\n2 (independent)\n\n\n\n\n\nToday’s question: What happens when we want to compare 3 or more groups?\n\n\n\n\n\nThe motivating question\n\n\nA genetics study wants to know: does ACTN3 genotype (CC, CT, or TT) affect how much arm strength changes after an exercise intervention?\nThat’s three groups — we can’t use a two-sample t-test anymore."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#why-not-just-run-three-t-tests",
+    "href": "lessons/19_anova/19_anova.html#why-not-just-run-three-t-tests",
+    "title": "Comparing Means Across Groups",
+    "section": "Why not just run three t-tests?",
+    "text": "Why not just run three t-tests?\n\n\nWith 3 groups (CC, CT, TT), we could run every possible pairwise comparison:\n\n\n\n\n3 tests:\n\nCC vs. CT\nCC vs. TT\nCT vs. TT\n\n\n\nEach test has \\(\\alpha = 0.05\\) probability of a Type I error.\n\n\n\nThe problem: With multiple tests, errors accumulate.\n\\[P(\\text{at least one false positive}) = 1 - (1-\\alpha)^m\\]\nFor \\(m = 3\\) tests at \\(\\alpha = 0.05\\):\n\\[1 - (0.95)^3 = 0.143\\]\nThat’s a 14% chance of at least one false positive — not 5%!\n\n\n\n\n\n\n\nThe multiple comparisons problem\n\n\nRunning many tests inflates the Type I error rate beyond the nominal \\(\\alpha\\). We need a method that tests all groups simultaneously — that’s ANOVA."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#the-multiple-comparisons-problem-grows-fast",
+    "href": "lessons/19_anova/19_anova.html#the-multiple-comparisons-problem-grows-fast",
+    "title": "Comparing Means Across Groups",
+    "section": "The multiple comparisons problem grows fast",
+    "text": "The multiple comparisons problem grows fast\n\nIf we had 4 groups that’s 6 tests → 19% chance of a false positive. ANOVA solves this by testing all groups in a single test."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#introducing-the-famuss-study",
+    "href": "lessons/19_anova/19_anova.html#introducing-the-famuss-study",
+    "title": "Comparing Means Across Groups",
+    "section": "Introducing the famuss study",
+    "text": "Introducing the famuss study\n\n\n\n\n\nThe FAMuSS Study\n\n\nThe Functional SNPs Associated with Muscle Size and Strength (FAMuSS) study investigated whether genetic variation is associated with exercise response.\n\nParticipants: ~600 young adults completed a resistance training program\nGenetic variable: ACTN3 genotype at position R577X (CC, CT, or TT)\nOutcome: Percent change in non-dominant arm strength after training\n\nQuestion: Is mean percent change in arm strength different across the three genotype groups?"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#visualizing-the-three-groups",
+    "href": "lessons/19_anova/19_anova.html#visualizing-the-three-groups",
+    "title": "Comparing Means Across Groups",
+    "section": "Visualizing the three groups",
+    "text": "Visualizing the three groups\n\nThe diamond ◆ marks the group mean. The dashed line is the grand mean across all participants. Do the groups look different enough to conclude a real effect?"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#the-key-question-anova-asks",
+    "href": "lessons/19_anova/19_anova.html#the-key-question-anova-asks",
+    "title": "Comparing Means Across Groups",
+    "section": "The key question ANOVA asks",
+    "text": "The key question ANOVA asks\n\n\nWhether or not group means appear different depends on two things:\n\n\n\n\n1. How far apart are the group means?\nIf the group means are close to the grand mean → not much going on.\nIf the group means are far from the grand mean → evidence of a real difference.\nThis is between-group variability.\n\n\n\n2. How much spread is there within each group?\nIf observations are tightly clustered around their group mean → easy to tell groups apart.\nIf observations are widely scattered → hard to tell groups apart even if means differ.\nThis is within-group variability.\n\n\n\n\n\n\nANOVA’s insight\n\n\n\nANOVA compares these two sources of variability.\nIf between-group variability is large relative to within-group variability, that’s evidence that the group means are genuinely different."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#three-sources-of-variability-visually",
+    "href": "lessons/19_anova/19_anova.html#three-sources-of-variability-visually",
+    "title": "Comparing Means Across Groups",
+    "section": "Three sources of variability — visually",
+    "text": "Three sources of variability — visually\n\n\n\n\\[\\underbrace{SST}_{\\text{Total}} = \\underbrace{SSG}_{\\text{Between groups}} + \\underbrace{SSE}_{\\text{Within groups}}\\]"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#the-anova-table",
+    "href": "lessons/19_anova/19_anova.html#the-anova-table",
+    "title": "Comparing Means Across Groups",
+    "section": "The ANOVA table",
+    "text": "The ANOVA table\n\n\nANOVA organizes the variability into a table. \\(k =\\) the number of groups and \\(N =\\) the total number of observations across \\(k\\) groups:\n\n\n\n\n\n\n\n\n\n\n\n\n\nSource\nSS\ndf\nMS\nF\n\n\n\n\nBetween groups (Model)\nSSG\n\\(k-1\\)\n\\(MSG = SSG/(k-1)\\)\n\\(F = MSG/MSE\\)\n\n\nWithin groups (Error)\nSSE\n\\(N-k\\)\n\\(MSE = SSE/(N-k)\\)\n\n\n\nTotal\nSST\n\\(N-1\\)\n\n\n\n\n\n\n\n\n\n\n\nMean Squares: the key step\n\n\nDividing each SS by its degrees of freedom converts sums of squares into mean squares — averages of squared deviations. This puts between and within variability on the same scale so we can compare them with a ratio.\n\\[F = \\frac{MSG}{MSE} = \\frac{\\text{between-group variability}}{\\text{within-group variability}}\\]"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#the-f-statistic",
+    "href": "lessons/19_anova/19_anova.html#the-f-statistic",
+    "title": "Comparing Means Across Groups",
+    "section": "The F-statistic",
+    "text": "The F-statistic\n\n\n\n\n\\(F = \\frac{MSG}{MSE}\\)\n\n\nWhen \\(H_0\\) is true (all means equal):\n\nBetween-group variability ≈ within-group variability\n\\(F \\approx 1\\)\n\nWhen \\(H_A\\) is true (at least one mean differs):\n\nBetween-group variability &gt; within-group variability\n\\(F &gt; 1\\), potentially much larger\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\nThe p-value for an F-test is always the upper tail — we only care about F being surprisingly large."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-1-check-assumptions",
+    "href": "lessons/19_anova/19_anova.html#step-1-check-assumptions",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 1: Check assumptions",
+    "text": "Step 1: Check assumptions\n\n\nThe F-statistic follows an F-distribution when these conditions hold:\n\n\n1. Independence: Observations within and across groups are independent\n\nMet by design in FAMuSS (different participants in each group)\n\n\n\n2. Normality within groups (or large samples):\n\nEach group should be approximately normally distributed, OR \\(n_i \\geq 30\\) per group\n\n\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(n = n())\n\n# A tibble: 3 × 2\n  actn3.r577x     n\n  &lt;fct&gt;       &lt;int&gt;\n1 CC            173\n2 CT            261\n3 TT            161\n\n\nAll groups have \\(n &gt; 30\\) ✓"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-1-check-assumptions-continued",
+    "href": "lessons/19_anova/19_anova.html#step-1-check-assumptions-continued",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 1: Check assumptions (continued)",
+    "text": "Step 1: Check assumptions (continued)\n\n\n3. Equal variance across groups (homoscedasticity):\n\nWithin-group variability should be similar across groups\nRule of thumb: violated if \\(\\max(s_i) / \\min(s_i) &gt; 2\\)\n\n\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(sd = sd(ndrm.ch)) %&gt;%\n  summarise(ratio = max(sd) / min(sd))\n\n# A tibble: 1 × 1\n  ratio\n  &lt;dbl&gt;\n1  1.19\n\n\n\n\nRatio is close to 1 — equal variance assumption is reasonable ✓\n\n\n\n\n\nTip\n\n\nIf the equal variance assumption is seriously violated, Welch’s ANOVA (oneway.test(..., var.equal = FALSE)) is a robust alternative that does not require equal variances."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-2-set-significance-level",
+    "href": "lessons/19_anova/19_anova.html#step-2-set-significance-level",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 2: Set significance level",
+    "text": "Step 2: Set significance level\n\n\nWe use the conventional significance level:\n\\[\\alpha = 0.05\\]"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-3-state-hypotheses",
+    "href": "lessons/19_anova/19_anova.html#step-3-state-hypotheses",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 3: State hypotheses",
+    "text": "Step 3: State hypotheses\n\n\n\n\n\nThe ANOVA hypotheses — get these right!\n\n\nThe null hypothesis for ANOVA is that all group means are equal:\n\\[H_0: \\mu_{CC} = \\mu_{CT} = \\mu_{TT}\\]\nThe alternative is that at least one pair of means differs:\n\\[H_A: \\text{At least one pair } \\mu_i \\neq \\mu_j \\text{ for } i \\neq j\\]\n\n\n\n\n\n\n\n\nCommon mistake\n\n\nStudents often write \\(H_A\\) as “all means are different.” That is wrong!\n\\(H_A\\) only requires that at least one group differs from at least one other. It could be that two groups are identical and a third is different — that still counts as \\(H_A\\)."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-3-state-hypotheses-in-words",
+    "href": "lessons/19_anova/19_anova.html#step-3-state-hypotheses-in-words",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 3: State hypotheses — in words",
+    "text": "Step 3: State hypotheses — in words\n\n\n\n\nIn symbols:\n\\[H_0: \\mu_{CC} = \\mu_{CT} = \\mu_{TT}\\]\n\\[H_A: \\text{At least one pair } \\mu_i \\neq \\mu_j\\]\n\n\n\nIn words:\n\\(H_0\\): The mean percent change in non-dominant arm strength is the same across all three ACTN3 genotype groups.\n\\(H_A\\): The mean percent change in non-dominant arm strength differs for at least one pair of ACTN3 genotype groups."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#steps-45-calculate-f-statistic-and-p-value",
+    "href": "lessons/19_anova/19_anova.html#steps-45-calculate-f-statistic-and-p-value",
+    "title": "Comparing Means Across Groups",
+    "section": "Steps 4–5: Calculate F-statistic and p-value",
+    "text": "Steps 4–5: Calculate F-statistic and p-value\n\n\n\n# Fit the ANOVA model\nfamuss_aov &lt;- aov(ndrm.ch ~ actn3.r577x, data = famuss)\n\n# View the ANOVA table\nsummary(famuss_aov)\n\n             Df Sum Sq Mean Sq F value Pr(&gt;F)  \nactn3.r577x   2   7043    3522   3.231 0.0402 *\nResiduals   592 645293    1090                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\n\n\nReading the output\n\n\n\nactn3.r577x row = between-group (model) variability\nResiduals row = within-group (error) variability\nF value = MSG / MSE\nPr(&gt;F) = p-value (upper tail of F-distribution)"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#steps-45-tidy-output-with-broom",
+    "href": "lessons/19_anova/19_anova.html#steps-45-tidy-output-with-broom",
+    "title": "Comparing Means Across Groups",
+    "section": "Steps 4–5: Tidy output with broom",
+    "text": "Steps 4–5: Tidy output with broom\n\n\nFor inline reporting or downstream use, tidy() from the broom package converts the ANOVA table to a data frame:\n\nfamuss_aov %&gt;%\n  tidy()\n\n# A tibble: 2 × 6\n  term           df   sumsq meansq statistic p.value\n  &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n1 actn3.r577x     2   7043.  3522.      3.23  0.0402\n2 Residuals     592 645293.  1090.     NA    NA     \n\n\n\n\nPull the p-value for inline reporting:\n\nfamuss_aov %&gt;%\n  tidy() %&gt;%\n  filter(term == \"actn3.r577x\") %&gt;%\n  pull(p.value) %&gt;%    # From dplyr package. Extract (\"pull\") a single column \n  round(4)\n\n[1] 0.0402"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-6-conclusion",
+    "href": "lessons/19_anova/19_anova.html#step-6-conclusion",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 6: Conclusion",
+    "text": "Step 6: Conclusion\n\n\nRecall our hypotheses:\n\\[H_0: \\mu_{CC} = \\mu_{CT} = \\mu_{TT} \\qquad \\text{vs.} \\qquad H_A: \\text{At least one mean differs from the others}\\]\n\n\nWith \\(F\\) = 3.23, \\(df\\) = (2, 592), p = 0.040, and \\(\\alpha = 0.05\\): We reject \\(H_0\\).\n\n\n\n\n\nConclusion\n\n\nThere is sufficient evidence that the mean percent change in non-dominant arm strength differs for at least one pair of ACTN3 genotype groups (\\(F\\) = 3.23, \\(df\\) = 2, 592, p = 0.040).\nDescriptively, mean arm strength change was 48.9% (SD = 30.0%) for CC, 53.2% (SD = 33.2%) for CT, and 58.1% (SD = 35.7%) for TT."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt",
+    "href": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt",
+    "title": "Comparing Means Across Groups",
+    "section": "What ANOVA tells us — and what it doesn’t",
+    "text": "What ANOVA tells us — and what it doesn’t\n\n\n\n\n\nA critical limitation\n\n\nANOVA tells us that at least one pair of means differs. It does not tell us:\n\nWhich specific groups are different from which\nHow many pairs differ\nThe direction or magnitude of the differences\n\nAfter a significant ANOVA, we need post-hoc tests to identify where the differences lie."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#the-multiple-comparisons-problem-revisited",
+    "href": "lessons/19_anova/19_anova.html#the-multiple-comparisons-problem-revisited",
+    "title": "Comparing Means Across Groups",
+    "section": "The multiple comparisons problem, revisited",
+    "text": "The multiple comparisons problem, revisited\n\n\nAfter a significant ANOVA, we want to test all pairwise comparisons. With \\(k = 3\\) groups:\n\\[{3 \\choose 2} = 3 \\text{ pairwise tests: CC vs. CT, CC vs. TT, CT vs. TT}\\]\n\n\nIf we just ran three regular t-tests at \\(\\alpha = 0.05\\):\n\\[P(\\text{at least one false positive}) = 1 - (0.95)^3 = 0.143\\]\n\n\nPost-hoc methods control this inflated error rate through different strategies — each with different tradeoffs between Type I and Type II error."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#post-hoc-comparisons-with-rstatix",
+    "href": "lessons/19_anova/19_anova.html#post-hoc-comparisons-with-rstatix",
+    "title": "Comparing Means Across Groups",
+    "section": "Post-hoc comparisons with rstatix",
+    "text": "Post-hoc comparisons with rstatix\n\n\nThe rstatix package provides tidy post-hoc testing:\n\n\n\n# Tukey HSD — controls family-wise error rate\nfamuss %&gt;%\n  tukey_hsd(ndrm.ch ~ actn3.r577x)\n\n# A tibble: 3 × 9\n  term  group1 group2 null.value estimate conf.low conf.high  p.adj p.adj.signif\n* &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       \n1 actn… CC     CT              0     4.35   -3.25       12.0 0.371  ns          \n2 actn… CC     TT              0     9.19    0.695      17.7 0.0303 *           \n3 actn… CT     TT              0     4.83   -2.94       12.6 0.31   ns"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#tukeys-honest-significant-difference-hsd",
+    "href": "lessons/19_anova/19_anova.html#tukeys-honest-significant-difference-hsd",
+    "title": "Comparing Means Across Groups",
+    "section": "Tukey’s Honest Significant Difference (HSD)",
+    "text": "Tukey’s Honest Significant Difference (HSD)\n\n\n\n\nWhat it does:\n\nControls the family-wise error rate (FWER) — the probability of making any false positive across all comparisons\nCompares all pairwise differences simultaneously\nReports both adjusted p-values and confidence intervals for each difference\nThe standard choice for ANOVA post-hoc testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhich comparison is driving the significant ANOVA result?"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#bonferroni-correction",
+    "href": "lessons/19_anova/19_anova.html#bonferroni-correction",
+    "title": "Comparing Means Across Groups",
+    "section": "Bonferroni correction",
+    "text": "Bonferroni correction\nStrategy: Divide \\(\\alpha\\) by the number of tests: \\(\\alpha_{Bonf} = \\alpha / m\\)\nEquivalently, multiply each p-value by \\(m\\) and compare to \\(\\alpha\\).\n\n# Bonferroni correction\nfamuss %&gt;%\n  rstatix::pairwise_t_test(ndrm.ch ~ actn3.r577x,\n                           p.adjust.method = \"bonferroni\")\n\n# A tibble: 3 × 9\n  .y.     group1 group2    n1    n2      p p.signif  p.adj p.adj.signif\n* &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       \n1 ndrm.ch CC     CT       173   261 0.179  ns       0.537  ns          \n2 ndrm.ch CC     TT       173   161 0.0113 *        0.0338 *           \n3 ndrm.ch CT     TT       261   161 0.144  ns       0.433  ns          \n\n\n\n\n\n\n\nBonferroni: pros and cons\n\n\nPro: Simple, transparent, very conservative (strong Type I error control)\nCon: Loses power quickly as the number of comparisons grows — becomes hard to detect real differences\nBonferroni is best when you have a small number of a priori comparisons you care about."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#false-discovery-rate-fdr",
+    "href": "lessons/19_anova/19_anova.html#false-discovery-rate-fdr",
+    "title": "Comparing Means Across Groups",
+    "section": "False Discovery Rate (FDR)",
+    "text": "False Discovery Rate (FDR)\n\n\nStrategy: Control the expected proportion of false positives among significant results, rather than the probability of any false positive.\n\n# Benjamini-Hochberg FDR\nfamuss %&gt;%\n  rstatix::pairwise_t_test(ndrm.ch ~ actn3.r577x,\n                           p.adjust.method = \"fdr\")\n\n# A tibble: 3 × 9\n  .y.     group1 group2    n1    n2      p p.signif  p.adj p.adj.signif\n* &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;       \n1 ndrm.ch CC     CT       173   261 0.179  ns       0.179  ns          \n2 ndrm.ch CC     TT       173   161 0.0113 *        0.0338 *           \n3 ndrm.ch CT     TT       261   161 0.144  ns       0.179  ns          \n\n\n\n\n\n\n\nFDR: pros and cons\n\n\nPro: More powerful than Bonferroni or Tukey when there are many comparisons — allows more discoveries\nCon: Some false positives are tolerated (you control the rate, not the occurrence)\nFDR is especially popular in genomics and omics where hundreds or thousands of tests are run simultaneously."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#comparing-the-three-approaches",
+    "href": "lessons/19_anova/19_anova.html#comparing-the-three-approaches",
+    "title": "Comparing Means Across Groups",
+    "section": "Comparing the three approaches",
+    "text": "Comparing the three approaches\n\n\n\n\n\n\n\n\n\n\n\nMethod\nControls\nBest used when\nConservativeness\n\n\n\n\nTukey HSD\nFamily-wise error rate\nPost-ANOVA pairwise comparisons\nModerate\n\n\nBonferroni\nFamily-wise error rate\nFew a priori comparisons\nHigh\n\n\nFDR\nFalse discovery rate\nMany simultaneous tests\nLow\n\n\n\n\n\n\n\n\nRule of thumb for BMSC 620\n\n\nFor ANOVA post-hoc testing in a standard biomedical study: Tukey HSD is your default.\nUse Bonferroni when you have a small number of planned comparisons stated before looking at the data.\nUse FDR when you’re doing many tests (e.g., comparing gene expression across dozens of groups)."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results",
+    "href": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results",
+    "title": "Comparing Means Across Groups",
+    "section": "Visualizing post-hoc results",
+    "text": "Visualizing post-hoc results\n\n# Add significance brackets to a boxplot using rstatix + ggpubr\nlibrary(ggpubr)\n\ntukey_results &lt;- famuss %&gt;%\n  tukey_hsd(ndrm.ch ~ actn3.r577x) %&gt;%\n  add_xy_position(x = \"actn3.r577x\")\n\nggboxplot(famuss, x = \"actn3.r577x\", y = \"ndrm.ch\",\n          color = \"actn3.r577x\",\n          palette = c(\"#E69F00\", \"#0072B2\", \"#009E73\"),\n          add = \"jitter\", add.params = list(alpha = 0.3)) +\n  stat_pvalue_manual(tukey_results, hide.ns = TRUE) +\n  labs(title = \"Percent change in arm strength by ACTN3 genotype\",\n       subtitle = \"Tukey HSD post-hoc comparisons (significant pairs shown)\",\n       x = \"ACTN3 genotype\",\n       y = \"Percent change in arm strength (%)\",\n       color = \"Genotype\")"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#putting-it-all-together-full-reporting",
+    "href": "lessons/19_anova/19_anova.html#putting-it-all-together-full-reporting",
+    "title": "Comparing Means Across Groups",
+    "section": "Putting it all together: full reporting",
+    "text": "Putting it all together: full reporting\n\n\nA complete report of this analysis would include:\n\n\n\n\n\nExample write-up\n\n\nMean percent change in non-dominant arm strength was 48.9% (SD = 30.0%) for CC, 53.2% (SD = 33.2%) for CT, and 58.1% (SD = 35.7%) for TT genotype groups. A one-way ANOVA indicated a statistically significant difference in mean arm strength change across genotype groups (\\(F\\)(2, 592) = 3.23, p = 0.040).\nPost-hoc comparisons using Tukey’s HSD revealed that the TT group had significantly greater mean arm strength change than the CC group (difference = 9.2 percentage points, 95% CI: 0.7 to 17.7, adjusted p = 0.030). No significant differences were found between the CC and CT groups (adjusted p = 0.371) or the CT and TT groups (adjusted p = 0.310).\n\n\n\n\n\nNote what’s included: group-level descriptive statistics, the F-statistic with both df values, the p-value, and specific post-hoc results with effect sizes and CIs."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#anova-summary",
+    "href": "lessons/19_anova/19_anova.html#anova-summary",
+    "title": "Comparing Means Across Groups",
+    "section": "ANOVA summary",
+    "text": "ANOVA summary\n\n\nWhen to use ANOVA:\n\nContinuous outcome\n3 or more independent groups\nGroups are independent of each other\n\n\n\nThe hypotheses:\n\\[H_0: \\mu_1 = \\mu_2 = \\cdots = \\mu_k\\]  \\[H_A: \\text{At least one mean differs from the others}\\]\n\n\nKey assumption to check:\n\nSimilar within-group SDs (\\(SD_{max} / SD_{min}\\) ratio &lt; 2)\n\\(n \\geq 30\\) per group or approximate normality\n\n\n\n\nR workflow:\n\n# 1. Check assumptions\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(n = n(), sd = sd(ndrm.ch))\n\n# 2. Fit ANOVA\nfamuss_aov &lt;- aov(ndrm.ch ~ actn3.r577x,\n                  data = famuss)\nsummary(famuss_aov)\n\n# 3. Post-hoc (if significant)\nfamuss %&gt;%\n  tukey_hsd(ndrm.ch ~ actn3.r577x)\n\nPost-hoc methods:\n\n\n\nMethod\nUse when\n\n\n\n\ntukey_hsd()\nDefault for ANOVA\n\n\nrstatix::pairwise_t_test\n\n\n\np.adjust = \"bonferroni\"\nFew planned comparisons\n\n\np.adjust = \"fdr\"\nMany tests"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#connecting-to-whats-next",
+    "href": "lessons/19_anova/19_anova.html#connecting-to-whats-next",
+    "title": "Comparing Means Across Groups",
+    "section": "Connecting to what’s next",
+    "text": "Connecting to what’s next\n\n\nLesson 17 (Monday): Nonparametric tests\n\nWhat if the normality assumption is violated and sample sizes are small?\nMann-Whitney U, Kruskal-Wallis — the nonparametric analogues to the t-test and ANOVA\n\n\n\nLesson 18 (Wednesday): Correlation and Simple Linear Regression\n\nWhat if both variables are continuous?\nExtending beyond group comparisons to relationships between variables\nANOVA is actually a special case of regression — we’ll see the connection\n\n\n\n\n\n\nThe big picture\n\n\nANOVA, t-tests, and linear regression are all part of the same family. The F-test in ANOVA and the t-test are mathematically related — in fact, for \\(k = 2\\) groups, \\(F = t^2\\).\n\n\n\n\n\n\nBMSC 620 | ANOVA"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#mean-arms-strength-by-genotype-group",
+    "href": "lessons/19_anova/19_anova.html#mean-arms-strength-by-genotype-group",
+    "title": "Comparing Means Across Groups",
+    "section": "Mean arms strength by genotype group",
+    "text": "Mean arms strength by genotype group\n\n\n\nlibrary(oibiostat)\ndata(\"famuss\")\n\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(n = n(),\n            mean = round(mean(ndrm.ch), 1),\n            sd   = round(sd(ndrm.ch), 1))\n\n# A tibble: 3 × 4\n  actn3.r577x     n  mean    sd\n  &lt;fct&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 CC            173  48.9  30  \n2 CT            261  53.2  33.2\n3 TT            161  58.1  35.7"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-1-state-hypotheses",
+    "href": "lessons/19_anova/19_anova.html#step-1-state-hypotheses",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 1: State hypotheses",
+    "text": "Step 1: State hypotheses\n\n\n\n\n\nThe ANOVA hypotheses\n\n\nThe null hypothesis for ANOVA is that all group means are equal:\n\\[H_0: \\mu_{CC} = \\mu_{CT} = \\mu_{TT}\\]\nThe alternative is that at least one pair of means differs:\n\n\\[H_A: \\text{At least one mean differs from the others}\\]\n\n\n\n\n\n\n\n\nCommon mistake\n\n\nPeople often write \\(H_A\\) as “all means are different.” That is wrong!\n\\(H_A\\) only requires that at least one group differs from at least one other. It could be that two groups are identical and a third is different — that still counts as \\(H_A\\)."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-1-state-hypotheses-in-words",
+    "href": "lessons/19_anova/19_anova.html#step-1-state-hypotheses-in-words",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 1: State hypotheses — in words",
+    "text": "Step 1: State hypotheses — in words\n\n\n\n\nIn symbols:\n\n\n\\[H_0: \\mu_{CC} = \\mu_{CT} = \\mu_{TT}\\]\n\n\\[H_A: \\text{At least one mean differs from the others}\\]\n\n\n\nIn words:\n\n\n\\(H_0\\): The mean percent change in non-dominant arm strength is the same across all three ACTN3 genotype groups.\n\\(H_A\\): The mean percent change in non-dominant arm strength differs for at least one pair of ACTN3 genotype groups."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-3-check-assumptions",
+    "href": "lessons/19_anova/19_anova.html#step-3-check-assumptions",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 3: Check assumptions",
+    "text": "Step 3: Check assumptions\n\n\nThe F-statistic follows an F-distribution when these conditions hold:\n\n\n1. Independence: Observations within and across groups are independent\n\nMet by design in FAMuSS (different participants in each group)\n\n\n\n2. Normality within groups (or large samples):\n\nEach group should be approximately normally distributed, OR \\(n_i \\geq 30\\) per group\n\n\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(n = n())\n\n# A tibble: 3 × 2\n  actn3.r577x     n\n  &lt;fct&gt;       &lt;int&gt;\n1 CC            173\n2 CT            261\n3 TT            161\n\n\nAll groups have \\(n &gt; 30\\) ✓"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#step-3-check-assumptions-continued",
+    "href": "lessons/19_anova/19_anova.html#step-3-check-assumptions-continued",
+    "title": "Comparing Means Across Groups",
+    "section": "Step 3: Check assumptions (continued)",
+    "text": "Step 3: Check assumptions (continued)\n\n\n3. Equal variance across groups (homoscedasticity):\n\nWithin-group variability should be similar across groups\nRule of thumb: violated if \\(\\max(s_i) / \\min(s_i) &gt; 2\\)\n\n\nfamuss %&gt;%\n  group_by(actn3.r577x) %&gt;%\n  summarise(sd = sd(ndrm.ch)) %&gt;%\n  summarise(ratio = max(sd) / min(sd))\n\n# A tibble: 1 × 1\n  ratio\n  &lt;dbl&gt;\n1  1.19\n\n\n\n\nRatio is close to 1 — equal variance assumption is reasonable ✓\n\n\n\nTip\n\n\nIf the equal variance assumption is seriously violated, Welch’s ANOVA (oneway.test(..., var.equal = FALSE)) is a robust alternative that does not require equal variances."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt-12",
+    "href": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt-12",
+    "title": "Comparing Means Across Groups",
+    "section": "What ANOVA tells us — and what it doesn’t (1/2)",
+    "text": "What ANOVA tells us — and what it doesn’t (1/2)"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt-22",
+    "href": "lessons/19_anova/19_anova.html#what-anova-tells-us-and-what-it-doesnt-22",
+    "title": "Comparing Means Across Groups",
+    "section": "What ANOVA tells us — and what it doesn’t (2/2)",
+    "text": "What ANOVA tells us — and what it doesn’t (2/2)\n\n\n\n\n\nA critical limitation\n\n\nANOVA tells us that at least one pair of means differs. It does not tell us:\n\nWhich specific groups are different from which\nHow many pairs differ\nThe direction or magnitude of the differences\n\nAfter a significant ANOVA, we need post-hoc tests to identify where the differences lie."
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-12",
+    "href": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-12",
+    "title": "Comparing Means Across Groups",
+    "section": "Visualizing post-hoc results (1/2)",
+    "text": "Visualizing post-hoc results (1/2)\n\n# Add significance brackets to a boxplot using rstatix + ggpubr\nlibrary(ggpubr)\n\ntukey_results &lt;- famuss %&gt;%\n  rstatix::tukey_hsd(ndrm.ch ~ actn3.r577x) %&gt;%\n  rstatix::add_xy_position(x = \"actn3.r577x\")\n\nggpubr::ggboxplot(famuss, x = \"actn3.r577x\", y = \"ndrm.ch\",\n                  color = \"actn3.r577x\",\n                  width = 0.5, \n                  palette = c(\"#E69F00\", \"#0072B2\", \"#009E73\"),\n                  add = \"jitter\", add.params = list(alpha = 0.3)) +\n  ggpubr::stat_pvalue_manual(tukey_results, hide.ns = TRUE) +\n  labs(title = \"Percent change in arm strength by ACTN3 genotype\",\n       subtitle = \"Tukey HSD post-hoc comparisons (significant pairs shown)\",\n       x = \"ACTN3 genotype\",\n       y = \"Percent change in arm strength (%)\",\n       color = \"Genotype\")"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-12-1",
+    "href": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-12-1",
+    "title": "Comparing Means Across Groups",
+    "section": "Visualizing post-hoc results (1/2)",
+    "text": "Visualizing post-hoc results (1/2)"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-22",
+    "href": "lessons/19_anova/19_anova.html#visualizing-post-hoc-results-22",
+    "title": "Comparing Means Across Groups",
+    "section": "Visualizing post-hoc results (2/2)",
+    "text": "Visualizing post-hoc results (2/2)"
+  },
+  {
+    "objectID": "lessons/19_anova/19_anova.html#motivating-example-arm-strength-and-genotype",
+    "href": "lessons/19_anova/19_anova.html#motivating-example-arm-strength-and-genotype",
+    "title": "Comparing Means Across Groups",
+    "section": "Motivating example: arm strength and genotype",
+    "text": "Motivating example: arm strength and genotype\n\n\n\n\n\nThe FAMuSS Study\n\n\nThe Functional SNPs Associated with Muscle Size and Strength (FAMuSS) study investigated whether genetic variation is associated with exercise response.\n\nParticipants: ~600 young adults completed a resistance training program\nGenetic variable: ACTN3 genotype at position R577X (CC, CT, or TT)\nOutcome: Percent change in non-dominant arm strength after training\n\nQuestion: Is mean percent change in arm strength different across the three genotype groups?"
   }
 ]

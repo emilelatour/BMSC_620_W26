@@ -1,0 +1,1197 @@
+---
+title: "Comparing Means Across Groups"
+subtitle: "Analysis of Variance (ANOVA)"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w9d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | ANOVA"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+
+knitr::opts_chunk$set(dpi = 300)
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(janitor)
+library(gt)
+
+library(lamisc)
+library(laviz)
+
+data("famuss")
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 14))
+
+set.seed(620)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Explain why we cannot just run many pairwise t-tests when comparing 3 or more group means
+2. State the null and alternative hypotheses for a one-way ANOVA
+3. Interpret the components of an ANOVA table (SS, MS, F-statistic)
+4. Check the assumptions required for ANOVA
+5. Run a one-way ANOVA in R and interpret the output
+6. Explain the multiple comparisons problem and why post-hoc testing is needed
+7. Conduct and interpret Tukey HSD, Bonferroni, and FDR post-hoc tests in R
+
+## Roadmap for Today
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: Why Not Just Use More t-Tests?**
+
+- Extending our toolkit beyond two groups
+- The multiple comparisons problem
+- Introducing ANOVA
+
+**Part 2: The Logic of ANOVA**
+
+- The research question and data
+- Between-group vs. within-group variability
+- The F-statistic and F-distribution
+- Reading the ANOVA table
+:::
+
+::: {.column width="50%"}
+**Part 3: Running ANOVA in R**
+
+- Checking assumptions
+- The six-step hypothesis test
+- Running `aov()` in R
+- Writing a complete conclusion
+
+**Part 4: Post-Hoc Comparisons**
+
+- Which groups are actually different?
+- Tukey's HSD
+- Bonferroni correction
+- False Discovery Rate (FDR)
+:::
+:::::
+
+# Part 1: Why Not Just Use More t-Tests?
+
+## Where we've been
+
+\
+
+So far our inference toolkit for **numerical outcomes** has been:
+
+\
+
+| Lesson | Test | Groups |
+|---|---|:---:|
+| 9 | One-sample t-test | 1 |
+| 10 | Paired t-test | 2 (matched) |
+| 11 | Two-sample t-test | 2 (independent) |
+
+\
+
+**Today's question:** What happens when we want to compare **3 or more** groups?
+
+\
+
+::: {.callout-note icon="false"}
+### The motivating question
+
+A genetics study wants to know: does ACTN3 genotype (CC, CT, or TT) affect how much arm strength changes after an exercise intervention?
+
+That's **three groups** — we can't use a two-sample t-test anymore.
+:::
+
+## Why not just run three t-tests?
+
+\
+
+With 3 groups (CC, CT, TT), we could run every possible pairwise comparison:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**3 tests:**
+
+- CC vs. CT
+- CC vs. TT
+- CT vs. TT
+
+\
+
+Each test has $\alpha = 0.05$ probability of a Type I error.
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**The problem:** With multiple tests, errors accumulate.
+
+$$P(\text{at least one false positive}) = 1 - (1-\alpha)^m$$
+
+For $m = 3$ tests at $\alpha = 0.05$:
+
+$$1 - (0.95)^3 = 0.143$$
+
+That's a **14% chance** of at least one false positive — not 5%!
+
+:::
+:::::
+
+\
+
+<!-- the (1-\alpha)^m formula assumes independent tests, which pairwise t-tests on overlapping groups aren't — so the actual inflation can be even worse -->
+
+::: {.callout-important icon="false"}
+### The multiple comparisons problem
+
+Running many tests inflates the Type I error rate beyond the nominal $\alpha$. We need a method that tests all groups simultaneously — that's ANOVA.
+:::
+
+## The multiple comparisons problem grows fast
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 5
+#| fig-align: center
+
+m_groups <- 4
+n_tests <- choose(4, 2)
+p_fp <- 1 - (0.95)^m_groups
+p_fp <- lamisc::fmt_pct(p_fp, accuracy = 1.0)
+
+tibble(
+  m = 1:20,
+  p_error = 1 - (0.95)^m,
+  k_groups = round((1 + sqrt(1 + 8*m)) / 2)
+) %>%
+  ggplot(aes(x = m, y = p_error)) +
+  geom_line(linewidth = 1.5, color = "#0072B2") +
+  geom_point(size = 3, color = "#0072B2") +
+  geom_hline(yintercept = 0.05, linetype = "dashed",
+             color = "#E69F00", linewidth = 1) +
+  annotate("text", x = 15, y = 0.12,
+           label = "Target α = 0.05", color = "#E69F00", size = 5) +
+  scale_y_continuous(labels = scales::percent_format(),
+                     limits = c(0, 1)) +
+  labs(
+    title = "P(at least one false positive) inflates with number of tests",
+    subtitle = "Each individual test uses α = 0.05",
+    x = "Number of pairwise tests (m)",
+    y = "P(at least one false positive)"
+  )
+  
+```
+
+**If we had `r m_groups` groups that's `r n_tests` tests → `r p_fp` chance of a false positive. ANOVA solves this by testing all groups in a single test.**
+
+# Part 2: The Logic of ANOVA
+
+## Motivating example: arm strength and genotype
+
+\
+
+::: {.callout-note icon="false"}
+### The FAMuSS Study
+
+The **Functional SNPs Associated with Muscle Size and Strength** (FAMuSS) study investigated whether genetic variation is associated with exercise response.
+
+- **Participants:** ~600 young adults completed a resistance training program
+- **Genetic variable:** ACTN3 genotype at position R577X (CC, CT, or TT)
+- **Outcome:** Percent change in non-dominant arm strength after training
+
+**Question:** Is mean percent change in arm strength different across the three genotype groups?
+:::
+
+## Mean arms strength by genotype group
+
+\
+
+
+```{r}
+library(oibiostat)
+data("famuss")
+
+famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(n = n(),
+            mean = round(mean(ndrm.ch), 1),
+            sd   = round(sd(ndrm.ch), 1))
+```
+
+## Visualizing the three groups
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 5
+#| fig-align: center
+
+ggplot(famuss, aes(x = actn3.r577x, y = ndrm.ch,
+                   color = actn3.r577x, fill = actn3.r577x)) +
+  geom_boxplot(alpha = 0.1, 
+               outlier.shape = NA, 
+               width = 0.4) +
+  geom_jitter(alpha = 0.5, width = 0.15, size = 1.5) +
+  stat_summary(fun = mean, geom = "point",
+               shape = 18, size = 5, color = "black") +
+  geom_hline(aes(yintercept = mean(ndrm.ch)),
+             linetype = "dashed", linewidth = 0.8,
+             color = "grey40") +
+  annotate("text", x = 3.7, y = mean(famuss$ndrm.ch) + 8,
+           label = "Grand mean", hjust = 1,
+           color = "grey40", size = 4.5) +
+  scale_color_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                     guide = "none") +
+  scale_fill_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                    guide = "none") +
+  labs(
+    title = "Percent change in non-dominant arm strength by ACTN3 genotype",
+    x = "ACTN3 genotype",
+    y = "Percent change in arm strength (%)"
+  )
+```
+
+The diamond ◆ marks the group mean. The dashed line is the grand mean across all participants. Do the groups look different enough to conclude a real effect?
+
+## The key question ANOVA asks
+
+\
+
+Whether or not group means appear different depends on **two things**:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**1. How far apart are the group means?**
+
+If the group means are close to the grand mean → not much going on.
+
+If the group means are far from the grand mean → evidence of a real difference.
+
+This is **between-group variability**.
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**2. How much spread is there within each group?**
+
+If observations are tightly clustered around their group mean → easy to tell groups apart.
+
+If observations are widely scattered → hard to tell groups apart even if means differ.
+
+This is **within-group variability**.
+
+:::
+:::::
+
+\
+
+::: {.callout-tip icon="false"}
+### ANOVA's insight
+
+- ANOVA compares these two sources of variability. 
+- If between-group variability is large *relative to* within-group variability, that's evidence that the group means are genuinely different.
+:::
+
+## Three sources of variability — visually
+
+\
+
+```{r}
+#| echo: false
+#| fig-width: 14
+#| fig-height: 4.5
+#| fig-align: center
+
+grand_mean <- mean(famuss$ndrm.ch)
+
+p_total <- ggplot(famuss, aes(x = actn3.r577x, y = ndrm.ch,
+                              color = actn3.r577x)) +
+  geom_jitter(alpha = 0.5, width = 0.15, size = 1.5) +
+  geom_hline(yintercept = grand_mean, linetype = "dashed",
+             linewidth = 1, color = "grey30") +
+  scale_color_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                     guide = "none") +
+  labs(title = "Total variability (SST)",
+       subtitle = "Each point vs. grand mean",
+       x = "Genotype", y = "% change") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+group_means <- famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(grp_mean = mean(ndrm.ch))
+
+famuss_aug <- famuss %>%
+  left_join(group_means, by = "actn3.r577x")
+
+p_between <- ggplot(famuss_aug, aes(x = actn3.r577x,
+                                    color = actn3.r577x)) +
+  geom_jitter(aes(y = ndrm.ch), alpha = 0.1, width = 0.15, size = 1.5) +
+  geom_hline(yintercept = grand_mean, linetype = "dashed",
+             linewidth = 1, color = "grey30") +
+  geom_point(aes(y = grp_mean), shape = 18, size = 6, color = "black") +
+  scale_color_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                     guide = "none") +
+  labs(title = "Between-group variability (SSG)",
+       subtitle = "Group means vs. grand mean",
+       x = "Genotype", y = "% change") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+p_within <- ggplot(famuss_aug, aes(x = actn3.r577x, y = ndrm.ch,
+                                    color = actn3.r577x)) +
+  geom_jitter(alpha = 0.5, width = 0.15, size = 1.5) +
+  geom_point(aes(y = grp_mean), shape = 18, size = 6, color = "black") +
+  scale_color_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                     guide = "none") +
+  labs(title = "Within-group variability (SSE)",
+       subtitle = "Each point vs. its group mean",
+       x = "Genotype", y = "% change") +
+  theme(plot.title = element_text(size = 14, face = "bold"))
+
+library(patchwork)
+p_total + p_between + p_within
+```
+
+$$\underbrace{SST}_{\text{Total}} = \underbrace{SSG}_{\text{Between groups}} + \underbrace{SSE}_{\text{Within groups}}$$
+
+## The ANOVA table
+
+\
+
+ANOVA organizes the variability into a table. $k =$ the number of groups and $N =$ the total number of observations across $k$ groups:
+
+\
+
+::: {style="width: 80%; margin: 0 auto;"}
+| Source | SS | df | MS | F |
+|---|---|---|---|---|
+| Between groups (Model) | SSG | $k-1$ | $MSG = SSG/(k-1)$ | $F = MSG/MSE$ |
+| Within groups (Error) | SSE | $N-k$ | $MSE = SSE/(N-k)$ | |
+| Total | SST | $N-1$ | | |
+:::
+
+\
+
+::: {.callout-note icon="false"}
+### Mean Squares: the key step
+
+Dividing each SS by its degrees of freedom converts sums of squares into **mean squares** — averages of squared deviations. This puts between and within variability on the same scale so we can compare them with a ratio.
+
+$$F = \frac{MSG}{MSE} = \frac{\text{between-group variability}}{\text{within-group variability}}$$
+:::
+
+## The F-statistic
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+$F = \frac{MSG}{MSE}$
+
+\
+
+**When $H_0$ is true** (all means equal):
+
+- Between-group variability ≈ within-group variability
+- $F \approx 1$
+
+**When $H_A$ is true** (at least one mean differs):
+
+- Between-group variability > within-group variability
+- $F > 1$, potentially much larger
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5
+
+# ggplot(data.frame(x = c(0, 6)), aes(x = x)) +
+#   stat_function(fun = df, args = list(df1 = 2, df2 = 592),
+#                 linewidth = 1.5, color = "#0072B2") +
+#   geom_vline(xintercept = 3.2, color = "#E69F00",
+#              linewidth = 1.2, linetype = "solid") +
+#   geom_area(stat = "function", fun = df,
+#             args = list(df1 = 2, df2 = 592),
+#             fill = "#E69F00", alpha = 0.3,
+#             xlim = c(3.2, 6)) +
+#   annotate("text", x = 3.5, y = 0.25,
+#            label = "F-statistic", hjust = 0,
+#            color = "#E69F00", size = 5) +
+#   annotate("text", x = 4.2, y = 0.05,
+#            label = "p-value", hjust = 0,
+#            color = "#E69F00", size = 5) +
+#   labs(title = "F-distribution (df1 = 2, df2 = 592)",
+#        subtitle = "p-value is always the upper tail",
+#        x = "F", y = "Density")
+
+
+df1 <- length(unique(famuss$actn3.r577x)) - 1
+df2 <- dim(famuss)[1] - length(unique(famuss$actn3.r577x))
+
+ggplot(data.frame(x = c(0, 6)), aes(x = x)) +
+  stat_function(fun = df, args = list(df1 = df1, df2 = df2),
+                linewidth = 1.5, color = "#0072B2") +
+  geom_vline(xintercept = 3.2, color = "#E69F00",
+             linewidth = 1.2, linetype = "solid") +
+  geom_area(stat = "function", fun = df,
+            args = list(df1 = 2, df2 = 592),
+            fill = "#E69F00", alpha = 0.5,
+            xlim = c(3.2, 6)) +
+  # Outline the shaded region so it's visible even when thin
+  stat_function(fun = df, args = list(df1 = df1, df2 = df2),
+                xlim = c(3.2, 6),
+                linewidth = 1.2, color = "#E69F00") +
+  annotate("text", x = 3.3, y = 0.3,
+           label = "F-statistic", hjust = 0,
+           color = "#E69F00", size = 5) +
+  annotate("text", x = 4.275, y = 0.11,
+           label = "p-value", hjust = 0,
+           color = "#E69F00", size = 5) +
+  annotate("segment", x = 4.25, y = 0.10,
+           xend = 3.8, yend = 0.0375,
+           curvature = -0.3,
+           arrow = arrow(length = unit(0.2, "cm")),
+           color = "#E69F00", 
+           linewidth = 0.8) +
+  labs(title = glue::glue("F-distribution (df1 = {df1}, df2 = {df2})"),
+       subtitle = "p-value is always the upper tail",
+       x = "F", y = "Density") + 
+  scale_y_continuous(expand = c(0, 0))
+```
+
+
+
+:::
+:::::
+
+
+::: {.callout-important icon="false"}
+The p-value for an F-test is **always the upper tail** — we only care about F being surprisingly large.
+:::
+
+# Part 3: Running ANOVA in R
+
+## Step 1: State hypotheses
+
+\
+
+::: {.callout-important icon="false"}
+### The ANOVA hypotheses
+
+The null hypothesis for ANOVA is that **all** group means are equal:
+
+$$H_0: \mu_{CC} = \mu_{CT} = \mu_{TT}$$
+
+The alternative is that **at least one pair** of means differs:
+
+<!-- $$H_A: \text{At least one pair } \mu_i \neq \mu_j \text{ for } i \neq j$$ -->
+$$H_A: \text{At least one mean differs from the others}$$
+:::
+
+\
+
+::: {.callout-warning icon="false"}
+### Common mistake
+
+People often write $H_A$ as "all means are different." That is **wrong!**
+
+$H_A$ only requires that *at least one* group differs from at least one other. It could be that two groups are identical and a third is different — that still counts as $H_A$.
+:::
+
+## Step 1: State hypotheses — in words
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**In symbols:**
+
+\
+
+
+$$H_0: \mu_{CC} = \mu_{CT} = \mu_{TT}$$
+
+<!-- $$H_A: \text{At least one pair } \mu_i \neq \mu_j$$ -->
+$$H_A: \text{At least one mean differs from the others}$$
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**In words:**
+
+\
+
+
+$H_0$: The mean percent change in non-dominant arm strength is the same across all three ACTN3 genotype groups.
+
+$H_A$: The mean percent change in non-dominant arm strength differs for at least one pair of ACTN3 genotype groups.
+
+:::
+:::::
+
+
+
+## Step 2: Set significance level
+
+\
+
+We use the conventional significance level:
+
+$$\alpha = 0.05$$
+
+## Step 3: Check assumptions
+
+\
+
+The F-statistic follows an F-distribution when these conditions hold:
+
+\
+
+**1. Independence:** Observations within and across groups are independent
+
+- Met by design in FAMuSS (different participants in each group)
+
+\
+
+**2. Normality within groups (or large samples):**
+
+- Each group should be approximately normally distributed, OR $n_i \geq 30$ per group
+
+```{r}
+famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(n = n())
+```
+
+All groups have $n > 30$ ✓
+
+## Step 3: Check assumptions (continued)
+
+\
+
+**3. Equal variance across groups (homoscedasticity):**
+
+- Within-group variability should be similar across groups
+- Rule of thumb: violated if $\max(s_i) / \min(s_i) > 2$
+
+```{r}
+famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(sd = sd(ndrm.ch)) %>%
+  summarise(ratio = max(sd) / min(sd))
+```
+
+\
+
+Ratio is close to 1 — equal variance assumption is reasonable ✓
+
+
+::: {.callout-tip icon="false"}
+If the equal variance assumption is seriously violated, Welch's ANOVA (`oneway.test(..., var.equal = FALSE)`) is a robust alternative that does not require equal variances.
+:::
+
+```{r}
+#| echo: false
+
+# ggplot(data = famuss, 
+#        aes(x = ndrm.ch)) + 
+#   geom_histogram(binwidth = 10, 
+#                  colour = "white") + 
+#   stat_function(fun = dnorm) + 
+#   facet_wrap(~ actn3.r577x)
+# 
+# # Pre-compute normal curves for each group
+# norm_curves <- famuss %>%
+#   group_by(actn3.r577x) %>%
+#   summarise(mean = mean(ndrm.ch), sd = sd(ndrm.ch)) %>%
+#   rowwise() %>%
+#   mutate(x = list(seq(-50, 150, length.out = 200))) %>%
+#   unnest(x) %>%
+#   mutate(y = dnorm(x, mean, sd))
+# 
+# ggplot(famuss, aes(x = ndrm.ch)) +
+#   geom_histogram(aes(y = after_stat(density)),
+#                  binwidth = 10, colour = "white") +
+#   geom_line(data = norm_curves, aes(x = x, y = y),
+#             color = "#E69F00", linewidth = 1.2) +
+#   facet_wrap(~ actn3.r577x)
+```
+
+
+## Steps 4–5: Calculate F-statistic and p-value
+
+\
+
+```{r}
+# Fit the ANOVA model
+famuss_aov <- aov(ndrm.ch ~ actn3.r577x, data = famuss)
+
+# View the ANOVA table
+summary(famuss_aov)
+```
+
+\
+
+::: {.callout-note icon="false"}
+### Reading the output
+
+- `actn3.r577x` row = **between-group** (model) variability
+- `Residuals` row = **within-group** (error) variability
+- `F value` = MSG / MSE
+- `Pr(>F)` = p-value (upper tail of F-distribution)
+:::
+
+## Steps 4–5: Tidy output with `broom`
+
+\
+
+For inline reporting or downstream use, `tidy()` from the `broom` package converts the ANOVA table to a data frame:
+
+```{r}
+famuss_aov %>%
+  tidy()
+```
+
+\
+
+Pull the p-value for inline reporting:
+
+```{r}
+famuss_aov %>%
+  tidy() %>%
+  filter(term == "actn3.r577x") %>%
+  pull(p.value) %>%    # From dplyr package. Extract ("pull") a single column 
+  round(4)
+```
+
+
+
+
+
+## Step 6: Conclusion
+
+\
+
+```{r}
+#| echo: false
+
+p_val <- famuss_aov %>%
+  tidy() %>%
+  filter(term == "actn3.r577x") %>%
+  pull(p.value) %>%
+  scales::pvalue()
+
+
+f_stat <- famuss_aov %>%
+  tidy() %>%
+  filter(term == "actn3.r577x") %>%
+  pull(statistic) %>%
+  scales::number(accuracy = 0.01)
+
+
+dfs <- famuss_aov %>%
+  tidy() %>%
+  pull(df)
+
+
+mean_sd <- famuss %>% 
+  group_by(actn3.r577x) %>% 
+  lamisc::calc_summ_stats(ndrm.ch) %>% 
+  mutate(mean = lamisc::fmt_pct(mean, accuracy = 0.1, scale = 1)) %>% 
+  mutate(sd = lamisc::fmt_pct(sd, accuracy = 0.1, scale = 1)) %>% 
+  mutate(mean_sd = glue::glue("{mean} (SD = {sd})")) %>% 
+  dplyr::pull(mean_sd)
+```
+
+Recall our hypotheses:
+
+$$H_0: \mu_{CC} = \mu_{CT} = \mu_{TT} \qquad \text{vs.} \qquad H_A: \text{At least one mean differs from the others}$$
+
+\
+
+With $F$ = `r f_stat`, $df$ = (`r dfs[1]`, `r dfs[2]`), *p* = `r p_val`, and $\alpha = 0.05$: We **reject $H_0$**.
+
+\
+
+::: {.callout-important icon="false"}
+### Conclusion
+
+There is sufficient evidence that the mean percent change in non-dominant arm strength differs for at least one pair of ACTN3 genotype groups ($F$ = `r f_stat`, $df$ = `r dfs[1]`, `r dfs[2]`, *p* = `r p_val`).
+
+Descriptively, mean arm strength change was `r mean_sd[1]` for CC, `r mean_sd[2]` for CT, and `r mean_sd[3]` for TT.
+:::
+
+## What ANOVA tells us — and what it doesn't (1/2)
+
+\
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4.9
+#| fig-align: center
+
+famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(mean = mean(ndrm.ch), sd = sd(ndrm.ch), n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lo = mean - 1.96 * se,
+         hi = mean + 1.96 * se) %>%
+  ggplot(aes(x = actn3.r577x, y = mean, color = actn3.r577x)) +
+  geom_point(size = 5) +
+  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.075, linewidth = 1.2) +
+  scale_color_manual(values = c("#E69F00", "#0072B2", "#009E73"),
+                     guide = "none") +
+  labs(title = "Group means with 95% CIs",
+       subtitle = "Significant ANOVA — but which pair(s) differ?",
+       x = "ACTN3 genotype", y = "Mean % change in arm strength")
+```
+
+## What ANOVA tells us — and what it doesn't (2/2)
+
+\
+
+::: {.callout-warning icon="false"}
+### A critical limitation
+
+ANOVA tells us that **at least one pair** of means differs. It does **not** tell us:
+
+- Which specific groups are different from which
+- How many pairs differ
+- The direction or magnitude of the differences
+
+After a significant ANOVA, we need **post-hoc tests** to identify where the differences lie.
+:::
+
+
+
+
+# Part 4: Post-Hoc Comparisons
+
+## The multiple comparisons problem, revisited
+
+\
+
+After a significant ANOVA, we want to test all pairwise comparisons. With $k = 3$ groups:
+
+$${3 \choose 2} = 3 \text{ pairwise tests: CC vs. CT, CC vs. TT, CT vs. TT}$$
+
+\
+
+If we just ran three regular t-tests at $\alpha = 0.05$:
+
+$$P(\text{at least one false positive}) = 1 - (0.95)^3 = 0.143$$
+
+\
+
+**Post-hoc methods control this inflated error rate** through different strategies — each with different tradeoffs between Type I and Type II error.
+
+## Post-hoc comparisons with `rstatix`
+
+\
+
+The `rstatix` package provides tidy post-hoc testing:
+
+\
+
+```{r}
+
+# Tukey HSD — controls family-wise error rate
+famuss %>%
+  tukey_hsd(ndrm.ch ~ actn3.r577x)
+```
+
+## Tukey's Honest Significant Difference (HSD)
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**What it does:**
+
+- Controls the **family-wise error rate** (FWER) — the probability of making *any* false positive across all comparisons
+- Compares all pairwise differences simultaneously
+- Reports both adjusted p-values and confidence intervals for each difference
+- **The standard choice for ANOVA post-hoc testing**
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 5
+
+# famuss_aov %>%
+#   TukeyHSD() %>%
+#   tidy() %>%
+#   ggplot(aes(x = contrast,
+#              y = estimate,
+#              ymin = conf.low,
+#              ymax = conf.high,
+#              color = adj.p.value < 0.05)) +
+#   geom_pointrange(linewidth = 1.2, size = 0.8) +
+#   geom_hline(yintercept = 0, linetype = "dashed",
+#              color = "grey40") +
+#   scale_color_manual(values = c("grey60", "#0072B2"),
+#                      labels = c("Not significant", "Significant"),
+#                      name = NULL) +
+#   coord_flip() +
+#   labs(title = "Tukey HSD",
+#        subtitle = "95% family-wise CIs",
+#        x = NULL, y = "Difference in means")
+
+famuss_aov %>%
+  rstatix::tukey_hsd() %>%
+  mutate(contrast = glue::glue("{group1}-{group2}")) %>%
+  ggplot(aes(x = contrast,
+             y = estimate,
+             ymin = conf.low,
+             ymax = conf.high,
+             color = p.adj < 0.05)) +
+  geom_pointrange(linewidth = 1.2, size = 0.8) +
+  geom_hline(yintercept = 0, linetype = "dashed",
+             color = "grey40") +
+  scale_color_manual(values = c("grey60", "#0072B2"),
+                     labels = c("Not significant", "Significant"),
+                     name = NULL) +
+  coord_flip() +
+  labs(title = "Tukey HSD",
+       subtitle = "95% family-wise CIs",
+       x = NULL, y = "Difference in means")
+```
+
+:::
+:::::
+
+Which comparison is driving the significant ANOVA result?
+
+## Bonferroni correction
+
+
+**Strategy:** Divide $\alpha$ by the number of tests: $\alpha_{Bonf} = \alpha / m$
+
+Equivalently, multiply each p-value by $m$ and compare to $\alpha$.
+
+```{r}
+# Bonferroni correction
+famuss %>%
+  rstatix::pairwise_t_test(ndrm.ch ~ actn3.r577x,
+                           p.adjust.method = "bonferroni")
+```
+
+\
+
+::: {.callout-note icon="false"}
+### Bonferroni: pros and cons
+
+**Pro:** Simple, transparent, very conservative (strong Type I error control)
+
+**Con:** Loses power quickly as the number of comparisons grows — becomes hard to detect real differences
+
+Bonferroni is best when you have a small number of *a priori* comparisons you care about.
+:::
+
+## False Discovery Rate (FDR)
+
+\
+
+**Strategy:** Control the *expected proportion* of false positives among significant results, rather than the probability of *any* false positive.
+
+```{r}
+# Benjamini-Hochberg FDR
+famuss %>%
+  rstatix::pairwise_t_test(ndrm.ch ~ actn3.r577x,
+                           p.adjust.method = "fdr")
+```
+
+\
+
+::: {.callout-note icon="false"}
+### FDR: pros and cons
+
+**Pro:** More powerful than Bonferroni or Tukey when there are many comparisons — allows more discoveries
+
+**Con:** Some false positives are tolerated (you control the *rate*, not the *occurrence*)
+
+FDR is especially popular in genomics and omics where hundreds or thousands of tests are run simultaneously.
+:::
+
+## Comparing the three approaches
+
+\
+
+| Method | Controls | Best used when | Conservativeness |
+|---|---|---|:---:|
+| **Tukey HSD** | Family-wise error rate | Post-ANOVA pairwise comparisons | Moderate |
+| **Bonferroni** | Family-wise error rate | Few *a priori* comparisons | High |
+| **FDR** | False discovery rate | Many simultaneous tests | Low |
+
+\
+
+::: {.callout-tip icon="false"}
+### Rule of thumb for BMSC 620
+
+For ANOVA post-hoc testing in a standard biomedical study: **Tukey HSD** is your default.
+
+Use Bonferroni when you have a small number of planned comparisons stated *before* looking at the data.
+
+Use FDR when you're doing many tests (e.g., comparing gene expression across dozens of groups).
+:::
+
+## Visualizing post-hoc results (1/2)
+
+```{r}
+#| fig-width: 9
+#| fig-height: 5
+#| fig-align: center
+#| eval: false
+
+# Add significance brackets to a boxplot using rstatix + ggpubr
+library(ggpubr)
+
+tukey_results <- famuss %>%
+  rstatix::tukey_hsd(ndrm.ch ~ actn3.r577x) %>%
+  rstatix::add_xy_position(x = "actn3.r577x")
+
+ggpubr::ggboxplot(famuss, x = "actn3.r577x", y = "ndrm.ch",
+                  color = "actn3.r577x",
+                  width = 0.5, 
+                  palette = c("#E69F00", "#0072B2", "#009E73"),
+                  add = "jitter", add.params = list(alpha = 0.3)) +
+  ggpubr::stat_pvalue_manual(tukey_results, hide.ns = TRUE) +
+  labs(title = "Percent change in arm strength by ACTN3 genotype",
+       subtitle = "Tukey HSD post-hoc comparisons (significant pairs shown)",
+       x = "ACTN3 genotype",
+       y = "Percent change in arm strength (%)",
+       color = "Genotype")
+
+
+
+
+```
+
+## Visualizing post-hoc results (2/2)
+
+```{r}
+#| fig-width: 6
+#| fig-height: 5
+#| fig-align: center
+#| echo: false
+
+# Add significance brackets to a boxplot using rstatix + ggpubr
+library(ggpubr)
+
+tukey_results <- famuss %>%
+  rstatix::tukey_hsd(ndrm.ch ~ actn3.r577x) %>%
+  rstatix::add_xy_position(x = "actn3.r577x")
+
+ggpubr::ggboxplot(famuss, x = "actn3.r577x", y = "ndrm.ch",
+                  color = "actn3.r577x",
+                  width = 0.5, 
+                  palette = c("#E69F00", "#0072B2", "#009E73"),
+                  add = "jitter", add.params = list(alpha = 0.3)) +
+  ggpubr::stat_pvalue_manual(tukey_results, hide.ns = TRUE) +
+  labs(title = "Percent change in arm strength by ACTN3 genotype",
+       subtitle = "Tukey HSD post-hoc comparisons (significant pairs shown)",
+       x = "ACTN3 genotype",
+       y = "Percent change in arm strength (%)",
+       color = "Genotype")
+
+
+
+
+```
+
+## Putting it all together: full reporting
+
+\
+
+A complete report of this analysis would include:
+
+\
+
+::: {.callout-important icon="false"}
+### Example write-up
+
+```{r}
+#| echo: false
+
+tukey_res <- famuss %>%
+  tukey_hsd(ndrm.ch ~ actn3.r577x)
+
+tukey_res <- tukey_res %>% 
+  mutate(dplyr::across(.cols = c(estimate, 
+                                 conf.low, 
+                                 conf.high), 
+                       .fns = ~ lamisc::fmt_num(x = ., 
+                                                accuracy = 0.1)),
+        p.adj = lamisc::fmt_pvl(p.adj))
+
+
+# Filter to the comparison of interest
+tt_vs_cc <- tukey_res %>%
+  filter(group1 == "CC", group2 == "TT")
+
+```
+
+
+Mean percent change in non-dominant arm strength was `r mean_sd[1]` for CC, `r mean_sd[2]` for CT, and `r mean_sd[3]` for TT genotype groups. A one-way ANOVA indicated a statistically significant difference in mean arm strength change across genotype groups ($F$(`r dfs[1]`, `r dfs[2]`) = `r f_stat`, *p* = `r p_val`).
+
+Post-hoc comparisons using Tukey's HSD revealed that the TT group had significantly greater mean arm strength change than the CC group (difference = `r tt_vs_cc$estimate` percentage points, 95% CI: `r tt_vs_cc$conf.low` to `r tt_vs_cc$conf.high`, adjusted *p* = `r tt_vs_cc$p.adj`). No significant differences were found between the CC and CT groups (adjusted *p* = `r purrr::pluck(tukey_res, "p.adj", 1)`) or the CT and TT groups (adjusted p = `r purrr::pluck(tukey_res, "p.adj", 3)`).
+:::
+
+\
+
+Note what's included: group-level descriptive statistics, the F-statistic with both df values, the p-value, and specific post-hoc results with effect sizes and CIs.
+
+# Wrap-Up
+
+## ANOVA summary
+
+::::: columns
+::: {.column width="48%"}
+
+**When to use ANOVA:**
+
+- Continuous outcome
+- 3 or more independent groups
+- Groups are independent of each other
+
+\
+
+**The hypotheses:**
+
+$$H_0: \mu_1 = \mu_2 = \cdots = \mu_k$$
+<!-- $$H_A: \text{at least one pair } \mu_i \neq \mu_j$$ -->
+$$H_A: \text{At least one mean differs from the others}$$
+
+
+\
+
+**Key assumption to check:**
+
+- Similar within-group SDs ($SD_{max} / SD_{min}$ ratio < 2)
+- $n \geq 30$ per group or approximate normality
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**R workflow:**
+
+```{r}
+#| eval: false
+
+# 1. Check assumptions
+famuss %>%
+  group_by(actn3.r577x) %>%
+  summarise(n = n(), sd = sd(ndrm.ch))
+
+# 2. Fit ANOVA
+famuss_aov <- aov(ndrm.ch ~ actn3.r577x,
+                  data = famuss)
+summary(famuss_aov)
+
+# 3. Post-hoc (if significant)
+famuss %>%
+  tukey_hsd(ndrm.ch ~ actn3.r577x)
+```
+
+
+**Post-hoc methods:**
+
+| Method | Use when |
+|---|---|
+| `tukey_hsd()` | Default for ANOVA |
+| `rstatix::pairwise_t_test` |  |
+| `p.adjust = "bonferroni"` | Few planned comparisons |
+| `p.adjust = "fdr"` | Many tests |
+
+:::
+:::::
+
+## Connecting to what's next
+
+\
+
+**Lesson 17 (Monday):** Nonparametric tests
+
+- What if the normality assumption is violated *and* sample sizes are small?
+- Mann-Whitney U, Kruskal-Wallis — the nonparametric analogues to the t-test and ANOVA
+
+\
+
+**Lesson 18 (Wednesday):** Correlation and Simple Linear Regression
+
+- What if both variables are continuous?
+- Extending beyond group comparisons to relationships between variables
+- ANOVA is actually a special case of regression — we'll see the connection
+
+\
+
+::: {.callout-tip icon="false"}
+### The big picture
+
+ANOVA, t-tests, and linear regression are all part of the same family. The F-test in ANOVA and the t-test are mathematically related — in fact, for $k = 2$ groups, $F = t^2$. 
+:::
