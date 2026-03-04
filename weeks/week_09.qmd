@@ -86,7 +86,7 @@ By the end of the week, you should be able to:
 -   **Slides**
     -   Comparing Means with ANOVA ([HTML](/lessons/19_anova/19_anova.qmd) | [PDF](/lessons/19_anova/19_anova.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
-    -   Coming soon
+    -   [Comparing Means with ANOVA](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBfSFhTCg_vRKzV_V8DNrPNAYQflLhuR3jc8VVd-BBMHbY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=o7Uzqb)
 -   **Muddy points**
     -   Coming soon
 
