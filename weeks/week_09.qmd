@@ -88,7 +88,10 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Comparing Means with ANOVA](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBfSFhTCg_vRKzV_V8DNrPNAYQflLhuR3jc8VVd-BBMHbY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=o7Uzqb)
 -   **Muddy points**
-    -   Coming soon
+
+    I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 16](/lessons/19_anova/19_anova_muddy_points.qmd)
+
 
 
 ------------------------------------------------------------------------
