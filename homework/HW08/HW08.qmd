@@ -1,0 +1,552 @@
+---
+title: "BMSC 620 — Homework 8"
+subtitle: "ANOVA and Nonparametric Tests"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+execute:
+  echo: true
+  eval: true
+---
+
+
+::: {.callout-note}
+**File naming and submission**
+
+Please use the following file naming convention:
+
+`Lastname_FirstInitial_HW08`
+
+Examples:
+
+- Smith_J_HW08.qmd
+- Smith_J_HW08.html
+
+When submitting Homework 8, upload **both**:
+
+- the `.qmd` file
+- the rendered `.html` file
+:::
+
+## Instructions
+
+- Answer each question clearly and concisely.
+- Show your work using R code chunks.
+- **Rounding:** Round summary statistics to 1 decimal place.
+  Round *p*-values to 3 decimal places (or report as *p* < 0.001 if very small).
+- This homework uses an **external data file** — see Part 0 below before writing
+  any code.
+- Code chunks marked `# Your code here` are intentionally blank. You are
+  expected to write the code yourself. Hints are provided to guide you.
+
+::: {.callout-note}
+**A note on this homework**
+
+This assignment covers two closely related topics. Parts 1–2 focus on ANOVA
+and post-hoc testing — extending the two-sample *t*-test to three or more
+groups. Parts 3–5 introduce nonparametric alternatives that you can use when
+parametric assumptions break down. The dataset is designed so that one
+outcome variable meets ANOVA assumptions nicely, while another does not —
+giving you practice deciding which approach is appropriate.
+:::
+
+---
+
+## Part 0: Project Setup
+
+**Before writing any code, do the following:**
+
+1. Make sure you are working inside your BMSC 620 R Project.
+2. Download the data file from OneDrive and place it inside your
+   project's `data/` folder:
+   - `knee_rehab.csv`
+3. Your folder structure should look like this:
+
+```
+BMSC620/
+├── BMSC620.Rproj
+├── data/
+│   ├── knee_rehab.csv
+└── homework/
+    └── Smith_J_HW08.qmd    ← your file goes here
+```
+
+Load the packages you will need:
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(here)
+library(broom)
+library(rstatix)
+library(janitor)
+```
+
+---
+
+## Background
+
+The `knee_rehab.csv` dataset comes from a simulated randomized controlled
+trial of **150 patients** recovering from total knee replacement surgery.
+Patients were randomized equally to one of three rehabilitation protocols:
+
+- **Standard**: Traditional physical therapy (clinic-based exercises)
+- **Aquatic**: Water-based rehabilitation (pool therapy)
+- **Accelerated**: Intensive early mobilization protocol
+
+The dataset contains the following variables:
+
+| Variable | Description |
+|---|---|
+| `patient_id` | Unique patient identifier |
+| `protocol` | Rehabilitation protocol (Standard, Aquatic, Accelerated) |
+| `age` | Patient age (years) |
+| `sex` | Patient sex (Female, Male) |
+| `rom_improvement` | Range of motion improvement in degrees at 12 weeks |
+| `pain_score_12wk` | Self-reported pain score at 12 weeks (0–10 scale) |
+| `tug_before` | Timed Up-and-Go test (seconds) before rehabilitation |
+| `tug_after` | Timed Up-and-Go test (seconds) after 12 weeks of rehabilitation |
+
+> *Data simulated for educational purposes. Values do not represent real
+> patient data.*
+
+---
+
+## Part 1: One-Way ANOVA
+
+### 1A. Load and explore the data
+
+Import `knee_rehab.csv` and assign it to an object called `knee`. Use
+`glimpse()` to inspect the structure.
+
+```{r}
+#| label: load-knee
+
+# Your code here
+
+```
+
+Compute summary statistics (sample size, mean, and SD) for
+`rom_improvement` by `protocol`.
+
+::: {.callout-tip}
+Try `group_by(protocol) %>% summarise(n = n(), mean = mean(rom_improvement), sd = sd(rom_improvement))`.
+:::
+
+```{r}
+#| label: rom-summary
+
+# Your code here
+
+```
+
+Which group had the highest mean ROM improvement? The lowest?
+
+**Answer:**
+
+---
+
+### 1B. Visualize the data
+
+Create side-by-side boxplots of `rom_improvement` by `protocol`. Overlay
+individual data points using `geom_jitter()`.
+
+::: {.callout-tip}
+Use `geom_boxplot(outlier.shape = NA)` so the jittered points don't
+duplicate the outlier markers.
+:::
+
+```{r}
+#| label: rom-boxplot
+
+# Your code here
+
+```
+
+Based on the boxplots, do the three groups appear to have similar
+spread? Does the data within each group look approximately symmetric?
+
+**Answer:**
+
+---
+
+### 1C. State the hypotheses
+
+We want to test whether mean ROM improvement differs across the three
+rehabilitation protocols.
+
+State the null and alternative hypotheses in both **symbols** and **words**.
+
+**Answer:**
+
+$H_0$:
+
+$H_A$:
+
+---
+
+### 1D. Check ANOVA assumptions
+
+Before running the ANOVA, check the key assumptions:
+
+1. **Equal variance:** Compute the ratio of the largest to smallest
+   within-group SD. Is the ratio less than 2?
+2. **Sample size / normality:** Are there at least 30 observations per
+   group?
+
+::: {.callout-tip}
+You already computed the SDs in 1A. Use those to calculate the max/min
+ratio.
+:::
+
+```{r}
+#| label: check-anova-assumptions
+
+# Your code here
+
+```
+
+Are the ANOVA assumptions reasonably met? Briefly explain.
+
+**Answer:**
+
+---
+
+### 1E. Run the one-way ANOVA
+
+Fit the ANOVA model using `aov()` and display the ANOVA table with
+`summary()`. Also display the tidy output using `broom::tidy()`.
+
+```{r}
+#| label: run-anova
+
+# Your code here
+
+```
+
+Report the F-statistic, degrees of freedom, and p-value.
+
+**Answer:**
+
+---
+
+### 1F. Interpret the ANOVA result
+
+Write a 2–3 sentence conclusion in context. Be sure to:
+
+- State whether you reject or fail to reject $H_0$ at $\alpha = 0.05$
+- State what the result means about ROM improvement across protocols
+- Report the F-statistic with both df values and the p-value
+
+**Answer:**
+
+---
+
+## Part 2: Post-Hoc Comparisons
+
+### 2A. Tukey HSD
+
+The ANOVA told us *that* at least one pair of means differs — but not
+*which* pair(s). Use Tukey's HSD to identify the specific pairwise
+differences.
+
+::: {.callout-tip}
+Use `tukey_hsd(rom_improvement ~ protocol)` from the `rstatix` package.
+This returns adjusted p-values and confidence intervals for each pairwise
+comparison.
+:::
+
+```{r}
+#| label: tukey-hsd
+
+# Your code here
+
+```
+
+Which pair(s) of protocols show a statistically significant difference
+at $\alpha = 0.05$? What is the estimated mean difference and 95% CI
+for the significant comparison(s)?
+
+**Answer:**
+
+---
+
+### 2B. Compare adjustment methods
+
+Run the pairwise comparisons using **Bonferroni** correction as well.
+
+::: {.callout-tip}
+Use `pairwise_t_test(rom_improvement ~ protocol, p.adjust.method = "bonferroni")`
+from `rstatix`.
+:::
+
+```{r}
+#| label: bonferroni
+
+# Your code here
+
+```
+
+Do the Bonferroni results agree with the Tukey HSD results? Would you
+expect them to — and why might they sometimes disagree?
+
+**Answer:**
+
+---
+
+### 2C. Write a complete report
+
+Using your results from Parts 1 and 2, write a short paragraph (3–5
+sentences) that a clinical researcher could include in a manuscript.
+Include: descriptive statistics for each group, the ANOVA result with
+test statistic and p-value, and the specific post-hoc findings.
+
+::: {.callout-tip}
+See the "Example write-up" from the ANOVA lecture for a model of what
+to include and how to structure it.
+:::
+
+**Answer:**
+
+---
+
+## Part 3: Choosing Between Parametric and Nonparametric
+
+### 3A. Explore the pain score variable
+
+The `pain_score_12wk` variable is a self-reported pain rating on a 0–10
+scale. Compute summary statistics (n, median, mean, SD) for each protocol
+group.
+
+```{r}
+#| label: pain-summary
+
+# Your code here
+
+```
+
+---
+
+### 3B. Visualize the distribution
+
+Create boxplots (or histograms) of `pain_score_12wk` by `protocol`.
+
+```{r}
+#| label: pain-boxplot
+
+# Your code here
+
+```
+
+Describe the shape of the distributions. Are they approximately
+symmetric or clearly skewed?
+
+**Answer:**
+
+---
+
+### 3C. Check ANOVA assumptions for pain scores
+
+Check the equal variance assumption (SD ratio) for pain scores. Also
+consider the distributional shape you observed in 3B.
+
+```{r}
+#| label: pain-assumptions
+
+# Your code here
+
+```
+
+Based on the distribution shape and the nature of the variable (ordinal
+0–10 scale), is ANOVA appropriate for comparing pain scores across
+groups? What test should you use instead, and why?
+
+**Answer:**
+
+---
+
+## Part 4: Kruskal-Wallis Test
+
+### 4A. State the hypotheses
+
+State the null and alternative hypotheses for a Kruskal-Wallis test
+comparing pain scores across the three rehabilitation protocols.
+
+**Answer:**
+
+$H_0$:
+
+$H_A$:
+
+---
+
+### 4B. Run the Kruskal-Wallis test
+
+Use `kruskal.test()` to test whether median pain scores differ across
+the three protocols.
+
+::: {.callout-tip}
+The syntax is `kruskal.test(pain_score_12wk ~ protocol, data = knee)`.
+Pipe the result to `broom::tidy()` for clean output.
+:::
+
+```{r}
+#| label: kruskal-wallis
+
+# Your code here
+
+```
+
+Report the test statistic ($H$), degrees of freedom, and p-value.
+
+**Answer:**
+
+---
+
+### 4C. Post-hoc pairwise comparisons
+
+If the Kruskal-Wallis test is significant, follow up with pairwise
+Wilcoxon rank-sum tests using an FDR correction.
+
+::: {.callout-tip}
+Use `wilcox_test(pain_score_12wk ~ protocol, p.adjust.method = "fdr")`
+from `rstatix`.
+:::
+
+```{r}
+#| label: kw-posthoc
+
+# Your code here
+
+```
+
+Which pair(s) of protocols show significantly different pain scores
+after correction?
+
+**Answer:**
+
+---
+
+### 4D. Interpret the results
+
+Write a 2–3 sentence conclusion about pain scores across the
+rehabilitation protocols. Report the Kruskal-Wallis result and summarize
+the post-hoc findings.
+
+**Answer:**
+
+---
+
+## Part 5: Wilcoxon Signed-Rank Test (Paired Data)
+
+### Background
+
+The Timed Up-and-Go (TUG) test measures how long it takes a patient to
+stand up from a chair, walk 3 meters, turn around, walk back, and sit
+down. It is a standard functional mobility measure — lower times indicate
+better mobility. TUG times are typically **right-skewed** because most
+patients cluster near a typical value while a few take considerably longer.
+
+Each patient in this study was measured **before** and **after** their
+12-week rehabilitation program, regardless of which protocol they
+received. We want to test whether rehabilitation improved TUG times
+overall.
+
+---
+
+### 5A. Explore the TUG data
+
+Compute the difference `tug_before - tug_after` for each patient (so that
+positive values indicate improvement). Then summarize the differences
+with the mean, median, and SD.
+
+```{r}
+#| label: tug-explore
+
+# Your code here
+
+```
+
+Also create a histogram or dotplot of the TUG **before** values.
+Is the distribution symmetric or skewed?
+
+```{r}
+#| label: tug-histogram
+
+# Your code here
+
+```
+
+**Answer:**
+
+---
+
+### 5B. Justify the nonparametric approach
+
+In 2–3 sentences, explain why the Wilcoxon signed-rank test is more
+appropriate than a paired *t*-test for these data. Consider the
+distribution shape and what you know about TUG timing data.
+
+**Answer:**
+
+---
+
+### 5C. State the hypotheses
+
+State the null and alternative hypotheses for the Wilcoxon signed-rank
+test.
+
+**Answer:**
+
+$H_0$:
+
+$H_A$:
+
+---
+
+### 5D. Run the Wilcoxon signed-rank test
+
+Test whether the median TUG time improved after rehabilitation.
+
+::: {.callout-tip}
+Create a new variable for the differences, then use
+`wilcox_test(tug_diff ~ 1, mu = 0)` from `rstatix`. The `~ 1` tells R
+this is a one-sample / paired test against a hypothesized median of 0.
+:::
+
+```{r}
+#| label: wilcoxon-signed-rank
+
+# Your code here
+
+```
+
+---
+
+### 5E. Interpret the results
+
+Report the test statistic, p-value, and the median improvement in TUG
+time.
+
+Write a 2–3 sentence conclusion. Did rehabilitation significantly
+improve functional mobility as measured by the TUG test?
+
+**Answer:**
+
+---
+
+## Submission checklist
+
+Before submitting, make sure you have:
+
+- [ ] Data file is in your `data/` folder
+- [ ] All code chunks run without errors when rendered
+- [ ] Answered all written questions
+- [ ] Interpretations are written in full sentences, in context
+- [ ] Rendered your HTML successfully
+- [ ] Uploaded both `.qmd` and `.html` files
