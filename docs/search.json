@@ -9160,5 +9160,376 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#roadmap-for-today",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#roadmap-for-today",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Roadmap for Today",
+    "text": "Roadmap for Today\n\n\n\n\nPart 1: Parametric vs. Nonparametric\n\nWhen do the assumptions break down?\nThe rank-based approach\nWhat we gain and what we lose\nThe complete comparison table\n\nPart 2: Wilcoxon Signed-Rank Test\n\nThe sign test (brief)\nWilcoxon signed-rank: the upgrade\nGlaucoma example (paired data)\nRunning it in R\n\n\nPart 3: Wilcoxon Rank-Sum Test\n\nThe nonparametric two-sample t-test\nRat neuron example\nRunning it in R\n\nPart 4: Kruskal-Wallis Test\n\nThe nonparametric ANOVA\nIL-6 example\nRunning it in R\nPost-hoc follow-up"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#what-do-all-our-tests-so-far-have-in-common",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#what-do-all-our-tests-so-far-have-in-common",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "What do all our tests so far have in common?",
+    "text": "What do all our tests so far have in common?\n\n\nEvery test we’ve learned assumes the data come from a specific distribution:\n\n\n\n\n\nTest\nDistributional assumption\n\n\n\n\nOne-sample t-test\nNormal population (or large \\(n\\))\n\n\nPaired t-test\nNormal differences (or large \\(n\\))\n\n\nTwo-sample t-test\nNormal populations (or large \\(n\\))\n\n\nANOVA\nNormal within each group (or large \\(n\\))\n\n\n\n\n\nThese are called parametric tests — they assume the population can be described by specific parameters (\\(\\mu\\), \\(\\sigma\\)) under a named distribution.\n\n\n\n\n\nWhat if the assumptions don’t hold?\n\n\nSmall samples + non-normal data + outliers = parametric tests may not be valid. Nonparametric tests are the answer."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#when-do-parametric-assumptions-break-down",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#when-do-parametric-assumptions-break-down",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "When do parametric assumptions break down?",
+    "text": "When do parametric assumptions break down?\n\n\n\n\nSituation 1: Small samples with skewed data\n\n\\(n = 8\\) per group, right-skewed outcome\nCentral limit theorem doesn’t save you here\nt-test p-values may not be reliable\n\n\n\nSituation 2: Outliers that aren’t errors\n\nBiological data often has extreme values\nA single outlier can dominate the mean\nThe outlier is real — you can’t just remove it\n\n\n\n\nSituation 3: Ordinal outcomes\n\nPain scale (1–10), severity scores, Likert items\nMeans aren’t always meaningful\n“Average pain of 4.7” — what does that mean?\n\n\n\nSituation 4: Heavy-tailed distributions\n\nGene expression, antibody titers, viral loads\nExtreme values are common, not aberrant\nLog-transformation helps, but isn’t always appropriate"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-rank-based-approach",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-rank-based-approach",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The rank-based approach",
+    "text": "The rank-based approach\nKey idea: Instead of testing raw values, convert them to ranks first.\n\n\n\n\n\n\nStep 1: Take your original data\n\n\n\nPatient\nViral load\n\n\n\n\nA\n125\n\n\nB\n3024\n\n\nC\n780\n\n\nD\n55\n\n\nE\n426\n\n\n\n\n\n\nStep 2: Replace values with ranks\n\n\n\nPatient\nViral load\nRank\n\n\n\n\nD\n55\n1\n\n\nA\n125\n2\n\n\nE\n426\n3\n\n\nC\n780\n4\n\n\nB\n3024\n5\n\n\n\n\n\n\n\n\n\nWhy ranks work\n\n\nPatient B’s viral load of 3024 is extreme, but as a rank it’s just “5” — the highest. Ranks compress outliers automatically. The rank-sum test uses these ranks instead of raw values, so no distributional assumption is needed."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#pros-and-cons-of-nonparametric-tests",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#pros-and-cons-of-nonparametric-tests",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Pros and cons of nonparametric tests",
+    "text": "Pros and cons of nonparametric tests\n\n\n\n\n\nAdvantages\n\n\n\nFewer assumptions — no normality required\nRobust to outliers — extreme values become just another rank\nWork with small samples — exact p-values available\nCan handle ordinal data — ranks are meaningful for ordered categories\n\n\n\n\n\n\n\n\n\n\nTrade-offs\n\n\n\nLess powerful — converting to ranks discards information about magnitude\nIf parametric assumptions are met, the t-test or ANOVA will detect effects more efficiently\nConfidence intervals are harder to compute\nTies in ranks require corrections\n\n\n\n\n\n\n\n\n\n\nThe bottom line\n\n\nUse parametric tests when assumptions are met — they’re more powerful. Switch to nonparametric when you have small samples, severe skew, heavy outliers, or ordinal data."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-complete-comparison-table",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-complete-comparison-table",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The complete comparison table",
+    "text": "The complete comparison table\n\n\n\n\n\n\n\n\n\n\nStudy design\nParametric test\nNonparametric alternative\n\n\n\n\nSingle sample, numeric\nOne-sample t-test\nWilcoxon signed-rank\n\n\nPaired sample, numeric\nPaired t-test\nWilcoxon signed-rank\n\n\nTwo independent samples, numeric\nTwo-sample t-test\nWilcoxon rank-sum\n\n\n3+ independent samples, numeric\nANOVA\nKruskal-Wallis\n\n\n\n\n\n\n\n\nWhat about categorical outcomes?\n\n\nFor 2×2 tables with small expected cell counts, we use Fisher’s exact test — we covered this already in Lesson 14. It’s the nonparametric alternative to the chi-squared test for categorical data."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#first-the-sign-test-brief",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#first-the-sign-test-brief",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "First: the sign test (brief)",
+    "text": "First: the sign test (brief)\n\n\n\n\n\n\nThe sign test is the simplest nonparametric test for paired or single-sample data.\n\n\nPaired setting: each subject \\(i\\) has two measurements — a first observation \\(x_{i1}\\) (e.g., pre-treatment) and a second observation \\(x_{i2}\\) (e.g., post-treatment). Compute the within-subject difference:\n\\[d_i = x_{i2} - x_{i1}\\]\nSingle-sample setting: each subject has one observation \\(x_i\\), and we compare it against a hypothesized value \\(\\mu_0\\):\n\\[d_i = x_i - \\mu_0\\]\n\n\nIn both cases, the test proceeds the same way:\n\nCount the number of positive differences (\\(D^+\\)) and negative differences (\\(D^-\\))\nIgnore ties (\\(d_i = 0\\))\nUnder \\(H_0\\): differences are symmetric around 0, so \\(D^+ \\sim \\text{Binomial}(n, 0.5)\\)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#why-we-dont-use-the-sign-test",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#why-we-dont-use-the-sign-test",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Why we don’t use the sign test",
+    "text": "Why we don’t use the sign test\n\n\n\n\n\nThe problem with the sign test\n\n\nThe sign test only uses the direction of each difference — not the size.\nA difference of 0.01 and a difference of 10.0 both count as a single “+”. This throws away most of the information in your data and makes the test much less powerful than it could be.\nThe Wilcoxon signed-rank test solves this by incorporating the magnitude of differences through ranking."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-wilcoxon-signed-rank-test",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-wilcoxon-signed-rank-test",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The Wilcoxon signed-rank test",
+    "text": "The Wilcoxon signed-rank test\n\n\nThe upgrade over the sign test: We rank the absolute values of the differences, then use the signs.\n\n\nConceptual steps:\n\nCompute differences \\(d_i\\) (drop any zeros)\nRank the absolute values \\(|d_i|\\) from smallest to largest (ties get average ranks)\nAttach the original sign (+/−) back to each rank\nSum the positive ranks (\\(T^+\\)) and negative ranks (\\(T^-\\))\nIf \\(H_0\\) is true, \\(T^+\\) and \\(T^-\\) should be roughly equal\n\n\n\n\n\n\nWhat’s being tested\n\n\n\\(H_0\\): The population of differences is symmetric around zero\n\\(H_A\\): The population of differences is not symmetric around zero\nThis is equivalent to testing whether the median difference is zero — provided the distribution is symmetric."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-glaucoma-example",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-glaucoma-example",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The glaucoma example",
+    "text": "The glaucoma example\nIntraocular pressure in glaucoma patients is often reduced by treatment with adrenaline. A new synthetic drug is being evaluated — more expensive, but potentially more effective.\n\n7 patients treated with both drugs (one eye each)\nOutcome: reduction in pressure after treatment\nLarger values = greater pressure reduction\n\nQuestion: Do the two drugs produce the same reduction in pressure?\n\n\n\nIOP\n\n# A tibble: 7 × 4\n  patient adrenaline synthetic      d\n    &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n1       1        3.5       3.2 -0.300\n2       2        2.6       3.1  0.5  \n3       3        3         3.3  0.300\n4       4        1.9       2.4  0.5  \n5       5        2.9       2.9  0    \n6       6        2.4       2.8  0.4  \n7       7        2         2.6  0.6"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 1: State hypotheses",
+    "text": "Step 1: State hypotheses\n\n\n\\(H_0\\): The differences in intraocular pressure reduction (synthetic − adrenaline) are symmetrically distributed around zero\n\\(H_A\\): The differences are not symmetrically distributed around zero\n\n\nIn plain language:\n\\(H_0\\): The two drugs produce the same median reduction in intraocular pressure\n\\(H_A\\): The two drugs differ in median reduction of intraocular pressure"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-2-set-significance-level",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-2-set-significance-level",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 2: Set significance level",
+    "text": "Step 2: Set significance level\n\\[\\alpha = 0.05\\]"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-3-check-assumptions",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-3-check-assumptions",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 3: Check assumptions",
+    "text": "Step 3: Check assumptions\n\n\nWilcoxon signed-rank assumptions:\n\nPaired observations (✓ — same patients, one eye each)\nDifferences are continuous (✓ — pressure measurements)\nDistribution of differences is symmetric around the median (check visually)\n\n\n\n\nAssumptions 1 and 2 are verified from the study design alone.\nFor assumption 3, we plot the distribution of differences \\(d_i\\) and look for approximate symmetry around zero — no need for perfect normality, just no severe skew or outliers pulling in one direction."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-3-check-assumptions-visually",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-3-check-assumptions-visually",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 3: Check assumptions — visually",
+    "text": "Step 3: Check assumptions — visually\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat to look for: approximate symmetry around zero — no severe skew, no outliers pulling strongly in one direction.\n\n\nWhat we see:\n\nMost differences are positive — the synthetic drug tends to reduce pressure more\nThe spread on both sides of zero is roughly balanced\nWith a small sample, we do not assume normality — only approximate symmetry\n\n\n\n✓ Assumption 3 is satisfied."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#how-ranking-works-conceptually",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#how-ranking-works-conceptually",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "How ranking works — conceptually",
+    "text": "How ranking works — conceptually\n\n\n\n\n\n\n\nPatient\nAdrenaline\nSynthetic\nd\nabs(d)\nRank of abs(d)\nSigned rank\n\n\n\n\n1\n3.5\n3.2\n-0.3\n0.3\n1.5\n-1.5\n\n\n2\n2.6\n3.1\n0.5\n0.5\n4.5\n4.5\n\n\n3\n3.0\n3.3\n0.3\n0.3\n1.5\n1.5\n\n\n4\n1.9\n2.4\n0.5\n0.5\n4.5\n4.5\n\n\n6\n2.4\n2.8\n0.4\n0.4\n3.0\n3.0\n\n\n7\n2.0\n2.6\n0.6\n0.6\n6.0\n6.0\n\n\n\n\n\n\n\n\n\n\nPatient 5 had \\(d = 0\\) → dropped from analysis (effective \\(n = 6\\))\n\\(T^+ = 1.5 + 3 + 4.5 + 4.5 + 6 = 19.5\\) (sum of positive ranks)\n\\(T^- = 1.5\\) (sum of negative ranks, in absolute value)\nIf \\(H_0\\) true: \\(T^+\\) and \\(T^-\\) should be roughly equal"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Steps 4–5: Test statistic and p-value in R",
+    "text": "Steps 4–5: Test statistic and p-value in R\n\n\n\n# exact = FALSE because ties exist in the nonzero differences\nsr_result &lt;- wilcox.test(IOP$d, mu = 0,\n                         alternative = \"two.sided\",\n                         exact = FALSE)\n\nsr_result %&gt;% \n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic p.value method                                           alternative\n      &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                                            &lt;chr&gt;      \n1      19.5  0.0731 Wilcoxon signed rank test with continuity corre… two.sided  \n\n\n\n\n\nReading the output\n\n\n\nstatistic = \\(T^+\\) = 19.50 (sum of positive ranks)\np.value = p-value using normal approximation — R uses the exact method only when sample is small and there are no ties. Because our nonzero differences contain ties (0.3 appears twice, 0.5 appears twice), R falls back to the normal approximation automatically. Setting exact = FALSE makes this explicit and prevents a warning."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Using rstatix",
+    "text": "Using rstatix\n\n\n\nlibrary(rstatix)\n\nIOP %&gt;%\n  wilcox_test(d ~ 1, mu = 0,\n              alternative = \"two.sided\",\n              exact = FALSE)\n\n# A tibble: 1 × 6\n  .y.   group1 group2         n statistic      p\n* &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n1 d     1      null model     7      19.5 0.0731"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 6: Conclusion",
+    "text": "Step 6: Conclusion\n\n\nWith p = 0.073 and \\(\\alpha = 0.05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\nConclusion\n\n\nThere is insufficient evidence that the median difference in intraocular pressure reduction between the synthetic drug and adrenaline differs from zero (Wilcoxon signed-rank test, \\(T^+\\) = 19.50, p = 0.073).\nThe synthetic drug showed a numerically higher median reduction (difference = 0.40 mmHg), but this difference was not statistically significant at \\(\\alpha = 0.05\\) with only 6 evaluable patients. A larger study would be needed to draw a definitive conclusion.\n\n\n\n\n\n\n\n\nNote on sample size\n\n\n\\(n = 7\\) (effective \\(n = 6\\)) gives this study very low power. Failing to reject \\(H_0\\) here does not mean the drugs are equivalent — it may simply mean we don’t have enough data."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-nonparametric-two-sample-t-test",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-nonparametric-two-sample-t-test",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The nonparametric two-sample t-test",
+    "text": "The nonparametric two-sample t-test\n\n\nWhen the two-sample t-test assumptions don’t hold and the groups are independent, use the Wilcoxon rank-sum test (also called the Mann-Whitney U test).\n\n\nThe idea:\n\nCombine both groups into one dataset\nRank all observations from 1 to \\(N\\)\nSum the ranks within each group\nIf the groups have the same median, the rank sums should be roughly equal\nIf one group tends to have higher ranks, that group has a higher median\n\n\n\n\n\n\nHypotheses\n\n\n\\(H_0\\): The distributions of the two populations are identical\n\\(H_A\\): The distributions of the two populations are not identical\n(When both groups share the same shape, any difference reflects a shift in location — i.e., a difference in median.)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-rat-neuron-example",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-rat-neuron-example",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The rat neuron example",
+    "text": "The rat neuron example\n\n\nA study measured evoked membrane current of dental sensory neurons in rats under two conditions:\n\nControl: standard conditions\nTreatment: capsaicin + capsazepine (CPZ)\n\n6 rats per group. Membrane current values (pA) are highly right-skewed with a wide range — a classic case for the rank-sum test.\n\n\nQuestion: Does CPZ treatment alter the median membrane current?"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#rat-neuron-data",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#rat-neuron-data",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Rat neuron data",
+    "text": "Rat neuron data\n\n\n\n\n\nCPZ\n\n# A tibble: 12 × 2\n   group     current\n   &lt;chr&gt;       &lt;dbl&gt;\n 1 Control      3024\n 2 Control      2164\n 3 Control       864\n 4 Control       780\n 5 Control       125\n 6 Control       110\n 7 Cap + CPZ     426\n 8 Cap + CPZ     232\n 9 Cap + CPZ     130\n10 Cap + CPZ      94\n11 Cap + CPZ      75\n12 Cap + CPZ      55\n\n\n\n\n\n\nCPZ %&gt;%\n  group_by(group) %&gt;%\n  summarise(\n    n      = n(),\n    median = median(current),\n    mean   = round(mean(current), 0)\n  )\n\n# A tibble: 2 × 4\n  group         n median  mean\n  &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1 Cap + CPZ     6    112   169\n2 Control       6    822  1178"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#visualizing-the-data",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#visualizing-the-data",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Visualizing the data",
+    "text": "Visualizing the data\n\n\nCode\nggplot(CPZ, aes(x = current, fill = group, color = group)) +\n  geom_dotplot(binwidth = 80, alpha = 0.7) +\n  facet_wrap(~ group, ncol = 2, \n             scale = \"free_y\") +\n  scale_fill_manual(values  = c(\"#E69F00\", \"#0072B2\"), guide = \"none\") +\n  scale_color_manual(values = c(\"#E69F00\", \"#0072B2\"), guide = \"none\") +\n  labs(title = \"Evoked membrane current by treatment group\",\n       x = \"Membrane current (pA)\", y = NULL) + \n  scale_y_continuous(expand = c(0, 0))\n\n\n\nBoth groups are right-skewed with similar shape — consistent with the rank-sum assumption. The control group has a much higher median."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#how-ranking-works-conceptually-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#how-ranking-works-conceptually-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "How ranking works — conceptually",
+    "text": "How ranking works — conceptually\n\n\n\n\n\nCPZ %&gt;%\n  arrange(current) %&gt;%\n  mutate(rank = rank(current, \n                     ties.method = \"average\"))\n\n# A tibble: 12 × 3\n   group     current  rank\n   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;\n 1 Cap + CPZ      55     1\n 2 Cap + CPZ      75     2\n 3 Cap + CPZ      94     3\n 4 Control       110     4\n 5 Control       125     5\n 6 Cap + CPZ     130     6\n 7 Cap + CPZ     232     7\n 8 Cap + CPZ     426     8\n 9 Control       780     9\n10 Control       864    10\n11 Control      2164    11\n12 Control      3024    12\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(W_{\\text{Control}} = 4 + 5 + 9 + 10 + 11 + 12 = 51\\)\n\\(W_{\\text{Cap+CPZ}} = 1 + 2 + 3 + 6 + 7 + 8 = 27\\)\n\n\n\n\nIf \\(H_0\\) true, we’d expect rank sums to be roughly equal (both ≈ 39)."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 1: State hypotheses",
+    "text": "Step 1: State hypotheses\n\n\n\\(H_0\\): The distribution of evoked membrane current is the same in the control and CPZ-treated populations\n\\(H_A\\): The distributions of evoked membrane current in the control and CPZ-treated populations are not identical"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Steps 2–3: Significance level and assumptions",
+    "text": "Steps 2–3: Significance level and assumptions\n\n\n\\(\\alpha = 0.05\\)\n\n\nWilcoxon rank-sum assumptions:\n\nTwo independent samples (✓ — different rats in each group)\nContinuous outcome (✓ — membrane current in pA)\nBoth distributions have the same shape — check visually\n\nThe dotplots showed both groups are right-skewed with similar spread. ✓"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Steps 4–5: Test statistic and p-value in R",
+    "text": "Steps 4–5: Test statistic and p-value in R\n\n\n\n# exact = TRUE is appropriate: both n &lt; 10, no ties in this dataset\nrs_result &lt;- wilcox.test(current ~ group, data = CPZ,\n                         alternative = \"two.sided\",\n                         exact = TRUE)\n\nrs_result %&gt;%\n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic p.value method                       alternative\n      &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;      \n1         6  0.0649 Wilcoxon rank sum exact test two.sided  \n\n\n\n\n\nReading the output\n\n\n\nstatistic = \\(W\\) = rank sum for the first alphabetical group\np.value = exact p-value (appropriate here: both \\(n &lt; 10\\), no ties)\nFor larger samples or when ties exist, R automatically uses the normal approximation"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Using rstatix",
+    "text": "Using rstatix\n\n\n\nCPZ %&gt;%\n  wilcox_test(current ~ group,\n              alternative = \"two.sided\",\n              exact = TRUE)\n\n# A tibble: 1 × 7\n  .y.     group1    group2     n1    n2 statistic      p\n* &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n1 current Cap + CPZ Control     6     6         6 0.0649"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 6: Conclusion",
+    "text": "Step 6: Conclusion\n\n\nWith p = 0.065 and \\(\\alpha = 0.05\\), we fail to reject \\(H_0\\).\n\n\n\n\n\nConclusion\n\n\n\nThere is suggestive but inconclusive evidence that the distributions of evoked membrane current differ between the control group and the group exposed to capsaicin + CPZ (Wilcoxon rank-sum test, \\(W\\) = 6.00, p = 0.065).\nThe control group had a substantially higher median current (median = 822 pA) compared to the CPZ group (median = 112 pA), but the small sample size (\\(n = 6\\) per group) limits statistical power."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-nonparametric-anova",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-nonparametric-anova",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The nonparametric ANOVA",
+    "text": "The nonparametric ANOVA\nWhen ANOVA assumptions fail with 3 or more groups, use the Kruskal-Wallis test.\n\n\nIt extends the rank-sum test to \\(k\\) groups:\n\nCombine all groups, rank all observations 1 to \\(N\\)\nCompute the sum of ranks within each group: \\(R_1, R_2, \\ldots, R_k\\)\nIf \\(H_0\\) is true, rank sums should be similar across groups\nThe test statistic \\(H\\) quantifies how different the rank sums are\n\n\\[H_0: \\text{The distributions of all } k \\text{ groups are identical}\\] \\[H_A: \\text{At least one group has a different distribution}\\]\n\n\n\n\n\nTip\n\n\nThe K-W test statistic \\(H\\) follows a \\(\\chi^2\\) distribution with \\(k - 1\\) degrees of freedom. When \\(k = 2\\), K-W gives the same result as the rank-sum test.\nWhen all groups share the same distributional shape, any difference reflects a shift in location — i.e., a difference in median."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#kruskal-wallis-vs-anova",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#kruskal-wallis-vs-anova",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Kruskal-Wallis vs ANOVA",
+    "text": "Kruskal-Wallis vs ANOVA\n\n\n\n\nSource: numiqo Team (2026). numiqo: Online Statistics Calculator. https://numiqo.com"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-ozone-example",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-ozone-example",
+    "title": "Nonparametric Tests",
+    "section": "The ozone example",
+    "text": "The ozone example\n\n\nairquality is a built-in R dataset: daily air quality measurements in New York, May–September 1973.\nQuestion: Do median ozone levels differ across the five months?\n\nairquality %&gt;%\n  group_by(Month) %&gt;%\n  get_summary_stats(Ozone, show = c(\"n\", \"mean\", \"median\", \"sd\")) %&gt;%\n  mutate(across(where(is.numeric), ~ round(.x, 1)))\n\n# A tibble: 5 × 6\n  Month variable     n  mean median    sd\n  &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n1     5 Ozone       26  23.6     18  22.2\n2     6 Ozone        9  29.4     23  18.2\n3     7 Ozone       26  59.1     60  31.6\n4     8 Ozone       26  60       52  39.7\n5     9 Ozone       29  31.4     23  24.1\n\n\n\n# Check the equal-variance assumption for ANOVA\nairquality %&gt;%\n  group_by(Month) %&gt;%\n  summarise(sd = sd(Ozone, na.rm = TRUE)) %&gt;%\n  summarise(ratio = max(sd) / min(sd))\n\n# A tibble: 1 × 1\n  ratio\n  &lt;dbl&gt;\n1  2.18\n\n\nSD ratio &gt; 2 and groups look skewed → ANOVA assumptions violated. K-W is the right choice."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#visualizing-ozone-by-month",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#visualizing-ozone-by-month",
+    "title": "Nonparametric Tests",
+    "section": "Visualizing ozone by month",
+    "text": "Visualizing ozone by month\n\nairquality %&gt;%\n  mutate(Month = factor(Month,\n                        labels = c(\"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\"))) %&gt;%\n  ggplot(aes(x = Month, y = Ozone, fill = Month, color = Month)) +\n  geom_boxplot(alpha = 0.3, outlier.shape = NA) +\n  geom_jitter(alpha = 0.5, width = 0.15, size = 2) +\n  scale_fill_manual(values  = c(\"#E69F00\",\"#0072B2\",\"#009E73\",\"#CC79A7\",\"#D55E00\"),\n                    guide = \"none\") +\n  scale_color_manual(values = c(\"#E69F00\",\"#0072B2\",\"#009E73\",\"#CC79A7\",\"#D55E00\"),\n                     guide = \"none\") +\n  labs(title = \"Daily ozone levels by month, New York 1973\",\n       x = NULL, y = \"Ozone (ppb)\")\n\n\nJuly and August show higher medians with more variability. May looks lower. Groups are clearly not normally distributed."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-2",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-2",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 1: State hypotheses",
+    "text": "Step 1: State hypotheses\n\n\n\\(H_0\\): The distributions of serum IL-6 are identical across all three severity groups\n\\(H_A\\): At least one severity group has a different distribution of serum IL-6"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions-1",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Steps 2–3: Significance level and assumptions",
+    "text": "Steps 2–3: Significance level and assumptions\n\n\n\\(\\alpha = 0.05\\)\n\n\nKruskal-Wallis assumptions:\n\nIndependent observations across groups (✓ — different patients in each group)\nContinuous or ordinal outcome (✓ — IL-6 in pg/mL)\nAll groups come from populations with the same distributional shape — check visually\n\nThe previous plots suggest right-skewed distributions across all three groups. ✓"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value",
+    "title": "Nonparametric Tests",
+    "section": "Steps 4–5: Test statistic and p-value",
+    "text": "Steps 4–5: Test statistic and p-value\n\nkruskal.test(Ozone ~ Month, data = airquality)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  Ozone by Month\nKruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06\n\n\n\n\nOr with tidy output:\n\nkruskal.test(Ozone ~ Month, data = airquality) %&gt;%\n  tidy()\n\n# A tibble: 1 × 4\n  statistic    p.value parameter method                      \n      &lt;dbl&gt;      &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                       \n1      29.3 0.00000690         4 Kruskal-Wallis rank sum test\n\n\n\n\n\n\n\nReading the output\n\n\n\nstatistic = \\(H\\) = Kruskal-Wallis test statistic\np.value = p-value from \\(\\chi^2\\) distribution with df = \\(k - 1 = 4\\)\nparameter = degrees of freedom"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-2",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-2",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Step 6: Conclusion",
+    "text": "Step 6: Conclusion\n\n\n\n\nWith \\(H\\) = 20.49, df = 2, p = &lt; 0.001, we reject \\(H_0\\).\n\n\n\n\n\nConclusion\n\n\nThere is strong evidence that the distribution of serum IL-6 differs across at least two disease severity groups (Kruskal-Wallis test, \\(H\\) = 20.49, df = 2, p = &lt; 0.001).\nDescriptively, median IL-6 increased with severity — mild (median = 3.4 pg/mL), moderate (median = 14.8 pg/mL), and severe (median = 68.2 pg/mL)."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w",
+    "title": "Nonparametric Tests",
+    "section": "Post-hoc comparisons after K-W",
+    "text": "Post-hoc comparisons after K-W\n\n\nA significant K-W test tells us something differs — not which pairs. Follow up with pairwise Wilcoxon rank-sum tests with a correction:\n\npairwise.wilcox.test(il6_data$il6, il6_data$severity,\n                     p.adjust.method = \"fdr\")\n\n\n    Pairwise comparisons using Wilcoxon rank sum test with continuity correction \n\ndata:  il6_data$il6 and il6_data$severity \n\n         Mild    Moderate\nModerate 0.00093 -       \nSevere   0.00093 0.00047 \n\nP value adjustment method: fdr \n\n\nAlternative using rstatix:\n\nil6_data %&gt;%\n  wilcox_test(il6 ~ severity,\n              p.adjust.method = \"fdr\",\n              paired = FALSE)\n\n# A tibble: 3 × 9\n  .y.   group1   group2      n1    n2 statistic        p    p.adj p.adj.signif\n* &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       \n1 il6   Mild     Moderate     8     8         0 0.000931 0.000931 ***         \n2 il6   Mild     Severe       8     8         0 0.000931 0.000931 ***         \n3 il6   Moderate Severe       8     8         0 0.000155 0.000465 ***         \n\n\n\n\n\nTip\n\n\nFDR correction is appropriate here with 3 pairwise tests. Use p.adjust.method = \"bonferroni\" or \"holm\" for a more conservative approach."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#choosing-the-right-nonparametric-test",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#choosing-the-right-nonparametric-test",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Choosing the right nonparametric test",
+    "text": "Choosing the right nonparametric test\n\n\n\n\n\n\n\n\n\n\n\nQuestion\nTest\n\n\n\n\nIs the median different from a value? (single sample)\nWilcoxon signed-rank\n\n\nDo paired measurements differ?\nWilcoxon signed-rank\n\n\nDo two independent groups differ?\nWilcoxon rank-sum\n\n\nDo 3+ independent groups differ?\nKruskal-Wallis\n\n\n\n\n\nKey decision rule:\n\nAre parametric assumptions met? → Use parametric test (more power)\nSmall \\(n\\), skewed data, outliers, ordinal outcome? → Use nonparametric test\n\n\n\n\nR functions summary:\n\n# Signed-rank (paired / one-sample)\nwilcox.test(data$d, mu = 0)\n\n# Rank-sum (two independent groups)\nwilcox.test(outcome ~ group, \n            data = data)\n\n# Kruskal-Wallis (3+ groups)\nkruskal.test(outcome ~ group, \n             data = data)\n\n# Post-hoc after K-W\npairwise.wilcox.test(\n  data$outcome, data$group,\n  p.adjust.method = \"bonferroni\"\n  )"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#connecting-to-whats-next",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#connecting-to-whats-next",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Connecting to what’s next",
+    "text": "Connecting to what’s next\n\n\nLesson 18 (Wednesday): Correlation and Simple Linear Regression\n\nBoth variables are continuous — we’re no longer comparing groups\nPearson correlation: the parametric approach\nSpearman correlation: the nonparametric analogue (ranks again!)\nSimple linear regression: predicting one variable from another\n\n\n\n\n\n\nThe big picture\n\n\nNonparametric tests are a safety net — they work when parametric assumptions fail. But they’re not magic. If assumptions are met, stick with t-tests and ANOVA. If they aren’t, you now have the right tools to handle it.\nThe rank-based logic you saw today also underlies Spearman correlation, which we’ll see on Wednesday — so this was good preparation."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#the-il-6-example",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#the-il-6-example",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "The IL-6 example",
+    "text": "The IL-6 example\n\n\nSerum interleukin-6 (IL-6) is an inflammatory cytokine commonly elevated in autoimmune and infectious disease. A researcher measured IL-6 levels (pg/mL) in patients classified into three disease severity groups.\n\nMild (\\(n = 8\\)), Moderate (\\(n = 8\\)), Severe (\\(n = 8\\))\nIL-6 values are highly right-skewed — a classic case for the Kruskal-Wallis test\n\n\n\n\nQuestion: Do IL-6 levels differ across disease severity groups?"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#il-6-data",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#il-6-data",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "IL-6 data",
+    "text": "IL-6 data\n\n\n\n\n\nil6_data\n\n# A tibble: 24 × 2\n   severity   il6\n   &lt;fct&gt;    &lt;dbl&gt;\n 1 Mild       3.1\n 2 Mild       3.2\n 3 Mild       3.8\n 4 Mild       3.7\n 5 Mild       3.1\n 6 Mild       2.8\n 7 Mild       5.4\n 8 Mild       4.2\n 9 Moderate  23  \n10 Moderate   8.8\n# ℹ 14 more rows\n\n\n\n\n\n\nil6_data %&gt;%\n  group_by(severity) %&gt;%\n  summarise(\n    n      = n(),\n    median = median(il6),\n    mean   = mean(il6),\n    sd     = sd(il6)\n  )\n\n# A tibble: 3 × 5\n  severity     n median  mean     sd\n  &lt;fct&gt;    &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n1 Mild         8   3.45  3.66  0.838\n2 Moderate     8  14.8  16.3   7.57 \n3 Severe       8  68.2  86.4  42.6"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#why-not-anova",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#why-not-anova",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Why not ANOVA?",
+    "text": "Why not ANOVA?\n\n\n\n# Check the equal-variance assumption\nil6_data %&gt;%\n  group_by(severity) %&gt;%\n  summarise(sd = sd(il6)) %&gt;%\n  summarise(ratio = max(sd) / min(sd))\n\n# A tibble: 1 × 1\n  ratio\n  &lt;dbl&gt;\n1  50.8\n\n\n\n\nSD ratio &gt; 2 and groups are right-skewed → ANOVA assumptions violated. Kruskal-Wallis is the right choice."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#visualizing-il-6-by-severity-group",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#visualizing-il-6-by-severity-group",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Visualizing IL-6 by severity group",
+    "text": "Visualizing IL-6 by severity group\n\n\nCode\nggplot(il6_data, aes(x = severity, \n                     y = il6, \n                     fill = severity, \n                     color = severity)) +\n  geom_boxplot(alpha = 0.3, \n               outlier.shape = NA, \n               width = 0.5) +\n  geom_jitter(alpha = 0.5, width = 0.15, size = 2) +\n  scale_fill_manual(values  = c(\"#0072B2\", \"#E69F00\", \"#D55E00\"),\n                    guide = \"none\") +\n  scale_color_manual(values = c(\"#0072B2\", \"#E69F00\", \"#D55E00\"),\n                     guide = \"none\") +\n  labs(title = \"Serum IL-6 by disease severity\",\n       x = NULL, y = \"IL-6 (pg/mL)\")\n\n\n\nRight-skewed distributions across all groups. Median IL-6 appears to increase with severity. Groups are clearly not normally distributed."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-3",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-1-state-hypotheses-3",
+    "title": "Nonparametric Tests",
+    "section": "Step 1: State hypotheses",
+    "text": "Step 1: State hypotheses\n\n\n\\(H_0\\): The distributions of serum IL-6 are identical across all three severity groups\n\\(H_A\\): At least one severity group has a different distribution of serum IL-6"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions-2",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-23-significance-level-and-assumptions-2",
+    "title": "Nonparametric Tests",
+    "section": "Steps 2–3: Significance level and assumptions",
+    "text": "Steps 2–3: Significance level and assumptions\n\n\n\\(\\alpha = 0.05\\)\n\n\nKruskal-Wallis assumptions:\n\nIndependent observations across groups (✓ — different patients in each group)\nContinuous or ordinal outcome (✓ — IL-6 in pg/mL)\nAll groups come from populations with the same distributional shape — check visually\n\nThe boxplots above suggest right-skewed distributions across all three groups. ✓"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r-2",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#steps-45-test-statistic-and-p-value-in-r-2",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Steps 4–5: Test statistic and p-value in R",
+    "text": "Steps 4–5: Test statistic and p-value in R\n\n\n\nkw_result &lt;- kruskal.test(il6 ~ severity, data = il6_data)\n\nkw_result %&gt;%\n  broom::tidy()\n\n# A tibble: 1 × 4\n  statistic   p.value parameter method                      \n      &lt;dbl&gt;     &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;                       \n1      20.5 0.0000356         2 Kruskal-Wallis rank sum test\n\n\n\n\n\n\n\nReading the output\n\n\n\nstatistic = \\(H\\) = Kruskal-Wallis test statistic\np.value = p-value from \\(\\chi^2\\) distribution with df = \\(k - 1\\) = 2\nparameter = degrees of freedom"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix-2",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#using-rstatix-2",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Using rstatix",
+    "text": "Using rstatix\n\n\n\nil6_data %&gt;%\n  kruskal_test(il6 ~ severity)\n\n# A tibble: 1 × 6\n  .y.       n statistic    df         p method        \n* &lt;chr&gt; &lt;int&gt;     &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         \n1 il6      24      20.5     2 0.0000356 Kruskal-Wallis"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-3",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#step-6-conclusion-3",
+    "title": "Nonparametric Tests",
+    "section": "Step 6: Conclusion",
+    "text": "Step 6: Conclusion\n\n\nWith \\(H\\) = 20.49, df = 2, p = &lt; 0.001, we reject \\(H_0\\).\n\n\n\n\n\nConclusion\n\n\nThere is strong evidence that the distribution of serum IL-6 differs across at least two disease severity groups (Kruskal-Wallis test, \\(H\\) = 20.49, df = 2, p = &lt; 0.001).\nDescriptively, median IL-6 increased with severity — mild (median = 3.4 pg/mL), moderate (median = 14.8 pg/mL), and severe (median = 68.2 pg/mL)."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-1",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-1",
+    "title": "Nonparametric Tests",
+    "section": "Post-hoc comparisons after K-W",
+    "text": "Post-hoc comparisons after K-W\n\n\nJust like ANOVA, a significant K-W test tells us something differs — not which pairs. Follow up with pairwise Wilcoxon rank-sum tests with a correction:\n\nairquality %&gt;%\n  mutate(Month = factor(Month,\n                        labels = c(\"May\",\"Jun\",\"Jul\",\"Aug\",\"Sep\"))) %&gt;%\n  wilcox_test(Ozone ~ Month,\n              p.adjust.method = \"fdr\",\n              paired = FALSE)\n\n# A tibble: 10 × 9\n   .y.   group1 group2    n1    n2 statistic        p    p.adj p.adj.signif\n * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       \n 1 Ozone May    Jun       26     9      82   0.193    0.241    ns          \n 2 Ozone May    Jul       26    26     110.  0.00003  0.0003   ***         \n 3 Ozone May    Aug       26    26     128.  0.000121 0.000605 ***         \n 4 Ozone May    Sep       26    29     284   0.119    0.17     ns          \n 5 Ozone Jun    Jul        9    26      51.5 0.014    0.028    *           \n 6 Ozone Jun    Aug        9    26      57.5 0.026    0.043    *           \n 7 Ozone Jun    Sep        9    29     132.  0.959    0.959    ns          \n 8 Ozone Jul    Aug       26    26     348   0.862    0.958    ns          \n 9 Ozone Jul    Sep       26    29     578.  0.000744 0.002    **          \n10 Ozone Aug    Sep       26    29     552   0.003    0.008    **          \n\n\n\n\n\n\n\nTip\n\n\nFDR correction is appropriate here with 10 pairwise tests. Use p.adjust.method = \"bonferroni\" or \"holm\" for a more conservative approach."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-12",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-12",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Post-hoc comparisons after K-W (1/2)",
+    "text": "Post-hoc comparisons after K-W (1/2)\n\n\nJust like ANOVA, a significant K-W test tells us something differs — not which pairs. Follow up with pairwise Wilcoxon rank-sum tests with a correction:\n\npairwise.wilcox.test(il6_data$il6, il6_data$severity,\n                     p.adjust.method = \"bonferroni\")\n\n\n    Pairwise comparisons using Wilcoxon rank sum test with continuity correction \n\ndata:  il6_data$il6 and il6_data$severity \n\n         Mild    Moderate\nModerate 0.00279 -       \nSevere   0.00279 0.00047 \n\nP value adjustment method: bonferroni"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-22",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#post-hoc-comparisons-after-k-w-22",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Post-hoc comparisons after K-W (2/2)",
+    "text": "Post-hoc comparisons after K-W (2/2)\n\n\nAlternative using rstatix:\n\n\n\nil6_data %&gt;%\n  wilcox_test(il6 ~ severity,\n              p.adjust.method = \"bonferroni\",\n              paired = FALSE)\n\n# A tibble: 3 × 9\n  .y.   group1   group2      n1    n2 statistic        p    p.adj p.adj.signif\n* &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       \n1 il6   Mild     Moderate     8     8         0 0.000931 0.003    **          \n2 il6   Mild     Severe       8     8         0 0.000931 0.003    **          \n3 il6   Moderate Severe       8     8         0 0.000155 0.000465 ***         \n\n\n\n\n\n\n\nTip\n\n\nThere is no nonparametric equivalent of Tukey HSD. Bonferroni correction is a straightforward choice — it controls the family-wise error rate across all pairwise comparisons. With only 3 pairs here, the penalty for using Bonferroni is small."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#dotplot-of-il-6-by-severity-group",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#dotplot-of-il-6-by-severity-group",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "Dotplot of IL-6 by severity group",
+    "text": "Dotplot of IL-6 by severity group\n\n\nCode\nggplot(data = il6_data, \n       aes(x = il6, \n           fill = severity, \n           color = severity)) + \n  geom_dotplot(binwidth = 10, \n               alpha = 0.80) + \n  scale_fill_manual(values  = c(\"#0072B2\", \"#E69F00\", \"#D55E00\"),\n                    guide = \"none\") +\n  scale_color_manual(values = c(\"#0072B2\", \"#E69F00\", \"#D55E00\"),\n                     guide = \"none\") + \n  facet_wrap(~ severity) + \n  scale_y_continuous(expand = c(0, 0)) +\n  labs(title = \"Serum IL-6 by disease severity\",\n       x = NULL, y = \"IL-6 (pg/mL)\")\n\n\n\nRight-skewed distributions within each group — consistent with what the boxplots showed."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric.html#references-and-further-reading",
+    "href": "lessons/20_nonparametric/20_nonparametric.html#references-and-further-reading",
+    "title": "Nonparametric Tests: When the Assumptions Break Down",
+    "section": "References and Further Reading",
+    "text": "References and Further Reading\n\n\nArticle\nNahm FS. Nonparametric statistical tests for the continuous data: the basic concept and the practical use. Korean Journal of Anesthesiology. 2016;69(1):8–14. doi:10.4097/kjae.2016.69.1.8\n\nAccessible overview of when and why to use nonparametric tests, with practical examples drawn from medical research\n\n\n\nWeb resources (numiqo Team, 2026. numiqo: Online Statistics Calculator. https://numiqo.com)\n\nParametric vs. nonparametric tests — overview and decision guidance\nWilcoxon signed-rank test — paired and single-sample\nMann-Whitney U / Wilcoxon rank-sum test — two independent groups\nKruskal-Wallis test — three or more groups\n\n\n\n\nBMSC 620 | Nonparametric Tests"
   }
 ]

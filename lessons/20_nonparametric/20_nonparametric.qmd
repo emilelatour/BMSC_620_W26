@@ -1,0 +1,1227 @@
+---
+title: "Nonparametric Tests: When the Assumptions Break Down"
+subtitle: "Not covered in textbook"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w10d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Nonparametric Tests"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(kableExtra)
+library(oibiostat)
+library(rstatix)
+library(janitor)
+library(gt)
+
+library(lamisc)
+library(laviz)
+
+# Set theme for plots
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+set.seed(620)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Explain when and why nonparametric tests are preferred over parametric alternatives
+2. Describe the core idea behind rank-based tests
+3. Apply the Wilcoxon signed-rank test to paired or single-sample data
+4. Apply the Wilcoxon rank-sum test to two independent samples
+5. Apply the Kruskal-Wallis test to compare three or more groups
+6. Choose the appropriate nonparametric test for a given study design
+
+## Roadmap for Today
+
+\
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: Parametric vs. Nonparametric**
+
+- When do the assumptions break down?
+- The rank-based approach
+- What we gain and what we lose
+- The complete comparison table
+
+**Part 2: Wilcoxon Signed-Rank Test**
+
+- The sign test (brief)
+- Wilcoxon signed-rank: the upgrade
+- Glaucoma example (paired data)
+- Running it in R
+:::
+
+::: {.column width="50%"}
+**Part 3: Wilcoxon Rank-Sum Test**
+
+- The nonparametric two-sample t-test
+- Rat neuron example
+- Running it in R
+
+**Part 4: Kruskal-Wallis Test**
+
+- The nonparametric ANOVA
+- IL-6 example
+- Running it in R
+- Post-hoc follow-up
+:::
+:::::
+
+# Part 1: Parametric vs. Nonparametric
+
+## What do all our tests so far have in common?
+
+\
+
+Every test we've learned assumes the data come from a specific distribution:
+
+\
+
+| Test | Distributional assumption |
+|---|---|
+| One-sample t-test | Normal population (or large $n$) |
+| Paired t-test | Normal differences (or large $n$) |
+| Two-sample t-test | Normal populations (or large $n$) |
+| ANOVA | Normal within each group (or large $n$) |
+
+\
+
+**These are called *parametric* tests** — they assume the population can be described by specific parameters ($\mu$, $\sigma$) under a named distribution.
+
+\
+
+::: {.callout-note icon="false"}
+### What if the assumptions don't hold?
+
+Small samples + non-normal data + outliers = parametric tests may not be valid. Nonparametric tests are the answer.
+:::
+
+## When do parametric assumptions break down?
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Situation 1: Small samples with skewed data**
+
+- $n = 8$ per group, right-skewed outcome
+- Central limit theorem doesn't save you here
+- t-test p-values may not be reliable
+
+\
+
+**Situation 2: Outliers that aren't errors**
+
+- Biological data often has extreme values
+- A single outlier can dominate the mean
+- The outlier is real — you can't just remove it
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**Situation 3: Ordinal outcomes**
+
+- Pain scale (1–10), severity scores, Likert items
+- Means aren't always meaningful
+- "Average pain of 4.7" — what does that mean?
+
+\
+
+**Situation 4: Heavy-tailed distributions**
+
+- Gene expression, antibody titers, viral loads
+- Extreme values are common, not aberrant
+- Log-transformation helps, but isn't always appropriate
+
+:::
+:::::
+
+## The rank-based approach
+
+**Key idea:** Instead of testing raw values, convert them to ranks first.
+
+\
+
+::::: columns
+::: {.column width="15%"}
+:::
+::: {.column width="40%"}
+
+**Step 1:** Take your original data
+
+| Patient | Viral load |
+|---|---|
+| A | 125 |
+| B | 3024 |
+| C | 780 |
+| D | 55 |
+| E | 426 |
+
+:::
+
+::: {.column width="0%"}
+:::
+
+::: {.column width="40%"}
+
+**Step 2:** Replace values with ranks
+
+| Patient | Viral load | Rank |
+|---|---|---|
+| D | 55 | 1 |
+| A | 125 | 2 |
+| E | 426 | 3 |
+| C | 780 | 4 |
+| B | 3024 | 5 |
+
+:::
+:::::
+
+\
+
+::: {.callout-tip icon="false"}
+### Why ranks work
+
+Patient B's viral load of 3024 is extreme, but as a rank it's just "5" — the highest. Ranks compress outliers automatically. The rank-sum test uses these ranks instead of raw values, so no distributional assumption is needed.
+:::
+
+## Pros and cons of nonparametric tests
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Advantages
+
+- **Fewer assumptions** — no normality required
+- **Robust to outliers** — extreme values become just another rank
+- **Work with small samples** — exact p-values available
+- **Can handle ordinal data** — ranks are meaningful for ordered categories
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-warning icon="false"}
+### Trade-offs
+
+- **Less powerful** — converting to ranks discards information about magnitude
+- If parametric assumptions *are* met, the t-test or ANOVA will detect effects more efficiently
+- Confidence intervals are harder to compute
+- Ties in ranks require corrections
+:::
+
+:::
+:::::
+
+\
+
+::: {.callout-important icon="false"}
+### The bottom line
+
+Use parametric tests when assumptions are met — they're more powerful. Switch to nonparametric when you have small samples, severe skew, heavy outliers, or ordinal data.
+:::
+
+## The complete comparison table
+
+\
+
+| Study design | Parametric test | Nonparametric alternative |
+|---|---|---|
+| Single sample, numeric | One-sample t-test | Wilcoxon signed-rank |
+| Paired sample, numeric | Paired t-test | Wilcoxon signed-rank |
+| Two independent samples, numeric | Two-sample t-test | Wilcoxon rank-sum |
+| 3+ independent samples, numeric | ANOVA | Kruskal-Wallis |
+
+\
+
+::: {.callout-note icon="false"}
+### What about categorical outcomes?
+
+For 2×2 tables with small expected cell counts, we use **Fisher's exact test** — we covered this already in Lesson 14. It's the nonparametric alternative to the chi-squared test for categorical data.
+:::
+
+# Part 2: Wilcoxon Signed-Rank Test
+
+## First: the sign test (brief)
+
+\
+
+<!-- The **sign test** is the simplest nonparametric test for paired or single-sample data: -->
+
+<!-- - Compute the differences $d_i = x_{i2} - x_{i1}$ -->
+<!-- - Count the number of **positive** signs ($D^+$) and **negative** signs ($D^-$) -->
+<!-- - Under $H_0$: differences symmetric around 0, so $D^+ \sim \text{Binomial}(n, 0.5)$ -->
+
+The **sign test** is the simplest nonparametric test for paired or single-sample data.
+
+\
+
+**Paired setting:** each subject $i$ has two measurements — a first observation
+$x_{i1}$ (e.g., pre-treatment) and a second observation $x_{i2}$ (e.g., post-treatment).
+Compute the within-subject difference:
+
+$$d_i = x_{i2} - x_{i1}$$
+
+**Single-sample setting:** each subject has one observation $x_i$, and we compare
+it against a hypothesized value $\mu_0$:
+
+$$d_i = x_i - \mu_0$$
+
+\
+
+In both cases, the test proceeds the same way:
+
+- Count the number of **positive** differences ($D^+$) and **negative** differences ($D^-$)
+- Ignore ties ($d_i = 0$)
+- Under $H_0$: differences are symmetric around 0, so $D^+ \sim \text{Binomial}(n, 0.5)$
+
+\
+
+## Why we don't use the sign test
+
+\
+
+::: {.callout-warning icon="false"}
+### The problem with the sign test
+
+The sign test only uses the **direction** of each difference — not the **size**.
+
+A difference of 0.01 and a difference of 10.0 both count as a single "+". This
+throws away most of the information in your data and makes the test much less
+powerful than it could be.
+
+**The Wilcoxon signed-rank test solves this by incorporating the magnitude of
+differences through ranking.**
+:::
+
+## The Wilcoxon signed-rank test
+
+\
+
+**The upgrade over the sign test:** We rank the *absolute values* of the differences, then use the signs.
+
+\
+
+**Conceptual steps:**
+
+1. Compute differences $d_i$ (drop any zeros)
+2. Rank the **absolute values** $|d_i|$ from smallest to largest (ties get average ranks)
+3. Attach the original sign (+/−) back to each rank
+4. Sum the positive ranks ($T^+$) and negative ranks ($T^-$)
+5. If $H_0$ is true, $T^+$ and $T^-$ should be roughly equal
+
+\
+
+::: {.callout-note icon="false"}
+### What's being tested
+
+$H_0$: The population of differences is **symmetric around zero**
+
+$H_A$: The population of differences is **not symmetric around zero**
+
+This is equivalent to testing whether the median difference is zero — provided the distribution is symmetric.
+:::
+
+## The glaucoma example
+
+Intraocular pressure in glaucoma patients is often reduced by treatment with adrenaline. A **new synthetic drug** is being evaluated — more expensive, but potentially more effective.
+
+- 7 patients treated with **both** drugs (one eye each)
+- Outcome: reduction in pressure after treatment
+- Larger values = greater pressure reduction
+
+**Question:** Do the two drugs produce the same reduction in pressure?
+
+\
+
+```{r}
+#| echo: false
+
+IOP <- tibble(
+  patient = 1:7,
+  adrenaline = c(3.5, 2.6, 3.0, 1.9, 2.9, 2.4, 2.0),
+  synthetic  = c(3.2, 3.1, 3.3, 2.4, 2.9, 2.8, 2.6)
+) %>%
+  mutate(d = synthetic - adrenaline)
+
+```
+
+```{r}
+IOP
+```
+
+
+## Step 1: State hypotheses
+
+\
+
+$H_0$: The differences in intraocular pressure reduction (synthetic − adrenaline) are symmetrically distributed around zero
+
+$H_A$: The differences are not symmetrically distributed around zero
+
+\
+
+In plain language:
+
+$H_0$: The two drugs produce the same median reduction in intraocular pressure
+
+$H_A$: The two drugs differ in median reduction of intraocular pressure
+
+## Step 2: Set significance level
+
+$$\alpha = 0.05$$
+
+## Step 3: Check assumptions
+
+\
+
+**Wilcoxon signed-rank assumptions:**
+
+1. Paired observations (✓ — same patients, one eye each)
+2. Differences are **continuous** (✓ — pressure measurements)
+3. Distribution of differences is **symmetric** around the median (check visually)
+
+\
+
+- Assumptions 1 and 2 are verified from the study design alone.
+- For assumption 3, we plot the distribution of differences $d_i$ and look for approximate symmetry around zero — no need for perfect normality, just no severe skew or outliers pulling in one direction.
+
+
+## Step 3: Check assumptions — visually
+
+::: {.columns}
+::: {.column width="55%"}
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5
+#| fig-align: center
+
+ggplot(IOP, aes(x = d)) +
+  geom_dotplot(binwidth = 0.1,
+               fill = "#0072B2",
+               color = "white",
+               dotsize = 0.6) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey50") +
+  labs(title = "Differences: synthetic − adrenaline",
+       x = "Difference in pressure reduction",
+       y = NULL) + 
+  scale_y_continuous(expand = c(0, 0))
+```
+:::
+
+::: {.column width="45%"}
+
+\
+
+**What to look for:** approximate symmetry around zero — no severe skew, no
+outliers pulling strongly in one direction.
+
+\
+
+**What we see:**
+
+- Most differences are positive — the synthetic drug tends to reduce pressure more
+- The spread on both sides of zero is roughly balanced
+- With a small sample, we do not assume normality — only approximate symmetry
+
+\
+
+✓ Assumption 3 is satisfied.
+
+:::
+:::
+
+## How ranking works — conceptually
+
+\
+
+```{r}
+#| echo: false
+
+# IOP %>%
+#   filter(d != 0) %>%
+#   mutate(
+#     abs_d = abs(d),
+#     rank  = rank(abs_d, ties.method = "average"),
+#     signed_rank = if_else(d > 0, rank, -rank)
+#   ) %>%
+#   select(patient, adrenaline, synthetic, d, abs_d, rank, signed_rank) %>%
+#   gt() %>%
+#   cols_label(
+#     patient = "Patient",
+#     adrenaline = "Adrenaline",
+#     synthetic = "Synthetic",
+#     d = "d",
+#     abs_d = "|d|",
+#     rank = "Rank of |d|",
+#     signed_rank = "Signed rank"
+#   ) %>%
+#   tab_options(table.font.size = 22)
+
+# IOP %>%
+#   filter(d != 0) %>%
+#   mutate(
+#     abs_d = abs(d),
+#     rank  = rank(abs_d, ties.method = "average"),
+#     signed_rank = if_else(d > 0, rank, -rank)
+#   ) %>%
+#   select(patient, adrenaline, synthetic, d, abs_d, rank, signed_rank) %>%
+#   knitr::kable(col.names = c("Patient",
+#     "Adrenaline",
+#     "Synthetic",
+#     "d",
+#     "|d|",
+#     "Rank of |d|",
+#     "Signed rank"))
+
+library(kableExtra)
+
+IOP %>%
+  filter(d != 0) %>%
+  mutate(
+    abs_d = abs(d),
+    rank  = rank(abs_d, ties.method = "average"),
+    signed_rank = if_else(d > 0, rank, -rank)
+  ) %>%
+  select(patient, adrenaline, synthetic, d, abs_d, rank, signed_rank) %>%
+  knitr::kable(
+    col.names = c("Patient", "Adrenaline", "Synthetic", "d", 
+                  "abs(d)", 
+                  "Rank of abs(d)", 
+                  "Signed rank"),
+    align = "c"
+  ) %>%
+  kable_styling(font_size = 28, full_width = FALSE) %>%
+  column_spec(1, width = "5em") %>%
+  column_spec(2:3, width = "7em") %>%
+  column_spec(4:5, width = "4em") %>%
+  column_spec(6, width = "7em") %>%
+  column_spec(7, width = "7em", background = "#FFF3CD", bold = TRUE)
+
+    
+```
+
+\
+
+- Patient 5 had $d = 0$ → dropped from analysis (effective $n = 6$)
+- $T^+ = 1.5 + 3 + 4.5 + 4.5 + 6 = 19.5$ (sum of positive ranks)
+- $T^- = 1.5$ (sum of negative ranks, in absolute value)
+- If $H_0$ true: $T^+$ and $T^-$ should be roughly equal
+
+
+## Steps 4–5: Test statistic and p-value in R
+
+\
+
+```{r}
+# exact = FALSE because ties exist in the nonzero differences
+sr_result <- wilcox.test(IOP$d, mu = 0,
+                         alternative = "two.sided",
+                         exact = FALSE)
+
+sr_result %>% 
+  broom::tidy()
+```
+
+```{r}
+#| echo: false
+res_p <- lamisc::fmt_pvl(sr_result$p.value)
+res_stat <- lamisc::fmt_num(sr_result$statistic, accuracy = 0.01)
+res_diff <- scales::number(median(IOP$d), accuracy = 0.01)
+```
+
+::: {.callout-note icon="false"}
+### Reading the output
+- `statistic` = $T^+$ = `r res_stat` (sum of positive ranks)
+- `p.value` = p-value using normal approximation — R uses the exact method only when sample is small **and** there are no ties. Because our nonzero differences contain ties (0.3 appears twice, 0.5 appears twice), R falls back to the normal approximation automatically. Setting `exact = FALSE` makes this explicit and prevents a warning.
+:::
+
+## Using `rstatix`
+
+\
+
+```{r}
+library(rstatix)
+
+IOP %>%
+  wilcox_test(d ~ 1, mu = 0,
+              alternative = "two.sided",
+              exact = FALSE)
+```
+
+## Step 6: Conclusion
+
+
+\
+
+With *p* = `r res_p` and $\alpha = 0.05$, we **fail to reject $H_0$**.
+
+\
+
+::: {.callout-important icon="false"}
+### Conclusion
+
+There is insufficient evidence that the median difference in intraocular pressure reduction between the synthetic drug and adrenaline differs from zero (Wilcoxon signed-rank test, $T^+$ = `r res_stat`, *p* = `r res_p`).
+
+The synthetic drug showed a numerically higher median reduction (difference = `r res_diff` mmHg), but this difference was not statistically significant at $\alpha = 0.05$ with only 6 evaluable patients. A larger study would be needed to draw a definitive conclusion.
+:::
+
+\
+
+::: {.callout-tip icon="false"}
+### Note on sample size
+
+$n = 7$ (effective $n = 6$) gives this study very low power. Failing to reject $H_0$ here does not mean the drugs are equivalent — it may simply mean we don't have enough data.
+:::
+
+# Part 3: Wilcoxon Rank-Sum Test
+
+## The nonparametric two-sample t-test
+
+\
+
+When the two-sample t-test assumptions don't hold and the groups are **independent**, use the **Wilcoxon rank-sum test** (also called the Mann-Whitney U test).
+
+\
+
+**The idea:**
+
+1. Combine both groups into one dataset
+2. Rank all observations from 1 to $N$
+3. Sum the ranks within each group
+4. If the groups have the same median, the rank sums should be roughly equal
+5. If one group tends to have higher ranks, that group has a higher median
+
+\
+
+::: {.callout-note icon="false"}
+### Hypotheses
+
+$H_0$: The distributions of the two populations are identical
+
+$H_A$: The distributions of the two populations are not identical
+
+(When both groups share the same shape, any difference reflects a shift in location — i.e., a difference in median.)
+:::
+
+
+## The rat neuron example
+
+\
+
+A study measured **evoked membrane current** of dental sensory neurons in rats under two conditions:
+
+- **Control:** standard conditions
+- **Treatment:** capsaicin + capsazepine (CPZ)
+
+6 rats per group. Membrane current values (pA) are highly right-skewed with a wide range — a classic case for the rank-sum test.
+
+\
+
+**Question:** Does CPZ treatment alter the median membrane current?
+
+```{r}
+#| echo: false
+CPZ <- tibble(
+  group   = c(rep("Control", 6),
+              rep("Cap + CPZ", 6)),
+  current = c(3024, 2164, 864,
+              780, 125, 110,
+              426, 232, 130,
+              94, 75, 55)
+)
+```
+
+
+## Rat neuron data
+
+\
+
+::::: columns
+::: {.column width="40%"}
+
+```{r}
+CPZ
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+
+```{r}
+
+
+CPZ %>%
+  group_by(group) %>%
+  summarise(
+    n      = n(),
+    median = median(current),
+    mean   = round(mean(current), 0)
+  )
+```
+
+:::
+:::::
+
+## Visualizing the data
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+#| fig-align: center
+#| code-fold: true
+
+ggplot(CPZ, aes(x = current, fill = group, color = group)) +
+  geom_dotplot(binwidth = 80, alpha = 0.7) +
+  facet_wrap(~ group, ncol = 2, 
+             scale = "free_y") +
+  scale_fill_manual(values  = c("#E69F00", "#0072B2"), guide = "none") +
+  scale_color_manual(values = c("#E69F00", "#0072B2"), guide = "none") +
+  labs(title = "Evoked membrane current by treatment group",
+       x = "Membrane current (pA)", y = NULL) + 
+  scale_y_continuous(expand = c(0, 0))
+```
+
+Both groups are **right-skewed** with similar shape — consistent with the rank-sum assumption. The control group has a much higher median.
+
+## How ranking works — conceptually
+
+\
+
+::: columns
+::: {.column width="55%"}
+```{r}
+CPZ %>%
+  arrange(current) %>%
+  mutate(rank = rank(current, 
+                     ties.method = "average"))
+```
+:::
+::: {.column width="45%"}
+
+\
+
+\
+
+\
+
+\
+
+\
+
+\
+
+
+- $W_{\text{Control}} = 4 + 5 + 9 + 10 + 11 + 12 = 51$
+- $W_{\text{Cap+CPZ}} = 1 + 2 + 3 + 6 + 7 + 8 = 27$
+
+\
+
+- If $H_0$ true, we'd expect rank sums to be roughly equal (both ≈ 39).
+
+:::
+:::
+
+
+
+
+## Step 1: State hypotheses
+
+\
+
+$H_0$: The distribution of evoked membrane current is the same in the control and CPZ-treated populations
+
+$H_A$: The distributions of evoked membrane current in the control and CPZ-treated populations are not identical
+
+
+## Steps 2–3: Significance level and assumptions
+
+\
+
+$\alpha = 0.05$
+
+\
+
+**Wilcoxon rank-sum assumptions:**
+
+1. Two independent samples (✓ — different rats in each group)
+2. Continuous outcome (✓ — membrane current in pA)
+3. Both distributions have the **same shape** — check visually
+
+The dotplots showed both groups are right-skewed with similar spread. ✓
+
+## Steps 4–5: Test statistic and p-value in R
+
+\
+```{r}
+# exact = TRUE is appropriate: both n < 10, no ties in this dataset
+rs_result <- wilcox.test(current ~ group, data = CPZ,
+                         alternative = "two.sided",
+                         exact = TRUE)
+
+rs_result %>%
+  broom::tidy()
+```
+
+```{r}
+#| echo: false
+res_p   <- lamisc::fmt_pvl(rs_result$p.value)
+res_stat <- lamisc::fmt_num(rs_result$statistic, accuracy = 0.01)
+res_med_ctrl <- scales::number(median(CPZ$current[CPZ$group == "Control"]), accuracy = 1)
+res_med_cpz  <- scales::number(median(CPZ$current[CPZ$group == "Cap + CPZ"]), accuracy = 1)
+```
+
+::: {.callout-note icon="false"}
+### Reading the output
+- `statistic` = $W$ = rank sum for the first alphabetical group
+- `p.value` = exact p-value (appropriate here: both $n < 10$, no ties)
+- For larger samples or when ties exist, R automatically uses the normal approximation
+:::
+
+## Using `rstatix`
+
+\
+```{r}
+CPZ %>%
+  wilcox_test(current ~ group,
+              alternative = "two.sided",
+              exact = TRUE)
+```
+
+## Step 6: Conclusion
+
+\
+
+With *p* = `r res_p` and $\alpha = 0.05$, we **fail to reject $H_0$**.
+
+\
+
+::: {.callout-important icon="false"}
+### Conclusion
+
+<!-- "picoamps" (or more formally, "picoamperes"). -->
+
+There is suggestive but inconclusive evidence that the distributions of evoked membrane current differ between the control group and the group exposed to capsaicin + CPZ (Wilcoxon rank-sum test, $W$ = `r res_stat`, *p* = `r res_p`).
+
+The control group had a substantially higher median current (median = `r res_med_ctrl` pA) compared to the CPZ group (median = `r res_med_cpz` pA), but the small sample size ($n = 6$ per group) limits statistical power.
+:::
+
+# Part 4: Kruskal-Wallis Test
+
+## The nonparametric ANOVA
+
+
+When ANOVA assumptions fail with 3 or more groups, use the **Kruskal-Wallis test**.
+
+\
+
+It extends the rank-sum test to $k$ groups:
+
+1. Combine all groups, rank all observations 1 to $N$
+2. Compute the sum of ranks within each group: $R_1, R_2, \ldots, R_k$
+3. If $H_0$ is true, rank sums should be similar across groups
+4. The test statistic $H$ quantifies how different the rank sums are
+
+
+$$H_0: \text{The distributions of all } k \text{ groups are identical}$$
+$$H_A: \text{At least one group has a different distribution}$$
+
+\
+
+::: {.callout-tip icon="false"}
+The K-W test statistic $H$ follows a $\chi^2$ distribution with $k - 1$ degrees of freedom. When $k = 2$, K-W gives the same result as the rank-sum test.
+
+When all groups share the same distributional shape, any difference reflects a shift in location — i.e., a difference in median.
+:::
+
+## Kruskal-Wallis vs ANOVA
+
+\
+
+
+![](/img_slides/Kruskal-Wallis-Test-vs-anova.png){fig-align="center" width="80%"}
+
+::: {style="font-size: 0.6em; color: grey; text-align: center;"}
+Source: numiqo Team (2026). numiqo: Online Statistics Calculator. https://numiqo.com
+:::
+
+## The IL-6 example
+
+\
+
+Serum **interleukin-6 (IL-6)** is an inflammatory cytokine commonly elevated in autoimmune and infectious disease. A researcher measured IL-6 levels (pg/mL) in patients classified into three disease severity groups.
+
+- **Mild** ($n = 8$), **Moderate** ($n = 8$), **Severe** ($n = 8$)
+- IL-6 values are highly right-skewed — a classic case for the Kruskal-Wallis test
+
+<!-- picograms per milliliter -->
+
+\
+
+**Question:** Do IL-6 levels differ across disease severity groups?
+```{r}
+#| echo: false
+set.seed(620)
+il6_data <- tibble(
+  severity = factor(
+    c(rep("Mild", 8), rep("Moderate", 8), rep("Severe", 8)),
+    levels = c("Mild", "Moderate", "Severe")
+  ),
+  il6 = c(
+    round(rlnorm(8, meanlog = 1.5, sdlog = 0.4), 1),
+    round(rlnorm(8, meanlog = 2.8, sdlog = 0.5), 1),
+    round(rlnorm(8, meanlog = 4.0, sdlog = 0.6), 1)
+  )
+)
+```
+
+## IL-6 data
+
+\
+
+::::: columns
+::: {.column width="40%"}
+```{r}
+il6_data
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="55%"}
+```{r}
+il6_data %>%
+  group_by(severity) %>%
+  summarise(
+    n      = n(),
+    median = median(il6),
+    mean   = mean(il6),
+    sd     = sd(il6)
+  )
+```
+
+:::
+:::::
+
+## Why not ANOVA?
+
+\
+```{r}
+# Check the equal-variance assumption
+il6_data %>%
+  group_by(severity) %>%
+  summarise(sd = sd(il6)) %>%
+  summarise(ratio = max(sd) / min(sd))
+```
+
+\
+
+SD ratio > 2 and groups are right-skewed → ANOVA assumptions violated.
+Kruskal-Wallis is the right choice.
+
+## Visualizing IL-6 by severity group
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-align: center
+#| code-fold: true
+
+ggplot(il6_data, aes(x = severity, 
+                     y = il6, 
+                     fill = severity, 
+                     color = severity)) +
+  geom_boxplot(alpha = 0.3, 
+               outlier.shape = NA, 
+               width = 0.5) +
+  geom_jitter(alpha = 0.5, width = 0.15, size = 2) +
+  scale_fill_manual(values  = c("#0072B2", "#E69F00", "#D55E00"),
+                    guide = "none") +
+  scale_color_manual(values = c("#0072B2", "#E69F00", "#D55E00"),
+                     guide = "none") +
+  labs(title = "Serum IL-6 by disease severity",
+       x = NULL, y = "IL-6 (pg/mL)")
+```
+
+Right-skewed distributions across all groups. Median IL-6 appears to increase
+with severity. Groups are clearly not normally distributed.
+
+## Dotplot of IL-6 by severity group
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+#| fig-align: center
+#| code-fold: true
+
+ggplot(data = il6_data, 
+       aes(x = il6, 
+           fill = severity, 
+           color = severity)) + 
+  geom_dotplot(binwidth = 10, 
+               alpha = 0.80) + 
+  scale_fill_manual(values  = c("#0072B2", "#E69F00", "#D55E00"),
+                    guide = "none") +
+  scale_color_manual(values = c("#0072B2", "#E69F00", "#D55E00"),
+                     guide = "none") + 
+  facet_wrap(~ severity) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Serum IL-6 by disease severity",
+       x = NULL, y = "IL-6 (pg/mL)")
+```
+
+Right-skewed distributions within each group — consistent with what the boxplots showed.
+
+## Step 1: State hypotheses
+
+\
+
+$H_0$: The distributions of serum IL-6 are identical across all three severity groups
+
+$H_A$: At least one severity group has a different distribution of serum IL-6
+
+## Steps 2–3: Significance level and assumptions
+
+\
+
+$\alpha = 0.05$
+
+\
+
+**Kruskal-Wallis assumptions:**
+
+1. Independent observations across groups (✓ — different patients in each group)
+2. Continuous or ordinal outcome (✓ — IL-6 in pg/mL)
+3. All groups come from populations with the **same distributional shape** — check visually
+
+The previous plots suggest right-skewed distributions across all three groups. ✓
+
+## Steps 4–5: Test statistic and p-value in R
+
+\
+```{r}
+kw_result <- kruskal.test(il6 ~ severity, data = il6_data)
+
+kw_result %>%
+  broom::tidy()
+```
+```{r}
+#| echo: false
+res_p    <- lamisc::fmt_pvl(kw_result$p.value)
+res_stat <- lamisc::fmt_num(kw_result$statistic, accuracy = 0.01)
+res_df   <- kw_result$parameter
+```
+
+\
+
+::: {.callout-note icon="false"}
+### Reading the output
+- `statistic` = $H$ = Kruskal-Wallis test statistic
+- `p.value` = p-value from $\chi^2$ distribution with df = $k - 1$ = `r res_df`
+- `parameter` = degrees of freedom
+:::
+
+## Using `rstatix`
+
+\
+```{r}
+il6_data %>%
+  kruskal_test(il6 ~ severity)
+```
+
+## Step 6: Conclusion
+
+\
+
+\
+
+With $H$ = `r res_stat`, df = `r res_df`, *p* = `r res_p`, we **reject $H_0$**.
+
+\
+
+::: {.callout-important icon="false"}
+### Conclusion
+
+There is strong evidence that the distribution of serum IL-6 differs across at
+least two disease severity groups (Kruskal-Wallis test, $H$ = `r res_stat`,
+df = `r res_df`, *p* = `r res_p`).
+
+Descriptively, median IL-6 increased with severity — mild
+(median = `r scales::number(median(il6_data$il6[il6_data$severity == "Mild"]), accuracy = 0.1)` pg/mL),
+moderate
+(median = `r scales::number(median(il6_data$il6[il6_data$severity == "Moderate"]), accuracy = 0.1)` pg/mL),
+and severe
+(median = `r scales::number(median(il6_data$il6[il6_data$severity == "Severe"]), accuracy = 0.1)` pg/mL).
+:::
+
+## Post-hoc comparisons after K-W (1/2)
+
+\
+
+Just like ANOVA, a significant K-W test tells us *something* differs — not *which* 
+pairs. Follow up with pairwise Wilcoxon rank-sum tests with a correction:
+```{r}
+pairwise.wilcox.test(il6_data$il6, il6_data$severity,
+                     p.adjust.method = "bonferroni")
+```
+
+## Post-hoc comparisons after K-W (2/2)
+
+\
+
+**Alternative using `rstatix`:**
+
+\
+```{r}
+il6_data %>%
+  wilcox_test(il6 ~ severity,
+              p.adjust.method = "bonferroni",
+              paired = FALSE)
+```
+
+\
+
+::: {.callout-tip icon="false"}
+There is no nonparametric equivalent of Tukey HSD. Bonferroni correction is a straightforward choice — it controls the family-wise error rate across all pairwise comparisons. With only 3 pairs here, the penalty for using Bonferroni is small.
+:::
+
+
+# Wrap-Up
+
+## Choosing the right nonparametric test
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+| Question | Test |
+|---|---|
+| Is the median different from a value? (single sample) | Wilcoxon signed-rank |
+| Do paired measurements differ? | Wilcoxon signed-rank |
+| Do two independent groups differ? | Wilcoxon rank-sum |
+| Do 3+ independent groups differ? | Kruskal-Wallis |
+
+\
+
+**Key decision rule:**
+
+1. Are parametric assumptions met? → Use parametric test (more power)
+2. Small $n$, skewed data, outliers, ordinal outcome? → Use nonparametric test
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+**R functions summary:**
+
+```{r}
+#| eval: false
+
+# Signed-rank (paired / one-sample)
+wilcox.test(data$d, mu = 0)
+
+# Rank-sum (two independent groups)
+wilcox.test(outcome ~ group, 
+            data = data)
+
+# Kruskal-Wallis (3+ groups)
+kruskal.test(outcome ~ group, 
+             data = data)
+
+# Post-hoc after K-W
+pairwise.wilcox.test(
+  data$outcome, data$group,
+  p.adjust.method = "bonferroni"
+  )
+```
+
+:::
+:::::
+
+## Connecting to what's next
+
+\
+
+**Lesson 18 (Wednesday):** Correlation and Simple Linear Regression
+
+- Both variables are continuous — we're no longer comparing groups
+- Pearson correlation: the parametric approach
+- Spearman correlation: the nonparametric analogue (ranks again!)
+- Simple linear regression: predicting one variable from another
+
+\
+
+::: {.callout-tip icon="false"}
+### The big picture
+
+Nonparametric tests are a safety net — they work when parametric assumptions fail. But they're not magic. If assumptions are met, stick with t-tests and ANOVA. If they aren't, you now have the right tools to handle it.
+
+The rank-based logic you saw today also underlies **Spearman correlation**, which we'll see on Wednesday — so this was good preparation.
+:::
+
+## References and Further Reading
+
+\
+
+**Article**
+
+Nahm FS. [**Nonparametric statistical tests for the continuous data: the basic concept and the practical use**](https://pmc.ncbi.nlm.nih.gov/articles/PMC4754273/). *Korean Journal of Anesthesiology*. 2016;69(1):8–14. doi:10.4097/kjae.2016.69.1.8
+
+- Accessible overview of when and why to use nonparametric tests, with practical examples drawn from medical research
+
+\
+
+**Web resources** (numiqo Team, 2026. numiqo: Online Statistics Calculator. https://numiqo.com)
+
+- [Parametric vs. nonparametric tests](https://numiqo.com/tutorial/parametric-and-non-parametric-tests) — overview and decision guidance
+- [Wilcoxon signed-rank test](https://numiqo.com/tutorial/wilcoxon-test) — paired and single-sample
+- [Mann-Whitney U / Wilcoxon rank-sum test](https://numiqo.com/tutorial/mann-whitney-u-test) — two independent groups
+- [Kruskal-Wallis test](https://numiqo.com/tutorial/kruskal-wallis-test) — three or more groups
