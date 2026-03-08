@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Power for Proportions and ANOVA">
+<meta name="description" content="Nonparametric Tests and Correlation and Simple Linear Regression">
 
-<title>Week 9 – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 10 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
@@ -121,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_09.html">Week 9</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_10.html">Week 10</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -253,13 +282,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week_09.html" class="sidebar-item-text sidebar-link active">
+  <a href="../weeks/week_09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../weeks/week_10.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_10.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
@@ -280,8 +309,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
   <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
   <ul class="collapse">
-  <li><a href="#monday-power-for-proportions-and-correlated-proportions" id="toc-monday-power-for-proportions-and-correlated-proportions" class="nav-link" data-scroll-target="#monday-power-for-proportions-and-correlated-proportions">Monday — Power for Proportions and Correlated Proportions</a></li>
-  <li><a href="#wednesday-comparing-means-with-anova" id="toc-wednesday-comparing-means-with-anova" class="nav-link" data-scroll-target="#wednesday-comparing-means-with-anova">Wednesday — Comparing Means with ANOVA</a></li>
+  <li><a href="#monday-nonparametric-tests" id="toc-monday-nonparametric-tests" class="nav-link" data-scroll-target="#monday-nonparametric-tests">Monday — Nonparametric Tests</a></li>
+  <li><a href="#wednesday-correlation-and-simple-linear-regression" id="toc-wednesday-correlation-and-simple-linear-regression" class="nav-link" data-scroll-target="#wednesday-correlation-and-simple-linear-regression">Wednesday — Correlation and Simple Linear Regression</a></li>
   </ul></li>
   <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
   <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
@@ -292,14 +321,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_09.html">Week 9</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../weeks/week_01.html">Weekly materials</a></li><li class="breadcrumb-item"><a href="../weeks/week_10.html">Week 10</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 9</h1>
+<h1 class="title">Week 10</h1>
 </div>
 
 <div>
   <div class="description">
-    Power for Proportions and ANOVA
+    Nonparametric Tests and Correlation and Simple Linear Regression
   </div>
 </div>
 
@@ -327,95 +356,93 @@ Think of the weekly page as answering just five student questions:
 <section id="announcements" class="level2">
 <h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
 <ul>
-<li><strong>HW 7</strong> is due <strong>Sunday, March 8 at 11:00 PM</strong></li>
+<li><strong>HW 8</strong> is released <strong>Monday, March 9</strong> and is due <strong>Sunday, March 15 at 11:00 PM</strong></li>
 </ul>
 </section>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This week we cover two distinct topics across our two class meetings.</p>
-<p>Monday wraps up our unit on proportions with power analysis — how to determine the sample size needed to detect meaningful differences in proportions, including the special case of correlated (paired) proportions using McNemar’s test. Wednesday shifts gears to comparing means across more than two groups using Analysis of Variance (ANOVA).</p>
+<p>This week we extend our toolkit to handle situations where the standard parametric assumptions break down, and then introduce a new class of questions: what happens when both variables are continuous?</p>
+<p>Monday covers nonparametric tests — rank-based alternatives to the t-test and ANOVA that are useful when data are skewed, samples are small, or outcomes are ordinal. If time permits, we will also begin R Module 3 on visual communication with ggplot2. Wednesday shifts to correlation and simple linear regression, where the goal is no longer comparing groups but understanding the relationship between two continuous variables.</p>
 <p>By the end of the week, you should be able to:</p>
 <ul>
-<li>explain why effect sizes for proportions require the arcsine transformation (Cohen’s <em>h</em>),</li>
-<li>conduct power and sample size calculations for one-sample and two-sample proportion tests,</li>
-<li>understand the role of discordant pairs in power analysis for McNemar’s test,</li>
-<li>describe when and why ANOVA is preferred over multiple t-tests,</li>
-<li>state the null and alternative hypotheses for one-way ANOVA,</li>
-<li>calculate and interpret the F-statistic,</li>
-<li>check ANOVA assumptions (independence, normality, equal variances), and</li>
-<li>conduct post-hoc pairwise comparisons when the overall F-test is significant.</li>
+<li>explain when and why nonparametric tests are preferred over parametric alternatives,</li>
+<li>describe the core idea behind rank-based tests,</li>
+<li>apply the Wilcoxon signed-rank test to paired or single-sample data,</li>
+<li>apply the Wilcoxon rank-sum test to two independent samples,</li>
+<li>apply the Kruskal-Wallis test to compare three or more groups,</li>
+<li>choose the appropriate nonparametric test for a given study design,</li>
+<li>calculate and interpret Pearson and Spearman correlation coefficients,</li>
+<li>identify the components of the simple linear regression model,</li>
+<li>run a simple linear regression in R and interpret the slope and intercept,</li>
+<li>check the LINE assumptions using diagnostic plots,</li>
+<li>interpret <span class="math inline">\(R^2\)</span> as a measure of model fit, and</li>
+<li>conduct and interpret inference for the population slope <span class="math inline">\(\beta_1\)</span>.</li>
 </ul>
 </section>
 <section id="readings-before-class" class="level2">
 <h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
 <ul>
-<li>No textbook reading for Monday (power for proportions is not covered in the textbook)</li>
-<li>Textbook section 5.5 (before Wednesday)</li>
+<li>No textbook reading for Monday (nonparametric tests are not covered in the textbook — see the supplementary references on the slides)</li>
+<li>Textbook sections 1.6, 6.1–6.2 (before Wednesday)</li>
 </ul>
 </section>
 <section id="materials" class="level2">
 <h2 class="anchored" data-anchor-id="materials">Materials</h2>
-<section id="monday-power-for-proportions-and-correlated-proportions" class="level3">
-<h3 class="anchored" data-anchor-id="monday-power-for-proportions-and-correlated-proportions">Monday — Power for Proportions and Correlated Proportions</h3>
+<section id="monday-nonparametric-tests" class="level3">
+<h3 class="anchored" data-anchor-id="monday-nonparametric-tests">Monday — Nonparametric Tests</h3>
 <ul>
-<li><p><strong>Topics</strong></p>
+<li><strong>Topics</strong>
 <ul>
-<li>Review: power analysis concepts (Type II error, effect size, sample size)</li>
-<li>Cohen’s <em>h</em>: the arcsine transformation for proportion effect sizes</li>
-<li>Why the same absolute difference in proportions is not always the same effect size</li>
-<li>Power and sample size for a one-sample proportion test</li>
-<li>Power and sample size for comparing two independent proportions</li>
-<li>Sensitivity analysis: varying the alternative proportion</li>
-<li>Paired proportions and McNemar’s test: the role of discordant pairs</li>
-<li>Power analysis for McNemar’s test via the simplified approach</li>
+<li>When and why to use nonparametric tests</li>
+<li>The rank-based approach</li>
+<li>Wilcoxon signed-rank test (paired and single-sample data)</li>
+<li>Wilcoxon rank-sum test (two independent groups)</li>
+<li>Kruskal-Wallis test (3+ groups) and post-hoc comparisons</li>
+<li><em>If time permits:</em> R Module 3 — Visual Communication with ggplot2</li>
 </ul></li>
-<li><p><strong>Slides</strong></p>
+<li><strong>Slides</strong>
 <ul>
-<li>Power for Proportions and Correlated Proportions (<a href="../lessons/18_power_proportions/18_power_proportions.html">HTML</a> | <a href="../lessons/18_power_proportions/18_power_proportions.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
-<li>R Module 2: Factors and Reshaping Data (<a href="../lessons/18_power_proportions/r_module2_slides.html">HTML</a> | <a href="../lessons/18_power_proportions/r_module2_slides.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+<li>Nonparametric Tests (<a href="../lessons/20_nonparametric/20_nonparametric.html">HTML</a> | <a href="../lessons/20_nonparametric/20_nonparametric.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+<li>R Module 3: Visual Communication with ggplot2 (<a href="../lessons/20_nonparametric/r_module3_slides.html">HTML</a> | <a href="../lessons/20_nonparametric/r_module3_slides.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
 </ul></li>
-<li><p><strong>Code along</strong></p>
+<li><strong>Code along</strong>
 <ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB">Download R Module 2: Factors and Reshaping Data (.qmd)</a></li>
+<li><a href="https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB">Download R Module 3: Visual Communication with ggplot2 (.qmd)</a></li>
 </ul></li>
-<li><p><strong>Recording</strong></p>
+<li><strong>Recording</strong>
 <ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQCeO_aWbqECRojXq58E7N0sAbeDbduU0UtpVfDmQz-kuc8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=j120H8">Power for Proportions and Correlated Proportions</a></li>
+<li>Coming soon</li>
 </ul></li>
-<li><p><strong>Muddy points</strong></p>
-<p>I reviewed your post-class feedback and wrote clarifications here:</p>
+<li><strong>Muddy points</strong>
 <ul>
-<li><a href="../lessons/18_power_proportions/18_power_proportions_muddy_points.html">Muddy Points - Lesson 15</a></li>
+<li>Coming soon</li>
 </ul></li>
 </ul>
 <hr>
 </section>
-<section id="wednesday-comparing-means-with-anova" class="level3">
-<h3 class="anchored" data-anchor-id="wednesday-comparing-means-with-anova">Wednesday — Comparing Means with ANOVA</h3>
+<section id="wednesday-correlation-and-simple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-correlation-and-simple-linear-regression">Wednesday — Correlation and Simple Linear Regression</h3>
 <ul>
-<li><p><strong>Topics</strong></p>
+<li><strong>Topics</strong>
 <ul>
-<li>The problem with multiple t-tests (inflated Type I error)</li>
-<li>One-way ANOVA: hypotheses, assumptions, and the F-statistic</li>
-<li>Between-group and within-group variability</li>
-<li>The ANOVA table: sums of squares, degrees of freedom, mean squares</li>
-<li>The F-distribution and p-values</li>
-<li>Checking assumptions: independence, normality, equal variances</li>
-<li>Post-hoc pairwise comparisons (Tukey’s HSD)</li>
-<li>ANOVA in R</li>
+<li>Pearson and Spearman correlation</li>
+<li>The simple linear regression model: slope, intercept, and residuals</li>
+<li>Fitting and interpreting <code>lm()</code> in R</li>
+<li>LINE assumptions and diagnostic plots</li>
+<li><span class="math inline">\(R^2\)</span> and inference for slope <span class="math inline">\(\beta_1\)</span></li>
+<li>Prediction: confidence intervals vs.&nbsp;prediction intervals</li>
 </ul></li>
-<li><p><strong>Slides</strong></p>
+<li><strong>Slides</strong>
 <ul>
-<li>Comparing Means with ANOVA (<a href="../lessons/19_anova/19_anova.html">HTML</a> | <a href="../lessons/19_anova/19_anova.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+<li>Correlation and Simple Linear Regression (HTML | PDF | OneDrive)</li>
 </ul></li>
-<li><p><strong>Recording</strong></p>
+<li><strong>Recording</strong>
 <ul>
-<li><a href="https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBfSFhTCg_vRKzV_V8DNrPNAYQflLhuR3jc8VVd-BBMHbY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&amp;e=o7Uzqb">Comparing Means with ANOVA</a></li>
+<li>Coming soon</li>
 </ul></li>
-<li><p><strong>Muddy points</strong></p>
-<p>I reviewed your post-class feedback and wrote clarifications here:</p>
+<li><strong>Muddy points</strong>
 <ul>
-<li><a href="../lessons/19_anova/19_anova_muddy_points.html">Muddy Points - Lesson 16</a></li>
+<li>Coming soon</li>
 </ul></li>
 </ul>
 <hr>
@@ -424,16 +451,17 @@ Think of the weekly page as answering just five student questions:
 <section id="homework" class="level2">
 <h2 class="anchored" data-anchor-id="homework">Homework</h2>
 <ul>
-<li><strong>HW 7</strong>
+<li><strong>HW 8</strong>
 <ul>
-<li>Released <strong>Monday, March 2</strong></li>
-<li>Due <strong>Sunday, March 8 at 11:00 PM</strong></li>
+<li>Released <strong>Monday, March 9</strong></li>
+<li>Due <strong>Sunday, March 15 at 11:00 PM</strong></li>
 <li>Covers:
 <ul>
-<li>Chi-Squared Tests, Fisher’s Exact Test, and Power for Proportions</li>
+<li>ANOVA and post-hoc testing</li>
+<li>Nonparametric alternatives (Wilcoxon rank-sum, Kruskal-Wallis)</li>
 </ul></li>
-<li>Data files needed: <code>smoking_cessation.xlsx</code> (available in the <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4">data folder on OneDrive</a>)</li>
-<li><a href="../homework/HW07/HW07.html">View HW 7 instructions</a></li>
+<li>Data files needed: <code>knee_rehab.csv</code> (available in the <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4">data folder on OneDrive</a>)</li>
+<li><a href="../homework/HW08/HW08.qmd">View HW 8 instructions</a></li>
 </ul></li>
 <li>See the full list of assignments on the <a href="../homework.html">Homework</a> page.</li>
 </ul>
@@ -448,12 +476,14 @@ Think of the weekly page as answering just five student questions:
 </section>
 <section id="looking-ahead" class="level2">
 <h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
-<p>Next week we continue expanding our analysis toolkit:</p>
 <ul>
-<li><strong>Week 10</strong>:
+<li><strong>Week 11</strong>:
 <ul>
-<li>Nonparametric tests (alternatives when ANOVA assumptions fail)</li>
-<li>Correlation and simple linear regression</li>
+<li>Monday — Finals review (Lesson 19)</li>
+<li><strong>Final exam opens Monday, March 16 at 3:00 PM</strong></li>
+<li>Wednesday — Optional review and questions session (no new material); textbook section 7.1 recommended reading</li>
+<li><strong>Final exam closes Friday, March 20 at 5:00 PM</strong></li>
+<li>The final is cumulative with emphasis on Lessons 10–19</li>
 </ul></li>
 </ul>
 
