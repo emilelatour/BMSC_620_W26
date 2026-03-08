@@ -9531,5 +9531,229 @@
     "title": "Nonparametric Tests: When the Assumptions Break Down",
     "section": "References and Further Reading",
     "text": "References and Further Reading\n\n\nArticle\nNahm FS. Nonparametric statistical tests for the continuous data: the basic concept and the practical use. Korean Journal of Anesthesiology. 2016;69(1):8–14. doi:10.4097/kjae.2016.69.1.8\n\nAccessible overview of when and why to use nonparametric tests, with practical examples drawn from medical research\n\n\n\nWeb resources (numiqo Team, 2026. numiqo: Online Statistics Calculator. https://numiqo.com)\n\nParametric vs. nonparametric tests — overview and decision guidance\nWilcoxon signed-rank test — paired and single-sample\nMann-Whitney U / Wilcoxon rank-sum test — two independent groups\nKruskal-Wallis test — three or more groups\n\n\n\n\nBMSC 620 | Nonparametric Tests"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#what-were-learning-today",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#what-were-learning-today",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "What We’re Learning Today",
+    "text": "What We’re Learning Today\n\nBy the end of this module, you will be able to:\n\nApply and customize themes to control the overall look of a plot\nUse colorblind-accessible palettes with scale_fill/color_manual()\nFormat axis labels with scale_x/y_continuous() and scales functions\nWrite informative plot labels using labs() well\nAdd contextual annotations directly to plots with annotate()\n\n\n\n\n\n\n\n\nNote\n\n\nThese skills apply every time you put a plot in a report, a poster, or a manuscript."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#the-problem-were-solving",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#the-problem-were-solving",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "The Problem We’re Solving",
+    "text": "The Problem We’re Solving\nHere is what ggplot2 gives you by default:\n\nggplot(nhanes.samp, aes(x = HealthGen, y = BPSysAve)) +\n  geom_boxplot()"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#the-problem-were-solving-1",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#the-problem-were-solving-1",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "The Problem We’re Solving",
+    "text": "The Problem We’re Solving\n\n\nIt runs. It’s technically correct. But it fails as communication:\n\n\n\nThe grey background competes with the data\nAll boxes are the same color — no visual encoding of groups\nAxis labels say HealthGen and BPSysAve — meaningless to a reader\nNo title. No context. No reference lines.\n\n\n\n\n\n\n\nThe principle for this module\n\n\nA plot that requires the reader to mentally decode it has failed. Our job is to make the finding obvious."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#part-1-themes",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#part-1-themes",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Part 1: Themes",
+    "text": "Part 1: Themes"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#built-in-themes",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#built-in-themes",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Built-In Themes",
+    "text": "Built-In Themes\nggplot2 ships with several themes. The default is theme_grey().\n\nFor biomedical reporting, theme_bw() and theme_classic() are the most common choices."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#applying-a-theme",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#applying-a-theme",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Applying a Theme",
+    "text": "Applying a Theme\nAdd the theme as a layer — it goes at the end:\n\nnhanes.samp %&gt;% filter(!is.na(BMI)) %&gt;% \n  ggplot(aes(x = BMI)) +\n  geom_histogram(bins = 25, fill = \"#0072B2\", color = \"white\") +\n  labs(x = \"BMI (kg/m²)\", y = \"Count\",\n       title = \"Distribution of BMI\") +\n  theme_bw(base_size = 14)\n\n\nbase_size scales all text elements proportionally. The default is 11 — increase it for presentations and posters."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#fine-tuning-with-theme",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#fine-tuning-with-theme",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Fine-Tuning with theme()",
+    "text": "Fine-Tuning with theme()\ntheme() lets you override individual elements after setting a base theme:\n\nggplot(...) +\n  geom_histogram(...) +\n  theme_bw(base_size = 14) +\n  theme(\n    plot.title    = element_text(face = \"bold\", size = 16),\n    axis.title    = element_text(size = 13),\n    panel.grid.minor = element_blank(),      # remove minor gridlines\n    legend.position  = \"bottom\"              # move legend\n  )\n\n\n\n\n\n\nThe pattern\n\n\ntheme_bw() sets the foundation. theme() adjusts the details. Always put theme() after your base theme — it overrides rather than replaces."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#useful-theme-arguments",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#useful-theme-arguments",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Useful theme() Arguments",
+    "text": "Useful theme() Arguments\n\n\n\n\n\nArgument\nWhat it controls\n\n\n\n\nplot.title\nTitle text style\n\n\nplot.subtitle\nSubtitle text style\n\n\naxis.title\nBoth axis labels\n\n\naxis.text\nTick mark labels\n\n\nlegend.position\n\"right\", \"bottom\", \"top\", \"none\"\n\n\npanel.grid.minor\nMinor gridlines\n\n\npanel.grid.major\nMajor gridlines\n\n\nstrip.text\nFacet panel labels\n\n\n\n\n\nUse element_text(face = \"bold\", size = 14, color = \"grey20\") to style text elements.\nUse element_blank() to remove an element entirely."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#part-2-colors-and-palettes",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#part-2-colors-and-palettes",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Part 2: Colors and Palettes",
+    "text": "Part 2: Colors and Palettes"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#the-default-color-problem",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#the-default-color-problem",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "The Default Color Problem",
+    "text": "The Default Color Problem\n\nnhanes.samp %&gt;% filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \n  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +\n  geom_boxplot() +\n  theme_bw(base_size = 14)\n\n\nThe default ggplot2 palette is not colorblind-accessible — approximately 8% of males have some form of color vision deficiency."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#the-okabe-ito-palette",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#the-okabe-ito-palette",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "The Okabe-Ito Palette",
+    "text": "The Okabe-Ito Palette\nDesigned to be distinguishable under the most common forms of color vision deficiency:\n\nUse scale_fill_manual() or scale_color_manual() to apply it.\n\n\n\n\n\nTip\n\n\nThe package ggokabeito wraps the Okabe-Ito palette into scale_fill_okabe_ito() and scale_color_okabe_ito() — no hex codes needed."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#scale_fill_manual-for-filled-geoms",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#scale_fill_manual-for-filled-geoms",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "scale_fill_manual() — For Filled Geoms",
+    "text": "scale_fill_manual() — For Filled Geoms\nUse this for geom_bar(), geom_boxplot(), geom_histogram(), geom_area():\n\nnhanes.samp %&gt;% filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \n  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +\n  geom_boxplot(alpha = 0.8) +\n  scale_fill_manual(values = c(\"#E69F00\", \"#56B4E9\", \"#009E73\",\n                                \"#0072B2\", \"#D55E00\"),\n                    guide = \"none\") +\n  theme_bw(base_size = 14)\n\n\nguide = \"none\" suppresses the legend when the x-axis already encodes the grouping."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#scale_color_manual-for-outlinedpoint-geoms",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#scale_color_manual-for-outlinedpoint-geoms",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "scale_color_manual() — For Outlined/Point Geoms",
+    "text": "scale_color_manual() — For Outlined/Point Geoms\nUse this for geom_point(), geom_line(), geom_boxplot(color = ...):\n\nnhanes.samp %&gt;% filter(!is.na(Gender), !is.na(BMI), !is.na(BPSysAve)) %&gt;% \n  ggplot(aes(x = BMI, y = BPSysAve, color = Gender)) +\n  geom_point(alpha = 0.5, size = 1.5) +\n  scale_color_manual(values = c(\"#E69F00\", \"#0072B2\")) +\n  theme_bw(base_size = 14)\n\n\n\n\n\nTip\n\n\nThe number of colors in values must match the number of groups. Supply them in the same order as the factor levels."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#part-3-axes-and-scales",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#part-3-axes-and-scales",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Part 3: Axes and Scales",
+    "text": "Part 3: Axes and Scales"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#scale_xy_continuous",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#scale_xy_continuous",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "scale_x/y_continuous()",
+    "text": "scale_x/y_continuous()\nUse scale_x_continuous() or scale_y_continuous() to control continuous axes:\n\nscale_y_continuous(\n  limits = c(70, 200),                           # axis range\n  breaks = seq(80, 200, by = 20),                # where tick marks appear\n  labels = scales::number_format(accuracy = 1)   # how labels are formatted\n)\n\n\n\n\n\n\nArgument\nPurpose\n\n\n\n\nlimits\nSet the min and max shown\n\n\nbreaks\nTick mark positions\n\n\nlabels\nHow to format the tick labels\n\n\nexpand\nPadding at the edges"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#formatting-axis-labels-with-scales",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#formatting-axis-labels-with-scales",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Formatting Axis Labels with scales",
+    "text": "Formatting Axis Labels with scales\nThe scales package gives you format functions for labels:\n\nnhanes.samp %&gt;% filter(!is.na(BMI)) %&gt;% \n  ggplot(aes(x = BMI)) +\n  geom_histogram(bins = 25, fill = \"#0072B2\", color = \"white\") +\n  scale_x_continuous(\n    breaks = seq(15, 70, by = 5),\n    labels = scales::number_format(accuracy = 1)\n  ) +\n  theme_bw(base_size = 14)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#formatting-as-percentages",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#formatting-as-percentages",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Formatting as Percentages",
+    "text": "Formatting as Percentages\nscales::percent_format() is useful when your axis represents a proportion:\n\nnhanes.samp %&gt;%\n  filter(!is.na(HealthGen)) %&gt;%\n  count(HealthGen) %&gt;%\n  mutate(prop = n / sum(n)) %&gt;%\n  ggplot(aes(x = HealthGen, y = prop)) +\n  geom_col(fill = \"#0072B2\") +\n  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +\n  theme_bw(base_size = 14)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#part-4-labels-done-well",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#part-4-labels-done-well",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Part 4: Labels Done Well",
+    "text": "Part 4: Labels Done Well"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#labs-your-communication-toolkit",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#labs-your-communication-toolkit",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "labs() — Your Communication Toolkit",
+    "text": "labs() — Your Communication Toolkit\nEvery element of labs() serves a purpose:\n\nlabs(\n  title    = \"The main finding, stated clearly\",\n  subtitle = \"Sample description or key context\",\n  x        = \"Axis label with units\",\n  y        = \"Axis label with units\",\n  color    = \"Legend title for color aesthetic\",\n  fill     = \"Legend title for fill aesthetic\",\n  caption  = \"Data source or methodological note\"\n)\n\n\n\n\n\n\nWhat makes a good title?\n\n\nState the finding, not the variable name. “BMI Distribution” is a label. “BMI is right-skewed, with most adults between 20 and 35 kg/m²” is a finding.\nFor exploratory plots (in homework), descriptive titles are fine. For manuscripts and presentations, state the finding."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#labels-before-and-after",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#labels-before-and-after",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Labels: Before and After",
+    "text": "Labels: Before and After\n\n\nMinimal labels:\n\n\n\n\n\n\n\n\n\n\nInformative labels:\n\n\n\n\n\n\n\n\n\n\nSame data, same geom. The labels do the communication."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#part-5-annotate",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#part-5-annotate",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Part 5: Annotate",
+    "text": "Part 5: Annotate"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#adding-context-directly-to-plots",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#adding-context-directly-to-plots",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Adding Context Directly to Plots",
+    "text": "Adding Context Directly to Plots\n\n\nSometimes the most important piece of information isn’t in the data — it’s a threshold, a benchmark, or a label that anchors the reader:\n\n\n\nA hypertension threshold line at SBP = 130 mmHg\nA reference line at BMI = 30 (obesity threshold)\n\nA label pointing to an outlier or a notable group\n\n\n\nTwo tools:\n\ngeom_hline() / geom_vline() — draw the reference line\nannotate() — add text, arrows, or shaded regions directly on the plot"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#geom_hline-horizontal-reference-lines",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#geom_hline-horizontal-reference-lines",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "geom_hline() — Horizontal Reference Lines",
+    "text": "geom_hline() — Horizontal Reference Lines\n\nnhanes.samp %&gt;% filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \n  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +\n  geom_boxplot(alpha = 0.8) +\n  geom_hline(yintercept = 130, linetype = \"dashed\",\n             color = \"grey40\", linewidth = 0.8) +\n  scale_fill_manual(values = c(\"#E69F00\", \"#56B4E9\", \"#009E73\",\n                               \"#0072B2\", \"#D55E00\"),\n                    guide = \"none\") +\n  theme_bw(base_size = 14)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#annotatetext-text-on-the-plot",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#annotatetext-text-on-the-plot",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "annotate(\"text\") — Text on the Plot",
+    "text": "annotate(\"text\") — Text on the Plot\nAdd a text label at a specific data coordinate:\n\nnhanes.samp %&gt;% filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \nggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +\n  geom_boxplot(alpha = 0.8) +\n  geom_hline(yintercept = 130, linetype = \"dashed\",\n             color = \"grey40\", linewidth = 0.8) +\n  annotate(\"text\", x = 1, y = 134,\n           label = \"Hypertension threshold (130 mmHg)\",\n           hjust = 0, size = 4, color = \"grey30\") +\n  scale_fill_manual(values = c(\"#E69F00\", \"#56B4E9\", \"#009E73\",\n                                \"#0072B2\", \"#D55E00\"),\n                    guide = \"none\") +\n  theme_bw(base_size = 14)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#annotate-arguments",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#annotate-arguments",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "annotate() Arguments",
+    "text": "annotate() Arguments\n\nannotate(\n  geom  = \"text\",      # \"text\", \"rect\", \"segment\", \"pointrange\"\n  x     = 1,           # x position (data coordinates)\n  y     = 134,         # y position (data coordinates)\n  label = \"...\",       # the text to display\n  hjust = 0,           # horizontal justification: 0 = left, 1 = right\n  vjust = 0,           # vertical justification: 0 = bottom, 1 = top\n  size  = 4,           # text size\n  color = \"grey30\"     # text color\n)\n\n\n\n\n\n\nImportant\n\n\nPositions in annotate() use data coordinates, not pixels or proportions. Set x and y to values that make sense on your axes."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#putting-it-all-together",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#putting-it-all-together",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Putting It All Together",
+    "text": "Putting It All Together"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#before-the-default-plot",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#before-the-default-plot",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Before: The Default Plot",
+    "text": "Before: The Default Plot\n\nggplot(nhanes.samp, aes(x = HealthGen, y = BPSysAve)) +\n  geom_boxplot()\n\n\nThis is our starting point. Grey background, no colors, variable names as axis labels, no context."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#after-the-polished-plot",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#after-the-polished-plot",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "After: The Polished Plot",
+    "text": "After: The Polished Plot"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#after-the-code",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#after-the-code",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "After: The Code",
+    "text": "After: The Code\n\n\nnhanes.samp %&gt;% filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \nggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +\n  geom_boxplot(alpha = 0.85, outlier.shape = 21) +\n  geom_hline(yintercept = 130, linetype = \"dashed\",\n             color = \"grey40\", linewidth = 0.8) +\n  annotate(\"text\", x = 1, y = 134,\n           label = \"Hypertension threshold (130 mmHg)\",\n           hjust = 0, size = 4.5, color = \"grey30\") +\n  scale_fill_manual(\n    values = c(\"#E69F00\", \"#56B4E9\", \"#009E73\", \"#0072B2\", \"#D55E00\"),\n    guide  = \"none\"\n  ) +\n  scale_y_continuous(\n    labels = scales::number_format(accuracy = 1),\n    limits = c(75, 180),\n    breaks = seq(80, 180, by = 20)\n  ) +\n  labs(\n    title    = \"Systolic blood pressure increases with poorer self-reported health\",\n    subtitle = \"NHANES sample adults (n = 200)\",\n    x        = \"Self-Reported Health Status\",\n    y        = \"Systolic Blood Pressure (mmHg)\",\n    caption  = \"Data: NHANES sample from the oibiostat package.\"\n  ) +\n  theme_bw(base_size = 14) +\n  theme(plot.title = element_text(face = \"bold\"),\n        panel.grid.minor = element_blank())"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#key-takeaways",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#key-takeaways",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\n\nThemes\n\ntheme_bw(), theme_classic(), theme_minimal() for clean backgrounds\ntheme() for fine-tuning after the base theme\nbase_size scales all text proportionally\n\nColors\n\nDefault colors are not colorblind-accessible\nOkabe-Ito: 8 hardcoded hex values, works for all audiences\nscale_fill_manual() for filled geoms; scale_color_manual() for outlines/points\n\nAxes and Labels\n\nscale_y_continuous(labels = scales::number_format()) for clean tick labels\nlabs() is your primary communication tool — use all of it\nTitles should state the finding, not the variable name\n\nAnnotate\n\ngeom_hline() / geom_vline() for reference lines\nannotate(\"text\") for labels placed in data coordinates\n\n\n\n\n\nTip\n\n\nThe rule:\nEvery element of a plot is either earning its place by communicating something, or it is visual noise. Themes, colors, labels, and annotations are how you make every pixel earn its place."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#references",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#references",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "References",
+    "text": "References\n\n\n\n\n\nThemes and theme()\n\nggplot2 theme documentation\nComplete themes in ggplot2\nggprism package — Prism theme\n\n\n\nColorblind-accessible palettes\n\nOkabe-Ito palette — original source\nDataviz with R: Color — Claus Wilke\n\n\n\nScales and axes\n\nscales package documentation\nggplot2: Scales\n\n\n\n\nLabels and annotation\n\nggplot2: annotate()\nFundamentals of Data Visualization — Claus Wilke (free online)\nData Visualization: A Practical Introducion — Kieran Healy (free online)\n\n\n\nFor fun\n\nggsci package — color palettes inspired by scientific journals, data visualization libraries, science fiction movies, and TV shows.\nWes Anderson palettes\n\n\n\n\n\n\nBMSC 620 | Visual Communication with ggplot2"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/r_module3_slides.html#geom_hline-horizontal-reference-lines-1",
+    "href": "lessons/20_nonparametric/r_module3_slides.html#geom_hline-horizontal-reference-lines-1",
+    "title": "R Module 3: Visual Communication with ggplot2",
+    "section": "geom_hline() — Horizontal Reference Lines",
+    "text": "geom_hline() — Horizontal Reference Lines\n\nnhanes.samp %&gt;% \n  filter(!is.na(HealthGen), !is.na(BPSysAve)) %&gt;% \n  ggplot(aes(x = HealthGen, \n             y = BPSysAve, \n             fill = HealthGen)) +\n  geom_boxplot(alpha = 0.8) +\n  geom_hline(yintercept = 130, \n             linetype = \"dashed\",\n             color = \"grey40\", \n             linewidth = 0.8) +\n  scale_fill_manual(values = c(\"#E69F00\", \"#56B4E9\", \"#009E73\",\n                               \"#0072B2\", \"#D55E00\"),\n                    guide = \"none\") +\n  theme_bw(base_size = 14)"
   }
 ]

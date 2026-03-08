@@ -1,0 +1,744 @@
+---
+title: "R Module 3: Visual Communication with ggplot2"
+subtitle: "BMSC 620 | R Workflow Series"
+author: "Emile Latour"
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Visual Communication with ggplot2"
+    html-math-method: mathjax
+    chalkboard: true
+    progress: true
+    code-line-numbers: true
+    code-copy: true
+    highlight-style: github
+    fig-align: center
+    incremental: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+knitr::opts_chunk$set(dpi = 300)
+
+library(tidyverse)
+library(oibiostat)
+library(scales)
+library(patchwork)
+
+data("nhanes.samp")
+
+# Set up HealthGen as a properly ordered factor with clean labels
+nhanes.samp <- nhanes.samp %>%
+  mutate(
+    HealthGen = factor(as.character(HealthGen),
+                       levels = c("Excellent", "Vgood", "Good", "Fair", "Poor"),
+                       labels = c("Excellent", "Very Good", "Good", "Fair", "Poor"))
+  )
+```
+
+## What We're Learning Today {.section-slide}
+
+::: {.learning-objectives}
+By the end of this module, you will be able to:
+
+1. Apply and customize **themes** to control the overall look of a plot
+2. Use **colorblind-accessible palettes** with `scale_fill/color_manual()`
+3. **Format axis labels** with `scale_x/y_continuous()` and `scales` functions
+4. Write informative **plot labels** using `labs()` well
+5. Add **contextual annotations** directly to plots with `annotate()`
+:::
+
+::: {.callout-note}
+These skills apply every time you put a plot in a report, a poster, or a manuscript.
+:::
+
+
+
+## The Problem We're Solving
+
+Here is what ggplot2 gives you by default:
+
+```{r}
+#| echo: true
+#| fig-width: 8
+#| fig-height: 4.5
+
+ggplot(nhanes.samp, aes(x = HealthGen, y = BPSysAve)) +
+  geom_boxplot()
+```
+
+
+
+## The Problem We're Solving
+
+\
+
+It runs. It's technically correct. But it **fails as communication**:
+
+\
+
+- The grey background competes with the data
+- All boxes are the same color — no visual encoding of groups
+- Axis labels say `HealthGen` and `BPSysAve` — meaningless to a reader
+- No title. No context. No reference lines.
+
+. . .
+
+\
+
+::: {.callout-important icon="false"}
+### The principle for this module
+
+A plot that requires the reader to mentally decode it has failed. Our job is to make the finding obvious.
+:::
+
+
+
+# Part 1: Themes {.section-slide}
+
+
+
+## Built-In Themes
+
+ggplot2 ships with several themes. The default is `theme_grey()`.
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+
+base_plot <- nhanes.samp %>% filter(!is.na(BMI)) %>% 
+  ggplot(aes(x = BMI)) +
+  geom_histogram(bins = 25, fill = "#0072B2", color = "white") +
+  labs(x = "BMI (kg/m²)", y = "Count")
+
+p1 <- base_plot + theme_grey()   + labs(subtitle = "theme_grey()   (default)")
+p2 <- base_plot + theme_bw()     + labs(subtitle = "theme_bw()")
+p3 <- base_plot + theme_minimal()+ labs(subtitle = "theme_minimal()")
+p4 <- base_plot + theme_classic()+ labs(subtitle = "theme_classic()")
+
+p1 + p2 + p3 + p4
+```
+
+For biomedical reporting, `theme_bw()` and `theme_classic()` are the most common choices.
+
+
+
+## Applying a Theme
+
+Add the theme as a layer — it goes at the end:
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+nhanes.samp %>% filter(!is.na(BMI)) %>% 
+  ggplot(aes(x = BMI)) +
+  geom_histogram(bins = 25, fill = "#0072B2", color = "white") +
+  labs(x = "BMI (kg/m²)", y = "Count",
+       title = "Distribution of BMI") +
+  theme_bw(base_size = 14)
+```
+
+`base_size` scales all text elements proportionally. The default is 11 — increase it for presentations and posters.
+
+
+
+## Fine-Tuning with `theme()`
+
+`theme()` lets you override individual elements after setting a base theme:
+
+```{r}
+#| eval: false
+
+ggplot(...) +
+  geom_histogram(...) +
+  theme_bw(base_size = 14) +
+  theme(
+    plot.title    = element_text(face = "bold", size = 16),
+    axis.title    = element_text(size = 13),
+    panel.grid.minor = element_blank(),      # remove minor gridlines
+    legend.position  = "bottom"              # move legend
+  )
+```
+
+\
+
+::: {.callout-tip icon="false"}
+### The pattern
+
+`theme_bw()` sets the foundation. `theme()` adjusts the details. Always put `theme()` **after** your base theme — it overrides rather than replaces.
+:::
+
+
+
+## Useful `theme()` Arguments
+
+\
+
+| Argument | What it controls |
+|---|---|
+| `plot.title` | Title text style |
+| `plot.subtitle` | Subtitle text style |
+| `axis.title` | Both axis labels |
+| `axis.text` | Tick mark labels |
+| `legend.position` | `"right"`, `"bottom"`, `"top"`, `"none"` |
+| `panel.grid.minor` | Minor gridlines |
+| `panel.grid.major` | Major gridlines |
+| `strip.text` | Facet panel labels |
+
+\
+
+Use `element_text(face = "bold", size = 14, color = "grey20")` to style text elements.
+
+Use `element_blank()` to remove an element entirely.
+
+
+
+# Part 2: Colors and Palettes {.section-slide}
+
+
+
+## The Default Color Problem
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4.5
+#| echo: true
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot() +
+  theme_bw(base_size = 14)
+```
+
+The default ggplot2 palette is **not colorblind-accessible** — approximately 8% of males have some form of color vision deficiency.
+
+
+
+## The Okabe-Ito Palette
+
+Designed to be distinguishable under the most common forms of color vision deficiency:
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 2.5
+
+oi_colors <- c("#E69F00", "#56B4E9", "#009E73", "#0072B2",
+               "#D55E00", "#CC79A7", "#F0E442", "#000000")
+oi_names  <- c("Orange", "Sky Blue", "Green", "Blue",
+               "Vermillion", "Pink", "Yellow", "Black")
+
+tibble(color = oi_colors, name = oi_names, x = seq_along(oi_colors)) %>%
+  ggplot(aes(x = x, y = 1, fill = color)) +
+  geom_tile(width = 0.9, height = 0.7) +
+  geom_text(aes(label = name), y = 0.55, size = 4.5, color = "white",
+            fontface = "bold") +
+  geom_text(aes(label = color), y = 1.45, size = 3.5, color = "grey30") +
+  scale_fill_identity() +
+  scale_x_continuous(expand = c(0.02, 0)) +
+  theme_void() +
+  labs(title = "The Okabe-Ito Palette (8 colors)") +
+  theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.5))
+```
+
+Use `scale_fill_manual()` or `scale_color_manual()` to apply it.
+
+\
+
+::: {.callout-tip icon="false"}
+The package [**ggokabeito**](https://malcolmbarrett.github.io/ggokabeito/) wraps 
+the Okabe-Ito palette into `scale_fill_okabe_ito()` and `scale_color_okabe_ito()` 
+— no hex codes needed. 
+:::
+
+
+
+## `scale_fill_manual()` — For Filled Geoms
+
+Use this for `geom_bar()`, `geom_boxplot()`, `geom_histogram()`, `geom_area()`:
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4.5
+
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
+                                "#0072B2", "#D55E00"),
+                    guide = "none") +
+  theme_bw(base_size = 14)
+```
+
+`guide = "none"` suppresses the legend when the x-axis already encodes the grouping.
+
+
+
+## `scale_color_manual()` — For Outlined/Point Geoms
+
+Use this for `geom_point()`, `geom_line()`, `geom_boxplot(color = ...)`:
+
+```{r}
+#| fig-width: 8.5
+#| fig-height: 4.5
+
+nhanes.samp %>% filter(!is.na(Gender), !is.na(BMI), !is.na(BPSysAve)) %>% 
+  ggplot(aes(x = BMI, y = BPSysAve, color = Gender)) +
+  geom_point(alpha = 0.5, size = 1.5) +
+  scale_color_manual(values = c("#E69F00", "#0072B2")) +
+  theme_bw(base_size = 14)
+```
+
+
+
+::: {.callout-tip icon="false"}
+The number of colors in `values` must match the number of groups. Supply them in the same order as the factor levels.
+:::
+
+
+
+# Part 3: Axes and Scales {.section-slide}
+
+
+
+## `scale_x/y_continuous()`
+
+Use `scale_x_continuous()` or `scale_y_continuous()` to control continuous axes:
+
+```{r}
+#| eval: false
+
+scale_y_continuous(
+  limits = c(70, 200),                           # axis range
+  breaks = seq(80, 200, by = 20),                # where tick marks appear
+  labels = scales::number_format(accuracy = 1)   # how labels are formatted
+)
+```
+
+\
+
+| Argument | Purpose |
+|---|---|
+| `limits` | Set the min and max shown |
+| `breaks` | Tick mark positions |
+| `labels` | How to format the tick labels |
+| `expand` | Padding at the edges |
+
+
+
+## Formatting Axis Labels with `scales`
+
+The `scales` package gives you format functions for labels:
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+nhanes.samp %>% filter(!is.na(BMI)) %>% 
+  ggplot(aes(x = BMI)) +
+  geom_histogram(bins = 25, fill = "#0072B2", color = "white") +
+  scale_x_continuous(
+    breaks = seq(15, 70, by = 5),
+    labels = scales::number_format(accuracy = 1)
+  ) +
+  theme_bw(base_size = 14)
+```
+
+
+
+## Formatting as Percentages
+
+`scales::percent_format()` is useful when your axis represents a proportion:
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+
+nhanes.samp %>%
+  filter(!is.na(HealthGen)) %>%
+  count(HealthGen) %>%
+  mutate(prop = n / sum(n)) %>%
+  ggplot(aes(x = HealthGen, y = prop)) +
+  geom_col(fill = "#0072B2") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  theme_bw(base_size = 14)
+```
+
+
+# Part 4: Labels Done Well 
+
+
+## `labs()` — Your Communication Toolkit
+
+Every element of `labs()` serves a purpose:
+
+```{r}
+#| eval: false
+
+labs(
+  title    = "The main finding, stated clearly",
+  subtitle = "Sample description or key context",
+  x        = "Axis label with units",
+  y        = "Axis label with units",
+  color    = "Legend title for color aesthetic",
+  fill     = "Legend title for fill aesthetic",
+  caption  = "Data source or methodological note"
+)
+```
+
+\
+
+::: {.callout-tip icon="false"}
+### What makes a good title?
+
+State the finding, not the variable name. **"BMI Distribution"** is a label. **"BMI is right-skewed, with most adults between 20 and 35 kg/m²"** is a finding.
+
+For exploratory plots (in homework), descriptive titles are fine. For manuscripts and presentations, state the finding.
+:::
+
+
+
+## Labels: Before and After
+
+::: {.columns}
+::: {.column width="50%"}
+**Minimal labels:**
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4.5
+
+nhanes.samp %>% filter(!is.na(Gender), !is.na(BPSysAve)) %>% 
+  ggplot(aes(x = Gender, y = BPSysAve, fill = Gender)) +
+  geom_boxplot(alpha = 0.8, 
+               width = 0.4) +
+  scale_fill_manual(values = c("#E69F00", "#0072B2"), guide = "none") +
+  theme_bw(base_size = 14)
+```
+:::
+
+::: {.column width="50%"}
+**Informative labels:**
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5
+
+nhanes.samp %>% filter(!is.na(Gender), !is.na(BPSysAve)) %>% 
+  mutate(Gender = factor(Gender, 
+                         levels = c("female", "male"), 
+                         labels = c("Female", "Male"))) %>% 
+  ggplot(aes(x = Gender, y = BPSysAve, fill = Gender)) +
+  geom_boxplot(alpha = 0.8, 
+               width = 0.4) +
+  scale_fill_manual(values = c("#E69F00", "#0072B2"), guide = "none") +
+  labs(
+    title    = "Systolic blood pressure is higher in males",
+    subtitle = "NHANES sample adults (n = 200)",
+    x        = "Sex",
+    y        = "Systolic Blood Pressure (mmHg)",
+    caption  = "Data: NHANES sample from the oibiostat package"
+  ) +
+  theme_bw(base_size = 14)
+```
+:::
+:::
+
+Same data, same geom. The labels do the communication.
+
+
+
+# Part 5: Annotate {.section-slide}
+
+
+
+## Adding Context Directly to Plots
+
+\
+
+Sometimes the most important piece of information isn't in the data — it's a threshold, a benchmark, or a label that anchors the reader:
+
+\
+
+- A hypertension threshold line at SBP = 130 mmHg
+- A reference line at BMI = 30 (obesity threshold)  
+- A label pointing to an outlier or a notable group
+
+\
+
+Two tools:
+
+- `geom_hline()` / `geom_vline()` — draw the reference line
+- `annotate()` — add text, arrows, or shaded regions directly on the plot
+
+
+
+## `geom_hline()` — Horizontal Reference Lines
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4.5
+
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+  ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_hline(yintercept = 130, linetype = "dashed",
+             color = "grey40", linewidth = 0.8) +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
+                               "#0072B2", "#D55E00"),
+                    guide = "none") +
+  theme_bw(base_size = 14)
+```
+
+
+
+
+## `annotate("text")` — Text on the Plot
+
+Add a text label at a specific data coordinate:
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4.5
+
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.8) +
+  geom_hline(yintercept = 130, linetype = "dashed",
+             color = "grey40", linewidth = 0.8) +
+  annotate("text", x = 1, y = 134,
+           label = "Hypertension threshold (130 mmHg)",
+           hjust = 0, size = 4, color = "grey30") +
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#009E73",
+                                "#0072B2", "#D55E00"),
+                    guide = "none") +
+  theme_bw(base_size = 14)
+```
+
+
+
+## `annotate()` Arguments
+
+```{r}
+#| eval: false
+
+annotate(
+  geom  = "text",      # "text", "rect", "segment", "pointrange"
+  x     = 1,           # x position (data coordinates)
+  y     = 134,         # y position (data coordinates)
+  label = "...",       # the text to display
+  hjust = 0,           # horizontal justification: 0 = left, 1 = right
+  vjust = 0,           # vertical justification: 0 = bottom, 1 = top
+  size  = 4,           # text size
+  color = "grey30"     # text color
+)
+```
+
+\
+
+::: {.callout-important icon="false"}
+Positions in `annotate()` use **data coordinates**, not pixels or proportions. Set `x` and `y` to values that make sense on your axes.
+:::
+
+
+
+# Putting It All Together {.section-slide}
+
+
+
+## Before: The Default Plot
+
+```{r}
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(nhanes.samp, aes(x = HealthGen, y = BPSysAve)) +
+  geom_boxplot()
+```
+
+This is our starting point. Grey background, no colors, variable names as axis labels, no context.
+
+
+
+## After: The Polished Plot
+
+```{r}
+#| echo: false
+#| fig-width: 7.5
+#| fig-height: 5
+
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.85, outlier.shape = 21,
+               outlier.size = 1.5, outlier.alpha = 0.5) +
+  geom_hline(yintercept = 130, linetype = "dashed",
+             color = "grey40", linewidth = 0.8) +
+  annotate("text", x = 1, y = 134,
+           label = "Hypertension threshold (130 mmHg)",
+           hjust = 0, size = 4.5, color = "grey30") +
+  scale_fill_manual(
+    values = c("#E69F00", "#56B4E9", "#009E73", "#0072B2", "#D55E00"),
+    guide  = "none"
+  ) +
+  scale_y_continuous(
+    labels = scales::number_format(accuracy = 1),
+    limits = c(75, 180),
+    breaks = seq(80, 180, by = 20)
+  ) +
+  labs(
+    title    = "Systolic blood pressure increases with poorer self-reported health",
+    subtitle = "NHANES sample adults (n = 200)",
+    x        = "Self-Reported Health Status",
+    y        = "Systolic Blood Pressure (mmHg)",
+    caption  = "Data: NHANES sample from the oibiostat package. Dashed line = hypertension threshold."
+  ) +
+  theme_bw(base_size = 14) +
+  theme(
+    plot.title       = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+```
+
+
+
+## After: The Code
+
+::: {style="font-size: 0.75em;"}
+```{r}
+#| eval: false
+#| code-block-font-size: 0.6em
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.85, outlier.shape = 21) +
+  geom_hline(yintercept = 130, linetype = "dashed",
+             color = "grey40", linewidth = 0.8) +
+  annotate("text", x = 1, y = 134,
+           label = "Hypertension threshold (130 mmHg)",
+           hjust = 0, size = 4.5, color = "grey30") +
+  scale_fill_manual(
+    values = c("#E69F00", "#56B4E9", "#009E73", "#0072B2", "#D55E00"),
+    guide  = "none"
+  ) +
+  scale_y_continuous(
+    labels = scales::number_format(accuracy = 1),
+    limits = c(75, 180),
+    breaks = seq(80, 180, by = 20)
+  ) +
+  labs(
+    title    = "Systolic blood pressure increases with poorer self-reported health",
+    subtitle = "NHANES sample adults (n = 200)",
+    x        = "Self-Reported Health Status",
+    y        = "Systolic Blood Pressure (mmHg)",
+    caption  = "Data: NHANES sample from the oibiostat package."
+  ) +
+  theme_bw(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"),
+        panel.grid.minor = element_blank())
+```
+:::
+
+
+
+## Key Takeaways
+
+::: {style="font-size: 0.8em;"}
+::: {.columns}
+::: {.column width="60%"}
+
+**Themes**
+
+- `theme_bw()`, `theme_classic()`, `theme_minimal()` for clean backgrounds
+- `theme()` for fine-tuning after the base theme
+- `base_size` scales all text proportionally
+
+**Colors**
+
+- Default colors are not colorblind-accessible
+- Okabe-Ito: 8 hardcoded hex values, works for all audiences
+- `scale_fill_manual()` for filled geoms; `scale_color_manual()` for outlines/points
+
+**Axes and Labels**
+
+- `scale_y_continuous(labels = scales::number_format())` for clean tick labels
+- `labs()` is your primary communication tool — use all of it
+- Titles should state the finding, not the variable name
+
+**Annotate**
+
+- `geom_hline()` / `geom_vline()` for reference lines
+- `annotate("text")` for labels placed in data coordinates
+:::
+
+::: {.column width="40%"}
+::: {.callout-tip icon="false"}
+**The rule:**
+
+Every element of a plot is either earning its place by communicating something, or it is visual noise. Themes, colors, labels, and annotations are how you make every pixel earn its place.
+:::
+:::
+:::
+:::
+
+
+
+## References
+
+\
+
+::: {style="font-size: 0.8em;"}
+::: columns
+::: {.column width="50%"}
+**Themes and `theme()`**
+
+- [ggplot2 theme documentation](https://ggplot2.tidyverse.org/reference/theme.html)
+- [Complete themes in ggplot2](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+- [ggprism package](https://csdaw.github.io/ggprism/) — Prism theme
+
+
+
+\
+
+**Colorblind-accessible palettes**
+
+- [Okabe-Ito palette](https://jfly.uni-koeln.de/color/) — original source
+- [Dataviz with R: Color](https://clauswilke.com/dataviz/color-basics.html) — Claus Wilke
+
+\
+
+**Scales and axes**
+
+- [scales package documentation](https://scales.r-lib.org/)
+- [ggplot2: Scales](https://ggplot2.tidyverse.org/reference/index.html#scales)
+
+\
+:::
+::: {.column width="50%"}
+**Labels and annotation**
+
+- [ggplot2: annotate()](https://ggplot2.tidyverse.org/reference/annotate.html)
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/) — Claus Wilke (free online)
+- [Data Visualization: A Practical Introducion](https://socviz.co/) — Kieran Healy (free online)
+
+\
+
+**For fun**
+
+- [ggsci package](https://nanx.me/ggsci/) — color palettes inspired by scientific journals, data visualization libraries, science fiction movies, and TV shows.
+- [Wes Anderson palettes](https://github.com/karthik/wesanderson) 
+:::
+:::
+:::
+
+
+

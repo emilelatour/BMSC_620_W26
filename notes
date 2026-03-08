@@ -252,3 +252,42 @@ execute:
   message: false
   freeze: auto
 ---
+
+
+
+
+## After: The Code
+
+::: {style="font-size: 0.75em;"}
+```{r}
+#| eval: false
+#| code-block-font-size: 0.6em
+nhanes.samp %>% filter(!is.na(HealthGen), !is.na(BPSysAve)) %>% 
+ggplot(aes(x = HealthGen, y = BPSysAve, fill = HealthGen)) +
+  geom_boxplot(alpha = 0.85, outlier.shape = 21) +
+  geom_hline(yintercept = 130, linetype = "dashed",
+             color = "grey40", linewidth = 0.8) +
+  annotate("text", x = 1, y = 134,
+           label = "Hypertension threshold (130 mmHg)",
+           hjust = 0, size = 4.5, color = "grey30") +
+  scale_fill_manual(
+    values = c("#E69F00", "#56B4E9", "#009E73", "#0072B2", "#D55E00"),
+    guide  = "none"
+  ) +
+  scale_y_continuous(
+    labels = scales::number_format(accuracy = 1),
+    limits = c(75, 180),
+    breaks = seq(80, 180, by = 20)
+  ) +
+  labs(
+    title    = "Systolic blood pressure increases with poorer self-reported health",
+    subtitle = "NHANES sample adults (n = 200)",
+    x        = "Self-Reported Health Status",
+    y        = "Systolic Blood Pressure (mmHg)",
+    caption  = "Data: NHANES sample from the oibiostat package."
+  ) +
+  theme_bw(base_size = 14) +
+  theme(plot.title = element_text(face = "bold"),
+        panel.grid.minor = element_blank())
+```
+:::
