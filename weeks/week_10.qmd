@@ -1,0 +1,117 @@
+---
+title: "Week 10"
+description: "Nonparametric Tests and Correlation and Simple Linear Regression"
+format:
+  html:
+    toc: true
+---
+
+```{=html}
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+```
+
+## Announcements
+
+-   **HW 8** is released **Monday, March 9** and is due **Sunday, March 15 at 11:00 PM**
+
+## Overview
+
+This week we extend our toolkit to handle situations where the standard parametric assumptions break down, and then introduce a new class of questions: what happens when both variables are continuous?
+
+Monday covers nonparametric tests — rank-based alternatives to the t-test and ANOVA that are useful when data are skewed, samples are small, or outcomes are ordinal. If time permits, we will also begin R Module 3 on visual communication with ggplot2. Wednesday shifts to correlation and simple linear regression, where the goal is no longer comparing groups but understanding the relationship between two continuous variables.
+
+By the end of the week, you should be able to:
+
+-   explain when and why nonparametric tests are preferred over parametric alternatives,
+-   describe the core idea behind rank-based tests,
+-   apply the Wilcoxon signed-rank test to paired or single-sample data,
+-   apply the Wilcoxon rank-sum test to two independent samples,
+-   apply the Kruskal-Wallis test to compare three or more groups,
+-   choose the appropriate nonparametric test for a given study design,
+-   calculate and interpret Pearson and Spearman correlation coefficients,
+-   identify the components of the simple linear regression model,
+-   run a simple linear regression in R and interpret the slope and intercept,
+-   check the LINE assumptions using diagnostic plots,
+-   interpret $R^2$ as a measure of model fit, and
+-   conduct and interpret inference for the population slope $\beta_1$.
+
+## Readings (before class)
+
+-   No textbook reading for Monday (nonparametric tests are not covered in the textbook — see the supplementary references on the slides)
+-   Textbook sections 1.6, 6.1–6.2 (before Wednesday)
+
+## Materials
+
+### Monday — Nonparametric Tests
+
+-   **Topics**
+    -   When and why to use nonparametric tests
+    -   The rank-based approach
+    -   Wilcoxon signed-rank test (paired and single-sample data)
+    -   Wilcoxon rank-sum test (two independent groups)
+    -   Kruskal-Wallis test (3+ groups) and post-hoc comparisons
+    -   *If time permits:* R Module 3 — Visual Communication with ggplot2
+-   **Slides**
+    -   Nonparametric Tests ([HTML](/lessons/20_nonparametric/20_nonparametric.qmd) | [PDF](/lessons/20_nonparametric/20_nonparametric.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   R Module 3: Visual Communication with ggplot2 ([HTML](/lessons/20_nonparametric/r_module3_slides.qmd) | [PDF](/lessons/20_nonparametric/r_module3_slides.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+-   **Code along**
+    -   [Download R Module 3: Visual Communication with ggplot2 (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB)
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
+
+------------------------------------------------------------------------
+
+### Wednesday — Correlation and Simple Linear Regression
+
+-   **Topics**
+    -   Pearson and Spearman correlation
+    -   The simple linear regression model: slope, intercept, and residuals
+    -   Fitting and interpreting `lm()` in R
+    -   LINE assumptions and diagnostic plots
+    -   $R^2$ and inference for slope $\beta_1$
+    -   Prediction: confidence intervals vs. prediction intervals
+-   **Slides**
+    -   Correlation and Simple Linear Regression (HTML | PDF | OneDrive)
+-   **Recording**
+    -   Coming soon
+-   **Muddy points**
+    -   Coming soon
+
+------------------------------------------------------------------------
+
+## Homework
+
+-   **HW 8**
+    -   Released **Monday, March 9**
+    -   Due **Sunday, March 15 at 11:00 PM**
+    -   Covers:
+        -   ANOVA and post-hoc testing
+        -   Nonparametric alternatives (Wilcoxon rank-sum, Kruskal-Wallis)
+    -   Data files needed: `knee_rehab.csv` (available in the [data folder on OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgBmKLHwwBXcRpYnSfP7XNYfAUi8RENlx_g8XH7VGjPtSuk?e=cvGlF4))
+    -   [View HW 8 instructions](/homework/HW08/HW08.qmd)
+
+-   See the full list of assignments on the [Homework](/homework.qmd) page.
+
+## Post-class check-in (attendance)
+
+-   Please complete the post-class check-in after each class meeting.
+-   Used for attendance credit and to identify topics that need clarification.
+-   Link: [Post-class check-in](https://forms.gle/AMX1S1vCGEEfmwLY6)
+
+## Looking ahead
+
+-   **Week 11**:
+    -   Monday — Finals review (Lesson 19)
+    -   **Final exam opens Monday, March 16 at 3:00 PM**
+    -   Wednesday — Optional review and questions session (no new material); textbook section 7.1 recommended reading
+    -   **Final exam closes Friday, March 20 at 5:00 PM**
+    -   The final is cumulative with emphasis on Lessons 10–19
