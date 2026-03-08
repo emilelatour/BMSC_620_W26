@@ -97,7 +97,7 @@ source(here("class_dates.R"))
 |  | `{r} format(w9d2, '%a, %m/%d')` | 16 | Comparing Means with ANOVA | 5.5, extra |
 |  | [**`{r} format(hw7, '%a, %m/%d')`**]{.hw-row} |  | [**HW 7 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
-| 10 | `{r} format(w10d1, '%a, %m/%d')` | 17 | Nonparametric tests | Extra |
+| [10](/weeks/week_10.qmd) | `{r} format(w10d1, '%a, %m/%d')` | 17 | Nonparametric tests | Extra |
 |  | `{r} format(w10d2, '%a, %m/%d')` | 18 | Correlation and Simple Linear Regression | 1.6, 6.1-6.4 |
 |  | [**`{r} format(hw8, '%a, %m/%d')`**]{.hw-row} |  | [**HW 8 due \@ 11 pm**]{.hw-row} |  |
 |  |  |  |  |  |
