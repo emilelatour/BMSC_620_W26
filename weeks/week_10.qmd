@@ -45,7 +45,7 @@ By the end of the week, you should be able to:
 ## Readings (before class)
 
 -   No textbook reading for Monday (nonparametric tests are not covered in the textbook — see the supplementary references on the slides)
--   Textbook sections 1.6, 6.1–6.2 (before Wednesday)
+-   Textbook sections 1.6, 6.1–6.4 (before Wednesday)
 
 ## Materials
 
