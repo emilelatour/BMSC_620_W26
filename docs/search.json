@@ -9816,5 +9816,327 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#roadmap-for-today",
+    "href": "lessons/21_slr/20_slr.html#roadmap-for-today",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "",
+    "text": "Part 1: Correlation\n\nVisualizing two continuous variables\nPearson correlation: \\(r\\)\nSpearman correlation: a nonparametric bridge\nCorrelation ≠ causation\n\nPart 2: The SLR Model\n\nFrom correlation to regression\nPopulation model vs. estimated line\nResiduals and OLS\nRunning lm() in R\nInterpreting slope and intercept\n\n\nPart 3: Model Evaluation\n\nLINE assumptions\nDiagnostic plots in R\n\\(R^2\\): how much variation does the model explain?\n\nPart 4: Inference and Prediction\n\nHypothesis test for slope \\(\\beta_1\\)\nConfidence interval for \\(\\beta_1\\)\nPredicting new observations\nCI for mean response vs. prediction interval"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-question-do-two-continuous-variables-move-together",
+    "href": "lessons/21_slr/20_slr.html#the-question-do-two-continuous-variables-move-together",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The question: do two continuous variables move together?",
+    "text": "The question: do two continuous variables move together?\n\n\n\n\nWe’ve spent the semester asking questions like:\n\nDoes mean BP differ between groups?\nIs proportion with hypertension the same across age groups?\n\n\n\nNow a new type of question: As BMI increases, does systolic blood pressure tend to increase too?\n\n\nBoth variables are continuous. We need new tools."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-a-scatterplot",
+    "href": "lessons/21_slr/20_slr.html#reading-a-scatterplot",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading a scatterplot",
+    "text": "Reading a scatterplot\n\n\nWhen you look at a scatterplot, ask four questions:\n\n\n\n\n1. Direction\n\nPositive: as \\(X\\) increases, \\(Y\\) tends to increase\nNegative: as \\(X\\) increases, \\(Y\\) tends to decrease\nNone: no clear pattern\n\n2. Form\n\nLinear: points follow a straight line\nCurved: some other shape\nNo pattern\n\n\n\n\n3. Strength\n\nHow tightly do the points follow the pattern?\nStrong, moderate, weak\n\n4. Unusual observations\n\nOutliers that don’t fit the trend\nClusters or subgroups"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-pearson-correlation-coefficient",
+    "href": "lessons/21_slr/20_slr.html#the-pearson-correlation-coefficient",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The Pearson correlation coefficient",
+    "text": "The Pearson correlation coefficient\n\n\nThe Pearson correlation coefficient \\(r\\) quantifies the strength and direction of the linear association between two continuous variables.\n\\[r = \\frac{1}{n-1}\\sum_{i=1}^{n}\\left(\\frac{x_i - \\bar{x}}{s_x}\\right)\\left(\\frac{y_i - \\bar{y}}{s_y}\\right)\\]\n\n\n\n\n\n\n\n\n\n\nWith base R:\n\ncor(nhanes_bp$BMI, nhanes_bp$BPSys1,\n    use = \"complete.obs\")\n\n[1] 0.2955122\n\n\n\n\n\nUsing tidyverse:\n\nnhanes_bp %&gt;%\n  summarise(\n    r = cor(BMI, BPSys1,\n            use = \"complete.obs\")\n  )\n\n# A tibble: 1 × 1\n      r\n  &lt;dbl&gt;\n1 0.296"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#interpreting-the-pearson-correlation",
+    "href": "lessons/21_slr/20_slr.html#interpreting-the-pearson-correlation",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Interpreting the Pearson correlation",
+    "text": "Interpreting the Pearson correlation\n\n\n\n\n\n\nCommon rough benchmarks (context-dependent!)\n\n\n\\(|r| &lt; 0.3\\): weak     \\(0.3 \\leq |r| &lt; 0.6\\): moderate     \\(|r| \\geq 0.6\\): strong\nThese are rough rules of thumb — what counts as a “strong” correlation varies by field. In complex biological systems, \\(r = 0.4\\) may be quite meaningful."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#correlation-causation",
+    "href": "lessons/21_slr/20_slr.html#correlation-causation",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Correlation ≠ causation",
+    "text": "Correlation ≠ causation\n\n\nA high \\(r\\) tells you two variables are associated. It says nothing about whether one causes the other.\n\n\n\n\nClassic confounders:\n\nIce cream sales and drowning deaths both increase in summer (confounder: temperature)\nShoe size and reading ability in children (confounder: age)\nHigher hospital admission rates associated with worse outcomes (confounder: severity of illness)\n\n\n\n\nFor our example:\nBMI and systolic BP are associated — but the causal pathway is complex:\n\nBMI → metabolic syndrome → hypertension\nShared causes: diet, physical activity, genetics\nReverse causation is unlikely here but not impossible\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nCorrelation is a description of the data. Causation requires study design (randomized experiments) or careful causal reasoning — not a higher \\(r\\)."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#spearman-correlation-the-nonparametric-alternative",
+    "href": "lessons/21_slr/20_slr.html#spearman-correlation-the-nonparametric-alternative",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Spearman correlation: the nonparametric alternative",
+    "text": "Spearman correlation: the nonparametric alternative\n\n\nRecall from Lesson 17: when data are skewed, contain outliers, or are ordinal, rank-based methods are more robust.\n\n\nThe Spearman correlation \\(r_s\\) is simply the Pearson correlation applied to the ranks of \\(X\\) and \\(Y\\):\n\nRank all \\(X\\) values (1 = smallest)\nRank all \\(Y\\) values (1 = smallest)\nCompute Pearson \\(r\\) on those ranks\n\n\n\nWhen to use Spearman:\n\nOrdinal outcomes (pain scales, severity scores)\nSkewed continuous variables (viral loads, antibody titers)\nWhen outliers would distort Pearson \\(r\\)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-limitation-of-correlation",
+    "href": "lessons/21_slr/20_slr.html#the-limitation-of-correlation",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The limitation of correlation",
+    "text": "The limitation of correlation\n\n\nCorrelation answers: how strongly are these two variables associated?\n\n\nBut researchers often want to know more:\n\nHow much does systolic BP increase for each 1-unit increase in BMI?\nWhat systolic BP would we predict for a patient with BMI = 32?\nIs the association statistically significant — or could it be due to chance?\n\n\n\n\n\n\n\n\n\nCorrelation → Regression\n\n\n\nCorrelation gives us a single number summarizing the association. Regression gives us a line — a model that lets us quantify, predict, and test.\nWe keep the same scatterplot. We add a line."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-regression-line",
+    "href": "lessons/21_slr/20_slr.html#the-regression-line",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The regression line",
+    "text": "The regression line\n\n\nA regression line describes how the mean of \\(Y\\) changes as \\(X\\) changes:\n\\[\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X\\]\n\nThe hat (^) on \\(\\hat{Y}\\) signals this is an estimated value from the line — not the actual observed \\(Y\\).\n\n\n\n\nCode\nggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +\n  geom_point(alpha = 0.3, color = \"#0072B2\", size = 1.5) +\n  geom_smooth(method = \"lm\", se = FALSE,\n              color = \"#D55E00\", linewidth = 1.5) +\n  labs(title = \"Systolic BP vs. BMI with regression line\",\n       x = \"BMI (kg/m²)\", y = \"Systolic BP (mmHg)\")"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#population-model-vs.-estimated-line",
+    "href": "lessons/21_slr/20_slr.html#population-model-vs.-estimated-line",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Population model vs. estimated line",
+    "text": "Population model vs. estimated line\n\n\n\n\n\n\n\n\nPopulation model (unobservable)\n\n\n\n\\[Y = \\beta_0 + \\beta_1 X + \\epsilon\\]\n\n\\(\\beta_0\\), \\(\\beta_1\\): unknown population parameters we want to estimate\n\\(\\epsilon\\) (epsilon): random error — how far each individual deviates from the true line\nAssumption: \\(\\epsilon \\sim N(0, \\sigma^2)\\) — errors are normally distributed with mean 0 and constant variance\n\n\n\n\n\n\n\n\n\n\n\n\nEstimated line (from our data)\n\n\n\n\\[\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X\\]\n\n\\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\): our sample estimates of \\(\\beta_0\\), \\(\\beta_1\\)\nNo error term — the line gives the predicted mean at each \\(X\\)\nIndividual observations will scatter above and below this line\n\n\n\n\n\n\n\n\n\n\n\n\n\nSymbol\nName\nType\n\n\n\n\n\\(Y\\)\nResponse / outcome\nObserved\n\n\n\\(X\\)\nPredictor / covariate\nObserved\n\n\n\\(\\beta_0\\)\nIntercept\nPopulation parameter\n\n\n\\(\\beta_1\\)\nSlope\nPopulation parameter\n\n\n\\(\\epsilon\\)\nError term\nUnobservable\n\n\n\\(\\hat{\\beta}_0\\), \\(\\hat{\\beta}_1\\)\nEstimated intercept / slope\nCalculated from data"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#residuals-the-building-block-of-regression",
+    "href": "lessons/21_slr/20_slr.html#residuals-the-building-block-of-regression",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Residuals: the building block of regression",
+    "text": "Residuals: the building block of regression\n\n\nFor each observation \\(i\\), the residual is the difference between what we observed and what the line predicted:\n\\[\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\]\n\n\n\n\n\n\n\nPoints above the line:\n\npositive residual (\\(Y_i &gt; \\hat{Y}_i\\))\n\nPoints below the line:\n\nnegative residual (\\(Y_i &lt; \\hat{Y}_i\\))\n\nPoints on the line:\n\nresidual = 0 (rare in practice)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#ordinary-least-squares-ols",
+    "href": "lessons/21_slr/20_slr.html#ordinary-least-squares-ols",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Ordinary Least Squares (OLS)",
+    "text": "Ordinary Least Squares (OLS)\n\n\nKey question: With infinitely many possible lines we could draw through the data, which one is best?\n\n\nOLS answer: Choose the line that minimizes the Sum of Squared Errors (SSE):\n\\[SSE = \\sum_{i=1}^{n} \\hat{\\epsilon}_i^2 = \\sum_{i=1}^{n}(Y_i - \\hat{Y}_i)^2\\]\n\n\n\n\nWhy square the residuals?\n\nPositive and negative residuals would cancel\nSquaring penalizes large errors more than small ones\nMakes the math tractable (calculus gives closed-form solutions)\n\nThe OLS estimates \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\) are the values that make SSE as small as possible. R’s lm() finds these automatically.\n\nMath details if interested\n\n\n\n\n\n\n\n\n\n\nThe OLS formulas\n\n\n\n\\[\\hat{\\beta}_1 = r \\cdot \\frac{s_Y}{s_X}\\]\n\\[\\hat{\\beta}_0 = \\bar{Y} - \\hat{\\beta}_1 \\bar{X}\\]\nNotice: \\(\\hat{\\beta}_1\\) depends directly on the Pearson correlation \\(r\\) — regression and correlation are deeply connected."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#running-slr-in-r-lm-tidy",
+    "href": "lessons/21_slr/20_slr.html#running-slr-in-r-lm-tidy",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Running SLR in R: lm() + tidy()",
+    "text": "Running SLR in R: lm() + tidy()\n\n\n\n# Fit the model\nmodel_bp &lt;- lm(BPSys1 ~ BMI, data = nhanes_bp)\n\nlibrary(broom)\n# Tidy output: coefficients, SE, t, p, CI\ntidy(model_bp, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  \n2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05\n\n\n\n\nOur estimated regression equation:\n\\[\\widehat{\\text{Systolic BP}} = 98.83 + 0.70 \\times \\text{BMI}\\]"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#interpreting-the-slope-and-intercept",
+    "href": "lessons/21_slr/20_slr.html#interpreting-the-slope-and-intercept",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Interpreting the slope and intercept",
+    "text": "Interpreting the slope and intercept\n\n\n\\[\\widehat{\\text{Systolic BP}} = 98.83 + 0.70 \\times \\text{BMI}\\]\n\n\n\n\n\n\n\n\nSlope (\\(\\hat{\\beta}_1\\) = 0.70)\n\n\n\nFor every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average, holding all else constant.\n\nSign tells you the direction of the association\nMagnitude tells you the rate of change in the units of \\(Y\\) per unit of \\(X\\)\n\n\n\n\n\n\n\n\n\n\n\n\nIntercept (\\(\\hat{\\beta}_0\\) = 98.83)\n\n\n\nThe expected systolic BP for someone with a BMI of 0 is 98.83 mmHg.\n⚠️ The intercept is often not directly interpretable. A BMI of 0 is physiologically impossible. The intercept is a mathematical anchor for the line — interpret it only when \\(X = 0\\) is meaningful in context.\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nRegression describes association, not causation. “Expected to increase by 0.70 mmHg” does not mean BMI causes higher blood pressure — it means these two variables are associated in a positive linear way."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-line-conditions",
+    "href": "lessons/21_slr/20_slr.html#the-line-conditions",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The LINE conditions",
+    "text": "The LINE conditions\n\n\nFor the regression model to give valid estimates and reliable inference, four conditions must hold. We remember them as LINE:\n\n\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — the relationship between \\(X\\) and \\(Y\\) is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations are independent of each other\nStudy design\n\n\nN\nNormality — residuals are approximately normally distributed\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant variance across all \\(X\\) values\nResidual plot\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe key diagnostic plots are the residual plot (residuals vs. fitted values) and the QQ plot of residuals. We generate both from the fitted model object."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#diagnostic-plots-in-r",
+    "href": "lessons/21_slr/20_slr.html#diagnostic-plots-in-r",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Diagnostic plots in R",
+    "text": "Diagnostic plots in R\n\n\nCode\n# TODO -- pick up here\n\naug &lt;- augment(model_bp)\n\np1 &lt;- ggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"grey50\") +\n  geom_smooth(se = FALSE, color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Residual plot\",\n       subtitle = \"Checks L and E\",\n       x = \"Fitted values (ŷ)\",\n       y = \"Residuals\")\n\np2 &lt;- ggplot(aug, aes(sample = .resid)) +\n  stat_qq(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  stat_qq_line(color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Normal QQ plot of residuals\",\n       subtitle = \"Checks N\",\n       x = \"Theoretical quantiles\",\n       y = \"Sample quantiles\")\n\nlibrary(patchwork)\np1 + p2\n\n\n\n\n\n\n\n\n\n\nmodel_bp &lt;- lm(BPSys1 ~ BMI, data = nhanes_bp)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-the-diagnostic-plots",
+    "href": "lessons/21_slr/20_slr.html#reading-the-diagnostic-plots",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading the diagnostic plots",
+    "text": "Reading the diagnostic plots\n\n\n\n\n\n\n\n\nResidual plot (checks L and E)\n\n\n\nWhat you want to see:\n\nPoints scattered randomly around the horizontal line at 0\nNo systematic curve or funnel shape\nRoughly equal spread across all fitted values\n\nRed flags:\n\nCurve: linearity (L) is violated — try a transformation\nFunnel (spread increases): equal variance (E) is violated — heteroscedasticity\n\n\n\n\n\n\n\n\n\n\n\n\nQQ plot (checks N)\n\n\n\nWhat you want to see:\n\nPoints fall approximately along the diagonal reference line\nUnderstanding QQ Plots, Univeristy of Virginia\n\nRed flags:\n\nS-shaped pattern: skewed residuals\nHeavy tails: points deviate at both ends\n\nNote: With large samples, moderate departures from normality matter less (CLT). Linearity and equal variance are more critical for inference."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-r2-statistic",
+    "href": "lessons/21_slr/20_slr.html#the-r2-statistic",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The \\(R^2\\) statistic",
+    "text": "The \\(R^2\\) statistic\n\n\n\\(R^2\\) (the coefficient of determination) tells us: what proportion of the variability in \\(Y\\) is explained by the linear relationship with \\(X\\)?\n\\[R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{\\sum(Y_i - \\hat{Y}_i)^2}{\\sum(Y_i - \\bar{Y})^2}\\]\n\n\n\n\n\n\\(R^2 = 0\\): the model explains none of the variability in \\(Y\\) — no better than predicting \\(\\bar{Y}\\) for everyone\n\\(R^2 = 1\\): the model explains all of the variability — all points fall exactly on the line\nFor simple linear regression: \\(R^2 = r^2\\) (square of the Pearson correlation)\n\n\n\n\n\n# glance() gives model-level summaries\nglance(model_bp) %&gt;%\n  select(r.squared, sigma, nobs)\n\n# A tibble: 1 × 3\n  r.squared sigma  nobs\n      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1    0.0873  17.5   162\n\n\n\n\n\n\n\n\nTip\n\n\n\nsigma = residual standard error = the typical size of a residual. Think of it as the average prediction error in units of \\(Y\\)."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#interpreting-r2-in-context",
+    "href": "lessons/21_slr/20_slr.html#interpreting-r2-in-context",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Interpreting \\(R^2\\) in context",
+    "text": "Interpreting \\(R^2\\) in context\n\n\nFor our model: \\(R^2\\) = 8.7%\n\n\n\n\n\n\n\n\nInterpretation\n\n\n\nBMI explains approximately 8.7% of the variability in systolic blood pressure in this NHANES sample. The remaining 91.3% of variability is due to other factors not included in the model — age, sex, medications, genetics, sodium intake, stress, and so on.\nAn \\(R^2\\) of 8.7% sounds modest, but in a complex biological system with a single predictor, this is a meaningful association. Context matters.\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nA high \\(R^2\\) does not validate the model. It is possible to have a high \\(R^2\\) with a curved relationship that a linear model fits poorly. Always check the LINE conditions first."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#what-are-we-testing",
+    "href": "lessons/21_slr/20_slr.html#what-are-we-testing",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "What are we testing?",
+    "text": "What are we testing?\n\n\nWe have an estimated slope \\(\\hat{\\beta}_1\\). But is the true population slope \\(\\beta_1\\) actually different from zero?\n\n\n\\[H_0: \\beta_1 = 0 \\qquad \\text{vs.} \\qquad H_A: \\beta_1 \\neq 0\\]\n\n\n\n\n\n\n\n\nWhy \\(\\beta_1 = 0\\) matters\n\n\n\nIf \\(\\beta_1 = 0\\), the regression line is flat — \\(X\\) tells us nothing about \\(Y\\). Testing \\(H_0: \\beta_1 = 0\\) is equivalent to testing whether there is any linear association between the two variables.\n\n\n\n\nThe test statistic is a \\(t\\)-statistic:\n\\[t = \\frac{\\hat{\\beta}_1 - 0}{SE_{\\hat{\\beta}_1}} = \\frac{\\hat{\\beta}_1}{SE_{\\hat{\\beta}_1}}\\]\nwhich follows a \\(t\\)-distribution with \\(df = n - 2\\) under \\(H_0\\)."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-all-6-steps",
+    "href": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-all-6-steps",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Inference for slope \\(\\beta_1\\): all 6 steps",
+    "text": "Inference for slope \\(\\beta_1\\): all 6 steps\nStep 1: Hypotheses\n\\[H_0: \\beta_1 = 0 \\quad \\text{(no linear association between BMI and systolic BP)}\\] \\[H_A: \\beta_1 \\neq 0 \\quad \\text{(a linear association exists)}\\]\nStep 2: Significance level   \\(\\alpha = 0.05\\)\nStep 3: Check assumptions   LINE conditions — checked via diagnostic plots on previous slides ✓\nStep 4: Test statistic\n\nb1_row &lt;- tidy(model_bp) %&gt;% filter(term == \"BMI\")\n(t_stat &lt;- b1_row$statistic)\n\n[1] 3.912713\n\n\n\\[t = \\frac{\\hat{\\beta}_1}{SE_{\\hat{\\beta}_1}} = \\frac{0.698}{0.178} = 3.91\\]"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-continued",
+    "href": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-continued",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Inference for slope \\(\\beta_1\\) (continued)",
+    "text": "Inference for slope \\(\\beta_1\\) (continued)\nStep 5: p-value\n\n(p_val &lt;- b1_row$p.value)\n\n[1] 0.0001346729\n\n\nOr directly from the regression table:\n\ntidy(model_bp, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  \n2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05\n\n\nStep 6: Conclusion\nWe reject \\(H_0\\) at the \\(\\alpha = 0.05\\) level (t = 3.91, df = 160, p &lt; 0.001). There is strong evidence of a positive linear association between BMI and systolic blood pressure."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1",
+    "href": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Confidence interval for \\(\\beta_1\\)",
+    "text": "Confidence interval for \\(\\beta_1\\)\n\n\nThe 95% confidence interval for the population slope uses the same logic as all our previous CIs:\n\\[\\hat{\\beta}_1 \\pm t^*_{n-2} \\cdot SE_{\\hat{\\beta}_1}\\]\nwhere \\(t^*_{n-2}\\) is the critical value from the \\(t\\)-distribution with \\(n - 2\\) degrees of freedom.\n\n\n\ntidy(model_bp, conf.int = TRUE) %&gt;%\n  filter(term == \"BMI\") %&gt;%\n  select(term, estimate, conf.low, conf.high)\n\n# A tibble: 1 × 4\n  term  estimate conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 BMI      0.698    0.345      1.05\n\n\n\n\n\n\n\n\n\n\nInterpretation\n\n\n\nFor every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average (95% CI: 0.345 to 1.05 mmHg).\nBecause the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#prediction-using-the-model-for-new-observations",
+    "href": "lessons/21_slr/20_slr.html#prediction-using-the-model-for-new-observations",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Prediction: using the model for new observations",
+    "text": "Prediction: using the model for new observations\n\n\nOnce we have a regression line, we can plug in any \\(X\\) value to get a predicted \\(Y\\):\n\\[\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 \\cdot X^*\\]\n\n\n\nnew_data &lt;- data.frame(BMI = c(25, 30, 35))\n\n# Point predictions\npredict(model_bp, newdata = new_data)\n\n       1        2        3 \n116.2686 119.7562 123.2438 \n\n\n\n\n\n\n\n\n\n\nWhat the confidence band in geom_smooth actually means\n\n\n\nWhen you write geom_smooth(method = \"lm\", se = TRUE), the shaded band is a 95% confidence interval for the mean response at each value of \\(X\\) — it answers: “What is the average systolic BP for all people at this BMI?”\nThe band is narrowest near \\(\\bar{X}\\) (the mean BMI) and widens toward the extremes. Predictions are less precise far from the center of the data."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#prediction-intervals-a-preview",
+    "href": "lessons/21_slr/20_slr.html#prediction-intervals-a-preview",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Prediction intervals: a preview",
+    "text": "Prediction intervals: a preview\n\n\nThere’s a second type of interval you’ll encounter — the prediction interval — which answers a different question:\n\n\n\n\n\n\n\n\n\n\n\nQuestion\nAccounts for\n\n\n\n\nCI for mean response\nWhat’s the average BP for people with BMI = 30?\nUncertainty about the line\n\n\nPrediction interval\nWhat BP would this specific patient have?\nUncertainty about the line + individual variation\n\n\n\n\n\nPrediction intervals are always wider than confidence intervals for the mean, because individuals vary around the mean even if we knew the line perfectly.\n\n\n\n\n\n\n\n\nComing in BSTA 512\n\n\n\nThe mechanics of constructing and interpreting prediction intervals — along with multiple regression, model selection, and diagnostics for more complex models — are covered in depth in BSTA 512. You now have the conceptual foundation to hit the ground running there."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-full-slr-workflow",
+    "href": "lessons/21_slr/20_slr.html#the-full-slr-workflow",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The full SLR workflow",
+    "text": "The full SLR workflow\n\n\n\n\n1. Visualize\nggplot(data, aes(x = X, y = Y)) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n2. Fit\nmodel &lt;- lm(Y ~ X, data = data)\n3. Coefficients + inference\ntidy(model, conf.int = TRUE)\n4. Model fit\nglance(model)   # R², sigma\n\n\n\n5. Diagnostics\naug &lt;- augment(model)\n\n# Residual plot\nggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0)\n\n# QQ plot\nggplot(aug, aes(sample = .resid)) +\n  stat_qq() + stat_qq_line()\n6. Predict\npredict(model,\n  newdata = new_data)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#where-this-fits-in-the-bigger-picture",
+    "href": "lessons/21_slr/20_slr.html#where-this-fits-in-the-bigger-picture",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Where this fits in the bigger picture",
+    "text": "Where this fits in the bigger picture\n\n\n\n\nWhat we’ve learned this semester:\n\nDescribing data (distributions, summaries, visualization)\nInference for one group (means, proportions)\nInference for two groups (t-tests, difference in proportions)\nInference for 3+ groups (ANOVA, Kruskal-Wallis)\nInference for categorical associations (chi-square, Fisher’s)\nInference for linear associations (today)\n\nWhere this leads:\n\nMultiple regression (add more predictors)\nLogistic regression (binary outcome)\nSurvival analysis, mixed models, causal inference\n\nThese are the tools of modern biomedical research. BSTA 512 takes it from here.\n\n\n\n\n\n\n\n\n\nThe unified thread\n\n\n\nEvery method we’ve learned is asking the same fundamental question:\nWhat does the data tell us about the population, and how confident are we?\nThe tools change. The logic — estimate, quantify uncertainty, test — stays the same.\n\n\n\n\n\n\nNext: Lesson 19 — Course Review and Final Exam Preparation"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#the-question-do-two-continuous-variables-move-together-1",
+    "href": "lessons/21_slr/20_slr.html#the-question-do-two-continuous-variables-move-together-1",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "The question: do two continuous variables move together?",
+    "text": "The question: do two continuous variables move together?\n\n\n\n\nWe’ve spent the semester asking questions like:\n\nDoes mean BP differ between groups?\nIs proportion with hypertension the same across age groups?\n\n\n\nNow a new type of question: As BMI increases, does systolic blood pressure tend to increase too?\n\n\nBoth variables are continuous. We need new tools."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-a-scatterplot-2",
+    "href": "lessons/21_slr/20_slr.html#reading-a-scatterplot-2",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading a scatterplot (2)",
+    "text": "Reading a scatterplot (2)\n\n\n\nDirection\n\n\nPositive\n\n\nForm\n\n\nRoughly linear\n\n\nStrength\n\n\nModerate\nNot a tight cloud\n\n\nUnusual observations\n\n\nSome present"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#scatterplot-for-systolic-bp-vs.-bmi",
+    "href": "lessons/21_slr/20_slr.html#scatterplot-for-systolic-bp-vs.-bmi",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Scatterplot for systolic BP vs. BMI",
+    "text": "Scatterplot for systolic BP vs. BMI\n\n\n\nDirection\n\nPositive\n\nForm\n\nRoughly linear\n\nStrength\n\nModerate\nNot a tight cloud\n\nUnusual observations\n\nSome present"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#response-and-explanatory-variables",
+    "href": "lessons/21_slr/20_slr.html#response-and-explanatory-variables",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Response and explanatory variables",
+    "text": "Response and explanatory variables\n\n\n\n\n\n\n\n\nResponse variable\n\n\n\nThe variable that measures the outcome of interest — what we are trying to understand or predict.\nExample: Systolic blood pressure\n\n\n\n\n\n\n\n\n\n\n\nExplanatory variable\n\n\n\nThe variable we think may explain or be associated with changes in the response.\nExample: BMI\n\n\n\n\n\nA study will typically examine whether the values of a response variable differ as values of an explanatory variable change\nThese roles guide how we set up plots and models\n\nThe explanatory variable goes on the \\(x\\)-axis, the response on the \\(y\\)-axis.\n\nSometimes we’re just interested in viewing the relationship between explanatory variables\nApproaches vary depending on whether the two variables are:\n\nBoth numerical\nBoth categorical\nOne numerical and one categorical\n\n\n\n\nWhen both variables are numerical, the scatterplot is our primary tool for visualizing the relationship."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#describing-associations-between-2-numerical-variables",
+    "href": "lessons/21_slr/20_slr.html#describing-associations-between-2-numerical-variables",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Describing associations between 2 numerical variables",
+    "text": "Describing associations between 2 numerical variables\n\n\n\nTwo variables \\(X\\) and \\(Y\\) are\n\nPositively associated if \\(Y\\) increases as \\(X\\) increases\nNegatively associated if \\(Y\\) decreases as \\(X\\) increases\n\n\n\n- If there is no association between the variables, then we say they are uncorrelated or independent\n\n\n\nThe term “association” is a very general term\n\nCan be used for numerical or categorical variables\nNot specifically referring to linear associations"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#pearson-correlation-coefficient-r",
+    "href": "lessons/21_slr/20_slr.html#pearson-correlation-coefficient-r",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "(Pearson) Correlation coefficient (\\(r\\))",
+    "text": "(Pearson) Correlation coefficient (\\(r\\))\n\n\n\n\\(r = -1\\) indicates a perfect negative linear relationship: As one variable increases, the value of the other variable tends to go down, following a straight line\n\\(r = 0\\) indicates no linear relationship: The values of both variables go up/down independently of each other\n\\(r = 1\\) indicates a perfect positive linear relationship: As the value of one variable goes up, the value of the other variable tends to go up as well in a linear fashion\n\n \n\nThe closer \\(r\\) is to ±1, the stronger the linear association"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#interpreting-the-correlation-coefficient",
+    "href": "lessons/21_slr/20_slr.html#interpreting-the-correlation-coefficient",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Interpreting the correlation coefficient",
+    "text": "Interpreting the correlation coefficient\nMultiple published schemes exist for labeling the strength of \\(r\\) — and they don’t agree:\n\n\nCommon scheme\n\n\n\n\\(|r|\\)\nLabel\n\n\n\n\n\\(\\geq 0.6\\)\nStrong\n\n\n\\(0.3 – 0.6\\)\nModerate\n\n\n\\(&lt; 0.3\\)\nWeak\n\n\n\n\n\n\nAnother common scheme\n\n\n\n\\(|r|\\)\nLabel\n\n\n\n\n\\(&gt; 0.8\\)\nStrong\n\n\n\\(0.5 – 0.8\\)\nModerate\n\n\n\\(&lt; 0.5\\)\nWeak\n\n\n\n\n\n\nMukaka (2012)\n\n\n\n\\(|r|\\)\nLabel\n\n\n\n\n\\(0.9 – 1.0\\)\nVery high\n\n\n\\(0.7 – 0.9\\)\nHigh\n\n\n\\(0.5 – 0.7\\)\nModerate\n\n\n\\(0.3 – 0.5\\)\nLow\n\n\n\\(0.0 – 0.3\\)\nNegligible\n\n\n\n\n\n\n\n\n\n\n\nThe disagreement is the lesson\n\n\n\nThree published schemes, three different answers for the same \\(r\\). Rather than memorizing cutoffs, ask: does this correlation accurately and meaningfully represent the relationship for your research question and field?\nIn biomedical research with a single predictor, \\(r = 0.40\\) may be quite meaningful. In a tightly controlled physical measurement, \\(r = 0.85\\) might be disappointing. Always report the actual value and interpret it in context.\n\n\nEight things you need to know about interpreting correlations (from University of Sussex)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#spearman-correlation-in-r",
+    "href": "lessons/21_slr/20_slr.html#spearman-correlation-in-r",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Spearman correlation in R",
+    "text": "Spearman correlation in R\n\n\n\n\nIn base R\n\ncor(nhanes_bp$BMI, nhanes_bp$BPSys1,\n    method = \"spearman\",\n    use = \"complete.obs\")\n\n[1] 0.3610264\n\n\n\n\n\nMore tidyverse way:\n\nnhanes_bp %&gt;%\n  summarise(\n    r_pearson = cor(BMI, BPSys1,\n        use = \"complete.obs\"),\n    r_spearman = cor(BMI, BPSys1,\n        method = \"spearman\",\n        use = \"complete.obs\")\n  )\n\n# A tibble: 1 × 2\n  r_pearson r_spearman\n      &lt;dbl&gt;      &lt;dbl&gt;\n1     0.296      0.361\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nPearson and Spearman are similar here — the relationship is reasonably linear without extreme outliers dominating."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#residuals-the-building-block-of-regression-1",
+    "href": "lessons/21_slr/20_slr.html#residuals-the-building-block-of-regression-1",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Residuals: the building block of regression",
+    "text": "Residuals: the building block of regression\n\n\nFor each observation \\(i\\), the residual is the difference between what we observed and what the line predicted:\n\\[\\hat{\\epsilon}_i = Y_i - \\hat{Y}_i\\]\n\n\n\n\n\n\n\nPoints above the line:\n\npositive residual (\\(Y_i &gt; \\hat{Y}_i\\))\n\nPoints below the line:\n\nnegative residual (\\(Y_i &lt; \\hat{Y}_i\\))\n\nPoints on the line:\n\nresidual = 0 (rare in practice)"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html",
+    "title": "Response to Muddy Points",
+    "section": "",
+    "text": "Thank you all for the feedback! Every student who responded rated the pace “about right,” with no one feeling it was too fast or too slow. That is especially encouraging for a lecture covering a lot of new vocabulary and test mechanics in a short time.\nThe two muddy points this week are closely related — both are asking, in different ways, about what nonparametric tests can and cannot do for you when sample sizes are small. They are excellent questions and worth addressing carefully, because the answer has real implications for how you design and analyze experiments.\n\n\n\n\n\n\nNote\n\n\n\nYou do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#what-sample-size-actually-does",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#what-sample-size-actually-does",
+    "title": "Response to Muddy Points",
+    "section": "What sample size actually does",
+    "text": "What sample size actually does\nThe role of sample size in this decision is more nuanced than it might seem. The issue is not \\(n\\) itself — it is whether the distributional assumptions are met.\nRecall why we brought up the Central Limit Theorem (CLT) repeatedly throughout the course. The CLT says that, as \\(n\\) grows large, the sampling distribution of the mean becomes approximately normal regardless of the shape of the underlying data. This means that with large \\(n\\), parametric tests are robust even when the raw data are skewed — the CLT bails you out.\nWith small \\(n\\), the CLT doesn’t rescue you. The t-test and ANOVA rely on the data (or their differences) being approximately normally distributed, and with small samples you can’t lean on large-sample theory to justify it. This is why small \\(n\\) raises the stakes for checking assumptions — but it doesn’t automatically make nonparametric tests the right answer."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-actual-decision-rule",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-actual-decision-rule",
+    "title": "Response to Muddy Points",
+    "section": "The actual decision rule",
+    "text": "The actual decision rule\nThe question is not “is \\(n\\) small?” but rather “do the data plausibly meet the normality assumption?”\nIf yes: use the parametric test. Parametric tests are more powerful — they use more of the information in your data — and are perfectly valid even with small samples when the assumption holds.\nIf no: use the nonparametric alternative. Small samples with skewed distributions, heavy tails, or outliers that cannot be removed are exactly the situation nonparametric tests were designed for.\nThe practical workflow looks like this:\n\nPlot the data (dotplot, histogram, or Q-Q plot)\nAsk: does the distribution look approximately normal, or at least roughly symmetric?\nWith very small \\(n\\) (say, \\(n &lt; 10\\)), even rough symmetry without extreme outliers is often sufficient for the Wilcoxon tests\nIf severe skew or outliers are present → go nonparametric"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#a-worked-example-with-the-glaucoma-data",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#a-worked-example-with-the-glaucoma-data",
+    "title": "Response to Muddy Points",
+    "section": "A worked example with the glaucoma data",
+    "text": "A worked example with the glaucoma data\nThe IOP data from lecture had \\(n = 7\\) (effective \\(n = 6\\) after dropping the zero difference).\n\nIOP\n\n# A tibble: 7 × 4\n  patient adrenaline synthetic      d\n    &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n1       1        3.5       3.2 -0.300\n2       2        2.6       3.1  0.5  \n3       3        3         3.3  0.300\n4       4        1.9       2.4  0.5  \n5       5        2.9       2.9  0    \n6       6        2.4       2.8  0.4  \n7       7        2         2.6  0.6  \n\n\n\n\nLet’s see what happens if we run both the paired t-test and the Wilcoxon signed-rank test on the same data:\n\n# Parametric: paired t-test\nt_result &lt;- t.test(IOP$d, mu = 0, alternative = \"two.sided\")\n\n# Nonparametric: Wilcoxon signed-rank\nw_result &lt;- wilcox.test(IOP$d, mu = 0,\n                        alternative = \"two.sided\",\n                        exact = FALSE)\n\ntibble(\n  Test    = c(\"Paired t-test\", \"Wilcoxon signed-rank\"),\n  p_value = c(t_result$p.value, w_result$p.value)\n) %&gt;%\n  mutate(p_value = scales::pvalue(p_value))\n\n# A tibble: 2 × 2\n  Test                 p_value\n  &lt;chr&gt;                &lt;chr&gt;  \n1 Paired t-test        0.058  \n2 Wilcoxon signed-rank 0.073  \n\n\nBoth tests give similar conclusions here — neither achieves significance at \\(\\alpha = 0.05\\). When the distributional assumption is approximately met (the differences in the IOP data are not dramatically skewed), parametric and nonparametric tests tend to agree. The choice between them matters most when the data are clearly non-normal."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#a-note-for-bench-scientists",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#a-note-for-bench-scientists",
+    "title": "Response to Muddy Points",
+    "section": "A note for bench scientists",
+    "text": "A note for bench scientists\nMuch of the data generated in biomedical lab work — gene expression, protein concentrations, antibody titers, cytokine levels — follows a log-normal distribution rather than a normal one. Log-normal data are right-skewed on the original scale but become approximately normal after a log transformation.\nIn many situations, log-transforming your outcome and then running a parametric test is a better choice than running a nonparametric test on the raw scale — it is more powerful and the results are more interpretable (back-transform to get ratio-scale conclusions). This is a topic beyond the scope of this course, but worth being aware of as you encounter these data types in your own work.\n\n\n\n\n\n\nThe practical takeaway\n\n\n\nAsk these questions in order:\n\nDo the data appear approximately normal (or do the differences appear approximately symmetric)?\nIf yes: use the parametric test — it’s more powerful\nIf no (skew, outliers, ordinal scale): use the nonparametric test\n\nSmall \\(n\\) is the reason to check assumptions carefully — not an automatic answer to the question."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-discrete-p-value-floor",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-discrete-p-value-floor",
+    "title": "Response to Muddy Points",
+    "section": "The discrete p-value floor",
+    "text": "The discrete p-value floor\nWith exact nonparametric tests (used when samples are small and there are no ties), p-values are not continuous — they can only take a discrete set of values. The reason is that the test statistic can only take a finite number of values, and the p-value is computed by counting how many outcomes are as extreme or more extreme than the one observed.\nFor the Wilcoxon signed-rank test with effective sample size \\(n\\) (after dropping zeros), the test statistic \\(T^+\\) can range from 0 to \\(n(n+1)/2\\), and there are \\(2^n\\) equally likely outcomes under \\(H_0\\). This means the smallest achievable two-sided p-value is \\(\\frac{2}{2^n}\\).\nLet’s see how this plays out for small \\(n\\):\n\n\n\n\n\nEffective n\nMin. possible p-value\nCan reach p &lt; 0.05?\n\n\n\n\n3\n0.250\nNo\n\n\n4\n0.125\nNo\n\n\n5\n0.062\nNo\n\n\n6\n0.031\nYes\n\n\n7\n0.016\nYes\n\n\n8\n0.008\nYes\n\n\n9\n0.004\nYes\n\n\n10\n0.002\nYes\n\n\n\n\n\nWith \\(n = 3\\), the smallest possible two-sided p-value is \\(2/8 = 0.25\\) — you literally cannot achieve \\(p &lt; 0.05\\) no matter how extreme the data are. With \\(n = 5\\) or more, it becomes possible to reach significance if the result is extreme enough."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#but-this-is-not-unique-to-nonparametric-tests",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#but-this-is-not-unique-to-nonparametric-tests",
+    "title": "Response to Muddy Points",
+    "section": "But this is not unique to nonparametric tests",
+    "text": "But this is not unique to nonparametric tests\nThis is the key point: parametric tests with very small samples face the exact same problem, just less obviously.\nWith a paired t-test and \\(n = 3\\) pairs, the critical value is \\(t^* = 4.30\\) (for \\(\\alpha = 0.05\\) two-sided). The mean difference would need to be more than 4.3 standard errors away from zero to achieve significance. That is an extraordinarily large effect. In practice, with \\(n = 3\\), almost nothing is statistically significant.\nThe reason is not what the test does with your data — it is simply that with very little data, you have very little statistical power. Power is the probability of detecting a real effect when it exists. With tiny samples, power is low regardless of which test you choose."
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-role-of-ranks",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#the-role-of-ranks",
+    "title": "Response to Muddy Points",
+    "section": "The role of ranks",
+    "text": "The role of ranks\nYour intuition that “ignoring the magnitude” costs you something is correct — that is the trade-off we discussed in class. Ranks discard information about how much larger one value is than another. This does make nonparametric tests slightly less powerful than their parametric counterparts when the parametric assumptions hold.\nBut this is a cost measured in power relative to the parametric test, not in an absolute inability to detect effects. The floor problem with very small \\(n\\) affects both types of tests.\n\n\n\n\n\n\n\n\n\nTwo things are visible in this plot:\n\nPower grows with \\(n\\) for both tests — the limitation is sample size, not test choice\nThe t-test has slightly higher power when data are normal (as they are in this simulation), consistent with the trade-off we discussed"
+  },
+  {
+    "objectID": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#what-this-means-practically",
+    "href": "lessons/20_nonparametric/20_nonparametric_muddy_points.html#what-this-means-practically",
+    "title": "Response to Muddy Points",
+    "section": "What this means practically",
+    "text": "What this means practically\nIf you are working with very small samples (\\(n &lt; 6\\) per group), you should know going in that your study is likely underpowered — and that no statistical test, parametric or nonparametric, can make up for insufficient data. The solution is more data, not a different test.\nThis is one reason why prospective power analysis before data collection is so important. If the minimum detectable effect at \\(n = 6\\) requires an effect size that is biologically implausible, that is information you want to know before running the experiment.\n\n\n\n\n\n\nThe practical takeaway\n\n\n\n\nWith very small samples (especially \\(n \\leq 5\\) per group), exact nonparametric p-values have a floor — they cannot reach below a certain value no matter how extreme the data\nThis is also true of parametric tests with tiny \\(n\\) — the t-distribution is very wide when df are small\nThe common cause is low statistical power, which affects all tests\nThe solution is larger samples, not a different test\n\nIf you are regularly working with \\(n &lt; 8\\) per group, consider consulting a statistician during the study design phase — prospective power analysis is much more useful than post-hoc choices between tests."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html",
+    "href": "lessons/21_slr/20_slr.html",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "",
+    "text": "By the end of today’s lecture, you will be able to:\n\nCalculate and interpret Pearson and Spearman correlation coefficients\nIdentify the components of the simple linear regression model\nExplain what ordinary least squares (OLS) minimizes\nRun a simple linear regression in R and interpret the output\nCheck the LINE assumptions using diagnostic plots\nInterpret \\(R^2\\) as a measure of model fit\nConduct and interpret inference for the population slope \\(\\beta_1\\)\nConstruct confidence and prediction intervals for new observations\n\n\n\n\n\n\n\nPart 1: Correlation\n\nVisualizing two continuous variables\nPearson correlation: \\(r\\)\nSpearman correlation: a nonparametric bridge\nCorrelation ≠ causation\n\nPart 2: The SLR Model\n\nFrom correlation to regression\nPopulation model vs. estimated line\nResiduals and OLS\nRunning lm() in R\nInterpreting slope and intercept\n\n\nPart 3: Model Evaluation\n\nLINE assumptions\nDiagnostic plots in R\n\\(R^2\\): how much variation does the model explain?\n\nPart 4: Inference and Prediction\n\nHypothesis test for slope \\(\\beta_1\\)\nConfidence interval for \\(\\beta_1\\)\nPredicting new observations\nCI for mean response vs. prediction interval"
   }
 ]

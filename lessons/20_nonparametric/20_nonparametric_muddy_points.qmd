@@ -1,0 +1,264 @@
+---
+title: "Response to Muddy Points"
+subtitle: "Lecture: Nonparametric Tests (Week 10, Day 1)"
+author: "Emile"
+date: "2026-03-10"
+date-format: long
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    html-math-method: mathjax
+    embed-resources: true
+    self-contained: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(broom)
+
+library(lamisc)
+library(laviz)
+
+# Recreate IOP dataset from lecture
+IOP <- tibble(
+  patient    = 1:7,
+  adrenaline = c(3.5, 2.6, 3.0, 1.9, 2.9, 2.4, 2.0),
+  synthetic  = c(3.2, 3.1, 3.3, 2.4, 2.9, 2.8, 2.6)
+) %>%
+  mutate(d = synthetic - adrenaline)
+
+theme_set(laviz::theme_minimal_white(grid = "none", axis = FALSE, base_size = 14))
+```
+
+# Overview
+
+Thank you all for the feedback! Every student who responded rated the pace "about right," with no one feeling it was too fast or too slow. That is especially encouraging for a lecture covering a lot of new vocabulary and test mechanics in a short time.
+
+The two muddy points this week are closely related — both are asking, in different ways, about what nonparametric tests can and cannot do for you when sample sizes are small. They are excellent questions and worth addressing carefully, because the answer has real implications for how you design and analyze experiments.
+
+::: {.callout-note}
+You do not need to read every section below. Each heading addresses a specific muddy point raised in class. Feel free to focus on the ones most relevant to you.
+:::
+
+---
+
+# Does small *n* mean I should always use a nonparametric test?
+
+> *"In lab work, I don't think I will ever have a n > 30. Does this mean I should always be using a non-parametric test?"*
+
+This is one of the most common misconceptions in applied biostatistics, and it is worth addressing directly: **no, small sample size alone does not automatically indicate a nonparametric test.**
+
+## What sample size actually does
+
+The role of sample size in this decision is more nuanced than it might seem. The issue is not $n$ itself — it is whether the **distributional assumptions are met**.
+
+Recall why we brought up the Central Limit Theorem (CLT) repeatedly throughout the course. The CLT says that, as $n$ grows large, the sampling distribution of the mean becomes approximately normal *regardless of the shape of the underlying data*. This means that with large $n$, parametric tests are robust even when the raw data are skewed — the CLT bails you out.
+
+With small $n$, the CLT doesn't rescue you. The t-test and ANOVA rely on the data (or their differences) being approximately normally distributed, and with small samples you can't lean on large-sample theory to justify it. This is why small $n$ raises the stakes for checking assumptions — but it doesn't automatically make nonparametric tests the right answer.
+
+## The actual decision rule
+
+The question is not "is $n$ small?" but rather "do the data plausibly meet the normality assumption?"
+
+**If yes:** use the parametric test. Parametric tests are more powerful — they use more of the information in your data — and are perfectly valid even with small samples when the assumption holds.
+
+**If no:** use the nonparametric alternative. Small samples with skewed distributions, heavy tails, or outliers that cannot be removed are exactly the situation nonparametric tests were designed for.
+
+The practical workflow looks like this:
+
+1. Plot the data (dotplot, histogram, or Q-Q plot)
+2. Ask: does the distribution look approximately normal, or at least roughly symmetric?
+3. With very small $n$ (say, $n < 10$), even rough symmetry without extreme outliers is often sufficient for the Wilcoxon tests
+4. If severe skew or outliers are present → go nonparametric
+
+## A worked example with the glaucoma data
+
+The IOP data from lecture had $n = 7$ (effective $n = 6$ after dropping the zero difference). 
+
+```{r}
+IOP
+```
+
+\
+
+Let's see what happens if we run both the paired t-test and the Wilcoxon signed-rank test on the same data:
+
+```{r}
+# Parametric: paired t-test
+t_result <- t.test(IOP$d, mu = 0, alternative = "two.sided")
+
+# Nonparametric: Wilcoxon signed-rank
+w_result <- wilcox.test(IOP$d, mu = 0,
+                        alternative = "two.sided",
+                        exact = FALSE)
+
+tibble(
+  Test    = c("Paired t-test", "Wilcoxon signed-rank"),
+  p_value = c(t_result$p.value, w_result$p.value)
+) %>%
+  mutate(p_value = scales::pvalue(p_value))
+```
+
+Both tests give similar conclusions here — neither achieves significance at $\alpha = 0.05$. When the distributional assumption is approximately met (the differences in the IOP data are not dramatically skewed), parametric and nonparametric tests tend to agree. The choice between them matters most when the data are clearly non-normal.
+
+## A note for bench scientists
+
+Much of the data generated in biomedical lab work — gene expression, protein concentrations, antibody titers, cytokine levels — follows a **log-normal distribution** rather than a normal one. Log-normal data are right-skewed on the original scale but become approximately normal after a log transformation.
+
+In many situations, log-transforming your outcome and then running a parametric test is a better choice than running a nonparametric test on the raw scale — it is more powerful *and* the results are more interpretable (back-transform to get ratio-scale conclusions). This is a topic beyond the scope of this course, but worth being aware of as you encounter these data types in your own work.
+
+::: {.callout-tip icon="false"}
+### The practical takeaway
+
+Ask these questions in order:
+
+1. Do the data appear approximately normal (or do the differences appear approximately symmetric)?
+2. **If yes:** use the parametric test — it's more powerful
+3. **If no (skew, outliers, ordinal scale):** use the nonparametric test
+
+Small $n$ is the *reason* to check assumptions carefully — not an automatic answer to the question.
+:::
+
+---
+
+# With very small samples, can nonparametric tests ever reach significance?
+
+> *"It seems like with the nonparametric tests, since you are just assigning rank and ignoring the magnitude of differences, there will be sample sizes that are too small and no matter what you won't get a significant difference. Is that true?"*
+
+This question gets at something real and important. The short answer is: **yes and no — but the limitation is about small sample size, not about the use of ranks**.
+
+## The discrete p-value floor
+
+With exact nonparametric tests (used when samples are small and there are no ties), p-values are not continuous — they can only take a discrete set of values. The reason is that the test statistic can only take a finite number of values, and the p-value is computed by counting how many outcomes are as extreme or more extreme than the one observed.
+
+For the **Wilcoxon signed-rank test** with effective sample size $n$ (after dropping zeros), the test statistic $T^+$ can range from 0 to $n(n+1)/2$, and there are $2^n$ equally likely outcomes under $H_0$. This means the smallest achievable two-sided p-value is $\frac{2}{2^n}$.
+
+Let's see how this plays out for small $n$:
+
+```{r}
+#| echo: false
+
+tibble(
+  n = 3:10,
+  min_pvalue = 2 / 2^n
+) %>%
+  mutate(
+    min_pvalue_fmt  = scales::pvalue(min_pvalue, accuracy = 0.001),
+    can_reach_05    = if_else(min_pvalue <= 0.05, "Yes", "No")
+  ) %>%
+  dplyr::select(-min_pvalue) %>% 
+  knitr::kable(
+    col.names = c("Effective n", "Min. possible p-value", 
+                  # "Min. p-value", 
+                  "Can reach p < 0.05?"),
+    align = "c"
+  )
+```
+
+With $n = 3$, the smallest possible two-sided p-value is $2/8 = 0.25$ — you literally cannot achieve $p < 0.05$ no matter how extreme the data are. With $n = 5$ or more, it becomes possible to reach significance if the result is extreme enough.
+
+## But this is not unique to nonparametric tests
+
+This is the key point: **parametric tests with very small samples face the exact same problem**, just less obviously.
+
+With a paired t-test and $n = 3$ pairs, the critical value is $t^* = 4.30$ (for $\alpha = 0.05$ two-sided). The mean difference would need to be more than 4.3 standard errors away from zero to achieve significance. That is an extraordinarily large effect. In practice, with $n = 3$, almost nothing is statistically significant.
+
+The reason is not what the test does with your data — it is simply that with very little data, you have very little **statistical power**. Power is the probability of detecting a real effect when it exists. With tiny samples, power is low regardless of which test you choose.
+
+## The role of ranks
+
+Your intuition that "ignoring the magnitude" costs you something is correct — that is the trade-off we discussed in class. Ranks discard information about *how much* larger one value is than another. This does make nonparametric tests slightly less powerful than their parametric counterparts when the parametric assumptions hold.
+
+But this is a cost measured in **power relative to the parametric test**, not in an absolute inability to detect effects. The floor problem with very small $n$ affects both types of tests.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4.9
+#| fig-align: center
+#| echo: false
+
+# Simulate power comparison across n for a moderate effect
+set.seed(620)
+
+sim_power <- function(n, n_sim = 2000, effect = 0.8) {
+  results <- replicate(n_sim, {
+    x <- rnorm(n, mean = effect, sd = 1)
+    p_t <- t.test(x, mu = 0)$p.value
+    p_w <- suppressWarnings(wilcox.test(x, mu = 0, exact = FALSE)$p.value)
+    c(p_t < 0.05, p_w < 0.05)
+  })
+  tibble(
+    n         = n,
+    t_power   = mean(results[1, ]),
+    wsr_power = mean(results[2, ])
+  )
+}
+
+power_df <- map_dfr(c(4, 6, 8, 10, 15, 20, 30), sim_power) %>%
+  pivot_longer(c(t_power, wsr_power),
+               names_to = "test", values_to = "power") %>%
+  mutate(test = if_else(test == "t_power", "Paired t-test", "Wilcoxon signed-rank"))
+
+ggplot(power_df, aes(x = n, y = power, color = test)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "grey50") +
+  scale_color_manual(values = c("#0072B2", "#E69F00")) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + 
+  scale_x_continuous(limits = c(0, 30), 
+                     breaks = c(0, 4, 6, 8, 10, 15, 20, 30)) + 
+  labs(
+    title    = "Power vs. sample size for a moderate effect (d = 0.8)",
+    subtitle = "Dashed line = Type I error rate (5%). Power increases with n for both tests.",
+    x        = "Sample size (n)",
+    y        = "Power",
+    color    = NULL
+  ) +
+  theme(legend.position = "bottom")
+```
+
+Two things are visible in this plot:
+
+1. **Power grows with $n$ for both tests** — the limitation is sample size, not test choice
+2. **The t-test has slightly higher power** when data are normal (as they are in this simulation), consistent with the trade-off we discussed
+
+## What this means practically
+
+If you are working with very small samples ($n < 6$ per group), you should know going in that your study is likely underpowered — and that no statistical test, parametric or nonparametric, can make up for insufficient data. The solution is more data, not a different test.
+
+This is one reason why **prospective power analysis before data collection** is so important. If the minimum detectable effect at $n = 6$ requires an effect size that is biologically implausible, that is information you want to know *before* running the experiment.
+
+::: {.callout-tip icon="false"}
+### The practical takeaway
+
+- With very small samples (especially $n \leq 5$ per group), exact nonparametric p-values have a floor — they cannot reach below a certain value no matter how extreme the data
+- This is also true of parametric tests with tiny $n$ — the t-distribution is very wide when df are small
+- The common cause is **low statistical power**, which affects all tests
+- The solution is larger samples, not a different test
+
+If you are regularly working with $n < 8$ per group, consider consulting a statistician during the study design phase — prospective power analysis is much more useful than post-hoc choices between tests.
+:::
+
+---
+
+# Summary
+
+- **Small $n$ alone does not determine your test choice.** The criterion is whether the distributional assumptions are met. Small samples raise the stakes for checking those assumptions (because the CLT can't rescue you), but if data look approximately normal, parametric tests are valid and more powerful.
+
+- **With very small samples, nonparametric exact p-values have a discrete floor** — some sample sizes genuinely cannot produce $p < 0.05$ no matter what. But this is not a peculiarity of rank-based tests: parametric tests with the same tiny samples also have very low power. The limitation is the data volume, not the test.
+
+- **Ranks do discard magnitude information**, which makes nonparametric tests slightly less powerful than parametric tests when normality holds. But "slightly less powerful" is very different from "unable to detect effects" — for reasonable sample sizes, the power loss is modest.
+
+- **For skewed biomedical data**, log-transformation followed by a parametric test is often worth considering as an alternative to nonparametric testing. Both approaches are valid; the right choice depends on your data and what question you're trying to answer.

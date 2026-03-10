@@ -1,0 +1,1361 @@
+---
+title: "Correlation and Simple Linear Regression"
+subtitle: "Textbook Sections 1.6, 6.1-6.4"
+author: "Emile Latour, Nicky Wakim, Meike Niederhausen"
+date: "`r library(here); source(here('class_dates.R')); w10d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Correlation and Simple Linear Regression"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(janitor)
+library(gt)
+
+library(lamisc)
+library(laviz)
+
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+# Load and clean NHANES data
+data(nhanes.samp)
+
+nhanes_bp <- nhanes.samp %>%
+  filter(!is.na(BMI), !is.na(BPSys1)) %>%
+  select(BMI, BPSys1, Gender, Age)
+
+# Fit the model once — reference throughout
+model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
+model_tidy <- tidy(model_bp, conf.int = TRUE)
+model_glance <- glance(model_bp)
+
+b0 <- lamisc::fmt_num(model_tidy$estimate[1], accuracy = 0.01)
+b1 <- lamisc::fmt_num(model_tidy$estimate[2], accuracy = 0.01)
+n_bp <- nobs(model_bp)
+```
+
+# Learning Objectives
+
+By the end of today's lecture, you will be able to:
+
+1. Calculate and interpret Pearson and Spearman correlation coefficients
+2. Identify the components of the simple linear regression model
+3. Explain what ordinary least squares (OLS) minimizes
+4. Run a simple linear regression in R and interpret the output
+5. Check the LINE assumptions using diagnostic plots
+6. Interpret $R^2$ as a measure of model fit
+7. Conduct and interpret inference for the population slope $\beta_1$
+8. Construct confidence and prediction intervals for new observations
+
+## Roadmap for Today
+
+\
+
+::::: columns
+::: {.column width="50%"}
+**Part 1: Correlation**
+
+- Visualizing two continuous variables
+- Pearson correlation: $r$
+- Spearman correlation: a nonparametric bridge
+- Correlation ≠ causation
+
+**Part 2: The SLR Model**
+
+- From correlation to regression
+- Population model vs. estimated line
+- Residuals and OLS
+- Running `lm()` in R
+- Interpreting slope and intercept
+:::
+
+::: {.column width="50%"}
+**Part 3: Model Evaluation**
+
+- LINE assumptions
+- Diagnostic plots in R
+- $R^2$: how much variation does the model explain?
+
+**Part 4: Inference and Prediction**
+
+- Hypothesis test for slope $\beta_1$
+- Confidence interval for $\beta_1$
+- Predicting new observations
+- CI for mean response vs. prediction interval
+:::
+:::::
+
+# Part 1: Correlation
+
+## The question: do two continuous variables move together?
+
+
+::: columns
+::: {.column width="50%"}
+\
+
+We've spent the semester asking questions like:
+
+- Does **mean** BP differ between groups?
+- Is **proportion** with hypertension the same across age groups?
+
+\
+
+Now a new type of question: **As BMI increases, does systolic blood pressure tend to increase too?**
+
+\
+
+Both variables are continuous. We need new tools.
+:::
+::: {.column width="50%"}
+
+\
+
+\
+
+\
+
+\
+
+\
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-align: center
+#| echo: false
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  labs(title = "Systolic blood pressure vs. BMI",
+       subtitle = glue("NHANES sample, n = {n_bp}"),
+       x = "BMI (kg/m²)",
+       y = "Systolic BP (mmHg)")
+```
+:::
+:::
+
+
+## Response and explanatory variables
+
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Response variable
+
+The variable that **measures the outcome of interest** — what we are trying to understand or predict.
+
+**Example:** Systolic blood pressure
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Explanatory variable
+
+The variable we think may **explain or be associated with** changes in the response.
+
+**Example:** BMI
+:::
+
+:::
+:::::
+
+
+- A study will typically examine whether the values of a **response variable** differ as values of an **explanatory variable** change
+- These roles guide how we set up plots and models
+   - The explanatory variable goes on the $x$-axis, the response on the $y$-axis.
+- Sometimes we’re just interested in viewing the relationship between **explanatory variables**
+- Approaches vary depending on whether the two variables are:
+   - Both numerical
+   - Both categorical
+   - One numerical and one categorical
+   
+\
+
+When both variables are numerical, the **scatterplot** is our primary tool for visualizing the relationship.
+  
+
+## Reading a scatterplot
+
+\
+
+When you look at a scatterplot, ask four questions:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+**1. Direction**
+
+- Positive: as $X$ increases, $Y$ tends to increase
+- Negative: as $X$ increases, $Y$ tends to decrease
+- None: no clear pattern
+
+**2. Form**
+
+- Linear: points follow a straight line
+- Curved: some other shape
+- No pattern
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**3. Strength**
+
+- How tightly do the points follow the pattern?
+- Strong, moderate, weak
+
+**4. Unusual observations**
+
+- Outliers that don't fit the trend
+- Clusters or subgroups
+
+:::
+:::::
+
+\
+
+
+
+<!-- ::: {.callout-tip icon="false"} -->
+<!-- For systolic BP vs. BMI: **positive, roughly linear, moderate strength**. Some variability — not a tight cloud. -->
+<!-- ::: -->
+
+## Scatterplot for systolic BP vs. BMI
+
+::: columns
+::: {.column width="40%"}
+
+1. Direction 
+   - Positive
+2. Form
+   - Roughly linear
+3. Strength
+   - Moderate
+   - Not a tight cloud
+4. Unusual observations
+   - Some present
+
+:::
+::: {.column width="60%"}
+
+\
+
+
+```{r}
+#| fig-width: 8
+#| fig-height: 6
+#| fig-align: center
+#| echo: false
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  labs(title = "Systolic blood pressure vs. BMI",
+       subtitle = glue("NHANES sample, n = {n_bp}"),
+       x = "BMI (kg/m²)",
+       y = "Systolic BP (mmHg)")
+```
+:::
+:::
+
+## The Pearson correlation coefficient
+
+\
+
+The **Pearson correlation coefficient** $r$ quantifies the strength and direction of the **linear** association between two continuous variables.
+
+$$r = \frac{1}{n-1}\sum_{i=1}^{n}\left(\frac{x_i - \bar{x}}{s_x}\right)\left(\frac{y_i - \bar{y}}{s_y}\right)$$
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+<!-- **Properties of $r$:** -->
+
+<!-- - Always between −1 and +1 -->
+<!-- - $r = +1$: perfect positive linear relationship -->
+<!-- - $r = -1$: perfect negative linear relationship -->
+<!-- - $r = 0$: no linear relationship -->
+<!-- - Sign = direction; magnitude = strength -->
+
+**With base R:**
+
+```{r}
+cor(nhanes_bp$BMI, nhanes_bp$BPSys1,
+    use = "complete.obs")
+
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**Using tidyverse:**
+
+```{r}
+nhanes_bp %>%
+  summarise(
+    r = cor(BMI, BPSys1,
+            use = "complete.obs")
+  )
+```
+
+:::
+:::::
+
+## Describing associations between 2 numerical variables
+
+
+\
+
+- Two variables $X$ and $Y$ are 
+
+  - **Positively associated** if $Y$ increases as $X$ increases
+
+  - **Negatively associated** if $Y$ decreases as $X$ increases
+  
+\
+- If there is no association between the variables, then we say they are **uncorrelated** or **independent**
+
+\
+
+- The term "association" is a very general term
+
+  - Can be used for numerical or categorical variables
+  - Not specifically referring to linear associations
+
+## (Pearson) Correlation coefficient ($r$)
+
+::: columns
+::: {.column width="40%"}
+* $r = -1$ indicates a __perfect negative linear relationship__: As one variable increases, the value of the other variable tends to go down, following a *straight line*
+* $r = 0$ indicates __no linear relationship__: The values of both variables go up/down independently of each other
+* $r = 1$ indicates a __perfect positive linear relationship__: As the value of one variable goes up, the value of the other variable tends to go up as well in a linear fashion
+
+ 
+
+* The closer $r$ is to ±1, the stronger the linear association
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 7
+#| fig-align: center
+
+set.seed(620)
+n <- 150
+
+# make_scatter <- function(r_target, title) {
+#   # Simulate bivariate normal
+#   Sigma <- matrix(c(1, r_target, r_target, 1), 2, 2)
+#   dat <- as.data.frame(MASS::mvrnorm(n, mu = c(0, 0), Sigma = Sigma))
+#   r_obs <- round(cor(dat$V1, dat$V2), 2)
+#   ggplot(dat, aes(x = V1, y = V2)) +
+#     geom_point(alpha = 0.5, color = "#0072B2", size = 1.2) +
+#     geom_smooth(method = "lm", se = FALSE, color = "#D55E00", linewidth = 1) +
+#     labs(title = glue("r = {r_obs}"), x = NULL, y = NULL) +
+#     theme(axis.text = element_blank(), axis.ticks = element_blank())
+# }
+
+
+make_scatter <- function(r_target, title) {
+  # Simulate bivariate normal
+  Sigma <- matrix(c(1, r_target, r_target, 1), 2, 2)
+  dat <- as.data.frame(MASS::mvrnorm(n, mu = c(0, 0), Sigma = Sigma))
+  r_obs <- lamisc::fmt_num(cor(dat$V1, dat$V2), accuracy = 0.01)
+  ggplot(dat, aes(x = V1, y = V2)) +
+    geom_point(alpha = 0.5, color = "#0072B2", size = 1.8) +
+    # geom_smooth(method = "lm", se = FALSE, color = "#D55E00", linewidth = 1) +
+    labs(caption = glue("r = {r_obs}"), x = NULL, y = NULL) +
+    laviz::theme_minimal_white(grid = "none", 
+                               border = TRUE) + 
+  theme(axis.text.x = element_blank(), 
+        axis.text.y = element_blank(), 
+        plot.caption = element_text(
+      hjust = 0.5, # Center the caption horizontally
+      vjust = 0,   # Align vertically as needed (0 is bottom)
+      size = 25,   # Adjust size
+      face = "bold" # Adjust font face)
+        ))
+}
+
+p1 <- make_scatter(0.33)
+p2 <- make_scatter(0.69)
+p3 <- make_scatter(0.98)
+p4 <- make_scatter(1.0)
+p5 <- make_scatter(-0.08)
+p6 <- make_scatter(-0.64)
+p7 <- make_scatter(-0.92)
+p8 <- make_scatter(-1.0)
+
+library(patchwork)
+
+p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + 
+  patchwork::plot_layout(ncol = 4)
+
+```
+:::
+:::
+
+## Interpreting the correlation coefficient
+
+Multiple published schemes exist for labeling the strength of $r$ — and they don't agree:
+
+::::: columns
+::: {.column width="30%"}
+
+**Common scheme**
+
+| $|r|$ | Label |
+|---|---|
+| $\geq 0.6$ | Strong |
+| $0.3 – 0.6$ | Moderate |
+| $< 0.3$ | Weak |
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+
+**Another common scheme**
+
+| $|r|$ | Label |
+|---|---|
+| $> 0.8$ | Strong |
+| $0.5 – 0.8$ | Moderate |
+| $< 0.5$ | Weak |
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="30%"}
+
+**Mukaka (2012)**
+
+| $|r|$ | Label |
+|---|---|
+| $0.9 – 1.0$ | Very high |
+| $0.7 – 0.9$ | High |
+| $0.5 – 0.7$ | Moderate |
+| $0.3 – 0.5$ | Low |
+| $0.0 – 0.3$ | Negligible |
+
+:::
+:::::
+
+::: {.callout-important icon="false"}
+### The disagreement is the lesson
+
+Three published schemes, three different answers for the same $r$. Rather than memorizing cutoffs, ask: does this correlation **accurately and meaningfully represent the relationship** for your research question and field?
+
+In biomedical research with a single predictor, $r = 0.40$ may be quite meaningful. In a tightly controlled physical measurement, $r = 0.85$ might be disappointing. **Always report the actual value and interpret it in context.**
+:::
+
+[Eight things you need to know about interpreting correlations (from University of Sussex)](https://users.sussex.ac.uk/~grahamh/RM1web/Eight%20things%20you%20need%20to%20know%20about%20interpreting%20correlations.pdf)
+
+<!-- ::: {.callout-warning icon="false"} -->
+<!-- ### Common rough benchmarks (context-dependent!) -->
+<!-- $|r| < 0.3$: weak  &nbsp;&nbsp;&nbsp; $0.3 \leq |r| < 0.6$: moderate  &nbsp;&nbsp;&nbsp; $|r| \geq 0.6$: strong -->
+
+<!-- These are rough rules of thumb — what counts as a "strong" correlation varies by field. In complex biological systems, $r = 0.4$ may be quite meaningful. -->
+<!-- ::: -->
+
+<!-- ## Interpreting the correlation coefficient -->
+
+<!-- \ -->
+
+<!-- ::: {.callout-warning icon="false"} -->
+<!-- ### There is no universal benchmark -->
+
+<!-- A correlation coefficient should accurately reflect the strength of the relationship in *your* data. What counts as "strong" depends entirely on the subject area. -->
+<!-- ::: -->
+
+<!-- \ -->
+
+<!-- ::::: columns -->
+<!-- ::: {.column width="48%"} -->
+
+<!-- **One common scheme:** -->
+
+<!-- | Strength | $|r|$ | -->
+<!-- |---|---| -->
+<!-- | Weak | $< 0.5$ | -->
+<!-- | Moderate | $0.5$ to $0.8$ | -->
+<!-- | Strong | $> 0.8$ | -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="4%"} -->
+<!-- ::: -->
+
+<!-- ::: {.column width="48%"} -->
+
+<!-- **Why context matters:** -->
+
+<!-- - Studies involving **human behavior or biology** often yield $r < 0.6$ — humans are complex and hard to predict -->
+<!-- - Studies of **physical or chemical processes** with precise measurement may yield $r$ near $\pm 1$ -->
+<!-- - In biomedical research, $r = 0.4$ with a single predictor can be quite meaningful -->
+
+<!-- ::: -->
+<!-- ::::: -->
+
+<!-- \ -->
+
+<!-- ::: {.callout-tip icon="false"} -->
+<!-- **Bottom line:** Don't chase a benchmark. Ask whether the correlation accurately and meaningfully represents the relationship for your research question. -->
+<!-- ::: -->
+
+## Correlation ≠ causation
+
+\
+
+A high $r$ tells you two variables are associated. It says **nothing** about whether one causes the other.
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Classic confounders:**
+
+- Ice cream sales and drowning deaths both increase in summer (confounder: temperature)
+- Shoe size and reading ability in children (confounder: age)
+- Higher hospital admission rates associated with worse outcomes (confounder: severity of illness)
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**For our example:**
+
+BMI and systolic BP are associated — but the causal pathway is complex:
+
+- BMI → metabolic syndrome → hypertension
+- Shared causes: diet, physical activity, genetics
+- Reverse causation is unlikely here but not impossible
+
+:::
+:::::
+
+\
+
+::: {.callout-important icon="false"}
+Correlation is a description of the data. Causation requires study design (randomized experiments) or careful causal reasoning — not a higher $r$.
+:::
+
+## Spearman correlation: the nonparametric alternative
+
+\
+
+**Recall from Lesson 17:** when data are skewed, contain outliers, or are ordinal, rank-based methods are more robust.
+
+\
+
+The **Spearman correlation** $r_s$ is simply the Pearson correlation applied to the **ranks** of $X$ and $Y$:
+
+1. Rank all $X$ values (1 = smallest)
+2. Rank all $Y$ values (1 = smallest)
+3. Compute Pearson $r$ on those ranks
+
+\
+
+
+**When to use Spearman:**
+
+- Ordinal outcomes (pain scales, severity scores)
+- Skewed continuous variables (viral loads, antibody titers)
+- When outliers would distort Pearson $r$
+
+
+
+## Spearman correlation in R
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**In base R**
+
+```{r}
+cor(nhanes_bp$BMI, nhanes_bp$BPSys1,
+    method = "spearman",
+    use = "complete.obs")
+```
+
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**More tidyverse way:**
+
+```{r}
+nhanes_bp %>%
+  summarise(
+    r_pearson = cor(BMI, BPSys1,
+        use = "complete.obs"),
+    r_spearman = cor(BMI, BPSys1,
+        method = "spearman",
+        use = "complete.obs")
+  )
+```
+
+:::
+:::::
+
+\
+
+::: {.callout-tip icon="false"}
+Pearson and Spearman are similar here — the relationship is reasonably linear without extreme outliers dominating.
+:::
+
+## The limitation of correlation
+
+\
+
+Correlation answers: **how strongly are these two variables associated?**
+
+\
+
+But researchers often want to know more:
+
+- How much does systolic BP **increase** for each 1-unit increase in BMI?
+- What systolic BP would we **predict** for a patient with BMI = 32?
+- Is the association **statistically significant** — or could it be due to chance?
+
+\
+
+::: {.callout-note icon="false"}
+### Correlation → Regression
+
+Correlation gives us a single number summarizing the association. **Regression** gives us a line — a model that lets us quantify, predict, and test.
+
+We keep the same scatterplot. We add a line.
+:::
+
+# Part 2: The Simple Linear Regression Model
+
+## The regression line
+
+\
+
+A **regression line** describes how the mean of $Y$ changes as $X$ changes:
+
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$$
+\
+
+The **hat** (^) on $\hat{Y}$ signals this is an **estimated** value from the line — not the actual observed $Y$.
+
+\
+
+```{r}
+#| fig-width: 8
+#| fig-height: 4
+#| fig-align: center
+#| code-fold: true
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +
+  geom_point(alpha = 0.3, color = "#0072B2", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE,
+              color = "#D55E00", linewidth = 1.5) +
+  labs(title = "Systolic BP vs. BMI with regression line",
+       x = "BMI (kg/m²)", y = "Systolic BP (mmHg)")
+```
+
+
+
+## Population model vs. estimated line
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Population model (unobservable)
+
+$$Y = \beta_0 + \beta_1 X + \epsilon$$
+
+- $\beta_0$, $\beta_1$: unknown population parameters we want to estimate
+- $\epsilon$ (epsilon): random error — how far each individual deviates from the true line
+- Assumption: $\epsilon \sim N(0, \sigma^2)$ — errors are normally distributed with mean 0 and constant variance
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-tip icon="false"}
+### Estimated line (from our data)
+
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X$$
+
+- $\hat{\beta}_0$, $\hat{\beta}_1$: our sample estimates of $\beta_0$, $\beta_1$
+- No error term — the line gives the **predicted mean** at each $X$
+- Individual observations will scatter above and below this line
+:::
+
+:::
+:::::
+
+| Symbol | Name | Type |
+|---|---|---|
+| $Y$ | Response / outcome | Observed |
+| $X$ | Predictor / covariate | Observed |
+| $\beta_0$ | Intercept | Population parameter |
+| $\beta_1$ | Slope | Population parameter |
+| $\epsilon$ | Error term | Unobservable |
+| $\hat{\beta}_0$, $\hat{\beta}_1$ | Estimated intercept / slope | Calculated from data |
+
+## Residuals: the building block of regression
+
+\
+
+For each observation $i$, the **residual** is the difference between what we observed and what the line predicted:
+
+$$\hat{\epsilon}_i = Y_i - \hat{Y}_i$$
+
+\
+
+::::: columns
+::: {.column width="30%"}
+
+\
+
+- Points **above** the line: 
+   - positive residual ($Y_i > \hat{Y}_i$)
+- Points **below** the line: 
+   - negative residual ($Y_i < \hat{Y}_i$)
+- Points **on** the line: 
+   - residual = 0 (rare in practice)
+
+:::
+
+
+::: {.column width="70%"}
+```{r}
+#| fig-width: 9
+#| fig-height: 7
+#| fig-align: center
+#| echo: false
+
+aug <- augment(model_bp)
+
+ggplot(aug, aes(x = BMI, y = BPSys1)) +
+  geom_segment(aes(xend = BMI, yend = .fitted),
+               color = "#CC79A7", alpha = 0.4, linewidth = 0.5) +
+  geom_smooth(method = "lm", se = FALSE,
+              color = "#D55E00", linewidth = 0.5) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.75) +
+  geom_point(aes(y = .fitted), shape = 1,
+             color = "#D55E00", size = 1.75) +
+  labs(title = "Residuals = observed − fitted",
+       subtitle = "Pink segments show residuals; open circles show fitted values",
+       x = "BMI (kg/m²)", y = "Systolic BP (mmHg)")
+```
+
+:::
+:::::
+
+## Ordinary Least Squares (OLS)
+
+\
+
+**Key question:** With infinitely many possible lines we could draw through the data, which one is *best*?
+
+\
+
+**OLS answer:** Choose the line that minimizes the **Sum of Squared Errors (SSE)**:
+
+$$SSE = \sum_{i=1}^{n} \hat{\epsilon}_i^2 = \sum_{i=1}^{n}(Y_i - \hat{Y}_i)^2$$
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**Why square the residuals?**
+
+- Positive and negative residuals would cancel
+- Squaring penalizes large errors more than small ones
+- Makes the math tractable (calculus gives closed-form solutions)
+
+The OLS estimates $\hat{\beta}_0$ and $\hat{\beta}_1$ are the values that make SSE as small as possible. R's `lm()` finds these automatically.
+
+- [Math details if interested](https://www.stat.cmu.edu/~hseltman/309/Book/chapter9.pdf)
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+
+::: {.callout-tip icon="false"}
+### The OLS formulas
+
+$$\hat{\beta}_1 = r \cdot \frac{s_Y}{s_X}$$
+
+$$\hat{\beta}_0 = \bar{Y} - \hat{\beta}_1 \bar{X}$$
+
+Notice: $\hat{\beta}_1$ depends directly on the Pearson correlation $r$ — regression and correlation are deeply connected.
+:::
+
+:::
+:::::
+
+## Running SLR in R: `lm()` + `tidy()`
+
+\
+
+```{r}
+# Fit the model
+model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
+
+library(broom)
+# Tidy output: coefficients, SE, t, p, CI
+tidy(model_bp, conf.int = TRUE)
+```
+
+\
+
+Our estimated regression equation:
+
+$$\widehat{\text{Systolic BP}} = `r b0` + `r b1` \times \text{BMI}$$
+
+## Interpreting the slope and intercept
+
+\
+
+$$\widehat{\text{Systolic BP}} = `r b0` + `r b1` \times \text{BMI}$$
+
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Slope ($\hat{\beta}_1$ = `r b1`)
+
+For every **1 kg/m² increase in BMI**, systolic blood pressure is expected to increase by **`r b1` mmHg**, on average, holding all else constant.
+
+- Sign tells you the **direction** of the association
+- Magnitude tells you the **rate of change** in the units of $Y$ per unit of $X$
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Intercept ($\hat{\beta}_0$ = `r b0`)
+
+The expected systolic BP for someone with a BMI of 0 is `r b0` mmHg.
+
+**⚠️ The intercept is often not directly interpretable.** A BMI of 0 is physiologically impossible. The intercept is a mathematical anchor for the line — interpret it only when $X = 0$ is meaningful in context.
+:::
+
+:::
+:::::
+
+::: {.callout-important icon="false"}
+Regression describes **association**, not causation. "Expected to increase by `r b1` mmHg" does not mean BMI *causes* higher blood pressure — it means these two variables are associated in a positive linear way.
+:::
+
+# Part 3: Model Evaluation
+
+## The LINE conditions
+
+\
+
+For the regression model to give valid estimates and reliable inference, four conditions must hold. We remember them as **LINE**:
+
+\
+
+| Letter | Condition | How to check |
+|:---:|---|---|
+| **L** | **L**inearity — the relationship between $X$ and $Y$ is linear | Scatterplot; residual plot |
+| **I** | **I**ndependence — observations are independent of each other | Study design |
+| **N** | **N**ormality — residuals are approximately normally distributed | QQ plot of residuals |
+| **E** | **E**qual variance — residuals have constant variance across all $X$ values | Residual plot |
+
+: {tbl-colwidths="\[7, 50, 25\]"}
+
+\
+
+::: {.callout-tip icon="false"}
+The key diagnostic plots are the **residual plot** (residuals vs. fitted values) and the **QQ plot of residuals**. We generate both from the fitted model object.
+:::
+
+## Diagnostic plots in R
+
+```{r}
+#| fig-width: 12
+#| fig-height: 4.5
+#| fig-align: center
+#| code-fold: true
+
+# TODO -- pick up here
+
+aug <- augment(model_bp)
+
+p1 <- ggplot(aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_smooth(se = FALSE, color = "#D55E00", linewidth = 1) +
+  labs(title = "Residual plot",
+       subtitle = "Checks L and E",
+       x = "Fitted values (ŷ)",
+       y = "Residuals")
+
+p2 <- ggplot(aug, aes(sample = .resid)) +
+  stat_qq(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  stat_qq_line(color = "#D55E00", linewidth = 1) +
+  labs(title = "Normal QQ plot of residuals",
+       subtitle = "Checks N",
+       x = "Theoretical quantiles",
+       y = "Sample quantiles")
+
+library(patchwork)
+p1 + p2
+```
+
+```{r}
+model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
+```
+
+
+
+## Reading the diagnostic plots
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Residual plot (checks L and E)
+
+**What you want to see:**
+
+- Points scattered randomly around the horizontal line at 0
+- No systematic curve or funnel shape
+- Roughly equal spread across all fitted values
+
+**Red flags:**
+
+- **Curve:** linearity (L) is violated — try a transformation
+- **Funnel (spread increases):** equal variance (E) is violated — heteroscedasticity
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### QQ plot (checks N)
+
+**What you want to see:**
+
+- Points fall approximately along the diagonal reference line
+- [Understanding QQ Plots, Univeristy of Virginia](https://library.virginia.edu/data/articles/understanding-q-q-plots)
+
+**Red flags:**
+
+- S-shaped pattern: skewed residuals
+- Heavy tails: points deviate at both ends
+
+**Note:** With large samples, moderate departures from normality matter less (CLT). Linearity and equal variance are more critical for inference.
+:::
+
+:::
+:::::
+
+## The $R^2$ statistic
+
+\
+
+**$R^2$** (the coefficient of determination) tells us: **what proportion of the variability in $Y$ is explained by the linear relationship with $X$?**
+
+$$R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{\sum(Y_i - \hat{Y}_i)^2}{\sum(Y_i - \bar{Y})^2}$$
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+- $R^2 = 0$: the model explains none of the variability in $Y$ — no better than predicting $\bar{Y}$ for everyone
+- $R^2 = 1$: the model explains all of the variability — all points fall exactly on the line
+- For simple linear regression: $R^2 = r^2$ (square of the Pearson correlation)
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+```{r}
+# glance() gives model-level summaries
+glance(model_bp) %>%
+  select(r.squared, sigma, nobs)
+```
+
+::: {.callout-tip icon="false"}
+`sigma` = residual standard error = the typical size of a residual. Think of it as the average prediction error in units of $Y$.
+:::
+
+:::
+:::::
+
+## Interpreting $R^2$ in context
+
+\
+
+```{r}
+#| echo: false
+r2 <- round(model_glance$r.squared * 100, 1)
+```
+
+For our model: $R^2$ = `r r2`%
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+BMI explains approximately `r r2`% of the variability in systolic blood pressure in this NHANES sample. The remaining `r 100 - r2`% of variability is due to other factors not included in the model — age, sex, medications, genetics, sodium intake, stress, and so on.
+
+An $R^2$ of `r r2`% sounds modest, but in a complex biological system with a single predictor, this is a meaningful association. **Context matters.**
+:::
+
+\
+
+::: {.callout-warning icon="false"}
+A high $R^2$ does not validate the model. It is possible to have a high $R^2$ with a curved relationship that a linear model fits poorly. **Always check the LINE conditions first.**
+:::
+
+# Part 4: Inference and Prediction
+
+## What are we testing?
+
+\
+
+We have an estimated slope $\hat{\beta}_1$. But is the true population slope $\beta_1$ actually different from zero?
+
+\
+
+$$H_0: \beta_1 = 0 \qquad \text{vs.} \qquad H_A: \beta_1 \neq 0$$
+
+\
+
+::: {.callout-note icon="false"}
+### Why $\beta_1 = 0$ matters
+
+If $\beta_1 = 0$, the regression line is flat — $X$ tells us nothing about $Y$. Testing $H_0: \beta_1 = 0$ is equivalent to testing whether there is **any linear association** between the two variables.
+:::
+
+\
+
+The test statistic is a $t$-statistic:
+
+$$t = \frac{\hat{\beta}_1 - 0}{SE_{\hat{\beta}_1}} = \frac{\hat{\beta}_1}{SE_{\hat{\beta}_1}}$$
+
+which follows a $t$-distribution with $df = n - 2$ under $H_0$.
+
+## Inference for slope $\beta_1$: all 6 steps
+
+**Step 1: Hypotheses**
+
+$$H_0: \beta_1 = 0 \quad \text{(no linear association between BMI and systolic BP)}$$
+$$H_A: \beta_1 \neq 0 \quad \text{(a linear association exists)}$$
+
+**Step 2: Significance level** &nbsp; $\alpha = 0.05$
+
+**Step 3: Check assumptions** &nbsp; LINE conditions — checked via diagnostic plots on previous slides ✓
+
+**Step 4: Test statistic**
+
+```{r}
+b1_row <- tidy(model_bp) %>% filter(term == "BMI")
+(t_stat <- b1_row$statistic)
+```
+
+$$t = \frac{\hat{\beta}_1}{SE_{\hat{\beta}_1}} = \frac{`r round(b1_row$estimate, 3)`}{`r round(b1_row$std.error, 3)`} = `r round(t_stat, 2)`$$
+
+## Inference for slope $\beta_1$ (continued)
+
+**Step 5: p-value**
+
+```{r}
+(p_val <- b1_row$p.value)
+```
+
+Or directly from the regression table:
+
+```{r}
+tidy(model_bp, conf.int = TRUE)
+```
+
+**Step 6: Conclusion**
+
+We reject $H_0$ at the $\alpha = 0.05$ level (t = `r round(t_stat, 2)`, df = `r n_bp - 2`, p `r if(p_val < 0.001) "< 0.001" else paste("=", round(p_val, 3))`). There is strong evidence of a positive linear association between BMI and systolic blood pressure.
+
+## Confidence interval for $\beta_1$
+
+\
+
+The 95% confidence interval for the population slope uses the same logic as all our previous CIs:
+
+$$\hat{\beta}_1 \pm t^*_{n-2} \cdot SE_{\hat{\beta}_1}$$
+
+where $t^*_{n-2}$ is the critical value from the $t$-distribution with $n - 2$ degrees of freedom.
+
+\
+
+```{r}
+tidy(model_bp, conf.int = TRUE) %>%
+  filter(term == "BMI") %>%
+  select(term, estimate, conf.low, conf.high)
+```
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+```{r}
+#| echo: false
+ci_lo <- round(tidy(model_bp, conf.int = TRUE) %>% filter(term == "BMI") %>% pull(conf.low), 3)
+ci_hi <- round(tidy(model_bp, conf.int = TRUE) %>% filter(term == "BMI") %>% pull(conf.high), 3)
+```
+
+For every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by `r b1` mmHg, on average (95% CI: `r ci_lo` to `r ci_hi` mmHg).
+
+Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.
+:::
+
+## Prediction: using the model for new observations
+
+\
+
+Once we have a regression line, we can plug in any $X$ value to get a predicted $Y$:
+
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot X^*$$
+
+\
+
+```{r}
+new_data <- data.frame(BMI = c(25, 30, 35))
+
+# Point predictions
+predict(model_bp, newdata = new_data)
+```
+
+\
+
+::: {.callout-tip icon="false"}
+### What the confidence band in `geom_smooth` actually means
+
+When you write `geom_smooth(method = "lm", se = TRUE)`, the shaded band is a **95% confidence interval for the mean response** at each value of $X$ — it answers: *"What is the average systolic BP for all people at this BMI?"*
+
+The band is narrowest near $\bar{X}$ (the mean BMI) and widens toward the extremes. Predictions are less precise far from the center of the data.
+:::
+
+## Prediction intervals: a preview
+
+\
+
+There's a second type of interval you'll encounter — the **prediction interval** — which answers a different question:
+
+\
+
+| | Question | Accounts for |
+|---|---|---|
+| **CI for mean response** | What's the *average* BP for people with BMI = 30? | Uncertainty about the line |
+| **Prediction interval** | What BP would *this specific patient* have? | Uncertainty about the line **+** individual variation |
+
+\
+
+Prediction intervals are always **wider** than confidence intervals for the mean, because individuals vary around the mean even if we knew the line perfectly.
+
+\
+
+::: {.callout-note icon="false"}
+### Coming in BSTA 512
+
+The mechanics of constructing and interpreting prediction intervals — along with multiple regression, model selection, and diagnostics for more complex models — are covered in depth in BSTA 512. You now have the conceptual foundation to hit the ground running there.
+:::
+
+# Wrap-Up
+
+## The full SLR workflow
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**1. Visualize**
+
+```r
+ggplot(data, aes(x = X, y = Y)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+**2. Fit**
+
+```r
+model <- lm(Y ~ X, data = data)
+```
+
+**3. Coefficients + inference**
+
+```r
+tidy(model, conf.int = TRUE)
+```
+
+**4. Model fit**
+
+```r
+glance(model)   # R², sigma
+```
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+
+**5. Diagnostics**
+
+```r
+aug <- augment(model)
+
+# Residual plot
+ggplot(aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+
+# QQ plot
+ggplot(aug, aes(sample = .resid)) +
+  stat_qq() + stat_qq_line()
+```
+
+**6. Predict**
+
+```r
+predict(model,
+  newdata = new_data)
+```
+
+:::
+:::::
+
+## Where this fits in the bigger picture
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**What we've learned this semester:**
+
+- Describing data (distributions, summaries, visualization)
+- Inference for one group (means, proportions)
+- Inference for two groups (t-tests, difference in proportions)
+- Inference for 3+ groups (ANOVA, Kruskal-Wallis)
+- Inference for categorical associations (chi-square, Fisher's)
+- Inference for linear associations **(today)**
+
+**Where this leads:**
+
+- Multiple regression (add more predictors)
+- Logistic regression (binary outcome)
+- Survival analysis, mixed models, causal inference
+
+These are the tools of modern biomedical research. BSTA 512 takes it from here.
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+
+::: {.callout-tip icon="false"}
+### The unified thread
+
+Every method we've learned is asking the same fundamental question:
+
+**What does the data tell us about the population, and how confident are we?**
+
+The tools change. The logic — estimate, quantify uncertainty, test — stays the same.
+:::
+
+:::
+:::::
+
+\
+
+**Next: Lesson 19 — Course Review and Final Exam Preparation**
