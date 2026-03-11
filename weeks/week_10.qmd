@@ -64,7 +64,7 @@ By the end of the week, you should be able to:
 -   **Code along**
     -   [Download R Module 3: Visual Communication with ggplot2 (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQC0uyj2CNDLQZ-yM0HyAYCAAUSV5q-CjGfAoHOo2bfdERc?e=U2vIeB)
 -   **Recording**
-    -   [Lecture 19 - Nonparametric tests](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBncKMPDwg7SIb-hhR_VfL0AY56EPkjQEze2xsUxGgHFF8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=C7RTfd)
+    -   [Nonparametric tests](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBncKMPDwg7SIb-hhR_VfL0AY56EPkjQEze2xsUxGgHFF8?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=C7RTfd)
 -   **Muddy points**
 
     I reviewed your post-class feedback and wrote clarifications here:
@@ -88,7 +88,7 @@ By the end of the week, you should be able to:
 -   **Code along**
     -   [Download R Module 4: Tables and Formatted Output (.qmd)](https://ohsuitg-my.sharepoint.com/:u:/g/personal/latour_ohsu_edu/IQDRBeMgwucQR4QAbvo62S4BAaR0WpFKklT3If6D6CwNLeg?e=4mKkwb)
 -   **Recording**
-    -   Coming soon
+    -   [Correlation and Simple Linear Regression](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQClXMqMor5iQr0nSSM2xOgNAXrcttCVBdogSa0vFrhh6h4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=vzBg1B)
 -   **Muddy points**
     -   Coming soon
     

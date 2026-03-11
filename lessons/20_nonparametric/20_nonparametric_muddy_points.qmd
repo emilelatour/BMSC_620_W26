@@ -169,7 +169,7 @@ tibble(
   )
 ```
 
-With $n = 3$, the smallest possible two-sided p-value is $2/8 = 0.25$ — you literally cannot achieve $p < 0.05$ no matter how extreme the data are. With $n = 5$ or more, it becomes possible to reach significance if the result is extreme enough.
+With $n = 3$, the smallest possible two-sided p-value is $2/8 = 0.250$ — you literally cannot achieve $p < 0.05$ no matter how extreme the data are. With $n = 5$ or more, it becomes possible to reach significance if the result is extreme enough.
 
 ## But this is not unique to nonparametric tests
 
