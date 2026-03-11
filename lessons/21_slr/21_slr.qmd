@@ -704,7 +704,7 @@ The **hat** (^) on $\hat{Y}$ signals this is an **estimated** value from the lin
 
 ```{r}
 #| fig-width: 8
-#| fig-height: 4
+#| fig-height: 5
 #| fig-align: center
 #| code-fold: true
 
@@ -941,18 +941,15 @@ For the regression model to give valid estimates and reliable inference, four co
 \
 
 ::: {.callout-tip icon="false"}
-The key diagnostic plots are the **residual plot** (residuals vs. fitted values) and the **QQ plot of residuals**. We generate both from the fitted model object.
+The two key diagnostic plots are the **residual plot** (residuals vs. fitted values) and the **QQ plot of residuals**. We generate both from the fitted model object using `augment()` from `broom`.
 :::
 
 ## Diagnostic plots in R
-
 ```{r}
 #| fig-width: 12
 #| fig-height: 4.5
 #| fig-align: center
 #| code-fold: true
-
-# TODO -- pick up here
 
 aug <- augment(model_bp)
 
@@ -973,15 +970,8 @@ p2 <- ggplot(aug, aes(sample = .resid)) +
        x = "Theoretical quantiles",
        y = "Sample quantiles")
 
-library(patchwork)
 p1 + p2
 ```
-
-```{r}
-model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
-```
-
-
 
 ## Reading the diagnostic plots
 
@@ -999,7 +989,7 @@ model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
 
 **Red flags:**
 
-- **Curve:** linearity (L) is violated — try a transformation
+- **Curve:** linearity (L) is violated — consider a transformation
 - **Funnel (spread increases):** equal variance (E) is violated — heteroscedasticity
 :::
 
@@ -1016,7 +1006,6 @@ model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
 **What you want to see:**
 
 - Points fall approximately along the diagonal reference line
-- [Understanding QQ Plots, Univeristy of Virginia](https://library.virginia.edu/data/articles/understanding-q-q-plots)
 
 **Red flags:**
 
@@ -1029,11 +1018,154 @@ model_bp <- lm(BPSys1 ~ BMI, data = nhanes_bp)
 :::
 :::::
 
-## The $R^2$ statistic
+## What good diagnostic plots look like
+```{r}
+#| fig-width: 12
+#| fig-height: 4.5
+#| fig-align: center
+#| echo: false
+
+set.seed(620)
+n_sim <- 200
+x_sim <- rnorm(n_sim, mean = 25, sd = 5)
+y_sim <- 100 + 0.8 * x_sim + rnorm(n_sim, mean = 0, sd = 8)
+sim_df <- tibble(x = x_sim, y = y_sim)
+sim_mod <- lm(y ~ x, data = sim_df)
+sim_aug <- augment(sim_mod)
+
+p_sim1 <- ggplot(sim_aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  geom_smooth(se = FALSE, color = "#009E73", linewidth = 1) +
+  labs(title = "Residual plot — ideal",
+       subtitle = "Random scatter, flat smoother (good)",
+       x = "Fitted values (ŷ)", y = "Residuals")
+
+p_sim2 <- ggplot(sim_aug, aes(sample = .resid)) +
+  stat_qq(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  stat_qq_line(color = "#009E73", linewidth = 1) +
+  labs(title = "QQ plot — ideal",
+       subtitle = "Points track the diagonal (good)",
+       x = "Theoretical quantiles", y = "Sample quantiles")
+
+p_sim1 + p_sim2
+```
+
+::: {.callout-tip icon="false"}
+**Residual plot:** The smoother is flat and close to zero — no curve, no funnel. **QQ plot:** Points track the diagonal closely; minor deviation at the very ends is normal and acceptable.
+:::
+
+## Reading our NHANES diagnostic plots (1/2)
 
 \
 
-**$R^2$** (the coefficient of determination) tells us: **what proportion of the variability in $Y$ is explained by the linear relationship with $X$?**
+::::: columns
+::: {.column width="48%"}
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 6
+p1
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-warning icon="false"}
+### Residual plot
+
+- The smoother curves downward at high fitted values — a mild non-linearity signal (**L** is questionable)
+- Spread is roughly constant across most of the range — **E** approximately satisfied
+- One point has a residual near +80: a person whose systolic BP is ~80 mmHg higher than their BMI predicts — worth noting but not removing
+
+:::
+
+:::
+:::::
+
+## Reading our NHANES diagnostic plots (2/2)
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 6
+p2
+```
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-warning icon="false"}
+### QQ plot
+
+- Points track the diagonal closely through the bulk of the data — **N** approximately satisfied
+- The upper tail deviates: a few large positive residuals pull away from the line
+- The same outlier visible in the residual plot is driving this deviation
+- With $n$ = `r n_bp`, moderate tail departures matter less (CLT)
+
+:::
+
+:::
+:::::
+
+
+## Overall assessment
+
+\
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+#| fig-align: center
+
+p1 + p2
+```
+
+::: {.callout-important icon="false"}
+### Overall assessment
+
+LINE conditions are approximately met. The linear model is a reasonable approximation for this data, and inference on the slope is valid. The curved smoother is a reminder that BMI alone explains only a modest portion of BP variability — other factors are clearly at work.
+:::
+
+## Going further
+
+\
+
+::: {.callout-note icon="false"}
+### More diagnostic plots
+
+There are two additional diagnostic plots — the **scale-location plot** (a cleaner check of equal variance) and the **residuals vs. leverage plot** (identifies influential observations). You can produce all four at once with `autoplot(model)` from the `ggfortify` package. 
+:::
+
+\
+
+Further reading: 
+
+- [Understanding Diagnostic Plots for Linear Regression Analysis](https://library.virginia.edu/data/articles/diagnostic-plots)
+- [Diagnostic Plots for Model Evaluation](https://www.geeksforgeeks.org/r-machine-learning/diagnostic-plots-for-model-evaluation/)
+- [Demystifying Simple Linear Regression Diagnostics in R](https://medium.com/@dorothyavo/demystifying-simple-linear-regression-diagnostics-in-r-720dd140f012) 
+
+
+## The $R^2$ statistic
+
+**$R^2$** (the coefficient of determination) tells us: 
+
+- **what proportion of the variability in $Y$ is explained by the linear relationship with $X$?**
 
 $$R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{\sum(Y_i - \hat{Y}_i)^2}{\sum(Y_i - \bar{Y})^2}$$
 
@@ -1128,36 +1260,66 @@ which follows a $t$-distribution with $df = n - 2$ under $H_0$.
 $$H_0: \beta_1 = 0 \quad \text{(no linear association between BMI and systolic BP)}$$
 $$H_A: \beta_1 \neq 0 \quad \text{(a linear association exists)}$$
 
+\
+
 **Step 2: Significance level** &nbsp; $\alpha = 0.05$
 
 **Step 3: Check assumptions** &nbsp; LINE conditions — checked via diagnostic plots on previous slides ✓
 
+\
+
 **Step 4: Test statistic**
 
 ```{r}
-b1_row <- tidy(model_bp) %>% filter(term == "BMI")
-(t_stat <- b1_row$statistic)
+b1_row <- model_bp %>% 
+  broom::tidy() %>% 
+  dplyr::filter(term == "BMI")
+
+t_stat <- b1_row %>% dplyr::pull(statistic)
+t_stat
 ```
+
+```{r}
+#| echo: false
+# tidy(model_bp)
+```
+
 
 $$t = \frac{\hat{\beta}_1}{SE_{\hat{\beta}_1}} = \frac{`r round(b1_row$estimate, 3)`}{`r round(b1_row$std.error, 3)`} = `r round(t_stat, 2)`$$
 
 ## Inference for slope $\beta_1$ (continued)
 
+\
+
 **Step 5: p-value**
 
 ```{r}
-(p_val <- b1_row$p.value)
+p_val <- b1_row %>% dplyr::pull(p.value)
+p_val
 ```
+
+\
 
 Or directly from the regression table:
 
 ```{r}
-tidy(model_bp, conf.int = TRUE)
+model_bp %>% 
+  broom::tidy(conf.int = TRUE)
 ```
+
+\
 
 **Step 6: Conclusion**
 
-We reject $H_0$ at the $\alpha = 0.05$ level (t = `r round(t_stat, 2)`, df = `r n_bp - 2`, p `r if(p_val < 0.001) "< 0.001" else paste("=", round(p_val, 3))`). There is strong evidence of a positive linear association between BMI and systolic blood pressure.
+```{r}
+#| echo: false
+t_stat <- lamisc::fmt_num(t_stat, accuracy = 0.01)
+df_bp <- lamisc::fmt_num(n_bp - 2, accuracy = 1.0)
+p_val <- lamisc::fmt_pvl(p_val, add_p = TRUE, p_lbl = "*p*")
+```
+
+
+We reject $H_0$ at the $\alpha = 0.05$ level (t = `r t_stat`, df = `r df_bp`, `r p_val`). There is strong evidence of a positive linear association between BMI and systolic blood pressure.
 
 ## Confidence interval for $\beta_1$
 
@@ -1165,16 +1327,24 @@ We reject $H_0$ at the $\alpha = 0.05$ level (t = `r round(t_stat, 2)`, df = `r 
 
 The 95% confidence interval for the population slope uses the same logic as all our previous CIs:
 
+$$\text{point estimate} \pm z^*(or~t^*)\cdot SE$$
+\
+
+So for the confidence interval for the coefficient $\hat{\beta}_1$ this translates to 
+
 $$\hat{\beta}_1 \pm t^*_{n-2} \cdot SE_{\hat{\beta}_1}$$
 
 where $t^*_{n-2}$ is the critical value from the $t$-distribution with $n - 2$ degrees of freedom.
 
 \
 
+## Confidence interval for $\beta_1$ (continued)
+
+\
+
 ```{r}
-tidy(model_bp, conf.int = TRUE) %>%
-  filter(term == "BMI") %>%
-  select(term, estimate, conf.low, conf.high)
+model_bp %>% 
+  tidy(conf.int = TRUE)
 ```
 
 \
@@ -1184,66 +1354,237 @@ tidy(model_bp, conf.int = TRUE) %>%
 
 ```{r}
 #| echo: false
-ci_lo <- round(tidy(model_bp, conf.int = TRUE) %>% filter(term == "BMI") %>% pull(conf.low), 3)
-ci_hi <- round(tidy(model_bp, conf.int = TRUE) %>% filter(term == "BMI") %>% pull(conf.high), 3)
+
+est <- model_bp %>% 
+  tidy(conf.int = TRUE) %>% 
+  filter(term == "BMI") %>% 
+  dplyr::pull(estimate) %>% 
+  lamisc::fmt_num(accuracy = 0.01)
+
+ci_lo <- model_bp %>% 
+  tidy(conf.int = TRUE) %>% 
+  filter(term == "BMI") %>% 
+  dplyr::pull(conf.low) %>% 
+  lamisc::fmt_num(accuracy = 0.01)
+
+ci_hi <- model_bp %>% 
+  tidy(conf.int = TRUE) %>% 
+  filter(term == "BMI") %>% 
+  dplyr::pull(conf.high) %>% 
+  lamisc::fmt_num(accuracy = 0.01)
+
 ```
 
-For every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by `r b1` mmHg, on average (95% CI: `r ci_lo` to `r ci_hi` mmHg).
+For every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by `r b1` mmHg, on average (95% CI: `r ci_lo` to `r ci_hi` mmHg). Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.
+:::
 
-Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.
+::: {.callout-note icon="false"}
+### General statement for population slope inference
+
+For every 1 unit increase in the $X$-variable, the is an expected/average increase of $\hat{\beta}_1$ units in the $Y$-variable (95% CI: LB, UB).
+
 :::
 
 ## Prediction: using the model for new observations
 
 \
 
-Once we have a regression line, we can plug in any $X$ value to get a predicted $Y$:
+Once we have a regression line, we can plug in any $X$ value to get a predicted $\hat{Y}$:
 
 $$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot X^*$$
 
 \
-
 ```{r}
 new_data <- data.frame(BMI = c(25, 30, 35))
 
-# Point predictions
 predict(model_bp, newdata = new_data)
 ```
 
 \
 
-::: {.callout-tip icon="false"}
-### What the confidence band in `geom_smooth` actually means
+::::: columns
+::: {.column width="48%"}
+::: {.callout-note icon="false"}
+### Interpretation
 
-When you write `geom_smooth(method = "lm", se = TRUE)`, the shaded band is a **95% confidence interval for the mean response** at each value of $X$ — it answers: *"What is the average systolic BP for all people at this BMI?"*
-
-The band is narrowest near $\bar{X}$ (the mean BMI) and widens toward the extremes. Predictions are less precise far from the center of the data.
+For a person with BMI = 30, the model predicts a systolic BP of approximately `r round(predict(model_bp, newdata = data.frame(BMI = 30)), 1)` mmHg — the **average** expected BP for all people at that BMI.
+:::
 :::
 
-## Prediction intervals: a preview
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+::: {.callout-warning icon="false"}
+### Extrapolation
+
+Only predict within the range of your data. The model was fit on BMI values from roughly `r round(min(nhanes_bp$BMI), 0)` to `r round(max(nhanes_bp$BMI), 0)` kg/m² — predictions far outside this range are unreliable.
+:::
+:::
+:::::
+
+<!-- ## Three intervals in regression -->
+
+<!-- \ -->
+
+<!-- | | What it estimates | Width | -->
+<!-- |---|---|---| -->
+<!-- | **CI for $\hat{\beta}_1$** | How precisely did we estimate the *slope*? | Constant — one number | -->
+<!-- | **CI for mean response** | What is the average $Y$ for *all people* at a given $X^*$? | Varies — narrowest at $\bar{X}$ | -->
+<!-- | **Prediction interval** | What $Y$ would *this specific new person* at $X^*$ have? | Varies — always wider than CI for mean | -->
+
+<!-- : {tbl-colwidths="\[20, 30, 30\]"} -->
+
+<!-- \ -->
+
+<!-- ::: {.callout-tip icon="false"} -->
+<!-- ### Why does width vary for the bottom two? -->
+
+<!-- The predicted mean at any $X^*$ depends on both $\hat{\beta}_0$ and $\hat{\beta}_1$.  -->
+<!-- Think of the line as a rod balanced at $(\bar{X}, \bar{Y})$ — uncertainty in the  -->
+<!-- slope means the rod can rotate slightly around that pivot. Near the center, a small  -->
+<!-- rotation barely moves the prediction. Near the extremes, the same rotation moves  -->
+<!-- it a lot. -->
+
+<!-- The prediction interval is wider still because even if we knew the line perfectly,  -->
+<!-- individual patients vary around it. -->
+
+<!-- **Short version:** The CI for mean response asks about the *line*. The prediction  -->
+<!-- interval asks about a *person*. The CI for $\hat{\beta}_1$ asks about a *parameter*. -->
+<!-- ::: -->
+
+## Two kinds of prediction uncertainty
 
 \
 
-There's a second type of interval you'll encounter — the **prediction interval** — which answers a different question:
+A point prediction is a single number — but how uncertain is it? There are two distinct questions:
 
 \
 
 | | Question | Accounts for |
 |---|---|---|
-| **CI for mean response** | What's the *average* BP for people with BMI = 30? | Uncertainty about the line |
-| **Prediction interval** | What BP would *this specific patient* have? | Uncertainty about the line **+** individual variation |
+| **CI for mean response** | What is the *average* BP for **all people** with BMI = 30? | Uncertainty about where the line is |
+| **Prediction interval** | What BP would *this specific new patient* with BMI = 30 have? | Uncertainty about the line **+** individual variation around it |
+
+: {tbl-colwidths="\[20, 30, 30\]"}
 
 \
 
-Prediction intervals are always **wider** than confidence intervals for the mean, because individuals vary around the mean even if we knew the line perfectly.
+Prediction intervals are always **wider** than confidence intervals for the mean — even if we knew the line perfectly, individuals still vary around it.
 
 \
+
+::: {.callout-tip icon="false"}
+- The CI for mean response asks about the **line**. 
+- The prediction interval asks about a **person**.
+- The CI for $\hat{\beta}_1$ asks about a *parameter*.
+:::
+
+## For BMI = 30
+
+\
+
+```{r}
+predict(model_bp, 
+        newdata = tibble(BMI = 30), 
+        interval = "confidence")
+```
+
+```{r}
+#| echo: false
+
+conf_res <- predict(model_bp, 
+        newdata = tibble(BMI = 30), 
+        interval = "confidence") %>% 
+  as_tibble()
+
+lwr_conf <- lamisc::fmt_num(conf_res$lwr, accuracy = 1.0)
+upr_conf <- lamisc::fmt_num(conf_res$upr, accuracy = 1.0)
+
+```
+
+::: {.callout-important icon="false"}
+### CI for mean response
+
+We are 95% confident that the **average** BP for all people with BMI = 30 is between **`r lwr_conf` and `r upr_conf` mmHg**.
+:::
+
+\
+
+```{r}
+predict(model_bp, 
+        newdata = tibble(BMI = 30), 
+        interval = "prediction")
+```
+
+```{r}
+#| echo: false
+
+pred_res <- predict(model_bp, 
+        newdata = tibble(BMI = 30), 
+        interval = "prediction") %>% 
+  as_tibble()
+
+lwr_pred <- lamisc::fmt_num(pred_res$lwr, accuracy = 1.0)
+upr_pred <- lamisc::fmt_num(pred_res$upr, accuracy = 1.0)
+
+```
+
+::: {.callout-important icon="false"}
+### Prediction interval
+
+We are 95% confident that a **specific future individual** with BMI = 30 will have BP between **`r lwr_pred` and `r upr_pred` mmHg**.
+:::
+
+\
+
+Notice how much wider the prediction interval is — it must account for individual variation, not just uncertainty about the line.
+
+## Visualizing both intervals
+
+::: {style="font-size: 0.55em;"}
+```{r}
+#| fig-width: 9
+#| fig-height: 5.5
+#| fig-align: center
+#| code-fold: true
+
+# Generate CI and prediction interval bands across BMI range
+bmi_grid <- data.frame(BMI = seq(min(nhanes_bp$BMI), 
+                                 max(nhanes_bp$BMI), 
+                                 length.out = 200))
+
+ci_band   <- predict(model_bp, newdata = bmi_grid, 
+                     interval = "confidence") %>% 
+  as_tibble() %>% 
+  bind_cols(bmi_grid)
+
+pred_band <- predict(model_bp, newdata = bmi_grid, 
+                     interval = "prediction") %>% 
+  as_tibble() %>% 
+  bind_cols(bmi_grid)
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +
+  geom_point(alpha = 0.3, color = "#0072B2", size = 1.5) +
+  geom_ribbon(data = pred_band, 
+              aes(y = fit, ymin = lwr, ymax = upr),
+              fill = "#E69F00", alpha = 0.2) +
+  geom_ribbon(data = ci_band,  
+              aes(y = fit, ymin = lwr, ymax = upr),
+              fill = "#009E73", alpha = 0.4) +
+  geom_line(data = ci_band, aes(y = fit), 
+            color = "#D55E00", linewidth = 1) +
+  labs(title = "CI for mean response (green) vs. prediction interval (yellow)",
+       x = "BMI (kg/m²)", y = "Systolic BP (mmHg)")
+```
+:::
 
 ::: {.callout-note icon="false"}
-### Coming in BSTA 512
-
-The mechanics of constructing and interpreting prediction intervals — along with multiple regression, model selection, and diagnostics for more complex models — are covered in depth in BSTA 512. You now have the conceptual foundation to hit the ground running there.
+The **green band** is the 95% CI for the mean response — narrow near the center of the data, wider at the extremes. The **yellow band** is the 95% prediction interval — much wider, because it must capture individual patients, not just the average.
 :::
+
+
+
 
 # Wrap-Up
 
@@ -1252,7 +1593,7 @@ The mechanics of constructing and interpreting prediction intervals — along wi
 \
 
 ::::: columns
-::: {.column width="55%"}
+::: {.column width="45%"}
 
 **1. Visualize**
 
@@ -1282,10 +1623,10 @@ glance(model)   # R², sigma
 
 :::
 
-::: {.column width="5%"}
+::: {.column width="3%"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="52%"}
 
 **5. Diagnostics**
 
@@ -1334,17 +1675,17 @@ predict(model,
 - Logistic regression (binary outcome)
 - Survival analysis, mixed models, causal inference
 
-These are the tools of modern biomedical research. BSTA 512 takes it from here.
+
 
 :::
 
-::: {.column width="5%"}
+::: {.column width="2%"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="43%"}
 
 ::: {.callout-tip icon="false"}
-### The unified thread
+### The unifying thread
 
 Every method we've learned is asking the same fundamental question:
 

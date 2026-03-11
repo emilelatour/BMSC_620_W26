@@ -873,28 +873,28 @@
     "href": "lessons/21_slr/20_slr.html#the-line-conditions",
     "title": "Correlation and Simple Linear Regression",
     "section": "The LINE conditions",
-    "text": "The LINE conditions\n\n\nFor the regression model to give valid estimates and reliable inference, four conditions must hold. We remember them as LINE:\n\n\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — the relationship between \\(X\\) and \\(Y\\) is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations are independent of each other\nStudy design\n\n\nN\nNormality — residuals are approximately normally distributed\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant variance across all \\(X\\) values\nResidual plot\n\n\n\n\n\n\n\n\nTip\n\n\nThe key diagnostic plots are the residual plot (residuals vs. fitted values) and the QQ plot of residuals. We generate both from the fitted model object."
+    "text": "The LINE conditions\n\n\nFor the regression model to give valid estimates and reliable inference, four conditions must hold. We remember them as LINE:\n\n\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — the relationship between \\(X\\) and \\(Y\\) is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations are independent of each other\nStudy design\n\n\nN\nNormality — residuals are approximately normally distributed\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant variance across all \\(X\\) values\nResidual plot\n\n\n\n\n\n\n\n\nTip\n\n\nThe two key diagnostic plots are the residual plot (residuals vs. fitted values) and the QQ plot of residuals. We generate both from the fitted model object using augment() from broom."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#diagnostic-plots-in-r",
     "href": "lessons/21_slr/20_slr.html#diagnostic-plots-in-r",
     "title": "Correlation and Simple Linear Regression",
     "section": "Diagnostic plots in R",
-    "text": "Diagnostic plots in R\n\n\nCode\n# TODO -- pick up here\n\naug &lt;- augment(model_bp)\n\np1 &lt;- ggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"grey50\") +\n  geom_smooth(se = FALSE, color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Residual plot\",\n       subtitle = \"Checks L and E\",\n       x = \"Fitted values (ŷ)\",\n       y = \"Residuals\")\n\np2 &lt;- ggplot(aug, aes(sample = .resid)) +\n  stat_qq(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  stat_qq_line(color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Normal QQ plot of residuals\",\n       subtitle = \"Checks N\",\n       x = \"Theoretical quantiles\",\n       y = \"Sample quantiles\")\n\nlibrary(patchwork)\np1 + p2\n\n\n\n\nmodel_bp &lt;- lm(BPSys1 ~ BMI, data = nhanes_bp)"
+    "text": "Diagnostic plots in R\n\n\nCode\naug &lt;- augment(model_bp)\n\np1 &lt;- ggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"grey50\") +\n  geom_smooth(se = FALSE, color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Residual plot\",\n       subtitle = \"Checks L and E\",\n       x = \"Fitted values (ŷ)\",\n       y = \"Residuals\")\n\np2 &lt;- ggplot(aug, aes(sample = .resid)) +\n  stat_qq(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  stat_qq_line(color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"Normal QQ plot of residuals\",\n       subtitle = \"Checks N\",\n       x = \"Theoretical quantiles\",\n       y = \"Sample quantiles\")\n\np1 + p2"
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#reading-the-diagnostic-plots",
     "href": "lessons/21_slr/20_slr.html#reading-the-diagnostic-plots",
     "title": "Correlation and Simple Linear Regression",
     "section": "Reading the diagnostic plots",
-    "text": "Reading the diagnostic plots\n\n\n\n\n\nResidual plot (checks L and E)\n\n\nWhat you want to see:\n\nPoints scattered randomly around the horizontal line at 0\nNo systematic curve or funnel shape\nRoughly equal spread across all fitted values\n\nRed flags:\n\nCurve: linearity (L) is violated — try a transformation\nFunnel (spread increases): equal variance (E) is violated — heteroscedasticity\n\n\n\n\n\n\n\n\n\n\nQQ plot (checks N)\n\n\nWhat you want to see:\n\nPoints fall approximately along the diagonal reference line\nUnderstanding QQ Plots, Univeristy of Virginia\n\nRed flags:\n\nS-shaped pattern: skewed residuals\nHeavy tails: points deviate at both ends\n\nNote: With large samples, moderate departures from normality matter less (CLT). Linearity and equal variance are more critical for inference."
+    "text": "Reading the diagnostic plots\n\n\n\n\n\nResidual plot (checks L and E)\n\n\nWhat you want to see:\n\nPoints scattered randomly around the horizontal line at 0\nNo systematic curve or funnel shape\nRoughly equal spread across all fitted values\n\nRed flags:\n\nCurve: linearity (L) is violated — consider a transformation\nFunnel (spread increases): equal variance (E) is violated — heteroscedasticity\n\n\n\n\n\n\n\n\n\n\nQQ plot (checks N)\n\n\nWhat you want to see:\n\nPoints fall approximately along the diagonal reference line\n\nRed flags:\n\nS-shaped pattern: skewed residuals\nHeavy tails: points deviate at both ends\n\nNote: With large samples, moderate departures from normality matter less (CLT). Linearity and equal variance are more critical for inference."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#the-r2-statistic",
     "href": "lessons/21_slr/20_slr.html#the-r2-statistic",
     "title": "Correlation and Simple Linear Regression",
     "section": "The \\(R^2\\) statistic",
-    "text": "The \\(R^2\\) statistic\n\n\n\\(R^2\\) (the coefficient of determination) tells us: what proportion of the variability in \\(Y\\) is explained by the linear relationship with \\(X\\)?\n\\[R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{\\sum(Y_i - \\hat{Y}_i)^2}{\\sum(Y_i - \\bar{Y})^2}\\]\n\n\n\n\n\n\\(R^2 = 0\\): the model explains none of the variability in \\(Y\\) — no better than predicting \\(\\bar{Y}\\) for everyone\n\\(R^2 = 1\\): the model explains all of the variability — all points fall exactly on the line\nFor simple linear regression: \\(R^2 = r^2\\) (square of the Pearson correlation)\n\n\n\n\n\n# glance() gives model-level summaries\nglance(model_bp) %&gt;%\n  select(r.squared, sigma, nobs)\n\n# A tibble: 1 × 3\n  r.squared sigma  nobs\n      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1    0.0873  17.5   162\n\n\n\n\n\nTip\n\n\nsigma = residual standard error = the typical size of a residual. Think of it as the average prediction error in units of \\(Y\\)."
+    "text": "The \\(R^2\\) statistic\n\\(R^2\\) (the coefficient of determination) tells us:\n\nwhat proportion of the variability in \\(Y\\) is explained by the linear relationship with \\(X\\)?\n\n\\[R^2 = 1 - \\frac{SSE}{SST} = 1 - \\frac{\\sum(Y_i - \\hat{Y}_i)^2}{\\sum(Y_i - \\bar{Y})^2}\\]\n\n\n\n\n\n\\(R^2 = 0\\): the model explains none of the variability in \\(Y\\) — no better than predicting \\(\\bar{Y}\\) for everyone\n\\(R^2 = 1\\): the model explains all of the variability — all points fall exactly on the line\nFor simple linear regression: \\(R^2 = r^2\\) (square of the Pearson correlation)\n\n\n\n\n\n# glance() gives model-level summaries\nglance(model_bp) %&gt;%\n  select(r.squared, sigma, nobs)\n\n# A tibble: 1 × 3\n  r.squared sigma  nobs\n      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1    0.0873  17.5   162\n\n\n\n\n\nTip\n\n\nsigma = residual standard error = the typical size of a residual. Think of it as the average prediction error in units of \\(Y\\)."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#interpreting-r2-in-context",
@@ -915,28 +915,28 @@
     "href": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-all-6-steps",
     "title": "Correlation and Simple Linear Regression",
     "section": "Inference for slope \\(\\beta_1\\): all 6 steps",
-    "text": "Inference for slope \\(\\beta_1\\): all 6 steps\nStep 1: Hypotheses\n\\[H_0: \\beta_1 = 0 \\quad \\text{(no linear association between BMI and systolic BP)}\\] \\[H_A: \\beta_1 \\neq 0 \\quad \\text{(a linear association exists)}\\]\nStep 2: Significance level   \\(\\alpha = 0.05\\)\nStep 3: Check assumptions   LINE conditions — checked via diagnostic plots on previous slides ✓\nStep 4: Test statistic\n\nb1_row &lt;- tidy(model_bp) %&gt;% filter(term == \"BMI\")\n(t_stat &lt;- b1_row$statistic)\n\n[1] 3.912713\n\n\n\\[t = \\frac{\\hat{\\beta}_1}{SE_{\\hat{\\beta}_1}} = \\frac{0.698}{0.178} = 3.91\\]"
+    "text": "Inference for slope \\(\\beta_1\\): all 6 steps\nStep 1: Hypotheses\n\\[H_0: \\beta_1 = 0 \\quad \\text{(no linear association between BMI and systolic BP)}\\] \\[H_A: \\beta_1 \\neq 0 \\quad \\text{(a linear association exists)}\\]\n\n\nStep 2: Significance level   \\(\\alpha = 0.05\\)\nStep 3: Check assumptions   LINE conditions — checked via diagnostic plots on previous slides ✓\n\n\nStep 4: Test statistic\n\nb1_row &lt;- model_bp %&gt;% \n  broom::tidy() %&gt;% \n  dplyr::filter(term == \"BMI\")\n\nt_stat &lt;- b1_row %&gt;% dplyr::pull(statistic)\nt_stat\n\n[1] 3.912713\n\n\n\\[t = \\frac{\\hat{\\beta}_1}{SE_{\\hat{\\beta}_1}} = \\frac{0.698}{0.178} = 3.91\\]"
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-continued",
     "href": "lessons/21_slr/20_slr.html#inference-for-slope-beta_1-continued",
     "title": "Correlation and Simple Linear Regression",
     "section": "Inference for slope \\(\\beta_1\\) (continued)",
-    "text": "Inference for slope \\(\\beta_1\\) (continued)\nStep 5: p-value\n\n(p_val &lt;- b1_row$p.value)\n\n[1] 0.0001346729\n\n\nOr directly from the regression table:\n\ntidy(model_bp, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  \n2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05\n\n\nStep 6: Conclusion\nWe reject \\(H_0\\) at the \\(\\alpha = 0.05\\) level (t = 3.91, df = 160, p &lt; 0.001). There is strong evidence of a positive linear association between BMI and systolic blood pressure."
+    "text": "Inference for slope \\(\\beta_1\\) (continued)\n\n\nStep 5: p-value\n\np_val &lt;- b1_row %&gt;% dplyr::pull(p.value)\np_val\n\n[1] 0.0001346729\n\n\n\n\nOr directly from the regression table:\n\nmodel_bp %&gt;% \n  broom::tidy(conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  \n2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05\n\n\n\n\nStep 6: Conclusion\nWe reject \\(H_0\\) at the \\(\\alpha = 0.05\\) level (t = 3.91, df = 160, p &lt; 0.001). There is strong evidence of a positive linear association between BMI and systolic blood pressure."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1",
     "href": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1",
     "title": "Correlation and Simple Linear Regression",
     "section": "Confidence interval for \\(\\beta_1\\)",
-    "text": "Confidence interval for \\(\\beta_1\\)\n\n\nThe 95% confidence interval for the population slope uses the same logic as all our previous CIs:\n\\[\\hat{\\beta}_1 \\pm t^*_{n-2} \\cdot SE_{\\hat{\\beta}_1}\\]\nwhere \\(t^*_{n-2}\\) is the critical value from the \\(t\\)-distribution with \\(n - 2\\) degrees of freedom.\n\n\n\ntidy(model_bp, conf.int = TRUE) %&gt;%\n  filter(term == \"BMI\") %&gt;%\n  select(term, estimate, conf.low, conf.high)\n\n# A tibble: 1 × 4\n  term  estimate conf.low conf.high\n  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 BMI      0.698    0.345      1.05\n\n\n\n\n\n\n\nInterpretation\n\n\nFor every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average (95% CI: 0.345 to 1.05 mmHg).\nBecause the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association."
+    "text": "Confidence interval for \\(\\beta_1\\)\n\n\nThe 95% confidence interval for the population slope uses the same logic as all our previous CIs:\n\\[\\text{point estimate} \\pm z^*(or~t^*)\\cdot SE\\]\n\nSo for the confidence interval for the coefficient \\(\\hat{\\beta}_1\\) this translates to\n\\[\\hat{\\beta}_1 \\pm t^*_{n-2} \\cdot SE_{\\hat{\\beta}_1}\\]\nwhere \\(t^*_{n-2}\\) is the critical value from the \\(t\\)-distribution with \\(n - 2\\) degrees of freedom."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#prediction-using-the-model-for-new-observations",
     "href": "lessons/21_slr/20_slr.html#prediction-using-the-model-for-new-observations",
     "title": "Correlation and Simple Linear Regression",
     "section": "Prediction: using the model for new observations",
-    "text": "Prediction: using the model for new observations\n\n\nOnce we have a regression line, we can plug in any \\(X\\) value to get a predicted \\(Y\\):\n\\[\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 \\cdot X^*\\]\n\n\n\nnew_data &lt;- data.frame(BMI = c(25, 30, 35))\n\n# Point predictions\npredict(model_bp, newdata = new_data)\n\n       1        2        3 \n116.2686 119.7562 123.2438 \n\n\n\n\n\n\n\nWhat the confidence band in geom_smooth actually means\n\n\nWhen you write geom_smooth(method = \"lm\", se = TRUE), the shaded band is a 95% confidence interval for the mean response at each value of \\(X\\) — it answers: “What is the average systolic BP for all people at this BMI?”\nThe band is narrowest near \\(\\bar{X}\\) (the mean BMI) and widens toward the extremes. Predictions are less precise far from the center of the data."
+    "text": "Prediction: using the model for new observations\n\n\nOnce we have a regression line, we can plug in any \\(X\\) value to get a predicted \\(\\hat{Y}\\):\n\\[\\hat{Y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 \\cdot X^*\\]\n\n\n\nnew_data &lt;- data.frame(BMI = c(25, 30, 35))\n\npredict(model_bp, newdata = new_data)\n\n       1        2        3 \n116.2686 119.7562 123.2438 \n\n\n\n\n\n\n\n\n\nInterpretation\n\n\nFor a person with BMI = 30, the model predicts a systolic BP of approximately 119.8 mmHg — the average expected BP for all people at that BMI.\n\n\n\n\n\n\n\n\n\nExtrapolation\n\n\nOnly predict within the range of your data. The model was fit on BMI values from roughly 14 to 69 kg/m² — predictions far outside this range are unreliable."
   },
   {
     "objectID": "lessons/21_slr/20_slr.html#prediction-intervals-a-preview",
@@ -957,7 +957,7 @@
     "href": "lessons/21_slr/20_slr.html#where-this-fits-in-the-bigger-picture",
     "title": "Correlation and Simple Linear Regression",
     "section": "Where this fits in the bigger picture",
-    "text": "Where this fits in the bigger picture\n\n\n\n\nWhat we’ve learned this semester:\n\nDescribing data (distributions, summaries, visualization)\nInference for one group (means, proportions)\nInference for two groups (t-tests, difference in proportions)\nInference for 3+ groups (ANOVA, Kruskal-Wallis)\nInference for categorical associations (chi-square, Fisher’s)\nInference for linear associations (today)\n\nWhere this leads:\n\nMultiple regression (add more predictors)\nLogistic regression (binary outcome)\nSurvival analysis, mixed models, causal inference\n\nThese are the tools of modern biomedical research. BSTA 512 takes it from here.\n\n\n\n\n\n\nThe unified thread\n\n\nEvery method we’ve learned is asking the same fundamental question:\nWhat does the data tell us about the population, and how confident are we?\nThe tools change. The logic — estimate, quantify uncertainty, test — stays the same.\n\n\n\n\n\n\nNext: Lesson 19 — Course Review and Final Exam Preparation\n\n\n\nBMSC 620 | Correlation and Simple Linear Regression"
+    "text": "Where this fits in the bigger picture\n\n\n\n\nWhat we’ve learned this semester:\n\nDescribing data (distributions, summaries, visualization)\nInference for one group (means, proportions)\nInference for two groups (t-tests, difference in proportions)\nInference for 3+ groups (ANOVA, Kruskal-Wallis)\nInference for categorical associations (chi-square, Fisher’s)\nInference for linear associations (today)\n\nWhere this leads:\n\nMultiple regression (add more predictors)\nLogistic regression (binary outcome)\nSurvival analysis, mixed models, causal inference\n\n\n\n\n\n\n\nThe unifying thread\n\n\nEvery method we’ve learned is asking the same fundamental question:\nWhat does the data tell us about the population, and how confident are we?\nThe tools change. The logic — estimate, quantify uncertainty, test — stays the same.\n\n\n\n\n\n\nNext: Lesson 19 — Course Review and Final Exam Preparation\n\n\n\nBMSC 620 | Correlation and Simple Linear Regression"
   },
   {
     "objectID": "lessons/08_eda_and_data_viz/08_eda_and_dataviz_muddy_points.html",
@@ -10103,5 +10103,313 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#all-four-diagnostic-plots-one-line-of-code",
+    "href": "lessons/21_slr/20_slr.html#all-four-diagnostic-plots-one-line-of-code",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "All four diagnostic plots — one line of code",
+    "text": "All four diagnostic plots — one line of code\n\n# install.packages(\"ggfortify\")\nlibrary(ggfortify)\nautoplot(model_bp)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#what-good-diagnostic-plots-look-like",
+    "href": "lessons/21_slr/20_slr.html#what-good-diagnostic-plots-look-like",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "What good diagnostic plots look like",
+    "text": "What good diagnostic plots look like\n\n\n\n\nTip\n\n\nResidual plot: The smoother is flat and close to zero — no curve, no funnel. QQ plot: Points track the diagonal closely; minor deviation at the very ends is normal and acceptable."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots",
+    "href": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading our NHANES diagnostic plots",
+    "text": "Reading our NHANES diagnostic plots\n\n\n\n\n\n\nResidual plot\n\n\n\nThe smoother curves downward at high fitted values — a mild non-linearity signal (L is questionable)\nSpread is roughly constant across most of the range — E approximately satisfied\nOne point has a residual near +80: a person whose systolic BP is ~80 mmHg higher than their BMI predicts — worth noting but not removing\n\n\n\n\n\n\n\n\n\n\nQQ plot\n\n\n\nPoints track the diagonal closely through the bulk of the data — N approximately satisfied\nThe upper tail deviates: a few large positive residuals pull away from the line\nThe same outlier visible in the residual plot is driving this deviation\nWith \\(n\\) = 162, moderate tail departures matter less (CLT)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#next-slide",
+    "href": "lessons/21_slr/20_slr.html#next-slide",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Next slide",
+    "text": "Next slide\n\n\n\nGoing further\n\n\nThere are two additional diagnostic plots — the scale-location plot (a cleaner check of equal variance) and the residuals vs. leverage plot (identifies influential observations). You can produce all four at once with autoplot(model) from the ggfortify package. See the reference links at the end of these slides."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#going-further",
+    "href": "lessons/21_slr/20_slr.html#going-further",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Going further",
+    "text": "Going further\n\n\n\n\n\nMore diagnostic plots\n\n\nThere are two additional diagnostic plots — the scale-location plot (a cleaner check of equal variance) and the residuals vs. leverage plot (identifies influential observations). You can produce all four at once with autoplot(model) from the ggfortify package.\n\n\n\n\n\nFurther reading:\n\nUnderstanding Diagnostic Plots for Linear Regression Analysis\nDiagnostic Plots for Model Evaluation\nDemystifying Simple Linear Regression Diagnostics in R"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#overall-assessment",
+    "href": "lessons/21_slr/20_slr.html#overall-assessment",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Overall assessment",
+    "text": "Overall assessment\n\n\n\n\n\n\nOverall assessment\n\n\nLINE conditions are approximately met. The linear model is a reasonable approximation for this data, and inference on the slope is valid. The curved smoother is a reminder that BMI alone explains only a modest portion of BP variability — other factors are clearly at work."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-1",
+    "href": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-1",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading our NHANES diagnostic plots",
+    "text": "Reading our NHANES diagnostic plots\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResidual plot\n\n\n\nThe smoother curves downward at high fitted values — a mild non-linearity signal (L is questionable)\nSpread is roughly constant across most of the range — E approximately satisfied\nOne point has a residual near +80: a person whose systolic BP is ~80 mmHg higher than their BMI predicts — worth noting but not removing"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-12",
+    "href": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-12",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading our NHANES diagnostic plots (1/2)",
+    "text": "Reading our NHANES diagnostic plots (1/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResidual plot\n\n\n\nThe smoother curves downward at high fitted values — a mild non-linearity signal (L is questionable)\nSpread is roughly constant across most of the range — E approximately satisfied\nOne point has a residual near +80: a person whose systolic BP is ~80 mmHg higher than their BMI predicts — worth noting but not removing"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-22",
+    "href": "lessons/21_slr/20_slr.html#reading-our-nhanes-diagnostic-plots-22",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Reading our NHANES diagnostic plots (2/2)",
+    "text": "Reading our NHANES diagnostic plots (2/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nQQ plot\n\n\n\nPoints track the diagonal closely through the bulk of the data — N approximately satisfied\nThe upper tail deviates: a few large positive residuals pull away from the line\nThe same outlier visible in the residual plot is driving this deviation\nWith \\(n\\) = 162, moderate tail departures matter less (CLT)"
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1-continued",
+    "href": "lessons/21_slr/20_slr.html#confidence-interval-for-beta_1-continued",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Confidence interval for \\(\\beta_1\\) (continued)",
+    "text": "Confidence interval for \\(\\beta_1\\) (continued)\n\n\n\nmodel_bp %&gt;% \n  tidy(conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic  p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  \n2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05\n\n\n\n\n\n\n\nInterpretation\n\n\nFor every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average (95% CI: 0.35 to 1.05 mmHg). Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.\n\n\n\n\n\n\nGeneral statement for population slope inference\n\n\nFor every 1 unit increase in the \\(X\\)-variable, the is an expected/average increase of \\(\\hat{\\beta}_1\\) units in the \\(Y\\)-variable (95% CI: LB, UB)."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#two-kinds-of-uncertainty",
+    "href": "lessons/21_slr/20_slr.html#two-kinds-of-uncertainty",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Two kinds of uncertainty",
+    "text": "Two kinds of uncertainty\n\n\nA point prediction is a single number — but how uncertain is it? There are two distinct questions:\n\n\n\n\n\n\n\n\n\n\n\nQuestion\nAccounts for\n\n\n\n\nCI for mean response\nWhat is the average BP for all people with BMI = 30?\nUncertainty about where the line is\n\n\nPrediction interval\nWhat BP would this specific new patient with BMI = 30 have?\nUncertainty about the line + individual variation around it\n\n\n\n\n\nPrediction intervals are always wider than confidence intervals for the mean — even if we knew the line perfectly, individuals still vary around it.\n\n\n\n\n\nTip\n\n\nThe CI for mean response asks about the line. The prediction interval asks about a person."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#visualizing-both-intervals",
+    "href": "lessons/21_slr/20_slr.html#visualizing-both-intervals",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Visualizing both intervals",
+    "text": "Visualizing both intervals\n\n\n\nCode\n# Generate CI and prediction interval bands across BMI range\nbmi_grid &lt;- data.frame(BMI = seq(min(nhanes_bp$BMI), \n                                 max(nhanes_bp$BMI), \n                                 length.out = 200))\n\nci_band   &lt;- predict(model_bp, newdata = bmi_grid, \n                     interval = \"confidence\") %&gt;% \n  as_tibble() %&gt;% \n  bind_cols(bmi_grid)\n\npred_band &lt;- predict(model_bp, newdata = bmi_grid, \n                     interval = \"prediction\") %&gt;% \n  as_tibble() %&gt;% \n  bind_cols(bmi_grid)\n\nggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +\n  geom_point(alpha = 0.3, color = \"#0072B2\", size = 1.5) +\n  geom_ribbon(data = pred_band, \n              aes(y = fit, ymin = lwr, ymax = upr),\n              fill = \"#E69F00\", alpha = 0.2) +\n  geom_ribbon(data = ci_band,  \n              aes(y = fit, ymin = lwr, ymax = upr),\n              fill = \"#009E73\", alpha = 0.4) +\n  geom_line(data = ci_band, aes(y = fit), \n            color = \"#D55E00\", linewidth = 1) +\n  labs(title = \"CI for mean response (green) vs. prediction interval (yellow)\",\n       x = \"BMI (kg/m²)\", y = \"Systolic BP (mmHg)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\nThe green band is the 95% CI for the mean response — narrow near the center of the data, wider at the extremes. The yellow band is the 95% prediction interval — much wider, because it must capture individual patients, not just the average."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#three-intervals-in-regression",
+    "href": "lessons/21_slr/20_slr.html#three-intervals-in-regression",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Three intervals in regression",
+    "text": "Three intervals in regression\n\n\n\n\n\n\n\n\n\n\n\nWhat it estimates\nWidth\n\n\n\n\nCI for \\(\\hat{\\beta}_1\\)\nHow precisely did we estimate the slope?\nConstant — one number\n\n\nCI for mean response\nWhat is the average \\(Y\\) for all people at a given \\(X^*\\)?\nVaries — narrowest at \\(\\bar{X}\\)\n\n\nPrediction interval\nWhat \\(Y\\) would this specific new person at \\(X^*\\) have?\nVaries — always wider than CI for mean\n\n\n\n\n\n\n\n\nWhy does width vary for the bottom two?\n\n\nThe predicted mean at any \\(X^*\\) depends on both \\(\\hat{\\beta}_0\\) and \\(\\hat{\\beta}_1\\). Think of the line as a rod balanced at \\((\\bar{X}, \\bar{Y})\\) — uncertainty in the slope means the rod can rotate slightly around that pivot. Near the center, a small rotation barely moves the prediction. Near the extremes, the same rotation moves it a lot.\nThe prediction interval is wider still because even if we knew the line perfectly, individual patients vary around it.\nShort version: The CI for mean response asks about the line. The prediction interval asks about a person. The CI for \\(\\hat{\\beta}_1\\) asks about a parameter."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#two-kinds-of-prediction-uncertainty",
+    "href": "lessons/21_slr/20_slr.html#two-kinds-of-prediction-uncertainty",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "Two kinds of prediction uncertainty",
+    "text": "Two kinds of prediction uncertainty\n\n\nA point prediction is a single number — but how uncertain is it? There are two distinct questions:\n\n\n\n\n\n\n\n\n\n\n\nQuestion\nAccounts for\n\n\n\n\nCI for mean response\nWhat is the average BP for all people with BMI = 30?\nUncertainty about where the line is\n\n\nPrediction interval\nWhat BP would this specific new patient with BMI = 30 have?\nUncertainty about the line + individual variation around it\n\n\n\n\n\nPrediction intervals are always wider than confidence intervals for the mean — even if we knew the line perfectly, individuals still vary around it.\n\n\n\n\n\nTip\n\n\n\nThe CI for mean response asks about the line.\nThe prediction interval asks about a person.\nThe CI for \\(\\hat{\\beta}_1\\) asks about a parameter."
+  },
+  {
+    "objectID": "lessons/21_slr/20_slr.html#for-bmi-30",
+    "href": "lessons/21_slr/20_slr.html#for-bmi-30",
+    "title": "Correlation and Simple Linear Regression",
+    "section": "For BMI = 30",
+    "text": "For BMI = 30\n\n\n\npredict(model_bp, \n        newdata = tibble(BMI = 30), \n        interval = \"confidence\")\n\n       fit      lwr      upr\n1 119.7562 116.8847 122.6277\n\n\n\n\n\nCI for mean response\n\n\nWe are 95% confident that the average BP for all people with BMI = 30 is between 117 and 123 mmHg.\n\n\n\n\n\n\npredict(model_bp, \n        newdata = tibble(BMI = 30), \n        interval = \"prediction\")\n\n       fit      lwr      upr\n1 119.7562 85.16867 154.3437\n\n\n\n\n\nPrediction interval\n\n\nWe are 95% confident that a specific future individual with BMI = 30 will have BP between 85 and 154 mmHg.\n\n\n\n\n\nNotice how much wider the prediction interval is — it must account for individual variation, not just uncertainty about the line."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#what-were-learning-today",
+    "href": "lessons/21_slr/r_module4_slides.html#what-were-learning-today",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "What We’re Learning Today",
+    "text": "What We’re Learning Today\n\nBy the end of this module, you will be able to:\n\nUse knitr::kable() to produce clean simple tables\nUse the gt package to build publication-quality formatted tables\nApply column labels, number formatting, and captions inside tables\nUse gtsummary::tbl_summary() to generate a Table 1 with minimal code\n\n\n\n\n\n\n\n\nNote\n\n\nThese skills close the gap between raw R output and results you can actually put in a report."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#the-problem-were-solving",
+    "href": "lessons/21_slr/r_module4_slides.html#the-problem-were-solving",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "The Problem We’re Solving",
+    "text": "The Problem We’re Solving\nThis is what raw R output looks like:\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = mean(BMI, na.rm = TRUE),\n    sd   = sd(BMI, na.rm = TRUE)\n  )\n\n# A tibble: 2 × 4\n  Gender     n  mean    sd\n  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Female   102  26.6  9.11\n2 Male      98  26.6  6.74"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#the-problem-were-solving-1",
+    "href": "lessons/21_slr/r_module4_slides.html#the-problem-were-solving-1",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "The Problem We’re Solving",
+    "text": "The Problem We’re Solving\nIt’s correct. But it is not a result:\n\n\n\nColumn names are code names, not readable labels\nNumbers have too many decimal places\nThere is no title or caption\nIt would look terrible in a report\n\n\n\n\n\n\n\nThe principle for this module\n\n\nA wall of raw R output is not a result. A table is. The gap between print(df) and a manuscript-ready table is smaller than you think."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#part-1-knitrkable",
+    "href": "lessons/21_slr/r_module4_slides.html#part-1-knitrkable",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Part 1: knitr::kable()",
+    "text": "Part 1: knitr::kable()"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#the-simplest-upgrade",
+    "href": "lessons/21_slr/r_module4_slides.html#the-simplest-upgrade",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "The Simplest Upgrade",
+    "text": "The Simplest Upgrade\nkable() from the knitr package converts any data frame into a formatted HTML or PDF table in one line:\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = round(mean(BMI, na.rm = TRUE), 1),\n    sd   = round(sd(BMI, na.rm = TRUE), 1)\n  ) %&gt;%\n  knitr::kable()\n\n\n\n\nGender\nn\nmean\nsd\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#kable-with-options",
+    "href": "lessons/21_slr/r_module4_slides.html#kable-with-options",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "kable() with Options",
+    "text": "kable() with Options\n\n\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = round(mean(BMI, na.rm = TRUE), 1),\n    sd   = round(sd(BMI, na.rm = TRUE), 1)\n  ) %&gt;%\n  knitr::kable(\n    col.names = c(\"Sex\", \"N\", \"Mean BMI\", \"SD\"),\n    caption   = \"BMI by sex in the NHANES sample\",\n    align     = c(\"l\", \"c\", \"c\", \"c\")\n  )\n\n\nBMI by sex in the NHANES sample\n\n\nSex\nN\nMean BMI\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nPurpose\n\n\n\n\ncol.names\nOverride column names\n\n\ncaption\nTable caption\n\n\nalign\nColumn alignment: \"l\", \"c\", \"r\"\n\n\ndigits\nDecimal places (applies globally)"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#when-to-use-kable",
+    "href": "lessons/21_slr/r_module4_slides.html#when-to-use-kable",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "When to Use kable()",
+    "text": "When to Use kable()\nkable() is the right tool when you need a quick, clean table:\n\nSimple summary statistics\nFrequency tables from tabyl()\nModel coefficient tables from tidy()\n\n\n\nFor publication-quality tables with custom formatting, colors, or merged cells — use gt."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#part-2-the-gt-package",
+    "href": "lessons/21_slr/r_module4_slides.html#part-2-the-gt-package",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Part 2: The gt Package",
+    "text": "Part 2: The gt Package"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#why-gt",
+    "href": "lessons/21_slr/r_module4_slides.html#why-gt",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Why gt?",
+    "text": "Why gt?\ngt (“grammar of tables”) gives you fine-grained control over every element of a table — similar to how ggplot2 gives you control over every element of a plot.\n\n\n\n\nkable()\n\nOne function\nWorks for quick clean tables\nLimited formatting options\n\n\ngt\n\nLayered grammar (like ggplot2)\nColumn labels, formatting, spanners, footnotes\nSuitable for manuscripts and reports\n\n\n\n\n\n\n\nTip\n\n\ngt tables render beautifully in HTML documents. For PDF output, additional setup is needed — HTML is the target format for this course."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#a-minimal-gt-table",
+    "href": "lessons/21_slr/r_module4_slides.html#a-minimal-gt-table",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "A Minimal gt Table",
+    "text": "A Minimal gt Table\nStart with gt() and add layers:\n\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = round(mean(BMI, na.rm = TRUE), 1),\n    sd   = round(sd(BMI, na.rm = TRUE), 1)\n  ) %&gt;%\n  gt()\n\n\n\n\n\n\n\nGender\nn\nmean\nsd\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#adding-a-title-and-column-labels",
+    "href": "lessons/21_slr/r_module4_slides.html#adding-a-title-and-column-labels",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Adding a Title and Column Labels",
+    "text": "Adding a Title and Column Labels\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = round(mean(BMI, na.rm = TRUE), 1),\n    sd   = round(sd(BMI, na.rm = TRUE), 1)\n  ) %&gt;%\n  gt() %&gt;%\n  tab_header(\n    title    = \"BMI by Sex\",\n    subtitle = \"NHANES sample (n = 200)\"\n  ) %&gt;%\n  cols_label(\n    Gender = \"Sex\",\n    n      = \"N\",\n    mean   = \"Mean BMI\",\n    sd     = \"SD\"\n  )"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#formatting-numbers-inside-the-table",
+    "href": "lessons/21_slr/r_module4_slides.html#formatting-numbers-inside-the-table",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Formatting Numbers Inside the Table",
+    "text": "Formatting Numbers Inside the Table\nfmt_number() formats specific columns — no more round() before the table. Now you keep raw values in the data and format only at the display stage.\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = n(),\n    mean = mean(BMI, na.rm = TRUE),\n    sd   = sd(BMI, na.rm = TRUE)\n  ) %&gt;%\n  gt() %&gt;%\n  tab_header(title = \"BMI by Sex\", subtitle = \"NHANES sample (n = 200)\") %&gt;%\n  cols_label(Gender = \"Sex\", n = \"N\", mean = \"Mean BMI\", sd = \"SD\") %&gt;%\n  fmt_number(columns = c(mean, sd), decimals = 1)\n\n\n\n\n\n\n\n\n\n\nBMI by Sex\n\n\nNHANES sample (n = 200)\n\n\nSex\nN\nMean BMI\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#key-gt-formatting-functions",
+    "href": "lessons/21_slr/r_module4_slides.html#key-gt-formatting-functions",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Key gt Formatting Functions",
+    "text": "Key gt Formatting Functions\n\n\n\nFunction\nPurpose\n\n\n\n\ntab_header()\nTitle and subtitle\n\n\ncols_label()\nHuman-readable column names\n\n\nfmt_number()\nFormat numeric columns (decimals, comma separators)\n\n\nfmt_percent()\nFormat as percentages\n\n\ntab_footnote()\nAdd footnotes to cells or columns\n\n\ntab_spanner()\nGroup columns under a shared label\n\n\ncols_align()\nColumn alignment\n\n\ntab_style()\nBold, color, or style specific cells"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table",
+    "href": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "A Multi-Variable Summary Table",
+    "text": "A Multi-Variable Summary Table\n\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n       = n(),\n    bmi_m   = mean(BMI, na.rm = TRUE),\n    bmi_sd  = sd(BMI, na.rm = TRUE),\n    sbp_m   = mean(BPSysAve, na.rm = TRUE),\n    sbp_sd  = sd(BPSysAve, na.rm = TRUE)\n  ) %&gt;%\n  gt() %&gt;%\n  tab_header(\n    title    = \"BMI and Systolic Blood Pressure by Sex\",\n    subtitle = \"NHANES sample (n = 200)\"\n  ) %&gt;%\n  cols_label(\n    Gender = \"Sex\",    n = \"N\",\n    bmi_m  = \"Mean\",   bmi_sd = \"SD\",\n    sbp_m  = \"Mean\",   sbp_sd = \"SD\"\n  ) %&gt;%\n  fmt_number(columns = c(bmi_m, bmi_sd, sbp_m, sbp_sd), decimals = 1) %&gt;%\n  tab_spanner(label = \"BMI (kg/m²)\",         columns = c(bmi_m, bmi_sd)) %&gt;%\n  tab_spanner(label = \"Systolic BP (mmHg)\",  columns = c(sbp_m, sbp_sd))"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table-output",
+    "href": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table-output",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "A Multi-Variable Summary Table",
+    "text": "A Multi-Variable Summary Table\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBMI and Systolic Blood Pressure by Sex\n\n\nNHANES sample (n = 200)\n\n\nSex\nN\n\nBMI (kg/m²)\n\n\nSystolic BP (mmHg)\n\n\n\nMean\nSD\nMean\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n115.0\n16.5\n\n\nMale\n98\n26.6\n6.7\n119.3\n17.5"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#part-3-table-1-with-gtsummary",
+    "href": "lessons/21_slr/r_module4_slides.html#part-3-table-1-with-gtsummary",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Part 3: Table 1 with gtsummary",
+    "text": "Part 3: Table 1 with gtsummary"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#what-is-a-table-1",
+    "href": "lessons/21_slr/r_module4_slides.html#what-is-a-table-1",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "What Is a Table 1?",
+    "text": "What Is a Table 1?\nIn clinical research, Table 1 is the first table in a manuscript — it describes the sample by group:\n\n\n\n\n\nEvery clinical paper has one\n\n\n“Table 1: Baseline characteristics of study participants by treatment group”\nFor continuous variables: mean (SD) or median (IQR)\nFor categorical variables: n (%)\n\n\n\n\n\nWriting Table 1 by hand is tedious and error-prone. gtsummary generates it automatically."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#tbl_summary-your-first-table-1",
+    "href": "lessons/21_slr/r_module4_slides.html#tbl_summary-your-first-table-1",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "tbl_summary() — Your First Table 1",
+    "text": "tbl_summary() — Your First Table 1\n\n\nnhanes.samp %&gt;%\n  select(Gender, Age, BMI, BPSysAve) %&gt;%\n  tbl_summary()\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 2001\n\n\n\n\nGender\n\n\n\n\n    Female\n102 (51%)\n\n\n    Male\n98 (49%)\n\n\nAge\n31 (16, 50)\n\n\nBMI\n26 (21, 31)\n\n\n    Unknown\n10\n\n\nBPSysAve\n114 (106, 127)\n\n\n    Unknown\n30\n\n\n\n1 n (%); Median (Q1, Q3)\n\n\n\n\n\n\n\n\n\nThat’s it. tbl_summary() detects variable types automatically:\n\nContinuous → median (IQR) by default\nCategorical → n (%)"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#stratifying-by-a-group-variable",
+    "href": "lessons/21_slr/r_module4_slides.html#stratifying-by-a-group-variable",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Stratifying by a Group Variable",
+    "text": "Stratifying by a Group Variable\nAdd by = Gender to split the table into columns:\n\nnhanes.samp %&gt;%\n  select(Gender, Age, BMI, BPSysAve) %&gt;%\n  tbl_summary(by = Gender)\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nFemale\nN = 1021\nMale\nN = 981\n\n\n\n\nAge\n30 (16, 49)\n31 (15, 50)\n\n\nBMI\n25 (20, 32)\n26 (21, 31)\n\n\n    Unknown\n8\n2\n\n\nBPSysAve\n112 (103, 125)\n118 (108, 128)\n\n\n    Unknown\n19\n11\n\n\n\n1 Median (Q1, Q3)"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#customizing-tbl_summary",
+    "href": "lessons/21_slr/r_module4_slides.html#customizing-tbl_summary",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Customizing tbl_summary()",
+    "text": "Customizing tbl_summary()\n\nnhanes.samp %&gt;%\n  select(Gender, Age, BMI, BPSysAve, HealthGen) %&gt;%\n  tbl_summary(\n    by        = Gender,\n    statistic = list(\n      all_continuous()  ~ \"{mean} ({sd})\",\n      all_categorical() ~ \"{n} ({p}%)\"\n    ),\n    digits    = all_continuous() ~ 1,\n    label     = list(\n      Age       ~ \"Age (years)\",\n      BMI       ~ \"BMI (kg/m²)\",\n      BPSysAve  ~ \"Systolic BP (mmHg)\",\n      HealthGen ~ \"Self-Reported Health\"\n    )\n  ) %&gt;%\n  add_overall() %&gt;%\n  add_p() %&gt;%\n  bold_labels()"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#customizing-tbl_summary-output",
+    "href": "lessons/21_slr/r_module4_slides.html#customizing-tbl_summary-output",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Customizing tbl_summary()",
+    "text": "Customizing tbl_summary()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOverall\nN = 2001\nFemale\nN = 1021\nMale\nN = 981\np-value2\n\n\n\n\nAge (years)\n33.3 (21.1)\n32.3 (21.2)\n34.4 (21.0)\n0.5\n\n\nBMI (kg/m²)\n26.6 (8.0)\n26.6 (9.1)\n26.6 (6.7)\n0.5\n\n\n    Unknown\n10\n8\n2\n\n\n\n\nSystolic BP (mmHg)\n117.2 (17.1)\n115.0 (16.5)\n119.3 (17.5)\n0.061\n\n\n    Unknown\n30\n19\n11\n\n\n\n\nSelf-Reported Health\n\n\n\n\n\n\n&gt;0.9\n\n\n    Excellent\n21 (14%)\n10 (14%)\n11 (14%)\n\n\n\n\n    Very Good\n41 (27%)\n20 (27%)\n21 (27%)\n\n\n\n\n    Good\n57 (37%)\n28 (38%)\n29 (37%)\n\n\n\n\n    Fair\n33 (22%)\n15 (20%)\n18 (23%)\n\n\n\n\n    Poor\n1 (0.7%)\n1 (1.4%)\n0 (0%)\n\n\n\n\n    Unknown\n47\n28\n19\n\n\n\n\n\n1 Mean (SD); n (%)\n\n\n2 Wilcoxon rank sum test; Fisher’s exact test"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#tbl_summary-key-arguments",
+    "href": "lessons/21_slr/r_module4_slides.html#tbl_summary-key-arguments",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "tbl_summary() Key Arguments",
+    "text": "tbl_summary() Key Arguments\n\n\n\nArgument\nPurpose\n\n\n\n\nby\nStratify columns by a group variable\n\n\nstatistic\nControl the summary format per variable type\n\n\ndigits\nDecimal places for continuous variables\n\n\nlabel\nHuman-readable variable labels\n\n\ninclude\nWhich variables to include\n\n\n\n\n\nPost-processing functions:\n\n\n\nFunction\nPurpose\n\n\n\n\nadd_overall()\nAdd an “Overall” column\n\n\nadd_p()\nAdd p-values comparing groups\n\n\nbold_labels()\nBold the row variable labels"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#putting-it-all-together",
+    "href": "lessons/21_slr/r_module4_slides.html#putting-it-all-together",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Putting It All Together",
+    "text": "Putting It All Together"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#choosing-the-right-tool",
+    "href": "lessons/21_slr/r_module4_slides.html#choosing-the-right-tool",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Choosing the Right Tool",
+    "text": "Choosing the Right Tool\n\n\n\n\n\nSituation\nTool\n\n\n\n\nQuick check of output during analysis\nprint() / console\n\n\nSimple table in a homework or report\nknitr::kable()\n\n\nFormatted multi-variable table for a report\ngt\n\n\nTable 1 with group comparisons\ngtsummary::tbl_summary()\n\n\nModel output (coefficients, CIs)\ngtsummary::tbl_regression()\n\n\n\n\n\n\n\n\nTip\n\n\nYou don’t need to memorize every function — you need to know which tool fits the situation, and know enough to look up the rest."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#key-takeaways",
+    "href": "lessons/21_slr/r_module4_slides.html#key-takeaways",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Key Takeaways",
+    "text": "Key Takeaways\n\n\nkable()\n\nknitr::kable() — one function, instantly clean\ncol.names, caption, align, digits\n\ngt\n\ngt() → tab_header() → cols_label() → fmt_number()\ntab_spanner() for grouped column headers\nKeep raw numbers in data; format only at display stage\n\ngtsummary\n\ntbl_summary(by = ...) generates Table 1 automatically\nstatistic controls mean (SD) vs median (IQR)\nlabel gives clean variable names\nadd_overall() and add_p() for the finishing touches\n\n\n\n\n\nTip\n\n\nThe rule:\nRaw R output is for you. A table is for your reader. Every number that appears in a report should be in a table or inline R — never copy-pasted."
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#references",
+    "href": "lessons/21_slr/r_module4_slides.html#references",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "References",
+    "text": "References\n\n\nknitr::kable()\n\nknitr documentation: kable\n\n\n\ngt\n\ngt package documentation\ngt cookbook — Thomas Mock\n\n\n\ngtsummary\n\ngtsummary documentation\ntbl_summary() tutorial\n\n\n\n\nBMSC 620 | Tables and Formatted Output"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#adding-a-title-and-column-labels-result",
+    "href": "lessons/21_slr/r_module4_slides.html#adding-a-title-and-column-labels-result",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "Adding a Title and Column Labels RESULT",
+    "text": "Adding a Title and Column Labels RESULT\n\n\n\n\n\n\n\n\n\nBMI by Sex\n\n\nNHANES sample (n = 200)\n\n\nSex\nN\nMean BMI\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#result-adding-a-title-and-column-labels",
+    "href": "lessons/21_slr/r_module4_slides.html#result-adding-a-title-and-column-labels",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "RESULT: Adding a Title and Column Labels",
+    "text": "RESULT: Adding a Title and Column Labels\n\n\n\n\n\n\n\n\n\n\n\nBMI by Sex\n\n\nNHANES sample (n = 200)\n\n\nSex\nN\nMean BMI\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n\n\nMale\n98\n26.6\n6.7"
+  },
+  {
+    "objectID": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table-1",
+    "href": "lessons/21_slr/r_module4_slides.html#a-multi-variable-summary-table-1",
+    "title": "R Module 4: Tables and Formatted Output",
+    "section": "A Multi-Variable Summary Table",
+    "text": "A Multi-Variable Summary Table\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBMI and Systolic Blood Pressure by Sex\n\n\nNHANES sample (n = 200)\n\n\nSex\nN\n\nBMI (kg/m²)\n\n\nSystolic BP (mmHg)\n\n\n\nMean\nSD\nMean\nSD\n\n\n\n\nFemale\n102\n26.6\n9.1\n115.0\n16.5\n\n\nMale\n98\n26.6\n6.7\n119.3\n17.5"
   }
 ]

@@ -496,7 +496,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="20_slr_files/figure-html/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
 </figure>
 </div>
 </div>
@@ -622,7 +622,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="20_slr_files/figure-html/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
 </figure>
 </div>
 </div>
@@ -713,7 +713,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="20_slr_files/figure-html/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="1152"></p>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="1152"></p>
 </figure>
 </div>
 </div>
@@ -1020,7 +1020,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </details>
 
 </div>
-<img data-src="20_slr_files/figure-html/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"></section>
+<img data-src="20_slr_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="768"></section>
 <section id="population-model-vs.-estimated-line" class="slide level2">
 <h2>Population model vs.&nbsp;estimated line</h2>
 <div class="columns">
@@ -1137,7 +1137,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="20_slr_files/figure-html/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="864"></p>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center" width="864"></p>
 </figure>
 </div>
 </div>
@@ -1311,7 +1311,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>The key diagnostic plots are the <strong>residual plot</strong> (residuals vs.&nbsp;fitted values) and the <strong>QQ plot of residuals</strong>. We generate both from the fitted model object.</p>
+<p>The two key diagnostic plots are the <strong>residual plot</strong> (residuals vs.&nbsp;fitted values) and the <strong>QQ plot of residuals</strong>. We generate both from the fitted model object using <code>augment()</code> from <code>broom</code>.</p>
 </div>
 </div>
 </div>
@@ -1321,36 +1321,30 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># </span><span class="al">TODO</span><span class="co"> -- pick up here</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(model_bp)</span>
 <span id="cb12-2"><a></a></span>
-<span id="cb12-3"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(model_bp)</span>
-<span id="cb12-4"><a></a></span>
-<span id="cb12-5"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb12-6"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb12-7"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
-<span id="cb12-8"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb12-9"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residual plot"</span>,</span>
-<span id="cb12-10"><a></a>       <span class="at">subtitle =</span> <span class="st">"Checks L and E"</span>,</span>
-<span id="cb12-11"><a></a>       <span class="at">x =</span> <span class="st">"Fitted values (ŷ)"</span>,</span>
-<span id="cb12-12"><a></a>       <span class="at">y =</span> <span class="st">"Residuals"</span>)</span>
-<span id="cb12-13"><a></a></span>
-<span id="cb12-14"><a></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb12-15"><a></a>  <span class="fu">stat_qq</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb12-16"><a></a>  <span class="fu">stat_qq_line</span>(<span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb12-17"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Normal QQ plot of residuals"</span>,</span>
-<span id="cb12-18"><a></a>       <span class="at">subtitle =</span> <span class="st">"Checks N"</span>,</span>
-<span id="cb12-19"><a></a>       <span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>,</span>
-<span id="cb12-20"><a></a>       <span class="at">y =</span> <span class="st">"Sample quantiles"</span>)</span>
-<span id="cb12-21"><a></a></span>
-<span id="cb12-22"><a></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb12-23"><a></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Residual plot"</span>,</span>
+<span id="cb12-8"><a></a>       <span class="at">subtitle =</span> <span class="st">"Checks L and E"</span>,</span>
+<span id="cb12-9"><a></a>       <span class="at">x =</span> <span class="st">"Fitted values (ŷ)"</span>,</span>
+<span id="cb12-10"><a></a>       <span class="at">y =</span> <span class="st">"Residuals"</span>)</span>
+<span id="cb12-11"><a></a></span>
+<span id="cb12-12"><a></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb12-13"><a></a>  <span class="fu">stat_qq</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a></a>  <span class="fu">stat_qq_line</span>(<span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-15"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Normal QQ plot of residuals"</span>,</span>
+<span id="cb12-16"><a></a>       <span class="at">subtitle =</span> <span class="st">"Checks N"</span>,</span>
+<span id="cb12-17"><a></a>       <span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>,</span>
+<span id="cb12-18"><a></a>       <span class="at">y =</span> <span class="st">"Sample quantiles"</span>)</span>
+<span id="cb12-19"><a></a></span>
+<span id="cb12-20"><a></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="20_slr_files/figure-html/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>model_bp <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSys1 <span class="sc">~</span> BMI, <span class="at">data =</span> nhanes_bp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
+<img data-src="20_slr_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"></section>
 <section id="reading-the-diagnostic-plots" class="slide level2">
 <h2>Reading the diagnostic plots</h2>
 <div class="columns">
@@ -1369,7 +1363,7 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </ul>
 <p><strong>Red flags:</strong></p>
 <ul>
-<li><strong>Curve:</strong> linearity (L) is violated — try a transformation</li>
+<li><strong>Curve:</strong> linearity (L) is violated — consider a transformation</li>
 <li><strong>Funnel (spread increases):</strong> equal variance (E) is violated — heteroscedasticity</li>
 </ul>
 </div>
@@ -1387,7 +1381,6 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>What you want to see:</strong></p>
 <ul>
 <li>Points fall approximately along the diagonal reference line</li>
-<li><a href="https://library.virginia.edu/data/articles/understanding-q-q-plots">Understanding QQ Plots, Univeristy of Virginia</a></li>
 </ul>
 <p><strong>Red flags:</strong></p>
 <ul>
@@ -1400,11 +1393,134 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 </div></div>
 </section>
-<section id="the-r2-statistic" class="slide level2">
-<h2>The <span class="math inline">\(R^2\)</span> statistic</h2>
+<section id="what-good-diagnostic-plots-look-like" class="slide level2">
+<h2>What good diagnostic plots look like</h2>
+
+<img data-src="20_slr_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1152"><div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Residual plot:</strong> The smoother is flat and close to zero — no curve, no funnel. <strong>QQ plot:</strong> Points track the diagonal closely; minor deviation at the very ends is normal and acceptable.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-our-nhanes-diagnostic-plots-12" class="slide level2">
+<h2>Reading our NHANES diagnostic plots (1/2)</h2>
 <p><br>
 </p>
-<p><strong><span class="math inline">\(R^2\)</span></strong> (the coefficient of determination) tells us: <strong>what proportion of the variability in <span class="math inline">\(Y\)</span> is explained by the linear relationship with <span class="math inline">\(X\)</span>?</strong></p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-13-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Residual plot</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>The smoother curves downward at high fitted values — a mild non-linearity signal (<strong>L</strong> is questionable)</li>
+<li>Spread is roughly constant across most of the range — <strong>E</strong> approximately satisfied</li>
+<li>One point has a residual near +80: a person whose systolic BP is ~80 mmHg higher than their BMI predicts — worth noting but not removing</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="reading-our-nhanes-diagnostic-plots-22" class="slide level2">
+<h2>Reading our NHANES diagnostic plots (2/2)</h2>
+<p><br>
+</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-14-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>QQ plot</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Points track the diagonal closely through the bulk of the data — <strong>N</strong> approximately satisfied</li>
+<li>The upper tail deviates: a few large positive residuals pull away from the line</li>
+<li>The same outlier visible in the residual plot is driving this deviation</li>
+<li>With <span class="math inline">\(n\)</span> = 162, moderate tail departures matter less (CLT)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="overall-assessment" class="slide level2">
+<h2>Overall assessment</h2>
+<p><br>
+</p>
+
+<img data-src="20_slr_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Overall assessment</strong></p>
+</div>
+<div class="callout-content">
+<p>LINE conditions are approximately met. The linear model is a reasonable approximation for this data, and inference on the slope is valid. The curved smoother is a reminder that BMI alone explains only a modest portion of BP variability — other factors are clearly at work.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="going-further" class="slide level2">
+<h2>Going further</h2>
+<p><br>
+</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>More diagnostic plots</strong></p>
+</div>
+<div class="callout-content">
+<p>There are two additional diagnostic plots — the <strong>scale-location plot</strong> (a cleaner check of equal variance) and the <strong>residuals vs.&nbsp;leverage plot</strong> (identifies influential observations). You can produce all four at once with <code>autoplot(model)</code> from the <code>ggfortify</code> package.</p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<p>Further reading:</p>
+<ul>
+<li><a href="https://library.virginia.edu/data/articles/diagnostic-plots">Understanding Diagnostic Plots for Linear Regression Analysis</a></li>
+<li><a href="https://www.geeksforgeeks.org/r-machine-learning/diagnostic-plots-for-model-evaluation/">Diagnostic Plots for Model Evaluation</a></li>
+<li><a href="https://medium.com/@dorothyavo/demystifying-simple-linear-regression-diagnostics-in-r-720dd140f012">Demystifying Simple Linear Regression Diagnostics in R</a></li>
+</ul>
+</section>
+<section id="the-r2-statistic" class="slide level2">
+<h2>The <span class="math inline">\(R^2\)</span> statistic</h2>
+<p><strong><span class="math inline">\(R^2\)</span></strong> (the coefficient of determination) tells us:</p>
+<ul>
+<li><strong>what proportion of the variability in <span class="math inline">\(Y\)</span> is explained by the linear relationship with <span class="math inline">\(X\)</span>?</strong></li>
+</ul>
 <p><span class="math display">\[R^2 = 1 - \frac{SSE}{SST} = 1 - \frac{\sum(Y_i - \hat{Y}_i)^2}{\sum(Y_i - \bar{Y})^2}\]</span></p>
 <p><br>
 </p>
@@ -1419,9 +1535,9 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 
 </div><div class="column" style="width:48%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># glance() gives model-level summaries</span></span>
-<span id="cb14-2"><a></a><span class="fu">glance</span>(model_bp) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a></a>  <span class="fu">select</span>(r.squared, sigma, nobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># glance() gives model-level summaries</span></span>
+<span id="cb13-2"><a></a><span class="fu">glance</span>(model_bp) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a></a>  <span class="fu">select</span>(r.squared, sigma, nobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   r.squared sigma  nobs
@@ -1507,12 +1623,20 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Inference for slope <span class="math inline">\(\beta_1\)</span>: all 6 steps</h2>
 <p><strong>Step 1: Hypotheses</strong></p>
 <p><span class="math display">\[H_0: \beta_1 = 0 \quad \text{(no linear association between BMI and systolic BP)}\]</span> <span class="math display">\[H_A: \beta_1 \neq 0 \quad \text{(a linear association exists)}\]</span></p>
+<p><br>
+</p>
 <p><strong>Step 2: Significance level</strong> &nbsp; <span class="math inline">\(\alpha = 0.05\)</span></p>
 <p><strong>Step 3: Check assumptions</strong> &nbsp; LINE conditions — checked via diagnostic plots on previous slides ✓</p>
+<p><br>
+</p>
 <p><strong>Step 4: Test statistic</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>b1_row <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_bp) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"BMI"</span>)</span>
-<span id="cb16-2"><a></a>(t_stat <span class="ot">&lt;-</span> b1_row<span class="sc">$</span>statistic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>b1_row <span class="ot">&lt;-</span> model_bp <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"BMI"</span>)</span>
+<span id="cb15-4"><a></a></span>
+<span id="cb15-5"><a></a>t_stat <span class="ot">&lt;-</span> b1_row <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">pull</span>(statistic)</span>
+<span id="cb15-6"><a></a>t_stat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.912713</code></pre>
 </div>
@@ -1521,16 +1645,22 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </section>
 <section id="inference-for-slope-beta_1-continued" class="slide level2">
 <h2>Inference for slope <span class="math inline">\(\beta_1\)</span> (continued)</h2>
+<p><br>
+</p>
 <p><strong>Step 5: p-value</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>(p_val <span class="ot">&lt;-</span> b1_row<span class="sc">$</span>p.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>p_val <span class="ot">&lt;-</span> b1_row <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">pull</span>(p.value)</span>
+<span id="cb17-2"><a></a>p_val</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0001346729</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p>Or directly from the regression table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">tidy</span>(model_bp, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>model_bp <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
   term        estimate std.error statistic  p.value conf.low conf.high
@@ -1539,27 +1669,37 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05</code></pre>
 </div>
 </div>
+<p><br>
+</p>
 <p><strong>Step 6: Conclusion</strong></p>
-<p>We reject <span class="math inline">\(H_0\)</span> at the <span class="math inline">\(\alpha = 0.05\)</span> level (t = 3.91, df = 160, p &lt; 0.001). There is strong evidence of a positive linear association between BMI and systolic blood pressure.</p>
+<p>We reject <span class="math inline">\(H_0\)</span> at the <span class="math inline">\(\alpha = 0.05\)</span> level (t = 3.91, df = 160, <em>p</em> &lt; 0.001). There is strong evidence of a positive linear association between BMI and systolic blood pressure.</p>
 </section>
 <section id="confidence-interval-for-beta_1" class="slide level2">
 <h2>Confidence interval for <span class="math inline">\(\beta_1\)</span></h2>
 <p><br>
 </p>
 <p>The 95% confidence interval for the population slope uses the same logic as all our previous CIs:</p>
+<p><span class="math display">\[\text{point estimate} \pm z^*(or~t^*)\cdot SE\]</span><br>
+</p>
+<p>So for the confidence interval for the coefficient <span class="math inline">\(\hat{\beta}_1\)</span> this translates to</p>
 <p><span class="math display">\[\hat{\beta}_1 \pm t^*_{n-2} \cdot SE_{\hat{\beta}_1}\]</span></p>
 <p>where <span class="math inline">\(t^*_{n-2}\)</span> is the critical value from the <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n - 2\)</span> degrees of freedom.</p>
 <p><br>
 </p>
+</section>
+<section id="confidence-interval-for-beta_1-continued" class="slide level2">
+<h2>Confidence interval for <span class="math inline">\(\beta_1\)</span> (continued)</h2>
+<p><br>
+</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">tidy</span>(model_bp, <span class="at">conf.int =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a></a>  <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"BMI"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a></a>  <span class="fu">select</span>(term, estimate, conf.low, conf.high)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>model_bp <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a></a>  <span class="fu">tidy</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  term  estimate conf.low conf.high
-  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-1 BMI      0.698    0.345      1.05</code></pre>
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   98.8       5.05      19.6  2.88e-44   88.8      109.  
+2 BMI            0.698     0.178      3.91 1.35e- 4    0.345      1.05</code></pre>
 </div>
 </div>
 <p><br>
@@ -1570,8 +1710,17 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><strong>Interpretation</strong></p>
 </div>
 <div class="callout-content">
-<p>For every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average (95% CI: 0.345 to 1.05 mmHg).</p>
-<p>Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.</p>
+<p>For every 1 kg/m² increase in BMI, systolic blood pressure is expected to increase by 0.70 mmHg, on average (95% CI: 0.35 to 1.05 mmHg). Because the CI does not include 0, this is consistent with our hypothesis test conclusion: there is evidence of a positive linear association.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>General statement for population slope inference</strong></p>
+</div>
+<div class="callout-content">
+<p>For every 1 unit increase in the <span class="math inline">\(X\)</span>-variable, the is an expected/average increase of <span class="math inline">\(\hat{\beta}_1\)</span> units in the <span class="math inline">\(Y\)</span>-variable (95% CI: LB, UB).</p>
 </div>
 </div>
 </div>
@@ -1580,15 +1729,14 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <h2>Prediction: using the model for new observations</h2>
 <p><br>
 </p>
-<p>Once we have a regression line, we can plug in any <span class="math inline">\(X\)</span> value to get a predicted <span class="math inline">\(Y\)</span>:</p>
+<p>Once we have a regression line, we can plug in any <span class="math inline">\(X\)</span> value to get a predicted <span class="math inline">\(\hat{Y}\)</span>:</p>
 <p><span class="math display">\[\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot X^*\]</span></p>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">BMI =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>))</span>
-<span id="cb24-2"><a></a></span>
-<span id="cb24-3"><a></a><span class="co"># Point predictions</span></span>
-<span id="cb24-4"><a></a><span class="fu">predict</span>(model_bp, <span class="at">newdata =</span> new_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">BMI =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>))</span>
+<span id="cb23-2"><a></a></span>
+<span id="cb23-3"><a></a><span class="fu">predict</span>(model_bp, <span class="at">newdata =</span> new_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3 
 116.2686 119.7562 123.2438 </code></pre>
@@ -1596,30 +1744,66 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 </div>
 <p><br>
 </p>
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>What the confidence band in <code>geom_smooth</code> actually means</strong></p>
+<p><strong>Interpretation</strong></p>
 </div>
 <div class="callout-content">
-<p>When you write <code>geom_smooth(method = "lm", se = TRUE)</code>, the shaded band is a <strong>95% confidence interval for the mean response</strong> at each value of <span class="math inline">\(X\)</span> — it answers: <em>“What is the average systolic BP for all people at this BMI?”</em></p>
-<p>The band is narrowest near <span class="math inline">\(\bar{X}\)</span> (the mean BMI) and widens toward the extremes. Predictions are less precise far from the center of the data.</p>
+<p>For a person with BMI = 30, the model predicts a systolic BP of approximately 119.8 mmHg — the <strong>average</strong> expected BP for all people at that BMI.</p>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Extrapolation</strong></p>
+</div>
+<div class="callout-content">
+<p>Only predict within the range of your data. The model was fit on BMI values from roughly 14 to 69 kg/m² — predictions far outside this range are unreliable.</p>
+</div>
+</div>
+</div>
+</div></div>
+<!-- ## Three intervals in regression -->
+<!-- \ -->
+<!-- | | What it estimates | Width | -->
+<!-- |---|---|---| -->
+<!-- | **CI for $\hat{\beta}_1$** | How precisely did we estimate the *slope*? | Constant — one number | -->
+<!-- | **CI for mean response** | What is the average $Y$ for *all people* at a given $X^*$? | Varies — narrowest at $\bar{X}$ | -->
+<!-- | **Prediction interval** | What $Y$ would *this specific new person* at $X^*$ have? | Varies — always wider than CI for mean | -->
+<!-- : {tbl-colwidths="\[20, 30, 30\]"} -->
+<!-- \ -->
+<!-- ::: {.callout-tip icon="false"} -->
+<!-- ### Why does width vary for the bottom two? -->
+<!-- The predicted mean at any $X^*$ depends on both $\hat{\beta}_0$ and $\hat{\beta}_1$.  -->
+<!-- Think of the line as a rod balanced at $(\bar{X}, \bar{Y})$ — uncertainty in the  -->
+<!-- slope means the rod can rotate slightly around that pivot. Near the center, a small  -->
+<!-- rotation barely moves the prediction. Near the extremes, the same rotation moves  -->
+<!-- it a lot. -->
+<!-- The prediction interval is wider still because even if we knew the line perfectly,  -->
+<!-- individual patients vary around it. -->
+<!-- **Short version:** The CI for mean response asks about the *line*. The prediction  -->
+<!-- interval asks about a *person*. The CI for $\hat{\beta}_1$ asks about a *parameter*. -->
+<!-- ::: -->
 </section>
-<section id="prediction-intervals-a-preview" class="slide level2">
-<h2>Prediction intervals: a preview</h2>
+<section id="two-kinds-of-prediction-uncertainty" class="slide level2">
+<h2>Two kinds of prediction uncertainty</h2>
 <p><br>
 </p>
-<p>There’s a second type of interval you’ll encounter — the <strong>prediction interval</strong> — which answers a different question:</p>
+<p>A point prediction is a single number — but how uncertain is it? There are two distinct questions:</p>
 <p><br>
 </p>
-<table class="caption-top">
+<table class="caption-top" style="width:80%;">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1631,28 +1815,134 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <tbody>
 <tr class="odd">
 <td><strong>CI for mean response</strong></td>
-<td>What’s the <em>average</em> BP for people with BMI = 30?</td>
-<td>Uncertainty about the line</td>
+<td>What is the <em>average</em> BP for <strong>all people</strong> with BMI = 30?</td>
+<td>Uncertainty about where the line is</td>
 </tr>
 <tr class="even">
 <td><strong>Prediction interval</strong></td>
-<td>What BP would <em>this specific patient</em> have?</td>
-<td>Uncertainty about the line <strong>+</strong> individual variation</td>
+<td>What BP would <em>this specific new patient</em> with BMI = 30 have?</td>
+<td>Uncertainty about the line <strong>+</strong> individual variation around it</td>
 </tr>
 </tbody>
 </table>
 <p><br>
 </p>
-<p>Prediction intervals are always <strong>wider</strong> than confidence intervals for the mean, because individuals vary around the mean even if we knew the line perfectly.</p>
+<p>Prediction intervals are always <strong>wider</strong> than confidence intervals for the mean — even if we knew the line perfectly, individuals still vary around it.</p>
 <p><br>
 </p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>The CI for mean response asks about the <strong>line</strong>.</li>
+<li>The prediction interval asks about a <strong>person</strong>.</li>
+<li>The CI for <span class="math inline">\(\hat{\beta}_1\)</span> asks about a <em>parameter</em>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="for-bmi-30" class="slide level2">
+<h2>For BMI = 30</h2>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">predict</span>(model_bp, </span>
+<span id="cb25-2"><a></a>        <span class="at">newdata =</span> <span class="fu">tibble</span>(<span class="at">BMI =</span> <span class="dv">30</span>), </span>
+<span id="cb25-3"><a></a>        <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 119.7562 116.8847 122.6277</code></pre>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>CI for mean response</strong></p>
+</div>
+<div class="callout-content">
+<p>We are 95% confident that the <strong>average</strong> BP for all people with BMI = 30 is between <strong>117 and 123 mmHg</strong>.</p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">predict</span>(model_bp, </span>
+<span id="cb27-2"><a></a>        <span class="at">newdata =</span> <span class="fu">tibble</span>(<span class="at">BMI =</span> <span class="dv">30</span>), </span>
+<span id="cb27-3"><a></a>        <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 119.7562 85.16867 154.3437</code></pre>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Prediction interval</strong></p>
+</div>
+<div class="callout-content">
+<p>We are 95% confident that a <strong>specific future individual</strong> with BMI = 30 will have BP between <strong>85 and 154 mmHg</strong>.</p>
+</div>
+</div>
+</div>
+<p><br>
+</p>
+<p>Notice how much wider the prediction interval is — it must account for individual variation, not just uncertainty about the line.</p>
+</section>
+<section id="visualizing-both-intervals" class="slide level2">
+<h2>Visualizing both intervals</h2>
+<div style="font-size: 0.55em;">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># Generate CI and prediction interval bands across BMI range</span></span>
+<span id="cb29-2"><a></a>bmi_grid <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">BMI =</span> <span class="fu">seq</span>(<span class="fu">min</span>(nhanes_bp<span class="sc">$</span>BMI), </span>
+<span id="cb29-3"><a></a>                                 <span class="fu">max</span>(nhanes_bp<span class="sc">$</span>BMI), </span>
+<span id="cb29-4"><a></a>                                 <span class="at">length.out =</span> <span class="dv">200</span>))</span>
+<span id="cb29-5"><a></a></span>
+<span id="cb29-6"><a></a>ci_band   <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_bp, <span class="at">newdata =</span> bmi_grid, </span>
+<span id="cb29-7"><a></a>                     <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-8"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-9"><a></a>  <span class="fu">bind_cols</span>(bmi_grid)</span>
+<span id="cb29-10"><a></a></span>
+<span id="cb29-11"><a></a>pred_band <span class="ot">&lt;-</span> <span class="fu">predict</span>(model_bp, <span class="at">newdata =</span> bmi_grid, </span>
+<span id="cb29-12"><a></a>                     <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-13"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb29-14"><a></a>  <span class="fu">bind_cols</span>(bmi_grid)</span>
+<span id="cb29-15"><a></a></span>
+<span id="cb29-16"><a></a><span class="fu">ggplot</span>(nhanes_bp, <span class="fu">aes</span>(<span class="at">x =</span> BMI, <span class="at">y =</span> BPSys1)) <span class="sc">+</span></span>
+<span id="cb29-17"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb29-18"><a></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> pred_band, </span>
+<span id="cb29-19"><a></a>              <span class="fu">aes</span>(<span class="at">y =</span> fit, <span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr),</span>
+<span id="cb29-20"><a></a>              <span class="at">fill =</span> <span class="st">"#E69F00"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb29-21"><a></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> ci_band,  </span>
+<span id="cb29-22"><a></a>              <span class="fu">aes</span>(<span class="at">y =</span> fit, <span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr),</span>
+<span id="cb29-23"><a></a>              <span class="at">fill =</span> <span class="st">"#009E73"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb29-24"><a></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ci_band, <span class="fu">aes</span>(<span class="at">y =</span> fit), </span>
+<span id="cb29-25"><a></a>            <span class="at">color =</span> <span class="st">"#D55E00"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb29-26"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"CI for mean response (green) vs. prediction interval (yellow)"</span>,</span>
+<span id="cb29-27"><a></a>       <span class="at">x =</span> <span class="st">"BMI (kg/m²)"</span>, <span class="at">y =</span> <span class="st">"Systolic BP (mmHg)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="20_slr_files/figure-revealjs/unnamed-chunk-30-1.png" class="quarto-figure quarto-figure-center" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Coming in BSTA 512</strong></p>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The mechanics of constructing and interpreting prediction intervals — along with multiple regression, model selection, and diagnostics for more complex models — are covered in depth in BSTA 512. You now have the conceptual foundation to hit the ground running there.</p>
+<p>The <strong>green band</strong> is the 95% CI for the mean response — narrow near the center of the data, wider at the extremes. The <strong>yellow band</strong> is the 95% prediction interval — much wider, because it must capture individual patients, not just the average.</p>
 </div>
 </div>
 </div>
@@ -1667,34 +1957,34 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <p><br>
 </p>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column" style="width:45%;">
 <p><strong>1. Visualize</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
-<span id="cb26-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> X, <span class="at">y =</span> Y)) <span class="sc">+</span></span>
+<span id="cb30-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb30-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>2. Fit</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>3. Coefficients + inference</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">tidy</span>(model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>4. Model fit</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">glance</span>(model)   <span class="co"># R², sigma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column" style="width:5%;">
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">glance</span>(model)   <span class="co"># R², sigma</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:3%;">
 
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:52%;">
 <p><strong>5. Diagnostics</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
-<span id="cb30-2"><a></a></span>
-<span id="cb30-3"><a></a><span class="co"># Residual plot</span></span>
-<span id="cb30-4"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb30-5"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb30-6"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span>
-<span id="cb30-7"><a></a></span>
-<span id="cb30-8"><a></a><span class="co"># QQ plot</span></span>
-<span id="cb30-9"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb30-10"><a></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(model)</span>
+<span id="cb34-2"><a></a></span>
+<span id="cb34-3"><a></a><span class="co"># Residual plot</span></span>
+<span id="cb34-4"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb34-5"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-6"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span>
+<span id="cb34-7"><a></a></span>
+<span id="cb34-8"><a></a><span class="co"># QQ plot</span></span>
+<span id="cb34-9"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb34-10"><a></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>6. Predict</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">predict</span>(model,</span>
-<span id="cb31-2"><a></a>  <span class="at">newdata =</span> new_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">predict</span>(model,</span>
+<span id="cb35-2"><a></a>  <span class="at">newdata =</span> new_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div>
 </section>
 <section id="where-this-fits-in-the-bigger-picture" class="slide level2">
@@ -1718,14 +2008,13 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
 <li>Logistic regression (binary outcome)</li>
 <li>Survival analysis, mixed models, causal inference</li>
 </ul>
-<p>These are the tools of modern biomedical research. BSTA 512 takes it from here.</p>
-</div><div class="column" style="width:5%;">
+</div><div class="column" style="width:2%;">
 
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:43%;">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>The unified thread</strong></p>
+<p><strong>The unifying thread</strong></p>
 </div>
 <div class="callout-content">
 <p>Every method we’ve learned is asking the same fundamental question:</p>
@@ -1957,6 +2246,44 @@ Emile Latour, Nicky Wakim, Meike Niederhausen
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

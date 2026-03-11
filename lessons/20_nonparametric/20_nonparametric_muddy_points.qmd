@@ -143,7 +143,9 @@ This question gets at something real and important. The short answer is: **yes a
 
 With exact nonparametric tests (used when samples are small and there are no ties), p-values are not continuous — they can only take a discrete set of values. The reason is that the test statistic can only take a finite number of values, and the p-value is computed by counting how many outcomes are as extreme or more extreme than the one observed.
 
-For the **Wilcoxon signed-rank test** with effective sample size $n$ (after dropping zeros), the test statistic $T^+$ can range from 0 to $n(n+1)/2$, and there are $2^n$ equally likely outcomes under $H_0$. This means the smallest achievable two-sided p-value is $\frac{2}{2^n}$.
+For the **Wilcoxon signed-rank test** with effective sample size $n$ (after dropping zeros), the test statistic $T^+$ can range from 0 to $n(n+1)/2$. Under the null hypothesis, each of the $2^n$ possible sign patterns is equally likely. The most extreme outcomes occur when all ranks have the same sign, which happens only twice among those $2^n$ patterns. As a result, the smallest achievable two-sided p-value is approximately $\frac{2}{2^n}$ for small samples.
+
+**The numerator is always 2 because the most extreme outcome in each tail — all ranks positive, all ranks negative — occurs exactly once among the $2^n$ equally likely arrangements**
 
 Let's see how this plays out for small $n$:
 
@@ -190,6 +192,7 @@ But this is a cost measured in **power relative to the parametric test**, not in
 #| echo: false
 
 # Simulate power comparison across n for a moderate effect
+# Use normal approximation for speed in simulation
 set.seed(620)
 
 sim_power <- function(n, n_sim = 2000, effect = 0.8) {
@@ -217,11 +220,11 @@ ggplot(power_df, aes(x = n, y = power, color = test)) +
   geom_hline(yintercept = 0.05, linetype = "dashed", color = "grey50") +
   scale_color_manual(values = c("#0072B2", "#E69F00")) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + 
-  scale_x_continuous(limits = c(0, 30), 
-                     breaks = c(0, 4, 6, 8, 10, 15, 20, 30)) + 
+  # scale_x_continuous(limits = c(0, 30), 
+  #                    breaks = c(0, 4, 6, 8, 10, 15, 20, 30)) + 
   labs(
     title    = "Power vs. sample size for a moderate effect (d = 0.8)",
-    subtitle = "Dashed line = Type I error rate (5%). Power increases with n for both tests.",
+    subtitle = "Dashed line = significance level (α = 0.05). Power increases with n for both tests.",
     x        = "Sample size (n)",
     y        = "Power",
     color    = NULL
