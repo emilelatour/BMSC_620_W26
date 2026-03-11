@@ -83,8 +83,8 @@ By the end of the week, you should be able to:
     -   Prediction: confidence intervals vs. prediction intervals
     -   *If time permits:* R Module 4 — Tables and Formatted Output
 -   **Slides**
-    -   Correlation and Simple Linear Regression ([HTML](/lessons/21_slr/21_slr.qmd) | PDF | OneDrive)
-    -   R Module 4: Tables and Formatted Output ([HTML](/lessons/21_slr/r_module4_slides.qmd) | PDF | OneDrive)
+    -   Correlation and Simple Linear Regression ([HTML](/lessons/21_slr/21_slr.qmd) | [PDF](/lessons/21_slr/21_slr.pdf) | OneDrive)
+    -   R Module 4: Tables and Formatted Output ([HTML](/lessons/21_slr/r_module4_slides.qmd) | [PDF](/lessons/21_slr/r_module4_slides.pdf) | OneDrive)
 -   **Recording**
     -   Coming soon
 -   **Muddy points**
