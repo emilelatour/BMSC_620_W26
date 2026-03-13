@@ -90,7 +90,9 @@ By the end of the week, you should be able to:
 -   **Recording**
     -   [Correlation and Simple Linear Regression](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQClXMqMor5iQr0nSSM2xOgNAXrcttCVBdogSa0vFrhh6h4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=vzBg1B)
 -   **Muddy points**
-    -   Coming soon
+
+    I reviewed your post-class feedback and wrote clarifications here:
+    - [Muddy Points - Lesson 18](/lessons/21_slr/21_slr_muddy_points.qmd)
     
     
 
