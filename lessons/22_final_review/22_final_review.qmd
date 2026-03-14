@@ -1,0 +1,1228 @@
+---
+title: "Final Exam Review"
+subtitle: "Cumulative: Lessons 1–18, Emphasis on Lessons 10–19"
+author: "Emile Latour"
+date: "`r library(here); source(here('class_dates.R')); w11d1`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Final Exam Review"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(here)
+library(tidyverse)
+library(oibiostat)
+library(broom)
+library(rstatix)
+library(janitor)
+library(pwr)
+library(laviz)
+library(lamisc)
+
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+data(nhanes.samp)
+data(prevend.samp)
+
+set.seed(620)
+```
+
+## Today's Agenda
+
+- Exam logistics and structure
+- First-half foundations (what's on the exam from Lessons 1–9)
+- Second-half concepts — the main focus:
+  - Data exploration
+  - Paired t-test
+  - ANOVA and post-hoc testing
+  - Categorical data analysis
+  - Nonparametric tests
+  - Correlation and simple linear regression
+  - Power, sample size, and synthesis
+- Choosing the right test
+- Your questions
+
+\
+
+**The final exam opens TODAY at 3:00 PM and closes Friday, March 20 at 5:00 PM**
+
+# Exam Logistics
+
+## Exam Details
+
+**Format:**
+
+- 8 parts, 150 points total
+- Designed for 4–6 hours completion
+- Mix of conceptual questions, R code, and interpretation
+
+\
+
+**Resources allowed:**
+
+- ✅ Course materials (slides, homework, textbook)
+- ✅ R documentation and help files (`?t.test`, `?pnorm`, etc.)
+- ✅ Your own notes
+- ❌ Other students
+- ❌ AI assistants (ChatGPT, Claude, etc.)
+- ❌ Online forums or external help
+
+\
+
+**Submit both `.qmd` and `.html` files — naming: `Lastname_FirstInitial_Final`**
+
+## What's Covered
+
+\
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Part 1:** Foundations — first half (15 pts)
+
+**Part 2:** Exploring the data (15 pts)
+
+**Part 3:** Paired t-test (20 pts)
+
+**Part 4:** ANOVA and post-hoc (20 pts)
+
+:::
+
+::: {.column width="48%"}
+
+**Part 5:** Categorical data (20 pts)
+
+**Part 6:** Nonparametric tests (15 pts)
+
+**Part 7:** Correlation and SLR (25 pts)
+
+**Part 8:** Power, sample size, synthesis (20 pts)
+
+:::
+:::::
+
+\
+
+**Key dataset:** `diabetes_trial.csv`
+
+- Simulated RCT, 180 patients, 3 treatment arms (Metformin, Lifestyle, Combined), 6-month follow-up
+- Read the variable descriptions carefully before starting
+
+## General Tips
+
+\
+
+::: columns
+::: {.column width="50%"}
+
+**Before you start:**
+
+- Set up your workspace: load packages, read in data
+- Make sure code chunks evaluate 
+- Check that `here("data", "your_file.csv")` finds your file
+
+\
+
+**While working:**
+
+- Interpret everything in complete sentences — reference the numbers
+- Use all 6 steps for hypothesis tests
+- Use comments in your R code to show your thinking
+- **Save often**
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="45%"}
+
+**Before submitting:**
+
+- Render and confirm no errors
+- Verify both `.qmd` and `.html` are submitted
+- Check file naming format
+
+\
+
+<!-- ::: {.callout-warning icon="false"} -->
+<!-- ### The #1 mistake -->
+
+<!-- Running code that *works* but never rendering the document. A file that won't knit cannot be graded. Render early and often. -->
+<!-- ::: -->
+
+:::
+:::
+
+# Part 1: First-Half Foundations
+
+## What from the first half is on the exam?
+
+\
+
+Part 1 (15 points) tests three targeted areas from Lessons 1–9:
+
+\
+
+::: columns
+::: {.column width="50%"}
+**1.1 — Study design (5 pts)**
+
+- Experiment vs. observational study
+- Why randomization matters
+- When can we claim causation?
+
+**1.2 — Bayes' theorem / PPV (5 pts)**
+
+- Given sensitivity, specificity, prevalence → calculate PPV
+- Interpret PPV in context
+:::
+::: {.column width="50%"}
+**1.3 — Normal distributions and CLT (5 pts)**
+
+- `pnorm()` for an individual value
+- `pnorm()` for a sample mean (using $SE = \frac{\sigma}{\sqrt{n}}$)
+:::
+:::
+
+
+
+
+\
+
+::: {.callout-tip icon="false"}
+Your **midterm review slides** cover all of this in detail — a quick re-read is the best preparation for Part 1.
+:::
+
+## Study design: the essentials
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Experiment:**
+
+- Researchers **assign** treatments (random assignment)
+- Controls for confounding
+- Can establish **causation**
+
+**Observational study:**
+
+- Researchers observe without interfering
+- Cannot control for all confounders
+- Can only show **association**
+
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important icon="false"}
+### Causation checklist
+
+A study can claim causation **only if:**
+
+1. It is a randomized experiment
+2. Random assignment was used
+3. Other explanations have been ruled out
+
+**Key question:** Was treatment *assigned* by the researchers, or did subjects choose/arrive with it?
+:::
+
+:::
+:::::
+
+## Bayes' Theorem: PPV setup
+
+Given sensitivity, specificity, and prevalence:
+
+$$PPV = P(\text{Disease} \mid \text{Test}+) = \frac{\text{sensitivity} \times \text{prevalence}}{\text{sensitivity} \times \text{prevalence} + (1 - \text{specificity}) \times (1 - \text{prevalence})}$$
+
+\
+
+**Worked example:** A TB screening test has sensitivity = 0.79, specificity = 0.87, applied in a population with 6% prevalence.
+
+```{r}
+sensitivity <- 0.79
+specificity <- 0.87
+prevalence  <- 0.06
+
+ppv <- (sensitivity * prevalence) /
+  (sensitivity * prevalence + (1 - specificity) * (1 - prevalence))
+ppv
+```
+
+::: {.callout-tip icon="false"}
+**Interpreting PPV:** "Of all patients who test positive, ___% actually have the condition."
+
+A high PPV → test is useful for **confirming** disease.
+A low PPV → test is better for **screening** (ruling out).
+:::
+
+## Normal distributions and CLT: two scenarios
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Individual observation:** $X \sim N(\mu, \sigma^2)$
+
+```{r}
+# LDL cholesterol: mu = 130, sd = 35
+# P(LDL > 160) — "borderline high"
+
+pnorm(160, mean = 130, sd = 35,
+      lower.tail = FALSE)
+```
+
+\
+
+The SD here is $\sigma$ — variability of **individuals**
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+**Sample mean:** $\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)$
+
+```{r}
+# for n = 25, same population
+# P(Xbar > 140) 
+
+se <- 35 / sqrt(25)
+pnorm(140, mean = 130, sd = se,
+      lower.tail = FALSE)
+```
+
+\
+
+The variability here is measure by $SE = \sigma/\sqrt{n}$ — variability of **sample means**
+
+:::
+:::::
+
+\
+
+::: {.callout-important icon="false"}
+### The key distinction
+
+When the question says "a random individual" → use $\sigma$.
+
+When the question says "a sample of $n$" → use $SE = \sigma/\sqrt{n}$.
+
+:::
+
+# Part 2: Exploring the Data
+
+## Descriptive statistics by group
+
+```{r}
+#| eval: false
+
+# Overall summary of a continuous variable
+nhanes.samp %>%
+  summarise(
+    n      = sum(!is.na(Pulse)),
+    mean   = mean(Pulse, na.rm = TRUE),
+    sd     = sd(Pulse, na.rm = TRUE),
+    median = median(Pulse, na.rm = TRUE)
+  )
+
+# By group
+nhanes.samp %>%
+  group_by(Gender) %>%
+  summarise(
+    n    = sum(!is.na(Pulse)),
+    mean = mean(Pulse, na.rm = TRUE),
+    sd   = sd(Pulse, na.rm = TRUE)
+  )
+
+# Or with rstatix
+nhanes.samp %>%
+  group_by(Gender) %>%
+  get_summary_stats(Pulse, type = "mean_sd")
+```
+
+## Visualization: histograms and boxplots
+
+```{r}
+#| eval: false
+
+# Histogram — check shape, skewness, outliers
+ggplot(nhanes.samp, 
+       aes(x = BPSys1)) +
+  geom_histogram(bins = 30, 
+                 color = "white") +
+  labs(x = "Systolic BP (mmHg)", y = "Count",
+       title = "Distribution of systolic blood pressure")
+
+# Boxplots by group with individual points
+ggplot(nhanes.samp, 
+       aes(x = Gender, y = Pulse, fill = Gender)) +
+  geom_boxplot(alpha = 0.6, 
+               width = 0.5) +
+  geom_jitter(width = 0.2, alpha = 0.4) +
+  labs(x = "Gender", y = "Pulse (bpm)",
+       title = "Pulse rate by gender")
+```
+
+\
+
+::: {.callout-tip icon="false"}
+`geom_jitter()` is layered **after** `geom_boxplot()` so points appear on top. Always include `width = 0.2` or similar to prevent overplotting.
+:::
+
+## Frequency tables with `tabyl()`
+
+```{r}
+#| eval: false
+
+# One-way table
+nhanes.samp %>%
+  tabyl(SmokeNow)
+
+# Two-way table with row percentages
+nhanes.samp %>%
+  tabyl(PhysActive, SmokeNow) %>%
+  adorn_totals(where = "row") %>%
+  adorn_percentages("row") %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns()
+```
+
+\
+
+::: {.callout-tip icon="false"}
+`adorn_percentages("row")` gives **row percentages** — the proportion *within* each row group. `adorn_ns()` keeps the raw counts alongside so both $n$ and % are visible.
+:::
+
+# Part 3: Paired t-test
+
+## When is a paired design appropriate?
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+**Paired (dependent) design:**
+
+- Same subject measured **twice** (before/after)
+- Matched pairs (sibling controls, eye studies)
+- The pairing controls for between-subject variability
+
+**Recognize it by:** 
+
+- the same ID appears in both measurements
+- there is a natural link between observations
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important icon="false"}
+### Why pairing matters
+
+- If you ignore the pairing and treat the two measurements as independent groups, you **throw away information** about within-subject change. 
+- The paired test uses differences $d_i = Y_{i,\text{post}} - Y_{i,\text{pre}}$ and is equivalent to a one-sample t-test on those differences.
+- Ignoring pairing → larger SE → less power → more likely to miss a real effect.
+:::
+
+:::
+:::::
+
+## Paired t-test: the workflow
+
+\
+
+**Step 1: Create the difference variable**
+
+```{r}
+#| eval: false
+
+# Example: SBP before and after a 12-week exercise intervention
+bp_data <- bp_data %>%
+  mutate(sbp_change = sbp_pre - sbp_post)  # positive = decrease in BP
+```
+
+\
+
+**Step 2: Run the test**
+
+```{r}
+#| eval: false
+
+# Option A: one-sample t-test on differences
+t.test(bp_data$sbp_change, mu = 0, alternative = "two.sided")
+
+# Option B: paired t-test directly
+t.test(bp_data$sbp_pre, bp_data$sbp_post,
+       paired = TRUE, alternative = "two.sided")
+```
+
+\
+
+::: {.callout-tip icon="false"}
+Both give identical results. Option A is often clearer for applying the six steps — you are explicitly testing whether the mean difference equals zero.
+:::
+
+## Paired t-test: the six steps
+
+\
+
+**Step 1:** $H_0: \mu_d = 0$ (no mean change) vs. $H_A: \mu_d > 0$ (BP decreased, if directional)
+
+**Step 2:** $\alpha = 0.05$
+
+**Step 3: Assumptions**
+
+- Independence: one pair per subject ✓ (study design)
+- Normality of differences: large $n$ → CLT; small $n$ → check histogram or QQ plot of differences
+
+**Step 4:** $t = \dfrac{\bar{d} - 0}{s_d / \sqrt{n}}$ — reported as `t` in `t.test()` output
+
+**Step 5:** p-value from `t.test()` output; $df = n - 1$
+
+**Step 6:** Reject if p < 0.05. Report in context:
+
+> "There was a statistically significant decrease in SBP from baseline to 12 weeks (t = \_\_\_, df = \_\_\_, p = \_\_\_). On average, SBP decreased by \_\_\_ mmHg (95% CI: \_\_\_ to \_\_\_)."
+
+# Part 4: ANOVA and Post-Hoc Testing
+
+## When to use one-way ANOVA
+
+::: {.callout-note icon="false"}
+### ANOVA: comparing means across 3+ groups
+
+Use one-way ANOVA when:
+
+- **Outcome:** continuous
+- **Predictor:** categorical with **3 or more groups**
+- **Question:** Do any of the group means differ?
+:::
+
+\
+
+**Why not just run multiple t-tests?**
+
+- Each t-test has a 5% Type I error rate. 
+- With 3 pairwise comparisons, the family-wise error rate inflates to ~14% — you're much more likely to find a spurious significant result by chance alone.
+- **ANOVA tests all groups simultaneously**, preserving the overall error rate at $\alpha$.
+
+## ANOVA assumptions (1/3)
+
+1. **Independence:** one observation per subject (study design) ✓
+2. **Normality:** approximately normal within each group
+3. **Equal variance:** SD ratio (max SD / min SD) should be < 2
+
+\
+
+```{r}
+#| eval: true
+
+# Create 3 age groups, then check group-level stats
+nhanes_age <- nhanes.samp %>%
+  mutate(age_group = cut(Age,
+                         breaks = c(0, 35, 55, 100),
+                         labels = c("Young", "Middle", "Older"))) %>%
+  filter(!is.na(age_group), !is.na(BPSys1))
+
+```
+
+## ANOVA assumptions (2/3): normality
+
+**Check:** distributions approximately normal within each group
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4.5
+#| fig-align: center
+
+ggplot(nhanes_age, aes(x = BPSys1)) +
+  geom_histogram(bins = 20, color = "white") +
+  facet_wrap(~ age_group) +
+  labs(x = "Systolic BP (mmHg)", y = "Count",
+       title = "Distribution of systolic BP by age group")
+```
+
+::: {.callout-tip icon="false"}
+With reasonably large groups, moderate departures from normality are acceptable — the CLT helps. Look for severe skew or extreme outliers.
+:::
+
+## ANOVA assumptions (3/3): equal variance
+
+**Check:** SD ratio (max SD / min SD) should be < 2
+
+```{r}
+nhanes_age %>%
+  group_by(age_group) %>%
+  summarise(n    = n(),
+            mean = mean(BPSys1),
+            sd   = sd(BPSys1)) %>%
+  mutate(sd_ratio = max(sd) / min(sd))
+```
+
+::: {.callout-tip icon="false"}
+SD ratio < 2 → equal variance assumption is met ✓
+
+If the ratio is borderline (say, 1.8–2.5), note the concern but proceed — ANOVA is fairly robust to mild violations when group sizes are similar.
+:::
+
+## ANOVA: the six steps + R code
+
+\
+
+**Step 1:** $H_0: \mu_1 = \mu_2 = \mu_3$ vs. $H_A:$ at least one group mean differs
+
+\
+
+**Steps 2–3:** $\alpha = 0.05$; check assumptions ✓
+
+\
+
+**Steps 4–5: Fit and summarize**
+
+```{r}
+#| eval: false
+
+anova_fit <- aov(BPSys1 ~ age_group, data = nhanes_age)
+
+# Traditional output
+summary(anova_fit)
+
+# Tidy output
+broom::tidy(anova_fit)
+```
+
+
+```{r}
+#| include: false
+anova_fit <- aov(BPSys1 ~ age_group, data = nhanes_age)
+
+# Tidy output
+aov_res <- broom::tidy(anova_fit)
+
+```
+
+\
+
+**Step 6:** Report F-statistic with **both** df values and p-value
+
+> "There was a significant difference in mean systolic blood pressure between at least two age groups (F(`r aov_res$df[1]`, `r aov_res$df[2]`) = \_\_\_, p = \_\_\_)."
+
+## Post-hoc testing: Tukey's HSD
+
+If ANOVA rejects $H_0$, use Tukey HSD to identify **which pairs** differ:
+
+```{r}
+#| eval: false
+
+rstatix::tukey_hsd(anova_fit)
+```
+
+\
+
+**Reading the output:**
+
+- `estimate` = difference in group means
+- `p.adj` = adjusted p-value (controls family-wise error rate)
+- Report pairs where `p.adj < 0.05`
+
+\
+
+::: {.callout-important icon="false"}
+### Writing a results paragraph
+
+Include: descriptive stats for each group + F-statistic + p-value + specific post-hoc comparisons.
+
+> "Mean [outcome] was \_\_\_ (SD = \_\_\_) in Group A, \_\_\_ (SD = \_\_\_) in Group B, and \_\_\_ (SD = \_\_\_) in Group C. A one-way ANOVA indicated a significant difference between group means (F(df1, df2) = \_\_\_, p = \_\_\_). Tukey post-hoc tests revealed that [Group A vs. Group C: mean diff = \_\_\_, p = \_\_\_] differed significantly, while [other comparisons] did not."
+:::
+
+# Part 5: Categorical Data Analysis
+
+## Chi-squared test for independence
+
+\
+
+**When to use:** Both variables are **categorical**, testing whether they are associated
+
+\
+
+```{r}
+#| eval: false
+
+# Step 1: Build the contingency table
+tab <- nhanes.samp %>%
+  filter(!is.na(SmokeNow), !is.na(PhysActive)) %>%
+  tabyl(PhysActive, SmokeNow)
+
+# Step 2: Check expected counts — all should be ≥ 5
+chisq.test(tab)$expected
+
+# Step 3: Run the test
+chisq.test(tab)
+```
+
+\
+
+**Hypotheses (in words):**
+
+- $H_0$: There is no association between physical activity and smoking status
+- $H_A$: There is an association between physical activity and smoking status
+
+## Two-proportion z-test
+
+\
+
+**When to use:** Exactly two groups, binary outcome
+
+\
+
+```{r}
+#| eval: false
+
+# Compute successes and group sizes
+counts <- nhanes.samp %>%
+  filter(!is.na(SmokeNow)) %>%
+  group_by(Gender) %>%
+  summarise(
+    success = sum(SmokeNow == "Yes", na.rm = TRUE),
+    n       = sum(!is.na(SmokeNow))
+  )
+
+# Two-proportion test
+prop.test(x = counts$success,
+          n = counts$n,
+          alternative = "two.sided")
+```
+
+\
+
+**Hypotheses:**
+
+- $H_0$: $p_1 = p_2$
+- $H_A$: $p_1 \ne p_2$
+
+## Chi-squared vs. two-proportion test
+
+\
+
+| | Chi-squared | Two-proportion (`prop.test`) |
+|---|---|---|
+| **Groups** | 2 or more | Exactly 2 |
+| **Outcome** | Categorical (any # levels) | Binary (success/failure) |
+| **Hypotheses** | Independence vs. association | $p_1 = p_2$ vs. $p_1 \neq p_2$ |
+| **Output** | $\chi^2$, df, p-value | z (or $\chi^2$), p-value, **CI for difference** |
+
+\
+
+::: {.callout-tip icon="false"}
+For exactly **2 groups and a binary outcome**, both tests give equivalent p-values. Prefer `prop.test()` when you want a **confidence interval for the difference in proportions** — that CI gives more information than the p-value alone.
+:::
+
+# Part 6: Nonparametric Tests
+
+## When to go nonparametric
+
+::: {.callout-note icon="false"}
+### The decision is about the data, not just sample size
+
+Use a nonparametric test when:
+
+- The distribution is **heavily skewed** or has extreme outliers
+- The outcome is **ordinal** (pain scales, severity scores)
+- Sample sizes are small **and** normality is implausible
+:::
+
+\
+
+**How to assess:** plot the data first (histogram or boxplot); check the SD ratio across groups if comparing 3+ groups
+
+\
+
+::: {.callout-warning icon="false"}
+Small $n$ alone does not automatically mean nonparametric. If the data look approximately normal, the parametric test is valid and more powerful. The criterion is whether the **assumptions** are plausibly met.
+:::
+
+## Three nonparametric tests: the map
+
+\
+
+| Parametric test | Nonparametric alternative | R function |
+|---|---|---|
+| One-sample / paired t-test | Wilcoxon signed-rank | `wilcox.test(x, mu = 0)` |
+| Two-sample t-test | Wilcoxon rank-sum (Mann-Whitney) | `wilcox.test(x, y)` |
+| One-way ANOVA | Kruskal-Wallis | `kruskal.test()` |
+
+\
+
+**Hypotheses (state correctly!):**
+
+- $H_0$: The distributions of [outcome] are **identical** across groups
+- $H_A$: At least one group has a different distribution
+
+::: {.callout-important icon="false"}
+Do **not** state hypotheses in terms of medians being equal — this is only valid under additional assumptions. "Distributions are identical" is the correct framing.
+:::
+
+## Kruskal-Wallis + pairwise follow-up
+
+```{r}
+#| eval: false
+
+# Kruskal-Wallis test
+kw_result <- kruskal.test(Pulse ~ age_group, data = nhanes_age)
+
+kw_result %>%
+  broom::tidy()
+
+# Pairwise Wilcoxon with Bonferroni correction (if K-W is significant)
+pairwise.wilcox.test(nhanes_age$Pulse, nhanes_age$age_group,
+                     p.adjust.method = "bonferroni") %>% 
+  broom::tidy()
+```
+
+\
+
+::: {.callout-tip icon="false"}
+<!-- Use **FDR** (Benjamini-Hochberg) correction for multiple comparisons — it controls the **false discovery rate** and is less conservative than Bonferroni when you have several comparisons. -->
+There is no nonparametric equivalent of Tukey HSD. Bonferroni correction is a straightforward choice — it controls the family-wise error rate across all pairwise comparisons. With only 3 pairs here, the penalty for using Bonferroni is small.
+:::
+
+# Part 7: Correlation and Simple Linear Regression
+
+## This section is 25 points — the largest on the exam
+
+\
+
+::: {.callout-important icon="false"}
+### No homework covered this material
+
+Part 7 is the only section that was not practiced in a homework assignment. The exam provides extra guidance (hints in code chunks). Read the questions carefully and follow the steps.
+
+The material maps directly to the Lesson 21 slides — a review of those slides before the exam is time well spent.
+:::
+
+\
+
+**What Part 7 tests:**
+
+- Scatterplot + regression line
+- Pearson and Spearman correlation: `cor()`
+- Fitting `lm()`, interpreting `tidy()` output
+- LINE assumption checks with `augment()` + diagnostic plots
+- $R^2$ from `glance()`
+- Prediction vs. confidence interval: `predict()`
+
+## Scatterplot and correlation
+
+Using `prevend.samp`: does cognitive function (`RFFT` score) decline with age?
+
+```{r}
+# Scatterplot with regression line
+ggplot(prevend.samp, aes(x = Age, y = RFFT)) +
+  geom_point(alpha = 0.4, color = "#0072B2", size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE, color = "#D55E00") +
+  labs(x = "Age (years)", y = "RFFT score",
+       title = "Cognitive function vs. age (prevend.samp)")
+```
+
+## Correlation coefficients
+
+```{r}
+# Pearson: strength of LINEAR association
+cor(prevend.samp$Age, prevend.samp$RFFT,
+    use = "complete.obs")
+
+# Spearman: rank-based, robust to skew/outliers
+cor(prevend.samp$Age, prevend.samp$RFFT,
+    method = "spearman",
+    use = "complete.obs")
+```
+
+\
+
+**Describing the relationship:** direction (positive/negative), form (linear/curved), strength (weak/moderate/strong), unusual observations
+
+::: {.callout-tip icon="false"}
+The Pearson and Spearman values are usually close when the relationship is approximately linear without extreme outliers. A large gap suggests outliers or nonlinearity are influencing the Pearson $r$.
+:::
+
+## Fitting the regression model
+
+```{r}
+# Fit
+rfft_model <- lm(RFFT ~ Age, data = prevend.samp)
+
+# Coefficients, SE, t, p, CI
+tidy(rfft_model, conf.int = TRUE)
+```
+
+\
+
+**Interpreting the slope ($\hat{\beta}_1$):**
+
+> "For every 1-year increase in age, RFFT score is expected to change, on average, by $\hat{\beta}_1$ points (95% CI: \_\_\_ to \_\_\_)."
+
+\
+
+**Interpreting the intercept ($\hat{\beta}_0$):** Often not meaningful — only interpret when $X = 0$ is realistic in context.
+
+## The LINE conditions
+
+| Letter | Condition | How to check |
+|:---:|---|---|
+| **L** | **L**inearity — relationship is linear | Scatterplot; residual plot |
+| **I** | **I**ndependence — observations independent | Study design |
+| **N** | **N**ormality — residuals approximately normal | QQ plot of residuals |
+| **E** | **E**qual variance — residuals have constant spread | Residual plot |
+
+: {tbl-colwidths="\[13, 40, 20\]"}
+
+\
+
+```{r}
+#| eval: false
+
+aug <- augment(rfft_model)
+
+# Residual plot (checks L and E)
+ggplot(aug, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.4) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = "Fitted values", y = "Residuals", title = "Residual plot")
+
+# QQ plot (checks N)
+ggplot(aug, aes(sample = .resid)) +
+  stat_qq() + stat_qq_line() +
+  labs(title = "QQ plot of residuals")
+```
+
+## Reading the diagnostic plots
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Residual plot (L and E)
+
+**Good:** Points scatter randomly around 0; flat smoother; roughly equal spread
+
+**Red flags:**
+
+- Curve → linearity violated (L)
+- Funnel → equal variance violated (E)
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### QQ plot (N)
+
+**Good:** Points track the diagonal reference line
+
+**Red flags:**
+
+- S-shape → skewed residuals
+- Heavy tails → points deviate at both ends
+
+**Note:** With large $n$, the CLT makes moderate departures from normality less of a concern. L and E are more critical for inference.
+:::
+
+:::
+:::::
+
+## $R^2$ and sigma
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### $R^2$ interpretation
+
+"Age explains ___% of the variability in RFFT score in this sample."
+
+$R^2$ ranges from 0 (model explains nothing) to 1 (perfect fit).
+
+For SLR: $R^2 = r^2$ (square of Pearson correlation)
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### sigma
+
+`sigma` = residual standard deviation = typical distance of an individual observation from the fitted line, in **units of $Y$**.
+
+This captures individual-level scatter. It is much larger than `std.error` for the slope, and it is why prediction intervals are so much wider than CIs for mean response.
+:::
+
+:::
+:::::
+
+\
+
+```{r}
+# Model-level summary: R², sigma, n
+glance(rfft_model) %>% select(r.squared, sigma, nobs)
+```
+
+::: {.callout-tip icon="false"}
+`std.error` (from `tidy()`) tells you how well you estimated the slope. `sigma` (from `glance()`) tells you how much individuals vary around the line. These measure completely different things.
+:::
+
+
+
+
+## Inference for the slope: six steps
+
+\
+
+**Step 1:** $H_0: \beta_1 = 0$ (age tells us nothing about RFFT) vs. $H_A: \beta_1 \neq 0$
+
+\
+
+**Step 2:** $\alpha = 0.05$
+
+\
+
+**Step 3:** Check LINE conditions ✓
+
+\
+
+**Step 4:** $t = \hat{\beta}_1 / SE_{\hat{\beta}_1}$ — read from `tidy()` output, `statistic` column
+
+\
+
+**Step 5:** p-value from `tidy()` output, `p.value` column; $df = n - 2$
+
+\
+
+**Step 6:** Conclusion in context:
+
+> "There is strong evidence of a negative linear association between age and RFFT score (t = \_\_\_, df = \_\_\_, p = \_\_\_). For every 1-year increase in age, RFFT score is expected to decrease by \_\_\_ points (95% CI: \_\_\_ to \_\_\_)."
+
+## CI for mean response vs. prediction interval
+
+| | Question | Accounts for |
+|---|---|---|
+| **CI for mean response** | Average RFFT for **all people** aged 60? | Uncertainty about where the line is |
+| **Prediction interval** | RFFT for **this specific new patient** aged 60? | Uncertainty about the line **+** individual variation ($\hat{\sigma}$) |
+
+: {tbl-colwidths="\[20, 40, 30\]"}
+
+\
+
+```{r}
+#| eval: false
+
+new_data <- data.frame(Age = c(45, 60, 75))
+
+# CI for mean response
+predict(rfft_model, newdata = new_data, interval = "confidence")
+
+# Prediction interval for a new individual
+predict(rfft_model, newdata = new_data, interval = "prediction")
+```
+
+\
+
+::: {.callout-important icon="false"}
+Prediction intervals are **always wider** than CIs for mean response. More data narrows the CI (better-estimated line) but cannot eliminate individual variation — that scatter is a property of the population, not of your sample size.
+:::
+
+# Part 8: Power, Sample Size, and Synthesis
+
+## Power analysis with `pwr.t.test()`
+
+**Cohen's $d$:** effect size for comparing two means
+
+$$d = \frac{\mu_1 - \mu_2}{\sigma_{\text{pooled}}}$$
+
+\
+
+**Example:** detect a 5 mmHg difference in SBP, pooled SD = 10 → $d = 0.5$
+
+::::: columns
+::: {.column width="48%"}
+**Solve for $n$:**
+```{r}
+#| eval: false
+pwr.t.test(n           = NULL,
+           d           = 5 / 10,
+           sig.level   = 0.05,
+           power       = 0.80,
+           type        = "two.sample",
+           alternative = "two.sided")
+```
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Solve for power** with n = 50 per group:
+```{r}
+#| eval: false
+pwr.t.test(n           = 50,
+           d           = 5 / 10,
+           sig.level   = 0.05,
+           power       = NULL,
+           type        = "two.sample",
+           alternative = "two.sided")
+```
+:::
+:::::
+
+::: {.callout-tip icon="false"}
+Always **round up** the required $n$ — rounding down means you're slightly underpowered.
+:::
+
+## Sample size and what it affects
+
+\
+
+When you increase $n$:
+
+| | Effect |
+|---|---|
+| **ANOVA F-statistic** | Increases (more power to detect group differences) |
+| **Post-hoc p-values** | Decrease (more power per pairwise comparison) |
+| **Width of CIs** | Narrower (smaller SE → tighter interval) |
+
+: {tbl-colwidths="\[20, 40\]"}
+
+\
+
+::: {.callout-important icon="false"}
+### Peeking at data before choosing the test
+
+- Running ANOVA, seeing which group performed best, then running a t-test comparing that group vs. the others is **data-driven test selection** — it inflates the Type I error rate because you used the data twice. 
+- The right approach: specify your comparisons **before** looking at the data.
+:::
+
+## Choosing the right test: the synthesis table
+
+\
+
+| Research question | Groups | Outcome | Test | Key R function |
+|---|:---:|:---:|---|---|
+| Did the outcome change? (same subject, 2 timepoints) | 1 (differences) | Continuous | Paired t-test | `t.test(d, mu = 0)` |
+| Does mean outcome differ across 3+ groups? | 3+ | Continuous, normal | One-way ANOVA | `aov()` |
+| Does a skewed outcome differ across 3+ groups? | 3+ | Continuous, skewed | Kruskal-Wallis | `kruskal.test()` |
+| Is a categorical variable associated with a binary outcome? | 3+ | Binary | Chi-squared | `chisq.test()` |
+| Does a binary outcome rate differ between 2 groups? | 2 | Binary | Two-proportion z-test | `prop.test()` |
+| Is there a linear association between two continuous variables? | — | 2 continuous | SLR / slope test | `lm()` + `tidy()` |
+
+: {tbl-colwidths="\[35, 15, 15, 20, 25\]"}
+
+## CI and hypothesis test: two sides of the same coin
+
+::: {.callout-note icon="false"}
+### A recurring exam theme
+
+For a two-sided test at $\alpha = 0.05$:
+
+- If the **95% CI excludes** the null value → p-value < 0.05 → reject $H_0$
+- If the **95% CI includes** the null value → p-value ≥ 0.05 → fail to reject $H_0$
+:::
+
+\
+
+**What the CI adds beyond the p-value:**
+
+- The **direction and magnitude** of the effect (not just "significant or not")
+- A range of **plausible values** for the true population parameter
+- Clinical interpretability — a statistically significant effect may be too small to matter in practice
+
+\
+
+**Good examples:** any test where you computed both a CI and a p-value. Ask: what does the CI tell us about the *size* of the effect that the p-value alone cannot?
+
+# Reminders and Good Luck
+
+## Common mistakes to avoid
+
+\
+
+1. **Ignoring paired structure** — running an independent t-test on before/after data
+2. **Forgetting to check assumptions** — especially ANOVA's SD ratio and chi-squared expected counts ≥ 5
+3. **Misframing nonparametric hypotheses** — say "distributions are identical," not "medians are equal"
+4. **Confusing $\sigma$, $s$, $SE$, and `sigma` from `glance()`** — know what each measures
+5. **Using `lower.tail = TRUE/FALSE` incorrectly** — sketch the picture first
+6. **Not rendering before submitting** — code that works in a chunk but breaks the render is ungraded
+
+\
+
+
+## You are ready
+
+\
+
+- ✅ You have worked through 8 homework assignments with increasingly complex analyses
+- ✅ You have practiced the six-step framework across many test types
+- ✅ You have hands-on experience with every R function on this exam
+- ✅ Part 7 has hints — you are not going in cold on SLR
+
+\
+
+**The exam opens at 3:00 PM today. You have until Friday at 5:00 PM.**
+
+\
+
+Read carefully, interpret in context, save frequently, and trust your preparation.
+
+**Good luck!**
+
+# Questions?
+
+## Your Turn
+
+\
+
+**What would you like to go over?**
+
+- Concepts that feel unclear?
+- R functions you want to see again?
+- Specific parts of the exam structure?
+
+\
+
+This is your time — ask anything.

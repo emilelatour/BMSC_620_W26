@@ -10439,5 +10439,614 @@
       "Course info",
       "Resources"
     ]
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#todays-agenda",
+    "href": "lessons/22_final_review/22_final_review.html#todays-agenda",
+    "title": "Final Exam Review",
+    "section": "Today’s Agenda",
+    "text": "Today’s Agenda\n\nExam logistics and structure\nFirst-half foundations (what’s on the exam from Lessons 1–9)\nSecond-half concepts — the main focus:\n\nData exploration\nPaired t-test\nANOVA and post-hoc testing\nCategorical data analysis\nNonparametric tests\nCorrelation and simple linear regression\nPower, sample size, and synthesis\n\nChoosing the right test\nYour questions\n\n\n\nThe final exam opens TODAY at 3:00 PM and closes Friday, March 20 at 5:00 PM"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#exam-details",
+    "href": "lessons/22_final_review/22_final_review.html#exam-details",
+    "title": "Final Exam Review",
+    "section": "Exam Details",
+    "text": "Exam Details\nFormat:\n\n8 parts, 150 points total\nDesigned for 4–6 hours completion\nMix of conceptual questions, R code, and interpretation\n\n\n\nResources allowed:\n\n✅ Course materials (slides, homework, textbook)\n✅ R documentation and help files (?t.test, ?pnorm, etc.)\n✅ Your own notes\n❌ Other students\n❌ AI assistants (ChatGPT, Claude, etc.)\n❌ Online forums or external help\n\n\n\nSubmit both .qmd and .html files — naming: Lastname_FirstInitial_Final"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#whats-covered",
+    "href": "lessons/22_final_review/22_final_review.html#whats-covered",
+    "title": "Final Exam Review",
+    "section": "What’s Covered",
+    "text": "What’s Covered\n\n\nPart 1: Foundations — first half (15 pts)\nPart 2: Exploring the data (15 pts)\nPart 3: Paired t-test (20 pts)\nPart 4: ANOVA and post-hoc (20 pts)\n\nPart 5: Categorical data (20 pts)\nPart 6: Nonparametric tests (15 pts)\nPart 7: Correlation and SLR (25 pts)\nPart 8: Power, sample size, synthesis (20 pts)\n\n\n\nKey dataset: diabetes_trial.csv — simulated RCT, 180 patients, 3 treatment arms (Metformin, Lifestyle, Combined), 6-month follow-up"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#general-tips",
+    "href": "lessons/22_final_review/22_final_review.html#general-tips",
+    "title": "Final Exam Review",
+    "section": "General Tips",
+    "text": "General Tips\n\n\nBefore you start:\n\nSet up your workspace: load packages, read in data\nMake sure code chunks evaluate (eval: TRUE or remove eval: FALSE)\nCheck that here(\"data\", \"diabetes_trial.csv\") finds your file\n\n\n\nWhile working:\n\nInterpret everything in complete sentences — reference the numbers\nUse all 6 steps for hypothesis tests\nUse comments in your R code to show your thinking\nRender frequently — don’t wait until the end\n\n\nBefore submitting:\n\nRender one final time — confirm no red errors\nVerify both .qmd and .html are submitted\nCheck file naming format\n\n\n\n\n\n\nThe #1 mistake\n\n\nRunning code that works but never rendering the document. A file that won’t knit cannot be graded. Render early and often."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#what-from-the-first-half-is-on-the-exam",
+    "href": "lessons/22_final_review/22_final_review.html#what-from-the-first-half-is-on-the-exam",
+    "title": "Final Exam Review",
+    "section": "What from the first half is on the exam?",
+    "text": "What from the first half is on the exam?\nPart 1 (15 points) tests three targeted areas from Lessons 1–9:\n\n\n1.1 — Study design (5 pts)\n\nExperiment vs. observational study\nWhy randomization matters\nWhen can we claim causation?\n\n1.2 — Bayes’ theorem / PPV (5 pts)\n\nGiven sensitivity, specificity, prevalence → calculate PPV\nInterpret PPV in context\n\n1.3 — Normal distributions and CLT (5 pts)\n\npnorm() for an individual value\npnorm() for a sample mean (using SE = σ/√n)\n\n\n\n\n\n\nTip\n\n\nYour midterm review slides cover all of this in detail — a quick re-read is the best preparation for Part 1."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#study-design-the-essentials",
+    "href": "lessons/22_final_review/22_final_review.html#study-design-the-essentials",
+    "title": "Final Exam Review",
+    "section": "Study design: the essentials",
+    "text": "Study design: the essentials\n\n\nExperiment:\n\nResearchers assign treatments (random assignment)\nControls for confounding\nCan establish causation\n\nObservational study:\n\nResearchers observe without interfering\nCannot control for all confounders\nCan only show association\n\n\n\n\n\nCausation checklist\n\n\nA study can claim causation only if:\n\nIt is a randomized experiment\nRandom assignment was used\nOther explanations have been ruled out\n\nThe diabetes trial: experiment (patients randomized to 3 arms) → causation is potentially claimable ✓"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#bayes-theorem-ppv-setup",
+    "href": "lessons/22_final_review/22_final_review.html#bayes-theorem-ppv-setup",
+    "title": "Final Exam Review",
+    "section": "Bayes’ Theorem: PPV setup",
+    "text": "Bayes’ Theorem: PPV setup\nGiven sensitivity, specificity, and prevalence:\n\\[PPV = P(\\text{Disease} \\mid \\text{Test}+) = \\frac{\\text{sensitivity} \\times \\text{prevalence}}{\\text{sensitivity} \\times \\text{prevalence} + (1 - \\text{specificity}) \\times (1 - \\text{prevalence})}\\]\n\n\n\nsensitivity &lt;- 0.82\nspecificity &lt;- 0.90\nprevalence  &lt;- 0.25\n\nppv &lt;- (sensitivity * prevalence) /\n       (sensitivity * prevalence + (1 - specificity) * (1 - prevalence))\nppv\n\n\n\n\n\n\nTip\n\n\nInterpreting PPV: “Of all patients who test positive, ___% actually have the condition.”\nA high PPV → test is useful for confirming disease. A low PPV → test is better for screening (ruling out)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#normal-distributions-and-clt-two-scenarios",
+    "href": "lessons/22_final_review/22_final_review.html#normal-distributions-and-clt-two-scenarios",
+    "title": "Final Exam Review",
+    "section": "Normal distributions and CLT: two scenarios",
+    "text": "Normal distributions and CLT: two scenarios\n\n\nIndividual observation: \\(X \\sim N(\\mu, \\sigma^2)\\)\n\n# P(X &gt; 110) if X ~ N(95, 12)\npnorm(110, mean = 95, sd = 12,\n      lower.tail = FALSE)\n\nThe SD here is \\(\\sigma\\) — variability of individuals\n\n\n\nSample mean: \\(\\bar{X} \\sim N\\left(\\mu, \\frac{\\sigma^2}{n}\\right)\\)\n\n# P(Xbar &gt; 100) for n=36, mu=95, sigma=12\nse &lt;- 12 / sqrt(36)\npnorm(100, mean = 95, sd = se,\n      lower.tail = FALSE)\n\nThe SD here is \\(SE = \\sigma/\\sqrt{n}\\) — variability of sample means\n\n\n\n\n\n\nThe key distinction\n\n\nWhen the question says “a random individual” → use \\(\\sigma\\).\nWhen the question says “a sample of \\(n\\)” → use \\(SE = \\sigma/\\sqrt{n}\\)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#descriptive-statistics-by-group",
+    "href": "lessons/22_final_review/22_final_review.html#descriptive-statistics-by-group",
+    "title": "Final Exam Review",
+    "section": "Descriptive statistics by group",
+    "text": "Descriptive statistics by group\n\n# Overall summary\ndiabetes %&gt;%\n  summarise(\n    n    = n(),\n    mean = mean(hba1c_baseline, na.rm = TRUE),\n    sd   = sd(hba1c_baseline, na.rm = TRUE),\n    median = median(hba1c_baseline, na.rm = TRUE)\n  )\n\n# By group\ndiabetes %&gt;%\n  group_by(treatment) %&gt;%\n  summarise(\n    n    = n(),\n    mean = mean(hba1c_change, na.rm = TRUE),\n    sd   = sd(hba1c_change, na.rm = TRUE)\n  )\n\n# Or with rstatix:\ndiabetes %&gt;%\n  group_by(treatment) %&gt;%\n  get_summary_stats(hba1c_change, type = \"mean_sd\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#visualization-histograms-and-boxplots",
+    "href": "lessons/22_final_review/22_final_review.html#visualization-histograms-and-boxplots",
+    "title": "Final Exam Review",
+    "section": "Visualization: histograms and boxplots",
+    "text": "Visualization: histograms and boxplots\n\n# Histogram — check shape, skewness, outliers\nggplot(diabetes, aes(x = triglycerides)) +\n  geom_histogram(bins = 30) +\n  labs(x = \"Triglycerides (mg/dL)\", y = \"Count\",\n       title = \"Distribution of triglycerides\")\n\n# Boxplots by group with jitter\nggplot(diabetes, aes(x = treatment, y = hba1c_6mo, fill = treatment)) +\n  geom_boxplot(alpha = 0.6) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  labs(x = \"Treatment\", y = \"HbA1c at 6 months (%)\",\n       title = \"HbA1c at 6 months by treatment group\")\n\n\n\n\n\n\nTip\n\n\ngeom_jitter() is layered after geom_boxplot() so points appear on top. Always include width = 0.2 or similar to prevent overplotting."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#frequency-tables-with-tabyl",
+    "href": "lessons/22_final_review/22_final_review.html#frequency-tables-with-tabyl",
+    "title": "Final Exam Review",
+    "section": "Frequency tables with tabyl()",
+    "text": "Frequency tables with tabyl()\n\n# One-way table\ndiabetes %&gt;%\n  tabyl(achieved_target)\n\n# Two-way table with row percentages\ndiabetes %&gt;%\n  tabyl(treatment, achieved_target) %&gt;%\n  adorn_totals(where = \"row\") %&gt;%\n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1) %&gt;%\n  adorn_ns()\n\n\n\n\n\n\nTip\n\n\nThe exam asks for row percentages — what % of each treatment group achieved the target. adorn_percentages(\"row\") gives you that. Use adorn_ns() to keep the raw counts alongside."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#when-is-a-paired-design-appropriate",
+    "href": "lessons/22_final_review/22_final_review.html#when-is-a-paired-design-appropriate",
+    "title": "Final Exam Review",
+    "section": "When is a paired design appropriate?",
+    "text": "When is a paired design appropriate?\n\n\nPaired (dependent) design:\n\nSame subject measured twice (before/after)\nMatched pairs (sibling controls, eye studies)\nThe pairing controls for between-subject variability\n\nIn the exam: HbA1c measured at baseline and at 6 months for the same patient → naturally paired\n\n\n\n\n\n\nWhy pairing matters\n\n\nIf you ignore the pairing and treat the two measurements as independent groups, you throw away information about within-subject change. The paired test uses differences \\(d_i = Y_{i,\\text{after}} - Y_{i,\\text{before}}\\) and is equivalent to a one-sample t-test on those differences.\nIgnoring pairing → larger SE → less power → more likely to miss a real effect."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#paired-t-test-the-workflow",
+    "href": "lessons/22_final_review/22_final_review.html#paired-t-test-the-workflow",
+    "title": "Final Exam Review",
+    "section": "Paired t-test: the workflow",
+    "text": "Paired t-test: the workflow\nStep 1: Create the difference variable\n\n# Positive values = improvement (baseline &gt; 6mo)\ndiabetes &lt;- diabetes %&gt;%\n  mutate(hba1c_change = hba1c_baseline - hba1c_6mo)\n\nStep 2: Run the test\n\n# Option A: one-sample t-test on differences\nt.test(diabetes$hba1c_change, mu = 0, alternative = \"two.sided\")\n\n# Option B: paired t-test directly\nt.test(diabetes$hba1c_baseline, diabetes$hba1c_6mo,\n       paired = TRUE, alternative = \"two.sided\")\n\n\n\n\n\n\nTip\n\n\nBoth give identical results. Option A is clearer for applying the six steps — you are testing whether the mean difference equals zero."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#paired-t-test-the-six-steps",
+    "href": "lessons/22_final_review/22_final_review.html#paired-t-test-the-six-steps",
+    "title": "Final Exam Review",
+    "section": "Paired t-test: the six steps",
+    "text": "Paired t-test: the six steps\nStep 1: \\(H_0: \\mu_d = 0\\) (no mean change) vs. \\(H_A: \\mu_d \\neq 0\\) (or \\(&gt; 0\\) if directional)\nStep 2: \\(\\alpha = 0.05\\)\nStep 3: Assumptions\n\nIndependence: one measure per patient ✓\nNormality of differences: \\(n = 180\\) is large → CLT applies ✓\n\nStep 4: \\(t = \\dfrac{\\bar{d} - 0}{s_d / \\sqrt{n}}\\) — reported as t in t.test() output\nStep 5: p-value from t.test() output, \\(df = n - 1 = 179\\)\nStep 6: If p &lt; 0.05 → reject \\(H_0\\). Report in context:\n\n“There was a statistically significant mean decrease in HbA1c from baseline to 6 months (t = , df = 179, p &lt; 0.001). The mean decrease was  percentage points (95% CI: ___ to ___).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#when-to-use-one-way-anova",
+    "href": "lessons/22_final_review/22_final_review.html#when-to-use-one-way-anova",
+    "title": "Final Exam Review",
+    "section": "When to use one-way ANOVA",
+    "text": "When to use one-way ANOVA\n\n\n\nANOVA: comparing means across 3+ groups\n\n\nUse one-way ANOVA when:\n\nOutcome: continuous\nPredictor: categorical with 3 or more groups\nQuestion: Do any of the group means differ?\n\n\n\n\n\n\nIn the exam: Does mean HbA1c change (hba1c_change) differ across Metformin, Lifestyle, and Combined groups?\n\n\nWhy not just run three t-tests?\nEach t-test has a 5% Type I error rate. With 3 pairwise comparisons, the family-wise error rate inflates to ~14% — you’re much more likely to find a spurious significant result."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#anova-assumptions",
+    "href": "lessons/22_final_review/22_final_review.html#anova-assumptions",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions",
+    "text": "ANOVA assumptions\nCheck before running:\n\nIndependence: one observation per patient (study design) ✓\nNormality: approximately normal within each group — check with QQ plot or note large \\(n\\)\nEqual variance: SD ratio (max SD / min SD) should be &lt; 2\n\n\n# Check group-level n, mean, SD\ndiabetes %&gt;%\n  group_by(treatment) %&gt;%\n  summarise(\n    n  = n(),\n    mean = mean(hba1c_change, na.rm = TRUE),\n    sd   = sd(hba1c_change, na.rm = TRUE)\n  ) %&gt;%\n  mutate(sd_ratio = max(sd) / min(sd))\n\n\n\n\nTip\n\n\nSD ratio &lt; 2 → equal variance assumption is met."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#anova-the-six-steps-r-code",
+    "href": "lessons/22_final_review/22_final_review.html#anova-the-six-steps-r-code",
+    "title": "Final Exam Review",
+    "section": "ANOVA: the six steps + R code",
+    "text": "ANOVA: the six steps + R code\nStep 1: \\(H_0: \\mu_{\\text{Met}} = \\mu_{\\text{Life}} = \\mu_{\\text{Comb}}\\) vs. \\(H_A:\\) at least one group mean differs\nSteps 2–3: \\(\\alpha = 0.05\\); check assumptions ✓\nSteps 4–5: Fit and summarize\n\nanova_fit &lt;- aov(hba1c_change ~ treatment, data = diabetes)\n\n# Traditional output\nsummary(anova_fit)\n\n# Tidy output\nbroom::tidy(anova_fit)\n\nStep 6: Report F-statistic with both df values and p-value\n\n“There was a significant effect of treatment on HbA1c change (F(2, 177) = , p = ).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#post-hoc-testing-tukeys-hsd",
+    "href": "lessons/22_final_review/22_final_review.html#post-hoc-testing-tukeys-hsd",
+    "title": "Final Exam Review",
+    "section": "Post-hoc testing: Tukey’s HSD",
+    "text": "Post-hoc testing: Tukey’s HSD\nIf ANOVA rejects \\(H_0\\), use Tukey HSD to identify which pairs differ:\n\n# Tukey HSD\nTukeyHSD(anova_fit)\n\n\n\nReading the output:\n\ndiff = difference in group means\np adj = adjusted p-value (controls family-wise error rate)\nReport pairs where p adj &lt; 0.05\n\n\n\n\n\n\nWriting a results paragraph (Q 4.4)\n\n\nInclude: descriptive stats for each group + F-statistic + p-value + specific post-hoc comparisons.\n\n“Mean HbA1c change was ___ (SD = ) in the Metformin group,  (SD = ) in the Lifestyle group, and  (SD = ) in the Combined group. A one-way ANOVA indicated a significant difference across groups (F(2, 177) = , p = ___). Tukey post-hoc tests revealed that [Combined vs. Metformin: mean diff = , p = ] differed significantly, while [other comparisons] did not.”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#chi-squared-test-for-independence",
+    "href": "lessons/22_final_review/22_final_review.html#chi-squared-test-for-independence",
+    "title": "Final Exam Review",
+    "section": "Chi-squared test for independence",
+    "text": "Chi-squared test for independence\nWhen to use: Both variables are categorical and you have 3+ groups\nIn the exam: Is treatment (3 groups) associated with achieved_target (Yes/No)?\n\n\n\n# Step 1: Build the contingency table\ntab &lt;- diabetes %&gt;%\n  tabyl(treatment, achieved_target)\n\n# Step 2: Check expected counts\nchisq.test(tab)$expected   # All should be ≥ 5\n\n# Step 3: Run the test\nchisq.test(tab)\n\n\n\nHypotheses (in words):\n\n\\(H_0\\): There is no association between treatment and achieving the glycemic target\n\\(H_A\\): There is an association between treatment and achieving the glycemic target"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#two-proportion-z-test",
+    "href": "lessons/22_final_review/22_final_review.html#two-proportion-z-test",
+    "title": "Final Exam Review",
+    "section": "Two-proportion z-test",
+    "text": "Two-proportion z-test\nWhen to use: Two groups, binary outcome — testing \\(H_0: p_1 = p_2\\)\nIn the exam: Combined vs. Lifestyle groups only — who achieved the target at a higher rate?\n\n# Filter to two groups\ndiabetes_two &lt;- diabetes %&gt;%\n  filter(treatment %in% c(\"Combined\", \"Lifestyle\"))\n\n# Compute successes and group sizes\ncounts &lt;- diabetes_two %&gt;%\n  group_by(treatment) %&gt;%\n  summarise(\n    success = sum(achieved_target == \"Yes\"),\n    n = n()\n  )\n\n# Two-proportion test\nprop.test(x = counts$success,\n          n = counts$n,\n          alternative = \"two.sided\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#chi-squared-vs.-two-proportion-test",
+    "href": "lessons/22_final_review/22_final_review.html#chi-squared-vs.-two-proportion-test",
+    "title": "Final Exam Review",
+    "section": "Chi-squared vs. two-proportion test",
+    "text": "Chi-squared vs. two-proportion test\n\n\n\n\n\n\n\n\n\nChi-squared\nTwo-proportion (prop.test)\n\n\n\n\nGroups\n2 or more\nExactly 2\n\n\nOutcome\nCategorical (any # levels)\nBinary (success/failure)\n\n\nHypotheses\nIndependence vs. association\n\\(p_1 = p_2\\) vs. \\(p_1 \\neq p_2\\)\n\n\nOutput\n\\(\\chi^2\\), df, p-value\nz (or \\(\\chi^2\\)), p-value, CI for difference\n\n\n\n\n\n\n\n\nTip\n\n\nFor exactly 2 groups and a binary outcome, both tests give equivalent p-values. Prefer prop.test() when you want a confidence interval for the difference in proportions — which gives more information than the p-value alone."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#when-to-go-nonparametric",
+    "href": "lessons/22_final_review/22_final_review.html#when-to-go-nonparametric",
+    "title": "Final Exam Review",
+    "section": "When to go nonparametric",
+    "text": "When to go nonparametric\n\n\n\nThe decision is about the data, not just the sample size\n\n\nUse a nonparametric test when:\n\nThe distribution is heavily skewed or has extreme outliers\nThe outcome is ordinal (pain scales, severity scores)\nSample sizes are small and normality is implausible\n\n\n\n\n\n\nIn the exam: triglycerides — visualized as right-skewed in Part 2 → Kruskal-Wallis is appropriate\nSD ratio check: large SD ratio across groups also supports nonparametric approach\n\n\n\n\n\nWarning\n\n\nSmall \\(n\\) alone does not automatically mean nonparametric. If the data look approximately normal, the parametric test is valid and more powerful. The criterion is whether the assumptions are plausibly met."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#three-nonparametric-tests-the-map",
+    "href": "lessons/22_final_review/22_final_review.html#three-nonparametric-tests-the-map",
+    "title": "Final Exam Review",
+    "section": "Three nonparametric tests: the map",
+    "text": "Three nonparametric tests: the map\n\n\n\n\n\n\n\n\nParametric test\nNonparametric alternative\nR function\n\n\n\n\nOne-sample / paired t-test\nWilcoxon signed-rank\nwilcox.test(x, mu = 0)\n\n\nTwo-sample t-test\nWilcoxon rank-sum (Mann-Whitney)\nwilcox.test(x, y)\n\n\nOne-way ANOVA\nKruskal-Wallis\nkruskal_test()\n\n\n\n\n\nHypotheses (state correctly!):\n\n\\(H_0\\): The distributions of [outcome] are identical across groups\n\\(H_A\\): At least one group has a different distribution\n\n\n\n\nImportant\n\n\nDo not state hypotheses in terms of medians being equal — this is only valid under additional assumptions. “Distributions are identical” is the correct framing."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#kruskal-wallis-pairwise-follow-up",
+    "href": "lessons/22_final_review/22_final_review.html#kruskal-wallis-pairwise-follow-up",
+    "title": "Final Exam Review",
+    "section": "Kruskal-Wallis + pairwise follow-up",
+    "text": "Kruskal-Wallis + pairwise follow-up\n\n# Kruskal-Wallis (nonparametric ANOVA)\ndiabetes %&gt;%\n  kruskal_test(triglycerides ~ treatment)\n\n# Pairwise Wilcoxon with FDR correction (if K-W is significant)\ndiabetes %&gt;%\n  wilcox_test(triglycerides ~ treatment,\n              p.adjust.method = \"fdr\") %&gt;%\n  filter(p.adj &lt; 0.05)\n\n\n\n\n\n\nTip\n\n\nUse FDR (Benjamini-Hochberg) for multiple comparisons in the nonparametric setting — it controls the false discovery rate and is less conservative than Bonferroni when you have several comparisons."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#this-section-is-25-points-the-largest-on-the-exam",
+    "href": "lessons/22_final_review/22_final_review.html#this-section-is-25-points-the-largest-on-the-exam",
+    "title": "Final Exam Review",
+    "section": "This section is 25 points — the largest on the exam",
+    "text": "This section is 25 points — the largest on the exam\n\n\n\nNo homework covered this material\n\n\nPart 7 is the only section that was not practiced in a homework assignment. The exam provides extra guidance (hints in code chunks). Read the questions carefully and follow the steps.\nThe material maps directly to Lesson 21 slides — a review of those slides before the exam is time well spent.\n\n\n\n\n\nWhat Part 7 tests:\n\nScatterplot + regression line\nPearson and Spearman correlation: cor()\nFitting lm(), interpreting tidy() output\nLINE assumption checks with augment() + diagnostic plots\n\\(R^2\\) from glance()\nPrediction vs. confidence interval: predict()"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#scatterplot-and-correlation",
+    "href": "lessons/22_final_review/22_final_review.html#scatterplot-and-correlation",
+    "title": "Final Exam Review",
+    "section": "Scatterplot and correlation",
+    "text": "Scatterplot and correlation\n\n# Scatterplot with regression line\nggplot(diabetes, aes(x = bmi, y = fasting_glucose)) +\n  geom_point(alpha = 0.4) +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(x = \"BMI (kg/m²)\", y = \"Fasting glucose (mg/dL)\",\n       title = \"Fasting glucose vs. BMI\")\n\n# Pearson correlation: strength of LINEAR association\ncor(diabetes$bmi, diabetes$fasting_glucose,\n    use = \"complete.obs\")\n\n# Spearman: rank-based, robust to skew/outliers\ncor(diabetes$bmi, diabetes$fasting_glucose,\n    method = \"spearman\",\n    use = \"complete.obs\")\n\nDescribing the relationship: direction (positive/negative), form (linear/curved), strength (weak/moderate/strong), unusual observations"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#fitting-the-regression-model",
+    "href": "lessons/22_final_review/22_final_review.html#fitting-the-regression-model",
+    "title": "Final Exam Review",
+    "section": "Fitting the regression model",
+    "text": "Fitting the regression model\n\n# Fit\nglucose_model &lt;- lm(fasting_glucose ~ bmi, data = diabetes)\n\n# Coefficients, SE, t, p, CI\ntidy(glucose_model, conf.int = TRUE)\n\n# Model-level summary: R², sigma, n\nglance(glucose_model)\n\n\n\nThe estimated equation:\n\\[\\widehat{\\text{Fasting Glucose}} = \\hat{\\beta}_0 + \\hat{\\beta}_1 \\times \\text{BMI}\\]\nInterpreting the slope (\\(\\hat{\\beta}_1\\)):\n\n“For every 1 kg/m² increase in BMI, fasting glucose is expected to increase by \\(\\hat{\\beta}_1\\) mg/dL, on average.”\n\nInterpreting the intercept (\\(\\hat{\\beta}_0\\)): Often not meaningful — only interpret when \\(X = 0\\) is realistic."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#the-line-conditions",
+    "href": "lessons/22_final_review/22_final_review.html#the-line-conditions",
+    "title": "Final Exam Review",
+    "section": "The LINE conditions",
+    "text": "The LINE conditions\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — relationship is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations independent\nStudy design\n\n\nN\nNormality — residuals approximately normal\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant spread\nResidual plot\n\n\n\n\n\n\naug &lt;- augment(glucose_model)\n\n# Residual plot (checks L and E)\nggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4) +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  labs(x = \"Fitted values\", y = \"Residuals\", title = \"Residual plot\")\n\n# QQ plot (checks N)\nggplot(aug, aes(sample = .resid)) +\n  stat_qq() + stat_qq_line() +\n  labs(title = \"QQ plot of residuals\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#reading-the-diagnostic-plots",
+    "href": "lessons/22_final_review/22_final_review.html#reading-the-diagnostic-plots",
+    "title": "Final Exam Review",
+    "section": "Reading the diagnostic plots",
+    "text": "Reading the diagnostic plots\n\n\n\n\n\nResidual plot (L and E)\n\n\nGood: Points scatter randomly around 0; flat smoother; roughly equal spread\nRed flags:\n\nCurve → linearity violated (L)\nFunnel → equal variance violated (E)\n\n\n\n\n\n\n\n\n\n\nQQ plot (N)\n\n\nGood: Points track the diagonal reference line\nRed flags:\n\nS-shape → skewed residuals\nHeavy tails → points deviate at both ends\n\nNote: With \\(n = 180\\), the CLT makes moderate departures from normality less of a concern. L and E are more critical for inference."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#r2-and-sigma",
+    "href": "lessons/22_final_review/22_final_review.html#r2-and-sigma",
+    "title": "Final Exam Review",
+    "section": "\\(R^2\\) and sigma",
+    "text": "\\(R^2\\) and sigma\n\nglance(glucose_model) %&gt;%\n  select(r.squared, sigma, nobs)\n\n\n\n\n\n\n\n\n\\(R^2\\) interpretation\n\n\n“BMI explains ___% of the variability in fasting glucose in this sample.”\n\\(R^2\\) ranges from 0 (model explains nothing) to 1 (perfect fit).\nFor SLR: \\(R^2 = r^2\\) (square of Pearson correlation)\n\n\n\n\n\n\n\n\n\nsigma\n\n\nsigma = residual standard deviation = typical distance of an individual observation from the fitted line, in units of \\(Y\\).\nThis is the individual-level scatter — much larger than the std.error for the slope, and it’s why prediction intervals are so wide."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#inference-for-the-slope-six-steps",
+    "href": "lessons/22_final_review/22_final_review.html#inference-for-the-slope-six-steps",
+    "title": "Final Exam Review",
+    "section": "Inference for the slope: six steps",
+    "text": "Inference for the slope: six steps\nStep 1: \\(H_0: \\beta_1 = 0\\) (BMI tells us nothing about glucose) vs. \\(H_A: \\beta_1 \\neq 0\\)\nStep 2: \\(\\alpha = 0.05\\)\nStep 3: Check LINE conditions ✓\nStep 4: \\(t = \\hat{\\beta}_1 / SE_{\\hat{\\beta}_1}\\) — read from tidy() output, statistic column\nStep 5: p-value from tidy() output, p.value column; \\(df = n - 2\\)\nStep 6: Conclusion in context:\n\n“There is [strong/insufficient] evidence of a positive linear association between BMI and fasting glucose (t = , df = , p = ). For every 1 kg/m² increase in BMI, fasting glucose is expected to increase by  mg/dL (95% CI: ___ to ___).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#ci-for-mean-response-vs.-prediction-interval",
+    "href": "lessons/22_final_review/22_final_review.html#ci-for-mean-response-vs.-prediction-interval",
+    "title": "Final Exam Review",
+    "section": "CI for mean response vs. prediction interval",
+    "text": "CI for mean response vs. prediction interval\n\n\n\n\n\n\n\n\n\nQuestion\nAccounts for\n\n\n\n\nCI for mean response\nAverage glucose for all patients with BMI = 30?\nUncertainty about the line\n\n\nPrediction interval\nGlucose for this specific new patient with BMI = 30?\nUncertainty about the line + individual variation (\\(\\hat{\\sigma}\\))\n\n\n\n\nnew_data &lt;- data.frame(bmi = c(25, 30, 35))\n\n# CI for mean response\npredict(glucose_model, newdata = new_data, interval = \"confidence\")\n\n# Prediction interval for a new individual\npredict(glucose_model, newdata = new_data, interval = \"prediction\")\n\n\n\n\n\n\nImportant\n\n\nPrediction intervals are always wider than CIs for mean response. More data narrows the CI (better estimated line) but cannot eliminate individual variation around the line."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#power-analysis-with-pwr.t.test",
+    "href": "lessons/22_final_review/22_final_review.html#power-analysis-with-pwr.t.test",
+    "title": "Final Exam Review",
+    "section": "Power analysis with pwr.t.test()",
+    "text": "Power analysis with pwr.t.test()\nCohen’s \\(d\\): effect size for comparing two means\n\\[d = \\frac{\\mu_1 - \\mu_2}{\\sigma_{\\text{pooled}}}\\]\n\n# How large a sample do we need?\npwr.t.test(n         = NULL,\n           d         = 0.4 / 0.50,   # delta / pooled SD\n           sig.level = 0.05,\n           power     = 0.80,\n           type      = \"two.sample\",\n           alternative = \"two.sided\")\n\n# What power do we have with n = 40 per group?\npwr.t.test(n         = 40,\n           d         = 0.4 / 0.50,\n           sig.level = 0.05,\n           power     = NULL,\n           type      = \"two.sample\",\n           alternative = \"two.sided\")\n\n\n\n\n\n\nTip\n\n\nAlways round up the required \\(n\\) — you can’t have a fractional person, and rounding down means you’re slightly underpowered."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#sample-size-and-what-it-affects",
+    "href": "lessons/22_final_review/22_final_review.html#sample-size-and-what-it-affects",
+    "title": "Final Exam Review",
+    "section": "Sample size and what it affects",
+    "text": "Sample size and what it affects\nWhen you increase \\(n\\):\n\n\n\n\n\n\n\n\nEffect\n\n\n\n\nANOVA F-statistic\nIncreases (more power to detect group differences)\n\n\nPost-hoc p-values\nDecrease (more power per pairwise comparison)\n\n\nWidth of CIs\nNarrower (smaller SE → tighter interval)\n\n\n\n\n\n\n\n\nPeeking at data before choosing the test\n\n\nRunning ANOVA, seeing which group “won,” then doing a t-test comparing that group vs. the others is data-driven test selection — it inflates the Type I error rate and violates the pre-specified analysis plan. This is the issue raised in Question 8.2b. The right approach: specify your comparisons before looking at the data."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#choosing-the-right-test-the-synthesis-table",
+    "href": "lessons/22_final_review/22_final_review.html#choosing-the-right-test-the-synthesis-table",
+    "title": "Final Exam Review",
+    "section": "Choosing the right test: the synthesis table",
+    "text": "Choosing the right test: the synthesis table\n\n\n\n\n\n\n\n\n\n\nResearch question\nGroups\nOutcome\nTest\nKey R function\n\n\n\n\nDid HbA1c change? (same patient)\n1 (differences)\nContinuous\nPaired t-test\nt.test(d, mu = 0)\n\n\nDoes mean change differ across 3 treatments?\n3\nContinuous, normal\nOne-way ANOVA\naov()\n\n\nDo triglycerides differ across 3 groups? (skewed)\n3\nContinuous, skewed\nKruskal-Wallis\nkruskal_test()\n\n\nIs treatment associated with achieving target? (3 groups)\n3\nBinary\nChi-squared\nchisq.test()\n\n\nDoes target rate differ between 2 groups?\n2\nBinary\nTwo-proportion z-test\nprop.test()\n\n\nIs there a linear association between BMI and glucose?\n—\n2 continuous\nSLR / slope test\nlm() + tidy()"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#ci-and-hypothesis-test-two-sides-of-the-same-coin",
+    "href": "lessons/22_final_review/22_final_review.html#ci-and-hypothesis-test-two-sides-of-the-same-coin",
+    "title": "Final Exam Review",
+    "section": "CI and hypothesis test: two sides of the same coin",
+    "text": "CI and hypothesis test: two sides of the same coin\n\n\n\nQuestion 8.3b asks you to connect these\n\n\nFor a two-sided test at \\(\\alpha = 0.05\\):\n\nIf the 95% CI excludes the null value → p-value &lt; 0.05 → reject \\(H_0\\)\nIf the 95% CI includes the null value → p-value ≥ 0.05 → fail to reject \\(H_0\\)\n\n\n\n\n\n\nWhat the CI adds beyond the p-value:\n\nThe direction and magnitude of the effect (not just “significant or not”)\nA range of plausible values for the true population parameter\nClinical interpretability — a 0.5 mmHg drug effect may be statistically significant but clinically meaningless\n\n\n\nGood example to use for this question: The paired t-test CI for mean HbA1c change, or the CI for the regression slope — both tell you not just whether the effect is real, but how big it plausibly is."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#common-mistakes-to-avoid",
+    "href": "lessons/22_final_review/22_final_review.html#common-mistakes-to-avoid",
+    "title": "Final Exam Review",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\nIgnoring paired structure — running an independent t-test on before/after data\nForgetting to check assumptions — especially ANOVA’s SD ratio and chi-squared expected counts\nMisframing nonparametric hypotheses — say “distributions are identical,” not “medians are equal”\nConfusing \\(\\sigma\\), \\(s\\), \\(SE\\), and sigma from glance() — know what each measures\nUsing lower.tail = TRUE/FALSE incorrectly — sketch the picture first\nNot rendering before submitting — code that works in a chunk but breaks the render is ungraded\n\n\n\n\n\n\nThe most important R check before submitting\n\n\nRemove or set eval: TRUE on any chunks you may have set to eval: FALSE while working. A chunk that doesn’t evaluate won’t produce output, and you’ll lose points."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#you-are-ready",
+    "href": "lessons/22_final_review/22_final_review.html#you-are-ready",
+    "title": "Final Exam Review",
+    "section": "You are ready",
+    "text": "You are ready\n\n\n\n✅ You have worked through 8 homework assignments with increasingly complex analyses\n✅ You have practiced the six-step framework across many test types\n✅ You have hands-on experience with every R function on this exam\n✅ Part 7 has hints — you are not going in cold on SLR\n\n\n\nThe exam opens at 3:00 PM today. You have until Friday at 5:00 PM.\n\n\nRead carefully, interpret in context, render frequently, and trust your preparation.\nGood luck!"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review.html#your-turn",
+    "href": "lessons/22_final_review/22_final_review.html#your-turn",
+    "title": "Final Exam Review",
+    "section": "Your Turn",
+    "text": "Your Turn\nWhat would you like to go over?\n\nConcepts that feel unclear?\nR functions you want to see again?\nSpecific parts of the exam structure?\n\n\n\nThis is your time — ask anything.\n\n\n\nBMSC 620 | Final Exam Review"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#todays-agenda",
+    "href": "lessons/22_final_review/22_final_review_1.html#todays-agenda",
+    "title": "Final Exam Review",
+    "section": "Today’s Agenda",
+    "text": "Today’s Agenda\n\nExam logistics and structure\nFirst-half foundations (what’s on the exam from Lessons 1–9)\nSecond-half concepts — the main focus:\n\nData exploration\nPaired t-test\nANOVA and post-hoc testing\nCategorical data analysis\nNonparametric tests\nCorrelation and simple linear regression\nPower, sample size, and synthesis\n\nChoosing the right test\nYour questions\n\n\n\nThe final exam opens TODAY at 3:00 PM and closes Friday, March 20 at 5:00 PM"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#exam-details",
+    "href": "lessons/22_final_review/22_final_review_1.html#exam-details",
+    "title": "Final Exam Review",
+    "section": "Exam Details",
+    "text": "Exam Details\nFormat:\n\n8 parts, 150 points total\nDesigned for 4–6 hours completion\nMix of conceptual questions, R code, and interpretation\n\n\n\nResources allowed:\n\n✅ Course materials (slides, homework, textbook)\n✅ R documentation and help files (?t.test, ?pnorm, etc.)\n✅ Your own notes\n❌ Other students\n❌ AI assistants (ChatGPT, Claude, etc.)\n❌ Online forums or external help\n\n\n\nSubmit both .qmd and .html files — naming: Lastname_FirstInitial_Final"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#whats-covered",
+    "href": "lessons/22_final_review/22_final_review_1.html#whats-covered",
+    "title": "Final Exam Review",
+    "section": "What’s Covered",
+    "text": "What’s Covered\n\n\n\n\n\n\nPart 1: Foundations — first half (15 pts)\nPart 2: Exploring the data (15 pts)\nPart 3: Paired t-test (20 pts)\nPart 4: ANOVA and post-hoc (20 pts)\n\nPart 5: Categorical data (20 pts)\nPart 6: Nonparametric tests (15 pts)\nPart 7: Correlation and SLR (25 pts)\nPart 8: Power, sample size, synthesis (20 pts)\n\n\n\nKey dataset: diabetes_trial.csv\n\nSimulated RCT, 180 patients, 3 treatment arms (Metformin, Lifestyle, Combined), 6-month follow-up\nRead the variable descriptions carefully before starting"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#general-tips",
+    "href": "lessons/22_final_review/22_final_review_1.html#general-tips",
+    "title": "Final Exam Review",
+    "section": "General Tips",
+    "text": "General Tips\n\n\n\n\nBefore you start:\n\nSet up your workspace: load packages, read in data\nMake sure code chunks evaluate\nCheck that here(\"data\", \"your_file.csv\") finds your file\n\n\n\nWhile working:\n\nInterpret everything in complete sentences — reference the numbers\nUse all 6 steps for hypothesis tests\nUse comments in your R code to show your thinking\nSave often\n\n\n\n\nBefore submitting:\n\nRender and confirm no errors\nVerify both .qmd and .html are submitted\nCheck file naming format"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#what-from-the-first-half-is-on-the-exam",
+    "href": "lessons/22_final_review/22_final_review_1.html#what-from-the-first-half-is-on-the-exam",
+    "title": "Final Exam Review",
+    "section": "What from the first half is on the exam?",
+    "text": "What from the first half is on the exam?\n\n\nPart 1 (15 points) tests three targeted areas from Lessons 1–9:\n\n\n\n\n1.1 — Study design (5 pts)\n\nExperiment vs. observational study\nWhy randomization matters\nWhen can we claim causation?\n\n1.2 — Bayes’ theorem / PPV (5 pts)\n\nGiven sensitivity, specificity, prevalence → calculate PPV\nInterpret PPV in context\n\n\n1.3 — Normal distributions and CLT (5 pts)\n\npnorm() for an individual value\npnorm() for a sample mean (using \\(SE = \\frac{\\sigma}{\\sqrt{n}}\\))\n\n\n\n\n\n\n\nTip\n\n\nYour midterm review slides cover all of this in detail — a quick re-read is the best preparation for Part 1."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#study-design-the-essentials",
+    "href": "lessons/22_final_review/22_final_review_1.html#study-design-the-essentials",
+    "title": "Final Exam Review",
+    "section": "Study design: the essentials",
+    "text": "Study design: the essentials\n\n\n\n\nExperiment:\n\nResearchers assign treatments (random assignment)\nControls for confounding\nCan establish causation\n\nObservational study:\n\nResearchers observe without interfering\nCannot control for all confounders\nCan only show association\n\n\n\n\n\nCausation checklist\n\n\nA study can claim causation only if:\n\nIt is a randomized experiment\nRandom assignment was used\nOther explanations have been ruled out\n\nKey question: Was treatment assigned by the researchers, or did subjects choose/arrive with it?"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#bayes-theorem-ppv-setup",
+    "href": "lessons/22_final_review/22_final_review_1.html#bayes-theorem-ppv-setup",
+    "title": "Final Exam Review",
+    "section": "Bayes’ Theorem: PPV setup",
+    "text": "Bayes’ Theorem: PPV setup\nGiven sensitivity, specificity, and prevalence:\n\\[PPV = P(\\text{Disease} \\mid \\text{Test}+) = \\frac{\\text{sensitivity} \\times \\text{prevalence}}{\\text{sensitivity} \\times \\text{prevalence} + (1 - \\text{specificity}) \\times (1 - \\text{prevalence})}\\]\n\n\nWorked example: A TB screening test has sensitivity = 0.79, specificity = 0.87, applied in a population with 6% prevalence.\n\nsensitivity &lt;- 0.79\nspecificity &lt;- 0.87\nprevalence  &lt;- 0.06\n\nppv &lt;- (sensitivity * prevalence) /\n  (sensitivity * prevalence + (1 - specificity) * (1 - prevalence))\nppv\n\n[1] 0.2794811\n\n\n\n\n\nTip\n\n\nInterpreting PPV: “Of all patients who test positive, ___% actually have the condition.”\nA high PPV → test is useful for confirming disease. A low PPV → test is better for screening (ruling out)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#normal-distributions-and-clt-two-scenarios",
+    "href": "lessons/22_final_review/22_final_review_1.html#normal-distributions-and-clt-two-scenarios",
+    "title": "Final Exam Review",
+    "section": "Normal distributions and CLT: two scenarios",
+    "text": "Normal distributions and CLT: two scenarios\n\n\n\n\nIndividual observation: \\(X \\sim N(\\mu, \\sigma^2)\\)\n\n# LDL cholesterol: mu = 130, sd = 35\n# P(LDL &gt; 160) — \"borderline high\"\n\npnorm(160, mean = 130, sd = 35,\n      lower.tail = FALSE)\n\n[1] 0.195683\n\n\n\n\nThe SD here is \\(\\sigma\\) — variability of individuals\n\n\n\nSample mean: \\(\\bar{X} \\sim N\\left(\\mu, \\frac{\\sigma^2}{n}\\right)\\)\n\n# for n = 25, same population\n# P(Xbar &gt; 140) \n\nse &lt;- 35 / sqrt(25)\npnorm(140, mean = 130, sd = se,\n      lower.tail = FALSE)\n\n[1] 0.07656373\n\n\n\n\nThe variability here is measure by \\(SE = \\sigma/\\sqrt{n}\\) — variability of sample means\n\n\n\n\n\n\nThe key distinction\n\n\nWhen the question says “a random individual” → use \\(\\sigma\\).\nWhen the question says “a sample of \\(n\\)” → use \\(SE = \\sigma/\\sqrt{n}\\)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#descriptive-statistics-by-group",
+    "href": "lessons/22_final_review/22_final_review_1.html#descriptive-statistics-by-group",
+    "title": "Final Exam Review",
+    "section": "Descriptive statistics by group",
+    "text": "Descriptive statistics by group\n\n# Overall summary of a continuous variable\nnhanes.samp %&gt;%\n  summarise(\n    n      = sum(!is.na(Pulse)),\n    mean   = mean(Pulse, na.rm = TRUE),\n    sd     = sd(Pulse, na.rm = TRUE),\n    median = median(Pulse, na.rm = TRUE)\n  )\n\n# By group\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    n    = sum(!is.na(Pulse)),\n    mean = mean(Pulse, na.rm = TRUE),\n    sd   = sd(Pulse, na.rm = TRUE)\n  )\n\n# Or with rstatix\nnhanes.samp %&gt;%\n  group_by(Gender) %&gt;%\n  get_summary_stats(Pulse, type = \"mean_sd\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#visualization-histograms-and-boxplots",
+    "href": "lessons/22_final_review/22_final_review_1.html#visualization-histograms-and-boxplots",
+    "title": "Final Exam Review",
+    "section": "Visualization: histograms and boxplots",
+    "text": "Visualization: histograms and boxplots\n\n# Histogram — check shape, skewness, outliers\nggplot(nhanes.samp, \n       aes(x = BPSys1)) +\n  geom_histogram(bins = 30, \n                 color = \"white\") +\n  labs(x = \"Systolic BP (mmHg)\", y = \"Count\",\n       title = \"Distribution of systolic blood pressure\")\n\n# Boxplots by group with individual points\nggplot(nhanes.samp, \n       aes(x = Gender, y = Pulse, fill = Gender)) +\n  geom_boxplot(alpha = 0.6, \n               width = 0.5) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  labs(x = \"Gender\", y = \"Pulse (bpm)\",\n       title = \"Pulse rate by gender\")\n\n\n\n\n\n\nTip\n\n\ngeom_jitter() is layered after geom_boxplot() so points appear on top. Always include width = 0.2 or similar to prevent overplotting."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#frequency-tables-with-tabyl",
+    "href": "lessons/22_final_review/22_final_review_1.html#frequency-tables-with-tabyl",
+    "title": "Final Exam Review",
+    "section": "Frequency tables with tabyl()",
+    "text": "Frequency tables with tabyl()\n\n# One-way table\nnhanes.samp %&gt;%\n  tabyl(SmokeNow)\n\n# Two-way table with row percentages\nnhanes.samp %&gt;%\n  tabyl(PhysActive, SmokeNow) %&gt;%\n  adorn_totals(where = \"row\") %&gt;%\n  adorn_percentages(\"row\") %&gt;%\n  adorn_pct_formatting(digits = 1) %&gt;%\n  adorn_ns()\n\n\n\n\n\n\nTip\n\n\nadorn_percentages(\"row\") gives row percentages — the proportion within each row group. adorn_ns() keeps the raw counts alongside so both \\(n\\) and % are visible."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#when-is-a-paired-design-appropriate",
+    "href": "lessons/22_final_review/22_final_review_1.html#when-is-a-paired-design-appropriate",
+    "title": "Final Exam Review",
+    "section": "When is a paired design appropriate?",
+    "text": "When is a paired design appropriate?\n\n\n\n\nPaired (dependent) design:\n\nSame subject measured twice (before/after)\nMatched pairs (sibling controls, eye studies)\nThe pairing controls for between-subject variability\n\nRecognize it by:\n\nthe same ID appears in both measurements\nthere is a natural link between observations\n\n\n\n\n\n\n\nWhy pairing matters\n\n\n\nIf you ignore the pairing and treat the two measurements as independent groups, you throw away information about within-subject change.\nThe paired test uses differences \\(d_i = Y_{i,\\text{post}} - Y_{i,\\text{pre}}\\) and is equivalent to a one-sample t-test on those differences.\nIgnoring pairing → larger SE → less power → more likely to miss a real effect."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#paired-t-test-the-workflow",
+    "href": "lessons/22_final_review/22_final_review_1.html#paired-t-test-the-workflow",
+    "title": "Final Exam Review",
+    "section": "Paired t-test: the workflow",
+    "text": "Paired t-test: the workflow\n\n\nStep 1: Create the difference variable\n\n# Example: SBP before and after a 12-week exercise intervention\nbp_data &lt;- bp_data %&gt;%\n  mutate(sbp_change = sbp_pre - sbp_post)  # positive = decrease in BP\n\n\n\nStep 2: Run the test\n\n# Option A: one-sample t-test on differences\nt.test(bp_data$sbp_change, mu = 0, alternative = \"two.sided\")\n\n# Option B: paired t-test directly\nt.test(bp_data$sbp_pre, bp_data$sbp_post,\n       paired = TRUE, alternative = \"two.sided\")\n\n\n\n\n\n\nTip\n\n\nBoth give identical results. Option A is often clearer for applying the six steps — you are explicitly testing whether the mean difference equals zero."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#paired-t-test-the-six-steps",
+    "href": "lessons/22_final_review/22_final_review_1.html#paired-t-test-the-six-steps",
+    "title": "Final Exam Review",
+    "section": "Paired t-test: the six steps",
+    "text": "Paired t-test: the six steps\n\n\nStep 1: \\(H_0: \\mu_d = 0\\) (no mean change) vs. \\(H_A: \\mu_d &gt; 0\\) (BP decreased, if directional)\nStep 2: \\(\\alpha = 0.05\\)\nStep 3: Assumptions\n\nIndependence: one pair per subject ✓ (study design)\nNormality of differences: large \\(n\\) → CLT; small \\(n\\) → check histogram or QQ plot of differences\n\nStep 4: \\(t = \\dfrac{\\bar{d} - 0}{s_d / \\sqrt{n}}\\) — reported as t in t.test() output\nStep 5: p-value from t.test() output; \\(df = n - 1\\)\nStep 6: Reject if p &lt; 0.05. Report in context:\n\n“There was a statistically significant decrease in SBP from baseline to 12 weeks (t = ___, df = ___, p = ___). On average, SBP decreased by ___ mmHg (95% CI: ___ to ___).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#when-to-use-one-way-anova",
+    "href": "lessons/22_final_review/22_final_review_1.html#when-to-use-one-way-anova",
+    "title": "Final Exam Review",
+    "section": "When to use one-way ANOVA",
+    "text": "When to use one-way ANOVA\n\n\n\nANOVA: comparing means across 3+ groups\n\n\nUse one-way ANOVA when:\n\nOutcome: continuous\nPredictor: categorical with 3 or more groups\nQuestion: Do any of the group means differ?\n\n\n\n\n\n\nWhy not just run multiple t-tests?\n\nEach t-test has a 5% Type I error rate.\nWith 3 pairwise comparisons, the family-wise error rate inflates to ~14% — you’re much more likely to find a spurious significant result by chance alone.\nANOVA tests all groups simultaneously, preserving the overall error rate at \\(\\alpha\\)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions",
+    "text": "ANOVA assumptions\nCheck before running:\n\nIndependence: one observation per subject (study design) ✓\nNormality: approximately normal within each group — note large \\(n\\) or check QQ plot\nEqual variance: SD ratio (max SD / min SD) should be &lt; 2\n\n\n# Create 3 age groups, then check group-level stats\nnhanes_age &lt;- nhanes.samp %&gt;%\n  mutate(age_group = cut(Age,\n                         breaks = c(0, 35, 55, 100),\n                         labels = c(\"Young\", \"Middle\", \"Older\"))) %&gt;%\n  filter(!is.na(age_group), !is.na(BPSys1))\n\nnhanes_age %&gt;%\n  group_by(age_group) %&gt;%\n  summarise(n = n(), mean = mean(BPSys1), sd = sd(BPSys1)) %&gt;%\n  mutate(sd_ratio = max(sd) / min(sd))\n\n\n\n\nTip\n\n\nSD ratio &lt; 2 → equal variance assumption is met ✓"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-the-six-steps-r-code",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-the-six-steps-r-code",
+    "title": "Final Exam Review",
+    "section": "ANOVA: the six steps + R code",
+    "text": "ANOVA: the six steps + R code\n\n\nStep 1: \\(H_0: \\mu_1 = \\mu_2 = \\mu_3\\) vs. \\(H_A:\\) at least one group mean differs\n\n\nSteps 2–3: \\(\\alpha = 0.05\\); check assumptions ✓\n\n\nSteps 4–5: Fit and summarize\n\nanova_fit &lt;- aov(BPSys1 ~ age_group, data = nhanes_age)\n\n# Traditional output\nsummary(anova_fit)\n\n# Tidy output\nbroom::tidy(anova_fit)\n\n\n\nStep 6: Report F-statistic with both df values and p-value\n\n“There was a significant difference in mean systolic blood pressure between at least two age groups (F(2, 160) = ___, p = ___).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#post-hoc-testing-tukeys-hsd",
+    "href": "lessons/22_final_review/22_final_review_1.html#post-hoc-testing-tukeys-hsd",
+    "title": "Final Exam Review",
+    "section": "Post-hoc testing: Tukey’s HSD",
+    "text": "Post-hoc testing: Tukey’s HSD\nIf ANOVA rejects \\(H_0\\), use Tukey HSD to identify which pairs differ:\n\nrstatix::tukey_hsd(anova_fit)\n\n\n\nReading the output:\n\nestimate = difference in group means\np.adj = adjusted p-value (controls family-wise error rate)\nReport pairs where p.adj &lt; 0.05\n\n\n\n\n\n\nWriting a results paragraph\n\n\nInclude: descriptive stats for each group + F-statistic + p-value + specific post-hoc comparisons.\n\n“Mean [outcome] was ___ (SD = ___) in Group A, ___ (SD = ___) in Group B, and ___ (SD = ___) in Group C. A one-way ANOVA indicated a significant difference between group means (F(df1, df2) = ___, p = ___). Tukey post-hoc tests revealed that [Group A vs. Group C: mean diff = ___, p = ___] differed significantly, while [other comparisons] did not.”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#chi-squared-test-for-independence",
+    "href": "lessons/22_final_review/22_final_review_1.html#chi-squared-test-for-independence",
+    "title": "Final Exam Review",
+    "section": "Chi-squared test for independence",
+    "text": "Chi-squared test for independence\n\n\nWhen to use: Both variables are categorical, testing whether they are associated\n\n\n\n# Step 1: Build the contingency table\ntab &lt;- nhanes.samp %&gt;%\n  filter(!is.na(SmokeNow), !is.na(PhysActive)) %&gt;%\n  tabyl(PhysActive, SmokeNow)\n\n# Step 2: Check expected counts — all should be ≥ 5\nchisq.test(tab)$expected\n\n# Step 3: Run the test\nchisq.test(tab)\n\n\n\nHypotheses (in words):\n\n\\(H_0\\): There is no association between physical activity and smoking status\n\\(H_A\\): There is an association between physical activity and smoking status"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#two-proportion-z-test",
+    "href": "lessons/22_final_review/22_final_review_1.html#two-proportion-z-test",
+    "title": "Final Exam Review",
+    "section": "Two-proportion z-test",
+    "text": "Two-proportion z-test\n\n\nWhen to use: Exactly two groups, binary outcome\n\n\n\n# Compute successes and group sizes\ncounts &lt;- nhanes.samp %&gt;%\n  filter(!is.na(SmokeNow)) %&gt;%\n  group_by(Gender) %&gt;%\n  summarise(\n    success = sum(SmokeNow == \"Yes\", na.rm = TRUE),\n    n       = sum(!is.na(SmokeNow))\n  )\n\n# Two-proportion test\nprop.test(x = counts$success,\n          n = counts$n,\n          alternative = \"two.sided\")\n\n\n\nHypotheses:\n\n\\(H_0\\): \\(p_1 = p_2\\)\n\\(H_A\\): \\(p_1 \\ne p_2\\)"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#chi-squared-vs.-two-proportion-test",
+    "href": "lessons/22_final_review/22_final_review_1.html#chi-squared-vs.-two-proportion-test",
+    "title": "Final Exam Review",
+    "section": "Chi-squared vs. two-proportion test",
+    "text": "Chi-squared vs. two-proportion test\n\n\n\n\n\n\n\n\n\n\n\nChi-squared\nTwo-proportion (prop.test)\n\n\n\n\nGroups\n2 or more\nExactly 2\n\n\nOutcome\nCategorical (any # levels)\nBinary (success/failure)\n\n\nHypotheses\nIndependence vs. association\n\\(p_1 = p_2\\) vs. \\(p_1 \\neq p_2\\)\n\n\nOutput\n\\(\\chi^2\\), df, p-value\nz (or \\(\\chi^2\\)), p-value, CI for difference\n\n\n\n\n\n\n\n\nTip\n\n\nFor exactly 2 groups and a binary outcome, both tests give equivalent p-values. Prefer prop.test() when you want a confidence interval for the difference in proportions — that CI gives more information than the p-value alone."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#when-to-go-nonparametric",
+    "href": "lessons/22_final_review/22_final_review_1.html#when-to-go-nonparametric",
+    "title": "Final Exam Review",
+    "section": "When to go nonparametric",
+    "text": "When to go nonparametric\n\n\n\nThe decision is about the data, not just sample size\n\n\nUse a nonparametric test when:\n\nThe distribution is heavily skewed or has extreme outliers\nThe outcome is ordinal (pain scales, severity scores)\nSample sizes are small and normality is implausible\n\n\n\n\n\n\nHow to assess: plot the data first (histogram or boxplot); check the SD ratio across groups if comparing 3+ groups\n\n\n\n\n\nWarning\n\n\nSmall \\(n\\) alone does not automatically mean nonparametric. If the data look approximately normal, the parametric test is valid and more powerful. The criterion is whether the assumptions are plausibly met."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#three-nonparametric-tests-the-map",
+    "href": "lessons/22_final_review/22_final_review_1.html#three-nonparametric-tests-the-map",
+    "title": "Final Exam Review",
+    "section": "Three nonparametric tests: the map",
+    "text": "Three nonparametric tests: the map\n\n\n\n\n\n\n\n\n\n\nParametric test\nNonparametric alternative\nR function\n\n\n\n\nOne-sample / paired t-test\nWilcoxon signed-rank\nwilcox.test(x, mu = 0)\n\n\nTwo-sample t-test\nWilcoxon rank-sum (Mann-Whitney)\nwilcox.test(x, y)\n\n\nOne-way ANOVA\nKruskal-Wallis\nkruskal.test()\n\n\n\n\n\nHypotheses (state correctly!):\n\n\\(H_0\\): The distributions of [outcome] are identical across groups\n\\(H_A\\): At least one group has a different distribution\n\n\n\n\nImportant\n\n\nDo not state hypotheses in terms of medians being equal — this is only valid under additional assumptions. “Distributions are identical” is the correct framing."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#kruskal-wallis-pairwise-follow-up",
+    "href": "lessons/22_final_review/22_final_review_1.html#kruskal-wallis-pairwise-follow-up",
+    "title": "Final Exam Review",
+    "section": "Kruskal-Wallis + pairwise follow-up",
+    "text": "Kruskal-Wallis + pairwise follow-up\n\n# Kruskal-Wallis test\nkw_result &lt;- kruskal.test(Pulse ~ age_group, data = nhanes_age)\n\nkw_result %&gt;%\n  broom::tidy()\n\n# Pairwise Wilcoxon with Bonferroni correction (if K-W is significant)\npairwise.wilcox.test(nhanes_age$Pulse, nhanes_age$age_group,\n                     p.adjust.method = \"bonferroni\") %&gt;% \n  broom::tidy()\n\n\n\n\n\n\nTip\n\n\n\nThere is no nonparametric equivalent of Tukey HSD. Bonferroni correction is a straightforward choice — it controls the family-wise error rate across all pairwise comparisons. With only 3 pairs here, the penalty for using Bonferroni is small."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#this-section-is-25-points-the-largest-on-the-exam",
+    "href": "lessons/22_final_review/22_final_review_1.html#this-section-is-25-points-the-largest-on-the-exam",
+    "title": "Final Exam Review",
+    "section": "This section is 25 points — the largest on the exam",
+    "text": "This section is 25 points — the largest on the exam\n\n\n\n\n\nNo homework covered this material\n\n\nPart 7 is the only section that was not practiced in a homework assignment. The exam provides extra guidance (hints in code chunks). Read the questions carefully and follow the steps.\nThe material maps directly to the Lesson 21 slides — a review of those slides before the exam is time well spent.\n\n\n\n\n\nWhat Part 7 tests:\n\nScatterplot + regression line\nPearson and Spearman correlation: cor()\nFitting lm(), interpreting tidy() output\nLINE assumption checks with augment() + diagnostic plots\n\\(R^2\\) from glance()\nPrediction vs. confidence interval: predict()"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#scatterplot-and-correlation",
+    "href": "lessons/22_final_review/22_final_review_1.html#scatterplot-and-correlation",
+    "title": "Final Exam Review",
+    "section": "Scatterplot and correlation",
+    "text": "Scatterplot and correlation\nUsing prevend.samp: does cognitive function (RFFT score) decline with age?\n\n# Scatterplot with regression line\nggplot(prevend.samp, aes(x = Age, y = RFFT)) +\n  geom_point(alpha = 0.4, color = \"#0072B2\", size = 1.5) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"#D55E00\") +\n  labs(x = \"Age (years)\", y = \"RFFT score\",\n       title = \"Cognitive function vs. age (prevend.samp)\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#correlation-coefficients",
+    "href": "lessons/22_final_review/22_final_review_1.html#correlation-coefficients",
+    "title": "Final Exam Review",
+    "section": "Correlation coefficients",
+    "text": "Correlation coefficients\n\n# Pearson: strength of LINEAR association\ncor(prevend.samp$Age, prevend.samp$RFFT,\n    use = \"complete.obs\")\n\n[1] -0.5338617\n\n# Spearman: rank-based, robust to skew/outliers\ncor(prevend.samp$Age, prevend.samp$RFFT,\n    method = \"spearman\",\n    use = \"complete.obs\")\n\n[1] -0.5318226\n\n\n\n\nDescribing the relationship: direction (positive/negative), form (linear/curved), strength (weak/moderate/strong), unusual observations\n\n\n\nTip\n\n\nThe Pearson and Spearman values are usually close when the relationship is approximately linear without extreme outliers. A large gap suggests outliers or nonlinearity are influencing the Pearson \\(r\\)."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#fitting-the-regression-model",
+    "href": "lessons/22_final_review/22_final_review_1.html#fitting-the-regression-model",
+    "title": "Final Exam Review",
+    "section": "Fitting the regression model",
+    "text": "Fitting the regression model\n\n# Fit\nrfft_model &lt;- lm(RFFT ~ Age, data = prevend.samp)\n\n# Coefficients, SE, t, p, CI\ntidy(rfft_model, conf.int = TRUE)\n\n# A tibble: 2 × 7\n  term        estimate std.error statistic   p.value conf.low conf.high\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;\n1 (Intercept)   138.      5.02        27.4 1.41e-101   128.      147.  \n2 Age            -1.26    0.0895     -14.1 3.50e- 38    -1.44     -1.09\n\n\n\n\nInterpreting the slope (\\(\\hat{\\beta}_1\\)):\n\n“For every 1-year increase in age, RFFT score is expected to change, on average, by \\(\\hat{\\beta}_1\\) points (95% CI: ___ to ___).”\n\n\n\nInterpreting the intercept (\\(\\hat{\\beta}_0\\)): Often not meaningful — only interpret when \\(X = 0\\) is realistic in context."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#the-line-conditions",
+    "href": "lessons/22_final_review/22_final_review_1.html#the-line-conditions",
+    "title": "Final Exam Review",
+    "section": "The LINE conditions",
+    "text": "The LINE conditions\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — relationship is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations independent\nStudy design\n\n\nN\nNormality — residuals approximately normal\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant spread\nResidual plot\n\n\n\n\n\n\naug &lt;- augment(rfft_model)\n\n# Residual plot (checks L and E)\nggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4) +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  labs(x = \"Fitted values\", y = \"Residuals\", title = \"Residual plot\")\n\n# QQ plot (checks N)\nggplot(aug, aes(sample = .resid)) +\n  stat_qq() + stat_qq_line() +\n  labs(title = \"QQ plot of residuals\")"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#reading-the-diagnostic-plots",
+    "href": "lessons/22_final_review/22_final_review_1.html#reading-the-diagnostic-plots",
+    "title": "Final Exam Review",
+    "section": "Reading the diagnostic plots",
+    "text": "Reading the diagnostic plots\n\n\n\n\n\nResidual plot (L and E)\n\n\nGood: Points scatter randomly around 0; flat smoother; roughly equal spread\nRed flags:\n\nCurve → linearity violated (L)\nFunnel → equal variance violated (E)\n\n\n\n\n\n\n\n\n\n\nQQ plot (N)\n\n\nGood: Points track the diagonal reference line\nRed flags:\n\nS-shape → skewed residuals\nHeavy tails → points deviate at both ends\n\nNote: With large \\(n\\), the CLT makes moderate departures from normality less of a concern. L and E are more critical for inference."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#r2-and-sigma",
+    "href": "lessons/22_final_review/22_final_review_1.html#r2-and-sigma",
+    "title": "Final Exam Review",
+    "section": "\\(R^2\\) and sigma",
+    "text": "\\(R^2\\) and sigma\n\n\n\n\n\n\\(R^2\\) interpretation\n\n\n“Age explains ___% of the variability in RFFT score in this sample.”\n\\(R^2\\) ranges from 0 (model explains nothing) to 1 (perfect fit).\nFor SLR: \\(R^2 = r^2\\) (square of Pearson correlation)\n\n\n\n\n\n\n\n\n\nsigma\n\n\nsigma = residual standard deviation = typical distance of an individual observation from the fitted line, in units of \\(Y\\).\nThis captures individual-level scatter. It is much larger than std.error for the slope, and it is why prediction intervals are so much wider than CIs for mean response.\n\n\n\n\n\n\n\n# Model-level summary: R², sigma, n\nglance(rfft_model) %&gt;% select(r.squared, sigma, nobs)\n\n# A tibble: 1 × 3\n  r.squared sigma  nobs\n      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     0.285  23.2   500\n\n\n\n\n\nTip\n\n\nstd.error (from tidy()) tells you how well you estimated the slope. sigma (from glance()) tells you how much individuals vary around the line. These measure completely different things."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#inference-for-the-slope-six-steps",
+    "href": "lessons/22_final_review/22_final_review_1.html#inference-for-the-slope-six-steps",
+    "title": "Final Exam Review",
+    "section": "Inference for the slope: six steps",
+    "text": "Inference for the slope: six steps\n\n\nStep 1: \\(H_0: \\beta_1 = 0\\) (age tells us nothing about RFFT) vs. \\(H_A: \\beta_1 \\neq 0\\)\n\n\nStep 2: \\(\\alpha = 0.05\\)\n\n\nStep 3: Check LINE conditions ✓\n\n\nStep 4: \\(t = \\hat{\\beta}_1 / SE_{\\hat{\\beta}_1}\\) — read from tidy() output, statistic column\n\n\nStep 5: p-value from tidy() output, p.value column; \\(df = n - 2\\)\n\n\nStep 6: Conclusion in context:\n\n“There is strong evidence of a negative linear association between age and RFFT score (t = ___, df = ___, p = ___). For every 1-year increase in age, RFFT score is expected to decrease by ___ points (95% CI: ___ to ___).”"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#ci-for-mean-response-vs.-prediction-interval",
+    "href": "lessons/22_final_review/22_final_review_1.html#ci-for-mean-response-vs.-prediction-interval",
+    "title": "Final Exam Review",
+    "section": "CI for mean response vs. prediction interval",
+    "text": "CI for mean response vs. prediction interval\n\n\n\n\n\n\n\n\n\nQuestion\nAccounts for\n\n\n\n\nCI for mean response\nAverage RFFT for all people aged 60?\nUncertainty about where the line is\n\n\nPrediction interval\nRFFT for this specific new patient aged 60?\nUncertainty about the line + individual variation (\\(\\hat{\\sigma}\\))\n\n\n\n\n\n\nnew_data &lt;- data.frame(Age = c(45, 60, 75))\n\n# CI for mean response\npredict(rfft_model, newdata = new_data, interval = \"confidence\")\n\n# Prediction interval for a new individual\npredict(rfft_model, newdata = new_data, interval = \"prediction\")\n\n\n\n\n\n\nImportant\n\n\nPrediction intervals are always wider than CIs for mean response. More data narrows the CI (better-estimated line) but cannot eliminate individual variation — that scatter is a property of the population, not of your sample size."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#power-analysis-with-pwr.t.test",
+    "href": "lessons/22_final_review/22_final_review_1.html#power-analysis-with-pwr.t.test",
+    "title": "Final Exam Review",
+    "section": "Power analysis with pwr.t.test()",
+    "text": "Power analysis with pwr.t.test()\nCohen’s \\(d\\): effect size for comparing two means\n\\[d = \\frac{\\mu_1 - \\mu_2}{\\sigma_{\\text{pooled}}}\\]\n\n\nExample: detect a 5 mmHg difference in SBP, pooled SD = 10 → \\(d = 0.5\\)\n\n\nSolve for \\(n\\):\n\npwr.t.test(n           = NULL,\n           d           = 5 / 10,\n           sig.level   = 0.05,\n           power       = 0.80,\n           type        = \"two.sample\",\n           alternative = \"two.sided\")\n\n\n\n\nSolve for power with n = 50 per group:\n\npwr.t.test(n           = 50,\n           d           = 5 / 10,\n           sig.level   = 0.05,\n           power       = NULL,\n           type        = \"two.sample\",\n           alternative = \"two.sided\")\n\n\n\n\n\nTip\n\n\nAlways round up the required \\(n\\) — rounding down means you’re slightly underpowered."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#sample-size-and-what-it-affects",
+    "href": "lessons/22_final_review/22_final_review_1.html#sample-size-and-what-it-affects",
+    "title": "Final Exam Review",
+    "section": "Sample size and what it affects",
+    "text": "Sample size and what it affects\n\n\nWhen you increase \\(n\\):\n\n\n\n\n\n\n\n\nEffect\n\n\n\n\nANOVA F-statistic\nIncreases (more power to detect group differences)\n\n\nPost-hoc p-values\nDecrease (more power per pairwise comparison)\n\n\nWidth of CIs\nNarrower (smaller SE → tighter interval)\n\n\n\n\n\n\n\n\nPeeking at data before choosing the test\n\n\n\nRunning ANOVA, seeing which group performed best, then running a t-test comparing that group vs. the others is data-driven test selection — it inflates the Type I error rate because you used the data twice.\nThe right approach: specify your comparisons before looking at the data."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#choosing-the-right-test-the-synthesis-table",
+    "href": "lessons/22_final_review/22_final_review_1.html#choosing-the-right-test-the-synthesis-table",
+    "title": "Final Exam Review",
+    "section": "Choosing the right test: the synthesis table",
+    "text": "Choosing the right test: the synthesis table\n\n\n\n\n\n\n\n\n\n\nResearch question\nGroups\nOutcome\nTest\nKey R function\n\n\n\n\nDid the outcome change? (same subject, 2 timepoints)\n1 (differences)\nContinuous\nPaired t-test\nt.test(d, mu = 0)\n\n\nDoes mean outcome differ across 3+ groups?\n3+\nContinuous, normal\nOne-way ANOVA\naov()\n\n\nDoes a skewed outcome differ across 3+ groups?\n3+\nContinuous, skewed\nKruskal-Wallis\nkruskal.test()\n\n\nIs a categorical variable associated with a binary outcome?\n3+\nBinary\nChi-squared\nchisq.test()\n\n\nDoes a binary outcome rate differ between 2 groups?\n2\nBinary\nTwo-proportion z-test\nprop.test()\n\n\nIs there a linear association between two continuous variables?\n—\n2 continuous\nSLR / slope test\nlm() + tidy()"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#ci-and-hypothesis-test-two-sides-of-the-same-coin",
+    "href": "lessons/22_final_review/22_final_review_1.html#ci-and-hypothesis-test-two-sides-of-the-same-coin",
+    "title": "Final Exam Review",
+    "section": "CI and hypothesis test: two sides of the same coin",
+    "text": "CI and hypothesis test: two sides of the same coin\n\n\n\nA recurring exam theme\n\n\nFor a two-sided test at \\(\\alpha = 0.05\\):\n\nIf the 95% CI excludes the null value → p-value &lt; 0.05 → reject \\(H_0\\)\nIf the 95% CI includes the null value → p-value ≥ 0.05 → fail to reject \\(H_0\\)\n\n\n\n\n\n\nWhat the CI adds beyond the p-value:\n\nThe direction and magnitude of the effect (not just “significant or not”)\nA range of plausible values for the true population parameter\nClinical interpretability — a statistically significant effect may be too small to matter in practice\n\n\n\nGood examples: any test where you computed both a CI and a p-value. Ask: what does the CI tell us about the size of the effect that the p-value alone cannot?"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#common-mistakes-to-avoid",
+    "href": "lessons/22_final_review/22_final_review_1.html#common-mistakes-to-avoid",
+    "title": "Final Exam Review",
+    "section": "Common mistakes to avoid",
+    "text": "Common mistakes to avoid\n\nIgnoring paired structure — running an independent t-test on before/after data\nForgetting to check assumptions — especially ANOVA’s SD ratio and chi-squared expected counts ≥ 5\nMisframing nonparametric hypotheses — say “distributions are identical,” not “medians are equal”\nConfusing \\(\\sigma\\), \\(s\\), \\(SE\\), and sigma from glance() — know what each measures\nUsing lower.tail = TRUE/FALSE incorrectly — sketch the picture first\nNot rendering before submitting — code that works in a chunk but breaks the render is ungraded\n\n\n\n\n\n\nThe most important R check before submitting\n\n\nRemove or set eval: TRUE on any chunks you may have set to eval: FALSE while working. A chunk that doesn’t evaluate won’t produce output, and you’ll lose points."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#you-are-ready",
+    "href": "lessons/22_final_review/22_final_review_1.html#you-are-ready",
+    "title": "Final Exam Review",
+    "section": "You are ready",
+    "text": "You are ready\n\n\n\n✅ You have worked through 8 homework assignments with increasingly complex analyses\n✅ You have practiced the six-step framework across many test types\n✅ You have hands-on experience with every R function on this exam\n✅ Part 7 has hints — you are not going in cold on SLR\n\n\n\nThe exam opens at 3:00 PM today. You have until Friday at 5:00 PM.\n\n\nRead carefully, interpret in context, render frequently, and trust your preparation.\nGood luck!"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#your-turn",
+    "href": "lessons/22_final_review/22_final_review_1.html#your-turn",
+    "title": "Final Exam Review",
+    "section": "Your Turn",
+    "text": "Your Turn\nWhat would you like to go over?\n\nConcepts that feel unclear?\nR functions you want to see again?\nSpecific parts of the exam structure?\n\n\n\nThis is your time — ask anything.\n\n\n\nBMSC 620 | Final Exam Review"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-12",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-12",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (1/2)",
+    "text": "ANOVA assumptions (1/2)\nCheck before running:\n\nIndependence: one observation per subject (study design) ✓\nNormality: approximately normal within each group — note large \\(n\\) or check QQ plot\n\n\n# Create 3 age groups, then check group-level stats\nnhanes_age &lt;- nhanes.samp %&gt;%\n  mutate(age_group = cut(Age,\n                         breaks = c(0, 35, 55, 100),\n                         labels = c(\"Young\", \"Middle\", \"Older\"))) %&gt;%\n  filter(!is.na(age_group), !is.na(BPSys1))\n\n\nggplot(nhanes_age, \n       aes(x = BPSys1)) + \n  geom_histogram(color = \"white\") + \n  facet_wrap(~ age_group)"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-22",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-22",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (2/2)",
+    "text": "ANOVA assumptions (2/2)\nCheck before running:\n\nIndependence: one observation per subject (study design) ✓\nNormality: approximately normal within each group — note large \\(n\\) or check QQ plot\nEqual variance: SD ratio (max SD / min SD) should be &lt; 2\n\n\n# Create 3 age groups, then check group-level stats\nnhanes_age &lt;- nhanes.samp %&gt;%\n  mutate(age_group = cut(Age,\n                         breaks = c(0, 35, 55, 100),\n                         labels = c(\"Young\", \"Middle\", \"Older\"))) %&gt;%\n  filter(!is.na(age_group), !is.na(BPSys1))\n\nnhanes_age %&gt;%\n  group_by(age_group) %&gt;%\n  summarise(n = n(), mean = mean(BPSys1), sd = sd(BPSys1)) %&gt;%\n  mutate(sd_ratio = max(sd) / min(sd))\n\n\nggplot(nhanes_age, \n       aes(x = BPSys1)) + \n  geom_histogram(color = \"white\") + \n  facet_wrap(~ age_group)\n\n\n\n\n\nTip\n\n\nSD ratio &lt; 2 → equal variance assumption is met ✓"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-13",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-13",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (1/3)",
+    "text": "ANOVA assumptions (1/3)\n\nIndependence: one observation per subject (study design) ✓\nNormality: approximately normal within each group\nEqual variance: SD ratio (max SD / min SD) should be &lt; 2\n\n\n\n\n# Create 3 age groups, then check group-level stats\nnhanes_age &lt;- nhanes.samp %&gt;%\n  mutate(age_group = cut(Age,\n                         breaks = c(0, 35, 55, 100),\n                         labels = c(\"Young\", \"Middle\", \"Older\"))) %&gt;%\n  filter(!is.na(age_group), !is.na(BPSys1))"
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-13-normality",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-13-normality",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (1/3): normality",
+    "text": "ANOVA assumptions (1/3): normality\nCheck: distributions approximately normal within each group\n\nggplot(nhanes_age, aes(x = BPSys1)) +\n  geom_histogram(bins = 20, color = \"white\") +\n  facet_wrap(~ age_group) +\n  labs(x = \"Systolic BP (mmHg)\", y = \"Count\",\n       title = \"Distribution of systolic BP by age group\")\n\n\n\n\n\nTip\n\n\nWith reasonably large groups, moderate departures from normality are acceptable — the CLT helps. Look for severe skew or extreme outliers."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-22-equal-variance",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-22-equal-variance",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (2/2): equal variance",
+    "text": "ANOVA assumptions (2/2): equal variance\nCheck: SD ratio (max SD / min SD) should be &lt; 2\n\nnhanes_age %&gt;%\n  group_by(age_group) %&gt;%\n  summarise(n    = n(),\n            mean = mean(BPSys1),\n            sd   = sd(BPSys1)) %&gt;%\n  mutate(sd_ratio = max(sd) / min(sd))\n\n# A tibble: 3 × 5\n  age_group     n  mean    sd sd_ratio\n  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1 Young        84  110.  12.4     1.68\n2 Middle       42  120.  16.2     1.68\n3 Older        37  133.  20.8     1.68\n\n\n\n\n\nTip\n\n\nSD ratio &lt; 2 → equal variance assumption is met ✓\nIf the ratio is borderline (say, 1.8–2.5), note the concern but proceed — ANOVA is fairly robust to mild violations when group sizes are similar."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-23-normality",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-23-normality",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (2/3): normality",
+    "text": "ANOVA assumptions (2/3): normality\nCheck: distributions approximately normal within each group\n\nggplot(nhanes_age, aes(x = BPSys1)) +\n  geom_histogram(bins = 20, color = \"white\") +\n  facet_wrap(~ age_group) +\n  labs(x = \"Systolic BP (mmHg)\", y = \"Count\",\n       title = \"Distribution of systolic BP by age group\")\n\n\n\n\n\nTip\n\n\nWith reasonably large groups, moderate departures from normality are acceptable — the CLT helps. Look for severe skew or extreme outliers."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-33-equal-variance",
+    "href": "lessons/22_final_review/22_final_review_1.html#anova-assumptions-33-equal-variance",
+    "title": "Final Exam Review",
+    "section": "ANOVA assumptions (3/3): equal variance",
+    "text": "ANOVA assumptions (3/3): equal variance\nCheck: SD ratio (max SD / min SD) should be &lt; 2\n\nnhanes_age %&gt;%\n  group_by(age_group) %&gt;%\n  summarise(n    = n(),\n            mean = mean(BPSys1),\n            sd   = sd(BPSys1)) %&gt;%\n  mutate(sd_ratio = max(sd) / min(sd))\n\n# A tibble: 3 × 5\n  age_group     n  mean    sd sd_ratio\n  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1 Young        84  110.  12.4     1.68\n2 Middle       42  120.  16.2     1.68\n3 Older        37  133.  20.8     1.68\n\n\n\n\n\nTip\n\n\nSD ratio &lt; 2 → equal variance assumption is met ✓\nIf the ratio is borderline (say, 1.8–2.5), note the concern but proceed — ANOVA is fairly robust to mild violations when group sizes are similar."
+  },
+  {
+    "objectID": "lessons/22_final_review/22_final_review_1.html#power-analysis-with-pwr.t.test-1",
+    "href": "lessons/22_final_review/22_final_review_1.html#power-analysis-with-pwr.t.test-1",
+    "title": "Final Exam Review",
+    "section": "Power analysis with pwr.t.test()",
+    "text": "Power analysis with pwr.t.test()\nCohen’s \\(d\\): effect size for comparing two means\n\\[d = \\frac{\\mu_1 - \\mu_2}{\\sigma_{\\text{pooled}}}\\]\n\n\nExample: detect a 5 mmHg difference in SBP, pooled SD = 10 → \\(d = 0.5\\)\n\n\nSolve for \\(n\\):\n\npwr.t.test(n           = NULL,\n           d           = 5 / 10,\n           sig.level   = 0.05,\n           power       = 0.80,\n           type        = \"two.sample\",\n           alternative = \"two.sided\")\n\n\n\n\nSolve for power with n = 50 per group:\n\npwr.t.test(n           = 50,\n           d           = 5 / 10,\n           sig.level   = 0.05,\n           power       = NULL,\n           type        = \"two.sample\",\n           alternative = \"two.sided\")\n\n\n\n\n\nTip\n\n\nAlways round up the required \\(n\\) — rounding down means you’re slightly underpowered."
   }
 ]
