@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Final Exam Review and Final Exam">
 
-<title>Muddy Points – BMSC 620: Introduction to Biostatistics</title>
+<title>Week 11 – BMSC 620: Introduction to Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,37 +69,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -108,7 +80,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-sm " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">BMSC 620: Introduction to Biostatistics</span>
     </a>
   </div>
@@ -119,23 +91,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../schedule.html"> 
+    <a class="nav-link" href="../schedule.html"> 
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../homework.html"> 
+    <a class="nav-link" href="../homework.html"> 
 <span class="menu-text">Homework</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../exams.html"> 
+    <a class="nav-link" href="../exams.html"> 
 <span class="menu-text">Exams</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../resources.html"> 
+    <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -149,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Muddy Points</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Week 11</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -171,25 +143,25 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../homework.html" class="sidebar-item-text sidebar-link">
+  <a href="../homework.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Homework</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exams.html" class="sidebar-item-text sidebar-link">
+  <a href="../exams.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -204,19 +176,19 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../syllabus.html" class="sidebar-item-text sidebar-link">
+  <a href="../syllabus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../instructors.html" class="sidebar-item-text sidebar-link">
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -233,61 +205,61 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_01.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_02.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_03.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_04.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_05.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_06.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_07.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_07.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_08.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_08.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_09.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_09.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 9</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week_10.html" class="sidebar-item-text sidebar-link">
+  <a href="../weeks/week_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 10</span></a>
   </div>
 </li>
@@ -303,13 +275,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thanks-for-the-feedback" id="toc-thanks-for-the-feedback" class="nav-link active" data-scroll-target="#thanks-for-the-feedback">Thanks for the feedback</a></li>
-  <li><a href="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" id="toc-mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="nav-link" data-scroll-target="#mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</a></li>
-  <li><a href="#markdown-vs.-comments-in-.qmd-files" id="toc-markdown-vs.-comments-in-.qmd-files" class="nav-link" data-scroll-target="#markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</a></li>
-  <li><a href="#source-vs.-visual-editor" id="toc-source-vs.-visual-editor" class="nav-link" data-scroll-target="#source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</a></li>
-  <li><a href="#is-.qmd-something-people-actually-use" id="toc-is-.qmd-something-people-actually-use" class="nav-link" data-scroll-target="#is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</a></li>
-  <li><a href="#pace-and-in-class-practice" id="toc-pace-and-in-class-practice" class="nav-link" data-scroll-target="#pace-and-in-class-practice">5. Pace and in-class practice</a></li>
-  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final note</a></li>
+  <li><a href="#announcements" id="toc-announcements" class="nav-link active" data-scroll-target="#announcements">Announcements</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#readings-before-class" id="toc-readings-before-class" class="nav-link" data-scroll-target="#readings-before-class">Readings (before class)</a></li>
+  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a>
+  <ul class="collapse">
+  <li><a href="#monday-final-exam-review" id="toc-monday-final-exam-review" class="nav-link" data-scroll-target="#monday-final-exam-review">Monday — Final Exam Review</a></li>
+  <li><a href="#wednesday-optional-qa-session" id="toc-wednesday-optional-qa-session" class="nav-link" data-scroll-target="#wednesday-optional-qa-session">Wednesday — Optional Q&amp;A Session</a></li>
+  </ul></li>
+  <li><a href="#final-exam" id="toc-final-exam" class="nav-link" data-scroll-target="#final-exam">Final Exam</a>
+  <ul class="collapse">
+  <li><a href="#submission-requirements" id="toc-submission-requirements" class="nav-link" data-scroll-target="#submission-requirements">Submission Requirements</a></li>
+  <li><a href="#important-reminders" id="toc-important-reminders" class="nav-link" data-scroll-target="#important-reminders">Important Reminders</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul></li>
+  <li><a href="#post-class-check-in-attendance" id="toc-post-class-check-in-attendance" class="nav-link" data-scroll-target="#post-class-check-in-attendance">Post-class check-in (attendance)</a></li>
   </ul>
 </nav>
     </div>
@@ -318,22 +298,20 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Muddy Points</h1>
-<p class="subtitle lead">Getting Started with Data, R, and Quarto</p>
+<h1 class="title">Week 11</h1>
 </div>
 
+<div>
+  <div class="description">
+    Final Exam Review and Final Exam
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
     
   
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 14, 2026</p>
-    </div>
-  </div>
     
   </div>
   
@@ -342,66 +320,122 @@ window.Quarto = {
 </header>
 
 
-<section id="thanks-for-the-feedback" class="level2">
-<h2 class="anchored" data-anchor-id="thanks-for-the-feedback">Thanks for the feedback</h2>
-<p>Thank you to everyone who submitted post-class feedback. Overall, the material from our first week was reported as quite clear, which is great to hear. Below I address the main points that came up as muddy or unclear.</p>
-<hr>
-</section>
-<section id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma" class="level2">
-<h2 class="anchored" data-anchor-id="mean-vs.-standard-deviation-notation-barx-s-vs.-mu-sigma">1. Mean vs.&nbsp;standard deviation notation (<span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(s\)</span> vs.&nbsp;<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span>)</h2>
-<p>One question that came up was why we sometimes use symbols like <strong>μ</strong> and <strong>σ</strong> instead of <strong>x̄</strong> (x-bar) and <strong>s</strong>, particularly when drawing or describing a normal curve.</p>
-<p>A helpful rule of thumb:</p>
+<!--
+Think of the weekly page as answering just five student questions:
+    1.  What are we doing this week?
+    2.  What do I need to read/watch before class?
+    3.  What materials should I have open during class?
+    4.  What is due (and when)?
+    5.  Where do I go if I want to review later?
+    -->
+<section id="announcements" class="level2">
+<h2 class="anchored" data-anchor-id="announcements">Announcements</h2>
 <ul>
-<li><strong>x̄ (x-bar)</strong> and <strong>s</strong> are <em>sample statistics</em> — they summarize data you actually observed.</li>
-<li><strong>μ (mu)</strong> and <strong>σ (sigma)</strong> are <em>population parameters</em> — they describe an underlying population or theoretical distribution.</li>
+<li><strong>The final exam opens Monday, March 16 at 3:00 PM and closes Friday, March 20 at 5:00 PM</strong></li>
+<li>No new homework this week</li>
 </ul>
-<p>When we draw a normal curve, we often label it with <strong>μ</strong> and <strong>σ</strong> even if, in practice, we estimate those values using <strong>x̄</strong> and <strong>s</strong> from data. This is just a convention and something we will revisit once we start formal inference.</p>
-<p>Relatedly, one person mentioned confusion about the “squared SD”:</p>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This is the final week of the course. Monday is dedicated to exam review — we will go through key concepts and R workflows from across the semester, with emphasis on Lessons 10–19. Bring your questions.</p>
+<p>Wednesday’s session is optional. There is no new material; it is an open Q&amp;A for anyone who wants to talk through the exam or revisit anything before the deadline. Attendance is not required and will not affect your grade.</p>
+<p>By the end of the week, you should feel confident in your ability to:</p>
 <ul>
-<li>The <strong>variance</strong> is the standard deviation squared.</li>
-<li>Variance has squared units, which is why we usually <em>report</em> the standard deviation instead.</li>
+<li>select the appropriate statistical test for a given research question and data structure,</li>
+<li>apply the six-step hypothesis testing framework across all test types covered this semester,</li>
+<li>check and interpret assumptions for parametric and nonparametric tests,</li>
+<li>fit and interpret a simple linear regression model in R,</li>
+<li>distinguish between confidence intervals for mean response and prediction intervals, and</li>
+<li>communicate statistical results clearly in context.</li>
 </ul>
-<hr>
 </section>
-<section id="markdown-vs.-comments-in-.qmd-files" class="level2">
-<h2 class="anchored" data-anchor-id="markdown-vs.-comments-in-.qmd-files">2. Markdown vs.&nbsp;comments in <code>.qmd</code> files</h2>
-<p>A few questions came up about when to use different symbols in Quarto files:</p>
+<section id="readings-before-class" class="level2">
+<h2 class="anchored" data-anchor-id="readings-before-class">Readings (before class)</h2>
 <ul>
-<li><code>#</code> inside an R code chunk is a <strong>code comment</strong> (for humans, not output).</li>
-<li><code>&lt;!-- --&gt;</code> is an <strong>HTML comment</strong> in the markdown text (also not shown in output).</li>
-<li><code>&gt;</code> creates a <strong>block quote</strong>, which <em>does</em> appear in the rendered document.</li>
+<li>No required reading for Monday</li>
 </ul>
-<p>In short: - Use comments (<code>#</code> or <code>&lt;!-- --&gt;</code>) for notes to yourself or graders. - Use block quotes (<code>&gt;</code>) when you want text to appear as part of the document.</p>
-<hr>
 </section>
-<section id="source-vs.-visual-editor" class="level2">
-<h2 class="anchored" data-anchor-id="source-vs.-visual-editor">3. Source vs.&nbsp;Visual editor</h2>
-<p>Some people weren’t sure why we would use the <strong>Source</strong> editor at this point.</p>
-<p>For now, think of this as:</p>
+<section id="materials" class="level2">
+<h2 class="anchored" data-anchor-id="materials">Materials</h2>
+<section id="monday-final-exam-review" class="level3">
+<h3 class="anchored" data-anchor-id="monday-final-exam-review">Monday — Final Exam Review</h3>
 <ul>
-<li><strong>Visual editor</strong>: helpful for getting started, especially if you’re new.</li>
-<li><strong>Source editor</strong>: shows the underlying text and structure of the document.</li>
+<li><strong>Topics</strong>
+<ul>
+<li>Exam logistics and structure</li>
+<li>First-half foundations: study design, Bayes’ theorem, normal distributions and CLT</li>
+<li>Paired t-test</li>
+<li>One-way ANOVA and post-hoc testing</li>
+<li>Categorical data analysis: chi-squared and two-proportion tests</li>
+<li>Nonparametric tests: Wilcoxon and Kruskal-Wallis</li>
+<li>Correlation and simple linear regression</li>
+<li>Power, sample size, and choosing the right test</li>
+</ul></li>
+<li><strong>Slides</strong>
+<ul>
+<li>Final Exam Review (<a href="../lessons/22_final_review/22_final_review.html">HTML</a> | <a href="../lessons/22_final_review/22_final_review.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+</ul></li>
+<li><strong>Recording</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
+<li><strong>Muddy points</strong>
+<ul>
+<li>Coming soon.</li>
+</ul></li>
 </ul>
-<p>They are just two ways of editing the <em>same</em> file. Over time, you may find that the Source editor gives you more control, but you are free to use whichever view feels more comfortable right now.</p>
 <hr>
 </section>
-<section id="is-.qmd-something-people-actually-use" class="level2">
-<h2 class="anchored" data-anchor-id="is-.qmd-something-people-actually-use">4. Is <code>.qmd</code> something people actually use?</h2>
-<p>Yes — documents that combine code, text, and output are very common in statistics and data analysis.</p>
-<p>Some people use: - Quarto (<code>.qmd</code>) - R Markdown (<code>.Rmd</code>) - Jupyter notebooks - Similar tools in Python or other languages</p>
-<p>We are using Quarto in this course because it supports reproducible analysis and clear communication in one place. The skills you learn here will transfer easily to other tools.</p>
+<section id="wednesday-optional-qa-session" class="level3">
+<h3 class="anchored" data-anchor-id="wednesday-optional-qa-session">Wednesday — Optional Q&amp;A Session</h3>
+<ul>
+<li>Attendance is <strong>optional</strong> — no new material will be covered</li>
+<li>Come with questions about the exam, specific concepts, or R code</li>
+<li><strong>Recording</strong>
+<ul>
+<li>Recording will be posted if the session is held</li>
+</ul></li>
+</ul>
 <hr>
 </section>
-<section id="pace-and-in-class-practice" class="level2">
-<h2 class="anchored" data-anchor-id="pace-and-in-class-practice">5. Pace and in-class practice</h2>
-<p>A small number of people mentioned that the R portion felt a little fast, especially for those completely new to R.</p>
-<p>That is expected early on. The goal of in-class practice is <strong>exposure</strong>, not mastery in the moment. It’s okay if you don’t finish everything during class — we’ll continue to reinforce these ideas through homework and repeated use.</p>
-<hr>
 </section>
-<section id="final-note" class="level2">
-<h2 class="anchored" data-anchor-id="final-note">Final note</h2>
-<p>If something still feels muddy after this clarification, that’s okay. Many ideas in statistics (and in R) only become clear after you see them used multiple times.</p>
-<p>Please keep using the post-class check-ins. They are genuinely helpful for guiding what we revisit or slow down on.</p>
+<section id="final-exam" class="level2">
+<h2 class="anchored" data-anchor-id="final-exam">Final Exam</h2>
+<p><strong>Available:</strong> Wednesday, March 16 at 3:00 PM through Friday, March 20 at 5:00 PM</p>
+<p><strong>Access:</strong> <a href="https://sakai.ohsu.edu/">Sakai</a></p>
+<p><strong>Time to budget:</strong> 4–6 hours (you do not need to complete it in one sitting)</p>
+<section id="submission-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="submission-requirements">Submission Requirements</h3>
+<p>Upload <strong>both</strong> files to Sakai:</p>
+<ol type="1">
+<li>Your <code>.qmd</code> source file</li>
+<li>The rendered <code>.html</code> file</li>
+</ol>
+<p><strong>File naming:</strong> <code>Lastname_FirstInitial_Final</code> (e.g., <code>Smith_J_Final.qmd</code> and <code>Smith_J_Final.html</code>)</p>
+</section>
+<section id="important-reminders" class="level3">
+<h3 class="anchored" data-anchor-id="important-reminders">Important Reminders</h3>
+<ul>
+<li><strong>Open book/notes:</strong> You may use course materials, R documentation, and your notes</li>
+<li><strong>No collaboration:</strong> Work independently — no help from other students, AI assistants, or online forums</li>
+<li><strong>Check before submitting:</strong> Make sure your document renders to HTML without errors</li>
+</ul>
+</section>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<ul>
+<li>Final Exam Review (<a href="../lessons/22_final_review/22_final_review.html">HTML</a> | <a href="../lessons/22_final_review/22_final_review.pdf">PDF</a> | <a href="https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l">OneDrive</a>)</li>
+<li>See <a href="schedule.qmd">Schedule</a> for all lecture materials and homework</li>
+</ul>
+</section>
+</section>
+<section id="post-class-check-in-attendance" class="level2">
+<h2 class="anchored" data-anchor-id="post-class-check-in-attendance">Post-class check-in (attendance)</h2>
+<ul>
+<li>Please complete the post-class check-in after Monday’s class meeting.</li>
+<li>Wednesday attendance is optional and no check-in is required.</li>
+<li>Link: <a href="https://forms.gle/AMX1S1vCGEEfmwLY6">Post-class check-in</a></li>
+</ul>
 
 
 </section>
@@ -832,5 +866,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
