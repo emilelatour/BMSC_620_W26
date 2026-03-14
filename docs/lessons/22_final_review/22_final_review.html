@@ -459,6 +459,10 @@ Emile Latour
 </section>
 <section id="whats-covered" class="slide level2">
 <h2>What’s Covered</h2>
+<p><br>
+</p>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Part 1:</strong> Foundations — first half (15 pts)</p>
@@ -473,17 +477,23 @@ Emile Latour
 </div></div>
 <p><br>
 </p>
-<p><strong>Key dataset:</strong> <code>diabetes_trial.csv</code> — simulated RCT, 180 patients, 3 treatment arms (Metformin, Lifestyle, Combined), 6-month follow-up</p>
+<p><strong>Key dataset:</strong> <code>diabetes_trial.csv</code></p>
+<ul>
+<li>Simulated RCT, 180 patients, 3 treatment arms (Metformin, Lifestyle, Combined), 6-month follow-up</li>
+<li>Read the variable descriptions carefully before starting</li>
+</ul>
 </section>
 <section id="general-tips" class="slide level2">
 <h2>General Tips</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Before you start:</strong></p>
 <ul>
 <li>Set up your workspace: load packages, read in data</li>
-<li>Make sure code chunks evaluate (<code>eval: TRUE</code> or remove <code>eval: FALSE</code>)</li>
-<li>Check that <code>here("data", "diabetes_trial.csv")</code> finds your file</li>
+<li>Make sure code chunks evaluate</li>
+<li>Check that <code>here("data", "your_file.csv")</code> finds your file</li>
 </ul>
 <p><br>
 </p>
@@ -492,27 +502,23 @@ Emile Latour
 <li>Interpret everything in complete sentences — reference the numbers</li>
 <li>Use all 6 steps for hypothesis tests</li>
 <li>Use comments in your R code to show your thinking</li>
-<li>Render frequently — don’t wait until the end</li>
+<li><strong>Save often</strong></li>
 </ul>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
 <p><strong>Before submitting:</strong></p>
 <ul>
-<li>Render one final time — confirm no red errors</li>
+<li>Render and confirm no errors</li>
 <li>Verify both <code>.qmd</code> and <code>.html</code> are submitted</li>
 <li>Check file naming format</li>
 </ul>
 <p><br>
 </p>
-<div class="callout callout-warning no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>The #1 mistake</strong></p>
-</div>
-<div class="callout-content">
-<p>Running code that <em>works</em> but never rendering the document. A file that won’t knit cannot be graded. Render early and often.</p>
-</div>
-</div>
-</div>
+<!-- ::: {.callout-warning icon="false"} -->
+<!-- ### The #1 mistake -->
+<!-- Running code that *works* but never rendering the document. A file that won't knit cannot be graded. Render early and often. -->
+<!-- ::: -->
 </div></div>
 </section></section>
 <section>
@@ -522,9 +528,13 @@ Emile Latour
 </section>
 <section id="what-from-the-first-half-is-on-the-exam" class="slide level2">
 <h2>What from the first half is on the exam?</h2>
+<p><br>
+</p>
 <p>Part 1 (15 points) tests three targeted areas from Lessons 1–9:</p>
 <p><br>
 </p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><strong>1.1 — Study design (5 pts)</strong></p>
 <ul>
 <li>Experiment vs.&nbsp;observational study</li>
@@ -536,11 +546,13 @@ Emile Latour
 <li>Given sensitivity, specificity, prevalence → calculate PPV</li>
 <li>Interpret PPV in context</li>
 </ul>
+</div><div class="column" style="width:50%;">
 <p><strong>1.3 — Normal distributions and CLT (5 pts)</strong></p>
 <ul>
 <li><code>pnorm()</code> for an individual value</li>
-<li><code>pnorm()</code> for a sample mean (using SE = σ/√n)</li>
+<li><code>pnorm()</code> for a sample mean (using <span class="math inline">\(SE = \frac{\sigma}{\sqrt{n}}\)</span>)</li>
 </ul>
+</div></div>
 <p><br>
 </p>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
@@ -556,6 +568,8 @@ Emile Latour
 </section>
 <section id="study-design-the-essentials" class="slide level2">
 <h2>Study design: the essentials</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Experiment:</strong></p>
@@ -583,7 +597,7 @@ Emile Latour
 <li>Random assignment was used</li>
 <li>Other explanations have been ruled out</li>
 </ol>
-<p>The diabetes trial: <strong>experiment</strong> (patients randomized to 3 arms) → causation is potentially claimable ✓</p>
+<p><strong>Key question:</strong> Was treatment <em>assigned</em> by the researchers, or did subjects choose/arrive with it?</p>
 </div>
 </div>
 </div>
@@ -595,17 +609,19 @@ Emile Latour
 <p><span class="math display">\[PPV = P(\text{Disease} \mid \text{Test}+) = \frac{\text{sensitivity} \times \text{prevalence}}{\text{sensitivity} \times \text{prevalence} + (1 - \text{specificity}) \times (1 - \text{prevalence})}\]</span></p>
 <p><br>
 </p>
+<p><strong>Worked example:</strong> A TB screening test has sensitivity = 0.79, specificity = 0.87, applied in a population with 6% prevalence.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>sensitivity <span class="ot">&lt;-</span> <span class="fl">0.82</span></span>
-<span id="cb1-2"><a></a>specificity <span class="ot">&lt;-</span> <span class="fl">0.90</span></span>
-<span id="cb1-3"><a></a>prevalence  <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>sensitivity <span class="ot">&lt;-</span> <span class="fl">0.79</span></span>
+<span id="cb1-2"><a></a>specificity <span class="ot">&lt;-</span> <span class="fl">0.87</span></span>
+<span id="cb1-3"><a></a>prevalence  <span class="ot">&lt;-</span> <span class="fl">0.06</span></span>
 <span id="cb1-4"><a></a></span>
 <span id="cb1-5"><a></a>ppv <span class="ot">&lt;-</span> (sensitivity <span class="sc">*</span> prevalence) <span class="sc">/</span></span>
-<span id="cb1-6"><a></a>       (sensitivity <span class="sc">*</span> prevalence <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> specificity) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prevalence))</span>
+<span id="cb1-6"><a></a>  (sensitivity <span class="sc">*</span> prevalence <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">-</span> specificity) <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prevalence))</span>
 <span id="cb1-7"><a></a>ppv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2794811</code></pre>
 </div>
-<p><br>
-</p>
+</div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -620,26 +636,42 @@ Emile Latour
 </section>
 <section id="normal-distributions-and-clt-two-scenarios" class="slide level2">
 <h2>Normal distributions and CLT: two scenarios</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Individual observation:</strong> <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># P(X &gt; 110) if X ~ N(95, 12)</span></span>
-<span id="cb2-2"><a></a><span class="fu">pnorm</span>(<span class="dv">110</span>, <span class="at">mean =</span> <span class="dv">95</span>, <span class="at">sd =</span> <span class="dv">12</span>,</span>
-<span id="cb2-3"><a></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># LDL cholesterol: mu = 130, sd = 35</span></span>
+<span id="cb3-2"><a></a><span class="co"># P(LDL &gt; 160) — "borderline high"</span></span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="fu">pnorm</span>(<span class="dv">160</span>, <span class="at">mean =</span> <span class="dv">130</span>, <span class="at">sd =</span> <span class="dv">35</span>,</span>
+<span id="cb3-5"><a></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.195683</code></pre>
 </div>
+</div>
+<p><br>
+</p>
 <p>The SD here is <span class="math inline">\(\sigma\)</span> — variability of <strong>individuals</strong></p>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
 <p><strong>Sample mean:</strong> <span class="math inline">\(\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># P(Xbar &gt; 100) for n=36, mu=95, sigma=12</span></span>
-<span id="cb3-2"><a></a>se <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">36</span>)</span>
-<span id="cb3-3"><a></a><span class="fu">pnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">95</span>, <span class="at">sd =</span> se,</span>
-<span id="cb3-4"><a></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># for n = 25, same population</span></span>
+<span id="cb5-2"><a></a><span class="co"># P(Xbar &gt; 140) </span></span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>se <span class="ot">&lt;-</span> <span class="dv">35</span> <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">25</span>)</span>
+<span id="cb5-5"><a></a><span class="fu">pnorm</span>(<span class="dv">140</span>, <span class="at">mean =</span> <span class="dv">130</span>, <span class="at">sd =</span> se,</span>
+<span id="cb5-6"><a></a>      <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07656373</code></pre>
 </div>
-<p>The SD here is <span class="math inline">\(SE = \sigma/\sqrt{n}\)</span> — variability of <strong>sample means</strong></p>
+</div>
+<p><br>
+</p>
+<p>The variability here is measure by <span class="math inline">\(SE = \sigma/\sqrt{n}\)</span> — variability of <strong>sample means</strong></p>
 </div></div>
 <p><br>
 </p>
@@ -663,45 +695,49 @@ Emile Latour
 <section id="descriptive-statistics-by-group" class="slide level2">
 <h2>Descriptive statistics by group</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># Overall summary</span></span>
-<span id="cb4-2"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb4-4"><a></a>    <span class="at">n    =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-5"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(hba1c_baseline, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb4-6"><a></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(hba1c_baseline, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb4-7"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(hba1c_baseline, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-8"><a></a>  )</span>
-<span id="cb4-9"><a></a></span>
-<span id="cb4-10"><a></a><span class="co"># By group</span></span>
-<span id="cb4-11"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb4-12"><a></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb4-13"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb4-14"><a></a>    <span class="at">n    =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-15"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(hba1c_change, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb4-16"><a></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(hba1c_change, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-17"><a></a>  )</span>
-<span id="cb4-18"><a></a></span>
-<span id="cb4-19"><a></a><span class="co"># Or with rstatix:</span></span>
-<span id="cb4-20"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb4-21"><a></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb4-22"><a></a>  <span class="fu">get_summary_stats</span>(hba1c_change, <span class="at">type =</span> <span class="st">"mean_sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Overall summary of a continuous variable</span></span>
+<span id="cb7-2"><a></a>nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-4"><a></a>    <span class="at">n      =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(Pulse)),</span>
+<span id="cb7-5"><a></a>    <span class="at">mean   =</span> <span class="fu">mean</span>(Pulse, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a></a>    <span class="at">sd     =</span> <span class="fu">sd</span>(Pulse, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-7"><a></a>    <span class="at">median =</span> <span class="fu">median</span>(Pulse, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-8"><a></a>  )</span>
+<span id="cb7-9"><a></a></span>
+<span id="cb7-10"><a></a><span class="co"># By group</span></span>
+<span id="cb7-11"><a></a>nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-14"><a></a>    <span class="at">n    =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(Pulse)),</span>
+<span id="cb7-15"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(Pulse, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-16"><a></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(Pulse, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-17"><a></a>  )</span>
+<span id="cb7-18"><a></a></span>
+<span id="cb7-19"><a></a><span class="co"># Or with rstatix</span></span>
+<span id="cb7-20"><a></a>nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb7-21"><a></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a></a>  <span class="fu">get_summary_stats</span>(Pulse, <span class="at">type =</span> <span class="st">"mean_sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualization-histograms-and-boxplots" class="slide level2">
 <h2>Visualization: histograms and boxplots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Histogram — check shape, skewness, outliers</span></span>
-<span id="cb5-2"><a></a><span class="fu">ggplot</span>(diabetes, <span class="fu">aes</span>(<span class="at">x =</span> triglycerides)) <span class="sc">+</span></span>
-<span id="cb5-3"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Triglycerides (mg/dL)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb5-5"><a></a>       <span class="at">title =</span> <span class="st">"Distribution of triglycerides"</span>)</span>
-<span id="cb5-6"><a></a></span>
-<span id="cb5-7"><a></a><span class="co"># Boxplots by group with jitter</span></span>
-<span id="cb5-8"><a></a><span class="fu">ggplot</span>(diabetes, <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> hba1c_6mo, <span class="at">fill =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb5-9"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb5-10"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb5-11"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Treatment"</span>, <span class="at">y =</span> <span class="st">"HbA1c at 6 months (%)"</span>,</span>
-<span id="cb5-12"><a></a>       <span class="at">title =</span> <span class="st">"HbA1c at 6 months by treatment group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Histogram — check shape, skewness, outliers</span></span>
+<span id="cb8-2"><a></a><span class="fu">ggplot</span>(nhanes.samp, </span>
+<span id="cb8-3"><a></a>       <span class="fu">aes</span>(<span class="at">x =</span> BPSys1)) <span class="sc">+</span></span>
+<span id="cb8-4"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, </span>
+<span id="cb8-5"><a></a>                 <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Systolic BP (mmHg)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb8-7"><a></a>       <span class="at">title =</span> <span class="st">"Distribution of systolic blood pressure"</span>)</span>
+<span id="cb8-8"><a></a></span>
+<span id="cb8-9"><a></a><span class="co"># Boxplots by group with individual points</span></span>
+<span id="cb8-10"><a></a><span class="fu">ggplot</span>(nhanes.samp, </span>
+<span id="cb8-11"><a></a>       <span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> Pulse, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb8-12"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, </span>
+<span id="cb8-13"><a></a>               <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Gender"</span>, <span class="at">y =</span> <span class="st">"Pulse (bpm)"</span>,</span>
+<span id="cb8-16"><a></a>       <span class="at">title =</span> <span class="st">"Pulse rate by gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -719,17 +755,17 @@ Emile Latour
 <section id="frequency-tables-with-tabyl" class="slide level2">
 <h2>Frequency tables with <code>tabyl()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># One-way table</span></span>
-<span id="cb6-2"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a></a>  <span class="fu">tabyl</span>(achieved_target)</span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a><span class="co"># Two-way table with row percentages</span></span>
-<span id="cb6-6"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a></a>  <span class="fu">tabyl</span>(treatment, achieved_target) <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a></a>  <span class="fu">adorn_totals</span>(<span class="at">where =</span> <span class="st">"row"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-9"><a></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-10"><a></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-11"><a></a>  <span class="fu">adorn_ns</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># One-way table</span></span>
+<span id="cb9-2"><a></a>nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a></a>  <span class="fu">tabyl</span>(SmokeNow)</span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a><span class="co"># Two-way table with row percentages</span></span>
+<span id="cb9-6"><a></a>nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a></a>  <span class="fu">tabyl</span>(PhysActive, SmokeNow) <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">adorn_totals</span>(<span class="at">where =</span> <span class="st">"row"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a></a>  <span class="fu">adorn_percentages</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-11"><a></a>  <span class="fu">adorn_ns</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -739,7 +775,7 @@ Emile Latour
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>The exam asks for <strong>row percentages</strong> — what % of each treatment group achieved the target. <code>adorn_percentages("row")</code> gives you that. Use <code>adorn_ns()</code> to keep the raw counts alongside.</p>
+<p><code>adorn_percentages("row")</code> gives <strong>row percentages</strong> — the proportion <em>within</em> each row group. <code>adorn_ns()</code> keeps the raw counts alongside so both <span class="math inline">\(n\)</span> and % are visible.</p>
 </div>
 </div>
 </div>
@@ -751,6 +787,8 @@ Emile Latour
 </section>
 <section id="when-is-a-paired-design-appropriate" class="slide level2">
 <h2>When is a paired design appropriate?</h2>
+<p><br>
+</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <p><strong>Paired (dependent) design:</strong></p>
@@ -759,7 +797,11 @@ Emile Latour
 <li>Matched pairs (sibling controls, eye studies)</li>
 <li>The pairing controls for between-subject variability</li>
 </ul>
-<p><strong>In the exam:</strong> HbA1c measured at baseline and at 6 months for <strong>the same patient</strong> → naturally paired</p>
+<p><strong>Recognize it by:</strong></p>
+<ul>
+<li>the same ID appears in both measurements</li>
+<li>there is a natural link between observations</li>
+</ul>
 </div><div class="column" style="width:4%;">
 
 </div><div class="column" style="width:48%;">
@@ -769,8 +811,11 @@ Emile Latour
 <p><strong>Why pairing matters</strong></p>
 </div>
 <div class="callout-content">
-<p>If you ignore the pairing and treat the two measurements as independent groups, you <strong>throw away information</strong> about within-subject change. The paired test uses differences <span class="math inline">\(d_i = Y_{i,\text{after}} - Y_{i,\text{before}}\)</span> and is equivalent to a one-sample t-test on those differences.</p>
-<p>Ignoring pairing → larger SE → less power → more likely to miss a real effect.</p>
+<ul>
+<li>If you ignore the pairing and treat the two measurements as independent groups, you <strong>throw away information</strong> about within-subject change.</li>
+<li>The paired test uses differences <span class="math inline">\(d_i = Y_{i,\text{post}} - Y_{i,\text{pre}}\)</span> and is equivalent to a one-sample t-test on those differences.</li>
+<li>Ignoring pairing → larger SE → less power → more likely to miss a real effect.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -778,20 +823,24 @@ Emile Latour
 </section>
 <section id="paired-t-test-the-workflow" class="slide level2">
 <h2>Paired t-test: the workflow</h2>
+<p><br>
+</p>
 <p><strong>Step 1: Create the difference variable</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Positive values = improvement (baseline &gt; 6mo)</span></span>
-<span id="cb7-2"><a></a>diabetes <span class="ot">&lt;-</span> diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a></a>  <span class="fu">mutate</span>(<span class="at">hba1c_change =</span> hba1c_baseline <span class="sc">-</span> hba1c_6mo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Example: SBP before and after a 12-week exercise intervention</span></span>
+<span id="cb10-2"><a></a>bp_data <span class="ot">&lt;-</span> bp_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">mutate</span>(<span class="at">sbp_change =</span> sbp_pre <span class="sc">-</span> sbp_post)  <span class="co"># positive = decrease in BP</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br>
+</p>
 <p><strong>Step 2: Run the test</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Option A: one-sample t-test on differences</span></span>
-<span id="cb8-2"><a></a><span class="fu">t.test</span>(diabetes<span class="sc">$</span>hba1c_change, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb8-3"><a></a></span>
-<span id="cb8-4"><a></a><span class="co"># Option B: paired t-test directly</span></span>
-<span id="cb8-5"><a></a><span class="fu">t.test</span>(diabetes<span class="sc">$</span>hba1c_baseline, diabetes<span class="sc">$</span>hba1c_6mo,</span>
-<span id="cb8-6"><a></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Option A: one-sample t-test on differences</span></span>
+<span id="cb11-2"><a></a><span class="fu">t.test</span>(bp_data<span class="sc">$</span>sbp_change, <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a><span class="co"># Option B: paired t-test directly</span></span>
+<span id="cb11-5"><a></a><span class="fu">t.test</span>(bp_data<span class="sc">$</span>sbp_pre, bp_data<span class="sc">$</span>sbp_post,</span>
+<span id="cb11-6"><a></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -801,25 +850,27 @@ Emile Latour
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Both give identical results. Option A is clearer for applying the six steps — you are testing whether the mean difference equals zero.</p>
+<p>Both give identical results. Option A is often clearer for applying the six steps — you are explicitly testing whether the mean difference equals zero.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="paired-t-test-the-six-steps" class="slide level2">
 <h2>Paired t-test: the six steps</h2>
-<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \mu_d = 0\)</span> (no mean change) vs.&nbsp;<span class="math inline">\(H_A: \mu_d \neq 0\)</span> (or <span class="math inline">\(&gt; 0\)</span> if directional)</p>
+<p><br>
+</p>
+<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \mu_d = 0\)</span> (no mean change) vs.&nbsp;<span class="math inline">\(H_A: \mu_d &gt; 0\)</span> (BP decreased, if directional)</p>
 <p><strong>Step 2:</strong> <span class="math inline">\(\alpha = 0.05\)</span></p>
 <p><strong>Step 3: Assumptions</strong></p>
 <ul>
-<li>Independence: one measure per patient ✓</li>
-<li>Normality of differences: <span class="math inline">\(n = 180\)</span> is large → CLT applies ✓</li>
+<li>Independence: one pair per subject ✓ (study design)</li>
+<li>Normality of differences: large <span class="math inline">\(n\)</span> → CLT; small <span class="math inline">\(n\)</span> → check histogram or QQ plot of differences</li>
 </ul>
 <p><strong>Step 4:</strong> <span class="math inline">\(t = \dfrac{\bar{d} - 0}{s_d / \sqrt{n}}\)</span> — reported as <code>t</code> in <code>t.test()</code> output</p>
-<p><strong>Step 5:</strong> p-value from <code>t.test()</code> output, <span class="math inline">\(df = n - 1 = 179\)</span></p>
-<p><strong>Step 6:</strong> If p &lt; 0.05 → reject <span class="math inline">\(H_0\)</span>. Report in context:</p>
+<p><strong>Step 5:</strong> p-value from <code>t.test()</code> output; <span class="math inline">\(df = n - 1\)</span></p>
+<p><strong>Step 6:</strong> Reject if p &lt; 0.05. Report in context:</p>
 <blockquote>
-<p>“There was a statistically significant mean decrease in HbA1c from baseline to 6 months (t = <strong><em>, df = 179, p &lt; 0.001). The mean decrease was </em></strong> percentage points (95% CI: ___ to ___).”</p>
+<p>“There was a statistically significant decrease in SBP from baseline to 12 weeks (t = ___, df = ___, p = ___). On average, SBP decreased by ___ mmHg (95% CI: ___ to ___).”</p>
 </blockquote>
 </section></section>
 <section>
@@ -846,30 +897,71 @@ Emile Latour
 </div>
 <p><br>
 </p>
-<p><strong>In the exam:</strong> Does mean HbA1c change (<code>hba1c_change</code>) differ across Metformin, Lifestyle, and Combined groups?</p>
-<p><br>
-</p>
-<p><strong>Why not just run three t-tests?</strong></p>
-<p>Each t-test has a 5% Type I error rate. With 3 pairwise comparisons, the family-wise error rate inflates to ~14% — you’re much more likely to find a spurious significant result.</p>
+<p><strong>Why not just run multiple t-tests?</strong></p>
+<ul>
+<li>Each t-test has a 5% Type I error rate.</li>
+<li>With 3 pairwise comparisons, the family-wise error rate inflates to ~14% — you’re much more likely to find a spurious significant result by chance alone.</li>
+<li><strong>ANOVA tests all groups simultaneously</strong>, preserving the overall error rate at <span class="math inline">\(\alpha\)</span>.</li>
+</ul>
 </section>
-<section id="anova-assumptions" class="slide level2">
-<h2>ANOVA assumptions</h2>
-<p><strong>Check before running:</strong></p>
+<section id="anova-assumptions-13" class="slide level2">
+<h2>ANOVA assumptions (1/3)</h2>
 <ol type="1">
-<li><strong>Independence:</strong> one observation per patient (study design) ✓</li>
-<li><strong>Normality:</strong> approximately normal within each group — check with QQ plot or note large <span class="math inline">\(n\)</span></li>
+<li><strong>Independence:</strong> one observation per subject (study design) ✓</li>
+<li><strong>Normality:</strong> approximately normal within each group</li>
 <li><strong>Equal variance:</strong> SD ratio (max SD / min SD) should be &lt; 2</li>
 </ol>
+<p><br>
+</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Check group-level n, mean, SD</span></span>
-<span id="cb9-2"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb9-5"><a></a>    <span class="at">n  =</span> <span class="fu">n</span>(),</span>
-<span id="cb9-6"><a></a>    <span class="at">mean =</span> <span class="fu">mean</span>(hba1c_change, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-7"><a></a>    <span class="at">sd   =</span> <span class="fu">sd</span>(hba1c_change, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-8"><a></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a></a>  <span class="fu">mutate</span>(<span class="at">sd_ratio =</span> <span class="fu">max</span>(sd) <span class="sc">/</span> <span class="fu">min</span>(sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Create 3 age groups, then check group-level stats</span></span>
+<span id="cb12-2"><a></a>nhanes_age <span class="ot">&lt;-</span> nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">cut</span>(Age,</span>
+<span id="cb12-4"><a></a>                         <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">35</span>, <span class="dv">55</span>, <span class="dv">100</span>),</span>
+<span id="cb12-5"><a></a>                         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Young"</span>, <span class="st">"Middle"</span>, <span class="st">"Older"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age_group), <span class="sc">!</span><span class="fu">is.na</span>(BPSys1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="anova-assumptions-23-normality" class="slide level2">
+<h2>ANOVA assumptions (2/3): normality</h2>
+<p><strong>Check:</strong> distributions approximately normal within each group</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">ggplot</span>(nhanes_age, <span class="fu">aes</span>(<span class="at">x =</span> BPSys1)) <span class="sc">+</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> age_group) <span class="sc">+</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Systolic BP (mmHg)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb13-5"><a></a>       <span class="at">title =</span> <span class="st">"Distribution of systolic BP by age group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="22_final_review_1_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>With reasonably large groups, moderate departures from normality are acceptable — the CLT helps. Look for severe skew or extreme outliers.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="anova-assumptions-33-equal-variance" class="slide level2">
+<h2>ANOVA assumptions (3/3): equal variance</h2>
+<p><strong>Check:</strong> SD ratio (max SD / min SD) should be &lt; 2</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>nhanes_age <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">group_by</span>(age_group) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a></a>  <span class="fu">summarise</span>(<span class="at">n    =</span> <span class="fu">n</span>(),</span>
+<span id="cb14-4"><a></a>            <span class="at">mean =</span> <span class="fu">mean</span>(BPSys1),</span>
+<span id="cb14-5"><a></a>            <span class="at">sd   =</span> <span class="fu">sd</span>(BPSys1)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a></a>  <span class="fu">mutate</span>(<span class="at">sd_ratio =</span> <span class="fu">max</span>(sd) <span class="sc">/</span> <span class="fu">min</span>(sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  age_group     n  mean    sd sd_ratio
+  &lt;fct&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 Young        84  110.  12.4     1.68
+2 Middle       42  120.  16.2     1.68
+3 Older        37  133.  20.8     1.68</code></pre>
+</div>
 </div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -877,56 +969,64 @@ Emile Latour
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>SD ratio &lt; 2 → equal variance assumption is met.</p>
+<p>SD ratio &lt; 2 → equal variance assumption is met ✓</p>
+<p>If the ratio is borderline (say, 1.8–2.5), note the concern but proceed — ANOVA is fairly robust to mild violations when group sizes are similar.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="anova-the-six-steps-r-code" class="slide level2">
 <h2>ANOVA: the six steps + R code</h2>
-<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \mu_{\text{Met}} = \mu_{\text{Life}} = \mu_{\text{Comb}}\)</span> vs.&nbsp;<span class="math inline">\(H_A:\)</span> at least one group mean differs</p>
+<p><br>
+</p>
+<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \mu_1 = \mu_2 = \mu_3\)</span> vs.&nbsp;<span class="math inline">\(H_A:\)</span> at least one group mean differs</p>
+<p><br>
+</p>
 <p><strong>Steps 2–3:</strong> <span class="math inline">\(\alpha = 0.05\)</span>; check assumptions ✓</p>
+<p><br>
+</p>
 <p><strong>Steps 4–5: Fit and summarize</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>anova_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(hba1c_change <span class="sc">~</span> treatment, <span class="at">data =</span> diabetes)</span>
-<span id="cb10-2"><a></a></span>
-<span id="cb10-3"><a></a><span class="co"># Traditional output</span></span>
-<span id="cb10-4"><a></a><span class="fu">summary</span>(anova_fit)</span>
-<span id="cb10-5"><a></a></span>
-<span id="cb10-6"><a></a><span class="co"># Tidy output</span></span>
-<span id="cb10-7"><a></a>broom<span class="sc">::</span><span class="fu">tidy</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>anova_fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(BPSys1 <span class="sc">~</span> age_group, <span class="at">data =</span> nhanes_age)</span>
+<span id="cb16-2"><a></a></span>
+<span id="cb16-3"><a></a><span class="co"># Traditional output</span></span>
+<span id="cb16-4"><a></a><span class="fu">summary</span>(anova_fit)</span>
+<span id="cb16-5"><a></a></span>
+<span id="cb16-6"><a></a><span class="co"># Tidy output</span></span>
+<span id="cb16-7"><a></a>broom<span class="sc">::</span><span class="fu">tidy</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Step 6:</strong> Report F-statistic with both df values and p-value</p>
+<p><br>
+</p>
+<p><strong>Step 6:</strong> Report F-statistic with <strong>both</strong> df values and p-value</p>
 <blockquote>
-<p>“There was a significant effect of treatment on HbA1c change (F(2, 177) = <strong><em>, p = </em></strong>).”</p>
+<p>“There was a significant difference in mean systolic blood pressure between at least two age groups (F(2, 160) = ___, p = ___).”</p>
 </blockquote>
 </section>
 <section id="post-hoc-testing-tukeys-hsd" class="slide level2">
 <h2>Post-hoc testing: Tukey’s HSD</h2>
 <p>If ANOVA rejects <span class="math inline">\(H_0\)</span>, use Tukey HSD to identify <strong>which pairs</strong> differ:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># Tukey HSD</span></span>
-<span id="cb11-2"><a></a><span class="fu">TukeyHSD</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>rstatix<span class="sc">::</span><span class="fu">tukey_hsd</span>(anova_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Reading the output:</strong></p>
 <ul>
-<li><code>diff</code> = difference in group means</li>
-<li><code>p adj</code> = adjusted p-value (controls family-wise error rate)</li>
-<li>Report pairs where <code>p adj &lt; 0.05</code></li>
+<li><code>estimate</code> = difference in group means</li>
+<li><code>p.adj</code> = adjusted p-value (controls family-wise error rate)</li>
+<li>Report pairs where <code>p.adj &lt; 0.05</code></li>
 </ul>
 <p><br>
 </p>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Writing a results paragraph (Q 4.4)</strong></p>
+<p><strong>Writing a results paragraph</strong></p>
 </div>
 <div class="callout-content">
 <p>Include: descriptive stats for each group + F-statistic + p-value + specific post-hoc comparisons.</p>
 <blockquote>
-<p>“Mean HbA1c change was ___ (SD = <strong><em>) in the Metformin group, </em></strong> (SD = <strong><em>) in the Lifestyle group, and </em></strong> (SD = <strong><em>) in the Combined group. A one-way ANOVA indicated a significant difference across groups (F(2, 177) = </em></strong>, p = ___). Tukey post-hoc tests revealed that [Combined vs.&nbsp;Metformin: mean diff = <strong><em>, p = </em></strong>] differed significantly, while [other comparisons] did not.”</p>
+<p>“Mean [outcome] was ___ (SD = ___) in Group A, ___ (SD = ___) in Group B, and ___ (SD = ___) in Group C. A one-way ANOVA indicated a significant difference between group means (F(df1, df2) = ___, p = ___). Tukey post-hoc tests revealed that [Group A vs.&nbsp;Group C: mean diff = ___, p = ___] differed significantly, while [other comparisons] did not.”</p>
 </blockquote>
 </div>
 </div>
@@ -939,54 +1039,65 @@ Emile Latour
 </section>
 <section id="chi-squared-test-for-independence" class="slide level2">
 <h2>Chi-squared test for independence</h2>
-<p><strong>When to use:</strong> Both variables are <strong>categorical</strong> and you have 3+ groups</p>
-<p><strong>In the exam:</strong> Is <code>treatment</code> (3 groups) associated with <code>achieved_target</code> (Yes/No)?</p>
+<p><br>
+</p>
+<p><strong>When to use:</strong> Both variables are <strong>categorical</strong>, testing whether they are associated</p>
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Step 1: Build the contingency table</span></span>
-<span id="cb12-2"><a></a>tab <span class="ot">&lt;-</span> diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">tabyl</span>(treatment, achieved_target)</span>
-<span id="cb12-4"><a></a></span>
-<span id="cb12-5"><a></a><span class="co"># Step 2: Check expected counts</span></span>
-<span id="cb12-6"><a></a><span class="fu">chisq.test</span>(tab)<span class="sc">$</span>expected   <span class="co"># All should be ≥ 5</span></span>
-<span id="cb12-7"><a></a></span>
-<span id="cb12-8"><a></a><span class="co"># Step 3: Run the test</span></span>
-<span id="cb12-9"><a></a><span class="fu">chisq.test</span>(tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># Step 1: Build the contingency table</span></span>
+<span id="cb18-2"><a></a>tab <span class="ot">&lt;-</span> nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(SmokeNow), <span class="sc">!</span><span class="fu">is.na</span>(PhysActive)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a></a>  <span class="fu">tabyl</span>(PhysActive, SmokeNow)</span>
+<span id="cb18-5"><a></a></span>
+<span id="cb18-6"><a></a><span class="co"># Step 2: Check expected counts — all should be ≥ 5</span></span>
+<span id="cb18-7"><a></a><span class="fu">chisq.test</span>(tab)<span class="sc">$</span>expected</span>
+<span id="cb18-8"><a></a></span>
+<span id="cb18-9"><a></a><span class="co"># Step 3: Run the test</span></span>
+<span id="cb18-10"><a></a><span class="fu">chisq.test</span>(tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
 <p><strong>Hypotheses (in words):</strong></p>
 <ul>
-<li><span class="math inline">\(H_0\)</span>: There is no association between treatment and achieving the glycemic target</li>
-<li><span class="math inline">\(H_A\)</span>: There is an association between treatment and achieving the glycemic target</li>
+<li><span class="math inline">\(H_0\)</span>: There is no association between physical activity and smoking status</li>
+<li><span class="math inline">\(H_A\)</span>: There is an association between physical activity and smoking status</li>
 </ul>
 </section>
 <section id="two-proportion-z-test" class="slide level2">
 <h2>Two-proportion z-test</h2>
-<p><strong>When to use:</strong> Two groups, binary outcome — testing <span class="math inline">\(H_0: p_1 = p_2\)</span></p>
-<p><strong>In the exam:</strong> Combined vs.&nbsp;Lifestyle groups only — who achieved the target at a higher rate?</p>
+<p><br>
+</p>
+<p><strong>When to use:</strong> Exactly two groups, binary outcome</p>
+<p><br>
+</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co"># Filter to two groups</span></span>
-<span id="cb13-2"><a></a>diabetes_two <span class="ot">&lt;-</span> diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a></a>  <span class="fu">filter</span>(treatment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Combined"</span>, <span class="st">"Lifestyle"</span>))</span>
-<span id="cb13-4"><a></a></span>
-<span id="cb13-5"><a></a><span class="co"># Compute successes and group sizes</span></span>
-<span id="cb13-6"><a></a>counts <span class="ot">&lt;-</span> diabetes_two <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a></a>  <span class="fu">group_by</span>(treatment) <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb13-9"><a></a>    <span class="at">success =</span> <span class="fu">sum</span>(achieved_target <span class="sc">==</span> <span class="st">"Yes"</span>),</span>
-<span id="cb13-10"><a></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb13-11"><a></a>  )</span>
-<span id="cb13-12"><a></a></span>
-<span id="cb13-13"><a></a><span class="co"># Two-proportion test</span></span>
-<span id="cb13-14"><a></a><span class="fu">prop.test</span>(<span class="at">x =</span> counts<span class="sc">$</span>success,</span>
-<span id="cb13-15"><a></a>          <span class="at">n =</span> counts<span class="sc">$</span>n,</span>
-<span id="cb13-16"><a></a>          <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Compute successes and group sizes</span></span>
+<span id="cb19-2"><a></a>counts <span class="ot">&lt;-</span> nhanes.samp <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(SmokeNow)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb19-6"><a></a>    <span class="at">success =</span> <span class="fu">sum</span>(SmokeNow <span class="sc">==</span> <span class="st">"Yes"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-7"><a></a>    <span class="at">n       =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(SmokeNow))</span>
+<span id="cb19-8"><a></a>  )</span>
+<span id="cb19-9"><a></a></span>
+<span id="cb19-10"><a></a><span class="co"># Two-proportion test</span></span>
+<span id="cb19-11"><a></a><span class="fu">prop.test</span>(<span class="at">x =</span> counts<span class="sc">$</span>success,</span>
+<span id="cb19-12"><a></a>          <span class="at">n =</span> counts<span class="sc">$</span>n,</span>
+<span id="cb19-13"><a></a>          <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><br>
+</p>
+<p><strong>Hypotheses:</strong></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(p_1 = p_2\)</span></li>
+<li><span class="math inline">\(H_A\)</span>: <span class="math inline">\(p_1 \ne p_2\)</span></li>
+</ul>
 </section>
 <section id="chi-squared-vs.-two-proportion-test" class="slide level2">
 <h2>Chi-squared vs.&nbsp;two-proportion test</h2>
+<p><br>
+</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1031,7 +1142,7 @@ Emile Latour
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>For exactly <strong>2 groups and a binary outcome</strong>, both tests give equivalent p-values. Prefer <code>prop.test()</code> when you want a <strong>confidence interval for the difference in proportions</strong> — which gives more information than the p-value alone.</p>
+<p>For exactly <strong>2 groups and a binary outcome</strong>, both tests give equivalent p-values. Prefer <code>prop.test()</code> when you want a <strong>confidence interval for the difference in proportions</strong> — that CI gives more information than the p-value alone.</p>
 </div>
 </div>
 </div>
@@ -1046,7 +1157,7 @@ Emile Latour
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>The decision is about the data, not just the sample size</strong></p>
+<p><strong>The decision is about the data, not just sample size</strong></p>
 </div>
 <div class="callout-content">
 <p>Use a nonparametric test when:</p>
@@ -1060,8 +1171,7 @@ Emile Latour
 </div>
 <p><br>
 </p>
-<p><strong>In the exam:</strong> <code>triglycerides</code> — visualized as right-skewed in Part 2 → Kruskal-Wallis is appropriate</p>
-<p><strong>SD ratio check:</strong> large SD ratio across groups also supports nonparametric approach</p>
+<p><strong>How to assess:</strong> plot the data first (histogram or boxplot); check the SD ratio across groups if comparing 3+ groups</p>
 <p><br>
 </p>
 <div class="callout callout-warning no-icon callout-titled callout-style-default">
@@ -1070,13 +1180,15 @@ Emile Latour
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>Small <span class="math inline">\(n\)</span> alone does not automatically mean nonparametric. If the data look approximately normal, the parametric test is valid and more powerful. The criterion is whether the assumptions are plausibly met.</p>
+<p>Small <span class="math inline">\(n\)</span> alone does not automatically mean nonparametric. If the data look approximately normal, the parametric test is valid and more powerful. The criterion is whether the <strong>assumptions</strong> are plausibly met.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="three-nonparametric-tests-the-map" class="slide level2">
 <h2>Three nonparametric tests: the map</h2>
+<p><br>
+</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1104,7 +1216,7 @@ Emile Latour
 <tr class="odd">
 <td>One-way ANOVA</td>
 <td>Kruskal-Wallis</td>
-<td><code>kruskal_test()</code></td>
+<td><code>kruskal.test()</code></td>
 </tr>
 </tbody>
 </table>
@@ -1112,7 +1224,7 @@ Emile Latour
 </p>
 <p><strong>Hypotheses (state correctly!):</strong></p>
 <ul>
-<li><span class="math inline">\(H_0\)</span>: The distributions of [outcome] are identical across groups</li>
+<li><span class="math inline">\(H_0\)</span>: The distributions of [outcome] are <strong>identical</strong> across groups</li>
 <li><span class="math inline">\(H_A\)</span>: At least one group has a different distribution</li>
 </ul>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
@@ -1129,15 +1241,16 @@ Emile Latour
 <section id="kruskal-wallis-pairwise-follow-up" class="slide level2">
 <h2>Kruskal-Wallis + pairwise follow-up</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Kruskal-Wallis (nonparametric ANOVA)</span></span>
-<span id="cb14-2"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a></a>  <span class="fu">kruskal_test</span>(triglycerides <span class="sc">~</span> treatment)</span>
-<span id="cb14-4"><a></a></span>
-<span id="cb14-5"><a></a><span class="co"># Pairwise Wilcoxon with FDR correction (if K-W is significant)</span></span>
-<span id="cb14-6"><a></a>diabetes <span class="sc">%&gt;%</span></span>
-<span id="cb14-7"><a></a>  <span class="fu">wilcox_test</span>(triglycerides <span class="sc">~</span> treatment,</span>
-<span id="cb14-8"><a></a>              <span class="at">p.adjust.method =</span> <span class="st">"fdr"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-9"><a></a>  <span class="fu">filter</span>(p.adj <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># Kruskal-Wallis test</span></span>
+<span id="cb20-2"><a></a>kw_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(Pulse <span class="sc">~</span> age_group, <span class="at">data =</span> nhanes_age)</span>
+<span id="cb20-3"><a></a></span>
+<span id="cb20-4"><a></a>kw_result <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb20-6"><a></a></span>
+<span id="cb20-7"><a></a><span class="co"># Pairwise Wilcoxon with Bonferroni correction (if K-W is significant)</span></span>
+<span id="cb20-8"><a></a><span class="fu">pairwise.wilcox.test</span>(nhanes_age<span class="sc">$</span>Pulse, nhanes_age<span class="sc">$</span>age_group,</span>
+<span id="cb20-9"><a></a>                     <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-10"><a></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -1147,7 +1260,8 @@ Emile Latour
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Use <strong>FDR</strong> (Benjamini-Hochberg) for multiple comparisons in the nonparametric setting — it controls the <strong>false discovery rate</strong> and is less conservative than Bonferroni when you have several comparisons.</p>
+<!-- Use **FDR** (Benjamini-Hochberg) correction for multiple comparisons — it controls the **false discovery rate** and is less conservative than Bonferroni when you have several comparisons. -->
+<p>There is no nonparametric equivalent of Tukey HSD. Bonferroni correction is a straightforward choice — it controls the family-wise error rate across all pairwise comparisons. With only 3 pairs here, the penalty for using Bonferroni is small.</p>
 </div>
 </div>
 </div>
@@ -1159,6 +1273,8 @@ Emile Latour
 </section>
 <section id="this-section-is-25-points-the-largest-on-the-exam" class="slide level2">
 <h2>This section is 25 points — the largest on the exam</h2>
+<p><br>
+</p>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1166,7 +1282,7 @@ Emile Latour
 </div>
 <div class="callout-content">
 <p>Part 7 is the only section that was not practiced in a homework assignment. The exam provides extra guidance (hints in code chunks). Read the questions carefully and follow the steps.</p>
-<p>The material maps directly to Lesson 21 slides — a review of those slides before the exam is time well spent.</p>
+<p>The material maps directly to the Lesson 21 slides — a review of those slides before the exam is time well spent.</p>
 </div>
 </div>
 </div>
@@ -1184,54 +1300,81 @@ Emile Latour
 </section>
 <section id="scatterplot-and-correlation" class="slide level2">
 <h2>Scatterplot and correlation</h2>
+<p>Using <code>prevend.samp</code>: does cognitive function (<code>RFFT</code> score) decline with age?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># Scatterplot with regression line</span></span>
-<span id="cb15-2"><a></a><span class="fu">ggplot</span>(diabetes, <span class="fu">aes</span>(<span class="at">x =</span> bmi, <span class="at">y =</span> fasting_glucose)) <span class="sc">+</span></span>
-<span id="cb15-3"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb15-5"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"BMI (kg/m²)"</span>, <span class="at">y =</span> <span class="st">"Fasting glucose (mg/dL)"</span>,</span>
-<span id="cb15-6"><a></a>       <span class="at">title =</span> <span class="st">"Fasting glucose vs. BMI"</span>)</span>
-<span id="cb15-7"><a></a></span>
-<span id="cb15-8"><a></a><span class="co"># Pearson correlation: strength of LINEAR association</span></span>
-<span id="cb15-9"><a></a><span class="fu">cor</span>(diabetes<span class="sc">$</span>bmi, diabetes<span class="sc">$</span>fasting_glucose,</span>
-<span id="cb15-10"><a></a>    <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
-<span id="cb15-11"><a></a></span>
-<span id="cb15-12"><a></a><span class="co"># Spearman: rank-based, robust to skew/outliers</span></span>
-<span id="cb15-13"><a></a><span class="fu">cor</span>(diabetes<span class="sc">$</span>bmi, diabetes<span class="sc">$</span>fasting_glucose,</span>
-<span id="cb15-14"><a></a>    <span class="at">method =</span> <span class="st">"spearman"</span>,</span>
-<span id="cb15-15"><a></a>    <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Scatterplot with regression line</span></span>
+<span id="cb21-2"><a></a><span class="fu">ggplot</span>(prevend.samp, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> RFFT)) <span class="sc">+</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"#0072B2"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"#D55E00"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"RFFT score"</span>,</span>
+<span id="cb21-6"><a></a>       <span class="at">title =</span> <span class="st">"Cognitive function vs. age (prevend.samp)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
+<img data-src="22_final_review_1_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<section id="correlation-coefficients" class="slide level2">
+<h2>Correlation coefficients</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Pearson: strength of LINEAR association</span></span>
+<span id="cb22-2"><a></a><span class="fu">cor</span>(prevend.samp<span class="sc">$</span>Age, prevend.samp<span class="sc">$</span>RFFT,</span>
+<span id="cb22-3"><a></a>    <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5338617</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Spearman: rank-based, robust to skew/outliers</span></span>
+<span id="cb24-2"><a></a><span class="fu">cor</span>(prevend.samp<span class="sc">$</span>Age, prevend.samp<span class="sc">$</span>RFFT,</span>
+<span id="cb24-3"><a></a>    <span class="at">method =</span> <span class="st">"spearman"</span>,</span>
+<span id="cb24-4"><a></a>    <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.5318226</code></pre>
+</div>
+</div>
+<p><br>
+</p>
 <p><strong>Describing the relationship:</strong> direction (positive/negative), form (linear/curved), strength (weak/moderate/strong), unusual observations</p>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The Pearson and Spearman values are usually close when the relationship is approximately linear without extreme outliers. A large gap suggests outliers or nonlinearity are influencing the Pearson <span class="math inline">\(r\)</span>.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="fitting-the-regression-model" class="slide level2">
 <h2>Fitting the regression model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Fit</span></span>
-<span id="cb16-2"><a></a>glucose_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(fasting_glucose <span class="sc">~</span> bmi, <span class="at">data =</span> diabetes)</span>
-<span id="cb16-3"><a></a></span>
-<span id="cb16-4"><a></a><span class="co"># Coefficients, SE, t, p, CI</span></span>
-<span id="cb16-5"><a></a><span class="fu">tidy</span>(glucose_model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-6"><a></a></span>
-<span id="cb16-7"><a></a><span class="co"># Model-level summary: R², sigma, n</span></span>
-<span id="cb16-8"><a></a><span class="fu">glance</span>(glucose_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Fit</span></span>
+<span id="cb26-2"><a></a>rfft_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RFFT <span class="sc">~</span> Age, <span class="at">data =</span> prevend.samp)</span>
+<span id="cb26-3"><a></a></span>
+<span id="cb26-4"><a></a><span class="co"># Coefficients, SE, t, p, CI</span></span>
+<span id="cb26-5"><a></a><span class="fu">tidy</span>(rfft_model, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  term        estimate std.error statistic   p.value conf.low conf.high
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   138.      5.02        27.4 1.41e-101   128.      147.  
+2 Age            -1.26    0.0895     -14.1 3.50e- 38    -1.44     -1.09</code></pre>
+</div>
 </div>
 <p><br>
 </p>
-<p><strong>The estimated equation:</strong></p>
-<p><span class="math display">\[\widehat{\text{Fasting Glucose}} = \hat{\beta}_0 + \hat{\beta}_1 \times \text{BMI}\]</span></p>
 <p><strong>Interpreting the slope (<span class="math inline">\(\hat{\beta}_1\)</span>):</strong></p>
 <blockquote>
-<p>“For every 1 kg/m² increase in BMI, fasting glucose is expected to increase by <span class="math inline">\(\hat{\beta}_1\)</span> mg/dL, on average.”</p>
+<p>“For every 1-year increase in age, RFFT score is expected to change, on average, by <span class="math inline">\(\hat{\beta}_1\)</span> points (95% CI: ___ to ___).”</p>
 </blockquote>
-<p><strong>Interpreting the intercept (<span class="math inline">\(\hat{\beta}_0\)</span>):</strong> Often not meaningful — only interpret when <span class="math inline">\(X = 0\)</span> is realistic.</p>
+<p><br>
+</p>
+<p><strong>Interpreting the intercept (<span class="math inline">\(\hat{\beta}_0\)</span>):</strong> Often not meaningful — only interpret when <span class="math inline">\(X = 0\)</span> is realistic in context.</p>
 </section>
 <section id="the-line-conditions" class="slide level2">
 <h2>The LINE conditions</h2>
-<table class="caption-top">
+<table class="caption-top" style="width:73%;">
 <colgroup>
-<col style="width: 45%">
-<col style="width: 27%">
-<col style="width: 27%">
+<col style="width: 13%">
+<col style="width: 40%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1266,18 +1409,18 @@ Emile Latour
 <p><br>
 </p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(glucose_model)</span>
-<span id="cb17-2"><a></a></span>
-<span id="cb17-3"><a></a><span class="co"># Residual plot (checks L and E)</span></span>
-<span id="cb17-4"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb17-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb17-7"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>, <span class="at">title =</span> <span class="st">"Residual plot"</span>)</span>
-<span id="cb17-8"><a></a></span>
-<span id="cb17-9"><a></a><span class="co"># QQ plot (checks N)</span></span>
-<span id="cb17-10"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
-<span id="cb17-11"><a></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"QQ plot of residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(rfft_model)</span>
+<span id="cb28-2"><a></a></span>
+<span id="cb28-3"><a></a><span class="co"># Residual plot (checks L and E)</span></span>
+<span id="cb28-4"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb28-5"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fitted values"</span>, <span class="at">y =</span> <span class="st">"Residuals"</span>, <span class="at">title =</span> <span class="st">"Residual plot"</span>)</span>
+<span id="cb28-8"><a></a></span>
+<span id="cb28-9"><a></a><span class="co"># QQ plot (checks N)</span></span>
+<span id="cb28-10"><a></a><span class="fu">ggplot</span>(aug, <span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb28-11"><a></a>  <span class="fu">stat_qq</span>() <span class="sc">+</span> <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb28-12"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"QQ plot of residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="reading-the-diagnostic-plots" class="slide level2">
@@ -1314,7 +1457,7 @@ Emile Latour
 <li>S-shape → skewed residuals</li>
 <li>Heavy tails → points deviate at both ends</li>
 </ul>
-<p><strong>Note:</strong> With <span class="math inline">\(n = 180\)</span>, the CLT makes moderate departures from normality less of a concern. L and E are more critical for inference.</p>
+<p><strong>Note:</strong> With large <span class="math inline">\(n\)</span>, the CLT makes moderate departures from normality less of a concern. L and E are more critical for inference.</p>
 </div>
 </div>
 </div>
@@ -1322,12 +1465,6 @@ Emile Latour
 </section>
 <section id="r2-and-sigma" class="slide level2">
 <h2><span class="math inline">\(R^2\)</span> and sigma</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">glance</span>(glucose_model) <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a></a>  <span class="fu">select</span>(r.squared, sigma, nobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br>
-</p>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -1336,7 +1473,7 @@ Emile Latour
 <p><strong><span class="math inline">\(R^2\)</span> interpretation</strong></p>
 </div>
 <div class="callout-content">
-<p>“BMI explains ___% of the variability in fasting glucose in this sample.”</p>
+<p>“Age explains ___% of the variability in RFFT score in this sample.”</p>
 <p><span class="math inline">\(R^2\)</span> ranges from 0 (model explains nothing) to 1 (perfect fit).</p>
 <p>For SLR: <span class="math inline">\(R^2 = r^2\)</span> (square of Pearson correlation)</p>
 </div>
@@ -1351,32 +1488,66 @@ Emile Latour
 <p><strong>sigma</strong></p>
 </div>
 <div class="callout-content">
-<p><code>sigma</code> = residual standard deviation = typical distance of an individual observation from the fitted line, in units of <span class="math inline">\(Y\)</span>.</p>
-<p>This is the individual-level scatter — much larger than the <code>std.error</code> for the slope, and it’s why prediction intervals are so wide.</p>
+<p><code>sigma</code> = residual standard deviation = typical distance of an individual observation from the fitted line, in <strong>units of <span class="math inline">\(Y\)</span></strong>.</p>
+<p>This captures individual-level scatter. It is much larger than <code>std.error</code> for the slope, and it is why prediction intervals are so much wider than CIs for mean response.</p>
 </div>
 </div>
 </div>
 </div></div>
+<p><br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># Model-level summary: R², sigma, n</span></span>
+<span id="cb29-2"><a></a><span class="fu">glance</span>(rfft_model) <span class="sc">%&gt;%</span> <span class="fu">select</span>(r.squared, sigma, nobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  r.squared sigma  nobs
+      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1     0.285  23.2   500</code></pre>
+</div>
+</div>
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><code>std.error</code> (from <code>tidy()</code>) tells you how well you estimated the slope. <code>sigma</code> (from <code>glance()</code>) tells you how much individuals vary around the line. These measure completely different things.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="inference-for-the-slope-six-steps" class="slide level2">
 <h2>Inference for the slope: six steps</h2>
-<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \beta_1 = 0\)</span> (BMI tells us nothing about glucose) vs.&nbsp;<span class="math inline">\(H_A: \beta_1 \neq 0\)</span></p>
+<p><br>
+</p>
+<p><strong>Step 1:</strong> <span class="math inline">\(H_0: \beta_1 = 0\)</span> (age tells us nothing about RFFT) vs.&nbsp;<span class="math inline">\(H_A: \beta_1 \neq 0\)</span></p>
+<p><br>
+</p>
 <p><strong>Step 2:</strong> <span class="math inline">\(\alpha = 0.05\)</span></p>
+<p><br>
+</p>
 <p><strong>Step 3:</strong> Check LINE conditions ✓</p>
+<p><br>
+</p>
 <p><strong>Step 4:</strong> <span class="math inline">\(t = \hat{\beta}_1 / SE_{\hat{\beta}_1}\)</span> — read from <code>tidy()</code> output, <code>statistic</code> column</p>
+<p><br>
+</p>
 <p><strong>Step 5:</strong> p-value from <code>tidy()</code> output, <code>p.value</code> column; <span class="math inline">\(df = n - 2\)</span></p>
+<p><br>
+</p>
 <p><strong>Step 6:</strong> Conclusion in context:</p>
 <blockquote>
-<p>“There is [strong/insufficient] evidence of a positive linear association between BMI and fasting glucose (t = <strong><em>, df = </em></strong>, p = <strong><em>). For every 1 kg/m² increase in BMI, fasting glucose is expected to increase by </em></strong> mg/dL (95% CI: ___ to ___).”</p>
+<p>“There is strong evidence of a negative linear association between age and RFFT score (t = ___, df = ___, p = ___). For every 1-year increase in age, RFFT score is expected to decrease by ___ points (95% CI: ___ to ___).”</p>
 </blockquote>
 </section>
 <section id="ci-for-mean-response-vs.-prediction-interval" class="slide level2">
 <h2>CI for mean response vs.&nbsp;prediction interval</h2>
-<table class="caption-top">
+<table class="caption-top" style="width:90%;">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 40%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1388,24 +1559,26 @@ Emile Latour
 <tbody>
 <tr class="odd">
 <td><strong>CI for mean response</strong></td>
-<td>Average glucose for <strong>all patients</strong> with BMI = 30?</td>
-<td>Uncertainty about the line</td>
+<td>Average RFFT for <strong>all people</strong> aged 60?</td>
+<td>Uncertainty about where the line is</td>
 </tr>
 <tr class="even">
 <td><strong>Prediction interval</strong></td>
-<td>Glucose for <strong>this specific new patient</strong> with BMI = 30?</td>
+<td>RFFT for <strong>this specific new patient</strong> aged 60?</td>
 <td>Uncertainty about the line <strong>+</strong> individual variation (<span class="math inline">\(\hat{\sigma}\)</span>)</td>
 </tr>
 </tbody>
 </table>
+<p><br>
+</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">bmi =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">35</span>))</span>
-<span id="cb19-2"><a></a></span>
-<span id="cb19-3"><a></a><span class="co"># CI for mean response</span></span>
-<span id="cb19-4"><a></a><span class="fu">predict</span>(glucose_model, <span class="at">newdata =</span> new_data, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb19-5"><a></a></span>
-<span id="cb19-6"><a></a><span class="co"># Prediction interval for a new individual</span></span>
-<span id="cb19-7"><a></a><span class="fu">predict</span>(glucose_model, <span class="at">newdata =</span> new_data, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Age =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">60</span>, <span class="dv">75</span>))</span>
+<span id="cb31-2"><a></a></span>
+<span id="cb31-3"><a></a><span class="co"># CI for mean response</span></span>
+<span id="cb31-4"><a></a><span class="fu">predict</span>(rfft_model, <span class="at">newdata =</span> new_data, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb31-5"><a></a></span>
+<span id="cb31-6"><a></a><span class="co"># Prediction interval for a new individual</span></span>
+<span id="cb31-7"><a></a><span class="fu">predict</span>(rfft_model, <span class="at">newdata =</span> new_data, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br>
 </p>
@@ -1415,7 +1588,7 @@ Emile Latour
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Prediction intervals are <strong>always wider</strong> than CIs for mean response. More data narrows the CI (better estimated line) but cannot eliminate individual variation around the line.</p>
+<p>Prediction intervals are <strong>always wider</strong> than CIs for mean response. More data narrows the CI (better-estimated line) but cannot eliminate individual variation — that scatter is a property of the population, not of your sample size.</p>
 </div>
 </div>
 </div>
@@ -1429,43 +1602,53 @@ Emile Latour
 <h2>Power analysis with <code>pwr.t.test()</code></h2>
 <p><strong>Cohen’s <span class="math inline">\(d\)</span>:</strong> effect size for comparing two means</p>
 <p><span class="math display">\[d = \frac{\mu_1 - \mu_2}{\sigma_{\text{pooled}}}\]</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># How large a sample do we need?</span></span>
-<span id="cb20-2"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n         =</span> <span class="cn">NULL</span>,</span>
-<span id="cb20-3"><a></a>           <span class="at">d         =</span> <span class="fl">0.4</span> <span class="sc">/</span> <span class="fl">0.50</span>,   <span class="co"># delta / pooled SD</span></span>
-<span id="cb20-4"><a></a>           <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb20-5"><a></a>           <span class="at">power     =</span> <span class="fl">0.80</span>,</span>
-<span id="cb20-6"><a></a>           <span class="at">type      =</span> <span class="st">"two.sample"</span>,</span>
-<span id="cb20-7"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
-<span id="cb20-8"><a></a></span>
-<span id="cb20-9"><a></a><span class="co"># What power do we have with n = 40 per group?</span></span>
-<span id="cb20-10"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n         =</span> <span class="dv">40</span>,</span>
-<span id="cb20-11"><a></a>           <span class="at">d         =</span> <span class="fl">0.4</span> <span class="sc">/</span> <span class="fl">0.50</span>,</span>
-<span id="cb20-12"><a></a>           <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
-<span id="cb20-13"><a></a>           <span class="at">power     =</span> <span class="cn">NULL</span>,</span>
-<span id="cb20-14"><a></a>           <span class="at">type      =</span> <span class="st">"two.sample"</span>,</span>
-<span id="cb20-15"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <p><br>
 </p>
+<p><strong>Example:</strong> detect a 5 mmHg difference in SBP, pooled SD = 10 → <span class="math inline">\(d = 0.5\)</span></p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Solve for <span class="math inline">\(n\)</span>:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n           =</span> <span class="cn">NULL</span>,</span>
+<span id="cb32-2"><a></a>           <span class="at">d           =</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb32-3"><a></a>           <span class="at">sig.level   =</span> <span class="fl">0.05</span>,</span>
+<span id="cb32-4"><a></a>           <span class="at">power       =</span> <span class="fl">0.80</span>,</span>
+<span id="cb32-5"><a></a>           <span class="at">type        =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb32-6"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:4%;">
+
+</div><div class="column" style="width:48%;">
+<p><strong>Solve for power</strong> with n = 50 per group:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">pwr.t.test</span>(<span class="at">n           =</span> <span class="dv">50</span>,</span>
+<span id="cb33-2"><a></a>           <span class="at">d           =</span> <span class="dv">5</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb33-3"><a></a>           <span class="at">sig.level   =</span> <span class="fl">0.05</span>,</span>
+<span id="cb33-4"><a></a>           <span class="at">power       =</span> <span class="cn">NULL</span>,</span>
+<span id="cb33-5"><a></a>           <span class="at">type        =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb33-6"><a></a>           <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></div>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Always <strong>round up</strong> the required <span class="math inline">\(n\)</span> — you can’t have a fractional person, and rounding down means you’re slightly underpowered.</p>
+<p>Always <strong>round up</strong> the required <span class="math inline">\(n\)</span> — rounding down means you’re slightly underpowered.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="sample-size-and-what-it-affects" class="slide level2">
 <h2>Sample size and what it affects</h2>
+<p><br>
+</p>
 <p>When you increase <span class="math inline">\(n\)</span>:</p>
-<table class="caption-top">
+<table class="caption-top" style="width:60%;">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 20%">
+<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1496,7 +1679,10 @@ Emile Latour
 <p><strong>Peeking at data before choosing the test</strong></p>
 </div>
 <div class="callout-content">
-<p>Running ANOVA, seeing which group “won,” then doing a t-test comparing that group vs.&nbsp;the others is <strong>data-driven test selection</strong> — it inflates the Type I error rate and violates the pre-specified analysis plan. This is the issue raised in Question 8.2b. The right approach: specify your comparisons <strong>before</strong> looking at the data.</p>
+<ul>
+<li>Running ANOVA, seeing which group performed best, then running a t-test comparing that group vs.&nbsp;the others is <strong>data-driven test selection</strong> — it inflates the Type I error rate because you used the data twice.</li>
+<li>The right approach: specify your comparisons <strong>before</strong> looking at the data.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1505,61 +1691,61 @@ Emile Latour
 <h2>Choosing the right test: the synthesis table</h2>
 <table class="caption-top">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 32%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Research question</th>
-<th>Groups</th>
-<th>Outcome</th>
+<th style="text-align: center;">Groups</th>
+<th style="text-align: center;">Outcome</th>
 <th>Test</th>
 <th>Key R function</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Did HbA1c change? (same patient)</td>
-<td>1 (differences)</td>
-<td>Continuous</td>
+<td>Did the outcome change? (same subject, 2 timepoints)</td>
+<td style="text-align: center;">1 (differences)</td>
+<td style="text-align: center;">Continuous</td>
 <td>Paired t-test</td>
 <td><code>t.test(d, mu = 0)</code></td>
 </tr>
 <tr class="even">
-<td>Does mean change differ across 3 treatments?</td>
-<td>3</td>
-<td>Continuous, normal</td>
+<td>Does mean outcome differ across 3+ groups?</td>
+<td style="text-align: center;">3+</td>
+<td style="text-align: center;">Continuous, normal</td>
 <td>One-way ANOVA</td>
 <td><code>aov()</code></td>
 </tr>
 <tr class="odd">
-<td>Do triglycerides differ across 3 groups? (skewed)</td>
-<td>3</td>
-<td>Continuous, skewed</td>
+<td>Does a skewed outcome differ across 3+ groups?</td>
+<td style="text-align: center;">3+</td>
+<td style="text-align: center;">Continuous, skewed</td>
 <td>Kruskal-Wallis</td>
-<td><code>kruskal_test()</code></td>
+<td><code>kruskal.test()</code></td>
 </tr>
 <tr class="even">
-<td>Is treatment associated with achieving target? (3 groups)</td>
-<td>3</td>
-<td>Binary</td>
+<td>Is a categorical variable associated with a binary outcome?</td>
+<td style="text-align: center;">3+</td>
+<td style="text-align: center;">Binary</td>
 <td>Chi-squared</td>
 <td><code>chisq.test()</code></td>
 </tr>
 <tr class="odd">
-<td>Does target rate differ between 2 groups?</td>
-<td>2</td>
-<td>Binary</td>
+<td>Does a binary outcome rate differ between 2 groups?</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">Binary</td>
 <td>Two-proportion z-test</td>
 <td><code>prop.test()</code></td>
 </tr>
 <tr class="even">
-<td>Is there a linear association between BMI and glucose?</td>
-<td>—</td>
-<td>2 continuous</td>
+<td>Is there a linear association between two continuous variables?</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">2 continuous</td>
 <td>SLR / slope test</td>
 <td><code>lm()</code> + <code>tidy()</code></td>
 </tr>
@@ -1571,7 +1757,7 @@ Emile Latour
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Question 8.3b asks you to connect these</strong></p>
+<p><strong>A recurring exam theme</strong></p>
 </div>
 <div class="callout-content">
 <p>For a two-sided test at <span class="math inline">\(\alpha = 0.05\)</span>:</p>
@@ -1588,11 +1774,11 @@ Emile Latour
 <ul>
 <li>The <strong>direction and magnitude</strong> of the effect (not just “significant or not”)</li>
 <li>A range of <strong>plausible values</strong> for the true population parameter</li>
-<li>Clinical interpretability — a 0.5 mmHg drug effect may be statistically significant but clinically meaningless</li>
+<li>Clinical interpretability — a statistically significant effect may be too small to matter in practice</li>
 </ul>
 <p><br>
 </p>
-<p><strong>Good example to use for this question:</strong> The paired t-test CI for mean HbA1c change, or the CI for the regression slope — both tell you not just <em>whether</em> the effect is real, but <em>how big</em> it plausibly is.</p>
+<p><strong>Good examples:</strong> any test where you computed both a CI and a p-value. Ask: what does the CI tell us about the <em>size</em> of the effect that the p-value alone cannot?</p>
 </section></section>
 <section>
 <section id="reminders-and-good-luck" class="title-slide slide level1 center">
@@ -1603,7 +1789,7 @@ Emile Latour
 <h2>Common mistakes to avoid</h2>
 <ol type="1">
 <li><strong>Ignoring paired structure</strong> — running an independent t-test on before/after data</li>
-<li><strong>Forgetting to check assumptions</strong> — especially ANOVA’s SD ratio and chi-squared expected counts</li>
+<li><strong>Forgetting to check assumptions</strong> — especially ANOVA’s SD ratio and chi-squared expected counts ≥ 5</li>
 <li><strong>Misframing nonparametric hypotheses</strong> — say “distributions are identical,” not “medians are equal”</li>
 <li><strong>Confusing <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(s\)</span>, <span class="math inline">\(SE\)</span>, and <code>sigma</code> from <code>glance()</code></strong> — know what each measures</li>
 <li><strong>Using <code>lower.tail = TRUE/FALSE</code> incorrectly</strong> — sketch the picture first</li>

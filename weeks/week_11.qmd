@@ -55,7 +55,7 @@ By the end of the week, you should feel confident in your ability to:
     -   Correlation and simple linear regression
     -   Power, sample size, and choosing the right test
 -   **Slides**
-    -   Final Exam Review <!-- ([HTML](/lessons/22_final_review/22_final_review.qmd) \| [PDF]() \| [OneDrive]()) -->
+    -   Final Exam Review ([HTML](/lessons/22_final_review/22_final_review.qmd) | [PDF](/lessons/22_final_review/22_final_review.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
     
 -   **Recording**
     -   Coming soon.
@@ -100,7 +100,7 @@ Upload **both** files to Sakai:
 
 ### Resources
 
--   Final Exam Review <!-- ([HTML]() \| [PDF]() \| [OneDrive]()) -->
+-   Final Exam Review ([HTML](/lessons/22_final_review/22_final_review.qmd) | [PDF](/lessons/22_final_review/22_final_review.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   See [Schedule](schedule.qmd) for all lecture materials and homework
 
 ## Post-class check-in (attendance)
