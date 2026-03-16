@@ -2563,6 +2563,13 @@
     "text": "The LINE conditions\n\n\n\n\n\n\n\n\nLetter\nCondition\nHow to check\n\n\n\n\nL\nLinearity — relationship is linear\nScatterplot; residual plot\n\n\nI\nIndependence — observations independent\nStudy design\n\n\nN\nNormality — residuals approximately normal\nQQ plot of residuals\n\n\nE\nEqual variance — residuals have constant spread\nResidual plot\n\n\n\n\n\n\naug &lt;- augment(rfft_model)\n\n# Residual plot (checks L and E)\nggplot(aug, aes(x = .fitted, y = .resid)) +\n  geom_point(alpha = 0.4) +\n  geom_hline(yintercept = 0, linetype = \"dashed\") +\n  labs(x = \"Fitted values\", y = \"Residuals\", title = \"Residual plot\")\n\n# QQ plot (checks N)\nggplot(aug, aes(sample = .resid)) +\n  stat_qq(alpha = 0.4) + stat_qq_line() +\n  labs(title = \"QQ plot of residuals\")"
   },
   {
+    "objectID": "lessons/22_final_review/22_final_review.html#diagnostic-plots-for-rfft_model",
+    "href": "lessons/22_final_review/22_final_review.html#diagnostic-plots-for-rfft_model",
+    "title": "Final Exam Review",
+    "section": "Diagnostic plots for rfft_model",
+    "text": "Diagnostic plots for rfft_model"
+  },
+  {
     "objectID": "lessons/22_final_review/22_final_review.html#reading-the-diagnostic-plots",
     "href": "lessons/22_final_review/22_final_review.html#reading-the-diagnostic-plots",
     "title": "Final Exam Review",
@@ -10828,12 +10835,5 @@
       "Course info",
       "Resources"
     ]
-  },
-  {
-    "objectID": "lessons/22_final_review/22_final_review.html#diagnostic-plots-for-rfft_model",
-    "href": "lessons/22_final_review/22_final_review.html#diagnostic-plots-for-rfft_model",
-    "title": "Final Exam Review",
-    "section": "Diagnostic plots for rfft_model",
-    "text": "Diagnostic plots for rfft_model"
   }
 ]
