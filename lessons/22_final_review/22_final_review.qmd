@@ -921,9 +921,35 @@ ggplot(aug, aes(x = .fitted, y = .resid)) +
 
 # QQ plot (checks N)
 ggplot(aug, aes(sample = .resid)) +
-  stat_qq() + stat_qq_line() +
+  stat_qq(alpha = 0.4) + stat_qq_line() +
   labs(title = "QQ plot of residuals")
 ```
+
+<!-- ## Diagnostic plots for rfft_model -->
+
+<!-- ```{r} -->
+<!-- #| echo: false -->
+<!-- #| fig-width: 8 -->
+<!-- #| fig-height: 4 -->
+<!-- #| fig-pos: center -->
+
+<!-- aug <- augment(rfft_model) -->
+
+<!-- # Residual plot (checks L and E) -->
+<!-- a <- ggplot(aug, aes(x = .fitted, y = .resid)) + -->
+<!--   geom_point(alpha = 0.4) + -->
+<!--   geom_hline(yintercept = 0, linetype = "dashed") + -->
+<!--   labs(x = "Fitted values", y = "Residuals", title = "Residual plot") -->
+
+<!-- # QQ plot (checks N) -->
+<!-- b <- ggplot(aug, aes(sample = .resid)) + -->
+<!--   stat_qq(alpha = 0.4) + stat_qq_line() + -->
+<!--   labs(title = "QQ plot of residuals") -->
+
+<!-- library(patchwork) -->
+<!-- a + b -->
+<!-- ``` -->
+
 
 ## Reading the diagnostic plots
 
