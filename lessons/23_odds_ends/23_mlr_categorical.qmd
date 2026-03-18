@@ -1,0 +1,785 @@
+---
+title: "Odds & Ends: Multiple Linear Regression"
+subtitle: "Categorical Predictors + Adjusting for Confounding"
+author: "Emile Latour"
+date: "`r library(here); source(here('class_dates.R')); w11d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Multiple Linear Regression"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(oibiostat)
+library(rstatix)
+library(janitor)
+library(gt)
+library(lamisc)
+library(laviz)
+
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+data(nhanes.samp)
+
+nhanes_bp <- nhanes.samp %>%
+  filter(!is.na(BMI), !is.na(BPSys1), !is.na(Gender), !is.na(Age)) %>%
+  select(BMI, BPSys1, Gender, Age) %>%
+  mutate(
+    Gender   = factor(Gender),   # "female" is reference (alphabetical)
+    Age_group = cut(Age,
+                    breaks = c(0, 39, 59, Inf),
+                    labels = c("Under 40", "40–59", "60+"))
+  )
+
+# SLR model (for comparison)
+model_slr <- lm(BPSys1 ~ BMI, data = nhanes_bp)
+
+# Categorical model
+model_cat <- lm(BPSys1 ~ Gender, data = nhanes_bp)
+tidy_cat  <- tidy(model_cat, conf.int = TRUE)
+
+# MLR model
+model_mlr <- lm(BPSys1 ~ BMI + Gender, data = nhanes_bp)
+tidy_mlr  <- tidy(model_mlr, conf.int = TRUE)
+
+# Inline values — MLR
+b_bmi_adj  <- lamisc::fmt_num(tidy_mlr$estimate[2], accuracy = 0.01)
+b_male_adj <- lamisc::fmt_num(tidy_mlr$estimate[3], accuracy = 0.01)
+b_bmi_slr  <- lamisc::fmt_num(tidy(model_slr)$estimate[2], accuracy = 0.01)
+
+r2_slr  <- lamisc::fmt_num(glance(model_slr)$r.squared,  accuracy = 0.001)
+r2_mlr  <- lamisc::fmt_num(glance(model_mlr)$r.squared,  accuracy = 0.001)
+r2a_mlr <- lamisc::fmt_num(glance(model_mlr)$adj.r.squared, accuracy = 0.001)
+
+# Age group model
+model_age <- lm(BPSys1 ~ Age_group, data = nhanes_bp)
+tidy_age  <- tidy(model_age, conf.int = TRUE)
+
+n_bp <- nrow(nhanes_bp)
+```
+
+# From SLR to Multiple Regression
+
+## Where we left off
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+In the SLR lecture we asked:
+
+> **Does BMI predict systolic blood pressure?**
+
+\
+
+We fit:
+
+$$\hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 \cdot \text{BMI}$$
+
+\
+
+And found: for every 1 kg/m² increase in BMI, systolic BP is expected to increase by `r b_bmi_slr` mmHg on average.
+
+\
+
+But real biology is messier. **Multiple variables** are usually at play — age, sex, medications, comorbidities...
+
+:::
+
+::: {.column width="45%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7.5
+#| fig-height: 6.0
+#| fig-align: center
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1)) +
+  geom_point(alpha = 0.35, color = "#0072B2", size = 1.5) +
+  geom_smooth(method = "lm", color = "#D55E00", se = FALSE) +
+  labs(title = "SLR: BP ~ BMI",
+       subtitle = glue("NHANES sample, n = {n_bp}"),
+       x = "BMI (kg/m²)", y = "Systolic BP (mmHg)")
+```
+
+:::
+:::::
+
+## Roadmap for Today
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+**Part 1: Categorical Predictors**
+
+- A new kind of explanatory variable
+- The binary categorical model
+- Connecting to what you already know
+- Interpreting output in R
+- Changing the reference category
+
+:::
+
+::: {.column width="50%"}
+
+**Part 2: Multiple Linear Regression**
+
+- Adding predictors to the model
+- Confounding: why adjustment matters
+- Fitting MLR in R with `lm()`
+- Interpreting adjusted coefficients
+- $R^2$ and adjusted $R^2$
+- Unadjusted vs. adjusted: a side-by-side comparison
+
+:::
+:::::
+
+# Part 1: Categorical Predictors
+
+## A new question about blood pressure
+
+\
+
+So far, the explanatory variable has always been **continuous** (e.g., BMI, Age).
+
+\
+
+What if the explanatory variable is **categorical**?
+
+\
+
+::: {.callout-note icon="false"}
+### New question
+
+**Does mean systolic blood pressure differ between males and females in the NHANES sample?**
+
+- Response $Y$: Systolic BP (continuous)
+- Explanatory $X$: Gender (categorical: female / male)
+:::
+
+\
+
+You might think: *"I know how to do this — it's a two-sample t-test!"* And you're right. But regression gives us a unified framework that extends naturally to multiple predictors.
+
+## Visualizing BP by gender
+
+\
+
+
+::: columns
+::: {.column width="40%"}
+
+\
+
+```{r}
+#| echo: false
+
+# nhanes_bp %>%
+#   group_by(Gender) %>%
+#   summarise(n = n(),
+#             mean_bp = mean(BPSys1),
+#             sd_bp   = sd(BPSys1)) %>%
+#   gt() %>%
+#   fmt_number(columns = c(mean_bp, sd_bp), decimals = 1) %>%
+#   cols_label(Gender = "Gender", n = "n",
+#              mean_bp = "Mean BP", sd_bp = "SD") %>%
+#   tab_options(table.font.size = px(28))
+
+nhanes_bp %>%
+  group_by(Gender) %>%
+  summarise(n = n(),
+            mean_bp = mean(BPSys1),
+            sd_bp   = sd(BPSys1)) %>%
+  mutate(dplyr::across(.cols = c(mean_bp, sd_bp), 
+                       .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.1))) %>% 
+  knitr::kable(col.names = c("Gender", "n", "Mean BP", "SD"))
+```
+
+\
+
+Males have a slightly higher mean BP than females in this sample.
+
+:::
+::: {.column width="60%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7.5
+#| fig-height: 6.0
+#| fig-align: center
+
+ggplot(nhanes_bp, aes(x = Gender, y = BPSys1, fill = Gender)) +
+  geom_boxplot(alpha = 0.7, width = 0.4) +
+  scale_fill_manual(values = c("female" = "#0072B2", "male" = "#E69F00"),
+                    guide = "none") +
+  labs(title = "Systolic BP by gender",
+       subtitle = glue("NHANES sample, n = {n_bp}"),
+       x = NULL, y = "Systolic BP (mmHg)")
+```
+
+:::
+:::
+
+## The regression model with a binary categorical predictor
+
+\
+
+For a binary categorical variable, `R` creates an **indicator variable** (0/1) automatically:
+
+$$\text{Gender}_{\text{male}} = \begin{cases} 1 & \text{if male} \\ 0 & \text{if female} \end{cases}$$
+
+\
+
+The model becomes:
+
+$$E(\text{BP}) = \beta_0 + \beta_1 \cdot \text{Gender}_{\text{male}}$$
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Intercept $\hat{\beta}_0$
+The **estimated mean BP for females** — the group where $\text{Gender}_{\text{male}} = 0$.
+
+This is the **reference category**.
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Slope $\hat{\beta}_1$
+The **estimated difference in mean BP** comparing males to females.
+
+$\hat{\beta}_1 = \overline{Y}_{\text{male}} - \overline{Y}_{\text{female}}$
+:::
+
+:::
+:::::
+
+## Running the model in R
+
+\
+
+```{r}
+model_cat <- lm(BPSys1 ~ Gender, data = nhanes_bp)
+
+broom::tidy(model_cat, conf.int = TRUE)
+```
+
+\
+
+::: {.callout-important icon="false"}
+### Interpretation
+
+- **Intercept** (`r lamisc::fmt_num(tidy_cat$estimate[1], accuracy = 0.1)` mmHg): The estimated mean systolic BP for **females**.
+- **Gendermale** (`r lamisc::fmt_num(tidy_cat$estimate[2], accuracy = 0.1)` mmHg): Males have, on average, a systolic BP that is `r lamisc::fmt_num(tidy_cat$estimate[2], accuracy = 0.1)` mmHg **higher** than females (95% CI: `r lamisc::fmt_num(tidy_cat$conf.low[2], accuracy = 0.1)` to `r lamisc::fmt_num(tidy_cat$conf.high[2], accuracy = 0.1)` mmHg).
+
+The p-value (`r lamisc::fmt_pvl(tidy_cat$p.value[2])`) indicates this difference is `r dplyr::if_else(tidy_cat$p.value[2] < 0.05, "", "not ")`statistically significant.
+:::
+
+## This is a t-test in disguise
+
+\
+
+::: {.callout-tip icon="false"}
+### Connecting to what you already know
+
+Running `lm(BPSys1 ~ Gender)` with a binary predictor gives you the **same p-value** as a two-sample t-test (assuming equal variances).
+
+Regression is the more general framework — it lets us add more predictors, which a t-test cannot do.
+:::
+
+\
+
+```{r}
+# Two-sample t-test for comparison
+t.test(BPSys1 ~ Gender, data = nhanes_bp, var.equal = TRUE)
+```
+
+## Changing the reference category
+
+\
+
+R chooses the reference category **alphabetically** — "female" comes before "male", so female is the reference.
+
+\
+
+To change it, use `relevel()`:
+
+\
+
+::: {style="font-size: 0.85em;"}
+```{r}
+nhanes_bp_male_ref <- nhanes_bp %>%
+  mutate(Gender = fct_relevel(Gender, "male"))  # base R equivalent: relevel(Gender, ref = "male")
+
+lm(BPSys1 ~ Gender, data = nhanes_bp_male_ref) %>%
+  tidy(conf.int = TRUE)
+```
+:::
+
+\
+
+::: {.callout-note icon="false"}
+The **estimate changes sign** but the **magnitude and p-value are identical** — we're just asking the question from the other direction. Use whichever reference group makes the most scientific sense.
+:::
+
+# Part 2: Multiple Linear Regression
+
+## Adding more predictors
+
+\
+
+We have two questions we'd like to answer simultaneously:
+
+- Is BMI associated with BP?
+- Is gender associated with BP?
+
+\
+
+**And**: we know BMI and gender are themselves related — males tend to have different BMI distributions than females. This creates a problem called **confounding**.
+
+\
+
+The solution is to put both predictors in the same model:
+
+$$E(\text{BP}) = \beta_0 + \beta_1 \cdot \text{BMI} + \beta_2 \cdot \text{Gender}_{\text{male}}$$
+
+\
+
+::: {.callout-note icon="false"}
+### Multiple linear regression (MLR)
+A regression model with **two or more** explanatory variables. Each coefficient describes the association between that predictor and the response, **holding the other predictors constant**.
+:::
+
+## What is confounding?
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+A **confounder** is a variable that is:
+
+1. Associated with the **explanatory variable** of interest
+2. Associated with the **response variable**
+3. Not on the causal pathway between them
+
+\
+
+**Example here:** Gender is associated with both BMI and BP.
+
+If we only look at BP ~ BMI, some of the apparent "BMI effect" is really a "gender effect" in disguise.
+
+\
+
+::: {.callout-important icon="false"}
+### Adjusting for confounding
+Including the confounder in the model lets us estimate the association between BMI and BP **among people of the same gender** — a fairer comparison.
+:::
+
+:::
+
+::: {.column width="45%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 6.0
+#| fig-align: center
+
+ggplot(nhanes_bp, aes(x = BMI, y = BPSys1, color = Gender)) +
+  geom_point(alpha = 0.35, size = 1.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("female" = "#0072B2", "male" = "#E69F00")) +
+  labs(title = "BP vs BMI, stratified by gender",
+       x = "BMI (kg/m²)", y = "Systolic BP (mmHg)",
+       color = NULL) +
+  theme(legend.position = "top")
+```
+
+:::
+:::::
+
+## Fitting MLR in R
+
+\
+
+The syntax extends naturally from SLR — just add predictors with `+`:
+
+\
+
+```{r}
+model_mlr <- lm(BPSys1 ~ BMI + Gender, data = nhanes_bp)
+
+tidy(model_mlr, conf.int = TRUE)
+```
+
+\
+
+::: {.callout-note icon="false"}
+`R` handles the categorical variable automatically. You do not need to create indicator variables by hand — just make sure `Gender` is a `factor`.
+:::
+
+## Interpreting the adjusted coefficients
+
+\
+
+$$\widehat{\text{BP}} = \hat{\beta}_0 + \hat{\beta}_1 \cdot \text{BMI} + \hat{\beta}_2 \cdot \text{Gender}_{\text{male}}$$
+
+\
+
+::: {style="font-size: 0.85em;"}
+```{r}
+tidy(model_mlr, conf.int = TRUE)
+```
+:::
+
+::: {.callout-important icon="false"}
+### Key rule: always say "holding the other variables constant"
+
+- **BMI** (`r b_bmi_adj` mmHg): For every 1 kg/m² increase in BMI, systolic BP is expected to increase by `r b_bmi_adj` mmHg on average, **holding gender constant**.
+
+- **Gendermale** (`r b_male_adj` mmHg): Males have, on average, a systolic BP that is `r b_male_adj` mmHg higher than females, **holding BMI constant** (i.e., comparing males and females at the same BMI).
+
+- **Intercept**: Expected mean BP for a **female** with BMI = 0. (Not a meaningful prediction — extrapolation.)
+:::
+
+## Unadjusted vs. adjusted: what changed?
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Unadjusted (SLR): BP ~ BMI
+
+\
+
+```{r}
+#| echo: false
+
+# tidy(model_slr, conf.int = TRUE) %>%
+#   select(term, estimate, conf.low, conf.high, p.value) %>%
+#   gt() %>%
+#   fmt_number(columns = c(estimate, conf.low, conf.high), decimals = 2) %>%
+#   fmt(columns = p.value, fns = lamisc::fmt_pvl) %>%
+#   cols_label(term = "Term", estimate = "Est.",
+#              conf.low = "Lower", conf.high = "Upper",
+#              p.value = "p-value") %>%
+#   tab_options(table.font.size = px(26))
+
+
+tidy(model_slr, conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high, p.value) %>%
+  mutate(dplyr::across(.cols = c(estimate, conf.low, conf.high), 
+                       .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.01)), 
+         p.value = lamisc::fmt_pvl(p.value)) %>% 
+  knitr::kable(col.names = c("Term", "Est.", "Lower", "Upper", "p-value"), 
+               align = "lr")
+```
+
+\
+
+BMI slope: **`r b_bmi_slr`** mmHg per kg/m²
+
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Adjusted (MLR): BP ~ BMI + Gender
+
+\
+
+```{r}
+#| echo: false
+
+# tidy(model_mlr, conf.int = TRUE) %>%
+#   select(term, estimate, conf.low, conf.high, p.value) %>%
+#   gt() %>%
+#   fmt_number(columns = c(estimate, conf.low, conf.high), decimals = 2) %>%
+#   fmt(columns = p.value, fns = lamisc::fmt_pvl) %>%
+#   cols_label(term = "Term", estimate = "Est.",
+#              conf.low = "Lower", conf.high = "Upper",
+#              p.value = "p-value") %>%
+#   tab_options(table.font.size = px(26))
+
+tidy(model_mlr, conf.int = TRUE) %>%
+  select(term, estimate, conf.low, conf.high, p.value) %>%
+  mutate(dplyr::across(.cols = c(estimate, conf.low, conf.high), 
+                       .fns = ~ lamisc::fmt_num(x = ., accuracy = 0.01)), 
+         p.value = lamisc::fmt_pvl(p.value)) %>% 
+  knitr::kable(col.names = c("Term", "Est.", "Lower", "Upper", "p-value"), 
+               align = "lr")
+```
+
+BMI slope: **`r b_bmi_adj`** mmHg per kg/m²
+
+:::
+
+:::
+:::::
+
+\
+
+::: {.callout-tip icon="false"}
+The BMI coefficient changed slightly after adjusting for gender — a sign that gender was acting as a mild confounder. In some datasets, adjustment can dramatically change an estimate (or even flip its direction).
+:::
+
+## $R^2$ and adjusted $R^2$
+
+\
+
+You've seen $R^2$ as a measure of model fit. In MLR there's a wrinkle:
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+::: {.callout-note icon="false"}
+### $R^2$ always increases when you add predictors
+Even if a new predictor is pure noise, $R^2$ can only stay the same or go up — making it a poor tool for comparing models with different numbers of predictors.
+:::
+
+\
+
+**Adjusted $R^2$** penalizes for the number of predictors:
+
+$$R^2_{\text{adj}} = 1 - \frac{(1-R^2)(n-1)}{n - p - 1}$$
+
+where $p$ = number of predictors. A new predictor only improves adjusted $R^2$ if it adds more than it costs.
+
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="40%"}
+```{r}
+glance(model_mlr) %>% 
+  select(r.squared, 
+         adj.r.squared, 
+         sigma, 
+         nobs)
+```
+
+\
+
+In our model: $R^2$ = `r r2_mlr`, adjusted $R^2$ = `r r2a_mlr`.
+
+:::
+:::::
+
+## The MLR workflow
+
+\
+
+::::: columns
+::: {.column width="45%"}
+
+**1. Visualize**
+
+```r
+ggplot(data, aes(x = X1, y = Y, color = X2)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+\
+
+**2. Ensure categorical vars are factors**
+
+```r
+data <- data %>%
+  mutate(X2 = factor(X2))
+```
+
+\
+
+**3. Fit**
+
+```r
+model <- lm(Y ~ X1 + X2, data = data)
+```
+
+:::
+
+::: {.column width="3%"}
+:::
+
+::: {.column width="52%"}
+
+**4. Coefficients + inference**
+
+```r
+tidy(model, conf.int = TRUE)
+```
+
+\
+
+**5. Model fit**
+
+```r
+glance(model)   # R², adj. R², sigma
+```
+
+\
+
+**6. Change reference category (if needed)**
+
+::: {style="font-size: 0.85em;"}
+```r
+data <- data %>%
+  mutate(X2 = foracts::fct_relevel(X2, "your_ref"))
+```
+:::
+
+\
+
+**7. Interpret everything as "adjusted"**
+
+Every coefficient describes the association with $Y$ **holding all other predictors constant**.
+
+:::
+:::::
+
+## Categorical predictors with 3+ levels
+
+\
+
+What if a categorical variable has **more than two levels**?
+
+\
+
+R creates **one coefficient per level, each compared to the same reference group** — the reference category is absorbed into the intercept and doesn't get its own row.
+
+\
+
+Let's create age groups from the continuous `Age` variable and fit the model (next slide):
+
+\
+```{r}
+nhanes_bp <- nhanes_bp %>%
+  mutate(Age_group = cut(Age,
+                         breaks = c(0, 39, 59, Inf),
+                         labels = c("Under 40", "40–59", "60+")))
+
+nhanes_bp %>% 
+  janitor::tabyl(Age_group)
+
+```
+
+## Interpreting the output
+
+\
+
+::: {style="font-size: 0.85em;"}
+```{r}
+model_age <- lm(BPSys1 ~ Age_group, data = nhanes_bp)
+
+tidy(model_age, conf.int = TRUE)
+```
+:::
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Reference category: "Under 40"
+The intercept (`r lamisc::fmt_num(tidy_age$estimate[1], accuracy = 0.1)` mmHg) is the estimated mean BP for participants **under 40** — the group that doesn't get its own row.
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important icon="false"}
+### Interpretation template
+- **40–59**: mean BP is `r lamisc::fmt_num(tidy_age$estimate[2], accuracy = 0.1)` mmHg **higher than the under-40 group**
+- **60+**: mean BP is `r lamisc::fmt_num(tidy_age$estimate[3], accuracy = 0.1)` mmHg **higher than the under-40 group**
+
+Every coefficient is *always* relative to the reference — never relative to each other.
+:::
+
+:::
+:::::
+
+## What we haven't covered (and where to go)
+
+\
+
+MLR is a huge topic. Today's lecture gives you the foundation; there's much more in the textbook (Chapter 7) and beyond:
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### In your textbook (Ch. 7)
+- Model selection strategies (§7.8)
+- Interaction terms (§7.7)
+- Connection to ANOVA (§7.9)
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Where regression leads
+- **Logistic regression** — binary response (yes/no, alive/dead)
+- **Survival analysis** — time-to-event outcomes
+- **Mixed models** — correlated observations 
+:::
+
+:::
+:::::

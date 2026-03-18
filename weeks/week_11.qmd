@@ -26,7 +26,7 @@ Think of the weekly page as answering just five student questions:
 
 This is the final week of the course. Monday is dedicated to exam review — we will go through key concepts and R workflows from across the semester, with emphasis on Lessons 10–19. Bring your questions.
 
-Wednesday's session is optional. There is no new material; it is an open Q&A for anyone who wants to talk through the exam or revisit anything before the deadline. Attendance is not required and will not affect your grade.
+Wednesday's session is optional. We will cover a few topics that didn't fit in the regular semester — multiple linear regression, statistics for animal and bench science studies, and a look at a real collaboration — followed by open Q&A. Attendance is not required and will not affect your grade.
 
 By the end of the week, you should feel confident in your ability to:
 
@@ -58,18 +58,27 @@ By the end of the week, you should feel confident in your ability to:
     -   Final Exam Review ([HTML](/lessons/22_final_review/22_final_review.qmd) | [PDF](/lessons/22_final_review/22_final_review.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
     
 -   **Recording**
-    -   Coming soon.
+    -   [Final Exam Review](https://ohsuitg-my.sharepoint.com/:v:/g/personal/latour_ohsu_edu/IQBsKTmQEjWnSIDkhWZJhOVuAWUM4qdRL_F-K0KVC9cSmfQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=I6bOHj)
 -   **Muddy points**
-    -   Coming soon.
+    -   No muddy points this week.
 
 
 
 ------------------------------------------------------------------------
 
-### Wednesday — Optional Q&A Session
+### Wednesday — Optional Session: Odds & Ends
 
--   Attendance is **optional** — no new material will be covered
--   Come with questions about the exam, specific concepts, or R code
+-   Attendance is **optional** — this session will not affect your grade
+-   Come with questions about the exam, specific concepts, or your own research
+-   **Topics**
+    -   Multiple linear regression: categorical predictors, adjusting for confounding
+    -   Statistics for animal studies and bench science: mapping your experiments to your toolkit, experimental design, biological vs. technical replicates, power and sample size
+    -   A real collaboration: linear mixed models applied to a UV radiation and skin biology study
+    -   Open Q&A — exam questions, your own data, anything from the semester
+-   **Slides**
+    -   Multiple Linear Regression ([HTML](/lessons/23_odds_ends/23_mlr_categorical.qmd) | [PDF](/lessons/23_odds_ends/23_mlr_categorical.pdf) | [OneDrive]())
+    -   Statistics for Animal Studies ([HTML](/lessons/23_odds_ends/23_animal_studies.qmd) | [PDF](/lessons/23_odds_ends/23_animal_studies.pdf) | [OneDrive]())
+    -   A Real Collaboration ([HTML](/lessons/23_odds_ends/23_nevus_project.qmd) | [PDF](/lessons/23_odds_ends/23_nevus_project.pdf) | [OneDrive]())
 -   **Recording**
     -   Recording will be posted if the session is held
 
@@ -77,7 +86,7 @@ By the end of the week, you should feel confident in your ability to:
 
 ## Final Exam
 
-**Available:** Wednesday, March 16 at 3:00 PM through Friday, March 20 at 5:00 PM
+**Available:** Monday, March 16 at 3:00 PM through Friday, March 20 at 5:00 PM
 
 **Access:** [Sakai](https://sakai.ohsu.edu/)
 

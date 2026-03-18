@@ -1,0 +1,814 @@
+---
+title: "Odds & Ends: Statistics for Animal Studies"
+subtitle: "What you know, what to watch out for, and where to go next"
+author: "Emile Latour"
+date: "`r library(here); source(here('class_dates.R')); w11d2`"
+date-format: long
+format:
+  revealjs:
+    theme: "../../assets/css/reveal-bmsc620_v5.scss"
+    slide-number: true
+    show-slide-number: all
+    width: 1955
+    height: 1100
+    footer: "BMSC 620 | Statistics for Animal Studies"
+    html-math-method: mathjax
+    chalkboard: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(broom)
+library(glue)
+library(here)
+library(knitr)
+library(gt)
+library(pwr)
+library(lamisc)
+library(laviz)
+
+theme_set(laviz::theme_minimal_white(grid = "none",
+                                     axis = "xy",
+                                     base_size = 16))
+
+# Simulated tumor growth data for the longitudinal example
+set.seed(620)
+n_mice <- 6
+
+tumor_data <- tibble(
+  mouse_id  = rep(paste0("M", 1:n_mice), each = 4),
+  treatment = rep(c("Control", "Control", "Control",
+                    "Treated", "Treated", "Treated"), each = 4),
+  week      = rep(c(1, 2, 3, 4), times = n_mice),
+  volume    = c(
+    # Control mice — growing fast
+    120 + cumsum(rnorm(4, 30, 8)),
+    110 + cumsum(rnorm(4, 28, 7)),
+    130 + cumsum(rnorm(4, 32, 9)),
+    # Treated mice — slower growth, different baseline
+    100 + cumsum(rnorm(4, 10, 6)),
+    115 + cumsum(rnorm(4, 12, 7)),
+     95 + cumsum(rnorm(4, 11, 5))
+  )
+)
+
+# Naive: t-test at each timepoint
+week4_data <- tumor_data %>% filter(week == 4)
+
+# Power calculation values for 3Rs slide
+pwr_result <- pwr.t.test(d = 0.8, sig.level = 0.05, power = 0.80,
+                          type = "two.sample")
+n_per_group <- ceiling(pwr_result$n)
+```
+
+# Part 1: You Know More Than You Think
+
+## Mapping your experiments to your toolkit
+
+\
+
+Every animal study comes down to a few fundamental questions. You've been answering versions of these all semester.
+
+\
+
+::::: columns
+::: {.column width="60%"}
+
+The key decisions are ones you already know how to make:
+
+\
+
+::: {.callout-note icon="false"}
+### The three questions that determine your test
+1. **What type of outcome?** Continuous, binary, ordinal?
+2. **How many groups?** One, two, or three or more?
+3. **Are the observations independent?** Or are they paired / repeated on the same subject?
+:::
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5.5
+#| fig-align: center
+
+tibble(
+  question = c("Continuous\noutcome?", "Two\ngroups?", "Paired\nobservations?"),
+  x = c(1, 2, 3),
+  y = c(1, 1, 1)
+) %>%
+  ggplot(aes(x = x, y = y, label = question)) +
+  geom_label(size = 5, fill = "#0072B2", color = "white",
+             fontface = "bold", label.size = 0,
+             label.padding = unit(0.6, "lines")) +
+  geom_segment(aes(x = 1.35, xend = 1.675, y = 1, yend = 1),
+               arrow = arrow(length = unit(0.2, "cm")), linewidth = 1,
+               color = "#555555") +
+  geom_segment(aes(x = 2.275, xend = 2.55, y = 1, yend = 1),
+               arrow = arrow(length = unit(0.2, "cm")), linewidth = 1,
+               color = "#555555") +
+  xlim(0.5, 3.5) + ylim(0.5, 1.5) +
+  theme_void()
+```
+
+:::
+:::::
+
+## Your course toolkit, translated to the bench
+
+\
+
+::: {style="font-size: 0.82em;"}
+
+| Study design | Groups | Outcome | Test | Key R function |
+|---|:---:|:---:|---|---|
+| Compare mean to a known reference value | 1 | Continuous, ~normal | One-sample t-test | `t.test(y, mu = ref)` |
+| Two groups, one timepoint (~normal) | 2 | Continuous, ~normal | Two-sample t-test | `t.test(y ~ group)` |
+| Two groups, one timepoint, skewed or small $n$ | 2 | Continuous, skewed | Wilcoxon rank-sum | `wilcox.test(y ~ group)` |
+| Same animal before and after treatment | 1 (paired) | Continuous | Paired t-test | `t.test(pre, post, paired = TRUE)` |
+| Three or more dose groups at one timepoint | 3+ | Continuous, ~normal | One-way ANOVA | `aov()` + post-hoc |
+| Three or more groups, skewed or small $n$ | 3+ | Continuous, skewed | Kruskal-Wallis | `kruskal.test()` |
+| Does response rate match a historical benchmark? | 1 | Binary | One-proportion z-test | `prop.test(x, n, p = ref)` |
+| Does response rate differ between two groups? (large $n$) | 2 | Binary | Two-proportion z-test | `prop.test()` |
+| Does response rate differ between two groups? (small $n$) | 2 | Binary | Fisher's exact | `fisher.test()` |
+| Same animal, binary outcome before and after (paired binary) | 1 (paired) | Binary | McNemar's test | `mcnemar.test()` |
+| Association between two categorical variables | 2+ | Categorical | Chi-square | `chisq.test()` |
+| Continuous predictor and continuous outcome | — | Continuous | Simple linear regression | `lm()` + `tidy()` |
+
+: {.striped tbl-colwidths="[30, 9, 16, 18, 17]"}
+
+:::
+
+## The conversation this prepares you for
+
+\
+
+When you sit down with a statistician, the most useful thing you can do is walk in with clear answers to:
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+::: {.callout-note icon="false"}
+### What a statistician wants to know
+- What is your **outcome**, and how is it measured?
+- What is your **primary comparison** — treatment vs. control? Before vs. after?
+- How many **groups**, and are they **independent or paired**?
+- What is your **sample size**, and how was it chosen?
+- Are there **other variables** that might confound the relationship?
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-important icon="false"}
+
+### What this course gave you
+
+You now have the vocabulary to answer all of these questions — and to understand the statistician's answer.
+
+\
+
+**You don't need to know the method. You need to know your data and your question.**
+
+That's what brings to a productive collaboration.
+:::
+
+:::
+:::::
+
+# Part 2: Experimental Design Matters
+
+## The decision that can't be fixed in analysis
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+Imagine you're preparing slides from tumor tissue.
+
+\
+
+It's a long protocol. You decide to process all **control samples on Monday** and all **treated samples on Wednesday**.
+
+\
+
+Seems fine — same technician, same reagents, same protocol.
+
+\
+
+**But what if:**
+
+- The antibody lot was slightly different?
+- Room temperature differed?
+- You were more fatigued by slide 30?
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-important icon="false"}
+### The problem: confounding by batch
+
+Now **treatment** and **processing day** are perfectly confounded.
+
+Any difference you observe between groups could be due to:
+
+- The treatment ✓
+- The day of processing ✗
+- Some combination of both ✗
+
+**You cannot separate them in analysis.** The damage is done at the design stage.
+:::
+
+:::
+:::::
+
+## What is a batch effect?
+
+\
+
+A **batch effect** is any source of technical variability introduced by when or how samples are processed — not by your biological treatment.
+
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Common sources of batch effects
+- Day of experiment / run
+- Reagent lot or antibody batch
+- Technician (inter-operator variability)
+- Equipment calibration drift
+- Passage number in cell lines
+- Time in culture before harvest
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Why cell lines deserve special mention
+Cell lines can drift over passages. A control run at passage 12 and a treatment run at passage 20 may not be biologically comparable — even if the protocol is identical.
+
+This is a batch effect with biological consequences.
+:::
+
+:::
+:::::
+
+\
+
+::: {.callout-tip icon="false"}
+### The fix: blocking
+**Randomize** your treatment and control samples across batches — process some controls and some treated samples together in each run. Now batch effects cancel out across groups rather than accumulating in one of them.
+:::
+
+## Blocking: turning nuisance into noise
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**Without blocking:** treatment is confounded with day
+
+```
+Monday:    Control  Control  Control
+Wednesday: Treated  Treated  Treated
+```
+
+You can't know if differences come from treatment or day.
+
+\
+
+**With blocking:** treatment is balanced across days
+
+```
+Monday:    Control  Treated  Control  Treated
+Wednesday: Treated  Control  Treated  Control
+```
+
+Now any day effect hits both groups equally — it's **noise**, not **bias**.
+
+\
+
+::: {.callout-note icon="false"}
+Blocking is the experimental design analog of the **paired t-test** — you're using structure in the design to reduce unwanted variability.
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-important icon="false"}
+### The principle
+
+**Design your experiment so that any batch effect is balanced across your groups.**
+
+\
+
+This is why randomizing *within* batches — not just randomizing overall — matters. Convenience-driven sequencing (all controls first, then all treated) is one of the most common and consequential design errors in bench science.
+:::
+
+:::
+:::::
+
+# Part 3: The Replication Problem
+
+## Not all replicates are created equal
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+::: {.callout-note icon="false"}
+### Biological replicates
+**Separate biological units** — different animals, different cell culture preparations, different patients.
+
+Each is an independent sample from the population of interest.
+
+**This is what your sample size $n$ should count.**
+:::
+
+\
+
+::: {.callout-note icon="false"}
+### Technical replicates
+**Repeated measurements of the same biological unit** — running the same sample through the assay three times, imaging the same tissue section twice.
+
+These measure **instrument precision**, not biological variability.
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {.callout-important icon="false"}
+### Why it matters statistically
+
+If you treat technical replicates as biological replicates, you **artificially inflate your sample size**.
+
+\
+
+**Example:** 3 mice, each measured 5 times.
+
+- True biological $n$ = **3**
+- If you treat all measurements as independent: $n$ = **15**
+
+With $n = 15$ your standard errors are artificially small, your t-statistics are inflated, and your p-values are too small.
+
+You will find "significant" results that aren't real.
+:::
+
+:::
+:::::
+
+## What the field actually does — and why
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+::: {.callout-tip icon="false"}
+### An honest conversation
+
+Using technical replicates as if they were biological replicates is **not statistically correct**.
+
+It is, however, **common in practice** — particularly in early-stage, exploratory bench work.
+
+\
+
+Why? Because biological replicates are expensive, time-consuming, and sometimes require institutional ethics approval for additional animals.
+
+\
+
+The pragmatic approach many labs take: average technical replicates within each biological unit first, then analyze those averages. This at least preserves the correct $n$.
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-important icon="false"}
+### What you should do
+
+1. **Be clear** about what type of replicates you have
+2. **Report** both biological and technical $n$ in your methods
+3. **Analyze** at the level of the biological replicate
+4. **Acknowledge** limitations if technical replicates were used due to feasibility constraints
+
+When in doubt — **ask a statistician before you collect data**, not after.
+:::
+
+:::
+:::::
+
+# Part 4: Where Your Toolkit Runs Out
+
+## Longitudinal animal studies: the naive approach fails
+
+\
+
+Many animal studies measure the **same outcome repeatedly over time** — tumor volume weekly, body weight daily, behavioral scores at multiple timepoints.
+
+
+::: {.callout-note icon="false"}
+### The tempting but wrong approach
+Run a t-test at **each timepoint separately**.
+:::
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+**Two problems:**
+
+1. **Multiple comparisons** — testing at 4 timepoints with $\alpha = 0.05$ means your family-wise false positive rate is already $> 18\%$ under the null, just like the ANOVA post-hoc problem
+2. **Non-independence** — measurements from the same mouse at week 1 and week 2 are **correlated**. A mouse with high tumor volume at week 1 will likely have high tumor volume at week 2. Standard errors that assume independence are **too small**.
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 5.5
+#| fig-align: center
+
+tumor_data %>%
+  ggplot(aes(x = week, y = volume,
+             color = treatment, group = mouse_id)) +
+  geom_line(alpha = 0.6, linewidth = 0.8) +
+  geom_point(size = 2.5) +
+  scale_color_manual(values = c("Control" = "#E69F00",
+                                "Treated" = "#0072B2")) +
+  labs(title = "Tumor volume over time",
+       subtitle = "Each line = one mouse",
+       x = "Week", y = "Tumor volume (mm³)",
+       color = NULL) +
+  theme(legend.position = "top")
+```
+
+:::
+:::::
+
+## The solution: linear mixed models
+
+\
+
+**Linear mixed models** (LMM) handle both problems at once. The key idea: give each animal **its own baseline**.
+
+\
+
+::::: columns
+::: {.column width="50%"}
+
+The model has two kinds of effects:
+
+::: {.callout-note icon="false"}
+### Fixed effects
+The parameters we care about — treatment group, time, their interaction. These are estimated the same way as in regular regression.
+:::
+
+::: {.callout-note icon="false"}
+### Random effects
+Animal-specific offsets from the overall intercept. Each mouse gets its own "starting point," which absorbs the within-animal correlation.
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {style="font-size: 0.75em;"}
+
+```r
+library(lme4)
+
+model_lmm <- lmer(
+  volume ~ week * treatment + (1 | mouse_id),
+  data = tumor_data
+)
+
+summary(model_lmm)
+```
+:::
+
+
+\
+
+::: {.callout-tip icon="false"}
+The `(1 | mouse_id)` term is the random intercept — it tells R that observations from the same mouse are correlated.
+
+You don't need to know how to fit this yet. You need to know **when to ask for it**.
+:::
+
+:::
+:::::
+
+## When to ask for a mixed model
+
+\
+
+::: {.callout-important icon="false"}
+### The signal that you need more than a t-test or ANOVA
+
+**If the same subject appears more than once in your dataset, you probably need a mixed model.**
+:::
+
+\
+
+| Design | Repeated measures? | Method |
+|---|:---:|---|
+| Two groups, one sacrifice timepoint | No | t-test / Wilcoxon |
+| Pre/post on same animal (two timepoints) | Yes (2 only) | Paired t-test |
+| Same animal measured weekly for 8 weeks | Yes (many) | Linear mixed model |
+| Cells from same animal run in triplicate | Yes (technical) | Mixed model preferred; averaging within animal then t-test is a common simplification |
+
+: {tbl-colwidths="[35, 25, 35]"}
+
+
+::: {.callout-tip icon="false"}
+### What to tell a statistician
+*"I have repeated measurements on the same animals over time. I think I need a mixed model but I'm not sure how to set it up."*
+
+That sentence will make any statistician very happy to work with you.
+:::
+
+# Part 5: Power and the 3Rs
+
+## Why sample size matters more in animal studies
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+You've used `pwr` to calculate sample size for t-tests and ANOVA. The same tools apply to animal studies — but the **stakes are different**.
+
+\
+
+In a clinical trial, enrolling more patients than needed is a resource question.
+
+In an animal study, it's an **ethical question**.
+
+\
+
+::: {.callout-note icon="false"}
+### The 3Rs framework (Russell & Burch, 1959)
+- **Replace** — use non-animal alternatives where possible
+- **Reduce** — use the minimum number of animals needed to achieve scientific objectives
+- **Refine** — minimize suffering and improve animal welfare
+
+**Institutional animal ethics review** and many journals now require a power justification for $n$.
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-important icon="false"}
+### The two failure modes
+
+**Too few animals (underpowered)**
+Study misses a real effect. Animals were used and the science learned nothing. This violates *Reduce*.
+
+\
+
+**Too many animals (overpowered)**
+More animals than needed to answer the question. Also violates *Reduce*.
+
+\
+
+Power analysis is not just a statistics formality — **it is an ethical obligation.**
+:::
+
+:::
+:::::
+
+## Power analysis with tools you already have
+
+\
+
+You already know `pwr.t.test()`. The inputs are the same for animal studies:
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+::: {style="font-size: 0.85em;"}
+
+```{r}
+library(pwr)
+
+# How many mice per group do I need?
+# Expecting a large effect (d = 0.8),
+# alpha = 0.05, power = 0.80
+
+pwr.t.test(
+  d         = 0.8,
+  sig.level = 0.05,
+  power     = 0.80,
+  type      = "two.sample"
+)
+```
+
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-note icon="false"}
+### Result
+**`r n_per_group` mice per group** — about `r n_per_group * 2` total.
+
+This is the minimum to detect a large effect with 80% power. For a medium effect ($d = 0.5$), you would need substantially more.
+:::
+
+:::
+:::::
+
+## The hardest part: choosing your effect size
+
+\
+
+> *"I don't know what effect size to expect. What should I use?"*
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Practical approaches
+- **Pilot data** from your own lab
+- **Published literature** in similar models
+- **Smallest effect worth detecting** — what difference would be biologically or clinically meaningful?
+- **Cohen's conventions** ($d$ = 0.2 / 0.5 / 0.8) as a last resort — but justify why
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-important icon="false"}
+### What not to do
+- Don't run the experiment first and then compute power from your results — **post-hoc power is circular**
+- Don't choose $n$ by convention ("we always do 5 per group") without justification
+
+\
+
+**Pilot experiments are valuable precisely because they give you an estimate of effect size and variability before you commit to a full study.**
+:::
+
+:::
+:::::
+
+
+
+## Putting it all together
+
+\
+
+::::: columns
+::: {.column width="55%"}
+
+**Before you run your experiment:**
+
+1. Define your outcome and primary comparison clearly
+2. Identify your design: independent groups? paired? longitudinal?
+3. Think about batch effects — plan to randomize within batches
+4. Distinguish biological from technical replicates — know your true $n$
+5. Run a power analysis — justify your $n$ for ethics review and grant applications
+
+**When the data are in:**
+
+6. Apply the test that matches your design (use the table!)
+7. If you have repeated measures — ask for help with mixed models
+8. Report biological $n$, test statistic, p-value, and effect size
+
+:::
+
+::: {.column width="45%"}
+
+::: {.callout-tip icon="false"}
+### The most valuable thing this class gave you
+
+You can now walk into a meeting with a statistician and have a real conversation.
+
+You know what your outcome is. You know whether it's paired. You know what a p-value means and what it doesn't. You know that sample size requires justification.
+
+**That puts you ahead of most people who show up with their data already collected and a question that can no longer be answered.**
+:::
+
+:::
+:::::
+
+## On the horizon: two designs worth knowing exist
+
+\
+
+Two extensions of ANOVA come up often in experimental biology. You don't need to know
+how to run them today — but you should know when to look them up.
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Two-way ANOVA
+**When you need it:** Two categorical explanatory variables, one continuous outcome.
+
+**Example:** Does tumor volume differ by *treatment* AND by *sex*? And does the
+treatment effect differ between sexes? That last question is an **interaction**.
+
+**R function:** `aov(y ~ A * B, data = data)`
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Repeated measures ANOVA
+**When you need it:** Same subjects at 3+ timepoints; simpler alternative to a
+full mixed model when data are complete and balanced.
+
+**Example:** Body weight at baseline, week 2, week 4, and week 8 in the same animals.
+
+**R function:** `aov(y ~ time + Error(id/time), data = data)`
+:::
+
+:::
+:::::
+
+## Where to learn more
+
+\
+
+::::: columns
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Free online textbook
+**Zhang & Wang (2017), *Advanced Statistics Using R*, Ch. 7**
+
+Clear, R-based, covers one-way, two-way, and repeated measures ANOVA.
+
+[advstats.psychstat.org/book/ZhangWang2017.pdf](https://advstats.psychstat.org/book/ZhangWang2017.pdf)
+:::
+
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+
+::: {.callout-note icon="false"}
+### Penn State open course notes
+**STAT 502** — Analysis of Variance and Design of Experiments
+
+[online.stat.psu.edu/stat502](https://online.stat.psu.edu/stat502)
+
+**STAT 503** — Design of Experiments
+
+[online.stat.psu.edu/stat503](https://online.stat.psu.edu/stat503)
+:::
+
+:::
+:::::
+
+\
+
