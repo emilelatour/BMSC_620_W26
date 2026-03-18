@@ -76,9 +76,9 @@ By the end of the week, you should feel confident in your ability to:
     -   A real collaboration: linear mixed models applied to a UV radiation and skin biology study
     -   Open Q&A — exam questions, your own data, anything from the semester
 -   **Slides**
-    -   Multiple Linear Regression ([HTML](/lessons/23_odds_ends/23_mlr_categorical.qmd) | [PDF](/lessons/23_odds_ends/23_mlr_categorical.pdf) | [OneDrive]())
-    -   Statistics for Animal Studies ([HTML](/lessons/23_odds_ends/23_animal_studies.qmd) | [PDF](/lessons/23_odds_ends/23_animal_studies.pdf) | [OneDrive]())
-    -   A Real Collaboration ([HTML](/lessons/23_odds_ends/23_nevus_project.qmd) | [PDF](/lessons/23_odds_ends/23_nevus_project.pdf) | [OneDrive]())
+    -   Multiple Linear Regression ([HTML](/lessons/23_odds_ends/23_mlr_categorical.qmd) | [PDF](/lessons/23_odds_ends/23_mlr_categorical.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   Statistics for Animal Studies ([HTML](/lessons/23_odds_ends/23_animal_studies.qmd) | [PDF](/lessons/23_odds_ends/23_animal_studies.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
+    -   A Real Collaboration ([HTML](/lessons/23_odds_ends/23_nevus_project.qmd) | [PDF](/lessons/23_odds_ends/23_nevus_project.pdf) | [OneDrive](https://ohsuitg-my.sharepoint.com/:f:/g/personal/latour_ohsu_edu/IgCOtOYcIrovSKF4qK2E2G-dAYxn57PU_3BBTsgcOoepe1Q?e=eC1m6l))
 -   **Recording**
     -   Recording will be posted if the session is held
 
